@@ -1,0 +1,57 @@
+.header {
+    height       : 10px;
+
+    h4 {
+        font-weight: 500;
+        font-size: 20px;
+    }
+}
+.conatiner{
+    padding: 5%;
+}
+
+.body {
+    padding: 4% 0% 0% 0%;
+
+    .col-left {
+        text-align: right;
+
+        .custom-input {
+            width        : 100%;
+            display      : flex;
+            border       : 1px solid lightgray;
+            border-radius: 6px;
+
+            mat-icon {
+                margin-top: 2%;
+            }
+
+            input {
+                border: none;
+            }
+        }
+
+        .search-container {
+            width  : 100%;
+            display: flex;
+
+            button {
+                margin-left: 3%;
+            }
+        }
+    }
+
+    .col-right {
+        text-align: right;
+    }
+}
+.table-data{
+    table{
+        width: 100%;
+    }
+    h6{
+        font-size: 16px;
+        margin: 0px;
+        font-weight: 500;
+    }
+}

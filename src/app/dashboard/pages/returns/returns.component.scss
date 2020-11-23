@@ -1,0 +1,27 @@
+.header {
+    height       : 10px;
+
+    h4 {
+        font-weight: 500;
+        font-size: 20px;
+    }
+}
+.conatiner{
+    padding: 5%;
+}
+
+.body {
+    padding: 4% 0% 0% 0%;
+}
+button{
+    height: fit-content;
+}
+mat-button-toggle {
+    width: 100px;
+    [type=button]{
+        margin-top: -5% !important;
+    }
+}
+mat-button-toggle-group{
+    height: 78%;
+}

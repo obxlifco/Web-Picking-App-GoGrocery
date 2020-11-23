@@ -1,0 +1,281 @@
+.container {
+    padding: 5% 3% 1% 5%;
+}
+
+h4 {
+    margin-left: -2%;
+}
+
+table,
+td,
+th {
+    font-family    : calibri;
+    border-collapse: collapse;
+    background     : white;
+}
+
+th {
+    background : green;
+    color      : white;
+    font-weight: 600;
+    text-align : center;
+}
+
+.orderlist-card {
+    max-width: 400px;
+    padding  : 0px;
+
+    mat-card-header {
+        background    : green;
+        color         : white;
+        font-weight   : 600;
+        text-align    : center;
+        // padding    : 5% 0% 0% 0%;
+    }
+
+    mat-card-title {
+        font-size : 14px;
+        width     : 100%;
+        margin    : 4px;
+        text-align: inherit;
+    }
+}
+
+h4 {
+    font-size: 18px;
+}
+
+label,
+h4 {
+    font-weight: 500;
+}
+
+.col-right {
+    text-align: center;
+
+    .orderlist-heading {
+        width        : 100%;
+        position     : absolute;
+        height       : 100%;
+        // background: antiquewhite;
+        // overflow: hidden;
+    }
+
+    h4 {
+        position     : absolute;
+        margin       : 0px;
+        background   : #2248d2;
+        border-radius: 2px;
+        width        : inherit;
+        height       : 32px;
+        padding-top  : 1%;
+        border-radius: 2px;
+        color        : white;
+        font-weight  : 500;
+        z-index      : 1;
+    }
+
+    //   scrollbar
+    .scroll-viewport {
+        width     : 100%;
+        height    : 100%;
+        margin-top: 10.5%;
+        border    : 1px solid lightgray;
+    }
+
+    .scroll-inner-data {
+        // height : 300px;
+        padding   : 3% 24% 0% 24%;
+        background: white;
+    }
+
+    input {
+        background: white;
+    }
+
+    @media only screen and (max-width: 500px) {
+
+        // .scroll-viewport {
+        //     margin-top: 18.5%;
+        // }
+        .scroll-inner-data {
+            padding: 3% 0% 0% 0%;
+        }
+
+        mat-card-title {
+            margin-left: 0%;
+        }
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .scroll-inner-data {
+            padding: 5% 7% 0% 7%;
+        }
+    }
+
+    // @media only screen and (min-width: 320px) {
+    //     // .scroll-viewport {
+    //     //     margin-top: 37.5%;
+    //     //   }
+    // }
+}
+
+.table-data {
+    width     : 97%;
+    border    : 1px solid lightgray;
+    background: white;
+}
+
+.grid-margin {
+    margin : 0px;
+    padding: 0px;
+}
+
+.cdk-virtual-scroll-content-wrapper {
+    margin-bottom: 22%;
+}
+
+.add-items {
+
+    h6 {
+        font-size  : 16px;
+        font-weight: 500;
+        width      : fit-content;
+        z-index    : 1;
+        background : white;
+    }
+
+    .background-divider {
+        width        : 97%;
+        height       : 2px;
+        // background: gray;
+        position     : absolute;
+        bottom       : 8.7%;
+        z-index      : -1;
+    }
+}
+
+table {
+    width: 100%;
+}
+
+.btn-light {
+    background-color: #e8e3e3;
+    font-size       : 14px;
+    width           : 30%;
+    font-weight     : 500;
+    height          : 45px;
+
+    mat-icon {
+        color        : green;
+        left         : 2%;
+        position     : absolute;
+        cursor       : pointer;
+        color        : white;
+        background   : green;
+        border-radius: 100;
+        border-radius: 100%;
+        width        : 21px;
+        height       : 21px;
+        font-size    : 21px;
+    }
+
+    span {
+        margin-left: 7%;
+    }
+}
+
+.csv-btn {
+    position: absolute;
+    // right   : 6%;
+}
+
+.row-margin {
+    margin       : 0px !important;
+    margin-bottom: 11px !important;
+}
+
+.substitute-container {
+    table {
+        width        : 97%;
+        border-bottom: 1px solid lightgray;
+    }
+
+    h6 {
+        font-size  : 16px;
+        font-weight: 500;
+        margin-top : 2%;
+    }
+
+    .btn-left {
+        display      : flex;
+        width        : 100px;
+        background   : green;
+        border-radius: 8px;
+    }
+
+    .btn-right {
+        display      : flex;
+        width        : 100px;
+        background   : #565a56;
+        border-radius: 8px;
+    }
+
+    input {
+        width     : 50%;
+        text-align: center;
+    }
+
+    .left-icon {
+        color      : white;
+        font-weight: 600;
+    }
+
+    .right-icon {
+        color      : white;
+        font-weight: 600;
+        margin-top : 8%;
+
+    }
+}
+
+//media query
+@media only screen and (max-width: 320px) {
+    .container {
+        padding: 5% 6% 1% 9%;
+    }
+
+    .scroll-inner-data {
+        padding: 26% 7% 0% 7% !important;
+    }
+
+    mat-card-title {
+        font-size: 12px !important;
+        width    : 100%;
+        margin   : 1px;
+    }
+}
+
+.colorclass {
+    color: cyan;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background: white;
+    border    : none;
+}
+
+.mat-form-field {
+    width: 40%;
+
+    mat-icon {
+        padding: 6% 0% 6% 3%;
+        margin : 0px;
+    }
+}
+.btnpadding{
+    padding:7%;
+}
+.paymentfooter{
+    font-size: 20px;
+}

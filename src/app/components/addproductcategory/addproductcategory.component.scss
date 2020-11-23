@@ -1,0 +1,30 @@
+.header {
+    border-bottom: 1px solid gray;
+    height       : 30px;
+
+    h4 {
+        font-weight: 500;
+    }
+
+}
+.body{
+
+    .formdata{
+        margin-top: 5%;
+
+        input{
+            border: none;
+            border-bottom: 1px solid darkgray;
+        }
+    }
+}
+
+.footer{
+    width: 100%;
+    background: white;
+    button{
+        width: fit-content;
+float: right;
+background: #037d50;
+    }
+}

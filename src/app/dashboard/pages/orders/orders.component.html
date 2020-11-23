@@ -1,0 +1,307 @@
+<div class="container">
+    <div>
+        <h4>Order Details</h4>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="orderby">Order prepared by</label>
+            <input type="text" [disabled]="userOrderdata.picker_name" #username [value]="userOrderdata.picker_name" (keyup.enter)="AssaignorderToUser(username.value)" class="form-control"
+                placeholder="Order prepared by" id="orderby">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 stretch-card grid-margin">
+            <div style="width: 100%;">
+                <table class="table table-data">
+                    <tr>
+                        <td>Order No : </td>
+                        <td>{{orderDetaildata['data'][0]?.custom_order_id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Order Status :</td>
+                        <td>
+                            <span style="color: green;"
+                                *ngIf="orderDetaildata['data'][0]?.order_status === 100 && orderDetaildata['data'][0]?.substitute_status === 'none'">Assigned</span>
+                            <span style="color: red;" *ngIf="orderDetaildata['data'][0]?.order_status === 0">New</span>
+                            <span style="color: 	#00CED1;"
+                                *ngIf="orderDetaildata['data'][0]?.order_status === 100 && orderDetaildata['data'][0]?.substitute_status === 'pending'">Subs.Out</span>
+                            <span style="color: #00008B;"
+                                *ngIf="orderDetaildata['data'][0]?.order_status === 100 && orderDetaildata['data'][0]?.substitute_status === 'done'">Subs.In</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bill Number :</td>
+                        <td>
+                            <input [disabled]="!userOrderdata.picker_name" class="colorclass"
+                                placeholder="Enter Bill Number" type="text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Order date and time :</td>
+                        <td>
+                            {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Customer Name :</td>
+                        <td>{{orderDetaildata['data'][0]?.customer?.first_name}}
+                            {{orderDetaildata['data'][0]?.customer?.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Number :</td>
+                        <td>{{orderDetaildata['data'][0]?.customer?.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5% 0% 0% 2%;">Delivery Address :</td>
+                        <td>{{orderDetaildata['data'][0]?.delivery_street_address}}
+                            {{orderDetaildata['data'][0]?.delivery_state_name}}
+                            <br>
+                            <strong *ngIf="!userOrderdata.picker_name" style="color: cyan;"
+                                (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8% 0% 0% 3%;">Deliver Time :</td>
+                        <td>
+                            <div style="color: cyan;">
+                                {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date | date : 'longDate'}}
+                                <mat-form-field appearance="fill">
+                                    <!-- The timepicker input -->
+                                    <input [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
+                                        #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
+                                        id="timepicker-example" mode="24h" [ngModel]="datetime" placeholder="time"
+                                        name="time" [errorStateMatcher]="customErrorStateMatcher"
+                                        (timeChange)="timeChangeHandler($event)" (invalidInput)="invalidInputHandler()">
+                                    <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
+                                    <mat-icon [disabled]="!userOrderdata.picker_name" matSuffix
+                                        (click)="t.showDialog()">access_time</mat-icon>
+                                    <!-- Error that will be shown when the input date is invalid -->
+                                    <mat-error *ngIf="time.touched && time.invalid">Invalid Date</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Value of Products :</td>
+                        <td>
+                            <strong>
+                                {{orderDetaildata['data'][0]?.currency_code}}
+                                {{orderDetaildata['data'][0]?.gross_amount}}
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>New Value of Products :</td>
+                        <td>
+                            <input [disabled]="!userOrderdata.picker_name" class="colorclass" placeholder="Enter Price"
+                                type="text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Charge :</td>
+                        <td>{{orderDetaildata['data'][0]?.shipping_cost}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Discount :</td>
+                        <td><strong>0.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Other Discount :</td>
+                        <td><strong>0.00</strong></td>
+                    </tr>
+                    <mat-divider></mat-divider>
+                    <tr>
+                        <td>
+                            <strong class="paymentfooter">Total Price</strong>
+                        </td>
+                        <td>
+                            <strong class="paymentfooter">
+                                {{orderDetaildata['data'][0]?.gross_amount}}
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong class="paymentfooter">Payment Method</strong>
+                        </td>
+                        <td>
+                            <strong class="paymentfooter">
+                                {{orderDetaildata['data'][0]?.payment_method_name}}
+                            </strong> 
+                        </td>
+                    </tr>
+                    <!-- <mat-divider></mat-divider> -->
+                </table>
+
+                <!-- adding items -->
+                <div class="add-items">
+                    <div>
+                        <!-- <div class="background-divider"></div> -->
+                       
+                        <h6>ITEMS</h6>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="row row-margin">
+                        <div class="col-md-12 stretch-card grid-margin" style="display: block;">
+                            <button [disabled]="!userOrderdata.picker_name"
+                                (click)="openDialog('picker-productlist/','Add New Product','',2)" type="button"
+                                class="btn btn-light">
+                                <mat-icon>control_point</mat-icon>
+                                Add More
+                            </button>
+                            <button [disabled]="!userOrderdata.picker_name" type="button" style="width: 98px;"
+                                class="btn btn-light csv-btn">
+                                <mat-icon style="left: 8%;">get_app</mat-icon> CSV
+                            </button>
+                        </div>
+                        <!-- <div class="col-md-6 stretch-card grid-margin">
+                            
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="row substitute-container">
+                    <div class="col-md-12 stretch-card grid-margin"
+                        *ngFor="let products of orderDetaildata['data'][0]?.order_products">
+                        <table>
+                            <tr>
+                                <td style="width: 100px;">
+                                    <img style="width: 50%;" [src]="products?.product.product_images[0]?.link" alt="">
+                                </td>
+                                <td style="line-height:2">
+                                    <h6>{{products?.product.name}}</h6>
+                                    <button (click)="openEditModal(products)" type="button" class="btn btn-danger">Edit
+                                        Weight</button><br>
+                                    <span>Unit Weight : {{products?.product.weight}}
+                                        {{products?.product.uom.uom_full_name}}</span> <br>
+                                    <span>Total Weight : {{products?.product.weight * products?.quantity}}
+                                        {{products?.product.uom.uom_full_name}}</span><br>
+                                    <span>Unit Price : {{products?.product_price}}</span><br>
+                                    <span>Total Price : {{products?.product_price *  products?.quantity}}</span><br>
+                                    <span>Ordered Qty : {{products?.quantity}}</span><br>
+                                    <div>
+
+                                    </div>
+                                    <div class="row row-margin">
+                                        <div class="col-md-6 stretch-card grid-margin">
+
+                                            <div>
+                                                <strong>Available</strong>
+                                                <div class="btn-left">
+                                                    <mat-icon [disabled]="!userOrderdata.picker_name" class="left-icon">
+                                                        minimize</mat-icon>
+                                                    <input [(ngModel)]="item_available" type="text"
+                                                        class="form-control">
+                                                    <mat-icon [disabled]="!userOrderdata.picker_name"
+                                                        class="right-icon">add</mat-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 stretch-card grid-margin">
+                                            <div>
+                                                <strong>Not Available</strong>
+                                                <div class="btn-right">
+                                                    <mat-icon [disabled]="!userOrderdata.picker_name" class="left-icon">
+                                                        minimize</mat-icon>
+                                                    <input [disabled]="!userOrderdata.picker_name" type="text"
+                                                        [(ngModel)]="item_available" class="form-control">
+                                                    <mat-icon [disabled]="!userOrderdata.picker_name"
+                                                        (click)="openDialog('picker-substituteproductlist/','Add Subtitute Product',products?.id,2)"
+                                                        class="right-icon">add</mat-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 stretch-card grid-margin btnpadding" >
+                        <button [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
+                            (click)="processOrder()" class="btn btn-success">Process the order</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 stretch-card grid-margin col-right">
+            <!-- <table class="table">
+        <th>Order Status</th>
+        <tr>
+            <td>Ordered On : </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Delivery Address :</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>This order is assaign to :</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Price :</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Payment status :</td>
+            <td></td>
+        </tr>
+        </table> -->
+            <div class="orderlist-heading">
+                <h4>Order List</h4>
+                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="scroll-viewport">
+                    <div *cdkVirtualFor="let order of orderlistdata['data']?.response" class="scroll-inner-data">
+                        <mat-card class="orderlist-card"
+                            (click)="getOrderDetailData(order.id,order.shipment_id,order.order_status,order.picker_name)">
+                            <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
+                                <mat-card-title>{{order?.custom_order_id}} New</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: green;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'none'">
+                                <mat-card-title>{{order?.custom_order_id}} Assigned
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: 	#00CED1;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'pending'">
+                                <mat-card-title>{{order?.custom_order_id}} Subs.Out
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: #00008B;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'done'">
+                                <mat-card-title>{{order?.custom_order_id}} Subs.In
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div>
+                                    <strong>- Ordered On : </strong><br>
+                                    <span>{{order?.order_activity?.activity_date | date : 'medium'}} </span><br>
+                                    <span>{{order?.order_activity?.activity_date | datepipe}}</span>
+                                </div>
+                                <div>
+                                    <strong>- Delivery Address : </strong><br>
+                                    <span>{{order?.delivery_street_address}}, {{order?.delivery_state_name}} </span>
+                                </div>
+                                <div>
+                                    <strong>- This order is assaign to : </strong><br>
+                                    <span>{{order?.order_shipment?.created_by_name}}</span>
+                                </div>
+                                <div>
+                                    <!-- <strong>Price : </strong><br> -->
+                                    <strong>{{order?.gross_amount}} {{order?.currency_code}} </strong>
+                                </div>
+                                <div>
+                                    <!-- <span>Payment status :</span><br> -->
+                                    <strong>{{order?.payment_method_name}}</strong>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </cdk-virtual-scroll-viewport>
+            </div>
+        </div>
+    </div>
+</div>

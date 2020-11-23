@@ -1,0 +1,66 @@
+<div class="container-scroller">
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <div class="main-panel" style="width: 100%;">
+            <div class="content-wrapper">
+               <div class="page-header">
+                   <h3 class="page-title">
+                       <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                           <i class="mdi mdi-home"></i>
+                       </span> Dashboard
+                   </h3>
+               </div>
+               <div class="row">
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-process card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Order Processing<i
+                                       class="mdi mdi-chart-line mdi-24px float-right"></i>
+                               </h4>
+                               <!-- <h6 class="mb-5">$ 15,0000</h2> -->
+                                   <h6 class="card-text">Order in-processing : {{orderdata['data'].pending_order + orderdata['data'].processing_order + orderdata['data']?.substitution_sent_order + orderdata['data']?.substitution_received_order}}</h6>
+                               <h6 class="card-text">New : {{orderdata['data'].pending_order}}</h6>
+                               <h6 class="card-text">Assigned : {{orderdata['data']?.processing_order}}</h6>
+                               <h6 class="card-text">Substitutions Sent : {{orderdata['data']?.substitution_sent_order}}</h6>
+                               <h6 class="card-text">Substitutions Recieved : {{orderdata['data']?.substitution_received_order}}</h6>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-ship card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Order In Shipping <i
+                                       class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                               </h4>
+                               <h2 class="mb-5">{{orderdata['data']?.shipped_order}}</h2>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-cancelled card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Cancelled Orders <i
+                                       class="mdi mdi-diamond mdi-24px float-right"></i>
+                               </h4>
+                               <h2 class="mb-5">{{orderdata['data']?.cancel_order}}</h2>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <footer class="footer">
+               <div class="container-fluid clearfix">
+                   <span class="text-muted d-table text-center text-sm-left d-sm-inline-block">Copyright © Lifco Group
+                       of Company 2020 </span>
+               </div>
+           </footer>
+       </div>
+   
+    </div>
+</div>
