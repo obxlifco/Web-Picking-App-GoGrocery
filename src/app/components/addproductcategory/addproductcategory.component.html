@@ -10,15 +10,27 @@
             <!-- Search form -->
             <form class="form-inline md-form form-sm active-cyan active-cyan-2">
                 <mat-icon class="right-icon">search</mat-icon>
-                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                <input class="form-control form-control-sm ml-3 w-75" type="search" placeholder="Search"
                     aria-label="Search" mdbInput>
             </form>
         </div>
         <mat-selection-list #shoes [multiple]="false">
-            <mat-list-option (click)="listItem('item : '+shoe,'cate 1')" *ngFor="let shoe of [1,2,3,4]" [value]="shoe">
-              item : {{shoe}} 
+            <mat-list-option (click)="listItem(catItem)" *ngFor="let catItem of categorylist['data']?.response" [value]="catItem">
+              {{catItem.name}} 
             </mat-list-option>
           </mat-selection-list>
+
+          <!-- <mat-form-field >
+            <mat-label>Search</mat-label>
+            <input matInput [formControl]="search">
+          </mat-form-field>
+        
+        <mat-selection-list #shoes [formControl]="searchControl">
+          <mat-list-option *ngFor="let shoe of $search|async" [value]="shoe">
+            {{shoe.name}}
+          </mat-list-option>
+        </mat-selection-list> -->
+
 
     </div>
 </div>

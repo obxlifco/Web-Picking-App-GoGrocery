@@ -28,3 +28,7 @@ float: right;
 background: #037d50;
     }
 }
+mat-selection-list {
+    max-height: 400px;
+    overflow: auto;
+  }

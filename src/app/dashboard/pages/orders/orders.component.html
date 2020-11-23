@@ -69,7 +69,7 @@
                                     <!-- The timepicker input -->
                                     <input [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
                                         #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
-                                        id="timepicker-example" mode="24h" [ngModel]="datetime" placeholder="time"
+                                        id="timepicker-example" mode="24h" [value]="datetime" [ngModel]="datetime" placeholder="time"
                                         name="time" [errorStateMatcher]="customErrorStateMatcher"
                                         (timeChange)="timeChangeHandler($event)" (invalidInput)="invalidInputHandler()">
                                     <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
@@ -144,7 +144,7 @@
                     <div class="row row-margin">
                         <div class="col-md-12 stretch-card grid-margin" style="display: block;">
                             <button [disabled]="!userOrderdata.picker_name"
-                                (click)="openDialog('picker-productlist/','Add New Product','',2)" type="button"
+                                (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1)" type="button"
                                 class="btn btn-light">
                                 <mat-icon>control_point</mat-icon>
                                 Add More
@@ -163,7 +163,8 @@
                 <div class="row substitute-container">
                     <div class="col-md-12 stretch-card grid-margin"
                         *ngFor="let products of orderDetaildata['data'][0]?.order_products">
-                        <table>
+                        <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
+                        <table >
                             <tr>
                                 <td style="width: 100px;">
                                     <img style="width: 50%;" [src]="products?.product.product_images[0]?.link" alt="">
@@ -204,9 +205,9 @@
                                                     <mat-icon [disabled]="!userOrderdata.picker_name" class="left-icon">
                                                         minimize</mat-icon>
                                                     <input [disabled]="!userOrderdata.picker_name" type="text"
-                                                        [(ngModel)]="item_available" class="form-control">
+                                                        [(ngModel)]="item_not_available" class="form-control">
                                                     <mat-icon [disabled]="!userOrderdata.picker_name"
-                                                        (click)="openDialog('picker-substituteproductlist/','Add Subtitute Product',products?.id,2)"
+                                                        (click)="openDialog('picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',products?.id,2)"
                                                         class="right-icon">add</mat-icon>
                                                 </div>
                                             </div>

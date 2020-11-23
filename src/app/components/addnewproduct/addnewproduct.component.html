@@ -12,8 +12,8 @@
             <div class="col-md-12 stretch-card grid-margin col-left">
                 <div class="search-container">
                     <div class="custom-input">
-                        <input placeholder="Search for product" type="text" class="form-control">
-                        <mat-icon class="right-icon">search</mat-icon>
+                        <input placeholder="Search for product"[(ngModel)]="userProductData.searchproductvalue" type="text" class="form-control">
+                        <mat-icon (click)="searchProducts()" class="right-icon">search</mat-icon>
                     </div>
                     <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
                 </div>
@@ -22,13 +22,15 @@
 
         <div class="row">
             <div class="col-md-6 stretch-card grid-margin col-left">
-                <select (click)="opencategory_modal('picker-stockcategory/')" class="browser-default custom-select">
-                    <option selected>Category</option>
-                </select>
+                <select placeholder="Category" (click)="opencategory_modal('picker-stockcategory/')" class="browser-default custom-select">
+                   <option *ngIf="!parentcategory.name">Category</option>
+                    <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}</option>
+                </select>              
             </div>
             <div class="col-md-6 stretch-card grid-margin col-left">
-                <select (click)="openSubcategory_modal('picker-stockcategory/')" class="browser-default custom-select">
-                    <option selected>Sub Category</option>
+                <select placeholder="Sub-Category" (click)="openSubcategory_modal('picker-stockcategory/')" [(ngModel)]="subcategory.name" class="browser-default custom-select">
+                    <option *ngIf="!subcategory.name">Sub-Category</option>
+                    <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}</option>
                 </select>
             </div>
         </div>
@@ -36,26 +38,36 @@
         <div class="row">
             <div class="col-md-12 stretch-card grid-margin table-data">
                 <table class="table">
-                    <th colspan="5">Product Info</th>
-                    <th colspan="3.5">Price</th>
-                    <th style="text-align: center;" colspan="3.5">app-stocks</th>
-
+                    <th colspan="3">Product Info</th>
+                    <th colspan="3">Price</th>
+                    <th colspan="3">Quantity</th>
+                    <th style="text-align: center;" colspan="3">app-stocks</th>
                     <tr *ngFor="let plist of pickerProductList['data']?.response">
-                        <td colspan="6">
+                        <td colspan="3">
                             <div style="display: flex;">
                                 <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
                                 <img *ngIf="!plist?.name" style="width: 19%;" src="assets/images/product/defaultproductimg.JPG" alt="">
                                 <div>
                                     <h6>{{plist?.name}}</h6>
-                                    <span>360ml</span>
+                                    <span>{{plist.weight}} {{plist.uom_name}}</span>
                                 </div>
                             </div>
                         </td>
-                        <td colspan="3.5">
-                            <strong>AED {{plist?.channel_currency_product_price.price}}</strong><br>
-                            <span *ngIf="plist?.quantity">Qty:{{plist?.quantity}}</span>
+                        <td colspan="3">
+                            <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED {{plist?.channel_currency_product_price.price}}</strong><br>
                         </td>
-                        <td colspan="3.5">
+                        <td colspan="3">
+                            <span *ngIf="plist?.quantity">Qty:{{plist?.quantity}}</span>
+                            <div>
+                                <div class="btn-left">
+                                    <mat-icon class="left-icon">minimize</mat-icon>
+                                    <input style="height: 1%;" [(ngModel)]="item_quantity" type="text"
+                                        class="form-control">
+                                    <mat-icon class="right-icon">add</mat-icon>
+                                </div>
+                            </div>
+                        </td>
+                        <td colspan="3">
                             <h5><mat-slide-toggle></mat-slide-toggle></h5>
                         </td>
                     </tr>
@@ -66,5 +78,6 @@
 </div>
     <!-- footer -->
     <div class="footer">
-        <button type="button" (click)="addProduct()" class="btn btn-success">Add Products</button>
+        <button type="button" *ngIf="incomingmodalData.productType === '1'" (click)="addProduct()" class="btn btn-success">Add Products</button>
+        <button type="button" *ngIf="incomingmodalData.productType === '2'"  (click)="addProduct()" class="btn btn-success">Add Subtitute Products</button>
     </div>

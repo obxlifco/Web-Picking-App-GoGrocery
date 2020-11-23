@@ -44,6 +44,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { EditproductweightComponent } from './components/editproductweight/editproductweight.component';
 import { MapmodalComponent } from './components/mapmodal/mapmodal.component';
 import { SubcategoryComponent } from './components/subcategory/subcategory.component';
+import { MatSelectFilterModule } from 'mat-select-filter';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,7 @@ import { SubcategoryComponent } from './components/subcategory/subcategory.compo
     MatTimepickerModule,
     MatFormFieldModule,
     MatDividerModule,
-
+    MatSelectFilterModule
   ],
   providers: [],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],

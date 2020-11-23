@@ -16,26 +16,26 @@ export class GlobalitemService {
     private spinner: NgxSpinnerService,
   ) { }
 
-  async openCategoryModal(data: any) {
-    this.dialogRef = this.dialog.open(AddnewproductComponent, {
-      width: '500px',
-      data: { data: data }
-    });
-  }
+  // async openCategoryModal(data: any) {
+  //   this.dialogRef = this.dialog.open(AddnewproductComponent, {
+  //     width: '500px',
+  //     data: { data: data }
+  //   });
+  // }
 
-  async openSubCategoryModal(data: any) {
-    this.dialogRef = this.dialog.open(AddproductcategoryComponent, {
-      width: '500px',
-      data: { data: data }
-    });
-  }
+  // async openSubCategoryModal(data: any) {
+  //   this.dialogRef = this.dialog.open(AddproductcategoryComponent, {
+  //     width: '500px',
+  //     data: { data: data }
+  //   });
+  // }
 
-  async closeCategoryModal() {
-    return this.dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed in service page', result);
-      return result;
-    });
-  }
+  // async closeCategoryModal() {
+  //   return this.dialogRef.afterClosed().subscribe((result: any) => {
+  //     console.log('The dialog was closed in service page', result);
+  //     return result;
+  //   });
+  // }
 
   // spinner
   showSuccess(message:any, title:any) {

@@ -63,14 +63,15 @@ export class OrdersComponent implements OnInit {
   }
 
   // dialog
-  openDialog(apiURL:any,pageTitle:any,productid:any,productType:any): void {
+  openDialog(apiURL:any,sub_apiUrl:any,pageTitle:any,productid:any,productType:any): void {
     let data={
       order_id:this.userOrderdata.order_id,
       apiURL:apiURL,
       pageTitle:pageTitle,
       ean:"",
       product_id:productid,
-      productType:productType
+      productType:productType,
+      sub_apiUrl:sub_apiUrl
     }
 
 
@@ -138,6 +139,11 @@ export class OrdersComponent implements OnInit {
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
+      let time:any=this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
+      // this.datetime = time.getTime()
+      console.log("Date Time : ",this.datetime);
+      
+
     })
   }
 
