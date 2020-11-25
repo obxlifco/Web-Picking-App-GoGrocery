@@ -35,7 +35,7 @@ export class MapmodalComponent implements OnInit {
     const mapProperties = {
       center: new google.maps.LatLng(data.data.lat_val, data.data.long_val),
       zoom: 15,
-      mapTypeId: google.maps.MapTypeId.HYBRID
+      mapTypeId: google.maps.MapTypeId.ROADMAP
  };
  this.map = new google.maps.Map(this.mapElement.nativeElement,    mapProperties);
  

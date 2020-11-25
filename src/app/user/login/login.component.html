@@ -1,6 +1,14 @@
 <div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
-        <h4 class="card-header">SIGN IN</h4>
+        <!-- <h4 class="card-header">SIGN IN</h4> -->
+        <div style="text-align: center;margin-top: 6%;">
+            <img width="50%" src="assets/images/gog.png" alt="">
+           <div>
+            <strong>PICKING</strong><br>
+            <strong>APP</strong><br>
+            <strong>Login to GoGroceryPicking</strong><br>
+           </div>
+        </div>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-group">
@@ -22,6 +30,9 @@
                     Login
                 </button>
             </form>
+            <div class="fgpassword">
+                <p>Forgot Password? <span (click)="forrgotePassword()">Click here</span></p>
+            </div>
         </div>
     </div>
   </div>

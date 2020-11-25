@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddnewproductComponent } from 'src/app/components/addnewproduct/addnewproduct.component';
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
+import { BillnumberComponent } from 'src/app/components/billnumber/billnumber.component';
 import { EditproductweightComponent } from 'src/app/components/editproductweight/editproductweight.component';
 import { MapmodalComponent } from 'src/app/components/mapmodal/mapmodal.component';
 

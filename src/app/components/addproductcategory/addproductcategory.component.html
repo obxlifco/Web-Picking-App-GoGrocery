@@ -1,40 +1,59 @@
 <div class="conatiner">
-    <div class="row header">
-        <div class="col-md-12 stretch-card grid-margin">
-            <h4>Select Category</h4>
-        </div>
+  <div class="row header">
+    <div class="col-md-12 stretch-card grid-margin">
+      <h4>Select Category</h4>
     </div>
-    <div class="body">
-        <div class="formdata">
+  </div>
+  <div class="body">
+    <div class="formdata">
 
-            <!-- Search form -->
-            <form class="form-inline md-form form-sm active-cyan active-cyan-2">
+      <!-- Search form -->
+      <!-- <form class="form-inline md-form form-sm active-cyan active-cyan-2">
                 <mat-icon class="right-icon">search</mat-icon>
-                <input class="form-control form-control-sm ml-3 w-75" type="search" placeholder="Search"
+                <input  (keyup)="filterListCareUnit($event)" class="form-control form-control-sm ml-3 w-75" type="search" placeholder="Search"
                     aria-label="Search" mdbInput>
-            </form>
-        </div>
-        <mat-selection-list #shoes [multiple]="false">
+            </form> -->
+    </div>
+    <!-- <mat-selection-list #shoes [multiple]="false">
             <mat-list-option (click)="listItem(catItem)" *ngFor="let catItem of categorylist['data']?.response" [value]="catItem">
               {{catItem.name}} 
             </mat-list-option>
-          </mat-selection-list>
+          </mat-selection-list> -->
 
-          <!-- <mat-form-field >
-            <mat-label>Search</mat-label>
-            <input matInput [formControl]="search">
-          </mat-form-field>
-        
-        <mat-selection-list #shoes [formControl]="searchControl">
-          <mat-list-option *ngFor="let shoe of $search|async" [value]="shoe">
-            {{shoe.name}}
-          </mat-list-option>
-        </mat-selection-list> -->
+    <div class="content" role="main">
+      <div class="card">
+        <!-- <div class="form-group">
+                <mat-icon for="search-text" class="right-icon">search</mat-icon>
+                <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+                  [(ngModel)]="searchText" placeholder="Enter text to search" 
+                  autofocus>
+                  
+              </div> -->
 
+        <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
+          <mat-icon class="right-icon">search</mat-icon>
+          <input class="form-control form-control-sm ml-3 w-75" type="email" placeholder="Search" id="search-text"
+            aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
+        </div>
 
+        <ul *ngIf="categorylist['data']?.response" class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let catItem of categorylist['data']?.response | searchfilter: searchText"
+            appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
+            (click)="listItem(catItem)">
+            {{catItem.name}}
+          </li>
+        </ul>
+
+        <div class="item" *ngIf="!categorylist['data']?.response">
+          <ngx-skeleton-loader *ngFor="let item of [1,2,3,4]"></ngx-skeleton-loader>
+        </div>
+      </div>
     </div>
+
+
+  </div>
 </div>
 <!-- footer -->
 <div class="footer">
-    <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+  <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
 </div>

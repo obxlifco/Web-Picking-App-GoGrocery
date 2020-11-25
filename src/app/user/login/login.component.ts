@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     private globalitem: GlobalitemService,
     public apiservice: ApiService,
     public router: Router,
+    public modalservice : ModalService,
     private database: DatabaseService
     // private authenticationService: AuthenticationService
   ) {
@@ -85,5 +88,9 @@ export class LoginComponent implements OnInit {
     this.database.getIP().then(data => {
       this.loginForm.controls['device_id'].setValue(data.ip);
     })
+  }
+
+  forrgotePassword(){
+    this.modalservice.openModal('',ForgotpasswordComponent )
   }
 }

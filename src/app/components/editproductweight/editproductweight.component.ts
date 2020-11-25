@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ApiService } from 'src/app/services/api/api.service';
+import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 import { DialogData } from '../addnewproduct/addnewproduct.component';
 
 @Component({
@@ -13,7 +15,10 @@ export class EditproductweightComponent implements OnInit {
   newprice:any
   newWeight:any
   notes:any
-  constructor(public dialogRef: MatDialogRef<EditproductweightComponent>,
+  constructor(
+    public apiService :ApiService,
+    public globalitem:GlobalitemService,
+    public dialogRef: MatDialogRef<EditproductweightComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
       let tempdata:any=[]
       tempdata=data
@@ -31,11 +36,35 @@ this.dialogRef.close()
   }
 
   Apply(){
-    let data = {
-      newprice: this.newprice,
-      newweight: this.newWeight,
-      notes:this.notes
-    }
+    // let data = {
+    //   newprice: this.newprice,
+    //   newweight: this.newWeight,
+    //   notes:this.notes
+    // }
+
+   let data={
+      website_id:this.editweightData["data"].website_id,
+      order_id: this.editweightData["data"].order,
+      user_id: this.editweightData["data"].user_id,
+      user_name: this.editweightData["data"].user_name,
+      product_id: this.editweightData["data"].id,
+      sku: this.editweightData["data"].product.sku,
+      order_product_id: this.editweightData["data"].product.id,
+      product_old_price: this.editweightData["data"].product_price,
+      product_new_price:this.newprice,
+      weight:this.newWeight,
+      notes: this.notes
+      }
+
+      this.apiService.postData("picker-updatepicklistproductinfo/", data).subscribe((data: any[]) => {
+        console.log("sendapproval : ",data);
+        let tempdata:any=data
+        // this.pickerProductList["data"] = data
+        if(tempdata.status === 1){
+          this.globalitem.showSuccess(tempdata.message,"Product Updated")
+        }
+
+      })
     this.dialogRef.close({ event: 'close', data: data });
   }
   totalweightPrice(totalweight :any,unitweight:any,unitprice:any,event:any){

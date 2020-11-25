@@ -29,11 +29,16 @@ export class AddnewproductComponent implements OnInit {
     search: "5055179722036",
     ean: "",
     category_id: 188,
-    searchproductvalue:''
+    searchproductvalue: '',
+    shipment_id: 0,
+    trent_picklist_id: 0
   }
-  item_quantity:any='1'
+  item_quantity: any = 0
   incomingmodalData: any = []
-  pickerProductList: any = []
+  pickerProductList: any = []//list of product data
+  productsIDS: any = []
+  productQuantity: any = []
+
 
   constructor(public router: Router, public dialog: MatDialog,
     public db: DatabaseService,
@@ -95,25 +100,6 @@ export class AddnewproductComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addProduct() {
-    // this.name = "changed name"
-    // this.category = "changed Category"
-
-    let data = {
-      name: 'this.name',
-      category: 'this.category',
-      user_id: 2,
-      order_id: 2223,
-      warehouse_id: 33,
-      shipment_id: 1182,
-      trent_picklist_id: 1187,
-      product_ids: [18614],
-      action: 2,
-      quantity: 1
-    }
-    this.dialogRef.close({ event: 'close', data: data });
-  }
-
   getProductlistData() {
     this.db.getUserData().then(res => {
       console.log("user data inside dashboard : ", res);
@@ -155,15 +141,111 @@ export class AddnewproductComponent implements OnInit {
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
-      product_stock_ids:1,
+      product_stock_ids: 1,
       page: 1,
       per_page: 15,
       category_id: this.parentcategory.id,
-      in_stock:""
+      in_stock: ""
     }
-      this.apiService.postData("picker-searchstock/", data).subscribe((data: any[]) => {
-        console.log(data);
-        this.pickerProductList["data"] = data
+    this.apiService.postData("picker-searchstock/", data).subscribe((data: any[]) => {
+      console.log(data);
+      this.pickerProductList["data"] = data
+    })
+  }
+
+
+  productDecerment(index: any) {
+    // console.log("index --: ",index);
+    for (var i = 0; i < this.pickerProductList["data"].response.length; i++) {
+      if (i == index) {
+        let templength = this.pickerProductList["data"].response[i].quantity - 1
+        this.pickerProductList["data"].response[i].quantity = templength;        
+      }
+    }
+  }
+
+  productIncrment(index: any) {
+    console.log("index ++: ",index);
+
+    for (var i = 0; i < this.pickerProductList["data"].response.length; i++) {
+      if (i === index) {     
+           
+          let templength = this.pickerProductList["data"].response[i].quantity + 1 //increment the quantity
+          this.pickerProductList["data"].response[i].quantity = templength; //assaign quantity to input
+          if(this.pickerProductList["data"].response[i].quantity > 0){
+            this.productsIDS.push(this.pickerProductList["data"].response[i].id) //push products ids
+          }
+      }
+    }
+    // this.productQuantity.push(this.pickerProductList["data"].response[index].quantity) //push quantity to arrays according to selected id's
+    this.productsIDS=  this.filterArray(this.productsIDS)
+    console.log("productQuantity : ", this.productQuantity);
+    // console.log("product list : ", this.pickerProductList["data"]);
+    console.log("product ids : ", this.productsIDS);
+    // this.pickerManageStocks()
+  }
+
+  addProduct(subUrl: any) {
+    for (var i = 0; i < this.pickerProductList["data"].response.length; i++) {
+      if(this.pickerProductList["data"].response[i].quantity > 0){
+        this.productQuantity.push(this.pickerProductList["data"].response[i].quantity)//push quantity to arrays according to selected id's
+      }
+    }
+    if(this.productsIDS.length !== 0){
+      this.apiService.postData(subUrl, this.getObjectData()).subscribe((data: any[]) => {
+        let tempdata:any=data
+        this.globalitem.showSuccess("Product has been added sucessfully in order List !","Product Addedd")
+        if(tempdata.status === 1 && tempdata.api_status === 'success'){
+          this.dialogRef.close({ event: 'close', data: data});
+        }else{
+          this.globalitem.showSuccess(tempdata.message,"")
+        }
+        
       })
+    }else{
+      this.globalitem.showError("No Product Found, You need to add product first !","No Product")
+    }
+
+  }
+
+  filterArray(array:any=[]):any{
+    return  array.filter(function(elem: any, index: any, self: string | any[]) {
+      return index === self.indexOf(elem);
+  })
+  }
+
+  getObjectData():any{
+    let data = {
+      website_id: this.userProductData.website_id,
+      warehouse_id: this.userProductData.warehouse_id,
+      order_id: this.userProductData.order_id,
+      user_id: this.userProductData.user_id,
+      shipment_id: this.userProductData.shipment_id,
+      trent_picklist_id: this.userProductData.trent_picklist_id,
+      action: "increase",
+      product_qtys:this.productQuantity,
+      // id:177
+    }
+    if (this.incomingmodalData.productType === 1) { //product type 1 for add more product and 2 for substitute
+      let product_ids = {
+        category_id: 188,
+        product_ids: this.productsIDS,
+      }
+      Object.assign(data, product_ids.category_id);
+      Object.assign(data, product_ids.product_ids);
+      
+    } else {
+      let product_ids = {
+        product_id: this.incomingmodalData.product_id,
+        sub_product_ids:this.productsIDS,
+        sub_product_qtys:this.productQuantity,
+      }
+      Object.assign(data, product_ids);
+      Object.assign(data, product_ids.sub_product_ids);
+      Object.assign(data, product_ids.sub_product_qtys);
+      
+    }
+
+    return data;
   }
 }

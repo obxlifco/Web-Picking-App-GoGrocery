@@ -32,3 +32,13 @@ mat-selection-list {
     max-height: 400px;
     overflow: auto;
   }
+  .form-inline{
+    margin-bottom: 2%;
+    input{
+        border: none;
+        border-bottom: 1px solid lightgray;
+    }
+  }
+  ul{
+    height: 314px;
+  }

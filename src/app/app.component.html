@@ -23,6 +23,7 @@
           <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span>lifco Picking App {{loginRouterLink}}</span>
+        <mat-icon (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge > 0" matBadgeColor="warn" style="right: 7%;" class="logout">notifications</mat-icon>
         <mat-icon class="logout" (click)="logout()">power_settings_new</mat-icon>
       </mat-toolbar>
       <!-- Add Content Here -->

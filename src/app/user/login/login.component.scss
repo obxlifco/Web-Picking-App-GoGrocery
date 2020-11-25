@@ -1,3 +1,18 @@
 .card{
     -webkit-box-shadow: 3px 3px 5px 0px #ccc !important;
 }
+span{
+    color: green;
+}
+.fgpassword{
+    margin-top: 3%;
+    text-align: center;
+    p{
+        font-size: small;
+    }
+}
+button{
+    width: 100%;
+    background: red;
+    border-color: red;
+}

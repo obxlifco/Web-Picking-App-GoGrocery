@@ -36,7 +36,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { DatepipePipe } from './core/pipe/datepipe.pipe';
+import { DatepipePipe } from './core/pipe/datepipe/datepipe.pipe';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTimepickerModule } from 'mat-timepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,6 +45,12 @@ import { EditproductweightComponent } from './components/editproductweight/editp
 import { MapmodalComponent } from './components/mapmodal/mapmodal.component';
 import { SubcategoryComponent } from './components/subcategory/subcategory.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
+import { SearchfilterPipe } from './core/pipe/searchfilter/searchfilter.pipe';
+import { HighlightDirective } from './core/directive/highlight.directive';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { BillnumberComponent } from './components/billnumber/billnumber.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +70,11 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     DatepipePipe,
     EditproductweightComponent,
     MapmodalComponent,
-    SubcategoryComponent
+    SubcategoryComponent,
+    SearchfilterPipe,
+    HighlightDirective,
+    BillnumberComponent,
+    ForgotpasswordComponent 
   ],
   imports: [
     BrowserModule,
@@ -94,7 +104,9 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     MatTimepickerModule,
     MatFormFieldModule,
     MatDividerModule,
-    MatSelectFilterModule
+    MatSelectFilterModule,
+    NgxSkeletonLoaderModule,
+    MatBadgeModule
   ],
   providers: [],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],

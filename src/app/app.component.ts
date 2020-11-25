@@ -6,6 +6,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { ApiService } from './services/api/api.service';
 import { DatabaseService } from './services/database/database.service';
 import { GlobalitemService } from './services/globalitem/globalitem.service';
+import { ModalService } from './services/modal/modal.service';
+import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassword.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,7 @@ import { GlobalitemService } from './services/globalitem/globalitem.service';
 export class AppComponent {
   title = 'lifco Picking pp';
   loginRouterLink: any
+  totalbadge:any=0
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -24,8 +27,9 @@ export class AppComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     private router: Router,
     private apiService: ApiService,
-    public globalitems:GlobalitemService,
-    private db:DatabaseService
+    public globalitems: GlobalitemService,
+    private db: DatabaseService,
+    private modalservice : ModalService
   ) {
     console.log("router link : ", this.loginRouterLink);
     router.events.subscribe((url: any) =>
@@ -35,7 +39,7 @@ export class AppComponent {
     this.initializeMethod()
   }
 
-  initializeMethod(){
+  initializeMethod() {
     this.isuerlogin()
   }
   getURL(url?: any) {
@@ -43,15 +47,42 @@ export class AppComponent {
     console.log("router link : ", this.loginRouterLink);
   }
 
-  isuerlogin(){
-    this.apiService.getIPAddress().subscribe(data =>{  
-      console.log("Ip Address : ",data);   
+  isuerlogin() {
+    this.apiService.getIPAddress().subscribe(data => {
+      console.log("Ip Address : ", data);
       this.db.setIP(data)
     })
   }
-  logout(){
-    this.globalitems.showSuccess("You have Sucessfully logout","Success")
-    this.db.SignOut();
-    this.router.navigate(["login"])
+  logout() {
+
+    this.db.getUserData().then(res => {
+      console.log("user data inside dashboard : ", res);
+      this.db.getIP().then(data1 => {
+        data1.api
+
+        let data = {
+          ip_address: data1.ip,
+          device_id: data1.ip,
+        }
+
+        this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
+          console.log("logout : ", data);
+          if (data.status === 1) {
+            this.globalitems.showSuccess("You have Sucessfully logout", "Success")
+            this.db.SignOut();
+            this.router.navigate(["login"])
+          }
+
+        })
+      })
+
+    })
   }
+  setbadge(badge:any){
+    this.totalbadge=badge
+  }
+  navigatLatestOrder(){
+    this.router.navigate(['orders'])
+  }
+
 }

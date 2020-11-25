@@ -14,8 +14,7 @@ import { DialogData } from '../addnewproduct/addnewproduct.component';
 })
 export class AddproductcategoryComponent implements OnInit {
 
-  search = new FormControl();
-  searchControl = new FormControl();
+  searchText = ''
   categoryData={
     categoryurl:'',
     website_id:'',
@@ -75,4 +74,11 @@ export class AddproductcategoryComponent implements OnInit {
       this.categorylist["data"]=data
     })
   }
+
+//   filterListCareUnit(val:any) {
+//     console.log(val.key);
+//     this.categorylist["data"] =  this.categorylist["data"].response.filter((unit:any) => unit.name.indexOf(val.key) > -1);
+//  console.log("after filter : ",this.categorylist["data"]);
+ 
+//   }
 }
