@@ -82,6 +82,7 @@ export class AppComponent {
     this.totalbadge=badge
   }
   navigatLatestOrder(){
+    this.totalbadge=0;
     this.router.navigate(['orders'])
   }
 

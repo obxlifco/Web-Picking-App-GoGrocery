@@ -49,7 +49,7 @@
                     <tr>
                         <td>Order date and time :</td>
                         <td>
-                            {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date }}
+                            {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date | date:'d MMM, y, h:mm a' }}
                         </td>
                     </tr>
                     <tr>
@@ -104,8 +104,10 @@
                     <tr>
                         <td>New Value of Products :</td>
                         <td>
-                            <input [disabled]="!userOrderdata.picker_name" class="colorclass" placeholder="Enter Price"
-                                type="text" class="form-control">
+                            <!-- <input [disabled]="!userOrderdata.picker_name" class="colorclass" placeholder="Enter Price"
+                                type="text" class="form-control"> -->
+                                <p *ngIf="!price" style="color: cyan;" (click)="updatePrice(orderDetaildata['data'][0]?.gross_amount)"> Enter Price</p>
+                                <p *ngIf="price" style="color: cyan;" (click)="updatePrice(orderDetaildata['data'][0]?.gross_amount)">{{price}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -193,7 +195,7 @@
                                     Total Weight : <strong>{{products?.product.weight * products?.quantity}}
                                         {{products?.product.uom.uom_name}}</strong><br>
                                     Unit Price :<strong>{{products?.product_price}}</strong><br>
-                                    Total Price : <strong>{{products?.product_price *  products?.quantity}}</strong><br>
+                                    Total Price : <strong>{{products?.product_price *  products?.grn_quantity}}</strong><br>
                                     Ordered Qty :<strong>{{products?.quantity}}</strong><br>
                                     <div>
 
@@ -260,7 +262,8 @@
                     <div class="alert alert-info">
                         <h3>Subtitute Product</h3>
                     </div>
-                    <div class="row" *ngFor="let subtitute of orderDetaildata['data'][0]?.order_substitute_products">
+                    <div *ngFor="let subtitute of orderDetaildata['data'][0]?.order_substitute_products">
+                    <div class="row" *ngIf="subtitute.send_approval !== 'declined'">
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
                             <img src="assets/images/product/defaultproductimg.jpg" alt="">
                         </div>
@@ -274,13 +277,18 @@
                             <span>{{subtitute.product.weight}} {{subtitute.product.uom.uom_name}}</span>
                         </div>
                     </div>
-                    <button type="button" style="width: 100%;" (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products)"
-                        class="btn btn-success">Send for Approval</button>
                 </div>
+                    <button type="button" style="width: 100%;" (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id)"
+                        class="btn btn-success">Send for Approval</button><br>
+                    <button *ngIf="IsTimeComplete" [disabled]="!userOrderdata.picker_name" type="button"
+                    (click)="notifyCustomer()" class="btn btn-success declinedbtn">Declined Product</button>
+                </div>
+                <!-- process order -->
                 <div class="row" *ngIf="!orderDetaildata['data'][0]?.order_substitute_products.length">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin btnpadding">
                         <button [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
                             (click)="processOrder()" class="btn btn-success">Process the order</button>
+                           
                     </div>
                 </div>
             </div>
@@ -312,6 +320,7 @@
         </table> -->
             <div class="orderlist-heading">
                 <h4>Order List</h4>
+                <!-- msInfiniteScroll (infiniteScroll)="getNextData()" threshold="15%" -->
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="scroll-viewport">
                     <div *cdkVirtualFor="let order of orderlistdata['data']?.response" class="scroll-inner-data">
                         <mat-card class="orderlist-card"
@@ -358,7 +367,7 @@
                                 </div>
                             </mat-card-content>
                         </mat-card>
-                    </div>
+                    </div>           
                 </cdk-virtual-scroll-viewport>
             </div>
         </div>

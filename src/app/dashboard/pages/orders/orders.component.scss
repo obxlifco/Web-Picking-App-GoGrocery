@@ -80,7 +80,7 @@ h4 {
     //   scrollbar
     .scroll-viewport {
         width     : 100%;
-        height    : 100%;
+        height    : 50%;
         margin-top: 10.5%;
         border    : 1px solid lightgray;
         z-index   : 2;
@@ -315,7 +315,7 @@ h3 {
 }
 
 .layover-root {
-    width   : 100%;
+    width   : 97%;
     height  : 100%;
     position: absolute;
 
@@ -341,3 +341,20 @@ h3 {
     color: cyan;
     opacity: 1;
   }
+
+//   .main-panel {
+//     height: 30px;
+//     overflow-y: scroll;
+//   }
+  .search-results {
+    height: 2rem;
+    overflow: scroll;
+}
+.declinedbtn{
+    width: 100%;
+    background: red;
+    margin-top: 3%;
+    border-color: red;
+
+}
+

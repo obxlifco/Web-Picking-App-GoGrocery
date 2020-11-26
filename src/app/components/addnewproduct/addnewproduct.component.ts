@@ -97,7 +97,7 @@ export class AddnewproductComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ event: 'close', data:  this.incomingmodalData.storage,subtitutestatus:"no_productadded"});
   }
 
   getProductlistData() {
@@ -191,17 +191,28 @@ export class AddnewproductComponent implements OnInit {
         this.productQuantity.push(this.pickerProductList["data"].response[i].quantity)//push quantity to arrays according to selected id's
       }
     }
+
     if(this.productsIDS.length !== 0){
-      this.apiService.postData(subUrl, this.getObjectData()).subscribe((data: any[]) => {
-        let tempdata:any=data
-        this.globalitem.showSuccess("Product has been added sucessfully in order List !","Product Addedd")
-        if(tempdata.status === 1 && tempdata.api_status === 'success'){
-          this.dialogRef.close({ event: 'close', data: data});
-        }else{
-          this.globalitem.showSuccess(tempdata.message,"")
-        }
-        
-      })
+      if(this.productsIDS.length <= 2){
+        this.apiService.postData(subUrl, this.getObjectData()).subscribe((data: any[]) => {
+          let tempdata:any=data
+          this.globalitem.showSuccess("Product has been added sucessfully in order List !","Product Addedd")
+          if(tempdata.status === 1 && tempdata.api_status === 'success'){
+            let modaldataTemp ={
+              data:data,
+              subtitutestatus:"productadded"
+            }
+            
+            this.dialogRef.close({ event: 'close', data: modaldataTemp,substituteData:this.incomingmodalData.substituteData});
+          }else{
+            this.globalitem.showSuccess(tempdata.message,"")
+          }
+          
+        })
+      }else{
+        this.globalitem.showError("You can't select more than 2 products ","")
+      }
+
     }else{
       this.globalitem.showError("No Product Found, You need to add product first !","No Product")
     }

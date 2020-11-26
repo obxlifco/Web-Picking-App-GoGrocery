@@ -47,5 +47,8 @@ const marker = new google.maps.Marker({
   });
   // this.map = new google.maps.Map(this.mapElement.nativeElement,    marker);
   }
+  closeModal(){
+    this.dialogRef.close()
+  }
 
 }

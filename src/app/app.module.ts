@@ -51,6 +51,11 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { BillnumberComponent } from './components/billnumber/billnumber.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassword.component';
+import { EditpriceComponent } from './components/editprice/editprice.component';
+import {DatePipe} from '@angular/common';
+import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +79,8 @@ import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassw
     SearchfilterPipe,
     HighlightDirective,
     BillnumberComponent,
-    ForgotpasswordComponent 
+    ForgotpasswordComponent,
+    EditpriceComponent 
   ],
   imports: [
     BrowserModule,
@@ -106,9 +112,13 @@ import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassw
     MatDividerModule,
     MatSelectFilterModule,
     NgxSkeletonLoaderModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectInfiniteScrollModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent]
 })

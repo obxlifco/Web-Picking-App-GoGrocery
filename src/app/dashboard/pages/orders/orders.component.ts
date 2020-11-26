@@ -10,6 +10,9 @@ import { ModalService } from 'src/app/services/modal/modal.service';
 import { EditproductweightComponent } from 'src/app/components/editproductweight/editproductweight.component';
 import { MapmodalComponent } from 'src/app/components/mapmodal/mapmodal.component';
 import { BillnumberComponent } from 'src/app/components/billnumber/billnumber.component';
+import { EditpriceComponent } from 'src/app/components/editprice/editprice.component';
+import { DatePipe } from '@angular/common';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-orders',
@@ -33,8 +36,15 @@ export class OrdersComponent implements OnInit {
     shipment_id: '',
     order_status: '',
     trent_picklist_id: 0,
-    substitute_status:''
+    substitute_status:'',
+    shortage:'',
+    grn_quantity:0,
+    product_id:'',
+    order_product_id:''
   }
+  price :any=''
+  countDownTimer:any
+  IsTimeComplete=false
 
   product_billnumber: any = 'Enter Bill Number';
   minValue: any = new Date();
@@ -43,6 +53,8 @@ export class OrdersComponent implements OnInit {
   customErrorStateMatcher: any
   constructor(public router: Router,
     public dialog: MatDialog,
+    public appcom : AppComponent,
+    public datePipe : DatePipe,
     public db: DatabaseService,
     public apiService: ApiService,
     public modalservice: ModalService,
@@ -63,7 +75,7 @@ export class OrdersComponent implements OnInit {
   }
 
 
-
+//call when we completing the order
   processOrder() {
 
     // substitute_product_id:any,product_id:any
@@ -109,6 +121,8 @@ export class OrdersComponent implements OnInit {
     
 
   }
+
+  //when to assaign user name to order
   AssaignorderToUser(value: string) {
     this.userOrderdata.picker_name = value;
     let data = {
@@ -157,11 +171,7 @@ export class OrdersComponent implements OnInit {
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
 
-  timeChangeHandler(event: any) {
-    console.log("date Event : ", event)
-  }
-  invalidInputHandler() {
-  }
+
 
   openEditModal(data: any) {
     let user_ids = {
@@ -177,8 +187,12 @@ export class OrdersComponent implements OnInit {
   }
 
   //send product subtitution for approval
-  sendProductSubtituteApproval(approvalProducst: any) {
+  sendProductSubtituteApproval(approvalProducst: any,bill_value:any) {
     // substitute_product_id:any,product_id:any
+    var today = new Date().toLocaleTimeString();
+    this.startTimer(60*0.5);
+    console.log("local time : ",today);
+    
     let temarray = new Array()
     for (let i = 0; i < approvalProducst.length; i++) {
       temarray.push({ product_id: approvalProducst[i].product.id, order_product_id: approvalProducst[i].id })
@@ -188,11 +202,12 @@ export class OrdersComponent implements OnInit {
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
-      // product_id:this.userOrderdata.order_id,
+      product_id:this.userOrderdata.order_id,
       order_id: this.userOrderdata.order_id,
       user_id: this.userOrderdata.user_id,
       approval_details: temarray
-    }
+      // approval_details:[{product_id:6618,order_product_id:764}]
+      }
     // let temp = {
     //   user_id: 587,
     //   approval_details: [
@@ -209,22 +224,22 @@ export class OrdersComponent implements OnInit {
     //   warehouse_id: 33
     // }
     console.log("subtitue array : ", data);
-    if (this.product_billnumber !== "Enter Bill Number") {
-      this.apiService.postData("picker-sendapproval/", data).subscribe((data: any[]) => {
-        console.log("sendapproval : ", data);
-        let tempdata: any = data
-        // this.pickerProductList["data"] = data
-        if (tempdata.status === 1) {
-          this.globalitem.showSuccess(tempdata.message, "Subtitute Sent")
-        }
-      })
-    } else {
-      this.globalitem.showError("Picking not completed yet", "Warning")
-    }
+    // if (bill_value !== "") {
+    //   this.apiService.postData("picker-sendapproval/", data).subscribe((data: any[]) => {
+    //     console.log("sendapproval : ", data);
+    //     let tempdata: any = data
+    //     // this.pickerProductList["data"] = data
+    //     if (tempdata.status === 1) {
+    //       this.globalitem.showSuccess(tempdata.message, "Subtitute Sent")
+    //     }
+    //   })
+    // } else {
+    //   this.globalitem.showError("Picking not completed yet", "Warning")
+    // }
   }
 
   // dialog
-  openDialog(apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any
+  openDialog(apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any,shortage:any,substituteData:any
     // quantity: any, product_id: any, order_product_id: any, shortage: any, index: any
   ): void {
     // this.updateMoreProductQuantity(quantity,product_id,order_product_id,shortage,index)
@@ -237,13 +252,16 @@ export class OrdersComponent implements OnInit {
       productType: productType,
       sub_apiUrl: sub_apiUrl,
       shipment_id: this.userOrderdata.shipment_id,
-      trent_picklist_id: this.userOrderdata.trent_picklist_id
+      trent_picklist_id: this.userOrderdata.trent_picklist_id,
+      shortage:shortage,
+      substituteData:substituteData
     }
-    this.modalservice.openCategoryModal(data).then(data => {
+    this.modalservice.openCategoryModal(data)
+    this.modalservice.closeCategoryModal().then(data => {
       console.log("closed Modal : ", data);
-      this.modalservice.closeCategoryModal().then(data => {
-        console.log("closed Modal : ", data);
-      })
+      if(data.subtitutestatus === "productadded"){
+        // this.updateMoreProductQuantity(data.substituteData.grn_quantity,data.substituteData.product_id,data.substituteData.order_product_id,data.substituteData.shortage,0)
+      }
     })
   }
 
@@ -261,6 +279,7 @@ export class OrdersComponent implements OnInit {
       grn_quantity: quantity,
       shortage: shortage
     }
+  
     this.apiService.postData("picker-updategrnquantity/", data).subscribe((data: any[]) => {
       console.log("updategrnquantity : ", data);
       let tempdata: any = data
@@ -296,20 +315,27 @@ export class OrdersComponent implements OnInit {
 
   productIncrment(quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
     apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any) {
-    // console.log("index ++: ", index);
+    var modaldata={
+      shortage:shortage,
+      grn_quantity:quantity,
+      product_id:product_id,
+      order_product_id:order_product_id
+    }
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       if (i === index) {
         if(productType === ''){
           let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
         this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
+        this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, shortage, index)
         }else if(productType === 2){
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
           this.orderDetaildata["data"][0].order_products[i].shortage = templength;
-          this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType)
+          this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, templength, index)
+          this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType,templength,modaldata)
         }
       }
     }
-    this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, shortage, index)
+   
   }
 
   //this for assing bill number
@@ -327,10 +353,8 @@ export class OrdersComponent implements OnInit {
       order_id:this.userOrderdata.order_id,
       user_id:this.userOrderdata.user_id,
       billnumber:billnumbr
-
     }
   this.modalservice.openModal(data,BillnumberComponent).then(data =>{
-
   })
   this.modalservice.closeCategoryModal().then(data => {
     this.product_billnumber = data.billnumber
@@ -346,22 +370,89 @@ export class OrdersComponent implements OnInit {
     this.apiService.postData("picker-resetsendapproval/", data).subscribe((data: any) => {
       console.log("updategrnquantity : ", data);
       if (data.status === 1) {
-        this.globalitem.showSuccess(data.message,"Subtitute Sent")
+        this.globalitem.showSuccess(data.message,"Subtitute Declined")
       }
-
     })
   }
-
+//get latest order then add tit it notify status
   getLatestOrder(){
       let data = {
         website_id: this.userOrderdata.website_id,
         warehouse_id: this.userOrderdata.warehouse_id,
-        order_id_for_substitute_checking: 3470,
+        order_id_for_substitute_checking:  this.userOrderdata.trent_picklist_id,
         order_id: this.userOrderdata.order_id,
       }
-      this.apiService.postData("picker-latestorders/", data).subscribe((data: any[]) => {
+      this.apiService.postData("picker-latestorders/", data).subscribe((data: any) => {
         console.log("latestorders : ", data);
+        this.appcom.setbadge(data.response.no_of_latest_order)
       })
+  }
+  updatePrice(order_amount:any){
+    let data={
+      website_id:this.userOrderdata.website_id,
+      order_id: this.userOrderdata.order_id,
+      user_id: this.userOrderdata.user_id,
+      order_amount: order_amount
+    }
+
+
+    this.modalservice.openModal(data,EditpriceComponent)
+    this.modalservice.closeCategoryModal().then(data => {
+      this.price = data.price
+      console.log("closed Modal : ", data.price);
+    })
+  }
+
+  //update detail order data with time
+  timeChangeHandler(event: any) {
+
+    var medium = this.datePipe.transform(new Date(),"'h:mm");
+    console.log("date Event : ", medium)
+    let data = {
+      website_id: this.userOrderdata.website_id,
+      user_id: this.userOrderdata.user_id,
+      order_id: this.userOrderdata.order_id,
+      slot_start_time:this.datePipe.transform(new Date(),"'h:mm"),
+      slot_end_time:this.datePipe.transform(event,"'h:mm")
+    }
+    this.apiService.postData("picker-updateorderdetails/", data).subscribe((data: any) => {
+      if(data.status === 1){
+        this.globalitem.showSuccess(data.message,"Time Updated")
+      }else{
+        this.globalitem.showError(data.message,"Warn")
+      }
+    })
+  }
+  invalidInputHandler() {
+  }
+
+  //on scroll we load more data
+  getNextData() {
+    console.log('scrolled!!');
+  }
+
+
+  startTimer(duration:any) {
+
+    let timer = duration, minutes, seconds;
+  
+    this.countDownTimer = setInterval(() => {
+      minutes = parseInt(timer / 60, 10)
+      seconds = parseInt(timer % 60, 10);
+  
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+      // display.textContent = minutes + ":" + seconds;
+  // console.log("timer : ",minutes + ":" + seconds);
+  
+      if (--timer < 0) {
+        timer = duration;
+        this.IsTimeComplete=true
+        // this.globalitem.showError("Time is up , You can decline the order ","Warn")
+        
+      }
+    }, 1000);
   }
 }
 

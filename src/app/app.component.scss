@@ -1,7 +1,17 @@
 .mat-drawer-container{
     height: -webkit-fill-available;
 }
-.logout{
+.logout-menu{
     position: absolute;
-    right: 16px;
+    right: 2%;
+    // mat-icon {
+    //     margin: auto;
+    //     top: 0px;
+    //     bottom: 5px;
+    // }
+}
+.mat-menu-item{
+    border: none;
+    color: none;
+    border-color: none;
 }
