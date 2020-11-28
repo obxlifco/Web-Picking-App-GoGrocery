@@ -40,10 +40,11 @@ export class AddnewproductComponent implements OnInit {
   productQuantity: any = []
 
 
-  constructor(public router: Router, public dialog: MatDialog,
+  constructor(public router: Router,
     public db: DatabaseService,
     public apiService: ApiService,
     public globalitem: GlobalitemService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddnewproductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.pickerProductList["data"] = []

@@ -70,10 +70,22 @@ mat-icon {
   background: white;
 }
 .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: blue;
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+  color: white;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
   /* border-radius: 4px 4px 0 0; */
   padding: 0em; 
   border: none;
 }
+
+//for date input
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: white !important;
+ } 
 ul,mat-card,li,mat-icon,button{
   cursor: pointer;
 }

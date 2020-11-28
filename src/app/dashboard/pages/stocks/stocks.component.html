@@ -1,5 +1,5 @@
 <div class="conatiner">
-    <div class="row header">
+    <div class="row main-header">
         <div class="col-md-12 stretch-card grid-margin">
             <h4>Manage Stock</h4>
         </div>
@@ -9,25 +9,27 @@
         <div class="row">
             <div class="col-md-3 stretch-card grid-margin col-left">
                 <select (click)="opencategory_modal()" class="browser-default custom-select">
-                    <option selected>Category</option>
+                    <option *ngIf="!parentcategory.name">Category</option>
+                    <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
 
                 </select>
             </div>
             <div class="col-md-3 stretch-card grid-margin col-left">
                 <select (click)="opensub_category_modal()" class="browser-default custom-select">
-                    <option selected>Sub Category</option>
+                    <option *ngIf="!subcategory.name">Sub Category</option>
+                    <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
                 </select>
             </div>
             <div class="col-md-3 stretch-card grid-margin col-left">
-                <select class="browser-default custom-select">
+                <select class="browser-default custom-select" [(ngModel)]="stockStatus">
                     <option value="stock" selected>Stock</option>
-                    <option value="instock">In-stock</option>
-                    <option value="outofstock">Out of stock</option>
+                    <option value="y">In-stock</option>
+                    <option value="n">Out of stock</option>
                 </select>
             </div>
             <div class="col-md-3 stretch-card grid-margin col-left">
-                <select class="browser-default custom-select">
-                    <option value="hasprice" selected>Has Price</option>
+                <select class="browser-default custom-select" [(ngModel)]="cat_price">
+                    <option value="hasprice"  selected>Has Price</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
@@ -41,7 +43,7 @@
                         <!-- <mat-icon class="right-icon">search</mat-icon> -->
                     </div>
                     <button type="button" class="btn btn-outline-secondary">Scan</button>
-                    <button type="button" class="btn btn-outline-secondary">Search</button>
+                    <button type="button" (click)="searchProducts()" class="btn btn-outline-secondary">Search</button>
                 </div>
             </div>
         </div>

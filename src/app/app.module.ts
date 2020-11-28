@@ -55,7 +55,8 @@ import { EditpriceComponent } from './components/editprice/editprice.component';
 import {DatePipe} from '@angular/common';
 import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
-
+import { TimerpipePipe } from './timerpipe.pipe';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { MatSelectModule } from '@angular/material/select';
     HighlightDirective,
     BillnumberComponent,
     ForgotpasswordComponent,
-    EditpriceComponent 
+    EditpriceComponent,
+    TimerpipePipe 
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,8 @@ import { MatSelectModule } from '@angular/material/select';
     NgxSkeletonLoaderModule,
     MatBadgeModule,
     MatSelectInfiniteScrollModule,
-    MatSelectModule
+    MatSelectModule,
+    CountdownModule
   ],
   providers: [
     DatePipe
