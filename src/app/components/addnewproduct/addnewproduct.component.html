@@ -13,7 +13,7 @@
                 <div class="search-container">
                     <div class="custom-input">
                         <input placeholder="Search for product" [(ngModel)]="userProductData.searchproductvalue"
-                            type="text" class="form-control">
+                            type="text" class="form-control" (keyup.enter)="searchProducts()">
                         <mat-icon (click)="searchProducts()">search</mat-icon>
                     </div>
                     <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
@@ -31,7 +31,8 @@
                 </select>
             </div>
             <div class="col-md-6 stretch-card grid-margin col-left">
-                <select placeholder="Sub-Category" (click)="openSubcategory_modal('picker-stockcategory/')"
+                <select placeholder="Sub-Category"
+                    (click)="openSub_modal('picker-stockcategory/','','','','AddproductcategoryComponent')"
                     [(ngModel)]="subcategory.name" class="browser-default custom-select">
                     <option *ngIf="!subcategory.name">Sub-Category</option>
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}</option>
@@ -39,7 +40,8 @@
             </div>
         </div>
 
-        <div class="row">
+        <!-- add more product loop -->
+        <div class="row" *ngIf="incomingmodalData.productType === 1" style="height: 289px;">
             <div class="col-md-12 stretch-card grid-margin table-data">
                 <table class="table">
                     <div>
@@ -69,13 +71,17 @@
                                 <!-- <span *ngIf="plist?.quantity">Qty:{{plist?.quantity}}</span> -->
                                 <div>
                                     <div class="btn-left">
-                                        <mat-icon matRipple class="left-icon" (click)="productDecerment(i)">minimize
+                                        <mat-icon matRipple class="left-icon"
+                                            (click)="productDecerment(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id)">
+                                            minimize
                                         </mat-icon>
                                         <input *ngIf="plist?.quantity" style="height: 1%;width: 40px;"
                                             [value]="plist?.quantity" type="text" class="form-control">
                                         <input *ngIf="!plist?.quantity" style="height: 1%;width: 40px;" value="0"
                                             type="text" class="form-control">
-                                        <mat-icon matRipple class="right-icon" (click)="productIncrment(i)">add
+                                        <mat-icon matRipple class="right-icon"
+                                            (click)="productIncrment(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id)">
+                                            add
                                         </mat-icon>
                                     </div>
                                 </div>
@@ -88,12 +94,75 @@
                 </table>
             </div>
         </div>
+        <!-- substitute products -->
+        <div class="row" *ngIf="incomingmodalData.productType === 2" style="height: 289px;">
+            <div class="col-md-12 stretch-card grid-margin table-data">
+                <table class="table">
+                    <div>
+                        <th colspan="7" style="width: 86%;">Product Info</th>
+                        <th colspan="5">Price</th>
+                        <!-- <th style="text-align: end;width: 100%;">Stock</th> -->
+                    </div>
+
+                    <!-- selected products -->
+                    <div >
+                        <h6 *ngIf="subtituteSelectedProducts.length">Selected Products </h6>
+                        <div *ngFor="let plist of subtituteSelectedProducts ;let i=index;" class="col-row">
+                            <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                                (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)">
+                                <td colspan="7" style="width: 57%;">
+                                    <div style="display: flex;">
+                                        <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
+                                        <img *ngIf="!plist?.name" style="width: 19%;"
+                                            src="assets/images/product/defaultproductimg.JPG" alt="">
+                                        <div>
+                                            <h6>{{plist?.name}}</h6>
+                                            <span>{{plist.weight}} {{plist.uom_name}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="5" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                                    <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
+                                        {{plist?.channel_currency_product_price.price}}</strong><br>
+                                </td>
+                            </tr>
+                    </div>
+                    </div>
+                  
+
+                    <!-- substitute list -->
+                    <div *ngFor="let plist of pickerProductList['data']?.response;let i=index;" class="col-row">
+                        <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                            (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
+                            [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }"
+                            >
+                            <td colspan="7" style="width: 57%;">
+                                <div style="display: flex;">
+                                    <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
+                                    <img *ngIf="!plist?.name" style="width: 19%;"
+                                        src="assets/images/product/defaultproductimg.JPG" alt="">
+                                    <div>
+                                        <h6>{{plist?.name}}</h6>
+                                        <span>{{plist.weight}} {{plist.uom_name}}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="5" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                                <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
+                                    {{plist?.channel_currency_product_price.price}}</strong><br>
+                            </td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <!-- footer -->
 <div class="footer">
-    <button type="button" *ngIf="incomingmodalData.productType === 1" (click)="addProduct('picker-addmoreproduct/')"
+    <button type="button" *ngIf="incomingmodalData.productType === 1" (click)="addMoreProduct('picker-addmoreproduct/')"
         class="btn btn-success">Add Products</button>
     <button type="button" *ngIf="incomingmodalData.productType === 2"
-        (click)="addProduct('picker-addsubstituteproduct/')" class="btn btn-success">Add Subtitute Products</button>
+        (click)="addSubtituteProduct('picker-substituteproductlist/')" class="btn btn-success">Add Subtitute
+        Products</button>
 </div>

@@ -49,4 +49,8 @@ export class DashboardComponent implements OnInit {
     })
 
   }
+
+  navigateOrder(orderstatus:any){
+    this.router.navigate(['orders',{orderstatus: orderstatus}])
+  }
 }

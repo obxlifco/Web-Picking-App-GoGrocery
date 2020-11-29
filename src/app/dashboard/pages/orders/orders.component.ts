@@ -1,5 +1,5 @@
 import { Component, ElementRef, NgModule, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddnewproductComponent } from 'src/app/components/addnewproduct/addnewproduct.component';
@@ -20,7 +20,7 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  @ViewChild('bnumber', { static: false }) billnumber: ElementRef | undefined;
+  @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
   // @ViewChild('time', { static: true }) timer: ElementRef | any
 
   item_available: any = 0;
@@ -42,7 +42,8 @@ export class OrdersComponent implements OnInit {
     shortage: '',
     grn_quantity: 0,
     product_id: '',
-    order_product_id: ''
+    order_product_id: '',
+    orderlistType:null
   }
   price: any = ''
   countDownTimer: any
@@ -65,12 +66,22 @@ export class OrdersComponent implements OnInit {
     public db: DatabaseService,
     public apiService: ApiService,
     public modalservice: ModalService,
+    private activated_route: ActivatedRoute,
     public globalitem: GlobalitemService) {
     // this.dataService.sendGetRequest().subscribe((data: any[])=>{
     //   console.log(data);
     //   this.products = data;
     // })  
     this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
+   this.activated_route.params.subscribe(v => {
+    console.log("activated route data :",v.orderstatus)
+    if(v.orderstatus){
+      this.userOrderdata.orderlistType =v.orderstatus
+     
+    }
+ 
+   })
+ 
   }
 
   ngOnInit(): void {
@@ -105,7 +116,7 @@ export class OrdersComponent implements OnInit {
     }
     console.log("Total counter : ", counter);
 
-    if (this.product_billnumber.length !== 0) {
+    if (this.billnumber.nativeElement.value) {
       if (counter === 0) {
         this.apiService.postData("picker-grn-complete/", data).subscribe((data: any[]) => {
           console.log("picker-grn-complete : ", data);
@@ -137,6 +148,13 @@ export class OrdersComponent implements OnInit {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
       }
+      if(this.userOrderdata.orderlistType !== null){
+        let status={
+          order_status:this.userOrderdata.orderlistType
+        }
+        Object.assign(data,status)
+      }
+
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
@@ -219,7 +237,9 @@ export class OrdersComponent implements OnInit {
   }
 
   //send product subtitution for approval
-  sendProductSubtituteApproval(approvalProducst: any, bill_value: any) {
+  sendProductSubtituteApproval(approvalProducst: any, bill_value: any,product_billnumber:any) {
+    console.log("check bill  number ,",this.billnumber.nativeElement.value);
+    
     // substitute_product_id:any,product_id:any
     let temarray = new Array()
     for (let i = 0; i < approvalProducst.length; i++) {
@@ -230,7 +250,7 @@ export class OrdersComponent implements OnInit {
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
-      product_id: this.userOrderdata.order_id,
+      // product_id: this.userOrderdata.order_id,
       order_id: this.userOrderdata.order_id,
       user_id: this.userOrderdata.user_id,
       approval_details: temarray
@@ -238,7 +258,7 @@ export class OrdersComponent implements OnInit {
     }
     this.IsTimeComplete=true
     // console.log("subtitue array : ", data);
-    if (this.product_billnumber.length < 3) {
+    if (this.billnumber.nativeElement.value) {
       this.apiService.postData("picker-sendapproval/", data).subscribe((data: any) => {
         if (data.status === 1) {
           this.globalitem.showSuccess(data.message, "Subtitute Sent")
@@ -334,10 +354,19 @@ export class OrdersComponent implements OnInit {
       if (i == index) {
         if (productType === '') {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity - 1
-          this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength;
+          if(templength < 0){
+            this.orderDetaildata["data"][0].order_products[i].grn_quantity = 0;
+          }else{
+            this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength;
+          } 
         } else if (productType === 2) {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage - 1
-          this.orderDetaildata["data"][0].order_products[i].shortage = templength;
+          if(templength < 0){
+            this.orderDetaildata["data"][0].order_products[i].shortage = 0;
+          }else{
+            this.orderDetaildata["data"][0].order_products[i].shortage = templength;
+          }
+         
           // this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType)
         }
       }

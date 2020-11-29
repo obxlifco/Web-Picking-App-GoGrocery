@@ -18,7 +18,6 @@
                 <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
                   [(ngModel)]="searchText" placeholder="Enter text to search" 
                   autofocus>
-                  
               </div> -->
 
         <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
@@ -27,6 +26,7 @@
             aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
         </div>
 
+        <div class="cardbody">
         <ul *ngIf="categorylist['data']?.response" class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let catItem of categorylist['data']?.response | searchfilter: searchText"
             appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
@@ -34,17 +34,22 @@
             {{catItem.name}}
           </li>
         </ul>
-
+        <div class="cardfooter">
+          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+        </div>
+      </div>
+    
         <div class="item" *ngIf="!categorylist['data']?.response">
           <ngx-skeleton-loader *ngFor="let item of [1,2,3,4]"></ngx-skeleton-loader>
         </div>
+        <!-- <div class="cardfooter">
+          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+        </div> -->
       </div>
     </div>
-
-
   </div>
 </div>
 <!-- footer -->
 <div class="footer">
-  <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+  <!-- <button (click)="closeModal()" type="button" class="btn btn-success">Close</button> -->
 </div>

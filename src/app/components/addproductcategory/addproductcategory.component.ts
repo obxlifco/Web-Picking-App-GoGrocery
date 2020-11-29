@@ -69,7 +69,7 @@ export class AddproductcategoryComponent implements OnInit {
     }
     console.log("going data : ",data);
     
-    this.apiService.postData(this.incomingModalData.data.categoryURl, data).subscribe((data: any[]) => {
+    this.apiService.postData(this.incomingModalData.data.URl, data).subscribe((data: any[]) => {
       console.log(data);
       this.categorylist["data"]=data
     })
@@ -81,4 +81,6 @@ export class AddproductcategoryComponent implements OnInit {
 //  console.log("after filter : ",this.categorylist["data"]);
  
 //   }
+
+
 }

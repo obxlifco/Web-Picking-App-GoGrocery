@@ -51,6 +51,7 @@
 .table-data{
     max-height: 400px;
     overflow: auto;
+    padding-bottom: 16%;
     table{
         width: 100%;
     }
@@ -59,12 +60,27 @@
         margin: 0px;
         font-weight: 500;
     }
+    .col-row{
+        width: -webkit-fill-available;
+        display: inline-table;
+    }
+}
+.mat-dialog-container {
+    overflow: hidden;
 }
 .footer{
-    width: 100%;
+    // width: 100%;
+    // background: white;
+
     background: white;
+    z-index: 2;
+    position: relative;
+    margin-top: 5%;
     button{
         width: 100%;
+        z-index: 11;
+        position: relative;
+        bottom: 0%;
     }
 }
 

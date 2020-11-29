@@ -23,6 +23,7 @@ export class AppComponent {
       map(result => result.matches),
       shareReplay()
     );
+    isLoggedIn$: Observable<boolean> | any;   
 
   constructor(private breakpointObserver: BreakpointObserver,
     private router: Router,
@@ -45,6 +46,9 @@ export class AppComponent {
   getURL(url?: any) {
     this.loginRouterLink = url?.url
     console.log("router link : ", this.loginRouterLink);
+  }
+  ngOnInit(): void {
+    this.isLoggedIn$ = this.db.isLoggedIn(); 
   }
 
   isuerlogin() {

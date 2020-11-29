@@ -57,6 +57,7 @@ import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
 import { TimerpipePipe } from './timerpipe.pipe';
 import { CountdownModule } from 'ngx-countdown';
+import { AddproductasSubtituteComponent } from './components/addproductas-subtitute/addproductas-subtitute.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { CountdownModule } from 'ngx-countdown';
     BillnumberComponent,
     ForgotpasswordComponent,
     EditpriceComponent,
-    TimerpipePipe 
+    TimerpipePipe,
+    AddproductasSubtituteComponent 
   ],
   imports: [
     BrowserModule,

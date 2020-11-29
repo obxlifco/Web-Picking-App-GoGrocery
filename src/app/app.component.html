@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav   #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar><img style="height: 64px !important" src="assets/logo/lifco.svg" alt="logo" /></mat-toolbar>
     <mat-nav-list>
@@ -10,7 +10,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar style="background-color: rgb(90, 90, 221) !important;" color="primary">
+    <mat-toolbar class="navheader" style="background-color: rgb(90, 90, 221) !important;" color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->
