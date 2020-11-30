@@ -93,15 +93,15 @@
                         <td>
                             <div class="highlight_edits">
                                 <div style="color: white;">
-                                    {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date | date : 'longDate'}}
+                                    {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
                                     <mat-form-field appearance="fill">
                                         <!-- The timepicker input -->
                                         <input style="background-color:blue;color: white !important;"
                                             [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
                                             #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
-                                            mode="24h" [value]="datetime" [ngModel]="datetime" [placeholder]="datetime"
+                                            mode="24h" [value]="datetime" [ngModel]="datetime" [placeholder]="orderDetaildata['data'][0]?.slot_end_time"
                                             name="time" [errorStateMatcher]="customErrorStateMatcher"
-                                            (timeChange)="timeChangeHandler($event)"
+                                            (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
                                             (invalidInput)="invalidInputHandler()">
                                         <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
                                         <mat-icon [disabled]="!userOrderdata.picker_name" matSuffix
@@ -186,24 +186,22 @@
                         <h6>ITEMS</h6>
                         <mat-divider></mat-divider>
                     </div>
-                    <div class="row row-margin">
+                    <!-- Add more button -->
+                    <!-- <div class="row row-margin">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
                             <button [disabled]="!userOrderdata.picker_name"
-                                (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','')" type="button"
-                                class="btn btn-light">
+                                (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','')"
+                                type="button" class="btn btn-light">
                                 <mat-icon>control_point</mat-icon>
                                 Add More
-                            </button> 
-                             <button [disabled]="!userOrderdata.picker_name" type="button" style="width: 98px;"
+                            </button>
+                            <button [disabled]="!userOrderdata.picker_name" type="button" style="width: 98px;"
                                 class="btn btn-light csv-btn">
                                 <mat-icon style="left: 8%;">get_app</mat-icon> CSV
                             </button>
                         </div>
-                        <!-- <div class="col-md-6 stretch-card grid-margin">
-                            
-                        </div> -->
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row substitute-container" style="margin-right: 0%;margin-left: 0px;">
@@ -223,8 +221,8 @@
                                 </td>
                                 <td style="line-height:2">
                                     <h6>{{products?.product.name}}</h6>
-                                    <button (click)="openEditModal(products)" type="button" class="btn btn-danger">Edit
-                                        Weight</button><br>
+                                    <!-- <button (click)="openEditModal(products)" type="button" class="btn btn-danger">Edit
+                                        Weight</button><br> -->
                                     <span>Unit Weight : {{products?.product.weight}}
                                         {{products?.product.uom.uom_name}}</span> <br>
                                     Total Weight : <strong>{{products?.product.weight * products?.quantity}}
@@ -411,11 +409,12 @@
                         <button type="button" style="width: 100%;"
                             (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id,product_billnumber)"
                             class="btn btn-success">Send for Approval
-                            <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: 10*60, notify: [ 2, 5 ]}" (event)="handleEvent($event)">
+                            <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: 0.1*60, notify: [ 2, 5 ]}"
+                                (event)="handleEvent($event)">
                             </countdown>
                         </button><br>
                         <button *ngIf="IsTimeComplete === false" [disabled]="!userOrderdata.picker_name" type="button"
-                            (click)="notifyCustomer()" class="btn btn-success declinedbtn">Declined Product
+                            (click)="declinedProduct()" class="btn btn-success declinedbtn">Declined Product
                         </button>
                         <p style="text-align: center;" *ngIf="!IsTimeComplete">
                             <strong>Send Replacement request to customer for approval</strong><br>
@@ -424,10 +423,9 @@
                     </div>
                 </div>
                 <!-- process order -->
-                <div class="row" *ngIf="IS_Subtitute === true" >
+                <div class="row" *ngIf="IS_Subtitute === true">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin btnpadding">
-                        <button  
-                            [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
+                        <button [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
                             (click)="processOrder()" class="btn btn-success">Process the order</button>
                     </div>
                 </div>
@@ -483,10 +481,10 @@
                                 </mat-card-title>
                             </mat-card-header>
                             <mat-card-header style="background-color: #00008B;"
-                            *ngIf="order?.order_status === 100 && order?.substitute_status === 'done'">
-                            <mat-card-title>{{order?.custom_order_id}} Subs.In 
-                            </mat-card-title>
-                        </mat-card-header>
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'done'">
+                                <mat-card-title>{{order?.custom_order_id}} Subs.In
+                                </mat-card-title>
+                            </mat-card-header>
                             <mat-card-content>
                                 <div>
                                     <strong>- Ordered On : </strong><br>

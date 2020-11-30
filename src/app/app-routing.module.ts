@@ -8,6 +8,7 @@ import { StocksComponent } from './dashboard/pages/stocks/stocks.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TestComponent } from './test/test.component';
 import { LoginComponent } from './user/login/login.component';
+import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'returns', component: ReturnsComponent },
   { path: 'stocks', component: StocksComponent },
   { path: 'home', component: HomeComponent },
-
+  { path: 'appsettings', component: AppsettingsComponent },
+  
   
 ];
 

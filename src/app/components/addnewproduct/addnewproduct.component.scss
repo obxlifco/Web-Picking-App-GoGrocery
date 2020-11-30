@@ -73,7 +73,7 @@
     // background: white;
 
     background: white;
-    z-index: 2;
+    z-index: 6;
     position: relative;
     margin-top: 5%;
     button{
@@ -110,3 +110,35 @@
     border-radius: 8px;
     margin-left: 20%;
 }
+.layover-root {
+    width   : 97%;
+    height: 25%;
+    position: absolute;
+
+    .layover {
+        height: 100px;
+        width: 100%;
+        background: black;
+        position  : absolute;
+        opacity   : 0.5;
+        z-index   : 1;
+        margin-top: -5%;
+        opacity: 0.3;
+    }
+    img{
+        width: 22px;
+        position: relative;
+        z-index: 5;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        top: 47%;
+        bottom: 0px;
+    }
+
+}
+.selectedproducts{
+    border: 1px solid lightgray;
+    overflow: hidden;
+}
+

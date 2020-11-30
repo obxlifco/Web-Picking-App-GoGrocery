@@ -6,6 +6,18 @@
         font-weight: 500;
     }
 
+    // position: fixed;
+    // display: block;
+    // z-index: 10;
+    // background: aquamarine;
+    // width: 50%;
+}
+header{
+      position: fixed;
+    display: block;
+    z-index: 10;
+    background: white;
+    width: 45%;
 }
 .body{
     padding: 4% 0% 0% 0%;
@@ -20,6 +32,11 @@
             border-bottom: 1px solid darkgray;
         }
     }
+}
+.conatiner{
+    height: 417px;
+  
+    // overflow: hidden;
 }
 .footerbtn{
     z-index: 10;
@@ -43,6 +60,7 @@ mat-selection-list {
   }
   .form-inline{
     margin-bottom: 2%;
+    margin-top: 10%;
     input{
         border: none;
         border-bottom: 1px solid lightgray;

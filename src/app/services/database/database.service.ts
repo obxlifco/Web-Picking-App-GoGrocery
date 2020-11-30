@@ -9,6 +9,8 @@ export class DatabaseService {
   STORAGE_KEY: any = "cartlist"
   USER_DATA:any="user";
   IP_ADDRESS:any="userip"
+  NOTIFICATION_TIME:any="notiTime"
+  ORDER_IDS:any="orderids"
 
   constructor(private storage:LocalStorageService) { }
 
@@ -16,9 +18,11 @@ export class DatabaseService {
     console.log("data inside :", data);
     this.storage.store(this.USER_DATA, data);
   }
+
   async getUserData() {
     return this.storage.retrieve(this.USER_DATA)
   }
+  
   clearstorage() {
     this.storage.clear(this.USER_DATA);
   }
@@ -28,6 +32,7 @@ export class DatabaseService {
     const user =this.storage.retrieve(this.USER_DATA);
     return (user !== null) ? true : false;
   }
+
   setToken(token:any){
     // this.storage.store(this.USER_TOEKN, token);
   }
@@ -44,5 +49,24 @@ export class DatabaseService {
 
   async getIP(){
     return this.storage.retrieve(this.IP_ADDRESS)
+  }
+
+  //set notification time for api calling
+  setNotificationTime(data: any) {
+    console.log("data inside :", data);
+    this.storage.store(this.NOTIFICATION_TIME, data);
+  }
+
+  async getNotificationTime() {
+    return this.storage.retrieve(this.NOTIFICATION_TIME)
+  }
+
+  //store latest ids for notifications
+  setOrderIDS(data: any) {
+    console.log("data inside :", data);
+    this.storage.store(this.ORDER_IDS, data);
+  }
+  async getOrderIDS() {
+    return this.storage.retrieve(this.ORDER_IDS)
   }
 }

@@ -56,6 +56,8 @@ export class AddproductcategoryComponent implements OnInit {
   }
 
   listItem(data:any){
+    console.log("data : ",data);
+    
     this.dialogRef.close({ event: 'close', data: data});
   }
   closeModal():void{
@@ -65,7 +67,7 @@ export class AddproductcategoryComponent implements OnInit {
     let data={
       website_id:this.incomingModalData.data.website_id,
       warehouse_id:this.incomingModalData.data.warehouse_id,
-      parent_id:this.incomingModalData.parent_id,
+      parent_id:this.incomingModalData.data.parent_id,
     }
     console.log("going data : ",data);
     

@@ -58,6 +58,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TimerpipePipe } from './timerpipe.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { AddproductasSubtituteComponent } from './components/addproductas-subtitute/addproductas-subtitute.component';
+import { EmptystateComponent } from './components/emptystate/emptystate.component';
+import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import { AddproductasSubtituteComponent } from './components/addproductas-subtit
     ForgotpasswordComponent,
     EditpriceComponent,
     TimerpipePipe,
-    AddproductasSubtituteComponent 
+    AddproductasSubtituteComponent,
+    EmptystateComponent,
+    AppsettingsComponent 
   ],
   imports: [
     BrowserModule,

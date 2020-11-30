@@ -1,9 +1,12 @@
-<div class="conatiner">
+
+<header>
   <div class="row main-header">
     <div class="col-md-12 stretch-card grid-margin">
       <h4>Select Category</h4>
     </div>
   </div>
+</header>
+<div class="conatiner">
   <div class="body">
     <!-- <mat-selection-list #shoes [multiple]="false">
             <mat-list-option (click)="listItem(catItem)" *ngFor="let catItem of categorylist['data']?.response" [value]="catItem">
@@ -11,7 +14,7 @@
             </mat-list-option>
           </mat-selection-list> -->
 
-    <div class="content" role="main">
+    <div class="content" role="main" *ngIf="categorylist['data']?.response.length">
       <div class="card">
         <!-- <div class="form-group">
                 <mat-icon for="search-text" class="right-icon">search</mat-icon>
@@ -47,9 +50,12 @@
         </div> -->
       </div>
     </div>
+
+    <!-- if data not found -->
+    <app-emptystate *ngIf="!categorylist['data'].length" ></app-emptystate>
   </div>
 </div>
 <!-- footer -->
-<div class="footer">
-  <!-- <button (click)="closeModal()" type="button" class="btn btn-success">Close</button> -->
+<div class="cardfooter">
+<button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
 </div>

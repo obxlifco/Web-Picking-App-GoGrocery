@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-6 stretch-card grid-margin col-left">
                 <select placeholder="Sub-Category"
-                    (click)="openSub_modal('picker-stockcategory/','','','','AddproductcategoryComponent')"
+                    (click)="openSub_modal('picker-stockcategory/','','','',AddproductcategoryComponent)"
                     [(ngModel)]="subcategory.name" class="browser-default custom-select">
                     <option *ngIf="!subcategory.name">Sub-Category</option>
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}</option>
@@ -105,11 +105,10 @@
                     </div>
 
                     <!-- selected products -->
-                    <div >
+                    <div class="selectedproducts">
                         <h6 *ngIf="subtituteSelectedProducts.length">Selected Products </h6>
                         <div *ngFor="let plist of subtituteSelectedProducts ;let i=index;" class="col-row">
-                            <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
-                                (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)">
+                            <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
                                         <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
@@ -132,9 +131,17 @@
 
                     <!-- substitute list -->
                     <div *ngFor="let plist of pickerProductList['data']?.response;let i=index;" class="col-row">
-                        <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                        <!-- layover selection -->
+                        <div class="layover-root" (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
+                        *ngIf="plist?.quantity === 1">
+                        <img src="assets/images/product/toggle_checked.png" alt="">
+                        <div class="layover">
+                        </div>
+                    </div>
+                    <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
+                        <tr style="height: 100px;" *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
                             (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
-                            [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }"
+                            
                             >
                             <td colspan="7" style="width: 57%;">
                                 <div style="display: flex;">
@@ -163,6 +170,6 @@
     <button type="button" *ngIf="incomingmodalData.productType === 1" (click)="addMoreProduct('picker-addmoreproduct/')"
         class="btn btn-success">Add Products</button>
     <button type="button" *ngIf="incomingmodalData.productType === 2"
-        (click)="addSubtituteProduct('picker-substituteproductlist/')" class="btn btn-success">Add Subtitute
+        (click)="addSubtituteProduct('picker-addsubstituteproduct/')" class="btn btn-success">Add Subtitute
         Products</button>
 </div>

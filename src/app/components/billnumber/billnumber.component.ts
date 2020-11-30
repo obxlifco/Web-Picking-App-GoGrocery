@@ -20,7 +20,11 @@ export class BillnumberComponent implements OnInit {
     public dialogRef: MatDialogRef<BillnumberComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
+      console.log("incoming modal data : ",data);
+      
+      
       this.modaldata=data
+      this.bill_number=this.modaldata.data.billnumber
      }
 
   ngOnInit(): void {
