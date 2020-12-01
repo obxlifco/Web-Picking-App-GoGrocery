@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
   ) {
 
     // redirect to home if already logged in
-    // if (this.database.isLoggedIn()) {
-    //   this.router.navigate(['dashboard']);
-    // }
+    if (this.database.isLoggedIn()) {
+      this.router.navigate(['dashboard']);
+    }
     
   }
   ngOnInit(): void {

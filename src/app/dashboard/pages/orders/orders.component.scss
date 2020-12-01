@@ -1,5 +1,5 @@
 .container {
-    padding: 5% 3% 1% 5%;
+    padding: 10% 3% 1% 5%;
 }
 
 h4 {
@@ -136,6 +136,7 @@ h4 {
 
 .cdk-virtual-scroll-content-wrapper {
     margin-bottom: 22%;
+    padding-top: 14%;
 }
 
 .add-items {
@@ -333,8 +334,8 @@ h3 {
         width: 9%;
         position: absolute;
         left: 3%;
-        top     : 0;
-        bottom  : 0;
+        top: 7%;
+        // bottom  : 0;
         margin  : auto;
     }
 }
@@ -345,6 +346,10 @@ h3 {
     color: white;
 }
 
+.cdk-virtual-scroll-viewport {
+    // display: contents;
+    padding-top: 14% !important;
+}
 
   .highlight_edits{
     background-color: blue;
@@ -374,6 +379,13 @@ h3 {
     background: red;
     margin-top: 3%;
     border-color: red;
-
 }
-
+// .orderprod_img{
+   
+// }
+// @media only screen and (max-width: 575px) {
+//     .orderprod_img{
+//         width: 30%;
+//     }
+    
+// }

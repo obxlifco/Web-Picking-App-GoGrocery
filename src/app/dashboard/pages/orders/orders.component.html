@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 stretch-card grid-margin">
+        <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 grid-margin">
             <div style="width: 100%;">
                 <table class="table table-data">
                     <tr>
@@ -217,7 +217,7 @@
                         <table>
                             <tr>
                                 <td style="width: 100px;">
-                                    <img style="width: 50%;" [src]="products?.product.product_images[0]?.link" alt="">
+                                    <img class="orderprod_img" style="width: 50%;" [src]="products?.product.product_images[0]?.link+''+products?.product.product_images[0]?.img" alt="">
                                 </td>
                                 <td style="line-height:2">
                                     <h6>{{products?.product.name}}</h6>
@@ -255,7 +255,7 @@
 
                                                     <mat-icon [disabled]="!userOrderdata.picker_name" class="right-icon"
                                                         (click)="productIncrment(products.grn_quantity,products.product.id,products.id,products.shortage,i,
-                                                        '','','','','')">
+                                                        '','','','','',products.product.ean)">
                                                         add</mat-icon>
                                                 </div>
                                             </div>
@@ -275,7 +275,7 @@
                                                     <input *ngIf="!products?.shortage" value="0" type="text"
                                                         class="form-control">
 
-                                                    <mat-icon matRipple [disabled]="!userOrderdata.picker_name" (click)="productIncrment(products.shortage,products.product.id,products.id,products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',products?.id,2)
+                                                    <mat-icon matRipple [disabled]="!userOrderdata.picker_name" (click)="productIncrment(products.shortage,products.product.id,products.id,products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',products?.id,2,products.product.ean)
                                                         " class="right-icon">add</mat-icon>
                                                 </div>
                                             </div>
@@ -301,7 +301,7 @@
                             <table>
                                 <tr>
                                     <td style="width: 100px;">
-                                        <img style="width: 50%;" [src]="subt_products?.product.product_images[0]?.link"
+                                        <img style="width: 50%;" [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
                                             alt="">
                                         <button type="button" style="bottom: 4%;position: absolute;left: 2%;"
                                             class="btn btn-primary">Substitute</button>
@@ -344,7 +344,7 @@
 
                                                         <mat-icon [disabled]="!userOrderdata.picker_name"
                                                             class="right-icon" (click)="productIncrment(subt_products.grn_quantity,subt_products.product.id,subt_products.id,subt_products.shortage,i,
-                                                    '','','','','')">
+                                                    '','','','','',subt_products.product.ean)">
                                                             add</mat-icon>
                                                     </div>
                                                 </div>
@@ -366,7 +366,7 @@
                                                             class="form-control">
 
                                                         <mat-icon matRipple [disabled]="!userOrderdata.picker_name"
-                                                            (click)="productIncrment(subt_products.shortage,subt_products.product.id,subt_products.id,subt_products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',subt_products?.id,2)
+                                                            (click)="productIncrment(subt_products.shortage,subt_products.product.id,subt_products.id,subt_products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',subt_products?.id,2,subt_products.product.ean)
                                                     " class="right-icon">add</mat-icon>
                                                     </div>
                                                 </div>
@@ -393,7 +393,7 @@
                             <div class="row"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
-                                    <img src="assets/images/product/defaultproductimg.jpg" alt="">
+                                    <img [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"  alt="">
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <strong style="color: green;">{{subtitute?.product.name}}</strong><br>
@@ -431,7 +431,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-4 col-sm-4  col-md-4  col-lg-4  stretch-card grid-margin col-right">
+        <div class="col-xs-6 col-sm-6  col-md-4  col-lg-4 grid-margin col-right">
             <!-- <table class="table">
         <th>Order Status</th>
         <tr>
@@ -459,7 +459,7 @@
                 <h4>Order List</h4>
                 <!-- msInfiniteScroll (infiniteScroll)="getNextData()" threshold="15%" -->
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="scroll-viewport">
-                    <div *cdkVirtualFor="let order of orderlistdata['data']?.response" class="scroll-inner-data">
+                    <div *cdkVirtualFor="let order of orderlistdata['data']?.response" class="scroll-inner-data" >
                         <mat-card class="orderlist-card"
                             (click)="getOrderDetailData(order.id,order.shipment_id,order.order_status,order.picker_name,order.substitute_status)">
                             <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">

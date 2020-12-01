@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../services/api/api.service';
 import { from } from 'rxjs';
 import { DatabaseService } from '../services/database/database.service';
+import { OrdersComponent } from './pages/orders/orders.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getorderData();
+    // this.oredrcom.startcounter()
     this.orderdata["data"] = []
   }
 

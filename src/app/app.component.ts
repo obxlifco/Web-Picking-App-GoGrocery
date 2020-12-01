@@ -8,6 +8,7 @@ import { DatabaseService } from './services/database/database.service';
 import { GlobalitemService } from './services/globalitem/globalitem.service';
 import { ModalService } from './services/modal/modal.service';
 import { ForgotpasswordComponent } from './user/login/forgotpassword/forgotpassword.component';
+import { NotificationserviceService } from './notificationservice.service';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent {
     private apiService: ApiService,
     public globalitems: GlobalitemService,
     private db: DatabaseService,
-    private modalservice : ModalService
+    private notificationservice : NotificationserviceService
   ) {
     console.log("router link : ", this.loginRouterLink);
     router.events.subscribe((url: any) =>
@@ -49,6 +50,11 @@ export class AppComponent {
   }
   ngOnInit(): void {
     this.isLoggedIn$ = this.db.isLoggedIn(); 
+    this.initializedTimer()
+  }
+
+  initializedTimer(){
+    this.notificationservice.startcounter()
   }
 
   isuerlogin() {
@@ -89,5 +95,7 @@ export class AppComponent {
     this.totalbadge=0;
     this.router.navigate(['orders'])
   }
+
+  
 
 }

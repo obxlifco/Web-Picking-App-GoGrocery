@@ -1,17 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { OrdersComponent } from 'src/app/dashboard/pages/orders/orders.component';
 import {environment } from '../../../../src/environments/environment'
+import { DatabaseService } from '../database/database.service';
+import { GlobalitemService } from '../globalitem/globalitem.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  
   apiUrl :any= "http://www.gogrocery.ae:8062/api/"
-  constructor(private httpClient :HttpClient) {
+  constructor(private httpClient :HttpClient,
+
+    ) {
    }
 
  async getData(subUrl:any){
-   console.log("api url is : ",environment.apiUrl+subUrl);
-    return this.httpClient.get(environment.apiUrl+subUrl);
+  //  console.log("api url is : ",environment.apiUrl+subUrl);
+  //   return this.httpClient.get(environment.apiUrl+subUrl);
   }
 
   postData(subUrl: string = "",data:any=[]):any {
@@ -36,6 +43,8 @@ export class ApiService {
 
   public getIPAddress()
     {
-    return this.httpClient.get("http://api.ipify.org/?format=json");
+    return this.httpClient.get("https://api.ipify.org/?format=json");
     }
+
+
 }

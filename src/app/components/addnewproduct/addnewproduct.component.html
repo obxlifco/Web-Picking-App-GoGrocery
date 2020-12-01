@@ -54,9 +54,9 @@
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                             <td colspan="3">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
-                                    <img *ngIf="!plist?.name" style="width: 19%;"
-                                        src="assets/images/product/defaultproductimg.JPG" alt="">
+                                    <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                    <!-- <img *ngIf="!plist?.name" style="width: 19%;"
+                                        src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                     <div>
                                         <h6>{{plist?.name}}</h6>
                                         <span>{{plist.weight}} {{plist.uom_name}}</span>
@@ -111,9 +111,9 @@
                             <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
-                                        <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
-                                        <img *ngIf="!plist?.name" style="width: 19%;"
-                                            src="assets/images/product/defaultproductimg.JPG" alt="">
+                                        <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                        <!-- <img *ngIf="!plist?.name" style="width: 19%;"
+                                            src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                         <div>
                                             <h6>{{plist?.name}}</h6>
                                             <span>{{plist.weight}} {{plist.uom_name}}</span>
@@ -145,9 +145,9 @@
                             >
                             <td colspan="7" style="width: 57%;">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;" [src]="plist?.product_images[0].link" alt="">
-                                    <img *ngIf="!plist?.name" style="width: 19%;"
-                                        src="assets/images/product/defaultproductimg.JPG" alt="">
+                                    <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                    <!-- <img *ngIf="!plist?.name" style="width: 19%;"
+                                        src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                     <div>
                                         <h6>{{plist?.name}}</h6>
                                         <span>{{plist.weight}} {{plist.uom_name}}</span>

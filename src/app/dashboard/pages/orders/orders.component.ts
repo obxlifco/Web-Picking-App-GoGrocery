@@ -13,6 +13,8 @@ import { BillnumberComponent } from 'src/app/components/billnumber/billnumber.co
 import { EditpriceComponent } from 'src/app/components/editprice/editprice.component';
 import { DatePipe } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
+import { Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class OrdersComponent implements OnInit {
   // category: any = "drink";
 
 
-
+  subscription: Subscription | any;
+  statusText: string  | any;
   orderlistdata: any = []
   orderDetaildata: any = []
   userOrderdata = {
@@ -88,12 +91,13 @@ export class OrdersComponent implements OnInit {
       }
 
     })
-
+    this.startcounter()
   }
 
   ngOnInit(): void {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
+    
     this.getOrderlistData()
   }
 
@@ -203,6 +207,7 @@ export class OrdersComponent implements OnInit {
       console.log(data);
       // this.orderlistdata["data"] = data
       this.globalitem.showSuccess(data.message, "Success")
+      this.reloadpage()
     })
   }
 
@@ -224,9 +229,11 @@ export class OrdersComponent implements OnInit {
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
+      this.userOrderdata.shipment_id = this.orderDetaildata["data"][0].shipment_id
+      this.userOrderdata.trent_picklist_id=this.orderDetaildata["data"][0].trent_picklist_id
       this.userOrderdata.order_id_for_substitute_checking=this.orderlistdata['data']?.response[0].id
-      this.getLatestOrder( this.userOrderdata.order_id_for_substitute_checking)
-      let time: any = this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
+      this.getLatestOrder( this.userOrderdata.order_id_for_substitute_checking,'insidePage')
+      // let time: any = this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
 
       this.getsubtitteStatus()
       // this.datetime = time.getTime()
@@ -293,7 +300,7 @@ export class OrdersComponent implements OnInit {
   }
 
   // dialog
-  openDialog(apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any, shortage: any, substituteData: any
+  openDialog(apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any, shortage: any, substituteData: any,ean:any
     // quantity: any, product_id: any, order_product_id: any, shortage: any, index: any
   ): void {
     // this.updateMoreProductQuantity(quantity,product_id,order_product_id,shortage,index)
@@ -301,7 +308,7 @@ export class OrdersComponent implements OnInit {
       order_id: this.userOrderdata.order_id,
       apiURL: apiURL,
       pageTitle: pageTitle,
-      ean: "",
+      ean: ean,
       product_id: productid,
       productType: productType,
       sub_apiUrl: sub_apiUrl,
@@ -340,7 +347,7 @@ export class OrdersComponent implements OnInit {
     // substitute_product_id:any,product_id:any
     let data = {
       website_id: this.userOrderdata.website_id,
-      warehouse_id: this.userOrderdata.warehouse_id,
+      // warehouse_id: this.userOrderdata.warehouse_id,
       product_id: product_id,
       order_product_id: order_product_id,
       order_id: this.userOrderdata.order_id,
@@ -392,7 +399,7 @@ export class OrdersComponent implements OnInit {
   }
 
   productIncrment(quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
-    apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any) {
+    apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any,ean:any) {
     var modaldata = {
       shortage: shortage,
       grn_quantity: quantity,
@@ -409,7 +416,7 @@ export class OrdersComponent implements OnInit {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
           this.orderDetaildata["data"][0].order_products[i].shortage = templength;
           this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, templength, index)
-          this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata)
+          this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata,ean)
         }
       }
     }
@@ -466,15 +473,22 @@ export class OrdersComponent implements OnInit {
     })
   }
   //get latest order then add tit it notify status
-  getLatestOrder(orderid:any) {
+  getLatestOrder(orderData:any,reqestType:any) {
+    let temData:any;
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
       order_id_for_substitute_checking: this.userOrderdata.order_id,
-      order_id: orderid,
+      order_id: orderData,
     }
-    this.db.setOrderIDS(data)
-    this.apiService.postData("picker-latestorders/", data).subscribe((data: any) => {
+    if(reqestType === "insidePage"){
+      temData=data
+    }else if(reqestType === "outsidePage"){
+      temData=orderData
+    }
+
+    this.db.setOrderIDS(temData)
+    this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
       console.log("latestorders : ", data);
       this.appcom.setbadge(data.response.no_of_latest_order)
     })
@@ -571,7 +585,25 @@ export class OrdersComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['orders']);
   }
+
+       //start time counter for getting latest orders
+       startcounter(){
+         console.log("timer is start");
+         
+        this.db.getNotificationTime().then(res => {
+          console.log("user timer : ", res);
+          this.subscription = timer(0, res).pipe(
+            switchMap(async () => {
+              this.db.getOrderIDS().then(res => {
+                this.getLatestOrder(res,'outsidePage')})
+            })
+            
+          ).subscribe(result =>{this.globalitem.showSuccess("Check your latest order ","Latest order");
+          }
+          );
+        })
 }
 
 
 
+}

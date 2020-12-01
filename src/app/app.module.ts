@@ -60,6 +60,8 @@ import { CountdownModule } from 'ngx-countdown';
 import { AddproductasSubtituteComponent } from './components/addproductas-subtitute/addproductas-subtitute.component';
 import { EmptystateComponent } from './components/emptystate/emptystate.component';
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/firebase.app.module';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,7 @@ import { AppsettingsComponent } from './components/appsettings/appsettings.compo
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     MatSidenavModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database/database.service';
+import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 
 @Component({
   selector: 'app-appsettings',
@@ -47,18 +48,15 @@ export class AppsettingsComponent implements OnInit {
       name: "1 Hour"
     },
   ]
-  constructor(public db:DatabaseService) { }
+  constructor(public db:DatabaseService,public gobalitems:GlobalitemService) { }
 
   ngOnInit(): void {
-  }
-
-  setTimer(){
-
   }
 
   onChange(event:any){
     console.log(event.target.value);
     this.db.setNotificationTime(event.target.value*60000)
+    this.gobalitems.showSuccess("Notification time change successfully ","Notification")
     // timer(0, 60000).pipe(
   }
 }

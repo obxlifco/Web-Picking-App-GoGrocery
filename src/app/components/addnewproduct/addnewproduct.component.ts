@@ -52,11 +52,14 @@ export class AddnewproductComponent implements OnInit {
     public dialogRef: MatDialogRef<AddnewproductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.pickerProductList["data"] = []
-    // console.log("modal incoming data : ", data);
+    console.log("modal incoming data : ", data);
     // this.userProductData.order_id = ""+data ;
     let temp: any = data
     this.incomingmodalData = temp.data
     this.userProductData.order_id = this.incomingmodalData.order_id
+    this.userProductData.shipment_id = this.incomingmodalData.shipment_id
+    this.userProductData.trent_picklist_id=this.incomingmodalData.trent_picklist_id
+    this.userProductData.ean = this.incomingmodalData.ean
     this.getProductlistData()
   }
 
@@ -118,7 +121,6 @@ export class AddnewproductComponent implements OnInit {
   getProductlistData() {
     this.db.getUserData().then(res => {
       // console.log("user data inside dashboard : ", res);
-
       let data = {
         website_id: res.website_id,
         user_id: res.user_id,
@@ -127,7 +129,7 @@ export class AddnewproductComponent implements OnInit {
         // page: 1,
         // per_page: 2,
         // search: "5055179722036",
-        ean: "",
+        ean: this.userProductData.ean,
         // category_id: 188
       }
       if (this.incomingmodalData.productType === 1) { //product type 1 for add more product and 2 for substitute
@@ -161,7 +163,7 @@ export class AddnewproductComponent implements OnInit {
       // page: 1,
       // per_page: 15,
       search: this.userProductData.searchproductvalue,
-      ean: "",
+      ean: this.userProductData.ean,
       user_id: this.userProductData.user_id,
       order_id: this.userProductData.order_id,
     }
@@ -247,7 +249,9 @@ export class AddnewproductComponent implements OnInit {
         product_id: this.incomingmodalData.product_id,
         sub_product_ids: this.productsIDS,
         sub_product_qtys: this.productQuantity,
+        // quantity:this.productQuantity
       }
+
       console.log("product ids ", this.productsIDS);
       console.log("product QTY ", this.productQuantity);
       this.apiService.postData(subUrl, data).subscribe((data: any) => {

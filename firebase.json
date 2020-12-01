@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/lifco-picking-app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

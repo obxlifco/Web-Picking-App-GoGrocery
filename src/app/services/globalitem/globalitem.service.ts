@@ -4,6 +4,8 @@ import { AddnewproductComponent } from 'src/app/components/addnewproduct/addnewp
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
+import { OrdersComponent } from 'src/app/dashboard/pages/orders/orders.component';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,12 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class GlobalitemService {
 
   dialogRef: any;
+
+
   constructor(public dialog: MatDialog,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
+    public db:DatabaseService
   ) { }
 
   // async openCategoryModal(data: any) {
@@ -52,5 +57,7 @@ export class GlobalitemService {
   hideSpinner() {
     this.spinner.hide();
   }
+
+   
 }
  

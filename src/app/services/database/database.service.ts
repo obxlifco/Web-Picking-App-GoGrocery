@@ -58,7 +58,14 @@ export class DatabaseService {
   }
 
   async getNotificationTime() {
-    return this.storage.retrieve(this.NOTIFICATION_TIME)
+    let data=this.storage.retrieve(this.NOTIFICATION_TIME)
+    console.log("timer data : ",data);
+    
+    if(data === null){
+      return 10000 
+    }else{
+      return data
+    }
   }
 
   //store latest ids for notifications
@@ -69,4 +76,6 @@ export class DatabaseService {
   async getOrderIDS() {
     return this.storage.retrieve(this.ORDER_IDS)
   }
+
+  
 }

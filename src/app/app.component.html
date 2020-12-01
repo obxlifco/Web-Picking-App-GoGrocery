@@ -23,7 +23,7 @@
       <mat-icon class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new</mat-icon>
       <!-- <button  class="logout-menu" mat-button [matMenuTriggerFor]="menu" (click)="logout()" #menuTrigger>logout</button> -->
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Logout</button>
+        <button (click)=" logout()" mat-menu-item>Logout</button>
       </mat-menu>
     </mat-toolbar>
     <!-- Add Content Here -->

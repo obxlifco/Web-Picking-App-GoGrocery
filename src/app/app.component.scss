@@ -2,13 +2,15 @@
     height: -webkit-fill-available;
 }
 .logout-menu{
-    position: absolute;
-    right: 2%;
+    // position: absolute;
+    // right: 2%;
     // mat-icon {
     //     margin: auto;
     //     top: 0px;
     //     bottom: 5px;
     // }
+    position: fixed;
+    right: 3%;
 }
 .mat-menu-item{
     border: none;
