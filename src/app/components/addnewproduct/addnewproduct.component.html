@@ -54,7 +54,8 @@
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                             <td colspan="3">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                    <img style="width: 19%;"
+                                        [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                     <div>
@@ -108,10 +109,13 @@
                     <div class="selectedproducts">
                         <h6 *ngIf="subtituteSelectedProducts.length">Selected Products </h6>
                         <div *ngFor="let plist of subtituteSelectedProducts ;let i=index;" class="col-row">
-                            <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
+                            <tr
+                                *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
-                                        <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                        <img style="width: 19%;"
+                                            [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img"
+                                            alt="">
                                         <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                             src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                         <div>
@@ -125,27 +129,28 @@
                                         {{plist?.channel_currency_product_price.price}}</strong><br>
                                 </td>
                             </tr>
+                        </div>
                     </div>
-                    </div>
-                  
+
 
                     <!-- substitute list -->
                     <div *ngFor="let plist of pickerProductList['data']?.response;let i=index;" class="col-row">
                         <!-- layover selection -->
-                        <div class="layover-root" (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
-                        *ngIf="plist?.quantity === 1">
-                        <img src="assets/images/product/toggle_checked.png" alt="">
-                        <div class="layover">
-                        </div>
-                    </div>
-                    <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
-                        <tr style="height: 100px;" *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                        <div class="layover-root"
                             (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
-                            
-                            >
+                            *ngIf="plist?.quantity === 1">
+                            <img src="assets/images/product/toggle_checked.png" alt="">
+                            <div class="layover">
+                            </div>
+                        </div>
+                        <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
+                        <tr style="height: 100px;"
+                            *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                            (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
                             <td colspan="7" style="width: 57%;">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;" [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                    <img style="width: 19%;"
+                                        [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                     <div>

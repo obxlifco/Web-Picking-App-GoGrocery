@@ -129,7 +129,8 @@ export class AddnewproductComponent implements OnInit {
         // page: 1,
         // per_page: 2,
         // search: "5055179722036",
-        ean: this.userProductData.ean,
+        ean: "",
+        // ean: this.userProductData.ean,
         // category_id: 188
       }
       if (this.incomingmodalData.productType === 1) { //product type 1 for add more product and 2 for substitute
@@ -140,7 +141,7 @@ export class AddnewproductComponent implements OnInit {
         Object.assign(data, category_ids);
       } else {
         let product_ids = {
-          product_id: this.incomingmodalData.product_id
+          product_id: this.incomingmodalData.substituteData.product_id
         }
         Object.assign(data, product_ids);
         this.userProductData.searchproductlist = 'picker-substituteproductlist/'
@@ -163,7 +164,7 @@ export class AddnewproductComponent implements OnInit {
       // page: 1,
       // per_page: 15,
       search: this.userProductData.searchproductvalue,
-      ean: this.userProductData.ean,
+      ean: "",
       user_id: this.userProductData.user_id,
       order_id: this.userProductData.order_id,
     }
@@ -185,7 +186,7 @@ export class AddnewproductComponent implements OnInit {
     })
   }
 
-
+    //this is for remove product from list
   productDecerment(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any) {
     // console.log("index --: ",index);
     for (var i = 0; i < this.pickerProductList["data"].response.length; i++) {
@@ -208,6 +209,7 @@ export class AddnewproductComponent implements OnInit {
     }
   }
 
+  //Add product into list
   productIncrment(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any) {
     // console.log("index ++: ", index, " substitutestatus : ", substitutestatus);
     if (substitutestatus !== 0) {
@@ -223,7 +225,7 @@ export class AddnewproductComponent implements OnInit {
       // this.productQuantity.push(this.pickerProductList["data"].response[index].quantity) //push quantity to arrays according to selected id's
       this.productsIDS = this.filterArray(this.productsIDS)
     } else {
-      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent)
+      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent)
     }
   }
 
@@ -246,7 +248,7 @@ export class AddnewproductComponent implements OnInit {
         trent_picklist_id: this.userProductData.trent_picklist_id,
         action: "increase",
         // product_qtys: this.productQuantity,
-        product_id: this.incomingmodalData.product_id,
+        product_id: this.incomingmodalData.substituteData.product_id,
         sub_product_ids: this.productsIDS,
         sub_product_qtys: this.productQuantity,
         // quantity:this.productQuantity
@@ -373,7 +375,7 @@ export class AddnewproductComponent implements OnInit {
       console.log(" this.subtituteSelectedProducts list : ", this.subtituteSelectedProducts, this.pickerProductList["data"].response);
 
     } else {
-      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent)
+      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent)
     }
   }
 }

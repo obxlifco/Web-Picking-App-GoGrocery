@@ -398,11 +398,11 @@ export class OrdersComponent implements OnInit {
     this.updateMoreProductQuantity(quantity, product_id, order_product_id, shortage, index)
   }
 
-  productIncrment(quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
+  productIncrment(grn_quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
     apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any,ean:any) {
     var modaldata = {
       shortage: shortage,
-      grn_quantity: quantity,
+      grn_quantity: grn_quantity,
       product_id: product_id,
       order_product_id: order_product_id
     }
