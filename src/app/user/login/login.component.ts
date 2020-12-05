@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     // redirect to home if already logged in
     if (this.database.isLoggedIn()) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard/home']);
     }
     
   }
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
       }else{
         this.globalitem.showSuccess("You have Successfully login", "Success")
         this.database.setUserData(data?.user_data)
-        this.router.navigate(["dashboard"])
+        this.router.navigate(["dashboard/home"])
       }
       
     })

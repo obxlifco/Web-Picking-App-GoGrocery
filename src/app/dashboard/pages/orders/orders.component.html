@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 grid-margin">
+        <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8 grid-margin">
             <div style="width: 100%;">
                 <table class="table table-data">
                     <tr>
@@ -29,8 +29,12 @@
                             <span style="color: #00008B;"
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 100 && userOrderdata.substitute_status === 'done'">Subs.In
                             </span>
+                            
                             <span style="color:gray;"
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 1 && orderDetaildata['data'][0]?.order_shipment.shipment_status === 'Shipped'">Shipped
+                            </span>
+                            <span style="color:#800080;"
+                                *ngIf="orderDetaildata['data'][0]?.order_status === 2">Cancelled
                             </span>
 
                         </td>
@@ -217,7 +221,7 @@
                         <table>
                             <tr>
                                 <td style="width: 100px;">
-                                    <img class="orderprod_img" style="width: 50%;" [src]="products?.product.product_images[0]?.link+''+products?.product.product_images[0]?.img" alt="">
+                                    <img class="productimg" style="width: 50%;" [src]="products?.product.product_images[0]?.link+''+products?.product.product_images[0]?.img" alt="">
                                 </td>
                                 <td style="line-height:2">
                                     <h6>{{products?.product.name}}</h6>
@@ -301,7 +305,7 @@
                             <table>
                                 <tr>
                                     <td style="width: 100px;">
-                                        <img style="width: 50%;" [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
+                                        <img class="productimg" [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
                                             alt="">
                                         <button type="button" style="bottom: 4%;position: absolute;left: 2%;"
                                             class="btn btn-primary">Substitute</button>
@@ -393,7 +397,7 @@
                             <div class="row"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
-                                    <img [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"  alt="">
+                                    <img class="productimg" [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"  alt="">
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <strong style="color: green;">{{subtitute?.product.name}}</strong><br>
@@ -409,7 +413,7 @@
                         <button type="button" style="width: 100%;"
                             (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id,product_billnumber)"
                             class="btn btn-success">Send for Approval
-                            <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: 0.1*60, notify: [ 2, 5 ]}"
+                            <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: leftTime, notify: [ 2, 5 ]}"
                                 (event)="handleEvent($event)">
                             </countdown>
                         </button><br>
@@ -431,7 +435,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-6  col-md-4  col-lg-4 grid-margin col-right">
+        <div class="col-xs-6 col-sm-4  col-md-6  col-lg-4 grid-margin col-right">
             <!-- <table class="table">
         <th>Order Status</th>
         <tr>
@@ -485,6 +489,12 @@
                                 <mat-card-title>{{order?.custom_order_id}} Subs.In
                                 </mat-card-title>
                             </mat-card-header>
+                            <mat-card-header style="background-color: #800080"
+                                *ngIf="order?.order_status === 2">
+                                <mat-card-title>{{order?.custom_order_id}} Cancelled
+                                </mat-card-title>
+                            </mat-card-header>
+
                             <mat-card-content>
                                 <div>
                                     <strong>- Ordered On : </strong><br>

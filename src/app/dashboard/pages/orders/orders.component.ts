@@ -24,15 +24,6 @@ import { switchMap } from 'rxjs/operators';
 })
 export class OrdersComponent implements OnInit {
   @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
-  // @ViewChild('time', { static: true }) timer: ElementRef | any
-
-  // item_available: any = 0;
-  // item_not_available: any = 0;
-
-  // name: any = "Pepsi";
-  // category: any = "drink";
-
-
   subscription: Subscription | any;
   statusText: string  | any;
   orderlistdata: any = []
@@ -62,6 +53,7 @@ export class OrdersComponent implements OnInit {
   product_billnumber: any = '';
   IS_Subtitute = false;
   timer: any
+  leftTime:any=0.1*60
 
   //below date var is sample max and min date
   minValue: any = new Date();
@@ -490,7 +482,7 @@ export class OrdersComponent implements OnInit {
     this.db.setOrderIDS(temData)
     this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
       console.log("latestorders : ", data);
-      this.appcom.setbadge(data.response.no_of_latest_order)
+      // this.appcom.setbadge(data.response.no_of_latest_order)
     })
   }
   updatePrice(order_amount: any, netAmount: any) {

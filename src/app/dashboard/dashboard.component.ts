@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApiService } from '../services/api/api.service';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { from } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ApiService } from '../services/api/api.service';
+import { GlobalitemService } from '../services/globalitem/globalitem.service';
 import { DatabaseService } from '../services/database/database.service';
-import { OrdersComponent } from './pages/orders/orders.component';
+import { NotificationserviceService } from '../notificationservice.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,48 +16,93 @@ import { OrdersComponent } from './pages/orders/orders.component';
 })
 export class DashboardComponent implements OnInit {
 
-  orderdata: any = []
-  constructor(public router: Router,
-    public db: DatabaseService,
-    public apiService: ApiService) {
+  @ViewChild('drawer') sidenav: MatSidenav | any;
 
+  title = 'lifco Picking pp';
+  loginRouterLink: any
+  totalbadge:any=0
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+    isLoggedIn$: Observable<boolean> | any;   
+
+  constructor(private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private apiService: ApiService,
+    public globalitems: GlobalitemService,
+    private db: DatabaseService,
+    private notificationservice : NotificationserviceService
+  ) {
+    console.log("router link : ", this.loginRouterLink);
+    router.events.subscribe((url: any) =>
+      this.getURL(url.url)
+    );
+
+    this.initializeMethod()
   }
 
+  initializeMethod() {
+    this.isuerlogin()
+  }
+  getURL(url?: any) {
+    this.loginRouterLink = url?.url
+    console.log("router link : ", this.loginRouterLink);
+  }
   ngOnInit(): void {
-    this.getorderData();
-    // this.oredrcom.startcounter()
-    this.orderdata["data"] = []
+    this.isLoggedIn$ = this.db.isLoggedIn(); 
+    this.initializedTimer()
   }
 
-  navigate(link: any) {
-    this.router.navigate([link]);
-  }
-  returnpage() {
-    this.router.navigate(["returns"]);
+  initializedTimer(){
+    this.notificationservice.startcounter()
   }
 
-  getorderData() {
-    // this.apiService.postParamData("picker-dashboard/").subscribe((data: any[])=>{  
-    //   console.log(data);   
-    //   this.orderdata["data"]=data
-    // })  
+  isuerlogin() {
+    this.apiService.getIPAddress().subscribe(data => {
+      console.log("Ip Address : ", data);
+      this.db.setIP(data)
+    })
+  }
+  close(){
+    console.log("menu actions : ",this.isHandset$);
+    
+    this.sidenav.close()
+  }
+  logout() {
 
     this.db.getUserData().then(res => {
       console.log("user data inside dashboard : ", res);
+      this.db.getIP().then(data1 => {
+        data1.api
 
-      let data = {
-        warehouse_id: res.warehouse_id,
-        website_id: res.website_id
-      }
-      this.apiService.postData("picker-dashboard/", data).subscribe((data: any[]) => {
-        console.log(data);
-        this.orderdata["data"] = data
+        let data = {
+          ip_address: data1.ip,
+          device_id: data1.ip,
+        }
+
+        this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
+          console.log("logout : ", data);
+          if (data.status === 1) {
+            this.globalitems.showSuccess("You have Sucessfully logout", "Success")
+            this.db.SignOut();
+            this.router.navigate(["login"])
+          }
+
+        })
       })
+
     })
-
+  }
+  setbadge(badge:any){
+    this.totalbadge=badge
+  }
+  navigatLatestOrder(){
+    this.totalbadge=0;
+    this.router.navigate(['orders'])
   }
 
-  navigateOrder(orderstatus:any){
-    this.router.navigate(['orders',{orderstatus: orderstatus}])
-  }
+  
+
 }

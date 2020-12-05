@@ -1,0 +1,33 @@
+
+   <!-- this dialog have used for show pop message and update price for stocks -->
+   <div *ngIf="incomingmodaldata.data === 'novalue'">
+   <div>
+        <h5>Set Price</h5>
+        <p>
+          The price must be set first before the slock
+        </p>
+    </div>
+    <div>
+        <div class="footerbtn">
+            <button type="button" (click)="close()"
+            class="btn btn-light btnok" >ok</button>
+        </div>
+    </div>
+</div>
+    <!-- update price -->
+    <div class="conatiner" *ngIf="incomingmodaldata.data !== 'novalue'">
+        <div class="row header">
+            <div class="col-md-8 stretch-card grid-margin">
+                <h4>Update Price</h4>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <mat-icon (click)="close()">clear</mat-icon>
+            </div>
+        </div>
+        <div class="body">
+            <input placeholder="Enter Price" [(ngModel)]="price"
+            type="text" class="form-control">
+            <button type="button"(click)="updatePrice()"
+            class="btn btn-success">Update Price</button>
+        </div>
+        </div>

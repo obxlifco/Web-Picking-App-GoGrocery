@@ -10,6 +10,7 @@ import { DatabaseService } from 'src/app/services/database/database.service';
 })
 export class HomeComponent implements OnInit {
  
+  
   orderdata: any = []
   constructor(public router: Router,
     public db: DatabaseService,
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getorderData();
+    // this.oredrcom.startcounter()
     this.orderdata["data"] = []
   }
 
@@ -47,6 +49,9 @@ export class HomeComponent implements OnInit {
         this.orderdata["data"] = data
       })
     })
+  }
 
+  navigateOrder(orderstatus:any){
+    this.router.navigate(['dashboard/orders',{orderstatus: orderstatus}])
   }
 }

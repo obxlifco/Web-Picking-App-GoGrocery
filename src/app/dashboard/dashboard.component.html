@@ -1,66 +1,37 @@
-<div class="container-scroller">
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-        <div class="main-panel" style="width: 100%;">
-            <div class="content-wrapper">
-               <div class="page-header">
-                   <h3 class="page-title">
-                       <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                           <i class="mdi mdi-home"></i>
-                       </span> Dashboard
-                   </h3>
-               </div>
-               <div class="row">
-                   <div class="col-md-4 stretch-card grid-margin" (click)="navigateOrder('processing')">
-                       <div class="card bg-order-process card-img-holder text-white">
-                           <div class="card-body">
-                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                   alt="circle-image" />
-                               <h4 class="font-weight-normal mb-3">Order Processing<i
-                                       class="mdi mdi-chart-line mdi-24px float-right"></i>
-                               </h4>
-                               <!-- <h6 class="mb-5">$ 15,0000</h2> -->
-                                   <h6 class="card-text">Order in-processing : {{orderdata['data'].pending_order + orderdata['data'].processing_order + orderdata['data']?.substitution_sent_order + orderdata['data']?.substitution_received_order}}</h6>
-                               <h6 class="card-text">New : {{orderdata['data'].pending_order}}</h6>
-                               <h6 class="card-text">Assigned : {{orderdata['data']?.processing_order}}</h6>
-                               <h6 class="card-text">Substitutions Sent : {{orderdata['data']?.substitution_sent_order}}</h6>
-                               <h6 class="card-text">Substitutions Recieved : {{orderdata['data']?.substitution_received_order}}</h6>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-md-4 stretch-card grid-margin"  (click)="navigateOrder('pending')">
-                       <div class="card bg-order-ship card-img-holder text-white">
-                           <div class="card-body">
-                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                   alt="circle-image" />
-                               <h4 class="font-weight-normal mb-3">Order In Shipping <i
-                                       class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-                               </h4>
-                               <h2 class="mb-5">{{orderdata['data']?.shipped_order}}</h2>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-md-4 stretch-card grid-margin"  (click)="navigateOrder('shipped')">
-                       <div class="card bg-order-cancelled card-img-holder text-white">
-                           <div class="card-body">
-                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
-                                   alt="circle-image" />
-                               <h4 class="font-weight-normal mb-3">Cancelled Orders <i
-                                       class="mdi mdi-diamond mdi-24px float-right"></i>
-                               </h4>
-                               <h2 class="mb-5">{{orderdata['data']?.cancel_order}}</h2>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           <footer class="footer">
-               <div class="container-fluid clearfix">
-                   <span class="text-muted d-table text-center text-sm-left d-sm-inline-block">Copyright © Lifco Group
-                       of Company 2020 </span>
-               </div>
-           </footer>
-       </div>
-   
-    </div>
-</div>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav   #drawer    class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+      <mat-toolbar style="background: white;">
+        <!-- <img style="height: 64px !important" src="assets/logo/lifco.svg" alt="logo" /> -->
+        <img style="height: 64px !important" src="assets/images/gog.jpg" alt="logo">
+      </mat-toolbar>
+      <mat-nav-list (click)="close()">
+        <a mat-list-item [routerLink]="'home'">Dashboard</a>
+        <a mat-list-item [routerLink]="'orders'">Orders</a>
+        <a mat-list-item [routerLink]="'stocks'">Stocks</a>
+        <a mat-list-item [routerLink]="'returns'">Returns</a>
+        <a mat-list-item [routerLink]="'appsettings'">App Settings</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="navheader" style="background-color: rgb(90, 90, 221) !important;" color="primary">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->
+          <mat-icon *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>GoGrocery {{loginRouterLink}}</span>
+        <mat-icon (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge > 0" matBadgeColor="warn"
+          style="right: 7%;position: absolute;" class="logout">notifications</mat-icon>
+        <mat-icon class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new</mat-icon>
+        <!-- <button  class="logout-menu" mat-button [matMenuTriggerFor]="menu" (click)="logout()" #menuTrigger>logout</button> -->
+        <mat-menu #menu="matMenu">
+          <button (click)=" logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  <!-- <router-outlet></router-outlet> -->

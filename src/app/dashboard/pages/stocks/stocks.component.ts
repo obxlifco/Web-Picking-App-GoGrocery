@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from 'src/app/components/addnewproduct/addnewproduct.component';
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
+import { MessagedialogComponent } from 'src/app/components/messagedialog/messagedialog.component';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
@@ -30,17 +31,26 @@ export class StocksComponent implements OnInit {
     order_product_id:'',
     category_id:''
   }
+  
   pickerProductList:any=[]
   stockStatus:any;
   parentcategory: any = []
   subcategory: any = []
   cat_price:any='';
-
+  IsDataLoaded=false
+  throttle = 300;
+  scrollDistance = 2;
+  scrollUpDistance = 1;
+  productpage:any=1
+  totalProductpage:any;
   constructor(private modalservice : ModalService,public db :DatabaseService,
     public apiService : ApiService,
+    public globalitem : GlobalitemService,
     public dialog: MatDialog,
     ) {
+      // this.pickerProductList=[]
       this.pickerProductList["data"]=[]
+      
     this.getuserData()
    }
 
@@ -64,7 +74,7 @@ export class StocksComponent implements OnInit {
 }
   opencategory_modal():void{
     let data = {
-      categoryURl: "picker-stockcategory/",
+      URl: "picker-stockcategory/",
      parent_id: null,
      
      warehouse_id: this.userOrderdata.warehouse_id,
@@ -94,8 +104,8 @@ export class StocksComponent implements OnInit {
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
-      parent_id: this.parentcategory.parent_id,
-      categoryURl: "picker-stockcategory/",
+      parent_id: this.parentcategory.id,
+      URl: "picker-stockcategory/",
     }
     const dialogRef = this.dialog.open(AddproductcategoryComponent, {
       width: '500px',
@@ -127,23 +137,108 @@ export class StocksComponent implements OnInit {
 
   }
 
-  searchProducts() {
+  searchProducts(value:any) {
     console.log("stockStatus : ",this.stockStatus);
-    
+    if(value === "search"){
+      this.totalProductpage=0;
+      this.pickerProductList["data"]=[]
+      console.log("enter");
+      
+    }
+    this.IsDataLoaded = true
     let data = {
-      product_stock_ids: 1,
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
-      page: 1,
-      per_page: 15,
-      category_id: this.userOrderdata.category_id,
-      in_stock: this.stockStatus
+      page: this.productpage,
+      // per_page: 15,
+      // category_id: this.parentcategory.id,
+      in_stock: this.stockStatus,
+      has_price:this.cat_price,
+      // product_stock_ids: 1
     }
-
-    this.apiService.postData("picker-searchstock/", data).subscribe((data: any[]) => {
+    this.apiService.postData("picker-searchstock/", data).subscribe((data: any) => {
       console.log(data);
-      this.pickerProductList["data"] = data
+      
+      if(this.productpage === 1){
+        this.pickerProductList["data"]=data.response
+        this.totalProductpage=data.total_page
+        console.log("page 1");
+        
+      }else{
+        console.log("page n");
+        this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];
+      }
+     
+      
+      this.IsDataLoaded = false
     })
+  }
+  onScrollDown(ev:any) {
+    console.log('scrolled!!',ev);
+    this.productpage++;
+    if(this.productpage <= this.totalProductpage){
+      this.searchProducts("novalue")
+    }else{
+      this.globalitem.showError("No more data is available ","No Data")
+    }
+  
+  }
+
+  onChange(event:any,price:any,productid:any,productindex:any){
+    this.userOrderdata.product_id=productid
+    if(event.checked === true && price === 0){
+      const dialogRef = this.dialog.open(MessagedialogComponent, {
+        width: '500px',
+        data: { data: 'novalue' }
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        this.searchProducts("novalue") 
+      });
+    }else{
+      if(event.checked === true){
+        this.updateProductPice(price,productid,100)
+      }else{
+        this.updateProductPice(price,productid,0)
+      }
+      
+    }
+  }
+  updateProductPice(price:any,productid:any,stockstatus:any){
+
+    let data = {
+      website_id: this.userOrderdata.website_id,
+      warehouse_id: this.userOrderdata.warehouse_id,
+      user_id: this.userOrderdata.user_id,
+      product_id: productid,
+      price: price,
+      stock:stockstatus
+    }
+    this.apiService.postData("picker-managestock/", data).subscribe((data: any[]) => {
+      console.log(data);
+      // this.pickerProductList["data"] = data
+      // this.IsDataLoaded = false
+      // this.searchProducts()
+
+    })
+  }
+  editprice(event:any,price:any,productid:any,productindex:any){
+    let data={
+      checked:event.checked,
+      price:price,
+      productid:productid,
+    }
+    const dialogRef = this.dialog.open(MessagedialogComponent, {
+      width: '500px',
+      data: { data: data }
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      console.log('Dialog result:',res,productindex);
+      console.log("Modal Data : ",this.pickerProductList["data"]);
+      
+      this.pickerProductList["data"][productindex].channel_currency_product_price.price = res.price
+      // this.updateProductPice(res.price,res.data.data.productid,100)
+    });
   }
 
 }

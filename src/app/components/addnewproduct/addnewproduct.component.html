@@ -54,7 +54,7 @@
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                             <td colspan="3">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;"
+                                    <img class="productimg"
                                         [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
@@ -92,6 +92,9 @@
                         </td> -->
                         </tr>
                     </div>
+                    <!-- if data not found -->
+                    <app-emptystate *ngIf="pickerProductList['data']?.status === 0"></app-emptystate>
+
                 </table>
             </div>
         </div>
@@ -113,7 +116,7 @@
                                 *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
-                                        <img style="width: 19%;"
+                                        <img class="productimg"
                                             [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img"
                                             alt="">
                                         <!-- <img *ngIf="!plist?.name" style="width: 19%;"
@@ -149,7 +152,7 @@
                             (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
                             <td colspan="7" style="width: 57%;">
                                 <div style="display: flex;">
-                                    <img style="width: 19%;"
+                                    <img class="productimg"
                                         [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
@@ -165,9 +168,14 @@
                             </td>
                         </tr>
                     </div>
+
+                    <!-- if data not found -->
+                    <app-emptystate *ngIf="pickerProductList['data']?.status === 0"></app-emptystate>
+
                 </table>
             </div>
         </div>
+
     </div>
 </div>
 <!-- footer -->

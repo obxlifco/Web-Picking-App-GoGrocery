@@ -68,6 +68,7 @@ export class AddproductcategoryComponent implements OnInit {
       website_id:this.incomingModalData.data.website_id,
       warehouse_id:this.incomingModalData.data.warehouse_id,
       parent_id:this.incomingModalData.data.parent_id,
+      isparent:0
     }
     console.log("going data : ",data);
     

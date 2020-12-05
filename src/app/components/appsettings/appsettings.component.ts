@@ -48,7 +48,9 @@ export class AppsettingsComponent implements OnInit {
       name: "1 Hour"
     },
   ]
-  constructor(public db:DatabaseService,public gobalitems:GlobalitemService) { }
+  constructor(public db:DatabaseService,public gobalitems:GlobalitemService) {
+    this.timerValue=5
+   }
 
   ngOnInit(): void {
   }

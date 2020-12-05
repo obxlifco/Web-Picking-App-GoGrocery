@@ -8,8 +8,7 @@ import { AddproductasSubtituteComponent } from '../addproductas-subtitute/addpro
 import { AddproductcategoryComponent } from '../addproductcategory/addproductcategory.component';
 
 export interface DialogData {
-  animal: string;
-  name: string;
+
 }
 @Component({
   selector: 'app-addnewproduct',

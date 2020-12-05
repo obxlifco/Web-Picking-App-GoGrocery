@@ -62,6 +62,8 @@ import { EmptystateComponent } from './components/emptystate/emptystate.componen
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/firebase.app.module';
+import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -90,12 +92,14 @@ import { AngularFireModule } from '@angular/fire/firebase.app.module';
     TimerpipePipe,
     AddproductasSubtituteComponent,
     EmptystateComponent,
-    AppsettingsComponent 
+    AppsettingsComponent,
+    MessagedialogComponent 
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    InfiniteScrollModule,
     ReactiveFormsModule,
     AppRoutingModule,
     // AngularFireModule.initializeApp(environment.firebaseConfig),
