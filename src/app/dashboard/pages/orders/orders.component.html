@@ -2,7 +2,8 @@
     <div>
         <h4>Order Details</h4>
     </div>
-    <div class="row">
+    <div class="row pickerinput"
+        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
         <div class="form-group">
             <label for="orderby">Order prepared by</label>
             <input type="text" [disabled]="userOrderdata.picker_name" #username [value]="userOrderdata.picker_name"
@@ -29,7 +30,7 @@
                             <span style="color: #00008B;"
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 100 && userOrderdata.substitute_status === 'done'">Subs.In
                             </span>
-                            
+
                             <span style="color:gray;"
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 1 && orderDetaildata['data'][0]?.order_shipment.shipment_status === 'Shipped'">Shipped
                             </span>
@@ -41,7 +42,8 @@
                     </tr>
                     <tr>
                         <td>Bill Number :</td>
-                        <td>
+                        <td
+                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                             <!-- <div (click)="BillnumberModal(orderDetaildata['data'][0]?.channel_order_id)"
                                 *ngIf="orderDetaildata['data'][0]?.channel_order_id"
                                 [disabled]="!userOrderdata.picker_name" class="colorclass"
@@ -54,7 +56,7 @@
                             </p> -->
                             <!-- <span style="color: cyan;" (click)="BillnumberComponent()" *ngIf="!orderDetaildata['data'][0]?.channel_order_id">Enter Bill Number</span> -->
 
-                            <input #bnumber
+                            <input #bnumber [disabled]="userOrderdata.orderlistType === 'cancelled'"
                                 [ngStyle]="{'border-color':product_billnumber === null ? 'gray' : customcolor }"
                                 (click)="BillnumberModal(orderDetaildata['data'][0]?.channel_order_id)"
                                 [disabled]="!userOrderdata.picker_name"
@@ -66,7 +68,7 @@
                     <tr>
                         <td>Order date and time :</td>
                         <td>
-                            {{orderDetaildata['data'][0]?.order_activity[0]?.activity_date | date:'d MMM, y, h:mm a' }}
+                            {{orderDetaildata['data'][0]?.created | date:'d MMM, y, h:mm a' }}
                         </td>
                     </tr>
                     <tr>
@@ -77,14 +79,24 @@
                     </tr>
                     <tr>
                         <td>Mobile Number :</td>
-                        <td>{{orderDetaildata['data'][0]?.customer?.phone}}</td>
+                        <td>{{orderDetaildata['data'][0]?.delivery_phone}}</td>
                     </tr>
                     <tr>
                         <td>Delivery Address :</td>
                         <td>{{orderDetaildata['data'][0]?.delivery_street_address}}
                             {{orderDetaildata['data'][0]?.delivery_state_name}}
                             <br>
-                            <div class="highlight_edits">
+                            <div class="highlight_edits" style="background-color:gray"
+                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ">
+                                <strong style="color: white;cursor: pointer;"
+                                    (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
+                                </strong>
+                            </div>
+
+                            <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' "
+                                class="highlight_edits"
+                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                 <strong style="color: white;cursor: pointer;"
                                     (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
                                 </strong>
@@ -95,16 +107,35 @@
                     <tr>
                         <td style="padding: 8% 0% 0% 3%;">Deliver Time :</td>
                         <td>
-                            <div class="highlight_edits">
-                                <div style="color: white;">
+                            <div class="highlight_edits"
+                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'blue' }">
+                                <div style="color: white;" 
+                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
-                                    <mat-form-field appearance="fill">
-                                        <!-- The timepicker input -->
-                                        <input style="background-color:blue;color: white !important;"
+                                    <!-- <mat-form-field appearance="fill"
+                                        *ngIf="userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'cancelled'">
+                                        <input style="color: white !important;background-color:gray"
                                             [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
                                             #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
-                                            mode="24h" [value]="datetime" [ngModel]="datetime" [placeholder]="orderDetaildata['data'][0]?.slot_end_time"
-                                            name="time" [errorStateMatcher]="customErrorStateMatcher"
+                                            mode="24h" [value]="datetime" [ngModel]="datetime"
+                                            [placeholder]="orderDetaildata['data'][0]?.slot_end_time" name="time"
+                                            [errorStateMatcher]="customErrorStateMatcher"
+                                            (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
+                                            (invalidInput)="invalidInputHandler()">
+                                        <mat-icon [disabled]="!userOrderdata.picker_name" matSuffix
+                                            (click)="t.showDialog()">access_time</mat-icon>
+                                        <mat-error *ngIf="time.touched && time.invalid">Invalid Date</mat-error>
+                                    </mat-form-field> -->
+
+                                    <mat-form-field appearance="fill"
+                                        *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped'">
+                                        <input style="color: white !important;background-color:blue"
+                                            [ngStyle]="{'background-color':userOrderdata.orderlistType === 'shipped' ? 'gray' : 'blue' }"
+                                            [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
+                                            #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
+                                            mode="24h" [value]="datetime" [ngModel]="datetime"
+                                            [placeholder]="orderDetaildata['data'][0]?.slot_end_time" name="time"
+                                            [errorStateMatcher]="customErrorStateMatcher"
                                             (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
                                             (invalidInput)="invalidInputHandler()">
                                         <!-- An icon for the timepicker input that will open the timepicker dialog when clicked -->
@@ -132,11 +163,14 @@
                         <td>
                             <!-- <input [disabled]="!userOrderdata.picker_name" class="colorclass" placeholder="Enter Price"
                                 type="text" class="form-control"> -->
-                            <div class="highlight_edits">
+                            <div class="highlight_edits"
+                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' 
+                        ,'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'blue' }">
                                 <p *ngIf="!orderDetaildata['data'][0]?.order_net_amount && !price" class="newprice"
                                     (click)="updatePrice(orderDetaildata['data'][0]?.order_net_amount,orderDetaildata['data'][0]?.net_amount)">
                                     Enter Product price
                                 </p>
+
                                 <p *ngIf="price && !orderDetaildata['data'][0]?.order_net_amount" class="newprice"
                                     (click)="updatePrice(orderDetaildata['data'][0]?.order_net_amount,orderDetaildata['data'][0]?.net_amount)">
                                     {{price}}</p>
@@ -221,7 +255,9 @@
                         <table>
                             <tr>
                                 <td style="width: 100px;">
-                                    <img class="productimg" style="width: 50%;" [src]="products?.product.product_images[0]?.link+''+products?.product.product_images[0]?.img" alt="">
+                                    <img class="productimg" style="width: 50%;"
+                                        [src]="products?.product.product_images[0]?.link+''+products?.product.product_images[0]?.img"
+                                        alt="">
                                 </td>
                                 <td style="line-height:2">
                                     <h6>{{products?.product.name}}</h6>
@@ -239,7 +275,8 @@
 
                                     </div>
                                     <div class="row row-margin">
-                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin">
+                                        <div [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                            class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin">
 
                                             <div>
                                                 <strong>Available</strong>
@@ -264,7 +301,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin"
+                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                             <div>
                                                 <strong>Not Available</strong>
                                                 <div class="btn-right">
@@ -293,6 +331,7 @@
                 <!-- Approved products -->
                 <div class="row substitute-container" style="margin-right: 0%;margin-left: 0px;">
                     <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12 stretch-card grid-margin"
+                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                         *ngFor="let subt_products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <div *ngIf="subt_products?.send_approval === 'approve'">
                             <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
@@ -305,7 +344,8 @@
                             <table>
                                 <tr>
                                     <td style="width: 100px;">
-                                        <img class="productimg" [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
+                                        <img class="productimg"
+                                            [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
                                             alt="">
                                         <button type="button" style="bottom: 4%;position: absolute;left: 2%;"
                                             class="btn btn-primary">Substitute</button>
@@ -327,7 +367,8 @@
                                         <div>
 
                                         </div>
-                                        <div class="row row-margin">
+                                        <div class="row row-margin"
+                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card">
 
                                                 <div>
@@ -353,7 +394,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card"
+                                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                                 <div>
                                                     <strong>Not Available</strong>
                                                     <div class="btn-right">
@@ -388,7 +430,8 @@
                     </div>
                 </div>
                 <!-- substitute product -->
-                <div *ngIf="!IS_Subtitute">
+                <div *ngIf="!IS_Subtitute"
+                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                     <div class="subtitute_data" *ngIf="orderDetaildata['data'][0]?.order_substitute_products.length">
                         <div class="alert alert-info">
                             <h3>Subtitute Product</h3>
@@ -397,7 +440,9 @@
                             <div class="row"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
-                                    <img class="productimg" [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"  alt="">
+                                    <img class="productimg"
+                                        [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"
+                                        alt="">
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <strong style="color: green;">{{subtitute?.product.name}}</strong><br>
@@ -410,15 +455,16 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" style="width: 100%;"
+                        <button type="button" style="width: 100%;" *ngIf="userOrderdata.substitute_status === 'pending'"
                             (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id,product_billnumber)"
                             class="btn btn-success">Send for Approval
                             <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: leftTime, notify: [ 2, 5 ]}"
                                 (event)="handleEvent($event)">
                             </countdown>
                         </button><br>
-                        <button *ngIf="IsTimeComplete === false" [disabled]="!userOrderdata.picker_name" type="button"
-                            (click)="declinedProduct()" class="btn btn-success declinedbtn">Declined Product
+                        <button *ngIf="IsTimeComplete === false && userOrderdata.substitute_status === 'pending'"
+                            [disabled]="!userOrderdata.picker_name" type="button" (click)="declinedProduct()"
+                            class="btn btn-success declinedbtn">Declined Product
                         </button>
                         <p style="text-align: center;" *ngIf="!IsTimeComplete">
                             <strong>Send Replacement request to customer for approval</strong><br>
@@ -429,7 +475,7 @@
                 <!-- process order -->
                 <div class="row" *ngIf="IS_Subtitute === true">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin btnpadding">
-                        <button [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
+                        <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped'" [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
                             (click)="processOrder()" class="btn btn-success">Process the order</button>
                     </div>
                 </div>
@@ -462,8 +508,10 @@
             <div class="orderlist-heading">
                 <h4>Order List</h4>
                 <!-- msInfiniteScroll (infiniteScroll)="getNextData()" threshold="15%" -->
-                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="scroll-viewport">
-                    <div *cdkVirtualFor="let order of orderlistdata['data']?.response" class="scroll-inner-data" >
+                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="scroll-viewport"
+                    infiniteScroll [infiniteScrollDistance]="0.05" [scrollWindow]="false" [infiniteScrollThrottle]="500"
+                    [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
+                    <div *ngFor="let order of orderlistdata['data']" class="scroll-inner-data">
                         <mat-card class="orderlist-card"
                             (click)="getOrderDetailData(order.id,order.shipment_id,order.order_status,order.picker_name,order.substitute_status)">
                             <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
@@ -489,8 +537,7 @@
                                 <mat-card-title>{{order?.custom_order_id}} Subs.In
                                 </mat-card-title>
                             </mat-card-header>
-                            <mat-card-header style="background-color: #800080"
-                                *ngIf="order?.order_status === 2">
+                            <mat-card-header style="background-color: #800080" *ngIf="order?.order_status === 2">
                                 <mat-card-title>{{order?.custom_order_id}} Cancelled
                                 </mat-card-title>
                             </mat-card-header>
@@ -498,8 +545,8 @@
                             <mat-card-content>
                                 <div>
                                     <strong>- Ordered On : </strong><br>
-                                    <span>{{order?.order_activity?.activity_date | date : 'medium'}} </span><br>
-                                    <span>{{order?.order_activity?.activity_date | datepipe}}</span>
+                                    <span>{{order?.created | date : 'medium'}} </span><br>
+                                    <span>{{order?.created | datepipe}}</span>
                                 </div>
                                 <div>
                                     <strong>- Delivery Address : </strong><br>

@@ -42,6 +42,15 @@ export class AddnewproductComponent implements OnInit {
   productsIDS: any = []
   productQuantity: any = []
   subtituteSelectedProducts: any = []
+  //for realtime selection we need to store selected product data 
+  selectedproductids={
+    index:'',
+    substitutestatus:'',
+    relatedproductid:'',
+    relatedproducttype:'',
+    item:[]
+  
+  }
   
   constructor(public router: Router,
     public db: DatabaseService,
@@ -107,14 +116,19 @@ export class AddnewproductComponent implements OnInit {
       } else if (result.data === "none") {
         // console.log("search text", this.userProductData.searchproductvalue);
         // this.searchProducts()
-        this.getProductlistData()
+        // this.getProductlistData()
+        this.selectSubstituteproduct(this.selectedproductids.index,1, this.selectedproductids.relatedproductid, this.selectedproductids.relatedproducttype, this.selectedproductids.item)
+      }else{
+        console.log("modal closed");
+        
       }
 
     });
   }
 
   closeModal(): void {
-    this.dialogRef.close({ event: 'close', data: this.incomingmodalData.storage, subtitutestatus: "no_productadded" });
+    // this.incomingmodalData.shortage=0
+    this.dialogRef.close({ event: 'close',substituteData: this.incomingmodalData.substituteData, data: this.incomingmodalData.substituteData.shortage, subtitutestatus: "no_productadded" });
   }
 
   getProductlistData() {
@@ -323,6 +337,13 @@ export class AddnewproductComponent implements OnInit {
 
   //substitute products
   selectSubstituteproduct(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any, item: any) {
+
+  this.selectedproductids.index=index,
+  this.selectedproductids.substitutestatus=substitutestatus,
+  this.selectedproductids.relatedproductid=relatedproductid,
+  this.selectedproductids.relatedproducttype=relatedproducttype,
+  this.selectedproductids.item=item
+
 
     console.log("index : ", index);
 

@@ -68,15 +68,14 @@ export class DashboardComponent implements OnInit {
   close(){
     console.log("menu actions : ",this.isHandset$);
     
-    this.sidenav.close()
+    // this.sidenav.close()
   }
   logout() {
 
     this.db.getUserData().then(res => {
       console.log("user data inside dashboard : ", res);
       this.db.getIP().then(data1 => {
-        data1.api
-
+        
         let data = {
           ip_address: data1.ip,
           device_id: data1.ip,
@@ -85,7 +84,7 @@ export class DashboardComponent implements OnInit {
         this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
           console.log("logout : ", data);
           if (data.status === 1) {
-            this.globalitems.showSuccess("You have Sucessfully logout", "Success")
+            // this.globalitems.showSuccess("You have Sucessfully logout", "Success")
             this.db.SignOut();
             this.router.navigate(["login"])
           }
@@ -96,11 +95,15 @@ export class DashboardComponent implements OnInit {
     })
   }
   setbadge(badge:any){
+    console.log("setbadge ",badge);
+    
     this.totalbadge=badge
   }
   navigatLatestOrder(){
     this.totalbadge=0;
-    this.router.navigate(['orders'])
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['dashboard/orders']);
   }
 
   

@@ -54,4 +54,7 @@ export class HomeComponent implements OnInit {
   navigateOrder(orderstatus:any){
     this.router.navigate(['dashboard/orders',{orderstatus: orderstatus}])
   }
+  navigatePocessingOrder(){
+    this.router.navigate(['dashboard/orders'])
+  }
 }

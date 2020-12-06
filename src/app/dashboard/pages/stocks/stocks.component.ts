@@ -33,7 +33,7 @@ export class StocksComponent implements OnInit {
   }
   
   pickerProductList:any=[]
-  stockStatus:any;
+  stockStatus:any='';
   parentcategory: any = []
   subcategory: any = []
   cat_price:any='';
@@ -179,7 +179,7 @@ export class StocksComponent implements OnInit {
     if(this.productpage <= this.totalProductpage){
       this.searchProducts("novalue")
     }else{
-      this.globalitem.showError("No more data is available ","No Data")
+      // this.globalitem.showError("No more data is available ","No Data")
     }
   
   }

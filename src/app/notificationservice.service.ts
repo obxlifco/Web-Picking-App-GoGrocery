@@ -19,7 +19,7 @@ export class NotificationserviceService {
      //start time counter for getting latest orders
      startcounter(){
       this.db.getNotificationTime().then(res => {
-        console.log("user timer : ", res);
+        // console.log("user timer : ", res);
         this.subscription = timer(0, res).pipe(
           switchMap(async () => {
             this.db.getOrderIDS().then(res => {
@@ -41,7 +41,7 @@ export class NotificationserviceService {
     getLatestOrder(orderData:any) {
       this.db.setOrderIDS(orderData)
       this.apiService.postData("picker-latestorders/", orderData).subscribe((data: any) => {
-        console.log("latestorders : ", data);
+        // console.log("latestorders : ", data);
         // this.appcom.setbadge(data.response.no_of_latest_order)
       })
     }

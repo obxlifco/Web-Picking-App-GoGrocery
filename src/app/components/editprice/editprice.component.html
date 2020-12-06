@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="body">
-        <input placeholder="Enter Price" [(ngModel)]="price"
+        <input  (keyup.enter)="updatePrice()" placeholder="Enter Price" [(ngModel)]="price"
         type="text" class="form-control">
         <button type="button"(click)="updatePrice()"
         class="btn btn-success">Update Price</button>

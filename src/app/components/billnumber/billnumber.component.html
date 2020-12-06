@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="body">
-        <input placeholder="Bill Number" [(ngModel)]="bill_number" [value]="modaldata.data.billnumber"
+        <input (keyup.enter)="saveBillNumber()" placeholder="Bill Number" [(ngModel)]="bill_number" [value]="modaldata.data.billnumber"
         type="text" class="form-control">
     </div>
     </div>

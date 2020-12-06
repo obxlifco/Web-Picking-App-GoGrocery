@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { DashboardComponent } from '../../dashboard.component';
 
 
 @Component({
@@ -43,10 +44,15 @@ export class OrdersComponent implements OnInit {
     product_id: '',
     order_product_id: '',
     orderlistType: null,
+    ordernonlistType: '',
     order_id_for_substitute_checking:0,
-   PickerCounter : 0 //set the counter to check if product selected in list
+   PickerCounter : 0, //set the counter to check if product selected in list
   }
+  currenttime:any=new Date()
+   paymentOnlineTime:any
   price: any = ''
+  currentPage:any=1//pagination
+  totalProductpage:any=0
   countDownTimer: any
   IsTimeComplete: any
   customcolor: any
@@ -63,7 +69,7 @@ export class OrdersComponent implements OnInit {
 
   constructor(public router: Router,
     public dialog: MatDialog,
-    public appcom: AppComponent,
+    public appcom: DashboardComponent,
     public datePipe: DatePipe,
     public db: DatabaseService,
     public apiService: ApiService,
@@ -79,6 +85,9 @@ export class OrdersComponent implements OnInit {
       console.log("activated route data :", v.orderstatus)
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
+        if(this.userOrderdata.orderlistType === "cancelled" || this.userOrderdata.orderlistType === "shipped" ){
+          this.appcom.setbadge(0)
+        }
 
       }
 
@@ -89,6 +98,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
+   
     
     this.getOrderlistData()
   }
@@ -133,8 +143,6 @@ export class OrdersComponent implements OnInit {
     } else {
       this.getbillValidator()
     }
-
-
   }
 
   getbillValidator(){
@@ -160,6 +168,8 @@ export class OrdersComponent implements OnInit {
       let data = {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
+        page:this.currentPage,
+        per_page:100
       }
       if (this.userOrderdata.orderlistType !== null) {
         let status = {
@@ -171,11 +181,31 @@ export class OrdersComponent implements OnInit {
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
-      this.apiService.postData("picker-orderlist/", data).subscribe((data: any[]) => {
-        console.log(data);
-        this.orderlistdata["data"] = data
-        this.getOrderDetailData(this.orderlistdata["data"].response[0].id, this.orderlistdata["data"].response[0].shipment_id, this.orderlistdata["data"].response[0].order_status,
-          this.orderlistdata["data"].response[0].picker_name, this.orderlistdata["data"].response[0].substitute_status)
+      this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
+        // console.log(data);
+        this.orderlistdata["data"] = data.response //json response
+        this.totalProductpage=data.total_page//total page
+        // if(this.orderlistdata["data"]?.payment_type_id === 2){
+        //   this.paymentOnlineTime=this.datePipe.transform(this.orderlistdata["data"]?.created, "'h:mm");
+        //   this.currenttime=this.datePipe.transform(this.currenttime, "'h:mm");
+        //   console.log("Payment time : ",this.paymentOnlineTime);
+        //   console.log("Current time : ",this.paymentOnlineTime);
+        // }
+
+        
+
+       
+        this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+          this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
+        if(this.currentPage === 1){
+          this.orderlistdata["data"]=data.response
+          this.totalProductpage=data.total_page
+        }else{
+          console.log("page n");
+          this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
+        }
+       
+        
       })
     })
 
@@ -199,7 +229,10 @@ export class OrdersComponent implements OnInit {
       console.log(data);
       // this.orderlistdata["data"] = data
       this.globalitem.showSuccess(data.message, "Success")
-      this.reloadpage()
+      // this.reloadpage()
+      this.getOrderlistData()
+      // this.getOrderDetailData( this.userOrderdata.order_id,  this.userOrderdata.shipment_id,  this.userOrderdata.order_status,  this.userOrderdata.picker_name,  this.userOrderdata.substitute_status)
+
     })
   }
 
@@ -221,10 +254,20 @@ export class OrdersComponent implements OnInit {
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
+
+      this.paymentOnlineTime=this.datePipe.transform(this.orderDetaildata["data"][0]?.created, "'h:mm:s");
+        this.currenttime=this.datePipe.transform(new Date(), "'h:mm:s");
+        console.log("Payment time : ",this.paymentOnlineTime);
+        console.log("Current time : ",this.currenttime); 
+
       this.userOrderdata.shipment_id = this.orderDetaildata["data"][0].shipment_id
       this.userOrderdata.trent_picklist_id=this.orderDetaildata["data"][0].trent_picklist_id
-      this.userOrderdata.order_id_for_substitute_checking=this.orderlistdata['data']?.response[0].id
-      this.getLatestOrder( this.userOrderdata.order_id_for_substitute_checking,'insidePage')
+      this.userOrderdata.order_id_for_substitute_checking=this.orderlistdata['data'][0].id
+      if(this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped'){
+      }else{
+        this.getLatestOrder( this.userOrderdata.order_id_for_substitute_checking,'insidePage')
+      }
+      
       // let time: any = this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
 
       this.getsubtitteStatus()
@@ -239,8 +282,6 @@ export class OrdersComponent implements OnInit {
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
-
-
 
   openEditModal(data: any) {
     let user_ids = {
@@ -321,13 +362,17 @@ export class OrdersComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddnewproductComponent, {width: '500px', data: { data: data }});
     dialogRef.afterClosed().subscribe(result => {console.log('The dialog was closed', result);
-      setTimeout(() => {
-        // this.reloadpage()
+
+      if (result.subtitutestatus === "productadded") {
+        setTimeout(() => {
+          // this.reloadpage()
+          this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+        }, 100);
+      }else if(result.subtitutestatus ==='no_productadded'){
+        this.updateMoreProductQuantity(result.substituteData.grn_quantity,result.substituteData.product_id,result.substituteData.order_product_id,result.substituteData.shortage,0)
+        setTimeout(() => {
         this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
       }, 100);
-      if (result.subtitutestatus === "productadded") {
-        // this.updateMoreProductQuantity(data.substituteData.grn_quantity,data.substituteData.product_id,data.substituteData.order_product_id,data.substituteData.shortage,0)
-
       }
 
     });
@@ -474,15 +519,19 @@ export class OrdersComponent implements OnInit {
       order_id: orderData,
     }
     if(reqestType === "insidePage"){
+      console.log("insidePage data : ",temData);
       temData=data
     }else if(reqestType === "outsidePage"){
+      console.log("outside data : ",temData);
+      
       temData=orderData
     }
 
-    this.db.setOrderIDS(temData)
+   
     this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
       console.log("latestorders : ", data);
-      // this.appcom.setbadge(data.response.no_of_latest_order)
+      this.appcom.setbadge(data.response.no_of_latest_order)
+      this.db.setOrderIDS(temData)
     })
   }
   updatePrice(order_amount: any, netAmount: any) {
@@ -575,27 +624,44 @@ export class OrdersComponent implements OnInit {
   reloadpage() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['orders']);
+    this.router.navigate(['dashboard/orders']);
   }
 
        //start time counter for getting latest orders
        startcounter(){
          console.log("timer is start");
-         
         this.db.getNotificationTime().then(res => {
           console.log("user timer : ", res);
           this.subscription = timer(0, res).pipe(
             switchMap(async () => {
               this.db.getOrderIDS().then(res => {
-                this.getLatestOrder(res,'outsidePage')})
+                console.log(" Type : ",this.userOrderdata.orderlistType);
+                
+                if(this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped'){
+                  
+                }else{
+                  this.getLatestOrder(res,'outsidePage')
+                }
+                
+              })
             })
             
-          ).subscribe(result =>{this.globalitem.showSuccess("Check your latest order ","Latest order");
+          ).subscribe(result =>{
           }
           );
         })
 }
 
+onScrollDown(ev:any) {
+  console.log('scrolled!!',ev);
+  this.currentPage++;
+  // this.getOrderlistData()
+  if(this.currentPage <= this.totalProductpage){
+    this.getOrderlistData()
+  }else{
+    // this.globalitem.showError("No more data is available ","No Data")
+  }
 
+}
 
 }

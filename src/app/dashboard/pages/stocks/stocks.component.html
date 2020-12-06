@@ -39,10 +39,10 @@
             <div class="col-md-12 stretch-card grid-margin col-left">
                 <div class="search-container">
                     <div class="custom-input">
-                        <input placeholder="Search for product" type="text" class="form-control">
+                        <input  (keyup.enter)="searchProducts('search')" placeholder="Search for product" type="text" class="form-control">
                         <!-- <mat-icon class="right-icon">search</mat-icon> -->
                     </div>
-                    <button type="button" class="btn btn-outline-secondary">Scan</button>
+                    <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
                     <button type="button" (click)="searchProducts('search')" class="btn btn-outline-secondary">Search</button>
                 </div>
             </div>

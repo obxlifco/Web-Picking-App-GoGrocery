@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log("login form data : ", this.loginForm.value);
+    // console.log("login form data : ", this.loginForm.value);
     
     // this.globalitem.showSpinner()
     this.apiservice.postData("picker-login/", this.loginForm.value).subscribe((res: any[]) => {
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       if(data.status === 0){
         this.globalitem.showError(data.message, "Error")
       }else{
-        this.globalitem.showSuccess("You have Successfully login", "Success")
+        // this.globalitem.showSuccess("You have Successfully login", "Success")
         this.database.setUserData(data?.user_data)
         this.router.navigate(["dashboard/home"])
       }
