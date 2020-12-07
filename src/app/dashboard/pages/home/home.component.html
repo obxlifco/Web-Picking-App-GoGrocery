@@ -17,12 +17,12 @@
                                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                    alt="circle-image" />
                                <h4 class="font-weight-normal mb-3">Order Processing<i
-                                       class="mdi mdi-chart-line mdi-24px float-right"></i>
+                                class="mdi mdi-chart-line mdi-24px float-right"></i>
                                </h4>
                                <!-- <h6 class="mb-5">$ 15,0000</h2> -->
-                                   <h6 class="card-text">Order in-processing : {{orderdata['data'].pending_order + orderdata['data'].processing_order + orderdata['data']?.substitution_sent_order + orderdata['data']?.substitution_received_order}}</h6>
+                               <h6 class="card-text">Order in-processing : {{orderdata['data'].pending_order + orderdata['data'].processing_order}}</h6>
                                <h6 class="card-text">New : {{orderdata['data'].pending_order}}</h6>
-                               <h6 class="card-text">Assigned : {{orderdata['data']?.processing_order}}</h6>
+                               <h6 class="card-text">Assigned : {{orderdata['data']?.processing_order - orderdata['data']?.substitution_sent_order - orderdata['data']?.substitution_received_order}}</h6>
                                <h6 class="card-text">Substitutions Sent : {{orderdata['data']?.substitution_sent_order}}</h6>
                                <h6 class="card-text">Substitutions Recieved : {{orderdata['data']?.substitution_received_order}}</h6>
                            </div>
@@ -34,7 +34,7 @@
                                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                    alt="circle-image" />
                                <h4 class="font-weight-normal mb-3">Order In Shipping <i
-                                       class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                                class="mdi mdi-car-estate mdi-24px float-right"></i>
                                </h4>
                                <h2 class="mb-5">{{orderdata['data']?.shipped_order}}</h2>
                            </div>
@@ -46,7 +46,7 @@
                                <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                    alt="circle-image" />
                                <h4 class="font-weight-normal mb-3">Cancelled Orders <i
-                                       class="mdi mdi-diamond mdi-24px float-right"></i>
+                                class="mdi mdi-cart-off mdi-24px float-right"></i>
                                </h4>
                                <h2 class="mb-5">{{orderdata['data']?.cancel_order}}</h2>
                            </div>

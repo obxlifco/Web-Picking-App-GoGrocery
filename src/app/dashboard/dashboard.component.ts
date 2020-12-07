@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { from } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -20,20 +20,20 @@ export class DashboardComponent implements OnInit {
 
   title = 'lifco Picking pp';
   loginRouterLink: any
-  totalbadge:any=0
+  totalbadge: any = 0
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
-    isLoggedIn$: Observable<boolean> | any;   
+  isLoggedIn$: Observable<boolean> | any;
 
   constructor(private breakpointObserver: BreakpointObserver,
     private router: Router,
     private apiService: ApiService,
     public globalitems: GlobalitemService,
     private db: DatabaseService,
-    private notificationservice : NotificationserviceService
+    private notificationservice: NotificationserviceService
   ) {
     console.log("router link : ", this.loginRouterLink);
     router.events.subscribe((url: any) =>
@@ -51,11 +51,11 @@ export class DashboardComponent implements OnInit {
     console.log("router link : ", this.loginRouterLink);
   }
   ngOnInit(): void {
-    this.isLoggedIn$ = this.db.isLoggedIn(); 
+    this.isLoggedIn$ = this.db.isLoggedIn();
     this.initializedTimer()
   }
 
-  initializedTimer(){
+  initializedTimer() {
     this.notificationservice.startcounter()
   }
 
@@ -65,9 +65,9 @@ export class DashboardComponent implements OnInit {
       this.db.setIP(data)
     })
   }
-  close(){
-    console.log("menu actions : ",this.isHandset$);
-    
+  close() {
+    console.log("menu actions : ", this.isHandset$);
+
     // this.sidenav.close()
   }
   logout() {
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
     this.db.getUserData().then(res => {
       console.log("user data inside dashboard : ", res);
       this.db.getIP().then(data1 => {
-        
+
         let data = {
           ip_address: data1.ip,
           device_id: data1.ip,
@@ -88,24 +88,19 @@ export class DashboardComponent implements OnInit {
             this.db.SignOut();
             this.router.navigate(["login"])
           }
-
         })
       })
-
     })
   }
-  setbadge(badge:any){
-    console.log("setbadge ",badge);
-    
-    this.totalbadge=badge
+  setbadge(badge: any) {
+    // console.log("setbadge ", badge);
+
+    this.totalbadge = badge
   }
-  navigatLatestOrder(){
-    this.totalbadge=0;
+  navigatLatestOrder() {
+    this.totalbadge = 0;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['dashboard/orders']);
   }
-
-  
-
 }

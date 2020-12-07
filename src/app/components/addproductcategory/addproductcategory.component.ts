@@ -64,20 +64,40 @@ export class AddproductcategoryComponent implements OnInit {
     this.dialogRef.close();
   }  
   getCategories(){
-    let data={
-      website_id:this.incomingModalData.data.website_id,
-      warehouse_id:this.incomingModalData.data.warehouse_id,
-      parent_id:this.incomingModalData.data.parent_id,
-      isparent:0
+      let data={
+        website_id:this.incomingModalData.data.website_id,
+        warehouse_id:this.incomingModalData.data.warehouse_id,
+        parent_id:this.incomingModalData.data.parent_id,
+        isparent:0
+      }
+      console.log("going data : ",data);
+      let temparray:any=[]
+      
+      this.apiService.postData(this.incomingModalData.data.URl, data).subscribe((data: any) => {
+        console.log(data);
+        this.categorylist["data"]=data
+        if(this.incomingModalData.data.parent_id === null){
+          for(let i=0;i<data.response?.length;i++){
+            if(data.response[i]?.parent_id ===0){
+              temparray.push(data.response[i])
+            }
+          }
+          this.categorylist["data"]=temparray
+          console.log("Parent Category ", this.categorylist["data"]);
+          
+        }else{
+          for(let i=0;i<data?.response?.length;i++){
+            if(data?.response[i]?.parent_id !==0){
+              temparray.push(data.response[i])
+            }
+        }
+        this.categorylist["data"]=temparray
+        console.log("child Category ",temparray);
+      }
+      })  
     }
-    console.log("going data : ",data);
     
-    this.apiService.postData(this.incomingModalData.data.URl, data).subscribe((data: any[]) => {
-      console.log(data);
-      this.categorylist["data"]=data
-    })
-  }
-
+   
 //   filterListCareUnit(val:any) {
 //     console.log(val.key);
 //     this.categorylist["data"] =  this.categorylist["data"].response.filter((unit:any) => unit.name.indexOf(val.key) > -1);

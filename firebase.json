@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "gogpicking",
     "public": "dist/lifco-picking-app",
     "ignore": [
       "firebase.json",

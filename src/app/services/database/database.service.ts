@@ -62,7 +62,7 @@ export class DatabaseService {
     console.log("timer data : ",data);
     
     if(data === null){
-      return 10000 
+      return 5*60000 
     }else{
       return data
     }

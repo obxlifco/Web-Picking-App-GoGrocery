@@ -14,7 +14,12 @@
             </mat-list-option>
           </mat-selection-list> -->
 
-    <div class="content" role="main" *ngIf="categorylist['data']?.response.length">
+    <div class="content" role="main" *ngIf="categorylist['data']?.length">
+      <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
+        <mat-icon class="right-icon">search</mat-icon>
+        <input class="form-control form-control-sm ml-3 w-75" type="email" placeholder="Search" id="search-text"
+          aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
+      </div>
       <div class="card">
         <!-- <div class="form-group">
                 <mat-icon for="search-text" class="right-icon">search</mat-icon>
@@ -22,16 +27,9 @@
                   [(ngModel)]="searchText" placeholder="Enter text to search" 
                   autofocus>
               </div> -->
-
-        <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
-          <mat-icon class="right-icon">search</mat-icon>
-          <input class="form-control form-control-sm ml-3 w-75" type="email" placeholder="Search" id="search-text"
-            aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
-        </div>
-
         <div class="cardbody">
-        <ul *ngIf="categorylist['data']?.response" class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let catItem of categorylist['data']?.response | searchfilter: searchText"
+        <ul *ngIf="categorylist['data']" class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let catItem of categorylist['data'] | searchfilter: searchText"
             appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
             (click)="listItem(catItem)">
             {{catItem.name}}
@@ -42,7 +40,7 @@
         </div>
       </div>
     
-        <div class="item" *ngIf="!categorylist['data']?.response">
+        <div class="item" *ngIf="!categorylist['data']">
           <ngx-skeleton-loader *ngFor="let item of [1,2,3,4]"></ngx-skeleton-loader>
         </div>
         <!-- <div class="cardfooter">
@@ -52,7 +50,7 @@
     </div>
 
     <!-- if data not found -->
-    <app-emptystate *ngIf="!categorylist['data'].length" ></app-emptystate>
+    <app-emptystate *ngIf="!categorylist['data']?.length" ></app-emptystate>
   </div>
 </div>
 <!-- footer -->
