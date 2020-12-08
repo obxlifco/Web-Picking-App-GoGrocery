@@ -45,10 +45,11 @@ export class OrdersComponent implements OnInit {
     order_product_id: '',
     orderlistType: null,
     ordernonlistType: '',
+    payment_type_id:'',
     order_id_for_substitute_checking: 0,
-    
     PickerCounter: 0, //set the counter to check if product selected in list
   }
+  paymentonlineTimer=false
   order_Substitute_Time:any
   currenttime: any = new Date()
   isTimerStart = false
@@ -191,16 +192,7 @@ export class OrdersComponent implements OnInit {
         // console.log(data);
         this.orderlistdata["data"] = data.response //json response
         this.totalProductpage = data.total_page//total page
-        // if(this.orderlistdata["data"]?.payment_type_id === 2){
-        //   this.paymentOnlineTime=this.datePipe.transform(this.orderlistdata["data"]?.created, "'h:mm");
-        //   this.currenttime=this.datePipe.transform(this.currenttime, "'h:mm");
-        //   console.log("Payment time : ",this.paymentOnlineTime);
-        //   console.log("Current time : ",this.paymentOnlineTime);
-        // }
-
-
-
-
+        this.orderlistdata["data"].payment_type_id=data?.response?.payment_type_id
         this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
           this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
           
@@ -244,7 +236,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
-    this.IsTimeComplete = ''
+    // this.IsTimeComplete = ''
     console.log("order id :", orderid);
     this.userOrderdata.picker_name = picker_name;
     this.userOrderdata.order_id = orderid
@@ -277,9 +269,13 @@ export class OrdersComponent implements OnInit {
         //   var seconds:any = (addedminutes_milisecond / 1000).toFixed(0);
         //     var minutes = Math.floor(seconds / 60);
         //     console.log("Date true",minutes ,"left minutes : ",this.leftTime);
-        this.timerProductSentApproval()
+        this.timerProductSentApproval(this.order_Substitute_Time,10)
       }
-
+      // if(this.orderDetaildata["data"]?.payment_type_id === 2){
+      if(true){
+        console.log("timer");
+        this.timerProductSentApproval(this.paymentOnlineTime,30)
+      }
   
       // let timediff=Date.parse( this.currenttime) - Date.parse(this.paymentOnlineTime)
     
@@ -356,10 +352,10 @@ export class OrdersComponent implements OnInit {
       // if (this.billnumber.nativeElement.value) {
       this.apiService.postData("picker-sendapproval/", data).subscribe((data: any) => {
         if (data.status === 1) {
-          this.timerProductSentApproval()
+          this.timerProductSentApproval(this.order_Substitute_Time,10)
           this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
           this.globalitem.showSuccess(data.message, "Subtitute Sent")
-          this.ApprovalTimer()
+          this.ApprovalTimer(10000)
           // this.reloadpage()
         }
       })
@@ -404,18 +400,19 @@ export class OrdersComponent implements OnInit {
     const dialogRef = this.dialog.open(AddnewproductComponent, { width: '500px', data: { data: data } });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
+      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
 
-      if (result.data.subtitutestatus === "productadded") {
-        setTimeout(() => {
-          // this.reloadpage()
-          this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
-        }, 100);
-      } else if (result.subtitutestatus === 'no_productadded') {
-        this.updateMoreProductQuantity(result.substituteData.grn_quantity, result.substituteData.product_id, result.substituteData.order_product_id, result.substituteData.shortage, 0)
-        setTimeout(() => {
-          this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
-        }, 100);
-      }
+      // if (result.data.subtitutestatus === "productadded") {
+      //   setTimeout(() => {
+      //     // this.reloadpage()
+      //     this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+      //   }, 100);
+      // } else if (result.subtitutestatus === 'no_productadded') {
+      //   this.updateMoreProductQuantity(result.substituteData.grn_quantity, result.substituteData.product_id, result.substituteData.order_product_id, result.substituteData.shortage, 0)
+      //   setTimeout(() => {
+      //     this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+      //   }, 100);
+      // }
 
     });
   }
@@ -671,20 +668,17 @@ export class OrdersComponent implements OnInit {
 
   //start time counter for getting latest orders
   startcounter() {
-    console.log("timer is start");
+    console.log("timer started");
     this.db.getNotificationTime().then(res => {
-      console.log("user timer : ", res);
+      // console.log("user timer : ", res);
       this.subscription = timer(0, res).pipe(
         switchMap(async () => {
           this.db.getOrderIDS().then(res => {
             console.log(" Type : ", this.userOrderdata.orderlistType);
-
             if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped') {
-
             } else {
               this.getLatestOrder(res, 'outsidePage')
             }
-
           })
         })
 
@@ -706,44 +700,51 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  ApprovalTimer() {
+  ApprovalTimer(timeValue:any) {
     this.isTimerStart = true
     this.userOrderdata.substitute_status = "pending"
-    this.subscription = timer(0, 10000).pipe(
+    this.subscription = timer(0, timeValue).pipe(
       switchMap(async () => {
         this.getOrderlistData()
         this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+        if(this.userOrderdata.substitute_status === "none"){
+          this.isProductSendFor_Approval=true
+        }
       })
     ).subscribe(result => {
       console.log("timer started");
     })
   }
 
-  timerProductSentApproval(){
-    const originalDate = new Date(this.order_Substitute_Time);
-    // const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (10 * 60000)),"MMM d, y, h:mm:ss a")
-    const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (2 * 60000)),"MMM d, y, h:mm:ss a")
-    console.log(" modifiedTime ",subst_modifiedTime ," currenttime : ",this.currenttime);
-    this.leftTime = Date.parse(subst_modifiedTime) - Date.parse(this.currenttime)
+  //timer for sent product approval
+  timerProductSentApproval(productTime:any,totaltime:any){
+    const originalDate = new Date(productTime);
+    const modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (1 * 60000)),"MMM d, y, h:mm:ss a")
+    // const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (2 * 60000)),"MMM d, y, h:mm:ss a")
+    console.log(" modifiedTime ",modifiedTime ," currenttime : ",this.currenttime);
+    this.leftTime = Date.parse(modifiedTime) - Date.parse(this.currenttime)
     //assaign difference to timer between subs time and current time
-    let milisecond =Date.parse(subst_modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
+    let milisecond =Date.parse(modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
         var seconds:any = (milisecond / 1000).toFixed(0);
         this.leftTime = Math.floor(seconds / 60)*60000/900;
           console.log("left minutes : ",this.leftTime);
 
     //check if timer is available ore not
-    if(subst_modifiedTime > this.currenttime){
+    console.log("current Time : ",this.currenttime,"modifiedTime ",modifiedTime);
+    
+    if(Date.parse(modifiedTime)  > Date.parse(this.currenttime)){
+      this.paymentonlineTimer=false
       console.log("timer is greater false");
       if(this.userOrderdata.substitute_status === "none"){
         this.isProductSendFor_Approval=true
       }else if(this.userOrderdata.substitute_status === "pending"){
         this.isProductSendFor_Approval=false
       }
-     
     }else{
+      this.paymentonlineTimer=true
       this.isProductSendFor_Approval=true
       this.IsTimeComplete=false
-      console.log("timer is less than  true");
+      console.log("timer is less than true");
     }
   }
 

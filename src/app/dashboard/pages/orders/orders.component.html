@@ -224,10 +224,9 @@
                 </table>
 
                 <!-- adding items -->
-                <div class="add-items">
-                    <div style="background: aliceblue;text-align: -webkit-center;width: 97%">
-                        <h6>ITEMS</h6>
-                        <mat-divider></mat-divider>
+                <div class="add-items" *ngIf="orderDetaildata['data'][0]?.order_products">
+                    <div  style="background: green;text-align: -webkit-center;width: 97%;margin-bottom: 6%;">
+                        <h6 class="itemdivider"><span>ITEMS</span></h6>
                     </div>
                     <!-- Add more button -->
                     <!-- <div class="row row-margin">
@@ -342,7 +341,7 @@
                     <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12 stretch-card grid-margin"
                         [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                         *ngFor="let subt_products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
-                        <div *ngIf="subt_products?.send_approval === 'approve'">
+                        <div *ngIf="subt_products?.send_approval === 'approve'" style="width: 97%;">
                             <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
                             <div class="layover-root"
                                 *ngIf="subt_products?.quantity === subt_products?.grn_quantity + subt_products?.shortage">
@@ -350,7 +349,7 @@
                                 <div class="layover">
                                 </div>
                             </div>
-                            <table>
+                            <table style="width: 97%;">
                                 <tr>
                                     <td style="width: 100px;">
                                         <img class="productimg" style="width: 100%;"
@@ -361,9 +360,9 @@
                                     </td>
                                     <td style="line-height:2">
                                         <h6>{{subt_products?.product.name}}</h6>
-                                        <button (click)="openEditModal(subt_products)" type="button"
+                                        <!-- <button (click)="openEditModal(subt_products)" type="button"
                                             class="btn btn-danger">Edit
-                                            Weight</button><br>
+                                            Weight</button><br> -->
                                         <span>Unit Weight : {{subt_products?.product.weight}}
                                             {{subt_products?.product.uom.uom_name}}</span> <br>
                                         Total Weight :
@@ -496,37 +495,15 @@
                 <div class="row" *ngIf="IS_Subtitute === true">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin btnpadding">
                         <button
-                            *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped'"
-                            [disabled]="!userOrderdata.picker_name" style="width: 100%;" type="button"
+                            *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' &&
+                            orderDetaildata['data'][0]?.order_products"
+                            [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: 100%;" type="button"
                             (click)="processOrder()" class="btn btn-success">Process the order</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xs-6 col-sm-4  col-md-6  col-lg-4 grid-margin col-right">
-            <!-- <table class="table">
-        <th>Order Status</th>
-        <tr>
-            <td>Ordered On : </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Delivery Address :</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>This order is assaign to :</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Price :</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Payment status :</td>
-            <td></td>
-        </tr>
-        </table> -->
             <div class="orderlist-heading">
                 <h4>Order List</h4>
                 <!-- msInfiniteScroll (infiniteScroll)="getNextData()" threshold="15%" -->

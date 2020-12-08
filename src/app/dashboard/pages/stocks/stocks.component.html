@@ -8,15 +8,15 @@
 
         <div class="row">
             <div class="col-md-3 stretch-card grid-margin col-left">
-                <select (click)="opencategory_modal()" class="browser-default custom-select">
-                    <option *ngIf="!parentcategory.name">Category</option>
+                <select (click)="opencategory_modal('Category')" class="browser-default custom-select">
+                    <option selected>Category</option>
                     <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
 
                 </select>
             </div>
             <div class="col-md-3 stretch-card grid-margin col-left">
-                <select (click)="opensub_category_modal()" class="browser-default custom-select">
-                    <option *ngIf="!subcategory.name">Sub Category</option>
+                <select (click)="opensub_category_modal('Sub Category')" class="browser-default custom-select">
+                    <option selected>Sub Category</option>
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
                 </select>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-md-12 stretch-card grid-margin col-left">
                 <div class="search-container">
                     <div class="custom-input">
-                        <input  (keyup.enter)="searchProducts('search')" placeholder="Search for product" type="text" class="form-control">
+                        <input  (keyup.enter)="searchProducts('search')" [(ngModel)]="userOrderdata.searchProductvalue" placeholder="Search for product" type="text" class="form-control">
                         <!-- <mat-icon class="right-icon">search</mat-icon> -->
                     </div>
                     <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
@@ -63,8 +63,9 @@
                     <tr *ngFor="let plist of pickerProductList['data'];let i=index">
                         <td colspan="6">
                             <div style="display: flex;">
-                                <img class="productimg"
+                                <img class="productimg" *ngIf="plist?.product_images"
                                     [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
+                                    <img  class="productimg" *ngIf="!plist?.product_images" src="assets/images/product/defaultproductimg.jpg">
                                 <div>
                                     <h6>{{plist?.name}}</h6>
                                     <span>{{plist?.weight}} {{plist?.uom_name}}</span>
@@ -74,7 +75,7 @@
                         <td colspan="3.5">
                             <strong>AED
                                 {{plist?.channel_currency_product_price?.price}}</strong><br>
-                            <span class="editprice" (click)="editprice($event,plist?.channel_currency_product_price?.price,plist?.id,i)">edit Price</span>
+                            <span class="editprice" (click)="editprice($event,plist?.channel_currency_product_price?.price,plist?.id,i,plist?.product_stock?.stock)">edit Price</span>
                         </td>
                         <td colspan="3.5">
                             <!-- <h5>switch button</h5> -->

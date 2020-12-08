@@ -2,7 +2,6 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="background: white;">
-      <!-- <img style="height: 64px !important" src="assets/logo/lifco.svg" alt="logo" /> -->
       <img style="height: 64px !important" src="assets/images/gog.jpg" alt="logo">
     </mat-toolbar>
     <mat-nav-list (click)="close()">

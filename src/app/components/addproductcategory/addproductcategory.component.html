@@ -1,12 +1,20 @@
 
-<header>
+<!-- <header>
   <div class="row main-header">
     <div class="col-md-12 stretch-card grid-margin">
       <h4>Select Category</h4>
     </div>
   </div>
-</header>
+</header> -->
 <div class="conatiner">
+  <div class="row main-header">
+    <div class="col-md-8 stretch-card grid-margin">
+        <h4>Select Category</h4>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <mat-icon (click)="closeModal()">clear</mat-icon>
+    </div>
+</div>
   <div class="body">
     <!-- <mat-selection-list #shoes [multiple]="false">
             <mat-list-option (click)="listItem(catItem)" *ngFor="let catItem of categorylist['data']?.response" [value]="catItem">
@@ -28,6 +36,7 @@
                   autofocus>
               </div> -->
         <div class="cardbody">
+          <h6 selected (click)="listItem('undefined')">{{incomingModalData?.data.catname}} (search without select category)</h6>
         <ul *ngIf="categorylist['data']" class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let catItem of categorylist['data'] | searchfilter: searchText"
             appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
@@ -35,9 +44,7 @@
             {{catItem.name}}
           </li>
         </ul>
-        <div class="cardfooter">
-          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
-        </div>
+        
       </div>
     
         <div class="item" *ngIf="!categorylist['data']">
@@ -46,7 +53,15 @@
         <!-- <div class="cardfooter">
           <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
         </div> -->
+
+       
       </div>
+      <div>
+        <div class="cardfooter">
+          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+        </div>
+      </div>
+      
     </div>
 
     <!-- if data not found -->
@@ -54,6 +69,12 @@
   </div>
 </div>
 <!-- footer -->
-<div class="cardfooter">
+<!-- <div class="cardfooter">
 <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
-</div>
+</div> -->
+
+<!-- footer -->
+<!-- <div class="footer">
+  <button type="button" (click)="closeModal()"
+      class="btn btn-success">Close</button>
+</div> -->

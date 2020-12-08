@@ -29,7 +29,8 @@ export class StocksComponent implements OnInit {
     grn_quantity:0,
     product_id:'',
     order_product_id:'',
-    category_id:''
+    category_id:'',
+    searchProductvalue:''
   }
   
   pickerProductList:any=[]
@@ -72,11 +73,11 @@ export class StocksComponent implements OnInit {
   }
     );
 }
-  opencategory_modal():void{
+  opencategory_modal(catname:any):void{
     let data = {
       URl: "picker-stockcategory/",
      parent_id: null,
-     
+     catname:catname,
      warehouse_id: this.userOrderdata.warehouse_id,
      website_id:  this.userOrderdata.website_id
      }
@@ -95,16 +96,24 @@ export class StocksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.parentcategory = result.data;
+      this.subcategory.name="Sub Category"
+      this.subcategory.id=''
+      if(result.data === "undefined"){
+        // this.subcategory.name="Sub Category"
+        // this.subcategory.id=''
+        this.parentcategory.id =''
+      }
     });
 
   }
 
   
-  opensub_category_modal():void{
+  opensub_category_modal(catname:any):void{
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
       parent_id: this.parentcategory.id,
+      catname:catname,
       URl: "picker-stockcategory/",
     }
     const dialogRef = this.dialog.open(AddproductcategoryComponent, {
@@ -141,17 +150,27 @@ export class StocksComponent implements OnInit {
     console.log("stockStatus : ",this.stockStatus);
     if(value === "search"){
       this.totalProductpage=0;
+      this.productpage=1
       this.pickerProductList["data"]=[]
       console.log("enter");
       
     }
+    let temcategory:any;
+    if(this.subcategory.id !== undefined){
+      temcategory= this.subcategory.id
+    }else{
+      temcategory= this.parentcategory.id
+    }
+    console.log("child Category : ", this.subcategory.id , "Parent Category : ",this.parentcategory.id);
+    
     this.IsDataLoaded = true
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
       page: this.productpage,
+      search:this.userOrderdata.searchProductvalue,
       // per_page: 15,
-      // category_id: this.parentcategory.id,
+      category_id: temcategory,
       in_stock: this.stockStatus,
       has_price:this.cat_price,
       // product_stock_ids: 1
@@ -177,6 +196,9 @@ export class StocksComponent implements OnInit {
     console.log('scrolled!!',ev);
     this.productpage++;
     if(this.productpage <= this.totalProductpage){
+      console.log(" this.totalProductpage : ",this.totalProductpage );
+      console.log("  this.productpage : ", this.productpage );
+      
       this.searchProducts("novalue")
     }else{
       // this.globalitem.showError("No more data is available ","No Data")
@@ -221,11 +243,12 @@ export class StocksComponent implements OnInit {
 
     })
   }
-  editprice(event:any,price:any,productid:any,productindex:any){
+  editprice(event:any,price:any,productid:any,productindex:any,IsInstock:any){
     let data={
       checked:event.checked,
       price:price,
       productid:productid,
+      IsInstock:IsInstock
     }
     const dialogRef = this.dialog.open(MessagedialogComponent, {
       width: '500px',
@@ -235,10 +258,12 @@ export class StocksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       console.log('Dialog result:',res,productindex);
       console.log("Modal Data : ",this.pickerProductList["data"]);
-      
       this.pickerProductList["data"][productindex].channel_currency_product_price.price = res.price
-      // this.updateProductPice(res.price,res.data.data.productid,100)
+      if(res.price > 0){
+        this.pickerProductList["data"][productindex].product_stock.stock = IsInstock
+        this.updateProductPice(res.price,res.data.data.productid,IsInstock);
+      }else{
+      }
     });
   }
-
 }

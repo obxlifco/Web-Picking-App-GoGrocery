@@ -13,8 +13,8 @@
                 <div class="search-container">
                     <div class="custom-input">
                         <input placeholder="Search for product" [(ngModel)]="userProductData.searchproductvalue"
-                            type="text" class="form-control" (keyup.enter)="searchProducts()">
-                        <mat-icon (click)="searchProducts()">search</mat-icon>
+                            type="text" class="form-control" (keyup.enter)="searchProducts('search')">
+                        <mat-icon (click)="searchProducts('search')">search</mat-icon>
                     </div>
                     <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
                 </div>
@@ -23,18 +23,18 @@
 
         <div class="row">
             <div class="col-md-6 stretch-card grid-margin col-left">
-                <select placeholder="Category" (click)="opencategory_modal('picker-stockcategory/')"
+                <select placeholder="Category" (click)="opencategory_modal('picker-stockcategory/','Category')"
                     class="browser-default custom-select">
-                    <option *ngIf="!parentcategory.name">Category</option>
+                    <option selected>Category</option>
                     <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
                     </option>
                 </select>
             </div>
             <div class="col-md-6 stretch-card grid-margin col-left">
                 <select placeholder="Sub-Category"
-                    (click)="openSub_modal('picker-stockcategory/','','','',AddproductcategoryComponent)"
-                    [(ngModel)]="subcategory.name" class="browser-default custom-select">
-                    <option *ngIf="!subcategory.name">Sub-Category</option>
+                    (click)="openSub_modal('picker-stockcategory/','','','',AddproductcategoryComponent,'Sub Category')"
+                    class="browser-default custom-select">
+                    <option selected>Sub-Category</option>
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}</option>
                 </select>
             </div>
@@ -50,12 +50,12 @@
                         <th style="text-align: end;width: 100%;">Quantity</th>
                         <!-- <th style="text-align: center;" colspan="3">app-stocks</th> -->
                     </div>
-                    <div *ngFor="let plist of pickerProductList['data']?.response;let i=index;">
+                    <div *ngFor="let plist of pickerProductList['data'];let i=index;">
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                             <td colspan="3">
                                 <div style="display: flex;">
                                     <img class="productimg"
-                                        [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
+                                        [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
                                     <div>
@@ -117,7 +117,7 @@
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
                                         <img class="productimg"
-                                            [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img"
+                                            [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img"
                                             alt="">
                                         <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                             src="assets/images/product/defaultproductimg.JPG" alt=""> -->
@@ -137,41 +137,43 @@
 
 
                     <!-- substitute list -->
-                    <div *ngFor="let plist of pickerProductList['data']?.response;let i=index;" class="col-row">
-                        <!-- layover selection -->
-                        <div class="layover-root"
-                            (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
-                            *ngIf="plist?.quantity === 1">
-                            <img src="assets/images/product/toggle_checked.png" alt="">
-                            <div class="layover">
-                            </div>
-                        </div>
-                        <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
-                        <tr style="height: 100px;"
-                            *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
-                            (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
-                            <td colspan="7" style="width: 57%;">
-                                <div style="display: flex;">
-                                    <img class="productimg"
-                                        [src]="plist?.product_images[0].link+''+plist?.product_images[0]?.img" alt="">
-                                    <!-- <img *ngIf="!plist?.name" style="width: 19%;"
-                                        src="assets/images/product/defaultproductimg.JPG" alt=""> -->
-                                    <div>
-                                        <h6>{{plist?.name}}</h6>
-                                        <span>{{plist.weight}} {{plist.uom_name}}</span>
-                                    </div>
+                    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
+                        [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
+                        <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row">
+                            <!-- layover selection -->
+                            <div class="layover-root"
+                                (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
+                                *ngIf="plist?.quantity === 1">
+                                <img src="assets/images/product/toggle_checked.png" alt="">
+                                <div class="layover">
                                 </div>
-                            </td>
-                            <td colspan="5" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
-                                <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
-                                    {{plist?.channel_currency_product_price.price}}</strong><br>
-                            </td>
-                        </tr>
+                            </div>
+                            <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
+                            <tr style="height: 100px;"
+                                *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
+                                (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
+                                <td colspan="7" style="width: 57%;">
+                                    <div style="display: flex;">
+                                        <img class="productimg"
+                                            [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img"
+                                            alt="">
+                                        <!-- <img *ngIf="!plist?.name" style="width: 19%;"
+                                        src="assets/images/product/defaultproductimg.JPG" alt=""> -->
+                                        <div>
+                                            <h6>{{plist?.name}}</h6>
+                                            <span>{{plist.weight}} {{plist.uom_name}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td colspan="5" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                                    <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
+                                        {{plist?.channel_currency_product_price.price}}</strong><br>
+                                </td>
+                            </tr>
+                        </div>
                     </div>
-
                     <!-- if data not found -->
-                    <app-emptystate *ngIf="pickerProductList['data']?.status === 0"></app-emptystate>
-
+                    <!-- <app-emptystate *ngIf="pickerProductList['data']"></app-emptystate> -->
                 </table>
             </div>
         </div>

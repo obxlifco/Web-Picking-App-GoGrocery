@@ -12,7 +12,10 @@
         position: absolute;
     }
 }
-
+.search-results {
+    height: 40rem;
+    overflow: scroll;
+  }
 .body {
     padding: 4% 0% 0% 0%;
 

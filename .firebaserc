@@ -2,7 +2,7 @@
   "targets": {
     "myapp-f8321": {
       "hosting": {
-        "lifco-picking-app": [
+        "gog-picking-app": [
           "myapp-f8321"
         ]
       }

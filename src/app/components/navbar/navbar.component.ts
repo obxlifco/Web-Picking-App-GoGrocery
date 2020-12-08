@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('drawer') sidenav: MatSidenav | any;
 
-  title = 'lifco Picking pp';
+  title = 'GOG Picking pp';
   loginRouterLink: any
   totalbadge:any=0
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
