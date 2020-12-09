@@ -11,8 +11,7 @@ export class ApiService {
 
   
   apiUrl :any= "http://www.gogrocery.ae:8062/api/"
-  constructor(private httpClient :HttpClient,
-
+  constructor(private httpClient :HttpClient
     ) {
    }
 
@@ -45,6 +44,4 @@ export class ApiService {
     {
     return this.httpClient.get("https://api.ipify.org/?format=json");
     }
-
-
 }

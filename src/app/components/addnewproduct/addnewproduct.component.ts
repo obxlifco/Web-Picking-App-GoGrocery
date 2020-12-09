@@ -191,11 +191,12 @@ export class AddnewproductComponent implements OnInit {
     }
 
     let temcategory:any=undefined;
-    if(this.subcategory.id !== undefined){
-      temcategory= this.subcategory.id
-    }if(this.parentcategory.id !== undefined){
+    if(this.parentcategory.id !== undefined && this.parentcategory.id){
       console.log("else true ",this.parentcategory.id);
       temcategory= this.parentcategory.id
+    }
+    if(this.subcategory.id !== undefined && this.subcategory.id){
+      temcategory= this.subcategory.id
     }
     let data = {
       website_id: this.userProductData.website_id,
@@ -223,14 +224,15 @@ export class AddnewproductComponent implements OnInit {
     this.apiService.postData(this.userProductData.searchproductlist, data).subscribe((data: any) => {
       console.log(data);
      if(data.status === 0){
-       this.globalitem.showError(data.message,"No Substitute")
-     }
-      if(this.productpage === 1){
+      this.pickerProductList["data"] = []
+      console.log("data length ", this.pickerProductList["data"].length);
+      
+      //  this.globalitem.showError(data.message,"No Substitute")
+     }else if(this.productpage === 1){
         // this.pickerProductList["data"]=data.response
         this.pickerProductList["data"] = data.response
         this.totalProductpage=data.total_page
-        console.log("page 1");
-        
+        console.log("page 1");   
       }else{
         console.log("page n");
         this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];

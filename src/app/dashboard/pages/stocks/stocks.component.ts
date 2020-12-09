@@ -147,6 +147,8 @@ export class StocksComponent implements OnInit {
   }
 
   searchProducts(value:any) {
+    console.log("subcategory.id",this.subcategory.id);
+    
     console.log("stockStatus : ",this.stockStatus);
     if(value === "search"){
       this.totalProductpage=0;
@@ -156,10 +158,13 @@ export class StocksComponent implements OnInit {
       
     }
     let temcategory:any;
-    if(this.subcategory.id !== undefined){
-      temcategory= this.subcategory.id
-    }else{
+    if(this.parentcategory.id !== undefined  && this.parentcategory.id){
       temcategory= this.parentcategory.id
+    }
+    if(this.subcategory.id !== undefined && this.subcategory.id){
+      console.log("no child cat");
+      
+      temcategory= this.subcategory.id
     }
     console.log("child Category : ", this.subcategory.id , "Parent Category : ",this.parentcategory.id);
     

@@ -23,7 +23,7 @@ export class EditproductweightComponent implements OnInit {
       let tempdata:any=[]
       tempdata=data
       this.editweightData["data"]=tempdata.data
-      console.log("edit weight data : ", this.editweightData["data"]);
+      console.log("edit weight data : ", data);
       
     }
 
@@ -41,19 +41,21 @@ this.dialogRef.close()
     //   newweight: this.newWeight,
     //   notes:this.notes
     // }
+    console.log("new weight : ",this.newWeight ,this.newprice,);
+    
 
    let data={
       website_id:this.editweightData["data"].website_id,
-      order_id: this.editweightData["data"].order,
+      order_id: this.editweightData["data"].order_id,
       user_id: this.editweightData["data"].user_id,
       user_name: this.editweightData["data"].user_name,
-      product_id: this.editweightData["data"].id,
+      product_id:this.editweightData["data"].product.id,
       sku: this.editweightData["data"].product.sku,
-      order_product_id: this.editweightData["data"].product.id,
+      order_product_id: this.editweightData["data"].id,
       product_old_price: this.editweightData["data"].product_price,
       product_new_price:this.newprice,
       weight:this.newWeight,
-      notes: this.notes
+      notes: ""
       }
 
       this.apiService.postData("picker-updatepicklistproductinfo/", data).subscribe((data: any[]) => {

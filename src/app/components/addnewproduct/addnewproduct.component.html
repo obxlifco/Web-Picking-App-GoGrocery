@@ -93,8 +93,7 @@
                         </tr>
                     </div>
                     <!-- if data not found -->
-                    <app-emptystate *ngIf="pickerProductList['data']?.status === 0"></app-emptystate>
-
+                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0"></app-emptystate>
                 </table>
             </div>
         </div>
@@ -107,7 +106,6 @@
                         <th colspan="5">Price</th>
                         <!-- <th style="text-align: end;width: 100%;">Stock</th> -->
                     </div>
-
                     <!-- selected products -->
                     <div class="selectedproducts">
                         <h6 *ngIf="subtituteSelectedProducts.length">Selected Products </h6>
@@ -134,10 +132,8 @@
                             </tr>
                         </div>
                     </div>
-
-
                     <!-- substitute list -->
-                    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
+                    <div *ngIf="pickerProductList['data']?.length !== 0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
                         [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
                         <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row">
                             <!-- layover selection -->
@@ -173,7 +169,7 @@
                         </div>
                     </div>
                     <!-- if data not found -->
-                    <!-- <app-emptystate *ngIf="pickerProductList['data']"></app-emptystate> -->
+                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0"></app-emptystate>
                 </table>
             </div>
         </div>

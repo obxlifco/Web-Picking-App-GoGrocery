@@ -272,7 +272,7 @@ export class OrdersComponent implements OnInit {
         this.timerProductSentApproval(this.order_Substitute_Time,10)
       }
       // if(this.orderDetaildata["data"]?.payment_type_id === 2){
-      if(true){
+      if(this.orderDetaildata["data"]?.payment_type_id === 2){
         console.log("timer");
         this.timerProductSentApproval(this.paymentOnlineTime,30)
       }
@@ -316,11 +316,13 @@ export class OrdersComponent implements OnInit {
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
 
+  //edit unit weight and price
   openEditModal(data: any) {
     let user_ids = {
       website_id: this.userOrderdata.website_id,
       user_id: this.userOrderdata.user_id,
-      user_name: this.userOrderdata.picker_name
+      user_name: this.userOrderdata.picker_name,
+      order_id:this.userOrderdata.order_id
     }
     Object.assign(data, user_ids)
     const dialogRef = this.dialog.open(EditproductweightComponent, { width: '500px', data: { data: data } });
@@ -458,6 +460,7 @@ export class OrdersComponent implements OnInit {
           } else {
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength;
           }
+          this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
         } else if (productType === 2) {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage - 1
           if (templength < 0) {
@@ -467,10 +470,11 @@ export class OrdersComponent implements OnInit {
           }
 
           // this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType)
+          this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
         }
       }
     }
-    this.updateMoreProductQuantity(quantity, product_id, order_product_id, shortage, index)
+   
   }
 
   productIncrment(grn_quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
@@ -484,14 +488,19 @@ export class OrdersComponent implements OnInit {
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       if (i === index) {
         if (productType === '') {
-          let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
-          this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
-          this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, shortage, index)
+          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity < this.orderDetaildata['data'][0]?.order_products[i].quantity){
+            let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
+            this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
+            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, shortage, index)
+          }
         } else if (productType === 2) {
-          let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
-          this.orderDetaildata["data"][0].order_products[i].shortage = templength;
-          this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, templength, index)
-          this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata, ean)
+          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity){
+            let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
+            this.orderDetaildata["data"][0].order_products[i].shortage = templength;
+            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, templength, index)
+            this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata, ean)
+          }
+
         }
       }
     }
@@ -572,7 +581,7 @@ export class OrdersComponent implements OnInit {
       this.db.setOrderIDS(temData)
     })
   }
-  updatePrice(order_amount: any, netAmount: any) {
+  updatePrice(order_amount: any,unitweight:any, netAmount: any,productinfo:any,URL:any,pricestatus:any) {
     console.log("order mount : ", order_amount);
     if (order_amount === null) {
       order_amount = netAmount
@@ -582,8 +591,15 @@ export class OrdersComponent implements OnInit {
       website_id: this.userOrderdata.website_id,
       order_id: this.userOrderdata.order_id,
       user_id: this.userOrderdata.user_id,
-      order_amount: order_amount
+      order_amount: order_amount,
+      user_name: this.userOrderdata.picker_name,
+      productinfo:productinfo,
+      URL:URL,
+      pricestatus:pricestatus,
+      unitweight:unitweight
     }
+
+    
 
     const dialogRef = this.dialog.open(EditpriceComponent, {
       width: '500px',
@@ -593,6 +609,7 @@ export class OrdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.price = result.price
+      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
 
     });
 
@@ -719,7 +736,7 @@ export class OrdersComponent implements OnInit {
   //timer for sent product approval
   timerProductSentApproval(productTime:any,totaltime:any){
     const originalDate = new Date(productTime);
-    const modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (1 * 60000)),"MMM d, y, h:mm:ss a")
+    const modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (totaltime* 60000)),"MMM d, y, h:mm:ss a")
     // const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (2 * 60000)),"MMM d, y, h:mm:ss a")
     console.log(" modifiedTime ",modifiedTime ," currenttime : ",this.currenttime);
     this.leftTime = Date.parse(modifiedTime) - Date.parse(this.currenttime)
