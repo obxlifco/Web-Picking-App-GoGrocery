@@ -57,7 +57,7 @@
                             </p> -->
                             <!-- <span style="color: cyan;" (click)="BillnumberComponent()" *ngIf="!orderDetaildata['data'][0]?.channel_order_id">Enter Bill Number</span> -->
 
-                            <input #bnumber [disabled]="userOrderdata.orderlistType === 'cancelled'"
+                            <input style="color: #28afaf;" #bnumber [disabled]="userOrderdata.orderlistType === 'cancelled'"
                                 [ngStyle]="{'border-color':product_billnumber === null ? 'gray' : customcolor }"
                                 (click)="BillnumberModal(orderDetaildata['data'][0]?.channel_order_id)"
                                 [disabled]="!userOrderdata.picker_name"
@@ -109,13 +109,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 8% 0% 0% 3%;">Deliver Time :</td>
+                        <td style="padding: 4% 0% 0% 3%;">Delivery Time :</td>
                         <td>
                             <div class="highlight_edits"
                                 [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'blue' }">
                                 <div style="color: white;"
                                     [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
+                                    <p style="display: contents;" *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'">{{orderDetaildata['data'][0]?.slot_end_time}}</p>
                                     <!-- <mat-form-field appearance="fill"
                                         *ngIf="userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'cancelled'">
                                         <input style="color: white !important;background-color:gray"
@@ -189,15 +190,15 @@
                     </tr> -->
                     <tr>
                         <td>Shipping Charge :</td>
-                        <td>{{orderDetaildata['data'][0]?.shipping_cost}}</td>
+                        <td>{{orderDetaildata['data'][0]?.currency_code}} {{orderDetaildata['data'][0]?.shipping_cost}}</td>
                     </tr>
                     <tr>
                         <td>Shipping Discount :</td>
-                        <td><strong>{{orderDetaildata['data'][0]?.cart_discount}}</strong></td>
+                        <td><strong>{{orderDetaildata['data'][0]?.currency_code}} {{orderDetaildata['data'][0]?.cart_discount}}</strong></td>
                     </tr>
                     <tr>
                         <td>Other Discount :</td>
-                        <td><strong>{{orderDetaildata['data'][0]?.gross_discount_amount}}</strong></td>
+                        <td><strong>{{orderDetaildata['data'][0]?.currency_code}} {{orderDetaildata['data'][0]?.gross_discount_amount}}</strong></td>
                     </tr>
                     <mat-divider></mat-divider>
                     <tr>
@@ -206,7 +207,7 @@
                         </td>
                         <td>
                             <strong class="paymentfooter">
-                                {{orderDetaildata['data'][0]?.gross_amount}}
+                                {{orderDetaildata['data'][0]?.currency_code}} {{orderDetaildata['data'][0]?.gross_amount}}
                             </strong>
                         </td>
                     </tr>
@@ -254,11 +255,13 @@
                             userOrderdata.orderlistType === 'cancelled'"
                             [ngStyle]="{'z-index':userOrderdata.orderlistType === 'cancelled' ? 2 : 1 }"
                             >
-                            <img style="z-index: 5;" src="assets/images/product/toggle_checked.png" alt="">
+                            
                             <div class="layover">
                             </div>
                         </div>
+                        <img class="checkmark_img" style="z-index: 5;" src="assets/images/product/toggle_checked.png" alt="">
                         <table [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }" style="z-index: 1;" [ngStyle]="{'opacity':products.grn_quantity + products.shortage === products?.quantity ? '0.5' : '1' }">
+                            
                             <tr>
                                 <td style="width: 100px;">
                                     <img class="productimg" style="width: 100%;"
@@ -350,7 +353,7 @@
                             <div class="layover-root"
                                 *ngIf="subt_products?.quantity === subt_products?.grn_quantity + subt_products?.shortage">
                                 <img src="assets/images/product/toggle_checked.png" alt="">
-                                <div class="layover">
+                                <div class="layover" style="opacity: 0.3;">
                                 </div>
                             </div>
                             <table style="width: 97%;">
@@ -393,11 +396,11 @@
                                                         <!-- <input [(ngModel)]="item_available" type="text"
                                                     class="form-control"> -->
                                                         <input *ngIf="subt_products?.grn_quantity"
-                                                            [value]="subt_products?.grn_quantity" type="text"
+                                                            [value]="subt_products?.grn_quantity" type="number"
                                                             class="form-control">
 
                                                         <input *ngIf="!subt_products?.grn_quantity" value="0"
-                                                            type="text" class="form-control">
+                                                            type="number" class="form-control">
 
                                                         <mat-icon [disabled]="!userOrderdata.picker_name"
                                                             class="right-icon" (click)="productIncrment(subt_products.grn_quantity,subt_products.product.id,subt_products.id,subt_products.shortage,i,
@@ -417,10 +420,10 @@
                                                             minimize</mat-icon>
 
                                                         <input *ngIf="subt_products?.shortage"
-                                                            [value]="subt_products?.shortage" type="text"
+                                                            [value]="subt_products?.shortage" type="number"
                                                             class="form-control">
 
-                                                        <input *ngIf="!subt_products?.shortage" value="0" type="text"
+                                                        <input *ngIf="!subt_products?.shortage" value="0" type="number"
                                                             class="form-control">
 
                                                         <mat-icon matRipple [disabled]="!userOrderdata.picker_name"
@@ -448,7 +451,7 @@
                         <div class="alert alert-info">
                             <h3>Subtitute Product</h3>
                         </div>
-                        <div *ngFor="let subtitute of orderDetaildata['data'][0]?.order_substitute_products">
+                        <div *ngFor="let subtitute of orderDetaildata['data'][0]?.order_substitute_products" style="margin-bottom: 10%;">
                             <div class="row"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">

@@ -269,10 +269,15 @@ export class OrdersComponent implements OnInit {
         //   var seconds:any = (addedminutes_milisecond / 1000).toFixed(0);
         //     var minutes = Math.floor(seconds / 60);
         //     console.log("Date true",minutes ,"left minutes : ",this.leftTime);
-        this.timerProductSentApproval(this.order_Substitute_Time,10)
+        if(  this.userOrderdata.substitute_status === 'pending'){
+          this.timerProductSentApproval(this.order_Substitute_Time,10)
+        }else{
+          this.paymentonlineTimer=true
+        }
+        
       }
       // if(this.orderDetaildata["data"]?.payment_type_id === 2){
-      if(this.orderDetaildata["data"]?.payment_type_id === 2){
+      if(this.orderDetaildata["data"][0]?.payment_type_id === 2){
         console.log("timer");
         this.timerProductSentApproval(this.paymentOnlineTime,30)
       }
@@ -420,9 +425,10 @@ export class OrdersComponent implements OnInit {
   }
 
   //update product quantity
-  updateMoreProductQuantity(quantity: any, product_id: any, order_product_id: any, shortage: any, index: any) {
+  updateMoreProductQuantity(quantity: any, order_product_id: any, product_id: any,  shortage: any, index: any) {
     console.log("prouct Quantity ", quantity);
     // substitute_product_id:any,product_id:any
+    console.log("order product id 1: ",order_product_id," product id 1: ",product_id);
     let data = {
       website_id: this.userOrderdata.website_id,
       // warehouse_id: this.userOrderdata.warehouse_id,
@@ -479,6 +485,8 @@ export class OrdersComponent implements OnInit {
 
   productIncrment(grn_quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
     apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any, ean: any) {
+      console.log("order product id : ",order_product_id," product id : ",product_id);
+      
     var modaldata = {
       shortage: shortage,
       grn_quantity: grn_quantity,
@@ -491,13 +499,13 @@ export class OrdersComponent implements OnInit {
           if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity < this.orderDetaildata['data'][0]?.order_products[i].quantity){
             let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
-            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, shortage, index)
+            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, order_product_id, product_id, shortage, index)
           }
         } else if (productType === 2) {
           if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity){
             let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
             this.orderDetaildata["data"][0].order_products[i].shortage = templength;
-            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, product_id, order_product_id, templength, index)
+            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity,order_product_id, product_id, templength, index)
             this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata, ean)
           }
 
