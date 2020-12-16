@@ -15,9 +15,13 @@ export class ApiService {
     ) {
    }
 
- async getData(subUrl:any){
-  //  console.log("api url is : ",environment.apiUrl+subUrl);
-  //   return this.httpClient.get(environment.apiUrl+subUrl);
+  getData(subUrl:any):any{
+    const headers = {  
+      'content-type': 'application/json',
+      'Authorization': 'Token 09c3b932ba526c5038c54a6c4995a229b9606cb6',
+      // 'Accept': 'form-data' 
+    };
+    return this.httpClient.get(this.apiUrl+subUrl,{headers});
   }
 
   postData(subUrl: string = "",data:any=[]):any {

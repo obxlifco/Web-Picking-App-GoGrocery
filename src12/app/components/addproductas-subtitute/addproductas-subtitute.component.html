@@ -1,0 +1,21 @@
+
+    
+    <div>
+    <div>
+        <p *ngIf="modalData.data.pagestatus !== 'order'">
+            {{modalData.data.info}}
+        </p>
+        <div class="confirmationdlg" *ngIf=" modalData.data.pagestatus === 'order'" [innerHtml]="modalData.data.info">
+
+        </div>
+    </div>
+    <div>
+        <div class="footerbtn">
+            <button type="button" (click)="addproduct()"
+            class="btn btn-success btnok" >ok</button>
+            <button type="button" 
+         class="btn btn-success btn_cancel"  (click)="closeModal()">close</button>
+
+        </div>
+    </div>
+</div>

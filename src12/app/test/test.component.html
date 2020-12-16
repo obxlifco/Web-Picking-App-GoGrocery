@@ -1,0 +1,154 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <mat-toolbar>
+            menue
+        </mat-toolbar>
+        <mat-nav-list>
+            <a (click)="navigate('dahboard')" mat-list-item>
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+            <a (click)="navigate('orders')" mat-list-item>
+                <span class="menu-title">Orders</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+            <a (click)="navigate('stocks')" mat-list-item>
+                <span class="menu-title">Stocks</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+            <a (click)="navigate('returns')" mat-list-item>
+                <span class="menu-title">Returns</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <!-- <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="index.html">
+                <img style="height: 64px !important" src="assets/logo/lifco.svg" alt="logo" />
+            </a>
+        </div> -->
+                <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                    <!-- <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="mdi mdi-menu"></span>
+            </button> -->
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                                data-toggle="dropdown">
+                                <i class="mdi mdi-bell-outline"></i>
+                                <span class="count-symbol bg-danger"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list alignment"
+                                aria-labelledby="notificationDropdown">
+                                <h6 class="p-3 mb-0">Notifications</h6>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-info">
+                                            <i class="mdi mdi-link-variant"></i>
+                                        </div>
+                                    </div>
+                                    <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class="nav-profile-img">
+                                    <img src="assets/images/faces/aa.JPG" alt="image">
+                                    <span class="availability-status online"></span>
+                                </div>
+                                <div class="nav-profile-text">
+                                    <p class="mb-1 text-black">Muhammad Jamal</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">
+                                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button> -->
+                </div>
+            </nav>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+               <div class="page-header">
+                   <h3 class="page-title">
+                       <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                           <i class="mdi mdi-home"></i>
+                       </span> Dashboard
+                   </h3>
+               </div>
+               <div class="row">
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-process card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Order Processing<i
+                                       class="mdi mdi-chart-line mdi-24px float-right"></i>
+                               </h4>
+                               <!-- <h6 class="mb-5">$ 15,0000</h2> -->
+                                   <h6 class="card-text">Order processing : 0</h6>
+                               <h6 class="card-text">New : 0</h6>
+                               <h6 class="card-text">Assigned : 0</h6>
+                               <h6 class="card-text">Substitutions Sent : 0</h6>
+                               <h6 class="card-text">Substitutions Recieved : 0</h6>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-ship card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Order In Shipping <i
+                                       class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                               </h4>
+                               <h2 class="mb-5">0</h2>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-4 stretch-card grid-margin">
+                       <div class="card bg-order-cancelled card-img-holder text-white">
+                           <div class="card-body">
+                               <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
+                                   alt="circle-image" />
+                               <h4 class="font-weight-normal mb-3">Cancelled Orders <i
+                                       class="mdi mdi-diamond mdi-24px float-right"></i>
+                               </h4>
+                               <h2 class="mb-5">0</h2>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <footer class="footer">
+               <div class="container-fluid clearfix">
+                   <span class="text-muted d-table text-center text-sm-left d-sm-inline-block">Copyright ©  GO Grocery Picking of Company 2020 </span>
+               </div>
+           </footer>
+       </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

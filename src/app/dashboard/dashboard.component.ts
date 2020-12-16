@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('drawer') sidenav: MatSidenav | any;
 
-  title = 'GOG Picking pp';
+  title = 'GoGrocery Picking App';
   loginRouterLink: any
   totalbadge: any = 0
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     private db: DatabaseService,
     private notificationservice: NotificationserviceService
   ) {
-    console.log("router link : ", this.loginRouterLink);
+    // console.log("router link : ", this.loginRouterLink);
     router.events.subscribe((url: any) =>
       this.getURL(url.url)
     );
@@ -45,10 +45,11 @@ export class DashboardComponent implements OnInit {
 
   initializeMethod() {
     this.isuerlogin()
+    this.getstorename()
   }
   getURL(url?: any) {
     this.loginRouterLink = url?.url
-    console.log("router link : ", this.loginRouterLink);
+    // console.log("router link : ", this.loginRouterLink);
   }
   ngOnInit(): void {
     this.isLoggedIn$ = this.db.isLoggedIn();
@@ -66,12 +67,23 @@ export class DashboardComponent implements OnInit {
     })
   }
   close() {
-    console.log("menu actions : ", this.isHandset$);
+    // console.log("menu actions : ", this.isHandset$);
 
     // this.sidenav.close()
   }
+  navigateSale(){
+    // this.router.navigate(["dashboard/salesreport"])
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['dashboard/salesreport']);
+  }
+  navigateOrders(){
+    // this.router.navigate(["dashboard/orders"])
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['dashboard/orders']);
+  }
   logout() {
-
     this.db.getUserData().then(res => {
       console.log("user data inside dashboard : ", res);
       this.db.getIP().then(data1 => {
@@ -80,7 +92,6 @@ export class DashboardComponent implements OnInit {
           ip_address: data1.ip,
           device_id: data1.ip,
         }
-
         this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
           console.log("logout : ", data);
           if (data.status === 1) {
@@ -102,5 +113,17 @@ export class DashboardComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['dashboard/orders']);
+  }
+
+  //gettting sytore name
+  getstorename(){
+    this.db.getUserData().then(res => {
+
+      this.apiService.getData("warehouse/"+res.warehouse_id+"/").subscribe((data: any) => {
+        // console.log("store name : ",data.warehouse.name);
+        
+          this.title=data.warehouse.name
+      })
+    })
   }
 }

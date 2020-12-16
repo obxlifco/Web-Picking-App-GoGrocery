@@ -1,0 +1,442 @@
+.container {
+    padding: 10% 3% 1% 5%;
+}
+
+h4 {
+    margin-left: -2%;
+}
+
+table,
+td,
+th {
+    font-family    : calibri;
+    border-collapse: collapse;
+    background     : white;
+}
+
+th {
+    background : green;
+    color      : white;
+    font-weight: 600;
+    text-align : center;
+}
+
+.orderlist-card {
+    max-width: 400px;
+    padding  : 0px;
+
+    mat-card-header {
+        background    : green;
+        color         : white;
+        font-weight   : 600;
+        text-align    : center;
+        // padding    : 5% 0% 0% 0%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    mat-card-title {
+        font-size : 14px;
+        width     : 100%;
+        margin    : 4px;
+        text-align: inherit;
+    }
+}
+
+h4 {
+    font-size: 18px;
+}
+
+label,
+h4 {
+    font-weight: 500;
+}
+
+.col-right {
+    text-align: center;
+
+    .orderlist-heading {
+        width        : 100%;
+        position     : absolute;
+        height       : 100%;
+        // background: antiquewhite;
+        // overflow: hidden;
+    }
+
+    h4 {
+        position     : absolute;
+        margin       : 0px;
+        background   : #2248d2;
+        border-radius: 2px;
+        width        : inherit;
+        height       : 32px;
+        padding-top  : 1%;
+        border-radius: 2px;
+        color        : white;
+        font-weight  : 500;
+        z-index      : 3;
+    }
+
+    //   scrollbar
+    .scroll-viewport {
+        width     : 100%;
+        height    : 50%;
+        margin-top: 10.5%;
+        border    : 1px solid lightgray;
+        z-index   : 2;
+    }
+
+    .scroll-inner-data {
+        // height : 300px;
+        padding   : 3% 9% 5% 24%;
+        background: white;
+    }
+
+    input {
+        background: white;
+    }
+
+    @media only screen and (max-width: 500px) {
+
+        // .scroll-viewport {
+        //     margin-top: 18.5%;
+        // }
+        .scroll-inner-data {
+            padding: 3% 0% 5% 0%;
+        }
+
+        mat-card-title {
+            margin-left: 0%;
+        }
+    }
+
+    @media only screen and (max-width: 1300px) {
+        .scroll-inner-data {
+            padding: 5% 7% 5% 7%;
+        }
+    }
+
+    // @media only screen and (min-width: 320px) {
+    //     // .scroll-viewport {
+    //     //     margin-top: 37.5%;
+    //     //   }
+    // }
+}
+
+.table-data {
+    width     : 97%;
+    border    : 1px solid lightgray;
+    background: white;
+}
+
+.grid-margin {
+    margin : 0px;
+    padding: 0px;
+}
+
+.cdk-virtual-scroll-content-wrapper {
+    margin-bottom: 22%;
+    padding-top: 14%;
+}
+
+.add-items {
+
+    h6 {
+        font-size  : 16px;
+        font-weight: 500;
+        width      : fit-content;
+        z-index    : 1;
+        top        : 0px;
+        bottom     : 0px;
+        margin     : auto;
+    }
+
+    .background-divider {
+        width        : 97%;
+        height       : 2px;
+        // background: gray;
+        position     : absolute;
+        bottom       : 8.7%;
+        z-index      : -1;
+    }
+}
+
+table {
+    width: 100%;
+}
+
+.btn-light {
+    background-color: #e8e3e3;
+    font-size       : 14px;
+    width           : 30%;
+    font-weight     : 500;
+    height          : 45px;
+
+    mat-icon {
+        color        : green;
+        left         : 2%;
+        position     : absolute;
+        cursor       : pointer;
+        color        : white;
+        background   : green;
+        border-radius: 100;
+        border-radius: 100%;
+        width        : 21px;
+        height       : 21px;
+        font-size    : 21px;
+    }
+
+    span {
+        margin-left: 7%;
+    }
+}
+
+.csv-btn {
+    position   : absolute;
+    // right   : 6%;
+}
+
+.row-margin {
+    margin       : 0px !important;
+    margin-bottom: 11px !important;
+}
+
+.substitute-container {
+    table {
+        width        : 100%;
+        border-bottom: 1px solid lightgray;
+    }
+
+    h6 {
+        font-size  : 16px;
+        font-weight: 500;
+        margin-top : 2%;
+    }
+
+    .btn-left {
+        display      : flex;
+        width        : 100px;
+        background   : green;
+        border-radius: 8px;
+    }
+
+    .btn-right {
+        display      : flex;
+        width        : 100px;
+        background   : #565a56;
+        border-radius: 8px;
+    }
+
+    input {
+        width     : 50%;
+        text-align: center;
+        padding: 0% 0% 0% 17%;
+        margin: 0px;
+    }
+
+    .left-icon {
+        color      : white;
+        font-weight: 600;
+    }
+
+    .right-icon {
+        color      : white;
+        font-weight: 600;
+        margin-top : 8%;
+
+    }
+}
+.checkmark_img{
+    z-index: 5;
+    width: 7%;
+    position: absolute;
+    top: 0%;
+    left: 3%;
+    bottom: 50%;
+    margin: auto;
+}
+
+//media query
+@media only screen and (max-width: 320px) {
+    .container {
+        padding: 5% 6% 1% 9%;
+    }
+
+    .scroll-inner-data {
+        padding: 26% 7% 5% 7% !important;
+    }
+
+    mat-card-title {
+        font-size: 12px !important;
+        width    : 100%;
+        margin   : 1px;
+    }
+}
+
+.colorclass {
+    color: cyan;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background: white;
+    border    : none;
+}
+
+.mat-form-field {
+    width: 40%;
+
+    mat-icon {
+        padding: 6% 0% 6% 3%;
+        margin : 0px;
+    }
+}
+
+.btnpadding {
+    padding: 7%;
+}
+
+.paymentfooter {
+    font-size: 16px;
+}
+
+h3 {
+
+    font-size  : 16px;
+    text-align : center;
+    font-weight: bold;
+
+}
+
+.subtitute_data {
+    padding: 3% 4% 0% 0%;
+
+    img {
+        width   : 50%;
+        right   : 0px;
+        position: absolute;
+    }
+
+    .alert {
+        height: 52px;
+    }
+
+    .row {
+        padding-top: 3%;
+        height     : 100px;
+    }
+}
+
+.layover-root {
+    width   : 100%;
+    height  : 100%;
+    position: absolute;
+
+    .layover {
+        height    : 100%;
+        width     : 100%;
+        background: black;
+        position  : absolute;
+        opacity   : 0.5;
+        z-index   : 1;
+    }
+
+    img {
+        z-index : 2;
+        width: 9%;
+        position: absolute;
+        left: 3%;
+        top: 7%;
+        // bottom  : 0;
+        margin  : auto;
+    }
+}
+.newprice{
+    top: 0%;
+    bottom: 0%;
+    margin: auto;
+    color: white;
+}
+.search-results {
+    height: 40rem;
+    overflow: scroll;
+  }
+
+.cdk-virtual-scroll-viewport {
+    // display: contents;
+    padding-top: 14% !important;
+}
+
+  .highlight_edits{
+    background-color: blue;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 2%;
+    p{
+        color: white;
+    }
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+      }
+  }
+
+//   .main-panel {
+//     height: 30px;
+//     overflow-y: scroll;
+//   }
+  .search-results {
+    height: 2rem;
+    overflow: scroll;
+}
+.declinedbtn{
+    width: 100%;
+    background: red;
+    margin-top: 3%;
+    border-color: red;
+}
+@media (max-width:360px)  { 
+    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ 
+.container{
+    padding: 10% 8% 0% 3%;
+}
+
+ mat-card-title{
+    font-size: 12px;
+}
+
+strong,span{
+    font-size: 13px;
+}
+.pickerinput{
+    margin-left: 3% !important;
+}
+td{
+    font-size: 12px;
+}
+.cdk-virtual-scroll-viewport{
+    padding-top: 70% !important;
+    // display: contents;
+}
+.mat-drawer-content {
+    height: auto !important;
+    overflow: auto;
+}
+}
+.itemdivider{
+        width: 100%; 
+        text-align: center; 
+        border-bottom: 1px solid #000; 
+        line-height: 0.1em;
+        margin: 10px 0 20px;
+        color: green;
+}
+.itemdivider span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+@media (min-width:480px)  { /* smartphones, Android phones, landscape iPhone */ }
+@media (min-width:600px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }

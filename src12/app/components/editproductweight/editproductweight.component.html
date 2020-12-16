@@ -1,0 +1,76 @@
+<div class="conatiner">
+    <div class="row header">
+        <div class="col-md-8 stretch-card grid-margin">
+            <h4>Edit Product Weight</h4>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+            <mat-icon (click)="closeModal()">clear</mat-icon>
+        </div>
+    </div>
+    <!-- products?.quantity,products?.product.weight,products?.product.uom.uom_full_name,products?.product_price,products?.product.name,products?.ean -->
+    <div class="body">
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>SKU</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <strong>{{editweightData['data']?.product?.sku}}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>Product item</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <strong>{{editweightData['data']?.product?.name}}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>Existing Price</span>
+            </div>
+            
+            <div class="col-md-7 stretch-card grid-margin">
+                <strong>{{editweightData['data']?.product_price * editweightData['data']?.quantity }}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>Existing weight</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <strong>{{editweightData['data']?.weight * editweightData['data']?.quantity}} {{editweightData['data']?.product?.uom?.uom_full_name}}</strong>
+            </div>
+        </div>
+        <!-- input -->
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>Total Weight</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <input  [(ngModel)]="newWeight" (keyup)="totalweightPrice(editweightData['data']?.product?.weight * editweightData['data']?.quantity,editweightData['data']?.product?.weight,editweightData['data']?.product_price ,$event)" placeholder="Weight" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>New Price</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <input placeholder="New price" disabled [(ngModel)]="newprice" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row" style="height: auto !important;">
+            <div class="col-md-5 stretch-card grid-margin">
+                <span>Notes</span>
+            </div>
+            <div class="col-md-7 stretch-card grid-margin">
+                <textarea class="form-control" [(ngModel)]="notes" placeholder="Notes" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+         
+    </div>
+       <!-- footer -->
+       <div class="footer" style="background: white;">
+        <button type="button" (click)="Apply()" class="btn btn-success">Apply</button>
+    </div>

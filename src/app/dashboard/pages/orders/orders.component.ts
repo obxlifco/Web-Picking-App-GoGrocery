@@ -16,6 +16,8 @@ import { AppComponent } from 'src/app/app.component';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
+import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
+import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
 
 
 @Component({
@@ -65,6 +67,7 @@ export class OrdersComponent implements OnInit {
   IS_Subtitute = false;
   timer: any
   leftTime: any = 5*60000
+  
 
   //below date var is sample max and min date
   minValue: any = new Date();
@@ -74,6 +77,7 @@ export class OrdersComponent implements OnInit {
 
   constructor(public router: Router,
     public dialog: MatDialog,
+    public commonfunc : CommonfunctionService,
     public appcom: DashboardComponent,
     public datePipe: DatePipe,
     public db: DatabaseService,
@@ -118,34 +122,12 @@ export class OrdersComponent implements OnInit {
 
   //call when we completing the order
   processOrder() {
-
     this.getcounter()
-
-    // substitute_product_id:any,product_id:any
-    let data = {
-      website_id: this.userOrderdata.website_id,
-      warehouse_id: this.userOrderdata.warehouse_id,
-      order_id: this.userOrderdata.order_id,
-      user_id: this.userOrderdata.user_id,
-      shipment_id: this.userOrderdata.shipment_id,
-      trent_picklist_id: this.userOrderdata.trent_picklist_id,
-    }
-    console.log("Total counter : ", this.userOrderdata.PickerCounter);
-
     if (this.billnumber.nativeElement.value) {
       if (this.userOrderdata.PickerCounter === 0) {
-        this.apiService.postData("picker-grn-complete/", data).subscribe((data: any[]) => {
-          console.log("picker-grn-complete : ", data);
-          let tempdata: any = data
-          // this.pickerProductList["data"] = data
-          if (tempdata.status === 1) {
-            this.globalitem.showSuccess(tempdata.message, "Order Placed")
-            this.reloadpage()
-          }
-
-        })
+        this.openConfirmationDialog()
       } else {
-        this.globalitem.showError("First you need to select all product from list", "Select product")
+        this.globalitem.showError("First you need to select all product from picker order list", "Select product")
       }
     } else {
       this.getbillValidator()
@@ -465,18 +447,23 @@ export class OrdersComponent implements OnInit {
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = 0;
           } else {
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength;
+            this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
           }
-          this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
+          
         } else if (productType === 2) {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage - 1
           if (templength < 0) {
             this.orderDetaildata["data"][0].order_products[i].shortage = 0;
+            // this.updateMoreProductQuantity(quantity, product_id, order_product_id, shortage, index)
           } else {
             this.orderDetaildata["data"][0].order_products[i].shortage = templength;
+            console.log("shortage length",templength);
+            this.updateMoreProductQuantity(templength,order_product_id, product_id, templength, index)
+            // this.updateMoreProductQuantity(quantity, product_id, order_product_id, templength, index)
           }
-
+         
           // this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType)
-          this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
+         
         }
       }
     }
@@ -496,7 +483,7 @@ export class OrdersComponent implements OnInit {
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       if (i === index) {
         if (productType === '') {
-          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity < this.orderDetaildata['data'][0]?.order_products[i].quantity){
+          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity){
             let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
             this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, order_product_id, product_id, shortage, index)
@@ -772,10 +759,91 @@ export class OrdersComponent implements OnInit {
       console.log("timer is less than true");
     }
   }
-
      //unsubscribe timer
      destroyCounter(){
       this.subscription.unsubscribe();
     }
 
+    //show confirmation dialog
+    openConfirmationDialog(): void {
+      let binddatawithHtml:any='<div class="confirmationdlg"><strong>Total Product Value = '+this.orderDetaildata["data"][0]?.currency_code+' '+this.orderDetaildata["data"][0]?.gross_amount+'</strong><br>'+
+      '<strong>Shipping Charge = '+this.orderDetaildata["data"][0]?.currency_code+' '+this.orderDetaildata["data"][0]?.shipping_cost+'</strong><br>'+
+      '<strong>Bill Number = '+this.billnumber.nativeElement.value+'</strong> <br><strong>Confirm?</strong>'+
+      '</div>'
+      let data = {
+        pagestatus:'order',
+        info:binddatawithHtml
+      }
+      const dialogRef = this.dialog.open(AddproductasSubtituteComponent, {
+        width: '500px',
+        data: { data: data }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed', result);
+        if (result.data === undefined) {
+          // this.subcategory = result.data;
+        } else if (result.data === "none") {
+          this.getcounter()
+          let data1 = {
+            website_id: this.userOrderdata.website_id,
+            warehouse_id: this.userOrderdata.warehouse_id,
+            order_id: this.userOrderdata.order_id,
+            user_id: this.userOrderdata.user_id,
+            shipment_id: this.userOrderdata.shipment_id,
+            trent_picklist_id: this.userOrderdata.trent_picklist_id,
+          }
+          console.log("Total counter : ", this.userOrderdata.PickerCounter);
+          this.apiService.postData("picker-grn-complete/", data1).subscribe((data: any[]) => {
+            console.log("picker-grn-complete : ", data);
+            let tempdata: any = data
+            if (tempdata.status === 1) {
+              this.globalitem.showSuccess(tempdata.message, "Order Placed")
+              this.reloadpage()
+            }else{
+              this.globalitem.showError(tempdata.message, "Wait for 30 min")
+            }
+          })
+        }else{
+          console.log("modal closed");
+          
+        }
+  
+      });
+    }
+
+    downloadCSV(orderproducts:any){
+      console.log("order produts list : ",orderproducts);
+    let counter=0
+      let temarray:any=[]
+      for(let i=0;i<orderproducts.length;i++){
+        let data={
+          'Product Name' : orderproducts[i].product.name,
+          'SKU':orderproducts[i].product.sku,
+          'Unit Weight':orderproducts[i].weight * orderproducts[i]?.quantity/ orderproducts[i]?.quantity +" "+orderproducts[i].product.uom.uom_name,
+          'Unit Price':orderproducts[i].product_price,
+          'Quantity':orderproducts[i].quantity,
+        }
+        counter++
+        // data.productname =orderproducts[i].product.name
+        // data.sku = orderproducts[i].product.sku
+        // data.quantity=orderproducts[i].quantity,
+        // data.unitweight=orderproducts[i].weight * orderproducts[i]?.quantity/ orderproducts[i]?.quantity,
+        // data.unitprice=orderproducts[i].product_price
+        temarray.push(data)
+        
+        console.log("Index: ",counter);
+        if(orderproducts.length === counter){
+          console.log("CSV file : ",temarray, orderproducts.length , i)
+          let paramdata:any=['Product Name','SKU','Unit Weight', 'Unit Price','Quantity',]
+          this.commonfunc.downloadFile(temarray,"order products",paramdata)
+        }
+      }
+
+      // console.log("CSV file : ",temarray)
+      
+    }
+    conertvaluetodecimal(value:any):any{
+      return this.commonfunc.precise_round(value, 0)
+    }
 }

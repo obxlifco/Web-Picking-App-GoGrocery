@@ -15,7 +15,7 @@ export class DatabaseService {
   constructor(private storage:LocalStorageService) { }
 
   setUserData(data: any) {
-    console.log("data inside :", data);
+    // console.log("data inside :", data);
     this.storage.store(this.USER_DATA, data);
   }
 
@@ -53,13 +53,13 @@ export class DatabaseService {
 
   //set notification time for api calling
   setNotificationTime(data: any) {
-    console.log("data inside :", data);
+    // console.log("data inside :", data);
     this.storage.store(this.NOTIFICATION_TIME, data);
   }
 
   async getNotificationTime() {
     let data=this.storage.retrieve(this.NOTIFICATION_TIME)
-    console.log("timer data : ",data);
+    // console.log("timer data : ",data);
     
     if(data === null){
       return 5*60000 
@@ -70,7 +70,7 @@ export class DatabaseService {
 
   //store latest ids for notifications
   setOrderIDS(data: any) {
-    console.log("data inside :", data);
+    // console.log("data inside :", data);
     this.storage.store(this.ORDER_IDS, data);
   }
   async getOrderIDS() {

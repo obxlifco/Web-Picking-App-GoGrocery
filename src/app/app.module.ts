@@ -25,7 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './footer/footer.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatRippleModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { AddnewproductComponent } from './components/addnewproduct/addnewproduct.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddproductcategoryComponent } from './components/addproductcategory/addproductcategory.component';
@@ -60,11 +60,12 @@ import { CountdownModule } from 'ngx-countdown';
 import { AddproductasSubtituteComponent } from './components/addproductas-subtitute/addproductas-subtitute.component';
 import { EmptystateComponent } from './components/emptystate/emptystate.component';
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
-import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire/firebase.app.module';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MessagedialogComponent } from './components/messagedialog/messagedialog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
+import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +94,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AddproductasSubtituteComponent,
     EmptystateComponent,
     AppsettingsComponent,
-    MessagedialogComponent 
+    MessagedialogComponent,
+    SalesreportComponent,
+    NotfoundComponent 
   ],
   imports: [
     BrowserModule,
@@ -130,7 +133,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatBadgeModule,
     MatSelectInfiniteScrollModule,
     MatSelectModule,
-    CountdownModule
+    CountdownModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
+    // MatMomentDateModule
   ],
   providers: [
     DatePipe

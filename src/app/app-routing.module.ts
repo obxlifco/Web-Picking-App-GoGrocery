@@ -10,6 +10,9 @@ import { TestComponent } from './test/test.component';
 import { LoginComponent } from './user/login/login.component';
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
+import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.component';
+import { AuthguardGuard } from './services/authguard/authguard.guard';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 // const routes: Routes = [
 //   { path: 'login', component: LoginComponent },
@@ -33,14 +36,17 @@ const appRoutes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'orders', component: OrdersComponent },
-      { path: 'returns', component: ReturnsComponent },
-      { path: 'stocks', component: StocksComponent },
-      { path: 'appsettings', component: AppsettingsComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' ,canActivate: [AuthguardGuard]},
+      { path: 'home', component: HomeComponent ,canActivate: [AuthguardGuard] },
+      { path: 'orders', component: OrdersComponent ,canActivate: [AuthguardGuard]},
+      { path: 'returns', component: ReturnsComponent,canActivate: [AuthguardGuard] },
+      { path: 'stocks', component: StocksComponent ,canActivate: [AuthguardGuard]},
+      { path: 'salesreport', component: SalesreportComponent,canActivate: [AuthguardGuard] },
+      { path: 'appsettings', component: AppsettingsComponent ,canActivate: [AuthguardGuard]},
     ]
-  }
+  },
+  {path: '404', component: NotfoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

@@ -6,6 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
 import { OrdersComponent } from 'src/app/dashboard/pages/orders/orders.component';
 import { DatabaseService } from '../database/database.service';
+export enum ToasterPosition {
+  topRight = 'toast-top-right',
+  topLeft = 'toast-top-left',
+  bottomRight = 'toast-bottom-right',
+  bottomLeft= 'toast-bottom-left',
+  // Other positions you would like
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +20,7 @@ import { DatabaseService } from '../database/database.service';
 export class GlobalitemService {
 
   dialogRef: any;
+  toasterpositions:any='toast-bottom-right';
 
 
   constructor(public dialog: MatDialog,
@@ -44,11 +52,11 @@ export class GlobalitemService {
 
   // spinner
   showSuccess(message:any, title:any) {
-    this.toastr.success(message, title)
+    this.toastr.success(message, title, {positionClass: this.toasterpositions})
   }
 
   showError(message:any, title:any) {
-    this.toastr.error(message, title)
+    this.toastr.error(message, title, { positionClass: this.toasterpositions })
   }
 
   showSpinner() {
@@ -57,7 +65,6 @@ export class GlobalitemService {
   hideSpinner() {
     this.spinner.hide();
   }
-
    
 }
  

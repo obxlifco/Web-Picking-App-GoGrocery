@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit {
 
       let data = {
         warehouse_id: res.warehouse_id,
-        website_id: res.website_id
+        website_id: res.website_id,
+        order_status:'complete',
       }
       this.apiService.postData("picker-dashboard/", data).subscribe((data: any[]) => {
         console.log(data);

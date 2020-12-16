@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit {
         this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
           console.log("logout : ", data);
           if (data.status === 1) {
-            this.globalitems.showSuccess("You have Sucessfully logout", "Success")
+            // this.globalitems.showSuccess("You have Sucessfully logout", "Success")
             this.db.SignOut();
             this.router.navigate(["login"])
           }

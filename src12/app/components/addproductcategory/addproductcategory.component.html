@@ -1,0 +1,80 @@
+
+<!-- <header>
+  <div class="row main-header">
+    <div class="col-md-12 stretch-card grid-margin">
+      <h4>Select Category</h4>
+    </div>
+  </div>
+</header> -->
+<div class="conatiner">
+  <div class="row main-header">
+    <div class="col-md-8 stretch-card grid-margin">
+        <h4>Select Category</h4>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <mat-icon (click)="closeModal()">clear</mat-icon>
+    </div>
+</div>
+  <div class="body">
+    <!-- <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option (click)="listItem(catItem)" *ngFor="let catItem of categorylist['data']?.response" [value]="catItem">
+              {{catItem.name}} 
+            </mat-list-option>
+          </mat-selection-list> -->
+
+    <div class="content" role="main" *ngIf="categorylist['data']?.length">
+      <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
+        <mat-icon class="right-icon">search</mat-icon>
+        <input class="form-control form-control-sm ml-3 w-75" type="email" placeholder="Search" id="search-text"
+          aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
+      </div>
+      <div class="card">
+        <!-- <div class="form-group">
+                <mat-icon for="search-text" class="right-icon">search</mat-icon>
+                <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+                  [(ngModel)]="searchText" placeholder="Enter text to search" 
+                  autofocus>
+              </div> -->
+        <div class="cardbody">
+          <h6 selected (click)="listItem('undefined')">{{incomingModalData?.data.catname}} (search without select category)</h6>
+        <ul *ngIf="categorylist['data']" class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let catItem of categorylist['data'] | searchfilter: searchText"
+            appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
+            (click)="listItem(catItem)">
+            {{catItem.name}}
+          </li>
+        </ul>
+        
+      </div>
+    
+        <div class="item" *ngIf="!categorylist['data']">
+          <ngx-skeleton-loader *ngFor="let item of [1,2,3,4]"></ngx-skeleton-loader>
+        </div>
+        <!-- <div class="cardfooter">
+          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+        </div> -->
+
+       
+      </div>
+      <div>
+        <div class="cardfooter">
+          <button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- if data not found -->
+    <app-emptystate *ngIf="!categorylist['data']?.length" ></app-emptystate>
+  </div>
+</div>
+<!-- footer -->
+<!-- <div class="cardfooter">
+<button (click)="closeModal()" type="button" class="btn btn-success">Close</button>
+</div> -->
+
+<!-- footer -->
+<!-- <div class="footer">
+  <button type="button" (click)="closeModal()"
+      class="btn btn-success">Close</button>
+</div> -->

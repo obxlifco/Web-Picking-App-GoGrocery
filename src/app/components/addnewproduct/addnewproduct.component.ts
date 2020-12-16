@@ -35,11 +35,12 @@ export class AddnewproductComponent implements OnInit {
     // product_id: '',
     searchproductlist: ''
   }
+  ISkeleton=false
   // for pagination on scroll
-  productpage:any=1
-  totalProductpage:any;
+  productpage: any = 1
+  totalProductpage: any;
   // modal object
-  AddproductcategoryComponent : any =AddproductcategoryComponent
+  AddproductcategoryComponent: any = AddproductcategoryComponent
   item_quantity: any = 0
   incomingmodalData: any = []
   pickerProductList: any = []//list of product data
@@ -47,15 +48,16 @@ export class AddnewproductComponent implements OnInit {
   productQuantity: any = []
   subtituteSelectedProducts: any = []
   //for realtime selection we need to store selected product data 
-  selectedproductids={
-    index:'',
-    substitutestatus:'',
-    relatedproductid:'',
-    relatedproducttype:'',
-    item:[]
-  
+  selectedproductids = {
+    index: '',
+    substitutestatus: '',
+    relatedproductid: '',
+    relatedproducttype: '',
+    item: []
+
   }
-  
+  AddmoreProducts:any=[]
+
   constructor(public router: Router,
     public db: DatabaseService,
     public apiService: ApiService,
@@ -70,7 +72,7 @@ export class AddnewproductComponent implements OnInit {
     this.incomingmodalData = temp.data
     this.userProductData.order_id = this.incomingmodalData.order_id
     this.userProductData.shipment_id = this.incomingmodalData.shipment_id
-    this.userProductData.trent_picklist_id=this.incomingmodalData.trent_picklist_id
+    this.userProductData.trent_picklist_id = this.incomingmodalData.trent_picklist_id
     this.userProductData.ean = this.incomingmodalData.ean
     this.getProductlistData()
   }
@@ -80,13 +82,13 @@ export class AddnewproductComponent implements OnInit {
 
   }
 
-  opencategory_modal(categoryURl: any,catname:any): void {
+  opencategory_modal(categoryURl: any, catname: any): void {
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
       parent_id: null,
       URl: categoryURl,
-      catname:catname
+      catname: catname
     }
     const dialogRef = this.dialog.open(AddproductcategoryComponent, {
       width: '500px',
@@ -96,15 +98,17 @@ export class AddnewproductComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.parentcategory = result.data;
+      this.subcategory.name="Sub Category"
+      this.subcategory.id=''
       if(result.data === "undefined"){
-        this.subcategory.name="Sub Category"
-        this.subcategory.id=''
+        // this.subcategory.name="Sub Category"
+        // this.subcategory.id=''
         this.parentcategory.id =''
       }
     });
   }
 
-  openSub_modal(ApiURl: any, product_id: any, related_product_id: any, related_product_type: any, modaltype: any,catname:any): void {
+  openSub_modal(ApiURl: any, product_id: any, related_product_id: any, related_product_type: any, modaltype: any, catname: any): void {
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
@@ -113,7 +117,9 @@ export class AddnewproductComponent implements OnInit {
       product_id: product_id,
       related_product_id: related_product_id,
       related_product_type: related_product_type,
-      catname:catname
+      catname: catname,
+      pagestatus: 'addnewsubs',
+      info: 'This is not subtitute product.Do you want to add this item as substitute product?'
     }
     const dialogRef = this.dialog.open(modaltype, {
       width: '500px',
@@ -128,10 +134,10 @@ export class AddnewproductComponent implements OnInit {
         // console.log("search text", this.userProductData.searchproductvalue);
         // this.searchProducts()
         // this.getProductlistData()
-        this.selectSubstituteproduct(this.selectedproductids.index,1, this.selectedproductids.relatedproductid, this.selectedproductids.relatedproducttype, this.selectedproductids.item)
-      }else{
+        this.selectSubstituteproduct(this.selectedproductids.index, 1, this.selectedproductids.relatedproductid, this.selectedproductids.relatedproducttype, this.selectedproductids.item)
+      } else {
         console.log("modal closed");
-        
+
       }
 
     });
@@ -139,10 +145,11 @@ export class AddnewproductComponent implements OnInit {
 
   closeModal(): void {
     // this.incomingmodalData.shortage=0
-    this.dialogRef.close({ event: 'close',substituteData: this.incomingmodalData.substituteData, data: this.incomingmodalData.substituteData.shortage, subtitutestatus: "no_productadded" });
+    this.dialogRef.close({ event: 'close', substituteData: this.incomingmodalData.substituteData, data: this.incomingmodalData.substituteData.shortage, subtitutestatus: "no_productadded" });
   }
 
   getProductlistData() {
+    this.ISkeleton=true
     this.db.getUserData().then(res => {
       // console.log("user data inside dashboard : ", res);
       let data = {
@@ -159,7 +166,7 @@ export class AddnewproductComponent implements OnInit {
       }
       if (this.incomingmodalData.productType === 1) { //product type 1 for add more product and 2 for substitute
         let category_ids = {
-          category_id: 188
+          category_id: ''
         }
         this.userProductData.searchproductlist = 'picker-productlist/'
         Object.assign(data, category_ids);
@@ -176,27 +183,49 @@ export class AddnewproductComponent implements OnInit {
       this.userProductData.user_id = res.user_id
       this.apiService.postData(this.incomingmodalData.apiURL, data).subscribe((data: any) => {
         // console.log(data);
-        this.pickerProductList["data"] = data.response
+
+        this.addCustomAttribute(data.response)
+       
       })
     })
   }
-
-  searchProducts(value:any) {
-    if(value === "search"){
-      this.totalProductpage=0;
-      this.productpage=1
-      this.pickerProductList["data"]=[]
-      console.log("enter");
+  addCustomAttribute(data:any){
+    let isselect={
+      Is_Select:0,
+      quantity:1
+    }
+    this.ISkeleton=false
+    if(this.userProductData.searchproductlist === 'picker-productlist/'){
+      this.pickerProductList["data"] = data
+      for(var i=0;i<data.length;i++){
+        Object.assign( this.pickerProductList["data"][i],isselect)
+      }
+     
+      console.log("add prodcut list",data);
+    }else{
+      console.log("substitute list");
       
+      this.pickerProductList["data"] = data
+    }
+  }
+
+  searchProducts(value: any) {
+    this.ISkeleton=true
+    if (value === "search") {
+      this.totalProductpage = 0;
+      this.productpage = 1
+      this.pickerProductList["data"] = []
+      console.log("enter");
+
     }
 
-    let temcategory:any=undefined;
-    if(this.parentcategory.id !== undefined && this.parentcategory.id){
-      console.log("else true ",this.parentcategory.id);
-      temcategory= this.parentcategory.id
+    let temcategory: any = undefined;
+    if (this.parentcategory.id !== undefined && this.parentcategory.id) {
+      console.log("else true ", this.parentcategory.id);
+      temcategory = this.parentcategory.id
     }
-    if(this.subcategory.id !== undefined && this.subcategory.id){
-      temcategory= this.subcategory.id
+    if (this.subcategory.id !== undefined && this.subcategory.id) {
+      temcategory = this.subcategory.id
     }
     let data = {
       website_id: this.userProductData.website_id,
@@ -223,24 +252,26 @@ export class AddnewproductComponent implements OnInit {
     }
     this.apiService.postData(this.userProductData.searchproductlist, data).subscribe((data: any) => {
       console.log(data);
-     if(data.status === 0){
-      this.pickerProductList["data"] = []
-      console.log("data length ", this.pickerProductList["data"].length);
-      
-      //  this.globalitem.showError(data.message,"No Substitute")
-     }else if(this.productpage === 1){
+      this.ISkeleton=false
+      this.addCustomAttribute(data.response)
+      if (data.status === 0) {
+        this.pickerProductList["data"] = []
+        console.log("data length ", this.pickerProductList["data"].length);
+
+        //  this.globalitem.showError(data.message,"No Substitute")
+      } else if (this.productpage === 1) {
         // this.pickerProductList["data"]=data.response
         this.pickerProductList["data"] = data.response
-        this.totalProductpage=data.total_page
-        console.log("page 1");   
-      }else{
+        this.totalProductpage = data.total_page
+        console.log("page 1");
+      } else {
         console.log("page n");
         this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];
       }
     })
   }
 
-    //this is for remove product from list
+  //this is for remove product from list
   productDecerment(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any) {
     // console.log("index --: ",index);
     for (var i = 0; i < this.pickerProductList["data"].length; i++) {
@@ -279,7 +310,7 @@ export class AddnewproductComponent implements OnInit {
       // this.productQuantity.push(this.pickerProductList["data"].response[index].quantity) //push quantity to arrays according to selected id's
       this.productsIDS = this.filterArray(this.productsIDS)
     } else {
-      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent,'Sub Category')
+      // this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent,'Sub Category')
     }
   }
 
@@ -311,9 +342,9 @@ export class AddnewproductComponent implements OnInit {
       console.log("product ids ", this.productsIDS);
       console.log("product QTY ", this.productQuantity);
       this.apiService.postData(subUrl, data).subscribe((data: any) => {
-    
+
         if (data.status === 1 && data.api_status === 'success') {
-           this.globalitem.showSuccess(data.message, "Product Addedd")
+          this.globalitem.showSuccess(data.message, "Product Addedd")
           let modaldataTemp = {
             data: data,
             subtitutestatus: "productadded"
@@ -336,15 +367,32 @@ export class AddnewproductComponent implements OnInit {
 
   //this method is for adding more than 0 products  
   addMoreProduct(searchURL: any) {
+   
     this.productQuantity = []
-    for (var i = 0; i < this.pickerProductList["data"].length; i++) {
-      if (this.pickerProductList["data"][i].id === this.productsIDS[i]) {
-        this.productQuantity.push(this.pickerProductList["data"][i].quantity)//push quantity to arrays according to selected id's
+    this.productsIDS=[]
+    console.log("add more products : ",this.AddmoreProducts);
+    
+    for (var i = 0; i < this.AddmoreProducts.length; i++) {
+        if (this.pickerProductList["data"][i].id === this.productsIDS[i]) {
+          // if(this.pickerProductList["data"][i].quantity === null){
+          //   this.pickerProductList["data"][i].quantity = 1
+          //   this.productQuantity.push(this.pickerProductList["data"][i].quantity )//push quantity to arrays according to selected id's
+          // }else{
+          //   this.productQuantity.push(this.pickerProductList["data"][i].quantity)//push quantity to arrays according to selected id's
+          // }
+         
       }
-      if (this.pickerProductList["data"][i].quantity > 0) {
+      this.productQuantity.push(this.AddmoreProducts[i].quantity)
+      this.productsIDS.push(this.AddmoreProducts[i].id)
+      this.productsIDS = this.filterArray(this.productsIDS)
+  
+      // if (this.pickerProductList["data"][i].quantity > 0) {
 
-      }
+      // }
     }
+   
+    console.log("productsIDS : ",this.productsIDS,' Quantity : ',this.productQuantity," Products : ",this.AddmoreProducts);
+    
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
@@ -357,10 +405,12 @@ export class AddnewproductComponent implements OnInit {
       product_ids: this.productsIDS
     }
     // console.log("data objects ", data);
-    if (this.productsIDS.length > 0) {
+    if (this.AddmoreProducts.length > 0) {
       this.apiService.postData(searchURL, data).subscribe((data: any[]) => {
         let tempdata: any = data
-        this.globalitem.showSuccess("Product has been added sucessfully in order List !", "Product Addedd")
+        this.ISkeleton=false
+        this.AddmoreProducts=[]
+        this.globalitem.showSuccess("Product has been added sucessfully in Picker order List !", "Product Addedd")
         if (tempdata.status === 1 && tempdata.api_status === 'success') {
           this.dialogRef.close();
         } else {
@@ -375,20 +425,55 @@ export class AddnewproductComponent implements OnInit {
   openproductModalAsSubtituteProduct() {
 
   }
+  selectMoreproduct(index: any,productid:any, item: any){
+    for (var i = 0; i < this.pickerProductList["data"].length; i++) {
+      if (i === index) {
+        if (this.pickerProductList["data"][i].Is_Select === 0) {
+            this.pickerProductList["data"][i].Is_Select = 1;
+            if (this.AddmoreProducts.length === 0) {
+              this.AddmoreProducts.push(item)
+              console.log("push 1");
+            } else if (this.pickerProductList["data"][i].id !== this.AddmoreProducts[i]?.id) {
+              console.log("push 2", i);
+                this.AddmoreProducts.push(item)
+              
+            } else if (this.AddmoreProducts[i]?.id === undefined) {
+              //nothing
+              console.log("nothing to do");
+              this.AddmoreProducts = []
+
+          } else{
+            console.log("else executed");
+            
+            // this.AddmoreProducts.push(item)
+          }
+        } else if (this.pickerProductList["data"][i].Is_Select === 1) {
+          console.log("index : ",index);
+          
+          this.pickerProductList["data"][i].Is_Select = 0
+          // this.productsIDS.splice(this.productsIDS.indexOf(this.pickerProductList["data"][index].id), 1)
+         this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(this.pickerProductList["data"][index]), 1)
+          // this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(index, 1))
+        } else {
+
+        }
+      }
+    }
+  }
 
   //substitute products
   selectSubstituteproduct(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any, item: any) {
 
-  this.selectedproductids.index=index,
-  this.selectedproductids.substitutestatus=substitutestatus,
-  this.selectedproductids.relatedproductid=relatedproductid,
-  this.selectedproductids.relatedproducttype=relatedproducttype,
-  this.selectedproductids.item=item
+    this.selectedproductids.index = index,
+      this.selectedproductids.substitutestatus = substitutestatus,
+      this.selectedproductids.relatedproductid = relatedproductid,
+      this.selectedproductids.relatedproducttype = relatedproducttype,
+      this.selectedproductids.item = item
 
 
     console.log("index : ", index);
-    console.log("Api Data : ",this.pickerProductList["data"]);
-    
+    console.log("Api Data : ", this.pickerProductList["data"]);
+
     if (substitutestatus === 1) {
       for (var i = 0; i < this.pickerProductList["data"].length; i++) {
         if (i === index) {
@@ -437,22 +522,22 @@ export class AddnewproductComponent implements OnInit {
       console.log(" this.subtituteSelectedProducts list : ", this.subtituteSelectedProducts, this.pickerProductList["data"]);
 
     } else {
-      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent,'Sub Category')
+      this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent, 'Sub Category')
     }
   }
-  
+
   // scroll events
-  onScrollDown(ev:any) {
-    console.log('scrolled!!',ev);
+  onScrollDown(ev: any) {
+    console.log('scrolled!!', ev);
     this.productpage++;
-    if(this.productpage <= this.totalProductpage){
-      console.log(" this.totalProductpage : ",this.totalProductpage );
-      console.log("  this.productpage : ", this.productpage );
-      
+    if (this.productpage <= this.totalProductpage) {
+      console.log(" this.totalProductpage : ", this.totalProductpage);
+      console.log("  this.productpage : ", this.productpage);
+
       this.searchProducts("novalue")
-    }else{
+    } else {
       // this.globalitem.showError("No more data is available ","No Data")
     }
-  
+
   }
 }

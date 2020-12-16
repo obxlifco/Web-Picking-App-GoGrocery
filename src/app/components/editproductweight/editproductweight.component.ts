@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
 import { ApiService } from 'src/app/services/api/api.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 import { DialogData } from '../addnewproduct/addnewproduct.component';
@@ -15,16 +16,18 @@ export class EditproductweightComponent implements OnInit {
   newprice:any
   newWeight:any
   notes:any
+  existingweight:any=''
   constructor(
     public apiService :ApiService,
     public globalitem:GlobalitemService,
+    public commonfunc : CommonfunctionService,
     public dialogRef: MatDialogRef<EditproductweightComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
       let tempdata:any=[]
       tempdata=data
       this.editweightData["data"]=tempdata.data
       console.log("edit weight data : ", data);
-      
+      this.existingweight=this.commonfunc.precise_round(this.editweightData['data']?.weight * this.editweightData['data']?.quantity, 0)
     }
 
   ngOnInit(): void {
@@ -53,8 +56,8 @@ this.dialogRef.close()
       sku: this.editweightData["data"].product.sku,
       order_product_id: this.editweightData["data"].id,
       product_old_price: this.editweightData["data"].product_price,
-      product_new_price:this.newprice,
-      weight:this.newWeight,
+      product_new_price:this.newprice/this.editweightData['data']?.quantity,
+      weight:this.newWeight/this.editweightData['data']?.quantity,
       notes: ""
       }
 
@@ -71,9 +74,10 @@ this.dialogRef.close()
   }
   totalweightPrice(totalweight :any,unitweight:any,unitprice:any,event:any){
     this.newprice = event.target.value/unitweight * unitprice
-    console.log("price : ",event.target.value/unitweight * unitprice);
-    console.log("unitweight : ",unitweight);
-    console.log("unit price : ",unitprice);
-    console.log("total weight : ",event.target.value);    
+    // this.newprice = (event.target.value/unitweight) * unitprice
+    // console.log("price : ",event.target.value/unitweight * unitprice);
+    // console.log("unitweight : ",unitweight);
+    // console.log("unit price : ",unitprice);
+    // console.log("total weight : ",event.target.value);    
   }
 }

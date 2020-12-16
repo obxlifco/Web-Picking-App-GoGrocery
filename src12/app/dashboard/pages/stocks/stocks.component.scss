@@ -1,0 +1,78 @@
+.main-header {
+    height: 10px;
+
+    h4 {
+        font-weight: 500;
+        font-size  : 20px;
+    }
+}
+
+.conatiner {
+    padding: 11% 5% 3% 5%;
+}
+
+
+
+.body {
+    padding: 4% 0% 0% 0%;
+
+    .col-left {
+        text-align: right;
+
+        .custom-input {
+            width        : 100%;
+            display      : flex;
+            border       : 1px solid lightgray;
+            border-radius: 6px;
+
+            mat-icon {
+                margin-top: 2%;
+            }
+
+            input {
+                border: none;
+            }
+        }
+
+        .search-container {
+            width  : 100%;
+            display: flex;
+
+            button {
+                margin-left: 3%;
+            }
+        }
+    }
+
+    .col-right {
+        text-align: right;
+    }
+}
+
+.table-data {
+    table {
+        width: 100%;
+    }
+
+    h6 {
+        font-size  : 16px;
+        margin     : 0px;
+        font-weight: 500;
+    }
+}
+.editprice{
+    color: red;
+    cursor: pointer;
+}
+.search-results {
+    height: 40rem;
+    overflow: scroll;
+  }
+  @media only screen and (max-width: 360) and (max-height: 640){
+    .conatiner {
+        padding: 18% 5% 3% 5% !important;
+    }
+  }
+  th{
+    border-bottom: 1px solid #dee2e6;
+  }

@@ -25,3 +25,23 @@
     position: fixed;
     z-index: 12;
   }
+  .title{
+    margin: auto;
+    width: 25%;
+    
+  }
+  @media only screen and (max-width: 360px) {
+    .title{
+      margin: auto;
+      width: 82% !important;
+      white-space: pre-wrap !important;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+  .title{
+    margin: auto;
+    width: 25%;
+    
+  }
+}

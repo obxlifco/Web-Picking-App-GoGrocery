@@ -42,7 +42,7 @@
 
         <!-- add more product loop -->
         <div class="row" *ngIf="incomingmodalData.productType === 1" style="height: 289px;">
-            <div class="col-md-12 stretch-card grid-margin table-data">
+            <div class="col-md-12 stretch-card grid-margin table-data" #selector>
                 <table class="table">
                     <div>
                         <th style="width: 63%;">Product Info</th>
@@ -50,9 +50,20 @@
                         <th style="text-align: end;width: 100%;">Quantity</th>
                         <!-- <th style="text-align: center;" colspan="3">app-stocks</th> -->
                     </div>
-                    <div *ngFor="let plist of pickerProductList['data'];let i=index;">
+                     <div *ngIf="pickerProductList['data']?.length !== 0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.05"  [scrollWindow]="false"
+                        [infiniteScrollThrottle]="500"  [alwaysCallback]="true" [infiniteScrollContainer]="selector" (scrolled)="onScrollDown($event)" >
+                        <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row">
+                            <!-- layover selection -->
+                            <div class="layover-root"
+                                (click)="selectMoreproduct(i,plist.id,plist)"
+                                *ngIf="plist?.Is_Select === 1">
+                                <img src="assets/images/product/toggle_checked.png" alt="">
+                                <div class="layover">
+                                </div>
+                            </div>
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
-                            <td colspan="3">
+                            <td  (click)="selectMoreproduct(i,plist?.id,plist)"
+                             colspan="3">
                                 <div style="display: flex;">
                                     <img class="productimg"
                                         [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
@@ -64,7 +75,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td colspan="3" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                            <td  (click)="selectMoreproduct(i,plist?.id,plist)"
+                             colspan="3" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
                                 <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
                                     {{plist?.channel_currency_product_price.price}}</strong><br>
                             </td>
@@ -78,7 +90,7 @@
                                         </mat-icon>
                                         <input *ngIf="plist?.quantity" style="height: 1%;width: 40px;"
                                             [value]="plist?.quantity" type="text" class="form-control">
-                                        <input *ngIf="!plist?.quantity" style="height: 1%;width: 40px;" value="0"
+                                        <input *ngIf="!plist?.quantity" style="height: 1%;width: 40px;" value="1"
                                             type="text" class="form-control">
                                         <mat-icon matRipple class="right-icon"
                                             (click)="productIncrment(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id)">
@@ -92,8 +104,12 @@
                         </td> -->
                         </tr>
                     </div>
+                    </div>
                     <!-- if data not found -->
-                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0"></app-emptystate>
+                    <div class="item" *ngIf="ISkeleton">
+                        <ngx-skeleton-loader *ngFor="let item of [1,2,3,4,5,6,7,9,10]"></ngx-skeleton-loader>
+                      </div>
+                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0 && !ISkeleton"></app-emptystate>
                 </table>
             </div>
         </div>
