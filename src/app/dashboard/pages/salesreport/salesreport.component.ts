@@ -12,6 +12,7 @@ export interface PaymentMethodInter {
   name: string;
   completed: boolean;
   id:any;
+  type:any
   color: ThemePalette;
   subtasks?: PaymentMethodInter[];
 }
@@ -23,59 +24,11 @@ export interface PaymentMethodInter {
 })
 export class SalesreportComponent implements OnInit {
   picker: any
-  monthname: any = [
-    {
-      "abbreviation": "Jan",
-      "name": "January"
-    },
-    {
-      "abbreviation": "Feb",
-      "name": "February"
-    },
-    {
-      "abbreviation": "Mar",
-      "name": "March"
-    },
-    {
-      "abbreviation": "Apr",
-      "name": "April"
-    },
-    {
-      "abbreviation": "May",
-      "name": "May"
-    },
-    {
-      "abbreviation": "Jun",
-      "name": "June"
-    },
-    {
-      "abbreviation": "Jul",
-      "name": "July"
-    },
-    {
-      "abbreviation": "Aug",
-      "name": "August"
-    },
-    {
-      "abbreviation": "Sep",
-      "name": "September"
-    },
-    {
-      "abbreviation": "Oct",
-      "name": "October"
-    },
-    {
-      "abbreviation": "Nov",
-      "name": "November"
-    },
-    {
-      "abbreviation": "Dec",
-      "name": "December"
-    }
-  ]
+  panelOpenState = false;
+  monthname: any;
   completelist: any = []
   pageurl: any = '/'
-  lastdate: any = "2020-1-1##2020-1-30";
+  lastdate: any = "";
   currentpage: any = 1
   getmonth: any = "1"
   getyear: any = "2020";
@@ -88,19 +41,23 @@ export class SalesreportComponent implements OnInit {
   advancedsearch:any=[]
   generalcounter:any=0
   paymentmethodid:any='both'
+  paymentmultyids:any= new Array;
+  paymentmethodname:any=''
   rangeFormGroup = new FormGroup({  
     start: new FormControl(null, Validators.required),  
     end: new FormControl(null, Validators.required),
   })  
- 
+ primarycolor:any="#007bff"
   paymentmethod: PaymentMethodInter = {
     name: 'Online Payment/Cash Payment',
+    type:"Select All",
     completed: false,
-    color: 'primary',
+    color: this.primarycolor,
     id:'both',
     subtasks: [
-      {name: 'Online Payment',id:'2467', completed: false, color: 'primary'},
-      {name: 'Cash Payment',id:'1655', completed: false, color: 'primary'}
+      {name: 'Cash On Delivery',id:16,type:"Cash On Delivery", completed: false, color: 'primary'},
+      {name: 'Card On Delivery',id:59,type:"Cash On Delivery", completed: false, color: 'primary'},
+      {name: 'Online Payment',type:"Online Payment",id:51, completed: false, color: 'primary'},
     ]
   };
   allComplete: boolean = false;
@@ -110,19 +67,23 @@ export class SalesreportComponent implements OnInit {
     public datePipe: DatePipe,
     public globalitem: GlobalitemService,
     public db: DatabaseService) {
-   
-     
-  }
+      this.monthname=this.commonfunc.monthname;
+      this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
+      setTimeout(() => {
+        // this.getpaymentmethodlist()
+      }, 1500);
+    }
 
   ngOnInit(): void {
     this.setfieldEmpty()
     this.getOrderlistData(this.lastdate)
+  
   }
   datemodal() {
 
   }
  
-  setcompletevalue(){
+  setcompleteparam(){
     this.advancedsearch.push({
       comparer: 1,
       field: "order_status",
@@ -144,16 +105,12 @@ export class SalesreportComponent implements OnInit {
 
   getOrderlistData(date: any) {
     console.log("advanced search : ",this.advancedsearch);
-    
     this.setfieldEmpty()
     this.db.getUserData().then(res => {
       // console.log("payment method ID : ", this.rangeFormGroup.controls.paymentmethodid.value);
-
-      
-
       let data = {
         advanced_search:this.advancedsearch,
-        warehouse_id:  res.warehouse_id,
+        warehouse_id:  '',
         website_id: res.website_id,
         per_page: 500,
         // page :1,
@@ -170,6 +127,8 @@ export class SalesreportComponent implements OnInit {
         warehouse_status: "",
       }
       this.apiService.postData("global_list" + this.pageurl, data).subscribe((data: any) => {
+        this.advancedsearch=[]
+        this.setcompleteparam()
         if (data.results[0].result) {
           if (data.count > this.generalcounter) {
             let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result,this.paymentmethodid)
@@ -193,39 +152,6 @@ export class SalesreportComponent implements OnInit {
             this.saleData.totalorder =data.count        
             this.completelist["data"]["currency_code"] = data?.results[0]?.result[0]?.currency_code
           }
-          // let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result)
-          // this.completelist["data"]["currency_code"] = data.results[0].result[0].currency_code
-          // this.completelist["data"]["shippingcost"] = this.precise_round(incomingdata.shpcost, 2)
-          // this.completelist["data"]["subtotal"] = this.precise_round(incomingdata.subtotal, 2)
-          // this.completelist["data"]["grandtotal"] = this.precise_round(incomingdata.grandtotal, 2)
-          // for (var i = 0; i < data.results[0].result.length; i++) {
-          //   counter++;
-          //   if (data.results[0].result[i].order_status === 4) {
-          //     temarray.push(data.results[0].result[i])
-          //   }
-          //   if (data.results[0].result.length === counter) {
-          //     console.log("length is correct", temarray);
-          //     if (temarray.length !== 0) {
-          //       this.completelist["data"] = temarray
-          //       let shpcost: any = 0;
-          //       let subtotal: any = 0;
-          //       let grandtotal: any = 0;
-          //       for (var i = 0; i < temarray.length; i++) {
-          //         shpcost += temarray[i].shipping_cost
-          //         subtotal += temarray[i].net_amount
-          //         grandtotal += temarray[i].gross_amount
-          //         this.completelist["data"]["currency_code"] = temarray[i].currency_code
-          //       }
-          //       this.completelist["data"]["shippingcost"] = this.precise_round(shpcost, 2)
-          //       this.completelist["data"]["subtotal"] = this.precise_round(subtotal, 2)
-          //       this.completelist["data"]["grandtotal"] = this.precise_round(grandtotal, 2)
-          //     } else {
-          //       this.setfieldvalue()
-          //     }
-          //   } else {
-          //     // console.log("length is not correct");
-          //   }
-          // }
         } if (data.results[0].result.length === 0 || data.results[0].result === []) {
           // console.log("else is executed");
           this.setfieldvalue()
@@ -233,8 +159,6 @@ export class SalesreportComponent implements OnInit {
       })
     })
   }
-
- 
 
   //set value to 0.00
   setfieldvalue() {
@@ -250,18 +174,29 @@ export class SalesreportComponent implements OnInit {
     this.pageurl= '/'
     this.setfieldvalue()
     this.currentpage = 1
-    console.log("paymentmethod id: ",this.paymentmethodid);
+  
     
     if(this.paymentmethodid !== "both"){
-      this.advancedsearch.push({
-        comparer: 1,
-        field: "payment_method_id",
-        field_id: 73,
-        input_type: "select",
-        key: this.paymentmethodid,
-        key2: "Credit / Debit Card(Online Payment)",
-        name: "payment_method_id",
-        show_name: "Payment Method"})
+      // let lastindex:any=this.paymentmultyids.slice(-1)
+      // this.paymentmultyids=this.commonfunc.filterArray(this.paymentmultyids)
+      let temparray:any=this.paymentmethod.subtasks
+      console.log("paymentmethod ids: ",this.paymentmethod.subtasks,temparray);
+      this.advancedsearch=[]
+      this.setcompleteparam()
+      for(let i=0;i<temparray.length;i++){
+        if(temparray[i].completed === true){
+          console.log("paymentmethod ids true");
+          this.advancedsearch.push({
+            comparer: 1,
+            field: "payment_method_id",
+            field_id: 73,
+            input_type: "select",
+            key:temparray[i].id,
+            key2: temparray[i].name,
+            name: "payment_method_id",
+            show_name: "Payment Method"})
+        }
+      }
     }
     if(this.rangeFormGroup.value.start !== null && this.rangeFormGroup.value.end !== null){
       this.getmonth = "nomonth"
@@ -326,7 +261,22 @@ export class SalesreportComponent implements OnInit {
   //checkbox
   updateAllComplete() {
     this.allComplete = this.paymentmethod.subtasks != null && this.paymentmethod.subtasks.every(t => t.completed);
-    console.log("updateAll Complete : ",this.allComplete);
+    if(this.allComplete){
+      console.log("all true");
+      
+      this.advancedsearch=[]
+      this.setcompleteparam()
+      this.paymentmethodid= this.paymentmethod.id;
+      this.paymentmethodname=this.paymentmethod.name;
+    }else if(!this.allComplete){
+      
+      this.paymentmethodid= this.paymentmethod.id;
+      this.advancedsearch=[]
+      this.setcompleteparam()
+      console.log("not complete",this.paymentmethodid ,this.allComplete);
+    }
+    // console.log("not complete",this.paymentmethodid ,this.allComplete);
+    // console.log("updateAll Complete : ",this.allComplete);
   }
 
   someComplete(): boolean {
@@ -341,13 +291,23 @@ export class SalesreportComponent implements OnInit {
         if(this.paymentmethod.subtasks[i].completed === true){
           counter++;
           this.paymentmethodid=this.paymentmethod.subtasks[i].id
+          this.paymentmultyids.push(this.paymentmethod.subtasks[i].id)
+          this.paymentmethodname=this.paymentmethod.subtasks[i].name
           // console.log("id : ",this.paymentmethod.subtasks[i].id);
           // console.log("counter value ",counter);
+          // console.log("some  complete ",this.paymentmethodid);
         }else{
-          // console.log("both");
-          this.paymentmethodid=this.paymentmethod.id
+          // console.log("some not complete ",this.paymentmethodid);
+          // this.paymentmethodid=this.paymentmethod.id
+          // this.advancedsearch=[]
+          // this.setcompleteparam()
+          
         }
       }
+    }else if(this.paymentmethod.subtasks.filter(t => t.completed).length === 0 && !this.allComplete){
+      console.log("not all completed", this.paymentmethod.subtasks);
+      this.advancedsearch=[]
+      this.setcompleteparam()
     }
     
     return this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
@@ -355,13 +315,14 @@ export class SalesreportComponent implements OnInit {
 
   setAll(completed: boolean) {
     this.paymentmethodid=this.paymentmethod.id
+    this.paymentmethodname=this.paymentmethod.name
     // console.log("method complete : ",this.paymentmethodid);
     
     this.allComplete = completed;
-    console.log("setAll : ",this.allComplete);
+    // console.log("setAll : ",this.allComplete);
     if(this.allComplete === false){
       this.advancedsearch=[]
-      this. setcompletevalue()
+      this. setcompleteparam()
     }
     if (this.paymentmethod.subtasks == null) { 
       return;

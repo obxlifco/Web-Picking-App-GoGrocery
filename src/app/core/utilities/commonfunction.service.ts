@@ -5,7 +5,7 @@ import { DatabaseService } from 'src/app/services/database/database.service';
   providedIn: 'root'
 })
 export class CommonfunctionService {
- counter = 0;
+  counter = 0;
   constructor(public db: DatabaseService) { }
   public warehouse_id: any = ''
   public website_id: any = ''
@@ -25,11 +25,11 @@ export class CommonfunctionService {
     return this.data;
   }
 
-  getcompletedOrders(completeorderdata: any,paymentid:any): any {
+  getcompletedOrders(completeorderdata: any, paymentid: any): any {
     this.counter++
     // console.log("incoming data from page : ",completeorderdata, "Api counter : ",this.counter);
-    
-   
+
+
     let temarray: any = []
     let shpcost: any = 0;
     let subtotal: any = 0;
@@ -65,12 +65,12 @@ export class CommonfunctionService {
       subtotal += completeorderdata[i].net_amount
       grandtotal += completeorderdata[i].gross_amount
       // console.log("shpcost : ",shpcost," subtotal:",subtotal," grandtotal: ",grandtotal);
-      
+
     }
-    let data={
-      shpcost:shpcost,
-      subtotal:subtotal,
-      grandtotal:grandtotal,
+    let data = {
+      shpcost: shpcost,
+      subtotal: subtotal,
+      grandtotal: grandtotal,
     }
     return data
   }
@@ -82,19 +82,19 @@ export class CommonfunctionService {
   }
 
   //download csv file
-  
+
   //convert json to csv and download it
-  downloadFile(data:any, filename='picker list',dataparams:any) {
-    console.log("data : ",data,"params : ",dataparams);
-    
+  downloadFile(data: any, filename = 'picker list', dataparams: any) {
+    console.log("data : ", data, "params : ", dataparams);
+
     let csvData = this.ConvertToCSV(data, dataparams);
-    console.log("csvData",csvData)
+    console.log("csvData", csvData)
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
     let url = URL.createObjectURL(blob);
     let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
     if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
-        dwldLink.setAttribute("target", "_blank");
+      dwldLink.setAttribute("target", "_blank");
     }
     dwldLink.setAttribute("href", url);
     dwldLink.setAttribute("download", filename + ".csv");
@@ -102,26 +102,115 @@ export class CommonfunctionService {
     document.body.appendChild(dwldLink);
     dwldLink.click();
     document.body.removeChild(dwldLink);
-}
-ConvertToCSV(objArray:any, headerList:any) {
-     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-     let str = '';
-     let row = 'S.No,';
-for (let index in headerList) {
-         row += headerList[index] + ',';
-     }
-     row = row.slice(0, -1);
-     str += row + '\r\n';
-     for (let i = 0; i < array.length; i++) {
-         let line = (i+1)+'';
-         for (let index in headerList) {
-            let head = headerList[index];
-line += ',' + array[i][head];
-         }
-         str += line + '\r\n';
-     }
-     return str;
- }
+  }
+  ConvertToCSV(objArray: any, headerList: any) {
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    let row = 'S.No,';
+    for (let index in headerList) {
+      row += headerList[index] + ',';
+    }
+    row = row.slice(0, -1);
+    str += row + '\r\n';
+    for (let i = 0; i < array.length; i++) {
+      let line = (i + 1) + '';
+      for (let index in headerList) {
+        let head = headerList[index];
+        line += ',' + array[i][head];
+      }
+      str += line + '\r\n';
+    }
+    return str;
+  }
 
+  monthname: any = [
+    {
+      "abbreviation": "Jan",
+      "name": "January"
+    },
+    {
+      "abbreviation": "Feb",
+      "name": "February"
+    },
+    {
+      "abbreviation": "Mar",
+      "name": "March"
+    },
+    {
+      "abbreviation": "Apr",
+      "name": "April"
+    },
+    {
+      "abbreviation": "May",
+      "name": "May"
+    },
+    {
+      "abbreviation": "Jun",
+      "name": "June"
+    },
+    {
+      "abbreviation": "Jul",
+      "name": "July"
+    },
+    {
+      "abbreviation": "Aug",
+      "name": "August"
+    },
+    {
+      "abbreviation": "Sep",
+      "name": "September"
+    },
+    {
+      "abbreviation": "Oct",
+      "name": "October"
+    },
+    {
+      "abbreviation": "Nov",
+      "name": "November"
+    },
+    {
+      "abbreviation": "Dec",
+      "name": "December"
+    }
+  ]
 
+  // let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result)
+  // this.completelist["data"]["currency_code"] = data.results[0].result[0].currency_code
+  // this.completelist["data"]["shippingcost"] = this.precise_round(incomingdata.shpcost, 2)
+  // this.completelist["data"]["subtotal"] = this.precise_round(incomingdata.subtotal, 2)
+  // this.completelist["data"]["grandtotal"] = this.precise_round(incomingdata.grandtotal, 2)
+  // for (var i = 0; i < data.results[0].result.length; i++) {
+  //   counter++;
+  //   if (data.results[0].result[i].order_status === 4) {
+  //     temarray.push(data.results[0].result[i])
+  //   }
+  //   if (data.results[0].result.length === counter) {
+  //     console.log("length is correct", temarray);
+  //     if (temarray.length !== 0) {
+  //       this.completelist["data"] = temarray
+  //       let shpcost: any = 0;
+  //       let subtotal: any = 0;
+  //       let grandtotal: any = 0;
+  //       for (var i = 0; i < temarray.length; i++) {
+  //         shpcost += temarray[i].shipping_cost
+  //         subtotal += temarray[i].net_amount
+  //         grandtotal += temarray[i].gross_amount
+  //         this.completelist["data"]["currency_code"] = temarray[i].currency_code
+  //       }
+  //       this.completelist["data"]["shippingcost"] = this.precise_round(shpcost, 2)
+  //       this.completelist["data"]["subtotal"] = this.precise_round(subtotal, 2)
+  //       this.completelist["data"]["grandtotal"] = this.precise_round(grandtotal, 2)
+  //     } else {
+  //       this.setfieldvalue()
+  //     }
+  //   } else {
+  //     // console.log("length is not correct");
+  //   }
+  // }
+
+  filterArray(array: any = []): any {
+    return array.filter(function (elem: any, index: any, self: string | any[]) {
+      return index === self.indexOf(elem);
+    })
+  }
 }

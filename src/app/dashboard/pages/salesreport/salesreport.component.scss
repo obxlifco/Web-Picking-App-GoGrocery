@@ -1,18 +1,42 @@
 .body {
     // padding: 11% 3% 2% 3%;
-    padding: 9% 1% 0% 2%;
+    padding : 8% 1% 0% 2%;
+    position: inherit;
+    display : block;
+    overflow: hidden;
 }
 
+label {
+    font-weight: 500;
+}
+
+section {
+    background: white;
+    width     : fit-content;
+    border-radius: 1%;
+    // padding: 1%;
+    box-shadow: 0 1px 13px -9px #d3d2d2;
+    width: auto;
+}
+mat-expansion-panel{
+    width: 49%;
+    margin: 9px 0px 9px 0px;
+
+}
+.mat-accordion>.mat-expansion-panel-spacing:last-child{
+    margin-bottom: 10px!important;
+    margin-top: 10px!important;
+}
 h4 {
     font-size  : 19px;
     font-weight: 500;
 }
 
 .btnsearch {
-    margin-top: 0.2%;
-    margin-left: 2%;
-    width: 18%;
-    height: 42px;
+    margin-top   : 0.2%;
+    margin-left  : 2%;
+    width        : 18%;
+    height       : 42px;
     margin-bottom: 1%;
 }
 
@@ -25,60 +49,69 @@ button {
 }
 
 .table {
-    width        : 58%;
-    margin-bottom: 1rem;
-    color        : #212529;
-    background   : white;
+    width           : 58%;
+    margin-bottom   : 1rem;
+    color           : #212529;
+    background      : white;
     // margin-top   : 2%;
-    border       : 1px solid lightgray;
-    font-size: 17px;
+    border          : 1px solid lightgray;
+    font-size       : 17px;
 }
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
-    background   : white ;
-    border-radius: 4px 4px 4px 4px !important;
-    padding      : 0.75em 0.75em 0 0.75em;
-    color        : black !important;
+    background      : white;
+    border-radius   : 4px 4px 4px 4px !important;
+    padding         : 0.75em 0.75em 0 0.75em;
+    color           : black !important;
     // box-shadow   : 0 6px 11px -9px #d3d2d2;
     // border       : 1px solid  #d3d2d2;
-    height: 50px;
+    height          : 50px;
 }
-mat-label{
+
+mat-label {
     color: black;
 }
+
 ::ng-deep.mat-form-field-underline {
     visibility: hidden;
 }
 
-::ng-deep.mat-calendar-body-selected{
-    color: white;
+::ng-deep.mat-calendar-body-selected {
+    color     : white;
     background: green;
-  }
+}
+
 mat-icon {
-    position: absolute;
-    right   : 0px;
-    top     : -7px;
+    position     : absolute;
+    right        : 0px;
+    top          : -7px;
     border-radius: 100%;
 }
-.example-section {
-    margin: 12px 0;
-  }
-  
-  .example-margin {
-    margin: 0 12px;
-  }
-  
-  ul {
-    list-style-type: none;
-    margin-top: 4px;
-  }
 
-  ::ng-deep .mat-checkbox-checked.mat-accent {
+.example-section {
+    // margin: 12px 0;
+}
+
+.example-margin {
+    // margin: 0 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top     : 4px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent {
     .mat-checkbox-ripple .mat-ripple-element {
-        background-color: green !important;
+        // background-color: gray !important;
     }
 
-    .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-        background-color:black;
-     }
+    .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: green;
+    }
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: gray;
 }

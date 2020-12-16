@@ -66,6 +66,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +137,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     CountdownModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
     // MatMomentDateModule
   ],
   providers: [
