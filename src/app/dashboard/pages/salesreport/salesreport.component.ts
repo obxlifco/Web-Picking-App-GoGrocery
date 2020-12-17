@@ -11,8 +11,8 @@ import { GlobalitemService } from 'src/app/services/globalitem/globalitem.servic
 export interface PaymentMethodInter {
   name: string;
   completed: boolean;
-  id:any;
-  type:any
+  id: any;
+  type: any
   color: ThemePalette;
   subtasks?: PaymentMethodInter[];
 }
@@ -32,58 +32,66 @@ export class SalesreportComponent implements OnInit {
   currentpage: any = 1
   getmonth: any = "1"
   getyear: any = "2020";
-  saleData={
-    totalorder:0,
-    shippingcost:0,
-    subtotal:0,
-    grandtotal:0
+  saleData = {
+    totalorder: 0,
+    shippingcost: 0,
+    subtotal: 0,
+    grandtotal: 0
   }
-  advancedsearch:any=[]
-  generalcounter:any=0
-  paymentmethodid:any='both'
-  paymentmultyids:any= new Array;
-  paymentmethodname:any=''
-  rangeFormGroup = new FormGroup({  
-    start: new FormControl(null, Validators.required),  
+  advancedsearch: any = []
+  generalcounter: any = 0
+  paymentmethodid: any = 'both'
+  paymentmethodlastids: any;
+  paymentmultyids: any = new Array;
+  paymentmethodname: any = ''
+  rangeFormGroup = new FormGroup({
+    start: new FormControl(null, Validators.required),
     end: new FormControl(null, Validators.required),
-  })  
- primarycolor:any="#007bff"
+  })
+  primarycolor: any = "#007bff"
   paymentmethod: PaymentMethodInter = {
     name: 'Online Payment/Cash Payment',
-    type:"Select All",
+    type: "Select All",
     completed: false,
     color: this.primarycolor,
-    id:'both',
+    id: 'both',
     subtasks: [
-      {name: 'Cash On Delivery',id:16,type:"Cash On Delivery", completed: false, color: 'primary'},
-      {name: 'Card On Delivery',id:59,type:"Cash On Delivery", completed: false, color: 'primary'},
-      {name: 'Online Payment',type:"Online Payment",id:51, completed: false, color: 'primary'},
+      { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: false, color: 'primary' },
+      { name: 'Card On Delivery', id: 59, type: "Cash On Delivery", completed: false, color: 'primary' },
+      { name: 'Online Payment', type: "Online Payment", id: 51, completed: false, color: 'primary' },
     ]
   };
   allComplete: boolean = false;
 
-  
+  //merging data for multi selection payment method
+  orderlistsaleData: any = []
+  // orderlistsaleMergrray:any=new Array()
+  mergeFirstPaymentData: any = new Array()
+  IsMerge = false;
+
+
   constructor(public apiService: ApiService, public commonfunc: CommonfunctionService,
     public datePipe: DatePipe,
     public globalitem: GlobalitemService,
     public db: DatabaseService) {
-      this.monthname=this.commonfunc.monthname;
-      this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
-      setTimeout(() => {
-        // this.getpaymentmethodlist()
-      }, 1500);
-    }
+    this.monthname = this.commonfunc.monthname;
+    this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
+    setTimeout(() => {
+      // this.getpaymentmethodlist()
+    }, 1500);
+
+  }
 
   ngOnInit(): void {
     this.setfieldEmpty()
     this.getOrderlistData(this.lastdate)
-  
+
   }
   datemodal() {
 
   }
- 
-  setcompleteparam(){
+
+  setcompleteparam() {
     this.advancedsearch.push({
       comparer: 1,
       field: "order_status",
@@ -104,13 +112,14 @@ export class SalesreportComponent implements OnInit {
   }
 
   getOrderlistData(date: any) {
-    console.log("advanced search : ",this.advancedsearch);
+    console.log("advanced search : ", this.advancedsearch);
+    console.log("before ids :", this.paymentmethodlastids);
     this.setfieldEmpty()
     this.db.getUserData().then(res => {
       // console.log("payment method ID : ", this.rangeFormGroup.controls.paymentmethodid.value);
       let data = {
-        advanced_search:this.advancedsearch,
-        warehouse_id:  '',
+        advanced_search: this.advancedsearch,
+        warehouse_id: res.warehouse_id,
         website_id: res.website_id,
         per_page: 500,
         // page :1,
@@ -127,81 +136,130 @@ export class SalesreportComponent implements OnInit {
         warehouse_status: "",
       }
       this.apiService.postData("global_list" + this.pageurl, data).subscribe((data: any) => {
-        this.advancedsearch=[]
+        this.advancedsearch = []
         this.setcompleteparam()
         if (data.results[0].result) {
           if (data.count > this.generalcounter) {
-            let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result,this.paymentmethodid)
-            this.saleData.grandtotal =parseFloat(this.commonfunc.precise_round(incomingdata.grandtotal, 2)) 
+           
+            let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result, this.paymentmethodid)
+            this.orderlistsaleData=[... this.orderlistsaleData, ...data.results[0].result]
+            this.saleData.grandtotal = parseFloat(this.commonfunc.precise_round(incomingdata.grandtotal, 2))
             this.saleData.shippingcost += parseFloat(this.commonfunc.precise_round(incomingdata.shpcost, 2))
             this.saleData.subtotal += parseFloat(this.commonfunc.precise_round(incomingdata.subtotal, 2))
-            this.generalcounter +=data.results[0].result.length
-            // console.log("total price : ", this.completelist["data"]["grandtotal"]);
-
-            if(this.currentpage > data.per_page_count){
-              this.currentpage=data.per_page_count
-            }else if(data.per_page_count > this.currentpage){
+            this.generalcounter += data.results[0].result.length
+            if (this.currentpage > data.per_page_count) {
+              this.currentpage = data.per_page_count
+            } else if (data.per_page_count > this.currentpage) {
               this.currentpage++
               this.pageurl = "/?page=" + this.currentpage
               this.getOrderlistData(this.lastdate)
-            }           
-          }if(this.currentpage > data.per_page_count){
-              this.currentpage=data.per_page_count
-            }if(data.count === this.generalcounter) {  
-            // console.log("true");/
-            this.saleData.totalorder =data.count        
+            }
+
+          } if (this.currentpage > data.per_page_count) {
+            this.currentpage = data.per_page_count
+          } if (data.count === this.generalcounter) {
+            console.log("before ids 2 :", this.paymentmethodlastids);
+            this.saleData.totalorder = data.count
             this.completelist["data"]["currency_code"] = data?.results[0]?.result[0]?.currency_code
+
+            //for multi selection checkbox, after getting data we set paymentmethodlastids value to undefined and calculate orders
+            if (this.paymentmethodlastids === undefined) {
+                if(this.mergeFirstPaymentData.length !==0 ){
+                  this.saleData.totalorder += this.mergeFirstPaymentData.totalorder
+                  this.saleData.shippingcost += this.mergeFirstPaymentData.shippingcost
+                  this.saleData.subtotal += this.mergeFirstPaymentData.subtotal
+                  this.saleData.grandtotal += this.mergeFirstPaymentData.grandtotal 
+                  this.mergeFirstPaymentData=[]
+                }
+            }//for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
+            if (this.paymentmethodlastids !== undefined) {
+                // this.orderlistsaleMergrray['data']=data.results[0].result
+              let tempdata = {
+                totalorder: this.saleData.totalorder,
+                shippingcost: this.saleData.shippingcost,
+                subtotal: this.saleData.subtotal,
+                grandtotal: this.saleData.grandtotal
+              }
+              this.mergeFirstPaymentData=tempdata//merge data with old and set new value for ids
+              if (this.paymentmethodlastids) {
+                this.generalcounter = 0
+                // this.mergeFirstPaymentData=[]
+                this.advancedsearch = []
+                this.setcompleteparam()
+                this.advancedsearch.push({
+                  comparer: 1,
+                  field: "payment_method_id",
+                  field_id: 73,
+                  input_type: "select",
+                  key: this.paymentmethodlastids,
+                  key2: this.paymentmethodname,
+                  name: "payment_method_id",
+                  show_name: "Payment Method"
+                })
+                this.paymentmethodlastids = undefined
+                this.getOrderlistData(this.lastdate)
+              }
+            }
           }
         } if (data.results[0].result.length === 0 || data.results[0].result === []) {
           // console.log("else is executed");
           this.setfieldvalue()
         }
+
       })
     })
   }
 
-  //set value to 0.00
   setfieldvalue() {
     // this.completelist["data"].length = 0
-    this.completelist['data']['currency_code']='0.'
-    this.saleData.grandtotal =parseFloat('00') 
-    this.saleData.shippingcost =parseFloat('00')
-    this.saleData.subtotal =parseFloat('00')
-    this.generalcounter =parseFloat('00')
+    this.completelist['data']['currency_code'] = '0.'
+    this.saleData.grandtotal = parseFloat('00')
+    this.saleData.shippingcost = parseFloat('00')
+    this.saleData.subtotal = parseFloat('00')
+    this.generalcounter = parseFloat('00')
   }
 
   Searchorders() {
-    this.pageurl= '/'
+    this.pageurl = '/'
     this.setfieldvalue()
     this.currentpage = 1
-  
-    
-    if(this.paymentmethodid !== "both"){
-      // let lastindex:any=this.paymentmultyids.slice(-1)
-      // this.paymentmultyids=this.commonfunc.filterArray(this.paymentmultyids)
-      let temparray:any=this.paymentmethod.subtasks
-      console.log("paymentmethod ids: ",this.paymentmethod.subtasks,temparray);
-      this.advancedsearch=[]
+
+    this.orderlistsaleData=[]
+    if (this.paymentmethodid !== "both") {
+      let temparray: any = this.paymentmethod.subtasks
+      let secondtemarray: any = []
+      console.log("paymentmethod ids: ", this.paymentmethod.subtasks, temparray);
+      this.advancedsearch = []
       this.setcompleteparam()
-      for(let i=0;i<temparray.length;i++){
-        if(temparray[i].completed === true){
-          console.log("paymentmethod ids true");
-          this.advancedsearch.push({
-            comparer: 1,
-            field: "payment_method_id",
-            field_id: 73,
-            input_type: "select",
-            key:temparray[i].id,
-            key2: temparray[i].name,
-            name: "payment_method_id",
-            show_name: "Payment Method"})
+      for (let i = 0; i < temparray.length; i++) {
+        if (temparray[i].completed === true) {
+          secondtemarray.push(temparray[i])
+          console.log("paymentmethod ids true", secondtemarray);
+
+          if (secondtemarray[1]) {
+            this.paymentmethodlastids = secondtemarray[1].id
+            this.paymentmethodname = secondtemarray[1].name
+            console.log("last payment ids :", this.paymentmethodlastids);
+          } else if (secondtemarray[0]) {
+            this.advancedsearch.push({
+              comparer: 1,
+              field: "payment_method_id",
+              field_id: 73,
+              input_type: "select",
+              key: secondtemarray[0].id,
+              key2: secondtemarray[0].name,
+              name: "payment_method_id",
+              show_name: "Payment Method"
+            })
+          }
+
         }
       }
     }
-    if(this.rangeFormGroup.value.start !== null && this.rangeFormGroup.value.end !== null){
+    if (this.rangeFormGroup.value.start !== null && this.rangeFormGroup.value.end !== null) {
       this.getmonth = "nomonth"
-      this.getyear= "2020";
-      this.lastdate = this.datePipe.transform(this.rangeFormGroup.value.start, "yyyy-M-d")+"##"+this.datePipe.transform(this.rangeFormGroup.value.end, "yyyy-M-d");
+      this.getyear = "2020";
+      this.lastdate = this.datePipe.transform(this.rangeFormGroup.value.start, "yyyy-M-d") + "##" + this.datePipe.transform(this.rangeFormGroup.value.end, "yyyy-M-d");
     } else if (this.getmonth === 'nomonth') {
       this.lastdate = this.getyear + "-" + 1 + "-" + 1 + "##" + this.getyear + "-" + 12 + "-" + this.getDaysInMonth(12, this.getyear)
     } else {
@@ -215,7 +273,7 @@ export class SalesreportComponent implements OnInit {
     this.rangeFormGroup.controls.start.setValue(null);
     this.rangeFormGroup.controls.end.setValue(null);
     // this.rangeFormGroup.controls.paymentmethodid.setValue(eventValue?.target?.value)
- if (status === 'month') {
+    if (status === 'month') {
       this.getmonth = eventValue?.target?.value
     } else {
       this.getyear = eventValue?.target?.value
@@ -235,9 +293,9 @@ export class SalesreportComponent implements OnInit {
       'Total Orders': this.saleData.totalorder,
       'Subtotal': this.saleData.subtotal,
       'Shipping Costs': this.saleData.shippingcost,
-      'Grand Total': this.saleData.grandtotal +" "+this.completelist['data']['currency_code']
+      'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code']
     }
- 
+
     if (this.saleData.totalorder !== 0) {
       let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs', 'Grand Total']
       // console.log("csv file : ", paramdata);
@@ -248,12 +306,12 @@ export class SalesreportComponent implements OnInit {
     }
   }
 
-  cleardatefield(){
+  cleardatefield() {
     this.rangeFormGroup.controls.start.setValue(null);
     this.rangeFormGroup.controls.end.setValue(null);
     const d = new Date();
     // alert(d.getMonth()+1);
-    this.getmonth =d.getMonth()+1
+    this.getmonth = d.getMonth() + 1
     this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(this.getmonth, this.getyear)
     this.Searchorders()
   }
@@ -261,72 +319,100 @@ export class SalesreportComponent implements OnInit {
   //checkbox
   updateAllComplete() {
     this.allComplete = this.paymentmethod.subtasks != null && this.paymentmethod.subtasks.every(t => t.completed);
-    if(this.allComplete){
-      console.log("all true");
-      
-      this.advancedsearch=[]
+    if (this.allComplete) {
+      // console.log("all true");
+      this.advancedsearch = []
       this.setcompleteparam()
-      this.paymentmethodid= this.paymentmethod.id;
-      this.paymentmethodname=this.paymentmethod.name;
-    }else if(!this.allComplete){
-      
-      this.paymentmethodid= this.paymentmethod.id;
-      this.advancedsearch=[]
+      this.paymentmethodid = this.paymentmethod.id;
+      this.paymentmethodname = this.paymentmethod.name;
+    } else if (!this.allComplete) {
+      this.paymentmethodid = this.paymentmethod.id;
+      this.advancedsearch = []
       this.setcompleteparam()
-      console.log("not complete",this.paymentmethodid ,this.allComplete);
+      // console.log("not complete",this.paymentmethodid ,this.allComplete);
     }
     // console.log("not complete",this.paymentmethodid ,this.allComplete);
     // console.log("updateAll Complete : ",this.allComplete);
   }
 
   someComplete(): boolean {
-    console.log("some completed : ");
-    
+    // console.log("some completed : ");
+
     if (this.paymentmethod.subtasks == null) {
       return false;
     }
-    let counter=0
-    if(this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete){
-      for(var i=0;i<this.paymentmethod.subtasks.length;i++){
-        if(this.paymentmethod.subtasks[i].completed === true){
+    let counter = 0
+    if (this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete) {
+      for (var i = 0; i < this.paymentmethod.subtasks.length; i++) {
+        if (this.paymentmethod.subtasks[i].completed === true) {
           counter++;
-          this.paymentmethodid=this.paymentmethod.subtasks[i].id
+          this.paymentmethodid = this.paymentmethod.subtasks[i].id
           this.paymentmultyids.push(this.paymentmethod.subtasks[i].id)
-          this.paymentmethodname=this.paymentmethod.subtasks[i].name
+          this.paymentmethodname = this.paymentmethod.subtasks[i].name
           // console.log("id : ",this.paymentmethod.subtasks[i].id);
           // console.log("counter value ",counter);
           // console.log("some  complete ",this.paymentmethodid);
-        }else{
+        } else {
           // console.log("some not complete ",this.paymentmethodid);
           // this.paymentmethodid=this.paymentmethod.id
           // this.advancedsearch=[]
           // this.setcompleteparam()
-          
+
         }
       }
-    }else if(this.paymentmethod.subtasks.filter(t => t.completed).length === 0 && !this.allComplete){
-      console.log("not all completed", this.paymentmethod.subtasks);
-      this.advancedsearch=[]
+    } else if (this.paymentmethod.subtasks.filter(t => t.completed).length === 0 && !this.allComplete) {
+      // console.log("not all completed", this.paymentmethod.subtasks);
+      this.advancedsearch = []
       this.setcompleteparam()
     }
-    
+
     return this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
   }
 
   setAll(completed: boolean) {
-    this.paymentmethodid=this.paymentmethod.id
-    this.paymentmethodname=this.paymentmethod.name
+    this.paymentmethodid = this.paymentmethod.id
+    this.paymentmethodname = this.paymentmethod.name
     // console.log("method complete : ",this.paymentmethodid);
-    
+
     this.allComplete = completed;
     // console.log("setAll : ",this.allComplete);
-    if(this.allComplete === false){
-      this.advancedsearch=[]
-      this. setcompleteparam()
+    if (this.allComplete === false) {
+      this.advancedsearch = []
+      this.setcompleteparam()
     }
-    if (this.paymentmethod.subtasks == null) { 
+    if (this.paymentmethod.subtasks == null) {
       return;
     }
     this.paymentmethod.subtasks.forEach(t => t.completed = completed);
+  }
+
+  //generate sale report
+  generateSaleReport(){
+    console.log("order list :",this.orderlistsaleData);
+      let counter=0
+      let temarray:any=[]
+      for(let i=0;i<this.orderlistsaleData.length;i++){
+        let data: any = {
+          'Order Number':this.orderlistsaleData[i].custom_order_id,
+          'Order Date': this.datePipe.transform(this.orderlistsaleData[i].created, "yyyy-M-d"),
+          'Customer Name': this.orderlistsaleData[i].customer.first_name +" "+this.orderlistsaleData[i].customer.last_name,
+          // 'Prepared By':this.orderlistsaleData[i].assign_to,
+          // 'Bill Number': this.orderlistsaleData[i].custom_order_id,
+          'Payment Method': this.orderlistsaleData[i].payment_method_name,
+          'Subtotal': this.orderlistsaleData[i].net_amount,
+          'Shipping Cost': this.orderlistsaleData[i].shipping_cost ,
+          'Shipping Discount': this.orderlistsaleData[i].cart_discount ,
+          'Other Discount': this.orderlistsaleData[i].gross_discount_amount,
+          'Grand Total': this.orderlistsaleData[i].gross_amount,
+        }
+        counter++
+          temarray.push(data)
+          console.log("Index: ",counter);
+          if(this.orderlistsaleData.length === counter){
+            console.log("CSV file : ",temarray, this.orderlistsaleData.length , i)
+            let paramdata:any=['Order Number','Order Date','Customer Name','Payment Method','Subtotal','Shipping Cost','Shipping Discount','Other Discount','Grand Total']
+            this.commonfunc.downloadFile(temarray,"order products",paramdata)
+          }
+      }
   }
 }

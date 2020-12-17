@@ -71,6 +71,7 @@ export class CommonfunctionService {
       shpcost: shpcost,
       subtotal: subtotal,
       grandtotal: grandtotal,
+      totalList: completeorderdata
     }
     return data
   }

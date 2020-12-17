@@ -138,6 +138,10 @@
                 <button matRipple type="button" class="btn btn-success" [disabled]="saleData.totalorder === 0"
                     (click)="getCSVFile()">Generate CSV</button>
             </div>
+            <div class="col-md-4">
+                <button matRipple type="button" class="btn btn-success" [disabled]="saleData.totalorder === 0"
+                    (click)="generateSaleReport()">Generate Order Report</button>
+            </div>
         </div>
     </div>
 </div>
