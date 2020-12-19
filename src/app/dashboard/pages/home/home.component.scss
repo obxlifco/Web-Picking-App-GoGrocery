@@ -23,25 +23,28 @@
  ::ng-deep.mat-card-header-text {
    margin: 0px !important;
  }
- .mainpadding{
-  padding-left:5% ;
+
+ .mainpadding {
+   padding-left: 5%;
  }
- .subpadding{
-  padding-left:9% ;
+
+ .subpadding {
+   padding-left: 9%;
  }
 
  table {
-  //  background: lightgray;
-   font-size : 17px;
+   //  background: lightgray;
+   font-size  : 17px;
    line-height: 1;
  }
- .table-striped tr:nth-child(odd) td {
-  background-color: #f5f4f4;
-}
 
-.table-striped tr:nth-child(even) td {
-  background-color:rgba(0,0,0,.028);
-}
+ .table-striped tr:nth-child(odd) td {
+   background-color: #f5f4f4;
+ }
+
+ .table-striped tr:nth-child(even) td {
+   background-color: rgba(0, 0, 0, .028);
+ }
 
  .bg-order-cancelled {
    background: #800080 !important;

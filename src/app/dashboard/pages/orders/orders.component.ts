@@ -1,6 +1,5 @@
 import { Component, ElementRef, NgModule, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-// import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddnewproductComponent } from 'src/app/components/addnewproduct/addnewproduct.component';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
@@ -12,7 +11,6 @@ import { MapmodalComponent } from 'src/app/components/mapmodal/mapmodal.componen
 import { BillnumberComponent } from 'src/app/components/billnumber/billnumber.component';
 import { EditpriceComponent } from 'src/app/components/editprice/editprice.component';
 import { DatePipe } from '@angular/common';
-import { AppComponent } from 'src/app/app.component';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
@@ -47,15 +45,15 @@ export class OrdersComponent implements OnInit {
     order_product_id: '',
     orderlistType: null,
     ordernonlistType: '',
-    payment_type_id:'',
+    payment_type_id: '',
     order_id_for_substitute_checking: 0,
     PickerCounter: 0, //set the counter to check if product selected in list
   }
-  paymentonlineTimer=false
-  order_Substitute_Time:any
+  paymentonlineTimer = false
+  order_Substitute_Time: any
   currenttime: any = new Date()
   isTimerStart = false
-  isProductSendFor_Approval=true
+  isProductSendFor_Approval = true
   paymentOnlineTime: any
   price: any = ''
   currentPage: any = 1//pagination
@@ -66,9 +64,7 @@ export class OrdersComponent implements OnInit {
   product_billnumber: any = '';
   IS_Subtitute = false;
   timer: any
-  leftTime: any = 5*60000
-  
-
+  leftTime: any = 5 * 60000
   //below date var is sample max and min date
   minValue: any = new Date();
   maxValue: any = this.minValue.getDate() + 3;
@@ -77,7 +73,7 @@ export class OrdersComponent implements OnInit {
 
   constructor(public router: Router,
     public dialog: MatDialog,
-    public commonfunc : CommonfunctionService,
+    public commonfunc: CommonfunctionService,
     public appcom: DashboardComponent,
     public datePipe: DatePipe,
     public db: DatabaseService,
@@ -85,12 +81,7 @@ export class OrdersComponent implements OnInit {
     public modalservice: ModalService,
     private activated_route: ActivatedRoute,
     public globalitem: GlobalitemService) {
-    // this.dataService.sendGetRequest().subscribe((data: any[])=>{
-    //   console.log(data);
-    //   this.products = data;
-    // })  
-    console.log("picker Nme : ", this.userOrderdata.picker_name);
-
+    // console.log("picker Nme : ", this.userOrderdata.picker_name);
     this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     this.activated_route.params.subscribe(v => {
       console.log("activated route data :", v.orderstatus)
@@ -99,9 +90,7 @@ export class OrdersComponent implements OnInit {
         if (this.userOrderdata.orderlistType === "cancelled" || this.userOrderdata.orderlistType === "shipped") {
           this.appcom.setbadge(0)
         }
-
       }
-
     })
     this.startcounter()
   }
@@ -109,17 +98,11 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
-
-
     this.getOrderlistData()
   }
-
   navigate(link: any) {
     this.router.navigate([link]);
   }
-
-
-
   //call when we completing the order
   processOrder() {
     this.getcounter()
@@ -158,7 +141,7 @@ export class OrdersComponent implements OnInit {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
         page: this.currentPage,
-        per_page: 100
+        per_page: 100,
       }
       if (this.userOrderdata.orderlistType !== null) {
         let status = {
@@ -166,18 +149,18 @@ export class OrdersComponent implements OnInit {
         }
         Object.assign(data, status)
       }
-
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
+      if(this.userOrderdata.orderlistType !== 'complete'){
       this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
         // console.log(data);
         this.orderlistdata["data"] = data.response //json response
         this.totalProductpage = data.total_page//total page
-        this.orderlistdata["data"].payment_type_id=data?.response?.payment_type_id
+        this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
         this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
           this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
-          
+
         if (this.currentPage === 1) {
           this.orderlistdata["data"] = data.response
           this.totalProductpage = data.total_page
@@ -185,13 +168,11 @@ export class OrdersComponent implements OnInit {
           console.log("page n");
           this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
         }
-
-
       })
+    }else if(this.userOrderdata.orderlistType === 'complete'){
+      this.getCompletedOrders()
+    }
     })
-
-
-
   }
 
   //when to assaign user name to order
@@ -205,7 +186,6 @@ export class OrdersComponent implements OnInit {
       shipment_id: this.userOrderdata.shipment_id,
       order_status: this.userOrderdata.order_status
     }
-
     this.apiService.postData("picker-generatepicklist/", data).subscribe((data: any) => {
       console.log(data);
       // this.orderlistdata["data"] = data
@@ -213,13 +193,13 @@ export class OrdersComponent implements OnInit {
       // this.reloadpage()
       this.getOrderlistData()
       // this.getOrderDetailData( this.userOrderdata.order_id,  this.userOrderdata.shipment_id,  this.userOrderdata.order_status,  this.userOrderdata.picker_name,  this.userOrderdata.substitute_status)
-
     })
   }
 
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
     // this.IsTimeComplete = ''
-    console.log("order id :", orderid);
+    
+    console.log("order id :", orderid,"shipment_id: ",shipment_id," order_status: ",order_status," picker_name: ",picker_name," substitute_status: ",substitute_status);
     this.userOrderdata.picker_name = picker_name;
     this.userOrderdata.order_id = orderid
     this.userOrderdata.order_status = order_status
@@ -229,73 +209,56 @@ export class OrdersComponent implements OnInit {
       website_id: this.userOrderdata.website_id,
       order_id: orderid,
     }
-
-    this.apiService.postData("picker-orderdetails/", data).subscribe((data: any[]) => {
+    this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata["data"][0]?.id
+    console.log("order list data inside detail : ", this.orderlistdata["data"]);
+    this.apiService.postData("picker-orderdetails/", data).subscribe((data: any) => {
+      // console.log("order list data inside detail : ",this.orderlistdata);
       console.log(data);
+     
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
-
       this.paymentOnlineTime = this.datePipe.transform(this.orderDetaildata["data"][0]?.created, "MMM d, y, h:mm:ss a");
       this.currenttime = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
-      if(this.orderDetaildata["data"][0]?.order_substitute_products){
+      
+      if (this.orderDetaildata["data"][0]?.order_substitute_products) {
         // console.log("entered in if ",this.orderDetaildata["data"]?.order_substitute_products);
-        
         this.order_Substitute_Time = this.datePipe.transform(this.orderDetaildata["data"][0]?.order_substitute_products[0]?.created, "MMM d, y, h:mm:ss a")
-       console.log(" order_Substitute_Time ",this.order_Substitute_Time  );
-       
-      //  this.leftTime= 0.6*60000
-       console.log("added 10 minutes to substitute  ",this.order_Substitute_Time + (30 * 60 * 1000));
-       
-        // let milisecond =Date.parse(this.currenttime) - Date.parse(this.order_Substitute_Time) //when subs product sent for a approval, thne time will start for ten minutes
-        //   var seconds:any = (addedminutes_milisecond / 1000).toFixed(0);
-        //     var minutes = Math.floor(seconds / 60);
-        //     console.log("Date true",minutes ,"left minutes : ",this.leftTime);
-        if(  this.userOrderdata.substitute_status === 'pending'){
-          this.timerProductSentApproval(this.order_Substitute_Time,10)
-        }else{
-          this.paymentonlineTimer=true
+        console.log(" order_Substitute_Time ", this.order_Substitute_Time);
+        //  this.leftTime= 0.6*60000
+        console.log("added 10 minutes to substitute  ", this.order_Substitute_Time + (30 * 60 * 1000));
+        if (this.userOrderdata.substitute_status === 'pending') {
+          this.timerProductSentApproval(this.order_Substitute_Time, 10)
+        } else {
+          this.paymentonlineTimer = true
         }
-        
       }
       // if(this.orderDetaildata["data"]?.payment_type_id === 2){
-      if(this.orderDetaildata["data"][0]?.payment_type_id === 2){
+      if (this.orderDetaildata["data"][0]?.payment_type_id === 2) {
         console.log("timer");
-        this.timerProductSentApproval(this.paymentOnlineTime,30)
+        this.timerProductSentApproval(this.paymentOnlineTime, 30)
       }
-  
-      // let timediff=Date.parse( this.currenttime) - Date.parse(this.paymentOnlineTime)
-    
-
-      // // test timer
-      // if(timediff === 30){
-      //   console.log("Date true",Date.parse(this.currenttime) - Date.parse(this.paymentOnlineTime));
-      //   let milisecond =Date.parse(this.currenttime) - Date.parse(this.paymentOnlineTime)
-      //   var seconds:any = (milisecond / 1000).toFixed(0);
-      //     var minutes = Math.floor(seconds / 60);
-      //     console.log("Date true",minutes);
-      // }else{
-      //   console.log(" Date false");
-      // }
-
-
       this.userOrderdata.shipment_id = this.orderDetaildata["data"][0].shipment_id
       this.userOrderdata.trent_picklist_id = this.orderDetaildata["data"][0].trent_picklist_id
-      this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata['data'][0].id
+      // if(this.userOrderdata.orderlistType !== 'complete'){
+      //   this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata['data'][0].id
+      // }else{
+      //   console.log("order llist data inside detail : ",this.orderlistdata["data"][0]);
+      //   this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata["data"][0]?.id
+      // }
+      
       if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped') {
       } else {
         this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
       }
 
       // let time: any = this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
-
       this.getsubtitteStatus()
       // this.datetime = time.getTime()
       console.log("Date Time : ", this.datetime);
       // this.addCustomVariable();
     })
   }
-
 
   openmap(latlang: any) {
     console.log("latlang : ", latlang);
@@ -309,7 +272,7 @@ export class OrdersComponent implements OnInit {
       website_id: this.userOrderdata.website_id,
       user_id: this.userOrderdata.user_id,
       user_name: this.userOrderdata.picker_name,
-      order_id:this.userOrderdata.order_id
+      order_id: this.userOrderdata.order_id
     }
     Object.assign(data, user_ids)
     const dialogRef = this.dialog.open(EditproductweightComponent, { width: '500px', data: { data: data } });
@@ -321,7 +284,6 @@ export class OrdersComponent implements OnInit {
 
   //send product subtitution for approval
   sendProductSubtituteApproval(approvalProducst: any, bill_value: any, product_billnumber: any) {
-
     this.getcounter()
     let temarray = new Array()
     for (let i = 0; i < approvalProducst.length; i++) {
@@ -341,21 +303,19 @@ export class OrdersComponent implements OnInit {
       // if (this.billnumber.nativeElement.value) {
       this.apiService.postData("picker-sendapproval/", data).subscribe((data: any) => {
         if (data.status === 1) {
-          this.timerProductSentApproval(this.order_Substitute_Time,10)
+          this.timerProductSentApproval(this.order_Substitute_Time, 10)
           this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
           this.globalitem.showSuccess(data.message, "Subtitute Sent")
           this.ApprovalTimer(10000)
           // this.reloadpage()
         }
       })
-
       // } else {
       //   this.getbillValidator()
       // }
     } else {
       this.globalitem.showError("Picking list not completed yet", "Warning")
     }
-
   }
 
   // dialog
@@ -407,10 +367,10 @@ export class OrdersComponent implements OnInit {
   }
 
   //update product quantity
-  updateMoreProductQuantity(quantity: any, order_product_id: any, product_id: any,  shortage: any, index: any) {
+  updateMoreProductQuantity(quantity: any, order_product_id: any, product_id: any, shortage: any, index: any) {
     console.log("prouct Quantity ", quantity);
     // substitute_product_id:any,product_id:any
-    console.log("order product id 1: ",order_product_id," product id 1: ",product_id);
+    console.log("order product id 1: ", order_product_id, " product id 1: ", product_id);
     let data = {
       website_id: this.userOrderdata.website_id,
       // warehouse_id: this.userOrderdata.warehouse_id,
@@ -421,7 +381,6 @@ export class OrdersComponent implements OnInit {
       grn_quantity: quantity,
       shortage: shortage
     }
-
     this.apiService.postData("picker-updategrnquantity/", data).subscribe((data: any[]) => {
       console.log("updategrnquantity : ", data);
       let tempdata: any = data
@@ -434,7 +393,6 @@ export class OrdersComponent implements OnInit {
       }
     })
   }
-
   // product increment and decrement funtion will be common 
   productDecerment(quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
     apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any) {
@@ -449,7 +407,6 @@ export class OrdersComponent implements OnInit {
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength;
             this.updateMoreProductQuantity(templength, product_id, order_product_id, shortage, index)
           }
-          
         } else if (productType === 2) {
           let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage - 1
           if (templength < 0) {
@@ -457,23 +414,20 @@ export class OrdersComponent implements OnInit {
             // this.updateMoreProductQuantity(quantity, product_id, order_product_id, shortage, index)
           } else {
             this.orderDetaildata["data"][0].order_products[i].shortage = templength;
-            console.log("shortage length",templength);
-            this.updateMoreProductQuantity(templength,order_product_id, product_id, templength, index)
+            console.log("shortage length", templength);
+            this.updateMoreProductQuantity(templength, order_product_id, product_id, templength, index)
             // this.updateMoreProductQuantity(quantity, product_id, order_product_id, templength, index)
           }
-         
           // this.openDialog(apiURL,sub_apiUrl, pageTitle, productid,productType)
-         
         }
       }
     }
-   
   }
 
   productIncrment(grn_quantity: any, product_id: any, order_product_id: any, shortage: any, index: any,
     apiURL: any, sub_apiUrl: any, pageTitle: any, productid: any, productType: any, ean: any) {
-      console.log("order product id : ",order_product_id," product id : ",product_id);
-      
+    console.log("order product id : ", order_product_id, " product id : ", product_id);
+
     var modaldata = {
       shortage: shortage,
       grn_quantity: grn_quantity,
@@ -483,58 +437,40 @@ export class OrdersComponent implements OnInit {
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       if (i === index) {
         if (productType === '') {
-          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity){
+          if (this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity) {
             let templength = this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + 1 //increment the quantity
             this.orderDetaildata["data"][0].order_products[i].grn_quantity = templength; //assaign quantity to input
             this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, order_product_id, product_id, shortage, index)
           }
         } else if (productType === 2) {
-          if(this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity){
+          if (this.orderDetaildata['data'][0]?.order_products[i].grn_quantity + this.orderDetaildata['data'][0]?.order_products[i].shortage < this.orderDetaildata['data'][0]?.order_products[i].quantity) {
             let templength = this.orderDetaildata['data'][0]?.order_products[i].shortage + 1
             this.orderDetaildata["data"][0].order_products[i].shortage = templength;
-            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity,order_product_id, product_id, templength, index)
+            this.updateMoreProductQuantity(this.orderDetaildata["data"][0].order_products[index].grn_quantity, order_product_id, product_id, templength, index)
             this.openDialog(apiURL, sub_apiUrl, pageTitle, productid, productType, templength, modaldata, ean)
           }
-
         }
       }
     }
-
   }
 
-  //this for assing bill number
-  // BillnumberModal1(){
-  //   if(this.product_billnumber === "Enter Bill Number"){
-  //     this.product_billnumber=''
-  //   }
-  //   this.BillnumberModal(this.product_billnumber)
-  // }
   BillnumberModal(billnumbr: any) {
-    console.log("bill number : ", billnumbr);
-
+    // console.log("bill number : ", billnumbr);
     let data = {
       website_id: this.userOrderdata.website_id,
       order_id: this.userOrderdata.order_id,
       user_id: this.userOrderdata.user_id,
       billnumber: billnumbr
     }
-
     const dialogRef = this.dialog.open(BillnumberComponent, {
       width: '500px',
       data: { data: data }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.product_billnumber = result.billnumber
 
     });
-    // this.modalservice.openModal(data,BillnumberComponent).then(data =>{
-    // })
-    // this.modalservice.closeCategoryModal().then(data => {
-    //   this.product_billnumber = data.billnumber
-    //   console.log("closed Modal : ", data.billnumber);
-    // })
   }
 
   // to notfy customer using bell icon with badge
@@ -568,15 +504,13 @@ export class OrdersComponent implements OnInit {
 
       temData = orderData
     }
-
-
     this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
       console.log("latestorders : ", data);
       this.appcom.setbadge(data.response.no_of_latest_order)
       this.db.setOrderIDS(temData)
     })
   }
-  updatePrice(order_amount: any,unitweight:any, netAmount: any,productinfo:any,URL:any,pricestatus:any) {
+  updatePrice(order_amount: any, unitweight: any, netAmount: any, productinfo: any, URL: any, pricestatus: any) {
     console.log("order mount : ", order_amount);
     if (order_amount === null) {
       order_amount = netAmount
@@ -588,31 +522,20 @@ export class OrdersComponent implements OnInit {
       user_id: this.userOrderdata.user_id,
       order_amount: order_amount,
       user_name: this.userOrderdata.picker_name,
-      productinfo:productinfo,
-      URL:URL,
-      pricestatus:pricestatus,
-      unitweight:unitweight
+      productinfo: productinfo,
+      URL: URL,
+      pricestatus: pricestatus,
+      unitweight: unitweight
     }
-
-    
-
     const dialogRef = this.dialog.open(EditpriceComponent, {
       width: '500px',
       data: { data: data }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.price = result.price
       this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
-
     });
-
-    // this.modalservice.openModal(data,EditpriceComponent)
-    // this.modalservice.closeCategoryModal().then(data => {
-    //   this.price = data.price
-    //   console.log("closed Modal : ", data.price);
-    // })
   }
 
   //update detail order data with time
@@ -635,6 +558,7 @@ export class OrdersComponent implements OnInit {
       }
     })
   }
+
   invalidInputHandler() {
   }
 
@@ -642,7 +566,6 @@ export class OrdersComponent implements OnInit {
   getNextData() {
     console.log('scrolled!!');
   }
-
 
   //this method use for to check substitute is there are not 
   getsubtitteStatus() {
@@ -655,20 +578,16 @@ export class OrdersComponent implements OnInit {
         this.IS_Subtitute = false
       }
     }
-
     if (this.orderDetaildata['data'][0]?.order_substitute_products.length === 0) {
       this.IS_Subtitute = true
     }
-
-
   }
   handleEvent(event: any) {
     console.log("event occur : ", event);
     if (event.action === "done") {
       this.IsTimeComplete = false
-      this.isProductSendFor_Approval=true
+      this.isProductSendFor_Approval = true
     }
-
   }
 
   // this will refresh the page
@@ -677,7 +596,6 @@ export class OrdersComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['dashboard/orders']);
   }
-
   //start time counter for getting latest orders
   startcounter() {
     console.log("timer started");
@@ -693,7 +611,6 @@ export class OrdersComponent implements OnInit {
             }
           })
         })
-
       ).subscribe(result => {
       }
       );
@@ -709,18 +626,17 @@ export class OrdersComponent implements OnInit {
     } else {
       // this.globalitem.showError("No more data is available ","No Data")
     }
-
   }
 
-  ApprovalTimer(timeValue:any) {
+  ApprovalTimer(timeValue: any) {
     this.isTimerStart = true
     this.userOrderdata.substitute_status = "pending"
     this.subscription = timer(0, timeValue).pipe(
       switchMap(async () => {
         this.getOrderlistData()
         this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
-        if(this.userOrderdata.substitute_status === "none"){
-          this.isProductSendFor_Approval=true
+        if (this.userOrderdata.substitute_status === "none") {
+          this.isProductSendFor_Approval = true
         }
       })
     ).subscribe(result => {
@@ -729,121 +645,156 @@ export class OrdersComponent implements OnInit {
   }
 
   //timer for sent product approval
-  timerProductSentApproval(productTime:any,totaltime:any){
+  timerProductSentApproval(productTime: any, totaltime: any) {
     const originalDate = new Date(productTime);
-    const modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (totaltime* 60000)),"MMM d, y, h:mm:ss a")
+    const modifiedTime: any = this.datePipe.transform(new Date(originalDate.valueOf() + (totaltime * 60000)), "MMM d, y, h:mm:ss a")
     // const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (2 * 60000)),"MMM d, y, h:mm:ss a")
-    console.log(" modifiedTime ",modifiedTime ," currenttime : ",this.currenttime);
+    console.log(" modifiedTime ", modifiedTime, " currenttime : ", this.currenttime);
     this.leftTime = Date.parse(modifiedTime) - Date.parse(this.currenttime)
     //assaign difference to timer between subs time and current time
-    let milisecond =Date.parse(modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
-        var seconds:any = (milisecond / 1000).toFixed(0);
-        this.leftTime = Math.floor(seconds / 60)*60000/900;
-          console.log("left minutes : ",this.leftTime);
+    let milisecond = Date.parse(modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
+    var seconds: any = (milisecond / 1000).toFixed(0);
+    this.leftTime = Math.floor(seconds / 60) * 60000 / 900;
+    console.log("left minutes : ", this.leftTime);
 
     //check if timer is available ore not
-    console.log("current Time : ",this.currenttime,"modifiedTime ",modifiedTime);
-    
-    if(Date.parse(modifiedTime)  > Date.parse(this.currenttime)){
-      this.paymentonlineTimer=false
+    console.log("current Time : ", this.currenttime, "modifiedTime ", modifiedTime);
+
+    if (Date.parse(modifiedTime) > Date.parse(this.currenttime)) {
+      this.paymentonlineTimer = false
       console.log("timer is greater false");
-      if(this.userOrderdata.substitute_status === "none"){
-        this.isProductSendFor_Approval=true
-      }else if(this.userOrderdata.substitute_status === "pending"){
-        this.isProductSendFor_Approval=false
+      if (this.userOrderdata.substitute_status === "none") {
+        this.isProductSendFor_Approval = true
+      } else if (this.userOrderdata.substitute_status === "pending") {
+        this.isProductSendFor_Approval = false
       }
-    }else{
-      this.paymentonlineTimer=true
-      this.isProductSendFor_Approval=true
-      this.IsTimeComplete=false
+    } else {
+      this.paymentonlineTimer = true
+      this.isProductSendFor_Approval = true
+      this.IsTimeComplete = false
       console.log("timer is less than true");
     }
   }
-     //unsubscribe timer
-     destroyCounter(){
-      this.subscription.unsubscribe();
-    }
+  //unsubscribe timer
+  destroyCounter() {
+    this.subscription.unsubscribe();
+  }
 
-    //show confirmation dialog
-    openConfirmationDialog(): void {
-      let binddatawithHtml:any='<div class="confirmationdlg"><strong>Total Product Value = '+this.orderDetaildata["data"][0]?.currency_code+' '+this.orderDetaildata["data"][0]?.gross_amount+'</strong><br>'+
-      '<strong>Shipping Charge = '+this.orderDetaildata["data"][0]?.currency_code+' '+this.orderDetaildata["data"][0]?.shipping_cost+'</strong><br>'+
-      '<strong>Bill Number = '+this.billnumber.nativeElement.value+'</strong> <br><strong>Confirm?</strong>'+
+  //show confirmation dialog
+  openConfirmationDialog(): void {
+    let binddatawithHtml: any = '<div class="confirmationdlg"><strong>Total Product Value = ' + this.orderDetaildata["data"][0]?.currency_code + ' ' + this.orderDetaildata["data"][0]?.gross_amount + '</strong><br>' +
+      '<strong>Shipping Charge = ' + this.orderDetaildata["data"][0]?.currency_code + ' ' + this.orderDetaildata["data"][0]?.shipping_cost + '</strong><br>' +
+      '<strong>Bill Number = ' + this.billnumber.nativeElement.value + '</strong> <br><strong>Confirm?</strong>' +
       '</div>'
-      let data = {
-        pagestatus:'order',
-        info:binddatawithHtml
-      }
-      const dialogRef = this.dialog.open(AddproductasSubtituteComponent, {
-        width: '500px',
-        data: { data: data }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed', result);
-        if (result.data === undefined) {
-          // this.subcategory = result.data;
-        } else if (result.data === "none") {
-          this.getcounter()
-          let data1 = {
-            website_id: this.userOrderdata.website_id,
-            warehouse_id: this.userOrderdata.warehouse_id,
-            order_id: this.userOrderdata.order_id,
-            user_id: this.userOrderdata.user_id,
-            shipment_id: this.userOrderdata.shipment_id,
-            trent_picklist_id: this.userOrderdata.trent_picklist_id,
+    let data = {
+      pagestatus: 'order',
+      info: binddatawithHtml
+    }
+    const dialogRef = this.dialog.open(AddproductasSubtituteComponent, {
+      width: '500px',
+      data: { data: data }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if (result.data === undefined) {
+        // this.subcategory = result.data;
+      } else if (result.data === "none") {
+        this.getcounter()
+        let data1 = {
+          website_id: this.userOrderdata.website_id,
+          warehouse_id: this.userOrderdata.warehouse_id,
+          order_id: this.userOrderdata.order_id,
+          user_id: this.userOrderdata.user_id,
+          shipment_id: this.userOrderdata.shipment_id,
+          trent_picklist_id: this.userOrderdata.trent_picklist_id,
+        }
+        console.log("Total counter : ", this.userOrderdata.PickerCounter);
+        this.apiService.postData("picker-grn-complete/", data1).subscribe((data: any[]) => {
+          console.log("picker-grn-complete : ", data);
+          let tempdata: any = data
+          if (tempdata.status === 1) {
+            this.globalitem.showSuccess(tempdata.message, "Order Placed")
+            this.reloadpage()
+          } else {
+            this.globalitem.showError(tempdata.message, "Wait for 30 min")
           }
-          console.log("Total counter : ", this.userOrderdata.PickerCounter);
-          this.apiService.postData("picker-grn-complete/", data1).subscribe((data: any[]) => {
-            console.log("picker-grn-complete : ", data);
-            let tempdata: any = data
-            if (tempdata.status === 1) {
-              this.globalitem.showSuccess(tempdata.message, "Order Placed")
-              this.reloadpage()
-            }else{
-              this.globalitem.showError(tempdata.message, "Wait for 30 min")
-            }
-          })
-        }else{
-          console.log("modal closed");
-          
-        }
-  
-      });
-    }
-
-    downloadCSV(orderproducts:any){
-      console.log("order produts list : ",orderproducts);
-    let counter=0
-      let temarray:any=[]
-      for(let i=0;i<orderproducts.length;i++){
-        let data={
-          'Product Name' : orderproducts[i].product.name,
-          'SKU':orderproducts[i].product.sku,
-          'Unit Weight':orderproducts[i].weight * orderproducts[i]?.quantity/ orderproducts[i]?.quantity +" "+orderproducts[i].product.uom.uom_name,
-          'Unit Price':orderproducts[i].product_price,
-          'Quantity':orderproducts[i].quantity,
-        }
-        counter++
-        // data.productname =orderproducts[i].product.name
-        // data.sku = orderproducts[i].product.sku
-        // data.quantity=orderproducts[i].quantity,
-        // data.unitweight=orderproducts[i].weight * orderproducts[i]?.quantity/ orderproducts[i]?.quantity,
-        // data.unitprice=orderproducts[i].product_price
-        temarray.push(data)
-        
-        console.log("Index: ",counter);
-        if(orderproducts.length === counter){
-          console.log("CSV file : ",temarray, orderproducts.length , i)
-          let paramdata:any=['Product Name','SKU','Unit Weight', 'Unit Price','Quantity',]
-          this.commonfunc.downloadFile(temarray,"order products",paramdata,'footerdata')
-        }
+        })
+      } else {
+        console.log("modal closed");
       }
+    });
+  }
 
-      // console.log("CSV file : ",temarray)
-      
+  downloadCSV(orderproducts: any) {
+    console.log("order produts list : ", orderproducts);
+    let counter = 0
+    let temarray: any = []
+    for (let i = 0; i < orderproducts.length; i++) {
+      let data = {
+        'Product Name': orderproducts[i].product.name,
+        'SKU': orderproducts[i].product.sku,
+        'Unit Weight': orderproducts[i].weight * orderproducts[i]?.quantity / orderproducts[i]?.quantity + " " + orderproducts[i].product.uom.uom_name,
+        'Unit Price': orderproducts[i].product_price,
+        'Quantity': orderproducts[i].quantity,
+      }
+      counter++
+      temarray.push(data)
+      console.log("Index: ", counter);
+      if (orderproducts.length === counter) {
+        console.log("CSV file : ", temarray, orderproducts.length, i)
+        let paramdata: any = ['Product Name', 'SKU', 'Unit Weight', 'Unit Price', 'Quantity',]
+        this.commonfunc.downloadFile(temarray, "order products", paramdata, 'footerdata')
+      }
     }
-    conertvaluetodecimal(value:any):any{
-      return this.commonfunc.precise_round(value, 0)
+  }
+  conertvaluetodecimal(value: any): any {
+    return this.commonfunc.precise_round(value, 0)
+  }
+
+  //get completed orders list
+  getCompletedOrders(){
+    let data = {
+      advanced_search: [{
+        comparer: 1,
+        field: "order_status",
+        field_id: 76,
+        input_type: "multi_select",
+        key: [4],
+        key2: "Completed",
+        name: "order_status",
+        show_name: "Order Status",
+      }],
+      warehouse_id: this.userOrderdata.warehouse_id,
+      website_id: this.userOrderdata.website_id,
+      per_page: 500,
+      // page :1,
+      user_id: this.userOrderdata.user_id,
+      model: "EngageboostOrdermaster",
+      order_by: "",
+      order_type: "",
+      screen_name: "list",
+      search: "",
+      status: "",
+      userid: this.userOrderdata.user_id,
+      warehouse_status: "",
     }
+    this.apiService.postData("global_list/", data).subscribe((data: any) => {
+      console.log("completed Order list Data : ",data);
+      this.orderlistdata["data"] = data.results[0].result //json response
+      console.log("global list : ",this.orderlistdata["data"] );
+    
+      this.totalProductpage = data.per_page_count//total page
+      this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+        this.orderlistdata["data"][0].picker_name, "done")
+
+      if (this.currentPage === 1) {
+        this.orderlistdata["data"] = data.results[0].result
+        this.totalProductpage = data.total_page
+      } else {
+        console.log("page n");
+        this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.results[0].result];
+      }
+    })
+  }
 }

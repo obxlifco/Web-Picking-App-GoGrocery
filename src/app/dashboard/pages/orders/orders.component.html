@@ -1,20 +1,20 @@
 <div class="container">
     <!-- <button style="width: auto;" type="button" class="btn btn-success btn-sm">go Go bottom</button> -->
     <div class="row pickerinput"
-        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'|| userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
 
         <div class="row" style="width: 50%;margin-top: 1%;">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin" style="padding: 4% 9% 3% 3%;">
                 <div>
                     <h4>Order Details</h4>
                 </div>
+                <!-- process orders -->
                 <div *ngIf="IS_Subtitute === true" style="margin-left:3%">
-                    <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' &&
+                    <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                     orderDetaildata['data'][0]?.order_products"
                         [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: auto;"
                         type="button" (click)="processOrder()" class="btn btn-success btn-sm">Process the order</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -29,17 +29,18 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" [disabled]="userOrderdata.picker_name" #username
-                                    [value]="userOrderdata.picker_name"
+                                <input *ngIf="userOrderdata.picker_name !== undefined" type="text" [disabled]="userOrderdata.picker_name" #username
+                                    [value]="userOrderdata.picker_name" 
                                     (keyup.enter)="AssaignorderToUser(username.value)" class="form-control"
                                     placeholder="Order prepared by" id="orderby">
+                                    <p *ngIf="userOrderdata.picker_name === undefined">None</p>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>Bill Number</td>
                         <td
-                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                             <!-- <div (click)="BillnumberModal(orderDetaildata['data'][0]?.channel_order_id)"
                                 *ngIf="orderDetaildata['data'][0]?.channel_order_id"
                                 [disabled]="!userOrderdata.picker_name" class="colorclass"
@@ -78,6 +79,10 @@
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 100 && userOrderdata.substitute_status === 'done'">Subs.In
                             </span>
 
+                            <span style="color: black;"
+                                *ngIf="orderDetaildata['data'][0]?.order_status === 4 ">Completed
+                            </span>
+
                             <span style="color:gray;"
                                 *ngIf="orderDetaildata['data'][0]?.order_status === 1 && orderDetaildata['data'][0]?.order_shipment.shipment_status === 'Shipped'">In-Shipping
                             </span>
@@ -99,23 +104,25 @@
                     </tr>
                     <tr>
                         <td>Delivery Address</td>
-                        <td>{{orderDetaildata['data'][0]?.billing_name}},
+                        <td>
+                            <p style="display: inline-block;width: 70%;">
+                            {{orderDetaildata['data'][0]?.billing_name}},
                             {{orderDetaildata['data'][0]?.delivery_street_address}},
                             {{orderDetaildata['data'][0]?.delivery_state_name}}
-
+                            </p>
                             <div class="highlight_edits"
                                 style="background-color:gray; display: initial;margin-left: 3%;padding: 2% !important;"
-                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
-                                *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ">
+                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ">
                                 <span style="color: white;cursor: pointer;"
-                                    [ngStyle]="{'pointer-events':userOrderdata.picker_name === null ? 'none' : 'auto' }"
+                                    [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete'  ? 'none' : 'auto' }"
                                     (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
                                 </span>
                             </div>
 
-                            <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' "
+                            <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete'"
                                 class="highlight_edits" style="display: initial;margin-left: 3%;padding: 2%;"
-                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
                                 <span style="color: white;cursor: pointer;"
                                     [ngStyle]="{'pointer-events':userOrderdata.picker_name === null ? 'none' : 'auto' }"
                                     (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
@@ -131,17 +138,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td [ngStyle]="{'padding-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '5%'}">Delivery Time</td>
+                        <td
+                            [ngStyle]="{'padding-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? '3%' : '5%'}">
+                            Delivery Time</td>
                         <td style="padding: 0px;">
                             <div class="highlight_edits" style="margin-top: 3%;padding: 1%;"
-                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white',
-                                'margin-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '0%' }">
-                                <div 
-                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
-                                    'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'white' : 'black' }">
+                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white',
+                                'margin-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '2%' }">
+                                <div
+                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
+                                    'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'white' : 'black' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
                                     <p style="display: contents;color: white;margin-top: 2%;"
-                                        *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'">
+                                        *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped'">
                                         {{orderDetaildata['data'][0]?.slot_end_time}}</p>
                                     <!-- <mat-form-field appearance="fill"
                                         *ngIf="userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'cancelled'">
@@ -160,7 +169,7 @@
 
                                     <!-- [disabled]="!userOrderdata.picker_name" -->
                                     <mat-form-field appearance="fill"
-                                        *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped'">
+                                        *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'">
                                         <input style="color: black !important;caret-color: transparent;width: 50%;"
                                             [ngStyle]="{'background-color':userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white' }"
                                             matTimepicker #t="matTimepicker" #time="ngModel" [minDate]="minValue"
@@ -269,7 +278,7 @@
                     </div>
                     <!-- Add more button -->
                     <div class="row row-margin"
-                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
                             <button [disabled]="!userOrderdata.picker_name"
@@ -292,16 +301,16 @@
                         *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index">
                         <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
                         <div class="layover-root" *ngIf="products?.quantity === products?.grn_quantity + products?.shortage  ||
-                            userOrderdata.orderlistType === 'cancelled'"
+                            userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete'"
                             [ngStyle]="{'z-index':userOrderdata.orderlistType === 'cancelled' ? 2 : 1 }">
                             <div class="layover">
                             </div>
                         </div>
-                        <img *ngIf="products?.quantity === products?.grn_quantity + products?.shortage  ||
+                        <img *ngIf="products?.quantity === products?.grn_quantity + products?.shortage  || userOrderdata.orderlistType === 'complete' || 
                         userOrderdata.orderlistType === 'cancelled'" class="checkmark_img" style="z-index: 5;"
                             src="assets/images/product/toggle_checked.png" alt="">
                         <table
-                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                             style="z-index: 1;"
                             [ngStyle]="{'opacity':products.grn_quantity + products.shortage === products?.quantity ? '0.5' : '1' }">
 
@@ -319,7 +328,7 @@
                                         {{products?.product_price/products?.quantity *products?.quantity |
                                         currency:'':''}}</span>
                                     <button style="margin: 1px 1px 9px 20px;"
-                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         (click)=" updatePrice(products?.product_price,products?.weight, '',products,'picker-updatepicklistproductinfo/','unitprice')"
                                         type="button" class="btn btn-primary btn-sm">Edit Unit Price</button>
                                     <br>
@@ -333,28 +342,23 @@
                                         Total Weight : <strong>{{products?.weight}}
                                             {{products?.product.uom.uom_name}}</strong> -->
                                     <button style="margin: 1px 1px 9px 20px;" (click)="openEditModal(products)"
-                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         type="button" class="btn btn-primary btn-sm">Edit Total
                                         Weight</button>
                                     <br>
-
-
                                     <strong> Total Price: {{products?.product_price * products?.grn_quantity |
                                         currency:'':''}}</strong><br>
-
                                     <div>
-
                                     </div>
                                     <div class="row row-margin">
                                         <div style="z-index: 1;"
-                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                             class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin">
-
                                             <div>
                                                 <strong>Available</strong>
                                                 <div class="btn-left" style="z-index: 999">
                                                     <mat-icon
-                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto'}"
+                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto'}"
                                                         (click)="productDecerment(products.grn_quantity,products.id,products.product.id,products.shortage,i,'','','','','')"
                                                         [disabled]="!userOrderdata.picker_name" class="left-icon">
                                                         minimize</mat-icon>
@@ -369,18 +373,18 @@
 
                                                     <mat-icon class="right-icon" (click)="productIncrment(products.grn_quantity,products.product.id,products.id,products.shortage,i,
                                                         '','','','','',products.product.ean)"
-                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                                         add</mat-icon>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card grid-margin"
-                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                                            [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                             <div>
                                                 <strong>Shortage</strong>
                                                 <div class="btn-right" style="z-index: 999;position: absolute;">
                                                     <mat-icon matRipple
-                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                                         (click)="productDecerment(products.shortage,products.product.id,products.id,products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',products?.id,2)"
                                                         class="left-icon">
                                                         minimize</mat-icon>
@@ -392,7 +396,7 @@
                                                         class="form-control">
 
                                                     <mat-icon matRipple
-                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                                                        [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                                         (click)="productIncrment(products.shortage,products.product.id,products.id,products.shortage,i,'picker-substituteproductlist/','picker-addsubstituteproduct','Add Subtitute Product',products?.id,2,products.product.ean)
                                                         " class="right-icon">add</mat-icon>
                                                 </div>
@@ -407,7 +411,7 @@
                 <!-- Approved products -->
                 <div class="row substitute-container" style="margin-right: 0%;margin-left: 0px;">
                     <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12 stretch-card grid-margin"
-                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
+                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                         *ngFor="let subt_products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <div *ngIf="subt_products?.send_approval === 'approve'" style="width: 97%;">
                             <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
@@ -473,7 +477,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 stretch-card"
-                                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                                 <div>
                                                     <strong>Not Available</strong>
                                                     <div class="btn-right">
@@ -509,7 +513,7 @@
                 </div>
                 <!-- substitute product -->
                 <div *ngIf="!IS_Subtitute"
-                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                     <div class="subtitute_data" *ngIf="orderDetaildata['data'][0]?.order_substitute_products.length">
                         <div class="alert alert-info">
                             <h3>Subtitute Product</h3>
@@ -567,7 +571,7 @@
                 <!-- process order -->
                 <div class="row" *ngIf="IS_Subtitute === true">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin btnpadding">
-                        <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' &&
+                        <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                             orderDetaildata['data'][0]?.order_products"
                             [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: 100%;"
                             type="button" (click)="processOrder()" class="btn btn-success">Process the order</button>
@@ -584,7 +588,7 @@
                     [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
                     <div *ngFor="let order of orderlistdata['data']" class="scroll-inner-data">
                         <mat-card class="orderlist-card"
-                            (click)="getOrderDetailData(order.id,order.shipment_id,order.order_status,order.picker_name,order.substitute_status)">
+                            (click)="getOrderDetailData(order?.id,order?.shipment_id,order?.order_status,order?.picker_name,order?.substitute_status)">
                             <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
                                 <mat-card-title>{{order?.custom_order_id}} New</mat-card-title>
                             </mat-card-header>
@@ -599,7 +603,7 @@
                                 </mat-card-title>
                             </mat-card-header>
                             <mat-card-header style="background-color: gray;"
-                                *ngIf="order?.order_shipment.shipment_status === 'Shipped' && order?.order_status === 1">
+                                *ngIf="order?.order_shipment?.shipment_status === 'Shipped' && order?.order_status === 1">
                                 <mat-card-title>{{order?.custom_order_id}} In-Shipping
                                 </mat-card-title>
                             </mat-card-header>
@@ -610,6 +614,10 @@
                             </mat-card-header>
                             <mat-card-header style="background-color: #800080" *ngIf="order?.order_status === 2">
                                 <mat-card-title>{{order?.custom_order_id}} Cancelled
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color:black" *ngIf="order?.order_status === 4">
+                                <mat-card-title>{{order?.custom_order_id}} Completed
                                 </mat-card-title>
                             </mat-card-header>
 

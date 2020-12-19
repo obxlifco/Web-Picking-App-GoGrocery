@@ -151,7 +151,7 @@ export class OrdersComponent implements OnInit {
         let status = {
           // order_status: this.userOrderdata.orderlistType
         }
-        // Object.assign(data, status)
+        Object.assign(data, status)
       }
 
       this.userOrderdata.warehouse_id = res.warehouse_id

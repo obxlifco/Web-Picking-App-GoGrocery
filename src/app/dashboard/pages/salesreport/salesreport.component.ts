@@ -419,7 +419,7 @@ export class SalesreportComponent implements OnInit {
         'Order Number': this.orderlistsaleData[i].custom_order_id,
         'Order Date': this.datePipe.transform(this.orderlistsaleData[i].created, "yyyy-M-d"),
         'Customer Name': this.orderlistsaleData[i].customer.first_name + " " + this.orderlistsaleData[i].customer.last_name,
-        // 'Prepared By':this.orderlistsaleData[i].assign_to,
+        'Prepared By':this.orderlistsaleData[i].assign_to,
         // 'Bill Number': this.orderlistsaleData[i].custom_order_id,
         'Payment Method': this.orderlistsaleData[i].payment_method_name,
         'Subtotal': this.orderlistsaleData[i].net_amount,

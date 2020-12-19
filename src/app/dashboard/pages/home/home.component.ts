@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getorderData();
+    this.getcompleteCounter()
     // this.oredrcom.startcounter()
     this.orderdata["data"] = []
   }
@@ -57,5 +58,41 @@ export class HomeComponent implements OnInit {
   }
   navigatePocessingOrder() {
     this.router.navigate(['dashboard/orders'])
+  }
+
+
+  getcompleteCounter() {
+    this.db.getUserData().then(res => {
+      // console.log("payment method ID : ", this.rangeFormGroup.controls.paymentmethodid.value);
+      let data = {
+        advanced_search: [{
+          comparer: 1,
+          field: "order_status",
+          field_id: 76,
+          input_type: "multi_select",
+          key: [4],
+          key2: "Completed",
+          name: "order_status",
+          show_name: "Order Status",
+        }],
+        warehouse_id: res.warehouse_id,
+        website_id: res.website_id,
+        // per_page: 500,
+        // page :1,
+        user_id: res.user_id,
+        model: "EngageboostOrdermaster",
+        order_by: "",
+        order_type: "",
+        screen_name: "list",
+        search: "",
+        status: "",
+        userid: res.user_id,
+        warehouse_status: "",
+      }
+      this.apiService.postData("global_list/", data).subscribe((data: any) => {
+        // console.log("completed Data : ",data);
+        this.orderdata["data"]["completeorders"]=data.count
+      })
+    })
   }
 }
