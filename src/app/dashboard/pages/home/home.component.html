@@ -59,36 +59,57 @@
                             <table class="table table-striped">
                                 <tr>
                                     <td matRipple><span>Orders Dashboard</span></td>
-                                    <td matRipple>{{orderdata['data'].pending_order + orderdata['data'].pending_order +
-                                        orderdata['data'].processing_order + orderdata['data']?.shipped_order +
-                                        orderdata['data']?.cancel_order }}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data'].pending_order + orderdata['data'].pending_order +
+                                            orderdata['data'].processing_order + orderdata['data']?.shipped_order +
+                                            orderdata['data']?.cancel_order }}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr (click)="navigatePocessingOrder()">
                                     <td matRipple class="mainpadding"><span>Pending or New</span></td>
-                                    <td matRipple>{{orderdata['data'].pending_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data'].pending_order}}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr (click)="navigatePocessingOrder()">
                                     <td matRipple class="mainpadding"><span>In-Processing</span></td>
-                                    <td matRipple>{{orderdata['data'].pending_order +
-                                        orderdata['data'].processing_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data'].pending_order +
+                                            orderdata['data'].processing_order}}</p>
+                                            <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                        </td>
                                 </tr>
                                 <tr (click)="navigatePocessingOrder()">
                                     <td matRipple class="subpadding"><span>Assigned</span></td>
-                                    <td matRipple>{{orderdata['data']?.processing_order -
-                                        orderdata['data']?.substitution_sent_order -
-                                        orderdata['data']?.substitution_received_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data']?.processing_order -
+                                            orderdata['data']?.substitution_sent_order -
+                                            orderdata['data']?.substitution_received_order}}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr (click)="navigatePocessingOrder()">
                                     <td matRipple class="subpadding"><span>Substitutions Out</span></td>
-                                    <td matRipple>{{orderdata['data']?.substitution_received_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order"></p>{{orderdata['data']?.substitution_received_order}}
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr (click)="navigatePocessingOrder()">
                                     <td matRipple class="subpadding"><span>Substitutions In</span></td>
-                                    <td matRipple>{{orderdata['data']?.substitution_sent_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data']?.substitution_sent_order}}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr (click)="navigateOrder('shipped')">
                                     <td matRipple class="mainpadding"><span>Shipped</span></td>
-                                    <td matRipple>{{orderdata['data']?.shipped_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data']?.shipped_order}}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td matRipple class="mainpadding"><span>Completed</span></td>
@@ -96,7 +117,10 @@
                                 </tr>
                                 <tr (click)="navigateOrder('cancelled')">
                                     <td matRipple class="mainpadding"><span>Cancelled</span></td>
-                                    <td matRipple>{{orderdata['data']?.cancel_order}}</td>
+                                    <td matRipple>
+                                        <p *ngIf="orderdata['data'].processing_order">{{orderdata['data']?.cancel_order}}</p>
+                                        <ngx-skeleton-loader *ngIf="!orderdata['data'].processing_order" style="width: 100%;"></ngx-skeleton-loader>
+                                    </td>
                                 </tr>
                             </table>
                         </mat-card-content>

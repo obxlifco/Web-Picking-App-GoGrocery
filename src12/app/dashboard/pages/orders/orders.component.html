@@ -140,7 +140,7 @@
                                         <input style="color: white !important;background-color:blue"
                                             [ngStyle]="{'background-color':userOrderdata.orderlistType === 'shipped' ? 'gray' : 'blue' }"
                                             [disabled]="!userOrderdata.picker_name" matTimepicker #t="matTimepicker"
-                                            #time="ngModel" [minDate]="minValue" [maxDate]="maxValue" [strict]="false"
+                                            #time="ngModel" [strict]="false"
                                             mode="24h" [value]="datetime" [ngModel]="datetime"
                                             [placeholder]="orderDetaildata['data'][0]?.slot_end_time" name="time"
                                             [errorStateMatcher]="customErrorStateMatcher"

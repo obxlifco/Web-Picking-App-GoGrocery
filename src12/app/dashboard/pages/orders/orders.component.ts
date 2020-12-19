@@ -66,10 +66,9 @@ export class OrdersComponent implements OnInit {
   IS_Subtitute = false;
   timer: any
   leftTime: any = 5 * 60000
-
   //below date var is sample max and min date
-  minValue: any = new Date();
-  maxValue: any = this.minValue.getDate() + 3;
+  // minValue: any = new Date();
+  // maxValue: any = this.minValue.getDate() + 3;
   datetime: any = new Date();
   customErrorStateMatcher: any
 
@@ -82,23 +81,15 @@ export class OrdersComponent implements OnInit {
     public modalservice: ModalService,
     private activated_route: ActivatedRoute,
     public globalitem: GlobalitemService) {
-    // this.dataService.sendGetRequest().subscribe((data: any[])=>{
-    //   console.log(data);
-    //   this.products = data;
-    // })  
-    console.log("picker Nme : ", this.userOrderdata.picker_name);
 
     this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     this.activated_route.params.subscribe(v => {
-      console.log("activated route data :", v.orderstatus)
+      // console.log("activated route data :", v.orderstatus)
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
         if (this.userOrderdata.orderlistType === "cancelled" || this.userOrderdata.orderlistType === "shipped") {
           this.appcom.setbadge(0)
-        }
-
-      }
-
+        }  }
     })
     this.startcounter()
   }
@@ -106,16 +97,12 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
-
-
     this.getOrderlistData()
   }
 
   navigate(link: any) {
     this.router.navigate([link]);
   }
-
-
 
   //call when we completing the order
   processOrder() {
@@ -145,33 +132,34 @@ export class OrdersComponent implements OnInit {
       }
     }
   }
-
+//order list with pagination
   getOrderlistData() {
     this.db.getUserData().then(res => {
-      console.log("user data inside dashboard : ", res);
+      // console.log("user data inside dashboard : ", res);
 
       let data = {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
         page: this.currentPage,
         per_page: 100,
-        order_status: "cancelled",
-        order_by: ""
+        order_status: 'cancelled',
+        // order_by: ""
       }
       console.log("order list : ",data);
       
       if (this.userOrderdata.orderlistType !== null) {
         let status = {
-          order_status: this.userOrderdata.orderlistType
+          // order_status: this.userOrderdata.orderlistType
         }
-        Object.assign(data, status)
+        // Object.assign(data, status)
       }
 
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
       this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
-        // console.log(data);
+        console.log("order list : ",data);
+        console.log(data);
         this.orderlistdata["data"] = data.response //json response
         this.totalProductpage = data.total_page//total page
         this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
@@ -185,14 +173,8 @@ export class OrdersComponent implements OnInit {
           console.log("page n");
           this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
         }
-
-
       })
-    })
-
-
-
-  }
+    })  }
 
   //when to assaign user name to order
   AssaignorderToUser(value: any) {
@@ -219,7 +201,7 @@ export class OrdersComponent implements OnInit {
 
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
     // this.IsTimeComplete = ''
-    console.log("order id :", orderid);
+    // console.log("order id :", orderid);
     this.userOrderdata.picker_name = picker_name;
     this.userOrderdata.order_id = orderid
     this.userOrderdata.order_status = order_status
@@ -231,7 +213,7 @@ export class OrdersComponent implements OnInit {
     }
 
     this.apiService.postData("picker-orderdetails/", data).subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
@@ -243,14 +225,6 @@ export class OrdersComponent implements OnInit {
 
         this.order_Substitute_Time = this.datePipe.transform(this.orderDetaildata["data"][0]?.order_substitute_products[0]?.created, "MMM d, y, h:mm:ss a")
         console.log(" order_Substitute_Time ", this.order_Substitute_Time);
-
-        //  this.leftTime= 0.6*60000
-        console.log("added 10 minutes to substitute  ", this.order_Substitute_Time + (30 * 60 * 1000));
-
-        // let milisecond =Date.parse(this.currenttime) - Date.parse(this.order_Substitute_Time) //when subs product sent for a approval, thne time will start for ten minutes
-        //   var seconds:any = (addedminutes_milisecond / 1000).toFixed(0);
-        //     var minutes = Math.floor(seconds / 60);
-        //     console.log("Date true",minutes ,"left minutes : ",this.leftTime);
         if (this.userOrderdata.substitute_status === 'pending') {
           this.timerProductSentApproval(this.order_Substitute_Time, 10)
         } else {
@@ -260,7 +234,7 @@ export class OrdersComponent implements OnInit {
       }
       // if(this.orderDetaildata["data"]?.payment_type_id === 2){
       if (this.orderDetaildata["data"][0]?.payment_type_id === 2) {
-        console.log("timer");
+        // console.log("timer");
         this.timerProductSentApproval(this.paymentOnlineTime, 30)
       }
 
@@ -291,14 +265,14 @@ export class OrdersComponent implements OnInit {
 
       this.getsubtitteStatus()
       // this.datetime = time.getTime()
-      console.log("Date Time : ", this.datetime);
+      // console.log("Date Time : ", this.datetime);
       // this.addCustomVariable();
     })
   }
 
 
   openmap(latlang: any) {
-    console.log("latlang : ", latlang);
+    // console.log("latlang : ", latlang);
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
@@ -314,7 +288,7 @@ export class OrdersComponent implements OnInit {
     Object.assign(data, user_ids)
     const dialogRef = this.dialog.open(EditproductweightComponent, { width: '500px', data: { data: data } });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
     });
   }
@@ -327,7 +301,7 @@ export class OrdersComponent implements OnInit {
     for (let i = 0; i < approvalProducst.length; i++) {
       temarray.push({ product_id: approvalProducst[i].product.id, order_product_id: approvalProducst[i].id })
     }
-    console.log("subtitue array : ", temarray);
+    // console.log("subtitue array : ", temarray);
     let data = {
       website_id: this.userOrderdata.website_id,
       warehouse_id: this.userOrderdata.warehouse_id,
@@ -524,7 +498,7 @@ export class OrdersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.product_billnumber = result.billnumber
 
     });
@@ -560,17 +534,17 @@ export class OrdersComponent implements OnInit {
       order_id: orderData,
     }
     if (reqestType === "insidePage") {
-      console.log("insidePage data : ", temData);
+      // console.log("insidePage data : ", temData);
       temData = data
     } else if (reqestType === "outsidePage") {
-      console.log("outside data : ", temData);
+      // console.log("outside data : ", temData);
 
       temData = orderData
     }
 
 
     this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
-      console.log("latestorders : ", data);
+      // console.log("latestorders : ", data);
       this.appcom.setbadge(data.response.no_of_latest_order)
       this.db.setOrderIDS(temData)
     })
@@ -601,7 +575,7 @@ export class OrdersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.price = result.price
       this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
 
@@ -679,7 +653,7 @@ export class OrdersComponent implements OnInit {
 
   //start time counter for getting latest orders
   startcounter() {
-    console.log("timer started");
+    // console.log("timer started");
     this.db.getNotificationTime().then(res => {
       // console.log("user timer : ", res);
       this.subscription = timer(0, res).pipe(
@@ -732,20 +706,18 @@ export class OrdersComponent implements OnInit {
     const originalDate = new Date(productTime);
     const modifiedTime: any = this.datePipe.transform(new Date(originalDate.valueOf() + (totaltime * 60000)), "MMM d, y, h:mm:ss a")
     // const subst_modifiedTime:any = this.datePipe.transform(new Date(originalDate.valueOf() + (2 * 60000)),"MMM d, y, h:mm:ss a")
-    console.log(" modifiedTime ", modifiedTime, " currenttime : ", this.currenttime);
+    // console.log(" modifiedTime ", modifiedTime, " currenttime : ", this.currenttime);
     this.leftTime = Date.parse(modifiedTime) - Date.parse(this.currenttime)
     //assaign difference to timer between subs time and current time
     let milisecond = Date.parse(modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
     var seconds: any = (milisecond / 1000).toFixed(0);
     this.leftTime = Math.floor(seconds / 60) * 60000 / 900;
-    console.log("left minutes : ", this.leftTime);
-
+    // console.log("left minutes : ", this.leftTime);
     //check if timer is available ore not
-    console.log("current Time : ", this.currenttime, "modifiedTime ", modifiedTime);
-
+    // console.log("current Time : ", this.currenttime, "modifiedTime ", modifiedTime);
     if (Date.parse(modifiedTime) > Date.parse(this.currenttime)) {
       this.paymentonlineTimer = false
-      console.log("timer is greater false");
+      // console.log("timer is greater false");
       if (this.userOrderdata.substitute_status === "none") {
         this.isProductSendFor_Approval = true
       } else if (this.userOrderdata.substitute_status === "pending") {
@@ -755,14 +727,13 @@ export class OrdersComponent implements OnInit {
       this.paymentonlineTimer = true
       this.isProductSendFor_Approval = true
       this.IsTimeComplete = false
-      console.log("timer is less than true");
+      // console.log("timer is less than true");
     }
   }
   //unsubscribe timer
   destroyCounter() {
     this.subscription.unsubscribe();
   }
-
   //show confirmation dialog
   openConfirmationDialog(): void {
     let binddatawithHtml: any = '<div class="confirmationdlg"><strong>Total Product Value = ' + this.orderDetaildata["data"][0]?.currency_code + ' ' + this.orderDetaildata["data"][0]?.gross_amount + '</strong><br>' +
