@@ -31,10 +31,17 @@
  }
 
  table {
-   background: lightgray;
+  //  background: lightgray;
    font-size : 17px;
    line-height: 1;
  }
+ .table-striped tr:nth-child(odd) td {
+  background-color: #f5f4f4;
+}
+
+.table-striped tr:nth-child(even) td {
+  background-color:rgba(0,0,0,.028);
+}
 
  .bg-order-cancelled {
    background: #800080 !important;

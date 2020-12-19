@@ -154,8 +154,12 @@ export class OrdersComponent implements OnInit {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
         page: this.currentPage,
-        per_page: 100
+        per_page: 100,
+        order_status: "cancelled",
+        order_by: ""
       }
+      console.log("order list : ",data);
+      
       if (this.userOrderdata.orderlistType !== null) {
         let status = {
           order_status: this.userOrderdata.orderlistType

@@ -14,6 +14,7 @@ export class CommonfunctionService {
     website_id: ''
   }
 
+  headerlist:any
   set setWarehouseIDS(val: any) {
     this.db.getUserData().then(res => {
       // console.log("user data inside dashboard : ", res);
@@ -85,11 +86,14 @@ export class CommonfunctionService {
   //download csv file
 
   //convert json to csv and download it
-  downloadFile(data: any, filename = 'picker list', dataparams: any) {
+  downloadFile(data: any, filename = 'picker list', dataparams: any,footerdata:any) {
     console.log("data : ", data, "params : ", dataparams);
-
     let csvData = this.ConvertToCSV(data, dataparams);
-    console.log("csvData", csvData)
+    // console.log("csvData", csvData + '\r\n'+" Total Amount,"+"ordernum,"+"orderdate,"+"cname,"+"pmethod,"+"122323,"+"123,"+"0,"+"11,"+"333432211" ," header list :",this.headerlist)
+    if(filename === "order products"){
+      csvData = csvData + '\r\n'+" Total Amount,"+","+","+","+","+footerdata.Subtotal+","+footerdata.ShippingCost+","+footerdata.ShippingDiscount+","+footerdata.OtherDiscount+","+footerdata.GrandTotal
+    }
+   
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
     let url = URL.createObjectURL(blob);
@@ -112,6 +116,7 @@ export class CommonfunctionService {
       row += headerList[index] + ',';
     }
     row = row.slice(0, -1);
+    this.headerlist=row
     str += row + '\r\n';
     for (let i = 0; i < array.length; i++) {
       let line = (i + 1) + '';

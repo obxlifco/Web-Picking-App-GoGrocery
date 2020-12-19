@@ -3,8 +3,8 @@
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel" style="width: 100%;">
             <!-- <div class="content-wrapper"> -->
-              
-               <!-- <div class="row">
+
+            <!-- <div class="row">
                    <div class="col-md-4 stretch-card grid-margin" (click)="navigatePocessingOrder()">
                        <div class="card bg-order-process card-img-holder text-white">
                            <div class="card-body">
@@ -46,68 +46,69 @@
                        </div>
                    </div>
                </div> -->
-           <!-- </div> -->
+            <!-- </div> -->
 
-           <div class="row" style="margin: 4% 0 0 4%;">
-               <div  class="col-md-8 stretch-card grid-margin">
-                <h5>Dashboard</h5>
-                <mat-card class="example-card">
-                    <mat-card-header >
-                      <mat-card-title>Orders Info</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                      <table class="table" >
-                        <tr>
-                            <td matRipple><span>Orders Dashboard</span></td>
-                            <td matRipple>{{orderdata['data'].pending_order + orderdata['data'].pending_order + orderdata['data'].processing_order + orderdata['data']?.shipped_order + orderdata['data']?.cancel_order }}</td>
-                        </tr>
-                          <tr>
-                              <td matRipple class="mainpadding"><span>Pending or New</span></td>
-                              <td matRipple>{{orderdata['data'].pending_order}}</td>
-                          </tr>
-                          <tr>
-                            <td matRipple class="mainpadding"><span>In-Processing</span></td>
-                            <td matRipple>{{orderdata['data'].pending_order + orderdata['data'].processing_order}}</td>
-                        </tr>
-                        <tr>
-                            <td  matRipple class="subpadding"><span>Assigned</span></td>
-                            <td matRipple>{{orderdata['data']?.processing_order - orderdata['data']?.substitution_sent_order - orderdata['data']?.substitution_received_order}}</td>
-                        </tr>
-                        <tr >
-                            <td matRipple class="subpadding"><span>Substitutions Out</span></td>
-                            <td matRipple>{{orderdata['data']?.substitution_received_order}}</td>
-                        </tr>
-                        <tr>
-                            <td matRipple class="subpadding"><span>Substitutions In</span></td>
-                            <td matRipple>{{orderdata['data']?.substitution_sent_order}}</td>
-                        </tr>
-                        <tr>
-                            <td matRipple class="mainpadding"><span>Shipped</span></td>
-                            <td matRipple>{{orderdata['data']?.shipped_order}}</td>
-                        </tr>
-                        <tr>
-                            <td matRipple class="mainpadding"><span>Completed</span></td>
-                            <td matRipple>12</td>
-                        </tr>
-                        <tr>
-                            <td matRipple class="mainpadding"><span>Cancelled</span></td>
-                            <td matRipple>{{orderdata['data']?.cancel_order}}</td>
-                        </tr>
-                      </table>
-                    </mat-card-content>
-                    <!-- <mat-card-actions>
-                      <button mat-button>LIKE</button>
-                      <button mat-button>SHARE</button>
-                    </mat-card-actions> -->
-                  </mat-card>
-               </div>
-           </div>
-           <footer class="footer">
-               <div class="container-fluid clearfix">
-                   <span class="text-muted d-table text-center text-sm-left d-sm-inline-block">Copyright © GO GROCERY Picking Company 2020 </span>
-               </div>
-           </footer>
-       </div>
-   
+            <div class="row" style="margin: 4% 0 0 4%;">
+                <div class="col-md-8 stretch-card grid-margin">
+                    <h5>Dashboard</h5>
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title>Orders Info</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td matRipple><span>Orders Dashboard</span></td>
+                                    <td matRipple>{{orderdata['data'].pending_order + orderdata['data'].pending_order +
+                                        orderdata['data'].processing_order + orderdata['data']?.shipped_order +
+                                        orderdata['data']?.cancel_order }}</td>
+                                </tr>
+                                <tr (click)="navigatePocessingOrder()">
+                                    <td matRipple class="mainpadding"><span>Pending or New</span></td>
+                                    <td matRipple>{{orderdata['data'].pending_order}}</td>
+                                </tr>
+                                <tr (click)="navigatePocessingOrder()">
+                                    <td matRipple class="mainpadding"><span>In-Processing</span></td>
+                                    <td matRipple>{{orderdata['data'].pending_order +
+                                        orderdata['data'].processing_order}}</td>
+                                </tr>
+                                <tr (click)="navigatePocessingOrder()">
+                                    <td matRipple class="subpadding"><span>Assigned</span></td>
+                                    <td matRipple>{{orderdata['data']?.processing_order -
+                                        orderdata['data']?.substitution_sent_order -
+                                        orderdata['data']?.substitution_received_order}}</td>
+                                </tr>
+                                <tr (click)="navigatePocessingOrder()">
+                                    <td matRipple class="subpadding"><span>Substitutions Out</span></td>
+                                    <td matRipple>{{orderdata['data']?.substitution_received_order}}</td>
+                                </tr>
+                                <tr (click)="navigatePocessingOrder()">
+                                    <td matRipple class="subpadding"><span>Substitutions In</span></td>
+                                    <td matRipple>{{orderdata['data']?.substitution_sent_order}}</td>
+                                </tr>
+                                <tr (click)="navigateOrder('shipped')">
+                                    <td matRipple class="mainpadding"><span>Shipped</span></td>
+                                    <td matRipple>{{orderdata['data']?.shipped_order}}</td>
+                                </tr>
+                                <tr>
+                                    <td matRipple class="mainpadding"><span>Completed</span></td>
+                                    <td matRipple>12</td>
+                                </tr>
+                                <tr (click)="navigateOrder('cancelled')">
+                                    <td matRipple class="mainpadding"><span>Cancelled</span></td>
+                                    <td matRipple>{{orderdata['data']?.cancel_order}}</td>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid clearfix">
+                    <span class="text-muted d-table text-center text-sm-left d-sm-inline-block">Copyright © GO GROCERY
+                        Picking Company 2020 </span>
+                </div>
+            </footer>
+        </div>
     </div>
 </div>

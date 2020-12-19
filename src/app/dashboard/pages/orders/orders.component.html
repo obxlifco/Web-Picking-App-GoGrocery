@@ -131,14 +131,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 4% 0% 0% 2%;">Delivery Time</td>
+                        <td [ngStyle]="{'padding-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '5%'}">Delivery Time</td>
                         <td style="padding: 0px;">
-                            <div class="highlight_edits"
-                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white' }">
-                                <div style="color: black;"
-                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                            <div class="highlight_edits" style="margin-top: 3%;padding: 1%;"
+                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white',
+                                'margin-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '0%' }">
+                                <div 
+                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
+                                    'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'white' : 'black' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
-                                    <p style="display: contents;"
+                                    <p style="display: contents;color: white;margin-top: 2%;"
                                         *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'">
                                         {{orderDetaildata['data'][0]?.slot_end_time}}</p>
                                     <!-- <mat-form-field appearance="fill"
@@ -317,7 +319,7 @@
                                         {{products?.product_price/products?.quantity *products?.quantity |
                                         currency:'':''}}</span>
                                     <button style="margin: 1px 1px 9px 20px;"
-                                        [disabled]="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'"
+                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         (click)=" updatePrice(products?.product_price,products?.weight, '',products,'picker-updatepicklistproductinfo/','unitprice')"
                                         type="button" class="btn btn-primary btn-sm">Edit Unit Price</button>
                                     <br>
@@ -331,7 +333,7 @@
                                         Total Weight : <strong>{{products?.weight}}
                                             {{products?.product.uom.uom_name}}</strong> -->
                                     <button style="margin: 1px 1px 9px 20px;" (click)="openEditModal(products)"
-                                        [disabled]="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'"
+                                    [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         type="button" class="btn btn-primary btn-sm">Edit Total
                                         Weight</button>
                                     <br>

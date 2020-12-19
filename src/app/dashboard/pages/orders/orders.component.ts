@@ -836,7 +836,7 @@ export class OrdersComponent implements OnInit {
         if(orderproducts.length === counter){
           console.log("CSV file : ",temarray, orderproducts.length , i)
           let paramdata:any=['Product Name','SKU','Unit Weight', 'Unit Price','Quantity',]
-          this.commonfunc.downloadFile(temarray,"order products",paramdata)
+          this.commonfunc.downloadFile(temarray,"order products",paramdata,'footerdata')
         }
       }
 

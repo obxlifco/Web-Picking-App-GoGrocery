@@ -9,8 +9,8 @@ import { DatabaseService } from 'src/app/services/database/database.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
- 
-  
+
+
   orderdata: any = []
   constructor(public router: Router,
     public db: DatabaseService,
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       let data = {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
-        order_status:'complete',
+        order_status: 'complete',
       }
       this.apiService.postData("picker-dashboard/", data).subscribe((data: any[]) => {
         console.log(data);
@@ -52,10 +52,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  navigateOrder(orderstatus:any){
-    this.router.navigate(['dashboard/orders',{orderstatus: orderstatus}])
+  navigateOrder(orderstatus: any) {
+    this.router.navigate(['dashboard/orders', { orderstatus: orderstatus }])
   }
-  navigatePocessingOrder(){
+  navigatePocessingOrder() {
     this.router.navigate(['dashboard/orders'])
   }
 }
