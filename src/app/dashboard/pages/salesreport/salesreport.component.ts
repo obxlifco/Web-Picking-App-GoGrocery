@@ -320,7 +320,7 @@ export class SalesreportComponent implements OnInit {
       'Subtotal': this.saleData.subtotal,
       'Shipping Costs': this.saleData.shippingcost,
       'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code'],
-      'Cancellation Avg':this.commonfunc.precise_round(this.averageData?.cancelledorders/(this.averageData?.cancelledorders + this.saleData.totalorder)*100, 0)+"%",
+      'Cancel Rate':this.commonfunc.precise_round(this.averageData?.cancelledorders/(this.averageData?.cancelledorders + this.saleData.totalorder)*100, 0)+"%",
       'Average Value':this.commonfunc.precise_round(this.saleData.grandtotal/this.saleData.totalorder,3)
     }
       
