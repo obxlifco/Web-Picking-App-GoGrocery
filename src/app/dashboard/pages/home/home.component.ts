@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
 
   orderdata: any = []
+  totalorders:any
   constructor(public router: Router,
     public db: DatabaseService,
     public apiService: ApiService) {
@@ -90,8 +91,31 @@ export class HomeComponent implements OnInit {
         warehouse_status: "",
       }
       this.apiService.postData("global_list/", data).subscribe((data: any) => {
-        // console.log("completed Data : ",data);
+        console.log("completed Data : ",data.results[0].result);
         this.orderdata["data"]["completeorders"]=data.count
+        if(data.results[0].result.length !== 0){
+          console.log("if conditions");
+        this.totalorders = this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
+          this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
+          this.orderdata['data']?.cancel_order + this.orderdata['data']['completeorders'] 
+          let data={
+            cancelledorders:this.orderdata['data']?.cancel_order,
+            completedOrders:this.orderdata['data']['completeorders'],
+            totaloreders: this.totalorders
+          }
+          this.db.setcancellationRate(data)
+        }else{
+          this.totalorders=this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
+          this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
+          this.orderdata['data']?.cancel_order 
+          console.log("total orders : ",this.totalorders);
+          let data={
+            cancelledorders:this.orderdata['data']?.cancel_order,
+            completedOrders:this.orderdata['data']['completeorders'],
+            totaloreders: this.totalorders
+          }
+          this.db.setcancellationRate(data)
+        }
       })
     })
   }

@@ -111,7 +111,7 @@
                             {{orderDetaildata['data'][0]?.delivery_state_name}}
                             </p>
                             <div class="highlight_edits"
-                                style="background-color:gray; display: initial;margin-left: 3%;padding: 2% !important;"
+                                style="background-color:gray; display: initial;margin-left: 3%;padding: 1% !important;"
                                 [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                 *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ">
                                 <span style="color: white;cursor: pointer;"
@@ -121,7 +121,7 @@
                             </div>
 
                             <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete'"
-                                class="highlight_edits" style="display: initial;margin-left: 3%;padding: 2%;"
+                                class="highlight_edits" style="display: initial;margin-left: 3%;padding: 1%;"
                                 [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
                                 <span style="color: white;cursor: pointer;"
                                     [ngStyle]="{'pointer-events':userOrderdata.picker_name === null ? 'none' : 'auto' }"
@@ -143,11 +143,11 @@
                             Delivery Time</td>
                         <td style="padding: 0px;">
                             <div class="highlight_edits" style="margin-top: 3%;padding: 1%;"
-                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white',
+                                [ngStyle]="{'background-color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'white' : 'white',
                                 'margin-top':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? '3%' : '2%' }">
                                 <div
                                     [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
-                                    'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'white' : 'black' }">
+                                    'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'black' : 'black' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
                                     <p style="display: contents;color: white;margin-top: 2%;"
                                         *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped'">
@@ -197,12 +197,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Subtotal</td>
+                        <td><strong>Subtotal</strong> </td>
                         <td>
-                            <span>
+                            <strong>
                                 {{orderDetaildata['data'][0]?.currency_code}}
-                                {{orderDetaildata['data'][0]?.net_amount}}
-                            </span>
+                                {{orderDetaildata['data'][0]?.net_amount | number}}
+                            </strong>
                         </td>
                     </tr>
                     <!-- New product value is disbaled  -->
@@ -231,20 +231,20 @@
                         </td>
                     </tr> -->
                     <tr>
-                        <td>Shipping Cost</td>
-                        <td><span>{{orderDetaildata['data'][0]?.currency_code}}
-                                {{orderDetaildata['data'][0]?.shipping_cost}}</span>
+                        <td> <strong>Shipping Cost</strong></td>
+                        <td><strong>{{orderDetaildata['data'][0]?.currency_code}}
+                                {{orderDetaildata['data'][0]?.shipping_cost | number}}</strong>
                         </td>
                     </tr>
                     <tr>
-                        <td>Shipping Discount</td>
-                        <td><span>{{orderDetaildata['data'][0]?.currency_code}}
-                                {{orderDetaildata['data'][0]?.cart_discount}}</span></td>
+                        <td><strong>Shipping Discount</strong></td>
+                        <td><strong>{{orderDetaildata['data'][0]?.currency_code}}
+                                {{orderDetaildata['data'][0]?.cart_discount}}</strong></td>
                     </tr>
                     <tr>
-                        <td>Other Discounts</td>
-                        <td><span>{{orderDetaildata['data'][0]?.currency_code}}
-                                {{orderDetaildata['data'][0]?.gross_discount_amount}}</span></td>
+                        <td><strong>Discounts</strong></td>
+                        <td><strong>{{orderDetaildata['data'][0]?.currency_code}}
+                                {{orderDetaildata['data'][0]?.gross_discount_amount}}</strong></td>
                     </tr>
                     <mat-divider></mat-divider>
                     <tr>
@@ -254,18 +254,18 @@
                         <td>
                             <strong class="paymentfooter">
                                 {{orderDetaildata['data'][0]?.currency_code}}
-                                {{orderDetaildata['data'][0]?.gross_amount}}
+                                {{orderDetaildata['data'][0]?.gross_amount | number}}
                             </strong>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span class="paymentfooter">Payment Method</span>
+                            <strong class="paymentfooter">Payment Method</strong>
                         </td>
                         <td>
-                            <span class="paymentfooter">
+                            <strong class="paymentfooter">
                                 {{orderDetaildata['data'][0]?.payment_method_name}}
-                            </span>
+                            </strong>
                         </td>
                     </tr>
                     <!-- <mat-divider></mat-divider> -->
@@ -277,8 +277,7 @@
                         <h6 class="itemdivider"><span>Picking List</span></h6>
                     </div>
                     <!-- Add more button -->
-                    <div class="row row-margin"
-                        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
+                    <div class="row row-margin" *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
                             <button [disabled]="!userOrderdata.picker_name"
@@ -302,7 +301,7 @@
                         <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
                         <div class="layover-root" *ngIf="products?.quantity === products?.grn_quantity + products?.shortage  ||
                             userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete'"
-                            [ngStyle]="{'z-index':userOrderdata.orderlistType === 'cancelled' ? 2 : 1 }">
+                            [ngStyle]="{'z-index':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' ? 2 : 1 }">
                             <div class="layover">
                             </div>
                         </div>
@@ -416,7 +415,7 @@
                         <div *ngIf="subt_products?.send_approval === 'approve'" style="width: 97%;">
                             <!-- [ngStyle]="{'background-color':products?.quantity === 'UK' ? 'green' : 'red' }" -->
                             <div class="layover-root"
-                                *ngIf="subt_products?.quantity === subt_products?.grn_quantity + subt_products?.shortage">
+                                *ngIf="subt_products?.quantity === subt_products?.grn_quantity + subt_products?.shortage || userOrderdata.orderlistType === 'complete'">
                                 <img src="assets/images/product/toggle_checked.png" alt="">
                                 <div class="layover" style="opacity: 0.3;">
                                 </div>
@@ -520,27 +519,32 @@
                         </div>
                         <div *ngFor="let subtitute of orderDetaildata['data'][0]?.order_substitute_products"
                             style="margin-bottom: 10%;">
-                            <div class="row"
+                            <div class="row" style="padding: 0%;"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
                                     <img class="productimg" style="width: 100%;"
                                         [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"
                                         alt="">
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 8% 0 0 3%;">
                                     <strong style="color: green;">{{subtitute?.product.name}}</strong><br>
                                     <div>Price:<strong>{{orderDetaildata['data'][0]?.currency_code}}
-                                            {{subtitute.product_price}}</strong></div>
+                                            {{subtitute.product_price}}</strong></div><br>
+                                            <div *ngFor="let picklistproduct of orderDetaildata['data'][0]?.order_products">
+                                                <strong *ngIf="subtitute?.substitute_product_id === picklistproduct?.product?.id">
+                                                   Substitute Product for : {{picklistproduct?.product?.name}}
+                                                </strong>
+                                            </div>
                                     <!-- <strong>Available</strong> -->
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 8% 0 0 3%;">
                                     <span>{{subtitute.product.weight}} {{subtitute.product.uom.uom_name}}</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- for approval -->
-                        <button type="button" style="width: 100%;" *ngIf="isProductSendFor_Approval"
+                        <button type="button" style="width: 100%;position: absolute;margin-top: 2%;" *ngIf="isProductSendFor_Approval"
                             (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id,product_billnumber)"
                             class="btn btn-success">Send for Approval
                             <!-- <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: leftTime, notify: [ 2, 5 ]}"
@@ -562,7 +566,7 @@
                             [disabled]="!userOrderdata.picker_name" type="button" (click)="declinedProduct()"
                             class="btn btn-success declinedbtn">Declined Product
                         </button>
-                        <p style="text-align: center;" *ngIf="!IsTimeComplete">
+                        <p style="text-align: center;margin-top: 3%;" *ngIf="!IsTimeComplete">
                             <strong>Send Replacement request to customer for approval</strong><br>
                             <span>please wait for cutomer cofirmation for 10 min</span>
                         </p>

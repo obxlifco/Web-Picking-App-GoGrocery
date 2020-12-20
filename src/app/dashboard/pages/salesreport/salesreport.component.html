@@ -110,7 +110,7 @@
                     <td>Subtotal</td>
                     <td>
                         <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
-                            {{saleData.subtotal}}</p>
+                            {{saleData.subtotal | number}}</p>
                         <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
                     </td>
                 </tr>
@@ -118,7 +118,7 @@
                     <td>Shipping Costs</td>
                     <td>
                         <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
-                            {{saleData.shippingcost}}</p>
+                            {{saleData.shippingcost | number}}</p>
                         <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
                     </td>
                 </tr>
@@ -126,15 +126,33 @@
                     <td><strong>Grand Total</strong></td>
                     <td style="width: 60%;">
                         <strong *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
-                            {{saleData.grandtotal}}</strong>
+                            {{saleData.grandtotal | number}}</strong>
                         <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span>Average Value</span></td>
+                    <td style="width: 60%;">
+                        <span *ngIf="saleData.totalorder === 0">0.0</span>
+                        <span *ngIf="saleData.totalorder">
+                            {{saleData.grandtotal/saleData.totalorder | number}}</span>
+                        <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
+                    </td>  
+                </tr>
+                <tr>
+                    <td><span>Cancel Rate</span></td>  
+                    <td style="width: 60%;">
+                        <span *ngIf="saleData.totalorder === 0">0.0</span>
+                        <span *ngIf="saleData.totalorder > 0">
+                            {{ averageData?.cancelledorders/(averageData?.cancelledorders + saleData.totalorder)*100  | number |slice:0:2}}%</span>
+                        <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
                     </td>
                 </tr>
             </tbody>
         </table>
 
         <div class="row" style="margin-bottom: 3%;">
-            <div class="col-md-4">
+            <div class="col-md-2" style="max-width: fit-content;">
                 <button matRipple type="button" class="btn btn-success" [disabled]="saleData.totalorder === 0"
                     (click)="getCSVFile()">Generate CSV</button>
             </div>

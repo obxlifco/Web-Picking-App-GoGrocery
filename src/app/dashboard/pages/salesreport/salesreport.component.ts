@@ -7,6 +7,7 @@ import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.ser
 import { ApiService } from 'src/app/services/api/api.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
+import { OrdersComponent } from '../orders/orders.component';
 // import * as monthname from '../../../core/utilities/monthname/monthname.json';
 
 export interface PaymentMethodInter {
@@ -64,12 +65,13 @@ export class SalesreportComponent implements OnInit {
     color: this.primarycolor,
     id: 'both',
     subtasks: [
-      { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: false, color: 'primary' },
-      { name: 'Card On Delivery', id: 59, type: "Cash On Delivery", completed: false, color: 'primary' },
-      { name: 'Online Payment', type: "Online Payment", id: 51, completed: false, color: 'primary' },
+      { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: true, color: 'primary' },
+      { name: 'Card On Delivery', id: 59, type: "Cash On Delivery", completed: true, color: 'primary' },
+      { name: 'Online Payment', type: "Online Payment", id: 51, completed: true, color: 'primary' },
     ]
   };
   allComplete: boolean = false;
+  averageData:any=[]
 
   //merging data for multi selection payment method
   orderlistsaleData: any = []
@@ -84,19 +86,18 @@ export class SalesreportComponent implements OnInit {
     public db: DatabaseService) {
     this.monthname = this.commonfunc.monthname;
     this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
-    setTimeout(() => {
-      // this.getpaymentmethodlist()
-    }, 1500);
 
   }
 
   ngOnInit(): void {
+    this.setcompleteparam()
+    this.getCancellationandCompleteRate()
     this.setfieldEmpty()
     this.getOrderlistData(this.lastdate)
 
   }
   datemodal() {
-
+   
   }
 
   setcompleteparam() {
@@ -119,6 +120,12 @@ export class SalesreportComponent implements OnInit {
     // this.completelist["data"]["grandtotal"] = 0
   }
 
+  getCancellationandCompleteRate(){
+    this.db.getcancellationRate().then(res => {
+      console.log("cancellation report : ",res);
+      this.averageData=res
+    });
+  }
   getOrderlistData(date: any) {
     console.log("advanced search : ", this.advancedsearch);
     console.log("before ids :", this.paymentmethodlastids);
@@ -151,7 +158,7 @@ export class SalesreportComponent implements OnInit {
 
             let incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result, this.paymentmethodid)
             this.orderlistsaleData = [... this.orderlistsaleData, ...data.results[0].result]
-            this.saleData.grandtotal = parseFloat(this.commonfunc.precise_round(incomingdata.grandtotal, 2))
+            this.saleData.grandtotal += parseFloat(this.commonfunc.precise_round(incomingdata.grandtotal, 2))
             this.saleData.shippingcost += parseFloat(this.commonfunc.precise_round(incomingdata.shpcost, 2))
             this.saleData.subtotal += parseFloat(this.commonfunc.precise_round(incomingdata.subtotal, 2))
             this.generalcounter += data.results[0].result.length
@@ -159,6 +166,8 @@ export class SalesreportComponent implements OnInit {
               this.currentpage = data.per_page_count
             } else if (data.per_page_count > this.currentpage) {
               this.currentpage++
+              console.log("current page : ",this.currentpage +" list page :",data.per_page_count);
+              
               this.pageurl = "/?page=" + this.currentpage
               this.getOrderlistData(this.lastdate)
             }
@@ -166,18 +175,22 @@ export class SalesreportComponent implements OnInit {
           } if (this.currentpage > data.per_page_count) {
             this.currentpage = data.per_page_count
           } if (data.count === this.generalcounter) {
-            console.log("before ids 2 :", this.paymentmethodlastids);
+            console.log("this.saleData:", this.saleData);
             this.saleData.totalorder = data.count
             this.completelist["data"]["currency_code"] = data?.results[0]?.result[0]?.currency_code
 
             //for multi selection checkbox, after getting data we set paymentmethodlastids value to undefined and calculate orders
+            console.log("paymentmethodlastids ",this.paymentmethodlastids);
             if (this.paymentmethodlastids === undefined) {
+              console.log("mergeFirstPaymentData ",this.mergeFirstPaymentData);
+              
               if (this.mergeFirstPaymentData.length !== 0) {
                 this.saleData.totalorder += this.mergeFirstPaymentData.totalorder
                 this.saleData.shippingcost += this.mergeFirstPaymentData.shippingcost
                 this.saleData.subtotal += this.mergeFirstPaymentData.subtotal
                 this.saleData.grandtotal += this.mergeFirstPaymentData.grandtotal
                 this.mergeFirstPaymentData = []
+                console.log("subtotal : ", this.saleData.subtotal);
               }
             }//for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
             if (this.paymentmethodlastids !== undefined) {
@@ -188,6 +201,7 @@ export class SalesreportComponent implements OnInit {
                 subtotal: this.saleData.subtotal,
                 grandtotal: this.saleData.grandtotal
               }
+              console.log("amounts are : ",tempdata);
               this.mergeFirstPaymentData = tempdata//merge data with old and set new value for ids
               if (this.paymentmethodlastids) {
                 this.generalcounter = 0
@@ -211,6 +225,7 @@ export class SalesreportComponent implements OnInit {
           }
         } if (data.results[0].result.length === 0 || data.results[0].result === []) {
           // console.log("else is executed");
+          this.saleData.totalorder=0
           this.setfieldvalue()
         }
 
@@ -234,6 +249,8 @@ export class SalesreportComponent implements OnInit {
     this.currentpage = 1
 
     this.orderlistsaleData = []
+    console.log("payment method id: ",this.paymentmethodid);
+    
     if (this.paymentmethodid !== "both") {
       let temparray: any = this.paymentmethod.subtasks
       let secondtemarray: any = []
@@ -302,11 +319,13 @@ export class SalesreportComponent implements OnInit {
       'Total Orders': this.saleData.totalorder,
       'Subtotal': this.saleData.subtotal,
       'Shipping Costs': this.saleData.shippingcost,
-      'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code']
+      'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code'],
+      'Cancellation Avg':this.commonfunc.precise_round(this.averageData?.cancelledorders/(this.averageData?.cancelledorders + this.saleData.totalorder)*100, 0)+"%",
+      'Average Value':this.commonfunc.precise_round(this.saleData.grandtotal/this.saleData.totalorder,3)
     }
-
+      
     if (this.saleData.totalorder !== 0) {
-      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs', 'Grand Total']
+      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs', 'Grand Total','Cancellation Avg','Average Value']
       // console.log("csv file : ", paramdata);
       temarray.push(data1)
       this.commonfunc.downloadFile(temarray, 'sales report', paramdata, 'footerdata')
@@ -332,10 +351,10 @@ export class SalesreportComponent implements OnInit {
       // console.log("all true");
       this.advancedsearch = []
       this.setcompleteparam()
-      this.paymentmethodid = this.paymentmethod.id;
+      this.paymentmethodid =  this.paymentmethod.id;
       this.paymentmethodname = this.paymentmethod.name;
     } else if (!this.allComplete) {
-      this.paymentmethodid = this.paymentmethod.id;
+      this.paymentmethodid =  this.paymentmethod.id;
       this.advancedsearch = []
       this.setcompleteparam()
       // console.log("not complete",this.paymentmethodid ,this.allComplete);
@@ -358,6 +377,9 @@ export class SalesreportComponent implements OnInit {
           this.paymentmethodid = this.paymentmethod.subtasks[i].id
           this.paymentmultyids.push(this.paymentmethod.subtasks[i].id)
           this.paymentmethodname = this.paymentmethod.subtasks[i].name
+          if(counter === this.paymentmethod.subtasks.length){
+            this.paymentmethodid=this.paymentmethod.id
+          }
           // console.log("id : ",this.paymentmethod.subtasks[i].id);
           // console.log("counter value ",counter);
           // console.log("some  complete ",this.paymentmethodid);
@@ -414,12 +436,11 @@ export class SalesreportComponent implements OnInit {
       footerdata.ShippingDiscount += this.orderlistsaleData[i].cart_discount
       footerdata.OtherDiscount += this.orderlistsaleData[i].gross_discount_amount
       footerdata.GrandTotal += this.orderlistsaleData[i].gross_amount
-
       let data: any = {
         'Order Number': this.orderlistsaleData[i].custom_order_id,
         'Order Date': this.datePipe.transform(this.orderlistsaleData[i].created, "yyyy-M-d"),
         'Customer Name': this.orderlistsaleData[i].customer.first_name + " " + this.orderlistsaleData[i].customer.last_name,
-        'Prepared By':this.orderlistsaleData[i].assign_to,
+        // 'Prepared By':this.orderlistsaleData[i].assign_to,
         // 'Bill Number': this.orderlistsaleData[i].custom_order_id,
         'Payment Method': this.orderlistsaleData[i].payment_method_name,
         'Subtotal': this.orderlistsaleData[i].net_amount,
@@ -428,7 +449,9 @@ export class SalesreportComponent implements OnInit {
         'Other Discount': this.orderlistsaleData[i].gross_discount_amount,
         'Grand Total': this.orderlistsaleData[i].gross_amount,
       }
-      counter++
+      // let averagevalue = totalamount/total OrdersComponent
+      //cancellation average  cancellation value /total oredsr * 100 will be in percentage
+       counter++
       temarray.push(data)
       console.log("Index: ", counter);
       if (this.orderlistsaleData.length === counter) {

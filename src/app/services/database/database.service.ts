@@ -11,6 +11,7 @@ export class DatabaseService {
   IP_ADDRESS:any="userip"
   NOTIFICATION_TIME:any="notiTime"
   ORDER_IDS:any="orderids"
+  AVERAGE_DATA:any="aeveragedata"//for sae report
 
   constructor(private storage:LocalStorageService) { }
 
@@ -76,6 +77,13 @@ export class DatabaseService {
   async getOrderIDS() {
     return this.storage.retrieve(this.ORDER_IDS)
   }
+  //set cancellation rates
 
+  setcancellationRate(data:any){
+    this.storage.store(this.AVERAGE_DATA, data);
+  }
+  async getcancellationRate(){
+    return this.storage.retrieve(this.AVERAGE_DATA)
+  }
   
 }

@@ -232,8 +232,7 @@ export class OrdersComponent implements OnInit {
         } else {
           this.paymentonlineTimer = true
         }
-      }
-      // if(this.orderDetaildata["data"]?.payment_type_id === 2){
+      }//payment id 2 for payment online 
       if (this.orderDetaildata["data"][0]?.payment_type_id === 2) {
         console.log("timer");
         this.timerProductSentApproval(this.paymentOnlineTime, 30)
@@ -247,7 +246,7 @@ export class OrdersComponent implements OnInit {
       //   this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata["data"][0]?.id
       // }
       
-      if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped') {
+      if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'complete' || this.userOrderdata.orderlistType === 'shipped') {
       } else {
         this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
       }
@@ -605,7 +604,8 @@ export class OrdersComponent implements OnInit {
         switchMap(async () => {
           this.db.getOrderIDS().then(res => {
             console.log(" Type : ", this.userOrderdata.orderlistType);
-            if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped') {
+            if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'shipped' || this.userOrderdata.orderlistType === 'complete') {
+              this.appcom.setbadge(0)
             } else {
               this.getLatestOrder(res, 'outsidePage')
             }
