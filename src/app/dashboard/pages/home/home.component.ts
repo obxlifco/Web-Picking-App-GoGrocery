@@ -105,10 +105,10 @@ export class HomeComponent implements OnInit {
           }
           this.db.setcancellationRate(data)
         }else{
-          this.totalorders=this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
+          this.totalorders = this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
           this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
           this.orderdata['data']?.cancel_order 
-          console.log("total orders : ",this.totalorders);
+          console.log("total orders : ",this.totalorders,this.orderdata['data'].pending_order);
           let data={
             cancelledorders:this.orderdata['data']?.cancel_order,
             completedOrders:this.orderdata['data']['completeorders'],

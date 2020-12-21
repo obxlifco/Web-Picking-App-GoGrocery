@@ -121,8 +121,8 @@ export class DashboardComponent implements OnInit {
 
       this.apiService.getData("warehouse/"+res.warehouse_id+"/").subscribe((data: any) => {
         // console.log("store name : ",data.warehouse.name);
-        
           this.title=data.warehouse.name
+          this.db.setwarehouseName(data.warehouse.name)
       })
     })
   }

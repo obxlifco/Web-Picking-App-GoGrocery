@@ -27,14 +27,15 @@ export class CommonfunctionService {
   }
 
   getcompletedOrders(completeorderdata: any, paymentid: any): any {
-    this.counter++
-    // console.log("incoming data from page : ",completeorderdata, "Api counter : ",this.counter);
+    // this.counter++
+    console.log("incoming data from page : ",completeorderdata, "Api counter : ",this.counter);
 
 
     let temarray: any = []
     let shpcost: any = 0;
     let subtotal: any = 0;
     let grandtotal: any = 0;
+    let counters:any=0
     // for (var i = 0; i < completeorderdata.length; i++) {
     //   // counter++;
     //   // if (completeorderdata[i].order_status === 4) {
@@ -62,9 +63,18 @@ export class CommonfunctionService {
     //   }
     // }
     for (var i = 0; i < completeorderdata.length; i++) {
-      shpcost += completeorderdata[i].shipping_cost
-      subtotal += completeorderdata[i].net_amount
-      grandtotal += completeorderdata[i].gross_amount
+      if(!completeorderdata[i]?.customer?.first_name?.includes("Test") && !completeorderdata[i]?.customer?.first_name?.includes("test")&& 
+      !completeorderdata[i]?.customer?.last_name?.includes("Test") && !completeorderdata[i]?.customer?.last_name?.includes("test")){
+        // console.log("name entered is : ",completeorderdata[i].customer.first_name);
+        
+        shpcost += completeorderdata[i].shipping_cost
+        subtotal += completeorderdata[i].net_amount
+        grandtotal += completeorderdata[i].gross_amount
+      }else{
+        counters++
+        // console.log("test name entered is : ",completeorderdata[i].customer.first_name);
+      }
+     
       // console.log("shpcost : ",shpcost," subtotal:",subtotal," grandtotal: ",grandtotal);
 
     }
@@ -72,7 +82,8 @@ export class CommonfunctionService {
       shpcost: shpcost,
       subtotal: subtotal,
       grandtotal: grandtotal,
-      totalList: completeorderdata
+      totalList: completeorderdata,
+      testorderFound:counters,
     }
     return data
   }

@@ -48,6 +48,7 @@ export class OrdersComponent implements OnInit {
     payment_type_id: '',
     order_id_for_substitute_checking: 0,
     PickerCounter: 0, //set the counter to check if product selected in list
+    warehouseName:''
   }
   paymentonlineTimer = false
   order_Substitute_Time: any
@@ -66,10 +67,12 @@ export class OrdersComponent implements OnInit {
   timer: any
   leftTime: any = 5 * 60000
   //below date var is sample max and min date
-  minValue: any = new Date();
-  maxValue: any = this.minValue.getDate() + 3;
+  // minValue: any = new Date();
+  // maxValue: any = this.minValue.getDate() + 3;
   datetime: any = new Date();
   customErrorStateMatcher: any
+  printerTotalcost:any=0; //for total cost of products printing
+  totalProductItems:any=0//for printer product quantity
 
   constructor(public router: Router,
     public dialog: MatDialog,
@@ -82,7 +85,7 @@ export class OrdersComponent implements OnInit {
     private activated_route: ActivatedRoute,
     public globalitem: GlobalitemService) {
     // console.log("picker Nme : ", this.userOrderdata.picker_name);
-    this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
+    // this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     this.activated_route.params.subscribe(v => {
       console.log("activated route data :", v.orderstatus)
       if (v.orderstatus) {
@@ -214,7 +217,7 @@ export class OrdersComponent implements OnInit {
     this.apiService.postData("picker-orderdetails/", data).subscribe((data: any) => {
       // console.log("order list data inside detail : ",this.orderlistdata);
       console.log(data);
-     
+      
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
@@ -256,6 +259,8 @@ export class OrdersComponent implements OnInit {
       // this.datetime = time.getTime()
       console.log("Date Time : ", this.datetime);
       // this.addCustomVariable();
+
+      this.gettotalCost()
     })
   }
 
@@ -263,6 +268,23 @@ export class OrdersComponent implements OnInit {
     console.log("latlang : ", latlang);
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
+  }
+  printdata(){
+    const printContent:any = document.getElementById("component1");
+// const WindowPrt:any = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+// WindowPrt.document.write(printContent.innerHTML);
+// WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="src/app/core/utilities/printorderlist.css">');
+// WindowPrt.document.close();
+// WindowPrt.focus();
+// WindowPrt.print();
+// WindowPrt.close();
+let popupWinindow:any
+        let innerContents = document.getElementById("component1")?.innerHTML;
+        popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+        popupWinindow.document.open();
+        popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="printscc.scss" /></head><body onload="window.print()">' + innerContents + '</html>');
+        popupWinindow.document.close();
+
   }
 
   //edit unit weight and price
@@ -552,6 +574,8 @@ export class OrdersComponent implements OnInit {
     this.apiService.postData("picker-updateorderdetails/", data).subscribe((data: any) => {
       if (data.status === 1) {
         this.globalitem.showSuccess(data.message, "Time Updated")
+        this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+        this.gettotalCost()
       } else {
         this.globalitem.showError(data.message, "Warn")
       }
@@ -780,14 +804,10 @@ export class OrdersComponent implements OnInit {
       warehouse_status: "",
     }
     this.apiService.postData("global_list/", data).subscribe((data: any) => {
-      console.log("completed Order list Data : ",data);
       this.orderlistdata["data"] = data.results[0].result //json response
-      console.log("global list : ",this.orderlistdata["data"] );
-    
       this.totalProductpage = data.per_page_count//total page
       this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
         this.orderlistdata["data"][0].picker_name, "done")
-
       if (this.currentPage === 1) {
         this.orderlistdata["data"] = data.results[0].result
         this.totalProductpage = data.total_page
@@ -797,4 +817,15 @@ export class OrdersComponent implements OnInit {
       }
     })
   }
+  //totalcost for print
+ gettotalCost(){
+  this.totalProductItems=0;
+  this.printerTotalcost=0
+
+  this.db.getwarehouseName().then(res => {this.userOrderdata.warehouseName=res});
+    for(let i=0;i<this.orderDetaildata['data'][0]?.order_products.length;i++){
+      this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
+      this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price/this.orderDetaildata['data'][0]?.order_products[i]?.quantity * this.orderDetaildata['data'][0]?.order_products[i]?.quantity
+    }}
+
 }

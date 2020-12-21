@@ -8,7 +8,9 @@
                 <div>
                     <h4>Order Details</h4>
                 </div>
+              
                 <!-- process orders -->
+                <button type="button" (click)="printdata()" class="btn btn-success btn-sm">Print pickerlist</button>
                 <div *ngIf="IS_Subtitute === true" style="margin-left:3%">
                     <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                     orderDetaildata['data'][0]?.order_products"
@@ -172,8 +174,8 @@
                                         *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'">
                                         <input style="color: black !important;caret-color: transparent;width: 50%;"
                                             [ngStyle]="{'background-color':userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white' }"
-                                            matTimepicker #t="matTimepicker" #time="ngModel" [minDate]="minValue"
-                                            [maxDate]="maxValue" [strict]="false" mode="24h" [value]="datetime"
+                                            matTimepicker #t="matTimepicker" #time="ngModel" 
+                                            [strict]="false" mode="24h" [value]="datetime"
                                             [ngModel]="datetime"
                                             [placeholder]="orderDetaildata['data'][0]?.slot_end_time" name="time"
                                             [errorStateMatcher]="customErrorStateMatcher"
@@ -656,3 +658,128 @@
         </div>
     </div>
 </div>
+<!-- printing pickerlist --> 
+<div class="container printdata pagebreak" id="component1">
+    <div>
+        <h6>Store</h6>
+        <!-- <mat-divider></mat-divider> -->
+        <div><span>{{userOrderdata.warehouseName}}</span></div>
+        <table>
+            <tr>
+                <td>Date </td>
+                <td><div>{{orderDetaildata['data'][0]?.created | date : 'mediumDate'}}</div></td>
+            </tr>
+            <tr>
+                <td>Picker Name</td>
+                <td>
+                    <div>{{orderDetaildata['data'][0]?.picker_name}}</div>
+                </td>
+            </tr>
+        </table>
+        <mat-divider></mat-divider>        
+        <h6 >Delivery Info</h6>
+        <!-- <mat-divider></mat-divider> -->
+        <div>
+            <table id="table1">
+                <tr>
+                    <td>Address</td>
+                    <td>{{orderDetaildata['data'][0]?.delivery_street_address}}</td>
+                </tr>
+                <tr>
+                    <td>Emirate</td>
+                    <td>{{orderDetaildata['data'][0]?.delivery_state_name}}</td>
+                </tr>
+                <tr>
+                    <td>Customer </td>
+                    <td>{{orderDetaildata['data'][0]?.customer.first_name}} </td>
+                </tr>
+                <tr>
+                    <td>Phone </td>
+                    <td *ngIf="orderDetaildata['data'][0]?.delivery_phone">{{orderDetaildata['data'][0]?.delivery_phone | slice:0:4}} {{orderDetaildata['data'][0]?.delivery_phone | slice:4:6}} {{orderDetaildata['data'][0]?.delivery_phone | slice:6:orderDetaildata['data'][0]?.delivery_phone.length}}</td>
+                    <td *ngIf="!orderDetaildata['data'][0]?.delivery_phone">{{orderDetaildata['data'][0]?.customer.phone}} </td>
+                </tr>
+                <tr>
+                    <td>Delivery Time</td>
+                    <td> {{orderDetaildata['data'][0]?.time_slot_id | slice:-7}}</td>
+                </tr>
+            </table>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="description">           
+            <table>
+                <th style="text-align: left;"><h6>Items/Products</h6></th>
+                <th><h6>Unit</h6></th>
+                <th><h6>Price</h6></th>
+                <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index">
+                    <td>{{products?.quantity}}x {{products?.product.name}}</td>
+                    <td>{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
+                    <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        {{products?.product_price/products?.quantity *products?.quantity |
+                        currency:'':''}}</td>
+                </tr>
+            </table>
+            <mat-divider></mat-divider>
+        </div>
+        <div>
+            <table>
+            <tr>
+                <td><span>Sub Total </span></td>
+                <td style="text-align: end;padding-right: 7%;"><span>{{printerTotalcost | number}} {{orderDetaildata['data'][0]?.currency_code}}</span></td>
+            </tr>
+            <tr>
+                <td><span>Total items </span></td>
+                <td class="leftcol"><span>{{totalProductItems}}</span></td>
+            </tr>
+            <tr>
+                <td><span>Products</span></td>
+                <td class="leftcol"><span>{{orderDetaildata['data'][0]?.order_products.length}}</span></td>
+            </tr>
+            <tr>
+                <td> <span>Shipping Cost</span></td>
+                <td class="leftcol"><span>
+                        {{orderDetaildata['data'][0]?.shipping_cost | number}} {{orderDetaildata['data'][0]?.currency_code}}</span>
+                </td>
+            </tr>
+            <tr *ngIf="orderDetaildata['data'][0]?.cart_discount">
+                <td><span>Shipping Discount</span></td>
+                <td class="leftcol"><span>{{orderDetaildata['data'][0]?.cart_discount}} {{orderDetaildata['data'][0]?.currency_code}}</span></td>
+            </tr>
+            <tr *ngIf="orderDetaildata['data'][0]?.gross_discount_amount">
+                <td><span>Other Discounts</span></td>
+                <td class="leftcol"><span>{{orderDetaildata['data'][0]?.gross_discount_amount}} {{orderDetaildata['data'][0]?.currency_code}}</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong class="paymentfooter">Grand Total</strong>
+                </td>
+                <td class="leftcol">
+                    <strong class="paymentfooter">
+                        {{orderDetaildata['data'][0]?.currency_code}}
+                        {{printerTotalcost + orderDetaildata['data'][0]?.shipping_cost - orderDetaildata['data'][0]?.cart_discount - orderDetaildata['data'][0]?.gross_discount_amount | number}}
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="paymentfooter">Payment Method</span>
+                </td>
+                <td class="leftcol">
+                    <span class="paymentfooter" *ngIf="orderDetaildata['data'][0]?.payment_type_id === 2">
+                        Online Payment
+                    </span>
+                    <span class="paymentfooter" *ngIf="orderDetaildata['data'][0]?.payment_type_id !== 2">
+                        {{orderDetaildata['data'][0]?.payment_method_name}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <mat-divider></mat-divider>
+        <div class="printfooter">
+            <h6>Thank you!</h6>
+            <strong>For more info visit https://www.gogrocery.ae/</strong>
+        </div>
+       
+        </div>
+    </div>
+    
+    </div>

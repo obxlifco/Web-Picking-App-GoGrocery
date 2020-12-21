@@ -1,0 +1,22 @@
+
+    h6{
+        font-size: 20px;
+        font-weight: bold
+    }
+    table{
+        background-color: black;
+    }
+
+    @media print {
+        app-orders{
+            background-color: black;
+        }
+        h6{
+          font-size: 20px;
+          font-weight: bold;
+      }
+      table{
+          background-color: black;
+      }
+      
+      }

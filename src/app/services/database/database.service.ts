@@ -12,6 +12,7 @@ export class DatabaseService {
   NOTIFICATION_TIME:any="notiTime"
   ORDER_IDS:any="orderids"
   AVERAGE_DATA:any="aeveragedata"//for sae report
+  WAREHOUSE_NAME:any="warehousename"
 
   constructor(private storage:LocalStorageService) { }
 
@@ -84,6 +85,13 @@ export class DatabaseService {
   }
   async getcancellationRate(){
     return this.storage.retrieve(this.AVERAGE_DATA)
+  }
+  //setter and getter for warehouse name
+  setwarehouseName(name:any){
+    this.storage.store(this.WAREHOUSE_NAME, name);
+  }
+  async getwarehouseName(){
+    return this.storage.retrieve(this.WAREHOUSE_NAME)
   }
   
 }
