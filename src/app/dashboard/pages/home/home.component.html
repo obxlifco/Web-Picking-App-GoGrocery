@@ -102,21 +102,21 @@
                                         <ngx-skeleton-loader *ngIf="orderdata['data'].substitution_sent_order !== 0 && orderdata['data'].substitution_sent_order < 0" style="width: 100%;"></ngx-skeleton-loader>
                                     </td>
                                 </tr>
-                                <tr (click)="navigateOrder('shipped')">
+                                <tr (click)="navigateOrder('shipped',orderdata['data']?.shipped_order)">
                                     <td matRipple class="mainpadding"><span>Shipped</span></td>
                                     <td matRipple>
                                         <p *ngIf="orderdata['data'].shipped_order === 0 || orderdata['data'].shipped_order > 0">{{orderdata['data']?.shipped_order}}</p>
                                         <ngx-skeleton-loader *ngIf="orderdata['data'].substitution_sent_order !== 0 && !orderdata['data'].substitution_sent_order" style="width: 100%;"></ngx-skeleton-loader>
                                     </td>
                                 </tr>
-                                <tr (click)="navigateOrder('complete')">
+                                <tr (click)="navigateOrder('complete',orderdata['data']['completeorders'])">
                                     <td matRipple class="mainpadding"><span>Completed</span></td>
                                     <td matRipple>
                                         <p *ngIf="totalorders === 0 || totalorders > 0">{{orderdata['data']['completeorders']}}</p>
                                         <ngx-skeleton-loader *ngIf="totalorders !== 0 && !totalorders" style="width: 100%;"></ngx-skeleton-loader>
                                     </td>
                                 </tr>
-                                <tr (click)="navigateOrder('cancelled')">
+                                <tr (click)="navigateOrder('cancelled',orderdata['data']?.cancel_order)">
                                     <td matRipple class="mainpadding"><span>Cancelled</span></td>
                                     <td matRipple>
                                         <p *ngIf="orderdata['data'].cancel_order === 0 || orderdata['data'].cancel_order > 0">{{orderdata['data']?.cancel_order}}</p>

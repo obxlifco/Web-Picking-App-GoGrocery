@@ -63,8 +63,16 @@ export class LoginComponent implements OnInit {
       let data:any=res;
       if(data.status === 0){
         this.globalitem.showError(data.message, "Error")
+        console.log("form value : ",);
       }else{
         // this.globalitem.showSuccess("You have Successfully login", "Success")
+        console.log("form value : ",this.loginForm.username);
+        if(this.loginForm.value.username === "supermgr"){
+          let warehouseids={
+            warehouse_id:null
+          }
+          Object.assign(data?.user_data,warehouseids)
+        }
         this.database.setUserData(data?.user_data)
         this.router.navigate(["dashboard/home"])
       }

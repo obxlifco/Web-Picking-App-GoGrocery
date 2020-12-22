@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('drawer') sidenav: MatSidenav | any;
 
   title = 'GoGrocery Picking App';
+  isWarehouseID:any=null
   loginRouterLink: any
   totalbadge: any = 0
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -85,7 +86,7 @@ export class DashboardComponent implements OnInit {
   }
   logout() {
     this.db.getUserData().then(res => {
-      console.log("user data inside dashboard : ", res);
+      // console.log("user data inside dashboard : ", res);
       this.db.getIP().then(data1 => {
 
         let data = {
@@ -93,7 +94,7 @@ export class DashboardComponent implements OnInit {
           device_id: data1.ip,
         }
         this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
-          console.log("logout : ", data);
+          // console.log("logout : ", data);
           if (data.status === 1) {
             // this.globalitems.showSuccess("You have Sucessfully logout", "Success")
             this.db.SignOut();
@@ -118,7 +119,7 @@ export class DashboardComponent implements OnInit {
   //gettting sytore name
   getstorename(){
     this.db.getUserData().then(res => {
-
+      this.isWarehouseID = res.warehouse_id
       this.apiService.getData("warehouse/"+res.warehouse_id+"/").subscribe((data: any) => {
         // console.log("store name : ",data.warehouse.name);
           this.title=data.warehouse.name

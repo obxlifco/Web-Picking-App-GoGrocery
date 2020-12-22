@@ -1,7 +1,6 @@
 <div class="container" id="header">
     <!-- <button style="width: auto;" type="button" class="btn btn-success btn-sm">go Go bottom</button> -->
-    <div class="row pickerinput"
-        [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'|| userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
+    <div class="row pickerinput">
 
         <div class="row" style="width: 50%;margin-top: 1%;" >
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin" style="padding: 4% 9% 3% 3%;">
@@ -9,7 +8,7 @@
                     <h4>Order Details</h4>
                 </div>
                 <!-- process orders -->
-                <div *ngIf="IS_Subtitute === true" style="margin-left:3%">
+                <div *ngIf="IS_Subtitute === true" style="margin-left:3%" [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'|| userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
                     <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                     orderDetaildata['data'][0]?.order_products"
                         [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: auto;"
@@ -33,7 +32,7 @@
                         <td>
                             <label for="orderby">Order prepared by</label>
                         </td>
-                        <td>
+                        <td [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'|| userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
                             <div class="form-group">
                                 <input *ngIf="userOrderdata.picker_name !== undefined" type="text"
                                     [disabled]="userOrderdata.picker_name" #username [value]="userOrderdata.picker_name"
@@ -775,7 +774,7 @@
                             {{orderDetaildata['data'][0]?.currency_code}}</span>
                     </td>
                 </tr>
-                <tr *ngIf="orderDetaildata['data'][0]?.cart_discount">
+                <!-- <tr *ngIf="orderDetaildata['data'][0]?.cart_discount">
                     <td><span>Shipping Discount</span></td>
                     <td class="leftcol"><span>{{orderDetaildata['data'][0]?.cart_discount}}
                             {{orderDetaildata['data'][0]?.currency_code}}</span></td>
@@ -784,17 +783,21 @@
                     <td><span>Other Discounts</span></td>
                     <td class="leftcol"><span>{{orderDetaildata['data'][0]?.gross_discount_amount}}
                             {{orderDetaildata['data'][0]?.currency_code}}</span></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td>
                         <strong class="paymentfooter">Grand Total</strong>
                     </td>
                     <td class="leftcol">
-                        <strong class="paymentfooter">
+                        <!-- <strong class="paymentfooter">
                             {{orderDetaildata['data'][0]?.currency_code}}
                             {{printerTotalcost + orderDetaildata['data'][0]?.shipping_cost -
                             orderDetaildata['data'][0]?.cart_discount -
                             orderDetaildata['data'][0]?.gross_discount_amount | number}}
+                        </strong> -->
+                        <strong class="paymentfooter">
+                            {{orderDetaildata['data'][0]?.currency_code}}
+                            {{printerTotalcost + orderDetaildata['data'][0]?.shipping_cost | number}}
                         </strong>
                     </td>
                 </tr>

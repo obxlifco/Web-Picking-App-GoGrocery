@@ -122,6 +122,22 @@
                         <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
                     </td>
                 </tr>
+                <!-- <tr>
+                    <td>Shipping Discount</td>
+                    <td>
+                        <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                            {{saleData.shippingDiscount | number}}</p>
+                        <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Coupon Discount</td>
+                    <td>
+                        <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                            {{saleData.coupendiscount | number}}</p>
+                        <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                    </td>
+                </tr> -->
                 <tr>
                     <td><strong>Grand Total</strong></td>
                     <td style="width: 60%;">

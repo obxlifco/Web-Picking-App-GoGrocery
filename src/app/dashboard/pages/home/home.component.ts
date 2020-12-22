@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     // })  
 
     this.db.getUserData().then(res => {
-      console.log("user data inside dashboard : ", res);
+      // console.log("user data inside dashboard : ", res);
 
       let data = {
         warehouse_id: res.warehouse_id,
@@ -48,17 +48,22 @@ export class HomeComponent implements OnInit {
         order_status: 'complete',
       }
       this.apiService.postData("picker-dashboard/", data).subscribe((data: any[]) => {
-        console.log(data);
+        // console.log(data);
         this.orderdata["data"] = data
       })
     })
   }
 
-  navigateOrder(orderstatus: any) {
-    this.router.navigate(['dashboard/orders', { orderstatus: orderstatus }])
-  }
+  navigateOrder(orderstatus: any,value:any) {
+    if(value !== 0){
+      this.router.navigate(['dashboard/orders', { orderstatus: orderstatus }])
+    }
+    }
+      
   navigatePocessingOrder() {
+    if(this.orderdata['data'].processing_order !== 0){
     this.router.navigate(['dashboard/orders'])
+    }
   }
 
 
@@ -91,10 +96,10 @@ export class HomeComponent implements OnInit {
         warehouse_status: "",
       }
       this.apiService.postData("global_list/", data).subscribe((data: any) => {
-        console.log("completed Data : ",data.results[0].result);
+        // console.log("completed Data : ",data.results[0].result);
         this.orderdata["data"]["completeorders"]=data.count
         if(data.results[0].result.length !== 0){
-          console.log("if conditions");
+          // console.log("if conditions");
         this.totalorders = this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
           this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
           this.orderdata['data']?.cancel_order + this.orderdata['data']['completeorders'] 
@@ -108,7 +113,7 @@ export class HomeComponent implements OnInit {
           this.totalorders = this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
           this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
           this.orderdata['data']?.cancel_order 
-          console.log("total orders : ",this.totalorders,this.orderdata['data'].pending_order);
+          // console.log("total orders : ",this.totalorders,this.orderdata['data'].pending_order);
           let data={
             cancelledorders:this.orderdata['data']?.cancel_order,
             completedOrders:this.orderdata['data']['completeorders'],

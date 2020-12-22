@@ -7,7 +7,7 @@
     <mat-nav-list (click)="close()">
       <a mat-list-item [routerLink]="'home'">Dashboard</a>
       <a mat-list-item (click)="navigateOrders()">Orders</a>
-      <a mat-list-item [routerLink]="'stocks'">Stocks</a>
+      <a *ngIf="isWarehouseID" mat-list-item [routerLink]="'stocks'">Stocks</a>
       <!-- <a mat-list-item [routerLink]="'returns'">Returns</a> -->
       <a mat-list-item (click)="navigateSale()">Sales Report</a>
       <a mat-list-item [routerLink]="'appsettings'">App Settings</a>

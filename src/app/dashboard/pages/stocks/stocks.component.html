@@ -51,14 +51,13 @@
         infiniteScroll
         [infiniteScrollDistance]="0.01"
         [scrollWindow]="false"
- 
         [infiniteScrollThrottle]="500"
         [alwaysCallback]="true"
         (scrolled)="onScrollDown($event)" >
             <div class="col-md-12 stretch-card grid-margin table-data">
                 <table class="table">
                     <th colspan="5">Product Info</th>
-                    <th colspan="3.5">Price</th>
+                    <th colspan="3.5" style="position: inherit;">Price</th>
                     <th colspan="3.5">Stock</th>
                     <tr *ngFor="let plist of pickerProductList['data'];let i=index">
                         <td colspan="6">
@@ -82,7 +81,6 @@
                             <mat-slide-toggle (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)" [checked]="plist?.product_stock?.stock > 0"></mat-slide-toggle>
                         </td>
                     </tr>
-
                     <!-- Skeleton and empty state-->
                     <tr>
                         <td  *ngIf="!pickerProductList['data']?.length && IsDataLoaded === true">

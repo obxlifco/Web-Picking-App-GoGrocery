@@ -68,6 +68,10 @@
     height: 40rem;
     overflow: scroll;
   }
+  .productimg{
+    width: fit-content !important;
+    height: 100px !important;
+  }
   @media only screen and (max-width: 360) and (max-height: 640){
     .conatiner {
         padding: 18% 5% 3% 5% !important;

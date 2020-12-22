@@ -538,11 +538,8 @@ export class OrdersComponent implements OnInit {
       temData = data
     } else if (reqestType === "outsidePage") {
       // console.log("outside data : ", temData);
-
       temData = orderData
     }
-
-
     this.apiService.postData("picker-latestorders/", temData).subscribe((data: any) => {
       // console.log("latestorders : ", data);
       this.appcom.setbadge(data.response.no_of_latest_order)

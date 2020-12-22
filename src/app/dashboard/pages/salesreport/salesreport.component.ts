@@ -44,6 +44,8 @@ export class SalesreportComponent implements OnInit {
   saleData = {
     totalorder: 0,
     shippingcost: 0,
+    coupendiscount:0,
+    shippingDiscount:0,
     subtotal: 0,
     grandtotal: 0,
     testorders:0
@@ -123,13 +125,13 @@ export class SalesreportComponent implements OnInit {
 
   getCancellationandCompleteRate(){
     this.db.getcancellationRate().then(res => {
-      console.log("cancellation report : ",res);
+      // console.log("cancellation report : ",res);
       this.averageData=res
     });
   }
   getOrderlistData(date: any) {
-    console.log("advanced search : ", this.advancedsearch);
-    console.log("before ids :", this.paymentmethodlastids);
+    // console.log("advanced search : ", this.advancedsearch);
+    // console.log("before ids :", this.paymentmethodlastids);
     this.setfieldEmpty()
     this.db.getUserData().then(res => {
       // console.log("payment method ID : ", this.rangeFormGroup.controls.paymentmethodid.value);
@@ -162,6 +164,8 @@ export class SalesreportComponent implements OnInit {
             this.saleData.grandtotal += parseFloat(this.commonfunc.precise_round(incomingdata.grandtotal, 2))
             this.saleData.shippingcost += parseFloat(this.commonfunc.precise_round(incomingdata.shpcost, 2))
             this.saleData.subtotal += parseFloat(this.commonfunc.precise_round(incomingdata.subtotal, 2))
+            this.saleData.coupendiscount += parseFloat(this.commonfunc.precise_round(incomingdata.coupendiscount, 2))
+            this.saleData.shippingDiscount += parseFloat(this.commonfunc.precise_round(incomingdata.shippingdiscount, 2))
             this.saleData.testorders += incomingdata.testorderFound
             this.generalcounter += data.results[0].result.length
             if (this.currentpage > data.per_page_count) {
@@ -176,7 +180,7 @@ export class SalesreportComponent implements OnInit {
             this.currentpage = data.per_page_count
           } if (data.count === this.generalcounter) {
             // console.log("this.saleData:", this.saleData ," and test oreders : ",incomingdata.testorderFound);
-            console.log("test orders : ",incomingdata);
+            // console.log("test orders : ",incomingdata);
             //for test order removing we used testorderfound
             if(incomingdata?.testorderFound === undefined){
 
@@ -189,17 +193,17 @@ export class SalesreportComponent implements OnInit {
             //for multi selection checkbox, after getting data we set paymentmethodlastids value to undefined and calculate orders
             // console.log("paymentmethodlastids ",this.paymentmethodlastids);
             if (this.paymentmethodlastids === undefined) {
-              console.log("mergeFirstPaymentData ",this.mergeFirstPaymentData);
+              // console.log("mergeFirstPaymentData ",this.mergeFirstPaymentData);
               
               if (this.mergeFirstPaymentData.length !== 0) {
-                console.log(" mergeFirstPaymentData enterd");
+                // console.log(" mergeFirstPaymentData enterd");
                 
                 this.saleData.totalorder += this.mergeFirstPaymentData.totalorder
                 this.saleData.shippingcost += this.mergeFirstPaymentData.shippingcost
                 this.saleData.subtotal += this.mergeFirstPaymentData.subtotal
                 this.saleData.grandtotal += this.mergeFirstPaymentData.grandtotal
                 this.mergeFirstPaymentData = []
-                console.log("subtotal : ", this.saleData.subtotal);
+                // console.log("subtotal : ", this.saleData.subtotal);
               }
             }//for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
             if (this.paymentmethodlastids !== undefined) {
@@ -210,7 +214,7 @@ export class SalesreportComponent implements OnInit {
                 subtotal: this.saleData.subtotal,
                 grandtotal: this.saleData.grandtotal
               }
-              console.log("amounts are : ",tempdata);
+              // console.log("amounts are : ",tempdata);
               this.mergeFirstPaymentData = tempdata//merge data with old and set new value for ids
               if (this.paymentmethodlastids) {
                 this.generalcounter = 0
@@ -252,6 +256,8 @@ export class SalesreportComponent implements OnInit {
     this.saleData.shippingcost = parseFloat('00')
     this.saleData.subtotal = parseFloat('00')
     this.generalcounter = parseFloat('00')
+    this.saleData.shippingDiscount = parseFloat('00')
+    this.saleData.coupendiscount = parseFloat('00')
   }
   //search orders on the base of selected date ,month,year ,date range and payment method
   Searchorders() {
@@ -260,23 +266,23 @@ export class SalesreportComponent implements OnInit {
     this.currentpage = 1
 
     this.orderlistsaleData = []
-    console.log("payment method id: ",this.paymentmethodid);
+    // console.log("payment method id: ",this.paymentmethodid);
     
     if (this.paymentmethodid !== "both") {
       let temparray: any = this.paymentmethod.subtasks
       let secondtemarray: any = []
-      console.log("paymentmethod ids: ", this.paymentmethod.subtasks, temparray);
+      // console.log("paymentmethod ids: ", this.paymentmethod.subtasks, temparray);
       this.advancedsearch = []
       this.setcompleteparam()
       for (let i = 0; i < temparray.length; i++) {
         if (temparray[i].completed === true) {
           secondtemarray.push(temparray[i])
-          console.log("paymentmethod ids true", secondtemarray);
+          // console.log("paymentmethod ids true", secondtemarray);
 
           if (secondtemarray[1]) {
             this.paymentmethodlastids = secondtemarray[1].id
             this.paymentmethodname = secondtemarray[1].name
-            console.log("last payment ids :", this.paymentmethodlastids);
+            // console.log("last payment ids :", this.paymentmethodlastids);
           } else if (secondtemarray[0]) {
             this.advancedsearch.push({
               comparer: 1,
@@ -289,7 +295,6 @@ export class SalesreportComponent implements OnInit {
               show_name: "Payment Method"
             })
           }
-
         }
       }
     }
@@ -324,18 +329,22 @@ export class SalesreportComponent implements OnInit {
   // download csv file
   getCSVFile() {
     // console.log(" data : ",this.completelist["data"]["subtotal"] ,this.completelist["data"]["grandtotal"]);
-    let temarray: any = []    
+    let temarray: any = [] 
+    console.log("this.saleData.shippingDiscount : ",this.saleData.shippingDiscount);
+       
     let data1: any = {
       'Total Orders': this.saleData.totalorder,
       'Subtotal': this.saleData.subtotal,
       'Shipping Costs': this.saleData.shippingcost,
+      'Shipping Discount': this.saleData.shippingDiscount,
+      'Coupon Discount': this.saleData.coupendiscount,
       'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code'],
       'Cancel Rate':this.commonfunc.precise_round(this.averageData?.cancelledorders/(this.averageData?.cancelledorders + this.saleData.totalorder)*100, 1)+"%",
       'Average Value':this.commonfunc.precise_round(this.saleData.grandtotal/this.saleData.totalorder,3)
     }
 
     if (this.saleData.totalorder !== 0) {
-      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs', 'Grand Total','Cancel Rate','Average Value']
+      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs','Shipping Discount','Coupon Discount', 'Grand Total','Cancel Rate','Average Value']
       // console.log("csv file : ", paramdata);
       temarray.push(data1)
       this.commonfunc.downloadFile(temarray, 'sales report', paramdata, 'footerdata')
@@ -428,7 +437,7 @@ export class SalesreportComponent implements OnInit {
 
   //generate sale report
   generateSaleReport() {
-    console.log("order list :", this.orderlistsaleData);
+    // console.log("order list :", this.orderlistsaleData);
     let counter = 0
     let diff :any
     //set footer with total charges
@@ -465,10 +474,10 @@ export class SalesreportComponent implements OnInit {
       //cancellation average  cancellation value /total oredsr * 100 will be in percentage
        counter++
       temarray.push(data)
-      console.log("Index: ", counter,this.saleData.testorders);
+      // console.log("Index: ", counter,this.saleData.testorders);
      
     } if (this.orderlistsaleData.length  === counter + this.saleData.testorders) {
-      console.log("CSV file : ", temarray, this.orderlistsaleData.length, i)
+      // console.log("CSV file : ", temarray, this.orderlistsaleData.length, i)
       let paramdata: any = ['Order Number', 'Order Date', 'Customer Name', 'Payment Method', 'Subtotal', 'Shipping Cost', 'Shipping Discount', 'Other Discount', 'Grand Total']
       this.commonfunc.downloadFile(temarray, "order products", paramdata, footerdata)
     }else{
