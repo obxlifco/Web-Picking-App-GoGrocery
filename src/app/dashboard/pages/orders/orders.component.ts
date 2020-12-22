@@ -25,6 +25,7 @@ import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.ser
 })
 export class OrdersComponent implements OnInit {
   @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
+  @ViewChild('footer', { static: true }) footerid: ElementRef | any;
   subscription: Subscription | any;
   statusText: string | any;
   orderlistdata: any = []
@@ -48,7 +49,7 @@ export class OrdersComponent implements OnInit {
     payment_type_id: '',
     order_id_for_substitute_checking: 0,
     PickerCounter: 0, //set the counter to check if product selected in list
-    warehouseName:''
+    warehouseName: ''
   }
   paymentonlineTimer = false
   order_Substitute_Time: any
@@ -71,8 +72,9 @@ export class OrdersComponent implements OnInit {
   // maxValue: any = this.minValue.getDate() + 3;
   datetime: any = new Date();
   customErrorStateMatcher: any
-  printerTotalcost:any=0; //for total cost of products printing
-  totalProductItems:any=0//for printer product quantity
+  printerTotalcost: any = 0; //for total cost of products printing
+  totalProductItems: any = 0//for printer product quantity
+
 
   constructor(public router: Router,
     public dialog: MatDialog,
@@ -102,6 +104,17 @@ export class OrdersComponent implements OnInit {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
     this.getOrderlistData()
+  }
+  movetofooter(value:any){
+    let innerContents :any;
+    if(value === "header"){
+      innerContents = document.getElementById("footer");
+    }else{
+      innerContents = document.getElementById("header");
+    }
+ 
+    // const targetElement = this.footerid.nativeElement
+    innerContents.scrollIntoView({behavior: "smooth"})
   }
   navigate(link: any) {
     this.router.navigate([link]);
@@ -155,26 +168,26 @@ export class OrdersComponent implements OnInit {
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
-      if(this.userOrderdata.orderlistType !== 'complete'){
-      this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
-        // console.log(data);
-        this.orderlistdata["data"] = data.response //json response
-        this.totalProductpage = data.total_page//total page
-        this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
-        this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-          this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
+      if (this.userOrderdata.orderlistType !== 'complete') {
+        this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
+          // console.log(data);
+          this.orderlistdata["data"] = data.response //json response
+          this.totalProductpage = data.total_page//total page
+          this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
+          this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+            this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
 
-        if (this.currentPage === 1) {
-          this.orderlistdata["data"] = data.response
-          this.totalProductpage = data.total_page
-        } else {
-          console.log("page n");
-          this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
-        }
-      })
-    }else if(this.userOrderdata.orderlistType === 'complete'){
-      this.getCompletedOrders()
-    }
+          if (this.currentPage === 1) {
+            this.orderlistdata["data"] = data.response
+            this.totalProductpage = data.total_page
+          } else {
+            console.log("page n");
+            this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
+          }
+        })
+      } else if (this.userOrderdata.orderlistType === 'complete') {
+        this.getCompletedOrders()
+      }
     })
   }
 
@@ -201,8 +214,8 @@ export class OrdersComponent implements OnInit {
 
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
     // this.IsTimeComplete = ''
-    
-    console.log("order id :", orderid,"shipment_id: ",shipment_id," order_status: ",order_status," picker_name: ",picker_name," substitute_status: ",substitute_status);
+
+    console.log("order id :", orderid, "shipment_id: ", shipment_id, " order_status: ", order_status, " picker_name: ", picker_name, " substitute_status: ", substitute_status);
     this.userOrderdata.picker_name = picker_name;
     this.userOrderdata.order_id = orderid
     this.userOrderdata.order_status = order_status
@@ -217,13 +230,13 @@ export class OrdersComponent implements OnInit {
     this.apiService.postData("picker-orderdetails/", data).subscribe((data: any) => {
       // console.log("order list data inside detail : ",this.orderlistdata);
       console.log(data);
-      
+
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
       this.paymentOnlineTime = this.datePipe.transform(this.orderDetaildata["data"][0]?.created, "MMM d, y, h:mm:ss a");
       this.currenttime = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
-      
+
       if (this.orderDetaildata["data"][0]?.order_substitute_products) {
         // console.log("entered in if ",this.orderDetaildata["data"]?.order_substitute_products);
         this.order_Substitute_Time = this.datePipe.transform(this.orderDetaildata["data"][0]?.order_substitute_products[0]?.created, "MMM d, y, h:mm:ss a")
@@ -248,7 +261,7 @@ export class OrdersComponent implements OnInit {
       //   console.log("order llist data inside detail : ",this.orderlistdata["data"][0]);
       //   this.userOrderdata.order_id_for_substitute_checking = this.orderlistdata["data"][0]?.id
       // }
-      
+
       if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'complete' || this.userOrderdata.orderlistType === 'shipped') {
       } else {
         this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
@@ -269,22 +282,63 @@ export class OrdersComponent implements OnInit {
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
-  printdata(){
-    const printContent:any = document.getElementById("component1");
-// const WindowPrt:any = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
-// WindowPrt.document.write(printContent.innerHTML);
-// WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="src/app/core/utilities/printorderlist.css">');
-// WindowPrt.document.close();
-// WindowPrt.focus();
-// WindowPrt.print();
-// WindowPrt.close();
-let popupWinindow:any
-        let innerContents = document.getElementById("component1")?.innerHTML;
-        popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
-        popupWinindow.document.open();
-        popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="printscc.scss" /></head><body onload="window.print()">' + innerContents + '</html>');
-        popupWinindow.document.close();
+  printdata() {
+    let innerContents = document.getElementById("component1")?.innerHTML;
+    const popupWinindow: any = window.open();
+    popupWinindow.document.open();
+    popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
+    popupWinindow.document.write(`<style>
+    .printdata{
+      background: white;
+      line-height: 2;
+      width: 50px !important;
+    }
+      .h6{
+        font-size: 15px;
+        font-weight: bolder;
+        margin: 1% 0% 1% 0%;
+      }
+      .table1{
+          line-height: normal;
+          width:100%;
+      }
+      .th{
+          text-align: inherit;
+          background: white;
+          color: black;
+      } 
+      .mat-divider{
+          margin: 4px 0px 4px 0px;
+          border: 1px solid #8a8484;
+      }
+      .printfooter{
+          text-align: center;
+          margin-top:4% !important;
+          h6{
+            font-size: 15px;
+            margin: 2% 0% 2% 0%;
+            font-weight: bolder;
+          }
+      }
+      .leftcol{
+          text-align: end;
+          padding-right: 6% !important;
+      }
 
+      @media print 
+{
+   @page
+   {
+    size: 5.5in 8.5in ;
+    size: portrait;
+    margin:minimum;
+  }
+}
+
+  
+    </style>
+  `);
+    popupWinindow.document.close();
   }
 
   //edit unit weight and price
@@ -561,9 +615,8 @@ let popupWinindow:any
 
   //update detail order data with time
   timeChangeHandler(event: any, starttime: any) {
-
-    var medium = this.datePipe.transform(new Date(), "'h:mm");
-    console.log("date Event : ", medium)
+    this.datetime = event
+    console.log("date Event : ", event)
     let data = {
       website_id: this.userOrderdata.website_id,
       user_id: this.userOrderdata.user_id,
@@ -589,7 +642,6 @@ let popupWinindow:any
   getNextData() {
     console.log('scrolled!!');
   }
-
   //this method use for to check substitute is there are not 
   getsubtitteStatus() {
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_substitute_products.length; i++) {
@@ -777,7 +829,7 @@ let popupWinindow:any
   }
 
   //get completed orders list
-  getCompletedOrders(){
+  getCompletedOrders() {
     let data = {
       advanced_search: [{
         comparer: 1,
@@ -818,14 +870,15 @@ let popupWinindow:any
     })
   }
   //totalcost for print
- gettotalCost(){
-  this.totalProductItems=0;
-  this.printerTotalcost=0
+  gettotalCost() {
+    this.totalProductItems = 0;
+    this.printerTotalcost = 0
 
-  this.db.getwarehouseName().then(res => {this.userOrderdata.warehouseName=res});
-    for(let i=0;i<this.orderDetaildata['data'][0]?.order_products.length;i++){
+    this.db.getwarehouseName().then(res => { this.userOrderdata.warehouseName = res });
+    for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
-      this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price/this.orderDetaildata['data'][0]?.order_products[i]?.quantity * this.orderDetaildata['data'][0]?.order_products[i]?.quantity
-    }}
+      this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;
+    }
+  }
 
 }

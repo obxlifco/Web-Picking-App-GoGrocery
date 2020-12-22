@@ -181,8 +181,8 @@ export class SalesreportComponent implements OnInit {
             if(incomingdata?.testorderFound === undefined){
 
             }else{
-              this.saleData.totalorder = data.count - incomingdata.testorderFound
-              this.saleData.testorders=incomingdata.testorderFound
+              this.saleData.totalorder = data.count - this.saleData.testorders
+              // this.saleData.testorders=incomingdata.testorderFound
             }
 
             this.completelist["data"]["currency_code"] = data?.results[0]?.result[0]?.currency_code
@@ -245,6 +245,8 @@ export class SalesreportComponent implements OnInit {
   //set filed value
   setfieldvalue() {
     // this.completelist["data"].length = 0
+    this.saleData.totalorder=0
+    this.saleData.testorders=0
     this.completelist['data']['currency_code'] = '0.'
     this.saleData.grandtotal = parseFloat('00')
     this.saleData.shippingcost = parseFloat('00')
@@ -463,7 +465,7 @@ export class SalesreportComponent implements OnInit {
       //cancellation average  cancellation value /total oredsr * 100 will be in percentage
        counter++
       temarray.push(data)
-      console.log("Index: ", counter);
+      console.log("Index: ", counter,this.saleData.testorders);
      
     } if (this.orderlistsaleData.length  === counter + this.saleData.testorders) {
       console.log("CSV file : ", temarray, this.orderlistsaleData.length, i)

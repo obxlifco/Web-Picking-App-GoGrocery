@@ -115,8 +115,8 @@
         </div>
         <!-- substitute products -->
         <div class="row" *ngIf="incomingmodalData.productType === 2" style="height: 289px;">
-            <div class="col-md-12 stretch-card grid-margin table-data">
-                <table class="table">
+            <div class="col-md-12 stretch-card grid-margin table-data" #selector>
+                <table class="table"  >
                     <div>
                         <th colspan="7" style="width: 86%;">Product Info</th>
                         <th colspan="5">Price</th>
@@ -149,8 +149,8 @@
                         </div>
                     </div>
                     <!-- substitute list -->
-                    <div *ngIf="pickerProductList['data']?.length !== 0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
-                        [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
+                    <div *ngIf="pickerProductList['data']?.length !== 0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.05"  [scrollWindow]="false"
+                    [infiniteScrollThrottle]="500"  [alwaysCallback]="true" [infiniteScrollContainer]="selector" (scrolled)="onScrollDown($event)">
                         <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row">
                             <!-- layover selection -->
                             <div class="layover-root"
