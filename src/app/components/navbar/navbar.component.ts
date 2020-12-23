@@ -8,7 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ApiService } from 'src/app/services/api/api.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
-import { NotificationserviceService } from 'src/app/notificationservice.service';
+import { NotificationserviceService } from 'src/app/core/pipe/notification/notificationservice.service';
 
 
 @Component({

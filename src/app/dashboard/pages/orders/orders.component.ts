@@ -52,6 +52,7 @@ export class OrdersComponent implements OnInit {
     warehouseName: ''
   }
   paymentonlineTimer = false
+  isOrderList=false
   order_Substitute_Time: any
   currenttime: any = new Date()
   isTimerStart = false
@@ -171,6 +172,8 @@ export class OrdersComponent implements OnInit {
       if (this.userOrderdata.orderlistType !== 'complete') {
         this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
           // console.log(data);
+          if(data.status !== 0){
+            this.isOrderList=false
           this.orderlistdata["data"] = data.response //json response
           this.totalProductpage = data.total_page//total page
           this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
@@ -183,6 +186,9 @@ export class OrdersComponent implements OnInit {
           } else {
             // console.log("page n");
             this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
+          }}else{
+            this.isOrderList=true
+            this.globalitem.showError("No Orderlist found ","No Order")
           }
         })
       } else if (this.userOrderdata.orderlistType === 'complete') {

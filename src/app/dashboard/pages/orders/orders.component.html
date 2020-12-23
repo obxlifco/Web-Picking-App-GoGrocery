@@ -2,7 +2,7 @@
     <!-- <button style="width: auto;" type="button" class="btn btn-success btn-sm">go Go bottom</button> -->
     <div class="row pickerinput">
 
-        <div class="row" style="width: 50%;margin-top: 1%;" >
+        <div class="row" style="width: 50%;margin-top: 1%;" *ngIf="orderlistdata['data'].length">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin" style="padding: 4% 9% 3% 3%;">
                 <div>
                     <h4>Order Details</h4>
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="orderlistdata['data'].length">
         <div class="col-xs-6 col-sm-8 col-md-6 col-lg-8 grid-margin">
             <div style="width: 100%;">
                 <!-- Detail of order list data -->
@@ -332,6 +332,7 @@
                                 <td style="line-height:2">
                                     <h6 style="color: green;">{{products?.product.name}}</h6>
                                     <!-- <br> -->
+                                    <span>SKU: {{products?.product.sku}}</span><br>
                                     Quantity Ordered: <span>{{products?.quantity}}</span><br>
                                     Unit Price: <span>{{orderDetaildata['data'][0]?.currency_code}}
                                         {{products?.product_price/products?.quantity *products?.quantity |
@@ -444,6 +445,7 @@
                                         <!-- <button (click)="openEditModal(subt_products)" type="button"
                                             class="btn btn-danger">Edit
                                             Weight</button><br> -->
+                                            <span>SKU: {{subt_products?.product.sku}}</span><br>
                                         Quantity Ordered: <span>{{subt_products?.quantity}}</span><br>
                                         Unit Price: <span>{{subt_products?.product_price}}</span><br>
                                         <span>Unit Weight: {{subt_products?.product.weight}}
@@ -673,6 +675,26 @@
                 </cdk-virtual-scroll-viewport>
             </div>
         </div>
+    </div>
+    <!-- skeleton start -->
+    <div class="skeletonorderlist" *ngIf="!orderlistdata['data'].length && !isOrderList">
+        <table >
+            <tr *ngFor="let item of [1,2,3,4,5]">
+                <td colspan="2" class="leftcol">
+                    <ngx-skeleton-loader></ngx-skeleton-loader>
+                </td>
+                <td colspan="4" class="centercol">
+                    <ngx-skeleton-loader></ngx-skeleton-loader>
+                </td>
+                <td  colspan="6" class="rightcol">
+                    <ngx-skeleton-loader></ngx-skeleton-loader>
+                </td>
+            </tr>
+        </table>
+    </div>
+     <!-- skeleton end -->
+    <div *ngIf="!orderlistdata['data'].length && isOrderList">
+        <img style="margin-top: 4%;" src="assets/images/product/noresult.jpeg" alt="">
     </div>
 </div>
 <!-- printing pickerlist -->

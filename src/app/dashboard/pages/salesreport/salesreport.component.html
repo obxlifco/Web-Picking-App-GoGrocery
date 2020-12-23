@@ -150,7 +150,7 @@
                     <td><span>Average Value</span></td>
                     <td style="width: 60%;">
                         <span *ngIf="saleData.totalorder === 0">0.0</span>
-                        <span *ngIf="saleData.totalorder">
+                        <span *ngIf="saleData.totalorder && completelist['data']['currency_code']">
                             {{saleData.grandtotal/saleData.totalorder | number}}</span>
                         <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
                     </td>  
@@ -159,7 +159,7 @@
                     <td><span>Cancel Rate</span></td>  
                     <td style="width: 60%;">
                         <span *ngIf="saleData.totalorder === 0">0.0</span>
-                        <span *ngIf="saleData.totalorder > 0">
+                        <span *ngIf="saleData.totalorder > 0 && completelist['data']['currency_code']">
                             {{ averageData?.cancelledorders/(averageData?.cancelledorders + saleData.totalorder)*100  | number |slice:0:2}}%</span>
                         <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
                     </td>

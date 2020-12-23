@@ -336,7 +336,7 @@ h3 {
 
 .subtitute_data {
     padding: 3% 4% 0% 0%;
-
+    
     img {
         width   : 50%;
         right   : 0px;
@@ -369,7 +369,7 @@ h3 {
 
     img {
         z-index    : 2;
-        width      : 9%;
+        width      : 7%;
         position   : absolute;
         left       : 3%;
         top        : 7%;
@@ -377,7 +377,22 @@ h3 {
         margin     : auto;
     }
 }
-
+.skeletonorderlist{
+    padding: 2% 2% 1% 2%;
+    background: white;
+    margin: 5%;
+    .leftcol{
+        width: 10%;
+        padding-right: 25px;
+    }
+    .centercol{
+        width: 34%;
+        padding-right: 25px;
+    }
+    .rightcol{
+        width: 34%;
+    }
+}
 .newprice {
     top   : 0%;
     bottom: 0%;

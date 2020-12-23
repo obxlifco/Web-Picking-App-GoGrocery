@@ -8,7 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ApiService } from '../services/api/api.service';
 import { GlobalitemService } from '../services/globalitem/globalitem.service';
 import { DatabaseService } from '../services/database/database.service';
-import { NotificationserviceService } from '../notificationservice.service';
+import { NotificationserviceService } from '../core/pipe/notification/notificationservice.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('drawer') sidenav: MatSidenav | any;
 
-  title = 'GoGrocery Picking App';
+  title = 'Store Picking App';
   isWarehouseID:any=null
   loginRouterLink: any
   totalbadge: any = 0
@@ -120,6 +120,7 @@ export class DashboardComponent implements OnInit {
   getstorename(){
     this.db.getUserData().then(res => {
       this.isWarehouseID = res.warehouse_id
+      if(res.warehouse_id !== null)
       this.apiService.getData("warehouse/"+res.warehouse_id+"/").subscribe((data: any) => {
         // console.log("store name : ",data.warehouse.name);
           this.title=data.warehouse.name

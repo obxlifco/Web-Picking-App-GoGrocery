@@ -27,11 +27,6 @@ export class CommonfunctionService {
   }
 
   getcompletedOrders(completeorderdata: any, paymentid: any): any {
-    // this.counter++
-    // console.log("incoming data from page : ",completeorderdata, "Api counter : ",this.counter);
-
-
-    let temarray: any = []
     let shpcost: any = 0;
     let subtotal: any = 0;
     let grandtotal: any = 0;
@@ -52,9 +47,7 @@ export class CommonfunctionService {
         counters++
         // console.log("test name entered is : ",completeorderdata[i].customer.first_name);
       }
-     
       // console.log("shpcost : ",shpcost," subtotal:",subtotal," grandtotal: ",grandtotal);
-
     }
     let data = {
       shpcost: shpcost,
@@ -84,7 +77,6 @@ export class CommonfunctionService {
     if(filename === "order products"){
       csvData = csvData + '\r\n'+" Total Amount,"+","+","+","+","+footerdata.Subtotal+","+footerdata.ShippingCost+","+footerdata.ShippingDiscount+","+footerdata.OtherDiscount+","+footerdata.GrandTotal
     }
-   
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
     let url = URL.createObjectURL(blob);

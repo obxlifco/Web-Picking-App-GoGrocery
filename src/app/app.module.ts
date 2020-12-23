@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { DashboardComponent } from './dashboard/dashboard.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './dashboard/pages/home/home.component';
 import { CommonModule } from '@angular/common';
@@ -13,7 +10,6 @@ import { StocksComponent } from './dashboard/pages/stocks/stocks.component';
 import { OrdersComponent } from './dashboard/pages/orders/orders.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { TestComponent } from './test/test.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { FooterComponent } from './footer/footer.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -55,7 +50,6 @@ import { EditpriceComponent } from './components/editprice/editprice.component';
 import {DatePipe} from '@angular/common';
 import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
-import { TimerpipePipe } from './timerpipe.pipe';
 import { CountdownModule } from 'ngx-countdown';
 import { AddproductasSubtituteComponent } from './components/addproductas-subtitute/addproductas-subtitute.component';
 import { EmptystateComponent } from './components/emptystate/emptystate.component';
@@ -77,8 +71,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ReturnsComponent,
     StocksComponent,
     OrdersComponent,
-    TestComponent,
-    FooterComponent,
     AddnewproductComponent,
     AddproductcategoryComponent,
     LoginComponent,
@@ -92,7 +84,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BillnumberComponent,
     ForgotpasswordComponent,
     EditpriceComponent,
-    TimerpipePipe,
     AddproductasSubtituteComponent,
     EmptystateComponent,
     AppsettingsComponent,

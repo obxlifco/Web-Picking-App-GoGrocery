@@ -154,9 +154,9 @@ export class SalesreportComponent implements OnInit {
         warehouse_status: "",
       }
       this.apiService.postData("global_list" + this.pageurl, data).subscribe((data: any) => {
-        this.advancedsearch = []
-        this.setcompleteparam()
-        if (data.results[0].result) {
+        // this.advancedsearch = []
+        // this.setcompleteparam()
+        if (data.results[0].result.length !== 0) {
           let incomingdata:any;
           if (data.count > this.generalcounter) {
             incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result, this.paymentmethodid)
@@ -205,8 +205,8 @@ export class SalesreportComponent implements OnInit {
                 this.mergeFirstPaymentData = []
                 // console.log("subtotal : ", this.saleData.subtotal);
               }
-            }//for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
-            if (this.paymentmethodlastids !== undefined) {
+            //for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
+            }if (this.paymentmethodlastids !== undefined) {
               // this.orderlistsaleMergrray['data']=data.results[0].result
               let tempdata = {
                 totalorder: this.saleData.totalorder,
@@ -217,33 +217,55 @@ export class SalesreportComponent implements OnInit {
               // console.log("amounts are : ",tempdata);
               this.mergeFirstPaymentData = tempdata//merge data with old and set new value for ids
               if (this.paymentmethodlastids) {
+                console.log("second id");
                 this.generalcounter = 0
                 // this.mergeFirstPaymentData=[]
-                this.advancedsearch = []
-                this.setcompleteparam()
-                this.advancedsearch.push({
-                  comparer: 1,
-                  field: "payment_method_id",
-                  field_id: 73,
-                  input_type: "select",
-                  key: this.paymentmethodlastids,
-                  key2: this.paymentmethodname,
-                  name: "payment_method_id",
-                  show_name: "Payment Method"
-                })
-                this.paymentmethodlastids = undefined
-                this.getOrderlistData(this.lastdate)
+                this.setSecondID()
               }
             }
           }
         } if (data.results[0].result.length === 0 || data.results[0].result === []) {
-          // console.log("else is executed");
-          this.saleData.totalorder=0
-          this.setfieldvalue()
+          if(this.paymentmethodlastids !== undefined){//incase of first selected payment method have no result then we check and call aagain
+            this.setSecondID()
+          }else{
+            if(this.mergeFirstPaymentData.length === 0){
+             this.saleData.totalorder=0
+            this.setfieldvalue()  // thi
+            }else{
+              this.saleData.totalorder = this.mergeFirstPaymentData.totalorder
+              this.saleData.shippingcost = this.mergeFirstPaymentData.shippingcost
+              this.saleData.subtotal = this.mergeFirstPaymentData.subtotal
+              this.saleData.grandtotal = this.mergeFirstPaymentData.grandtotal
+              this.mergeFirstPaymentData = []
+              this.completelist["data"]["currency_code"] = "AED"
+            }
+          }
+          // if(this.paymentmethodlastids === undefined){
+          //   this.saleData.totalorder=0
+          // }if( this.saleData.totalorder !== 0){
+          //   this.setfieldvalue()
+          // }
         }
-
       })
     })
+  }
+
+  //getting completed orders in case of pagination(to call multiple time api)
+  setSecondID(){
+    this.advancedsearch = []
+    this.setcompleteparam()
+    this.advancedsearch.push({
+      comparer: 1,
+      field: "payment_method_id",
+      field_id: 73,
+      input_type: "select",
+      key: this.paymentmethodlastids,
+      key2: this.paymentmethodname,
+      name: "payment_method_id",
+      show_name: "Payment Method"
+    })
+    this.paymentmethodlastids = undefined
+    this.getOrderlistData(this.lastdate)
   }
 
   //set filed value
@@ -264,25 +286,19 @@ export class SalesreportComponent implements OnInit {
     this.pageurl = '/'
     this.setfieldvalue()
     this.currentpage = 1
-
     this.orderlistsaleData = []
-    // console.log("payment method id: ",this.paymentmethodid);
-    
     if (this.paymentmethodid !== "both") {
       let temparray: any = this.paymentmethod.subtasks
       let secondtemarray: any = []
-      // console.log("paymentmethod ids: ", this.paymentmethod.subtasks, temparray);
+      this.mergeFirstPaymentData=[]
       this.advancedsearch = []
       this.setcompleteparam()
       for (let i = 0; i < temparray.length; i++) {
         if (temparray[i].completed === true) {
           secondtemarray.push(temparray[i])
-          // console.log("paymentmethod ids true", secondtemarray);
-
           if (secondtemarray[1]) {
             this.paymentmethodlastids = secondtemarray[1].id
             this.paymentmethodname = secondtemarray[1].name
-            // console.log("last payment ids :", this.paymentmethodlastids);
           } else if (secondtemarray[0]) {
             this.advancedsearch.push({
               comparer: 1,
