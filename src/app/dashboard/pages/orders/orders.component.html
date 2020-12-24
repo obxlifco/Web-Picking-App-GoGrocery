@@ -351,7 +351,7 @@
                                             {{products?.product.uom.uom_name}}</strong> <br>
                                         Total Weight : <strong>{{products?.weight}}
                                             {{products?.product.uom.uom_name}}</strong> -->
-                                    <button style="margin: 1px 1px 9px 20px;" (click)="openEditModal(products)"
+                                    <button matRipple style="margin: 1px 1px 9px 20px;" (click)="openEditModal(products)"
                                         [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         type="button" class="btn btn-primary btn-sm">Edit Total
                                         Weight</button>
@@ -367,7 +367,7 @@
                                             <div>
                                                 <strong>Available</strong>
                                                 <div class="btn-left" style="z-index: 999">
-                                                    <mat-icon
+                                                    <mat-icon matRipple
                                                         [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto'}"
                                                         (click)="productDecerment(products.grn_quantity,products.id,products.product.id,products.shortage,i,'','','','','')"
                                                         [disabled]="!userOrderdata.picker_name" class="left-icon">
@@ -381,7 +381,7 @@
                                                     <input *ngIf="!products?.grn_quantity" value="0" type="number"
                                                         class="form-control">
 
-                                                    <mat-icon class="right-icon" (click)="productIncrment(products.grn_quantity,products.product.id,products.id,products.shortage,i,
+                                                    <mat-icon matRipple class="right-icon" (click)="productIncrment(products.grn_quantity,products.product.id,products.id,products.shortage,i,
                                                         '','','','','',products.product.ean)"
                                                         [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }">
                                                         add</mat-icon>
