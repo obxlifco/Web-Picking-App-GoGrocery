@@ -16,7 +16,8 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
-
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-orders',
@@ -52,7 +53,7 @@ export class OrdersComponent implements OnInit {
     warehouseName: ''
   }
   paymentonlineTimer = false
-  isOrderList=false
+  isOrderList = false
   order_Substitute_Time: any
   currenttime: any = new Date()
   isTimerStart = false
@@ -68,6 +69,7 @@ export class OrdersComponent implements OnInit {
   IS_Subtitute = false;
   timer: any
   leftTime: any = 5 * 60000
+  isdownload=false
   //below date var is sample max and min date
   // minValue: any = new Date();
   // maxValue: any = this.minValue.getDate() + 3;
@@ -76,6 +78,25 @@ export class OrdersComponent implements OnInit {
   printerTotalcost: any = 0; //for total cost of products printing
   totalProductItems: any = 0//for printer product quantity
 
+  //testing tabs
+  navTablink:any=[
+    {
+      name:'In-Processing',
+      type:''
+    },
+    {
+      name:'Shipped',
+      type:'shipped'
+    },
+    {
+      name:'Cancelled',
+      type:'cancelled'
+    },{
+      name:'Completed',
+      type:'complete'
+    }
+  ]
+  activeLink = this.navTablink[0];
 
   constructor(public router: Router,
     public dialog: MatDialog,
@@ -93,6 +114,11 @@ export class OrdersComponent implements OnInit {
       // console.log("activated route data :", v.orderstatus)
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
+        for(let i=0;i<this.navTablink.length;i++){
+          if(this.navTablink[i].type ===  this.userOrderdata.orderlistType){
+            this.activeLink = this.navTablink[i];
+          }
+        }
         if (this.userOrderdata.orderlistType === "cancelled" || this.userOrderdata.orderlistType === "shipped") {
           this.appcom.setbadge(0)
         }
@@ -106,16 +132,20 @@ export class OrdersComponent implements OnInit {
     this.orderDetaildata["data"] = []
     this.getOrderlistData()
   }
-  movetofooter(value:any){
-    let innerContents :any;
-    if(value === "header"){
+  setordertype(type:any){
+    this.userOrderdata.orderlistType=type;
+    this.getOrderlistData()
+  }
+  movetofooter(value: any) {
+    let innerContents: any;
+    if (value === "header") {
       innerContents = document.getElementById("footer");
-    }else{
+    } else {
       innerContents = document.getElementById("header");
     }
- 
+
     // const targetElement = this.footerid.nativeElement
-    innerContents.scrollIntoView({behavior: "smooth"})
+    innerContents.scrollIntoView({ behavior: "smooth" })
   }
   navigate(link: any) {
     this.router.navigate([link]);
@@ -172,23 +202,24 @@ export class OrdersComponent implements OnInit {
       if (this.userOrderdata.orderlistType !== 'complete') {
         this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
           // console.log(data);
-          if(data.status !== 0){
-            this.isOrderList=false
-          this.orderlistdata["data"] = data.response //json response
-          this.totalProductpage = data.total_page//total page
-          this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
-          this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-            this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
+          if (data.status !== 0) {
+            this.isOrderList = false
+            this.orderlistdata["data"] = data.response //json response
+            this.totalProductpage = data.total_page//total page
+            this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
+            this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
 
-          if (this.currentPage === 1) {
-            this.orderlistdata["data"] = data.response
-            this.totalProductpage = data.total_page
+            if (this.currentPage === 1) {
+              this.orderlistdata["data"] = data.response
+              this.totalProductpage = data.total_page
+            } else {
+              // console.log("page n");
+              this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
+            }
           } else {
-            // console.log("page n");
-            this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.response];
-          }}else{
-            this.isOrderList=true
-            this.globalitem.showError("No Orderlist found ","No Order")
+            this.isOrderList = true
+            this.globalitem.showError("No Orderlist found ", "No Order")
           }
         })
       } else if (this.userOrderdata.orderlistType === 'complete') {
@@ -288,63 +319,103 @@ export class OrdersComponent implements OnInit {
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
-  printdata() {
-    let innerContents = document.getElementById("component1")?.innerHTML;
-    const popupWinindow: any = window.open();
-    popupWinindow.document.open();
-    popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
-    popupWinindow.document.write(`<style>
-    .printdata{
-      background: white;
-      line-height: 2;
-      width: 50px !important;
+  printdata(skustatus:any,printstatus:any) {
+    // this.isdownload=true 
+    var innerContents : any
+    let templayout:any;
+    if(skustatus === "withoutsku"){
+      // templayout = document.getElementById("printwithOutsku")?.innerHTML;
+      templayout="printwithOutsku"
+    }else{
+      templayout="printwithsku"
+      // templayout = document.getElementById("printwithsku")?.innerHTML;
     }
-      .h6{
-        font-size: 15px;
-        font-weight: bolder;
-        margin: 1% 0% 1% 0%;
-      }
-      .table1{
-          line-height: normal;
-          width:100%;
-      }
-      .th{
-          text-align: inherit;
-          background: white;
-          color: black;
-      } 
-      .mat-divider{
-          margin: 4px 0px 4px 0px;
-          border: 1px solid #8a8484;
-      }
-      .printfooter{
-          text-align: center;
-          margin-top:4% !important;
-          h6{
-            font-size: 15px;
-            margin: 2% 0% 2% 0%;
-            font-weight: bolder;
-          }
-      }
-      .leftcol{
-          text-align: end;
-          padding-right: 6% !important;
-      }
 
-      @media print 
-{
-   @page
-   {
-    size: 5.5in 8.5in ;
-    size: portrait;
-    margin:minimum;
-  }
-}
-
+    if(printstatus === "print"){
+      innerContents = document.getElementById(templayout)?.innerHTML;
+      const popupWinindow: any = window.open();
+      popupWinindow.document.open();
+      popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
+      popupWinindow.document.write(`<style>
+      .printdata{
+        background: white;
+        line-height: 2;
+        width: 50px !important;
+      }
+        .h6{
+          font-size: 15px;
+          font-weight: bolder;
+          margin: 1% 0% 1% 0%;
+        }
+        .table1{
+            line-height: normal;
+            width:100%;
+        }
+        .th{
+            text-align: inherit;
+            background: white;
+            color: black;
+        } 
+        .mat-divider{
+            margin: 4px 0px 4px 0px;
+            border: 1px solid #8a8484;
+        }
+        .printfooter{
+            text-align: center;
+            margin-top:4% !important;
+            h6{
+              font-size: 15px;
+              margin: 2% 0% 2% 0%;
+              font-weight: bolder;
+            }
+        }
+        .leftcol{
+            text-align: end;
+            padding-right: 6% !important;
+        }
   
-    </style>
-  `);
-    popupWinindow.document.close();
+        @media print 
+  {
+     @page
+     {
+      size: 5.5in 8.5in ;
+      size: portrait;
+      margin:minimum;
+    }
+  }
+  </style>
+    `);
+      popupWinindow.document.close();
+    }else{
+      innerContents = document.getElementById(templayout);
+      // html2canvas(innerContents).then(canvas => {
+      //   var imgWidth = 208;
+      //   var imgHeight = canvas.height * imgWidth / canvas.width;
+      //   const contentDataURL = canvas.toDataURL('image/png')
+      //   let pdf = new jsPDF('p', 'mm', 'a4');
+      //   var position = 0;
+      //   console.log("image load or not : ",contentDataURL);
+      //   setTimeout(() => {
+      //     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      //   pdf.save('pickerlist.pdf');
+      //   }, 1000);
+        
+      // });
+
+      html2canvas(document.getElementById(templayout), {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            // let pdf = new jsPDF('p', 'mm', 'a4');
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500,
+                }]
+            };
+            data.createPdf(docDefinition).download("Score_Details.pdf");
+        }
+    });
+    }
   }
 
   //edit unit weight and price
@@ -879,7 +950,6 @@ export class OrdersComponent implements OnInit {
   gettotalCost() {
     this.totalProductItems = 0;
     this.printerTotalcost = 0
-
     this.db.getwarehouseName().then(res => { this.userOrderdata.warehouseName = res });
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity

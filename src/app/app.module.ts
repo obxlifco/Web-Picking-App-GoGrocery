@@ -61,6 +61,7 @@ import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -131,6 +132,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatNativeDateModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatTabsModule
     // fs
     // MatMomentDateModule
   ],

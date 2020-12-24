@@ -180,7 +180,7 @@ h4 {
     mat-icon{
         left: 0%;
     position: relative;
-    bottom: -4px;
+    bottom: -6px;
     }
 }
 
@@ -219,7 +219,12 @@ table {
 .csv-btn {
     // position   : absolute;
     // right   : 6%;
-    margin: 0% 2% 0% 2%;
+    // margin: 0% 2% 0% 2%;
+}
+.printbtn{
+    button{
+        margin-right: 0.5%;
+    }
 }
 
 .row-margin {
@@ -552,36 +557,62 @@ input[type=number]::-webkit-outer-spin-button {
     background: white;
     line-height: 2;
     width: 50%;
-    display: none;
-    // h6{
-    //     font-size: 16px;
-    //     font-weight: 500;
-    // }
-    // table{
-    //     line-height: normal;
-    // }
-    // th{
-    //     text-align: inherit;
-    //     background: white;
-    //     color: black;
-    // }
-    // mat-divider{
-    //     margin: 6px 0px 6px 0px;
-    //     border: 1px solid #8a8484;
-    // }
-    // .printfooter{
-    //     text-align: center;
-    //     h6{
-    //         text-align: center;
-    //         margin: 3% 0% 1% 0%;
-    //     }
-    // }
-    // .leftcol{
-    //     text-align: end;
-    //     padding-right: 8%;
-    // }
+    // display: none;
+     .h6{
+          font-size: 15px;
+          font-weight: bolder;
+          margin: 1% 0% 1% 0%;
+        }
+        .table1{
+            line-height: normal;
+            width:100%;
+        }
+        .th{
+            text-align: inherit;
+            background: white;
+            color: black;
+        } 
+        .mat-divider{
+            margin: 4px 0px 4px 0px;
+            border: 1px solid #8a8484;
+        }
+        .printfooter{
+            text-align: center;
+            margin-top:4% !important;
+            h6{
+              font-size: 15px;
+              margin: 2% 0% 2% 0%;
+              font-weight: bolder;
+            }
+        }
+        .leftcol{
+            text-align: end;
+            padding-right: 6% !important;
+        }
+  
+        @media print 
+  {
+     @page
+     {
+      size: 5.5in 8.5in ;
+      size: portrait;
+      margin:minimum;
+    }
+  }
 }
 html {
     scroll-behavior: smooth;
   }
-  
+  .mat-focus-indicator:active{
+    color:green
+  }
+  mat-tab-link:active{
+    color: green !important;
+  }
+ a:hover{
+    text-decoration: none !important;
+}
+::ng-deep.mat-ink-bar {
+    background-color: green !important;
+    // height: 3px !important;
+}
