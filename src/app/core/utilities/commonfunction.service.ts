@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from 'src/app/services/database/database.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CommonfunctionService {
   counter = 0;
+  pdfMake: any;
+
   constructor(public db: DatabaseService) { }
   public warehouse_id: any = ''
   public website_id: any = ''
@@ -14,7 +17,7 @@ export class CommonfunctionService {
     website_id: ''
   }
 
-  headerlist:any
+  headerlist: any
   set setWarehouseIDS(val: any) {
     this.db.getUserData().then(res => {
       // console.log("user data inside dashboard : ", res);
@@ -30,20 +33,20 @@ export class CommonfunctionService {
     let shpcost: any = 0;
     let subtotal: any = 0;
     let grandtotal: any = 0;
-    let shippingdiscount:any=0;
-    let coupendiscount:any=0;
-    let counters:any=0
+    let shippingdiscount: any = 0;
+    let coupendiscount: any = 0;
+    let counters: any = 0
     for (var i = 0; i < completeorderdata.length; i++) {
-      if(!completeorderdata[i]?.customer?.first_name?.includes("Test") && !completeorderdata[i]?.customer?.first_name?.includes("test")&& 
-      !completeorderdata[i]?.customer?.last_name?.includes("Test") && !completeorderdata[i]?.customer?.last_name?.includes("test")){
+      if (!completeorderdata[i]?.customer?.first_name?.includes("Test") && !completeorderdata[i]?.customer?.first_name?.includes("test") &&
+        !completeorderdata[i]?.customer?.last_name?.includes("Test") && !completeorderdata[i]?.customer?.last_name?.includes("test")) {
         // console.log("name entered is : ",completeorderdata[i].customer.first_name);
-        
+
         shpcost += completeorderdata[i].shipping_cost
         subtotal += completeorderdata[i].net_amount
         grandtotal += completeorderdata[i].gross_amount
         shippingdiscount += completeorderdata[i].cart_discount
-        coupendiscount += completeorderdata[i].gross_discount_amount 
-      }else{
+        coupendiscount += completeorderdata[i].gross_discount_amount
+      } else {
         counters++
         // console.log("test name entered is : ",completeorderdata[i].customer.first_name);
       }
@@ -54,9 +57,9 @@ export class CommonfunctionService {
       subtotal: subtotal,
       grandtotal: grandtotal,
       totalList: completeorderdata,
-      testorderFound:counters,
-      shippingdiscount:shippingdiscount,
-      coupendiscount:coupendiscount
+      testorderFound: counters,
+      shippingdiscount: shippingdiscount,
+      coupendiscount: coupendiscount
     }
     return data
   }
@@ -70,12 +73,12 @@ export class CommonfunctionService {
   //download csv file
 
   //convert json to csv and download it
-  downloadFile(data: any, filename = 'picker list', dataparams: any,footerdata:any) {
+  downloadFile(data: any, filename = 'picker list', dataparams: any, footerdata: any) {
     // console.log("data : ", data, "params : ", dataparams);
     let csvData = this.ConvertToCSV(data, dataparams);
     // console.log("csvData", csvData + '\r\n'+" Total Amount,"+"ordernum,"+"orderdate,"+"cname,"+"pmethod,"+"122323,"+"123,"+"0,"+"11,"+"333432211" ," header list :",this.headerlist)
-    if(filename === "order products"){
-      csvData = csvData + '\r\n'+" Total Amount,"+","+","+","+","+footerdata.Subtotal+","+footerdata.ShippingCost+","+footerdata.ShippingDiscount+","+footerdata.OtherDiscount+","+footerdata.GrandTotal
+    if (filename === "order products") {
+      csvData = csvData + '\r\n' + " Total Amount," + "," + "," + "," + "," + footerdata.Subtotal + "," + footerdata.ShippingCost + "," + footerdata.ShippingDiscount + "," + footerdata.OtherDiscount + "," + footerdata.GrandTotal
     }
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
@@ -99,7 +102,7 @@ export class CommonfunctionService {
       row += headerList[index] + ',';
     }
     row = row.slice(0, -1);
-    this.headerlist=row
+    this.headerlist = row
     str += row + '\r\n';
     for (let i = 0; i < array.length; i++) {
       let line = (i + 1) + '';

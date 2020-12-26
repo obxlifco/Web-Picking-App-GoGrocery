@@ -16,9 +16,14 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
-import { jsPDF } from "jspdf";
+// import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 
+// import * as jsPDF from 'jspdf'
+
+declare var jsPDF: any;
+declare var $:any
+declare var window:any
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -27,6 +32,10 @@ import html2canvas from 'html2canvas';
 export class OrdersComponent implements OnInit {
   @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
   @ViewChild('footer', { static: true }) footerid: ElementRef | any;
+  @ViewChild('printwithsku', { static: false }) withsku:ElementRef | any;
+  @ViewChild('printwithOutsku', { static: false }) withoutsku:ElementRef | any;
+
+  pdfMake: any;
   subscription: Subscription | any;
   statusText: string | any;
   orderlistdata: any = []
@@ -251,7 +260,6 @@ export class OrdersComponent implements OnInit {
 
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
     // this.IsTimeComplete = ''
-
     // console.log("order id :", orderid, "shipment_id: ", shipment_id, " order_status: ", order_status, " picker_name: ", picker_name, " substitute_status: ", substitute_status);
     this.userOrderdata.picker_name = picker_name;
     this.userOrderdata.order_id = orderid
@@ -319,8 +327,9 @@ export class OrdersComponent implements OnInit {
     // MapmodalComponent
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
-  printdata(skustatus:any,printstatus:any) {
-    // this.isdownload=true 
+
+  async printdata(skustatus:any,printstatus:any) {
+    this.isdownload=true 
     var innerContents : any
     let templayout:any;
     if(skustatus === "withoutsku"){
@@ -332,92 +341,87 @@ export class OrdersComponent implements OnInit {
     }
 
     if(printstatus === "print"){
-      innerContents = document.getElementById(templayout)?.innerHTML;
+      
       const popupWinindow: any = window.open();
       popupWinindow.document.open();
-      popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
-      popupWinindow.document.write(`<style>
-      .printdata{
-        background: white;
-        line-height: 2;
-        width: 50px !important;
+      setTimeout(()=>{
+        innerContents = document.getElementById(templayout)?.innerHTML;
+        popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
+        popupWinindow.document.write(`<style>
+        .printdata{
+          background: white;
+          line-height: 2;
+          width: 50px !important;
+        }
+          .h6{
+            font-size: 15px;
+            font-weight: bolder;
+            margin: 1% 0% 1% 0%;
+          }
+          .table1{
+              line-height: normal;
+              width:100%;
+          }
+          .th{
+              text-align: inherit;
+              background: white;
+              color: black;
+          } 
+          .mat-divider{
+              margin: 4px 0px 4px 0px;
+              border: 1px solid #8a8484;
+          }
+          .printfooter{
+              text-align: center;
+              margin-top:4% !important;
+              h6{
+                font-size: 15px;
+                margin: 2% 0% 2% 0%;
+                font-weight: bolder;
+              }
+          }
+          .leftcol{
+              text-align: end;
+              padding-right: 6% !important;
+          }
+    
+          @media print 
+    {
+       @page
+       {
+        size: 5.5in 8.5in ;
+        size: portrait;
+        margin:minimum;
+        destination:pdf !important
       }
-        .h6{
-          font-size: 15px;
-          font-weight: bolder;
-          margin: 1% 0% 1% 0%;
-        }
-        .table1{
-            line-height: normal;
-            width:100%;
-        }
-        .th{
-            text-align: inherit;
-            background: white;
-            color: black;
-        } 
-        .mat-divider{
-            margin: 4px 0px 4px 0px;
-            border: 1px solid #8a8484;
-        }
-        .printfooter{
-            text-align: center;
-            margin-top:4% !important;
-            h6{
-              font-size: 15px;
-              margin: 2% 0% 2% 0%;
-              font-weight: bolder;
-            }
-        }
-        .leftcol{
-            text-align: end;
-            padding-right: 6% !important;
-        }
-  
-        @media print 
-  {
-     @page
-     {
-      size: 5.5in 8.5in ;
-      size: portrait;
-      margin:minimum;
     }
-  }
-  </style>
-    `);
-      popupWinindow.document.close();
+    </style>
+      `);
+      // this.isdownload=false
+        popupWinindow.document.close();
+        this.isdownload=false;
+      },20);
+     
     }else{
-      innerContents = document.getElementById(templayout);
-      // html2canvas(innerContents).then(canvas => {
-      //   var imgWidth = 208;
-      //   var imgHeight = canvas.height * imgWidth / canvas.width;
-      //   const contentDataURL = canvas.toDataURL('image/png')
-      //   let pdf = new jsPDF('p', 'mm', 'a4');
-      //   var position = 0;
-      //   console.log("image load or not : ",contentDataURL);
-      //   setTimeout(() => {
-      //     pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      //   pdf.save('pickerlist.pdf');
-      //   }, 1000);
-        
-      // });
-
-      html2canvas(document.getElementById(templayout), {
-        onrendered: function (canvas) {
-            var data = canvas.toDataURL();
-            // let pdf = new jsPDF('p', 'mm', 'a4');
-            var docDefinition = {
-                content: [{
-                    image: data,
-                    width: 500,
-                }]
-            };
-            data.createPdf(docDefinition).download("Score_Details.pdf");
-        }
-    });
+      setTimeout(()=>{
+        innerContents = document.getElementById(templayout);
+        var imgWidth = 1300;
+        html2canvas(innerContents).then(canvas => {
+          let totalPages=canvas.height/imgWidth;
+          var pdf:any = new jsPDF('p', 'pt',[canvas.width, imgWidth]);
+          console.log(pdf);
+          for(let i=1;i<=totalPages;i++)
+          {
+           var imgData  = canvas.toDataURL("image/png", 2);
+           pdf.addImage(imgData,0,0,canvas.width, imgWidth*i);
+          //  pdf.addPage(canvas.width,imgWidth*i);
+          }
+           pdf.save('converteddoc.pdf');
+           this.isdownload=false 
+         })
+        },1000)
     }
   }
-
   //edit unit weight and price
   openEditModal(data: any) {
     let user_ids = {
@@ -956,5 +960,6 @@ export class OrdersComponent implements OnInit {
       this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;
     }
   }
+
 
 }

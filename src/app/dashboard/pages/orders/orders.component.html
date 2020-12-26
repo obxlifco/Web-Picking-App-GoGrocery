@@ -297,25 +297,25 @@
                         <h6 class="itemdivider"><span>Picking List</span></h6>
                     </div>
                     <!-- Add more button -->
-                    <div class="row row-margin printbtn" style="margin-bottom: 3%;">
+                    <div style="width: 101% !important;margin-left: -1%!important;" class="row printbtn" style="margin-bottom: 3%;">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
-                            <button *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
+                            <button [disabled]="!userOrderdata.picker_name" *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
                             (click)="printdata('withoutsku','print')" class="btn btn-primary">
                             <mat-icon>print</mat-icon>Print Receipt
                         </button>
                         
-                        <button *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
+                        <button [disabled]="!userOrderdata.picker_name" id="cmd" *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
                         (click)="printdata('withoutsku','download')" class="btn btn-primary">
                         <mat-icon>get_app</mat-icon>Download Receipt
                         </button>
-                            <button [disabled]="!userOrderdata.picker_name" type="button"
+                            <button  type="button"
                                 *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                                 (click)="printdata('withsku','print')" 
                                 class="btn btn-primary csv-btn">
                                 <mat-icon>print</mat-icon> Print Picking List
                             </button>
-                            <button [disabled]="!userOrderdata.picker_name" type="button"
+                            <button type="button"
                             *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                             (click)="printdata('withsku','download')" 
                             class="btn btn-primary csv-btn">
@@ -731,9 +731,9 @@
         <img style="margin-top: 4%;" src="assets/images/product/noresult.jpeg" alt="">
     </div>
 </div>
-
+<div style="height: 1px;">
 <!-- printing pickerlist -->
-<div class="container printdata" id="printwithOutsku">
+<div *ngIf="isdownload"  class="container printdata"  #printwithOutsku id="printwithOutsku">
     <div>
         <h6 class="h6">Store</h6>
         <!-- <mat-divider></mat-divider> -->
@@ -880,8 +880,9 @@
         </div>
     </div>
 </div>
+<!-- <div id="editor"></div> -->
 <!-- print pickerlist product with SKU-->
-<div class="container printdata" id="printwithsku">
+<div  *ngIf="isdownload"  class="container printdata"  #printwithsku id="printwithsku">
     <div>
         <h6 class="h6">Store</h6>
         <!-- <mat-divider></mat-divider> -->
@@ -1021,4 +1022,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
