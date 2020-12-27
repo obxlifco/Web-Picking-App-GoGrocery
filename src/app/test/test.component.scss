@@ -1,0 +1,95 @@
+.card {
+    // -webkit-box-shadow: 3px 3px 5px 0px #ccc !important;
+    border: none;
+}
+.logo{
+    width: 22%;
+    position: absolute;
+    left: -129px;
+    top: -49px;
+}
+
+span {
+    color: #2E6B0B;
+}
+img{
+    width: 4%;
+    position: absolute;
+    float: right;
+    right: 4%;
+    margin-top: 9px;
+}
+.form-group{
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    border-color:  #2E6B0B;
+}
+.form-control{
+    border: none !important;
+    border-bottom: 1px solid lightgrey !important;
+    color:  #2E6B0B;
+}
+.form-control:focus{
+    border-color: black;
+}
+.fgpassword {
+    margin-top: 3%;
+    text-align: center;
+
+    p {
+        font-size: 15px;
+        color:  #2E6B0B;
+    }
+
+    span {
+        cursor: pointer;
+    }
+}
+h1,p{
+    color:  #2E6B0B;
+}
+::placeholder{
+    color:  #2E6B0B;
+}
+button {
+    width: 19%;
+    background: #98D81D !important;
+    border-color: #98D81D !important;
+    color: white !important;
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 0px;
+}
+
+label {
+    font-size  : 16px;
+    font-weight: 500;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+  }
+  
+  /* Style the form icons */
+  .icon {
+    padding: 10px;
+    // background: dodgerblue;
+    color: green;
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  /* Style the input fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border: 2px solid dodgerblue;
+  }

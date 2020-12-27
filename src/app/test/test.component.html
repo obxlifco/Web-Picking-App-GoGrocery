@@ -1,4 +1,4 @@
-<table id="imgTable"  style="background-color: darkblue;color:red">
+<!-- <table id="imgTable"  style="background-color: darkblue;color:red">
     <thead id="elementH">
         <tr><th>Name</th>
         <th>Domain</th>
@@ -12,4 +12,52 @@
     
     </tbody>
     </table>
-    <button (click)="generatePdf()">Generate Pdf</button>
+    <button (click)="generatePdf()">Generate Pdf</button> -->
+
+    <!-- test login screen -->
+    <div class="container" style="padding-bottom: 12%;width: 100%;max-width: 100%;height: 100%;margin: 0px !important;background: #aed86e;">
+        <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <div class="card" style="margin-top:10%">
+                <!-- <h4 class="card-header">SIGN IN</h4> -->
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 mt-5" style="position: relative;">
+                        <img class="logo" src="assets/images/gog.jpg" alt="">
+                    </div>
+                </div>
+                <div style="text-align: center;margin-top: 2%;">
+                    <h1>Sign In</h1>
+                    <p>Start managing your store item and orders</p><br>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <input placeholder="Username/Email" type="text" formControlName="username" class="form-control" />
+                            <img src="assets/images/product/toggle_checked1.png" alt="">
+                        </div>
+                        <div class="form-group">
+                            <input placeholder="Password" type="password" formControlName="password" class="form-control"/>
+                            <img src="assets/images/product/toggle_checked1.png" alt="">
+                        </div>
+                        <!-- <div class="input-container">
+                            <input class="input-field" type="password" placeholder="Password" name="psw">
+                            <img src="assets/images/product/toggle_checked1.png" alt="">
+                          </div> -->
+                        <div style="width: 100%;text-align: center;">
+                            <mat-checkbox style="color:  #2E6B0B;" color='primary'>Show Characrter</mat-checkbox><br>
+                            <button  class="btn btn-primary globalbutton">Login</button>
+                        </div>
+                      
+                    </form>
+                    <div class="fgpassword">
+                        <p>Forgot Password?</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <ngx-spinner></ngx-spinner>
+        </div>
+    </div>
+    
+
+  

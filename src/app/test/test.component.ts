@@ -14,7 +14,7 @@ declare var jsPDF: any;
 export class TestComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    this.goToUrl()
+    // this.goToUrl()
    }
 
   ngOnInit(): void {

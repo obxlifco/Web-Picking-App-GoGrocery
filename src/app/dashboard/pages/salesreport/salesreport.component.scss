@@ -8,6 +8,7 @@
 
 label {
     font-weight: 500;
+    font-size  : 16px;
 }
 
 section {
@@ -59,6 +60,7 @@ button {
     // margin-top   : 2%;
     border          : 1px solid lightgray;
     font-size       : 17px;
+    margin-top: 1px;
 }
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { DatabaseService } from 'src/app/services/database/database.service';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -170,5 +170,25 @@ export class CommonfunctionService {
     return array.filter(function (elem: any, index: any, self: string | any[]) {
       return index === self.indexOf(elem);
     })
+  }
+
+  //convert html to pdf
+  generatePDF(elementID:any){
+    console.log("Inner Content :",elementID);
+        
+        var imgWidth = 600;
+        html2canvas(elementID).then(canvas => {
+          let totalPages = canvas.height / imgWidth;
+          var pdf: any = new jsPDF('p', 'pt', [canvas.width, imgWidth]);
+          // console.log(pdf);
+          for (let i = 1; i <= totalPages; i++) {
+            var imgData = canvas.toDataURL("image/png",10);
+            pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
+            //  pdf.addPage(canvas.width,imgWidth*i);
+          }
+          // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
+          pdf.save('pickerlist.pdf');
+          // this.isdownload = false
+        })
   }
 }

@@ -8,7 +8,7 @@ span{
     margin-top: 3%;
     text-align: center;
     p{
-        font-size: small;
+        font-size: 15px;
     }
     span{
         cursor: pointer;
@@ -19,4 +19,9 @@ button{
     background: #98D81D !important;
   border-color:  #98D81D !important;
   color: white !important;
+  font-size: 17px;
+}
+label{
+    font-size: 16px;
+    font-weight: 500;
 }

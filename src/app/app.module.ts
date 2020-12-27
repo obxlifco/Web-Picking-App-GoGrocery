@@ -38,7 +38,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import { EditproductweightComponent } from './components/editproductweight/editproductweight.component';
 import { MapmodalComponent } from './components/mapmodal/mapmodal.component';
-import { SubcategoryComponent } from './components/subcategory/subcategory.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
 import { SearchfilterPipe } from './core/pipe/searchfilter/searchfilter.pipe';
 import { HighlightDirective } from './core/directive/highlight.directive';
@@ -63,7 +62,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TestComponent } from './test/test.component';
-
+import { UiSwitchModule } from 'ngx-ui-switch';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +79,6 @@ import { TestComponent } from './test/test.component';
     DatepipePipe,
     EditproductweightComponent,
     MapmodalComponent,
-    SubcategoryComponent,
     SearchfilterPipe,
     HighlightDirective,
     BillnumberComponent,
@@ -134,7 +132,8 @@ import { TestComponent } from './test/test.component';
     MatNativeDateModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    UiSwitchModule
     // fs
     // MatMomentDateModule
   ],

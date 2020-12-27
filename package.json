@@ -38,6 +38,7 @@
     "ngx-skeleton-loader": "^2.6.0",
     "ngx-spinner": "^10.0.1",
     "ngx-toastr": "^13.1.0",
+    "ngx-ui-switch": "^10.0.2",
     "ngx-webstorage": "^6.0.0",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.6.0",

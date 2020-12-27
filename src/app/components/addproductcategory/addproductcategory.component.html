@@ -36,7 +36,7 @@
                   autofocus>
               </div> -->
         <div class="cardbody">
-          <h6 selected (click)="listItem('undefined')">{{incomingModalData?.data.catname}} (search without select category)</h6>
+          <h6 selected (click)="listItem('undefined')">{{incomingModalData?.data.catname}} (All)</h6>
         <ul *ngIf="categorylist['data']" class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let catItem of categorylist['data'] | searchfilter: searchText"
             appHighlight [searchedWord]="searchText" [content]="catItem.name" [classToApply]="'font-weight-bold'"
