@@ -10,6 +10,7 @@ import { AppsettingsComponent } from './components/appsettings/appsettings.compo
 import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.component';
 import { AuthguardGuard } from './services/authguard/authguard.guard';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { TestComponent } from './test/test.component';
 
 // const routes: Routes = [
 //   { path: 'login', component: LoginComponent },
@@ -30,6 +31,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'test', component: TestComponent },
   {
     path: 'dashboard', component: DashboardComponent,
     children: [
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
       { path: 'salesreport', component: SalesreportComponent,canActivate: [AuthguardGuard] },
       { path: 'appsettings', component: AppsettingsComponent ,canActivate: [AuthguardGuard]},
     ]
-  },
+  },  
   {path: '404', component: NotfoundComponent},
   {path: '**', redirectTo: '/404'}
 ];

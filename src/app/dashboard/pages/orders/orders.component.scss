@@ -74,7 +74,7 @@ h4 {
     h4 {
         position     : absolute;
         margin       : 0px;
-        background   : #2248d2;
+        background   : #98D81D;
         border-radius: 2px;
         width        : inherit;
         height       : 32px;
@@ -141,17 +141,7 @@ h4 {
     margin : 0px;
     padding: 0px;
 }
-.scrolldown{
-    background: green;
-    margin-left: 2%;
-    border-radius: 100%;
-    height: 30px;
-    width: 30px;
-    padding: 0.8%;
-    color: white;
-    cursor: pointer;
-    padding: 3% 0.1% 0.1% 3%;
-}
+
 .cdk-virtual-scroll-content-wrapper {
     margin-bottom: 22%;
     padding-top  : 14%;
@@ -417,8 +407,8 @@ h3 {
 }
 
 .highlight_edits {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #98D81D;
+    border-color:  #98D81D;
     width           : fit-content;
     border-radius   : 3px;
     // padding         : 2%;
@@ -434,7 +424,11 @@ h3 {
         /* Firefox */
     }
 }
-
+.hovercolor:hover{
+    background: #2E6B0B!important;
+  border-color:  #2E6B0B !important;
+  color: white !important;
+}
 //   .main-panel {
 //     height: 30px;
 //     overflow-y: scroll;
@@ -615,15 +609,21 @@ html {
     scroll-behavior: smooth;
   }
   .mat-focus-indicator:active{
-    color:green
+    color:#98D81D
   }
   mat-tab-link:active{
-    color: green !important;
+    color: #98D81D !important;
   }
  a:hover{
     text-decoration: none !important;
+    color: #2E6B0B !important;;
 }
 ::ng-deep.mat-ink-bar {
-    background-color: green !important;
-    // height: 3px !important;
+    background-color: #98D81D !important;
+    height: 3px !important;
 }
+button{
+    background: #98D81D !important;
+  border-color:  #98D81D !important;
+  color: white !important;
+  }

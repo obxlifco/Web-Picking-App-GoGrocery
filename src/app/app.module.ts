@@ -62,6 +62,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     AppsettingsComponent,
     MessagedialogComponent,
     SalesreportComponent,
-    NotfoundComponent 
+    NotfoundComponent,
+    TestComponent 
   ],
   imports: [
     BrowserModule,

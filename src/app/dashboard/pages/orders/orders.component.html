@@ -1,11 +1,6 @@
 <div class="container" id="header">
     <!-- tabs testing -->
-    <div style="width: fit-content;">
-        <nav mat-tab-nav-bar>
-            <a mat-tab-link *ngFor="let link of navTablink" (click)="setordertype(link?.type)"
-                (click)="activeLink = link" [active]="activeLink == link"> {{link.name}} </a>
-        </nav>
-    </div>
+  
     <!-- toggle group -->
     <!-- <div style="width: fit-content;margin-top: 2%;">
         <mat-button-toggle-group #backgroundColorToggle="matButtonToggleGroup" value="primary"
@@ -28,14 +23,21 @@
                     <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                     orderDetaildata['data'][0]?.order_products"
                         [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: auto;"
-                        type="button" (click)="processOrder()" class="btn btn-success btn-sm">Process the order</button>
+                        type="button" (click)="processOrder()" class="btn btn-success btn-sm globalbutton">Process the order</button>
                 </div>
-                <div matRipple (click)="movetofooter('header')" style="width: 100px;display: flex;margin-left: 5%;">
-                    <div class="scrolldown"><i class="material-icons">keyboard_arrow_down</i>
+                <div matRipple class="scrolldown" (click)="movetofooter('header')" style="width: 100px;display: flex;">
+                    <div ><i class="material-icons">keyboard_arrow_down</i>
                     </div>
                     <p style="margin-top: auto;margin-left: 4%;">Go Down</p>
                 </div>
             </div>
+        </div>
+
+        <div style="width: fit-content;">
+            <nav mat-tab-nav-bar>
+                <a routerLinkActive="active-link" mat-tab-link *ngFor="let link of navTablink" (click)="setordertype(link?.type)"
+                    (click)="activeLink = link" [active]="activeLink == link"> {{link.name}} </a>
+            </nav>
         </div>
     </div>
     <div class="row" *ngIf="orderlistdata['data'].length">
@@ -131,8 +133,8 @@
                                 {{orderDetaildata['data'][0]?.delivery_street_address}},
                                 {{orderDetaildata['data'][0]?.delivery_state_name}}
                             </p>
-                            <div class="highlight_edits"
-                                style="background-color:gray; display: initial;margin-left: 3%;padding: 1% !important;"
+                            <div class="highlight_edits hovercolor"
+                                style="background-color:#98D81D; display: initial;margin-left: 3%;padding: 1% !important;"
                                 [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                 *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ">
                                 <span style="color: white;cursor: pointer;"
@@ -142,7 +144,7 @@
                             </div>
 
                             <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete'"
-                                class="highlight_edits" style="display: initial;margin-left: 3%;padding: 1%;"
+                                class="highlight_edits hovercolor" style="display: initial;margin-left: 3%;padding: 1%;"
                                 [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
                                 <span style="color: white;cursor: pointer;"
                                     [ngStyle]="{'pointer-events':userOrderdata.picker_name === null ? 'none' : 'auto' }"
@@ -207,7 +209,7 @@
                                             (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
                                             (click)="t.showDialog()"
                                             style="position: absolute;display: inline;margin-top: -5%;" type="button"
-                                            class="btn btn-primary btn-sm">Edit time</button>
+                                            class="btn btn-primary btn-sm globalbutton">Edit time</button>
                                         <!-- <mat-error *ngIf="time.touched && time.invalid">Invalid Date</mat-error> -->
                                     </mat-form-field>
 
@@ -301,24 +303,24 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
                             <button [disabled]="!userOrderdata.picker_name" *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
-                            (click)="printdata('withoutsku','print')" class="btn btn-primary">
+                            (click)="printdata('withoutsku','print')" class="btn btn-primary globalbutton">
                             <mat-icon>print</mat-icon>Print Receipt
                         </button>
                         
                         <button [disabled]="!userOrderdata.picker_name" id="cmd" *ngIf="userOrderdata.orderlistType !== 'cancelled'" type="button"
-                        (click)="printdata('withoutsku','download')" class="btn btn-primary">
+                        (click)="printdata('withoutsku','download')" class="btn btn-primary globalbutton">
                         <mat-icon>get_app</mat-icon>Download Receipt
                         </button>
-                            <button  type="button"
+                            <button  type="button" 
                                 *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                                 (click)="printdata('withsku','print')" 
-                                class="btn btn-primary csv-btn">
+                                class="btn btn-primary csv-btn globalbutton">
                                 <mat-icon>print</mat-icon> Print Picking List
                             </button>
                             <button type="button"
                             *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                             (click)="printdata('withsku','download')" 
-                            class="btn btn-primary csv-btn">
+                            class="btn btn-primary csv-btn globalbutton">
                             <mat-icon>get_app</mat-icon> Download picking List
                         </button>                         
                         </div>
@@ -327,7 +329,7 @@
                         <button [disabled]="!userOrderdata.picker_name"
                         *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'"
                         (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','','')"
-                        type="button" class="btn btn-primary">
+                        type="button" class="btn btn-primary globalbutton">
                         <mat-icon class="">control_point</mat-icon>Add More
                     </button>
                     <!-- <button [disabled]="!userOrderdata.picker_name" type="button"
@@ -374,7 +376,7 @@
                                     <button style="margin: 1px 1px 9px 20px;"
                                         [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
                                         (click)=" updatePrice(products?.product_price,products?.weight, '',products,'picker-updatepicklistproductinfo/','unitprice')"
-                                        type="button" class="btn btn-primary btn-sm">Edit Unit Price</button>
+                                        type="button" class="btn btn-primary btn-sm globalbutton">Edit Unit Price</button>
                                     <br>
                                     Unit Weight: <span>{{conertvaluetodecimal(products?.weight * products?.quantity/
                                         products?.quantity)}}
@@ -388,7 +390,7 @@
                                     <button matRipple style="margin: 1px 1px 9px 20px;"
                                         (click)="openEditModal(products)"
                                         [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
-                                        type="button" class="btn btn-primary btn-sm">Edit Total
+                                        type="button" class="btn btn-primary btn-sm globalbutton">Edit Total
                                         Weight</button>
                                     <br>
                                     <strong> Total Price: {{products?.product_price * products?.grn_quantity |
@@ -473,7 +475,7 @@
                                             [src]="subt_products?.product.product_images[0]?.link+''+subt_products?.product.product_images[0]?.img"
                                             alt="">
                                         <button type="button" style="bottom: 4%;position: absolute;left: 2%;"
-                                            class="btn btn-primary">Substitute</button>
+                                            class="btn btn-primary globalbutton">Substitute</button>
                                     </td>
                                     <td style="line-height:2">
                                         <h6>{{subt_products?.product.name}}</h6>
@@ -595,7 +597,7 @@
                         <button type="button" style="width: 100%;position: absolute;margin-top: 2%;"
                             *ngIf="isProductSendFor_Approval"
                             (click)="sendProductSubtituteApproval(orderDetaildata['data'][0]?.order_substitute_products,orderDetaildata['data'][0]?.channel_order_id,product_billnumber)"
-                            class="btn btn-success">Send for Approval
+                            class="btn btn-success globalbutton">Send for Approval
                             <!-- <countdown *ngIf="IsTimeComplete === true" [config]="{leftTime: leftTime, notify: [ 2, 5 ]}"
                                 (event)="handleEvent($event)">
                             </countdown> -->
@@ -604,7 +606,7 @@
                         <button type="button" style="cursor: none;"
                             [disabled]="userOrderdata.substitute_status === 'pending'" style="width: 100%;"
                             *ngIf="userOrderdata.substitute_status === 'pending' && isProductSendFor_Approval === false"
-                            class="btn btn-success">Product sent
+                            class="btn btn-success globalbutton">Product sent
                             for Approval,Please wait for customer response
                             <countdown y [config]="{leftTime: leftTime, notify: [ 2, 5 ]}"
                                 (event)="handleEvent($event)">
@@ -627,14 +629,14 @@
                         <button *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete' &&
                             orderDetaildata['data'][0]?.order_products"
                             [disabled]="!userOrderdata.picker_name || paymentonlineTimer !== true" style="width: 100%;"
-                            type="button" (click)="processOrder()" class="btn btn-success">Process the order</button>
+                            type="button" (click)="processOrder()" class="btn btn-success globalbutton">Process the order</button>
                     </div>
                 </div>
                 <div id="footer"></div>
-                <div matRipple (click)="movetofooter('footer')" style="width: 100px;display: flex;margin-left: 5%;">
-                    <div class="scrolldown"><i class="material-icons">keyboard_arrow_up</i>
+                <div class="scrolldown" matRipple (click)="movetofooter('footer')" style="width: 100px;display: flex;margin-left: 5%;">
+                    <div ><i style="margin-top: -12%;" class="material-icons">keyboard_arrow_up</i>
                     </div>
-                    <p style="margin-top: 6%;margin-left: 4%;">Go Up</p>
+                    <p style="margin-left: 4%;">Go Up</p>
                 </div>
             </div>
         </div>
@@ -806,6 +808,14 @@
                         {{products?.product_price * products?.quantity |
                         currency:'':''}}</td>
                 </tr>
+                <tr *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
+                    <td>{{products?.quantity}} x {{products?.product.name}}</td>
+                    <td>{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
+                        {{products?.product.uom.uom_name}}</td>
+                    <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        {{products?.product_price * products?.quantity |
+                        currency:'':''}}</td>
+                </tr>
             </table>
             <div class="mat-divider"></div>
         </div>
@@ -818,7 +828,7 @@
                 </tr>
                 <tr>
                     <td><span>Products</span></td>
-                    <td class="leftcol"><span>{{orderDetaildata['data'][0]?.order_products.length}}</span></td>
+                    <td class="leftcol"><span>{{orderDetaildata['data'][0]?.order_products.length + orderDetaildata['data'][0]?.order_substitute_products.length}}</span></td>
                 </tr>
                 <tr>
                     <td><span>Total items </span></td>
@@ -959,6 +969,15 @@
                         {{products?.product_price * products?.quantity |
                         currency:'':''}}</td>
                 </tr>
+                <tr *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
+                    <td>{{products?.quantity}} x {{products?.product.name}}</td>
+                    <td>{{products?.product.sku}}</td>
+                    <td>{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
+                        {{products?.product.uom.uom_name}}</td>
+                    <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        {{products?.product_price * products?.quantity |
+                        currency:'':''}}</td>
+                </tr>
             </table>
             <div class="mat-divider"></div>
         </div>
@@ -971,7 +990,7 @@
                 </tr>
                 <tr>
                     <td><span>Products</span></td>
-                    <td class="leftcol"><span>{{orderDetaildata['data'][0]?.order_products.length}}</span></td>
+                    <td class="leftcol"><span>{{orderDetaildata['data'][0]?.order_products.length + orderDetaildata['data'][0]?.order_substitute_products.length}}</span></td>
                 </tr>
                 <tr>
                     <td><span>Total items </span></td>

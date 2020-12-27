@@ -11,22 +11,25 @@ label {
 }
 
 section {
-    background: white;
-    width     : fit-content;
+    background   : white;
+    width        : fit-content;
     border-radius: 1%;
     // padding: 1%;
-    box-shadow: 0 1px 13px -9px #d3d2d2;
-    width: auto;
+    box-shadow   : 0 1px 13px -9px #d3d2d2;
+    width        : auto;
 }
-mat-expansion-panel{
-    width: 49%;
+
+mat-expansion-panel {
+    width : 49%;
     margin: 9px 0px 9px 0px;
 
 }
-.mat-accordion>.mat-expansion-panel-spacing:last-child{
-    margin-bottom: 10px!important;
-    margin-top: 10px!important;
+
+.mat-accordion>.mat-expansion-panel-spacing:last-child {
+    margin-bottom: 10px !important;
+    margin-top   : 10px !important;
 }
+
 h4 {
     font-size  : 19px;
     font-weight: 500;
@@ -114,4 +117,14 @@ ul {
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
     border-color: gray;
+}
+
+::ng-deep.loader.progress {
+    background-image: linear-gradient(90deg, rgba(136, 204, 151, 0), rgba(98, 81%, 23%, 1), rgba(255, 255, 255, 0)) !important;
+}
+
+button {
+    background  : #98D81D !important;
+    border-color: #98D81D !important;
+    color       : white !important;
 }

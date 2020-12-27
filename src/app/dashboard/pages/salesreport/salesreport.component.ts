@@ -313,6 +313,10 @@ export class SalesreportComponent implements OnInit {
           }
         }
       }
+    }if (this.paymentmethodid === "both") {
+      this.mergeFirstPaymentData=[]
+      this.advancedsearch = []
+      this.setcompleteparam()
     }
     if (this.rangeFormGroup.value.start !== null && this.rangeFormGroup.value.end !== null) {
       this.getmonth = "nomonth"

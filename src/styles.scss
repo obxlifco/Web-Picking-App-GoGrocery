@@ -58,13 +58,13 @@ mat-icon {
   // background: white;
 }
 
-::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
-  background   : blue !important;
-  background-color   : blue !important;
-  border-radius: 4px 4px 0 0 !important;
-  padding      : .75em .75em 0 .75em;
-  color        : white !important;
-}
+// ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+//   background   : blue !important;
+//   background-color   : blue !important;
+//   border-radius: 4px 4px 0 0 !important;
+//   padding      : .75em .75em 0 .75em;
+//   color        : white !important;
+// }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
   /* border-radius: 4px 4px 0 0; */
@@ -95,6 +95,8 @@ button {
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
 :root {
+  --green:#2E6B0B;
+  --lightgreen:#98D81D;
   --blue                  : #5E50F9;
   --indigo                : #6610f2;
   --purple                : #6a008a;
@@ -1050,3 +1052,27 @@ body {
           background-color: black;
       }
 }
+
+.globalbutton{
+  background: #98D81D !important;
+border-color:  #98D81D !important;
+color: white ;
+}
+.scrolldown{
+  background: #98D81D;
+  border: 1px solid #98D81D;
+  border-radius: 4%;
+  margin-left: 2%;
+  // border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  padding: 0.8%;
+  color: white;
+  cursor: pointer;
+  padding: 1% 0% 0% 1%;
+}
+.globalbutton:hover,.scrolldown:hover {
+  background: #2E6B0B!important;
+  border-color:  #2E6B0B !important;
+  color: white !important;
+  }

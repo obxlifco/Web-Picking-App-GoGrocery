@@ -22,8 +22,8 @@ import html2canvas from 'html2canvas';
 // import * as jsPDF from 'jspdf'
 
 declare var jsPDF: any;
-declare var $:any
-declare var window:any
+declare var $: any
+declare var window: any
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -32,8 +32,8 @@ declare var window:any
 export class OrdersComponent implements OnInit {
   @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
   @ViewChild('footer', { static: true }) footerid: ElementRef | any;
-  @ViewChild('printwithsku', { static: false }) withsku:ElementRef | any;
-  @ViewChild('printwithOutsku', { static: false }) withoutsku:ElementRef | any;
+  @ViewChild('printwithsku', { static: false }) withsku: ElementRef | any;
+  @ViewChild('printwithOutsku', { static: false }) withoutsku: ElementRef | any;
 
   pdfMake: any;
   subscription: Subscription | any;
@@ -78,7 +78,7 @@ export class OrdersComponent implements OnInit {
   IS_Subtitute = false;
   timer: any
   leftTime: any = 5 * 60000
-  isdownload=false
+  isdownload = false
   //below date var is sample max and min date
   // minValue: any = new Date();
   // maxValue: any = this.minValue.getDate() + 3;
@@ -88,21 +88,21 @@ export class OrdersComponent implements OnInit {
   totalProductItems: any = 0//for printer product quantity
 
   //testing tabs
-  navTablink:any=[
+  navTablink: any = [
     {
-      name:'In-Processing',
-      type:''
+      name: 'In-Processing',
+      type: ''
     },
     {
-      name:'Shipped',
-      type:'shipped'
+      name: 'Shipped',
+      type: 'shipped'
     },
     {
-      name:'Cancelled',
-      type:'cancelled'
-    },{
-      name:'Completed',
-      type:'complete'
+      name: 'Cancelled',
+      type: 'cancelled'
+    }, {
+      name: 'Completed',
+      type: 'complete'
     }
   ]
   activeLink = this.navTablink[0];
@@ -123,8 +123,8 @@ export class OrdersComponent implements OnInit {
       // console.log("activated route data :", v.orderstatus)
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
-        for(let i=0;i<this.navTablink.length;i++){
-          if(this.navTablink[i].type ===  this.userOrderdata.orderlistType){
+        for (let i = 0; i < this.navTablink.length; i++) {
+          if (this.navTablink[i].type === this.userOrderdata.orderlistType) {
             this.activeLink = this.navTablink[i];
           }
         }
@@ -141,8 +141,8 @@ export class OrdersComponent implements OnInit {
     this.orderDetaildata["data"] = []
     this.getOrderlistData()
   }
-  setordertype(type:any){
-    this.userOrderdata.orderlistType=type;
+  setordertype(type: any) {
+    this.userOrderdata.orderlistType = type;
     this.getOrderlistData()
   }
   movetofooter(value: any) {
@@ -228,6 +228,7 @@ export class OrdersComponent implements OnInit {
             }
           } else {
             this.isOrderList = true
+            this.orderlistdata["data"] = []
             this.globalitem.showError("No Orderlist found ", "No Order")
           }
         })
@@ -328,23 +329,22 @@ export class OrdersComponent implements OnInit {
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
 
-  async printdata(skustatus:any,printstatus:any) {
-    this.isdownload=true 
-    var innerContents : any
-    let templayout:any;
-    if(skustatus === "withoutsku"){
+   printdata(skustatus: any, printstatus: any) {
+    this.isdownload = true
+    var innerContents: any
+    let templayout: any;
+    if (skustatus === "withoutsku") {
       // templayout = document.getElementById("printwithOutsku")?.innerHTML;
-      templayout="printwithOutsku"
-    }else{
-      templayout="printwithsku"
+      templayout = "printwithOutsku"
+    } else {
+      templayout = "printwithsku"
       // templayout = document.getElementById("printwithsku")?.innerHTML;
     }
 
-    if(printstatus === "print"){
-      
+    if (printstatus === "print") {
       const popupWinindow: any = window.open();
       popupWinindow.document.open();
-      setTimeout(()=>{
+      setTimeout(() => {
         innerContents = document.getElementById(templayout)?.innerHTML;
         popupWinindow.document.write('<html><head></head><body onload="window.print()">' + innerContents + '</html>');
         popupWinindow.document.write(`<style>
@@ -397,29 +397,31 @@ export class OrdersComponent implements OnInit {
     }
     </style>
       `);
-      // this.isdownload=false
+        // this.isdownload=false
         popupWinindow.document.close();
-        this.isdownload=false;
-      },20);
-     
-    }else{
-      setTimeout(()=>{
+        this.isdownload = false;
+      }, 20);
+
+    } else {
+      setTimeout(() => {
         innerContents = document.getElementById(templayout);
-        var imgWidth = 1300;
+        console.log("Inner Content :",innerContents);
+        
+        var imgWidth = 600;
         html2canvas(innerContents).then(canvas => {
-          let totalPages=canvas.height/imgWidth;
-          var pdf:any = new jsPDF('p', 'pt',[canvas.width, imgWidth]);
-          console.log(pdf);
-          for(let i=1;i<=totalPages;i++)
-          {
-           var imgData  = canvas.toDataURL("image/png", 2);
-           pdf.addImage(imgData,0,0,canvas.width, imgWidth*i);
-          //  pdf.addPage(canvas.width,imgWidth*i);
+          let totalPages = canvas.height / imgWidth;
+          var pdf: any = new jsPDF('p', 'pt', [canvas.width, imgWidth]);
+          // console.log(pdf);
+          for (let i = 1; i <= totalPages; i++) {
+            var imgData = canvas.toDataURL("image/png",10);
+            pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
+            //  pdf.addPage(canvas.width,imgWidth*i);
           }
-           pdf.save('converteddoc.pdf');
-           this.isdownload=false 
-         })
-        },1000)
+          // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
+          pdf.save('pickerlist.pdf');
+          this.isdownload = false
+        })
+      }, 600)
     }
   }
   //edit unit weight and price
@@ -937,16 +939,21 @@ export class OrdersComponent implements OnInit {
       warehouse_status: "",
     }
     this.apiService.postData("global_list/", data).subscribe((data: any) => {
-      this.orderlistdata["data"] = data.results[0].result //json response
-      this.totalProductpage = data.per_page_count//total page
-      this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-        this.orderlistdata["data"][0].picker_name, "done")
-      if (this.currentPage === 1) {
-        this.orderlistdata["data"] = data.results[0].result
-        this.totalProductpage = data.total_page
+      if (data.count > 0) {
+        this.orderlistdata["data"] = data.results[0].result //json response
+        this.totalProductpage = data.per_page_count//total page
+        this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+          this.orderlistdata["data"][0].picker_name, "done")
+        if (this.currentPage === 1) {
+          this.orderlistdata["data"] = data.results[0].result
+          this.totalProductpage = data.total_page
+        } else {
+          // console.log("page n");
+          this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.results[0].result];
+        }
       } else {
-        // console.log("page n");
-        this.orderlistdata["data"] = [...  this.orderlistdata["data"], ...data.results[0].result];
+        this.isOrderList = true
+        this.orderlistdata["data"] = []
       }
     })
   }
@@ -954,11 +961,19 @@ export class OrdersComponent implements OnInit {
   gettotalCost() {
     this.totalProductItems = 0;
     this.printerTotalcost = 0
+    let tempcost:any=0
+    let tempproductitem:any=0
     this.db.getwarehouseName().then(res => { this.userOrderdata.warehouseName = res });
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
       this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;
     }
+    for (let i = 0; i < this.orderDetaildata['data'][0]?.order_substitute_products.length; i++) {
+      tempproductitem += this.orderDetaildata['data'][0]?.order_substitute_products[i]?.quantity
+      tempcost += this.orderDetaildata['data'][0]?.order_substitute_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_substitute_products[i]?.quantity;
+    }
+    this.totalProductItems += tempproductitem
+    this.printerTotalcost += tempcost
   }
 
 

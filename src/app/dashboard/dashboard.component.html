@@ -5,16 +5,17 @@
       <img matRipple style="height: 64px !important" src="assets/images/gog.jpg" alt="logo">
     </mat-toolbar>
     <mat-nav-list (click)="close()">
-      <a mat-list-item [routerLink]="'home'">Dashboard</a>
-      <a mat-list-item (click)="navigateOrders()">Orders</a>
-      <a *ngIf="isWarehouseID" mat-list-item [routerLink]="'stocks'">Stocks</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'home'">Dashboard</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'orders'" (click)="navigateOrders()">Orders</a>
+      <a *ngIf="isWarehouseID" routerLinkActive="active-link" mat-list-item [routerLink]="'stocks'">Stocks</a>
       <!-- <a mat-list-item [routerLink]="'returns'">Returns</a> -->
-      <a mat-list-item (click)="navigateSale()">Sales Report</a>
-      <a mat-list-item [routerLink]="'appsettings'">App Settings</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'salesreport'" (click)="navigateSale()">Sales Report</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'appsettings'">App Settings</a>
+      <!-- <a mat-list-item [routerLink]="'/test'">Test</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="navheader" style="background-color: rgb(90, 90, 221) !important;" color="primary">
+    <mat-toolbar class="navheader" style="background: #2E6B0B !important;" color="primary">
       <button matRipple type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->

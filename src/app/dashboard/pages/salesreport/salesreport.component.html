@@ -20,11 +20,8 @@
                 <label for="year">Year</label>
                 <select #year class="browser-default custom-select" [(ngModel)]="getyear"
                     (change)="setSearchattribute($event,'year')">
+                    <option value="2021">2021</option>
                     <option selected value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
                 </select>
             </div>
             <div class="col-md-4" style="display: contents;">
@@ -46,7 +43,7 @@
                     </mat-form-field>
                 </form>
                 <button style="margin-top: auto;margin-bottom: 0.6%;" matRipple type="button"
-                    class="btn btn-primary btnsearch" (click)="Searchorders()">Search</button>
+                    class="btn btn-primary btnsearch globalbutton" (click)="Searchorders()">Search</button>
             </div>
         </div>
         <div class="row">
@@ -169,11 +166,11 @@
 
         <div class="row" style="margin-bottom: 3%;">
             <div class="col-md-2" style="max-width: fit-content;">
-                <button matRipple type="button" class="btn btn-success" [disabled]="saleData.totalorder === 0"
+                <button matRipple type="button" class="btn btn-success globalbutton" [disabled]="saleData.totalorder === 0"
                     (click)="getCSVFile()">Generate CSV</button>
             </div>
             <div class="col-md-4">
-                <button matRipple type="button" class="btn btn-success" [disabled]="saleData.totalorder === 0"
+                <button matRipple type="button" class="btn btn-success globalbutton" [disabled]="saleData.totalorder === 0"
                     (click)="generateSaleReport()">Generate Order Report</button>
             </div>
         </div>
