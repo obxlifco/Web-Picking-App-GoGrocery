@@ -5,7 +5,13 @@
     display : block;
     overflow: hidden;
 }
-
+.container{
+    margin-left: 45px;
+    background: white;
+    margin-right: 45px;
+    overflow: hidden;
+    border-radius: 3px;
+}
 label {
     font-weight: 500;
     font-size  : 16px;
@@ -51,7 +57,9 @@ select {
 button {
     height: 100%;
 }
-
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #2E6B0B !important;
+  }
 .table {
     width           : 58%;
     margin-bottom   : 1rem;

@@ -1,6 +1,9 @@
 .mat-drawer-container{
     height: -webkit-fill-available;
   }
+  .sidenav-container{
+    background: #aed86e;
+  }
   .logout-menu{
     // position: absolute;
     // right: 2%;
@@ -32,6 +35,7 @@
   .title{
     margin: auto;
     width: 40%;
+    font-family:'proxima' !important;
     
   }
   @media only screen and (max-width: 360px) {
@@ -50,10 +54,10 @@
   }
 }
 a:hover {
-  background-color:#2E6B0B !important;
+  background-color: #aed86e !important;
   color: white;
 }
 .active-link {
-  background-color: #2E6B0B !important;
+  background-color: #93C88D !important;
   color: white;
 }

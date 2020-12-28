@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav style="border-right: 4px solid #aed86e;" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="background: white;">
       <img matRipple style="height: 64px !important" src="assets/images/gog.jpg" alt="logo">
@@ -11,11 +11,11 @@
       <!-- <a mat-list-item [routerLink]="'returns'">Returns</a> -->
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'salesreport'" (click)="navigateSale()">Sales Report</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'appsettings'">App Settings</a>
-      <a mat-list-item [routerLink]="'/test'">Test</a>
+      <!-- <a mat-list-item [routerLink]="'/test'">Test</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="navheader" style="background: #2E6B0B !important;" color="primary">
+    <mat-toolbar class="navheader" style="background: #aed86e !important;" color="primary">
       <button matRipple type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->

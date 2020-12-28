@@ -3,6 +3,7 @@
  }
 
  .container-scroller {
+  
    padding: 3% 0% 0 0;
  }
 
@@ -43,6 +44,18 @@
    line-height: 0;
  }
 
+ .customrow{
+  border: none !important;
+  border-top: none !important;
+  border-color: white !important;
+}
+td{
+  border-color: white !important;
+}
+ tr:hover td {
+  background-color: #93C88D !important;
+  color: white;
+  }
  .table-striped tr:nth-child(odd) td {
    background-color: #f5f4f4;
  }

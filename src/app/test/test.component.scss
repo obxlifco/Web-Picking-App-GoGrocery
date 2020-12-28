@@ -2,22 +2,44 @@
     // -webkit-box-shadow: 3px 3px 5px 0px #ccc !important;
     border: none;
 }
+.container{
+    // padding: 2% 0% 2% 0% !important;
+}
 .logo{
     width: 22%;
     position: absolute;
-    left: -129px;
-    top: -49px;
+    left: -48px;
+    top: 97%;
 }
+h1{
+    margin: 0px 0px 3% 0px;
+    font-size: 43px;
+    font-weight: 100;
+}
+form{
+    padding: 0% 12% 0% 12% !important;
+    // margin-top: 3% !important;
+}
+h2{
+    font-family:'proxima' !important;
+    margin-top: 1.6%;
+    position: fixed;
+    margin-left: -2%;
+    font-weight: 500;
+    color:  #2E6B0B
+}
+
 
 span {
     color: #2E6B0B;
 }
 img{
-    width: 4%;
-    position: absolute;
+    width: 5%;
+    position: relative;
     float: right;
     right: 4%;
-    margin-top: 9px;
+    margin-top: 2%;
+    height: 4%;
 }
 .form-group{
     display: flex;
@@ -29,12 +51,13 @@ img{
     border: none !important;
     border-bottom: 1px solid lightgrey !important;
     color:  #2E6B0B;
+    font-size: 13px;
 }
 .form-control:focus{
     border-color: black;
 }
 .fgpassword {
-    margin-top: 3%;
+    margin-top: 17%;
     text-align: center;
 
     p {

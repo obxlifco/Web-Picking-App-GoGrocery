@@ -1,4 +1,4 @@
-<div class="container" id="header">
+<div class="container" id="header" >
     <!-- tabs testing -->
   
     <!-- toggle group -->
@@ -311,13 +311,13 @@
                         (click)="printdata('withoutsku','download')" class="btn btn-primary globalbutton">
                         <mat-icon>get_app</mat-icon>Download Receipt
                         </button>
-                            <button  type="button" 
+                            <button  type="button"  [disabled]="!userOrderdata.picker_name"
                                 *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                                 (click)="printdata('withsku','print')" 
                                 class="btn btn-primary csv-btn globalbutton">
                                 <mat-icon>print</mat-icon> Print Picking List
                             </button>
-                            <button type="button"
+                            <button type="button" [disabled]="!userOrderdata.picker_name"
                             *ngIf="userOrderdata.orderlistType !== 'cancelled'"
                             (click)="printdata('withsku','download')" 
                             class="btn btn-primary csv-btn globalbutton">

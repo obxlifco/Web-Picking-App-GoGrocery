@@ -9,6 +9,12 @@
 
 .conatiner {
     padding: 8% 5% 3% 5%;
+    margin-left: 45px;
+    background: white;
+    margin-right: 45px;
+    overflow: hidden;
+    margin-bottom: 4%;
+    border-radius: 3px;
 }
 
 label {
@@ -67,22 +73,27 @@ th{
         text-align: right;
     }
 }
-
+::ng-deep.switch.switch-medium {
+    min-width: 61px !important;
+}
 .table-data {
     table {
         width: 100%;
     }
-
+span{
+    font-size: 17px;
+}
     h6 {
-        font-size  : 16px;
+        font-size  : 17px;
         margin     : 0px;
         font-weight: 500;
     }
 }
 
 .editprice {
-    color : #2E6B0B;
+    color :white;
     cursor: pointer;
+    margin-top: 3%;
 }
 
 .search-results {

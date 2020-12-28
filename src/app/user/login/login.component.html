@@ -1,12 +1,8 @@
-
-<div class="col-md-6 offset-md-3 mt-5">
+<!-- <div class="col-md-6 offset-md-3 mt-5">
     <div class="card" style="margin-top:10%">
-        <!-- <h4 class="card-header">SIGN IN</h4> -->
         <div style="text-align: center;margin-top: 2%;">
             <img width="20%" src="assets/images/gog.jpg" alt="">
            <div>
-            <!-- <strong>PICKING</strong><br>
-            <strong>APP</strong><br> -->
             <strong>Login to GoGroceryPicking</strong><br>
            </div>
         </div>
@@ -27,7 +23,6 @@
                     </div>
                 </div>
                 <button  class="btn btn-primary globalbutton">
-                    <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
                     Login
                 </button>
             </form>
@@ -37,5 +32,68 @@
         </div>
     </div>
   </div>
-  <ngx-spinner></ngx-spinner>
-  
+  <ngx-spinner></ngx-spinner> -->
+
+<body style="background-color: #aed86e; ;">
+    <div class="container"
+        style="overflow: hidden;padding-bottom: 3%;display: flow-root;width: 100%;max-width: 100%;margin: 0px !important;background: #aed86e;">
+        <div class="row"
+            style="background: #aed86e;margin-right: -30px !important; margin-left: -30px !important;margin-top: -1.4%;">
+            <div class="col-md-10 offset-md-1 mt-4">
+                <div class="row" style="margin-left: -12%;">
+                    <div class="col-md-5 offset-md-1 mt-5" style="position: relative;">
+                        <!-- <img class="logo" src="assets/images/gog.jpg" alt=""> -->
+                        <h2>GOGROCERY PICKING APP</h2>
+                    </div>
+                </div>
+                <div class="row sub_container">
+                    <div class="col-md-6 offset-md-3 mt-5">
+                        <div class="card" style="margin-top:8%">
+                            <!-- <h4 class="card-header">SIGN IN</h4> -->
+
+                            <div style="text-align: center;">
+                                <h1>Sign In</h1>
+                                <p>Start managing your store item and orders</p><br>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                                    <div class="form-group">
+                                        <input placeholder="username" type="text" formControlName="username"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                        <img src="assets/images/product/toggle_checked1.png"
+                                            *ngIf="f.username.value !== ''" alt="">
+                                    </div>
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                        <div *ngIf="f.username.errors.required">Username is required</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input placeholder="password" #showpasswordvalue id="showpasswordvalue"
+                                            type="password" formControlName="password" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                        <img src="assets/images/product/toggle_checked1.png"
+                                            *ngIf="f.password.value !== ''" alt="">
+                                    </div>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Password is required</div>
+                                    </div>
+                                    <div style="width: 100%;text-align: center;">
+                                        <mat-checkbox (change)="showpassword($event)"
+                                            style="color:  #2E6B0B;font-size: 12px;" color='primary'>Show Characrter
+                                        </mat-checkbox><br>
+                                        <button class="btn btn-primary globalbutton">Login</button>
+                                    </div>
+
+                                </form>
+                                <div class="fgpassword">
+                                    <p (click)="forrgotePassword()">Forgot Password?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ngx-spinner></ngx-spinner>
+        </div>
+    </div>
+</body>

@@ -2,7 +2,11 @@
 @import '~ngx-ui-switch/ui-switch.component.scss';
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-
+// fonts
+@font-face {
+  font-family: "proxima";
+  src: local("proxima"), url(./assets/fonts/proxima_ssv/ProximaNova-Regular.otf) format("truetype");
+}
 // global css
 mat-icon {
   cursor: pointer;

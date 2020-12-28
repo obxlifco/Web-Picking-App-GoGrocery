@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -14,6 +14,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('showpasswordvalue', { static: true }) showpasswordValue: ElementRef | any;
   loginForm: any = FormGroup;
   loading = false;
   submitted = false;
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit {
       device_id: ['']
     });
     this.getIp()
-
   }
+
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
       console.log("inside login");
 
     }, 1500);
-
   }
 
   getIp() {
@@ -100,5 +100,16 @@ export class LoginComponent implements OnInit {
 
   forrgotePassword(){
     this.modalservice.openModal('',ForgotpasswordComponent )
+  }
+
+  showpassword(event:any){
+    console.log("event Value : ",event);
+    if (event.checked) {
+      this.showpasswordValue.nativeElement.setAttribute('type', 'text');
+      // span.innerHTML = 'hide';
+    } else {
+      this.showpasswordValue.nativeElement.setAttribute('type', 'password');
+      // span.innerHTML = 'show';
+    }
   }
 }

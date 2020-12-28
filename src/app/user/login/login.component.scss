@@ -1,27 +1,124 @@
-.card{
-    -webkit-box-shadow: 3px 3px 5px 0px #ccc !important;
+.card {
+    // -webkit-box-shadow: 3px 3px 5px 0px #ccc !important;
+    border: none;
+}  
+
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #2E6B0B !important;
+  }
+.sub_container{
+    -webkit-box-shadow: 3px 3px 5px 0px gray !important;
+    box-shadow: 0px 0px 5px 1px gray !important;
+    background: white;
+    border-radius: 2px;
+    margin-right: -70px !important;
+    margin-left: -70px !important;
+    overflow: hidden;
 }
-span{
-    color: green;
+.logo{
+    width: 22%;
+    position: absolute;
+    left: -48px;
+    top: 97%;
 }
-.fgpassword{
-    margin-top: 3%;
-    text-align: center;
-    p{
-        font-size: 15px;
-    }
-    span{
-        cursor: pointer;
-    }
+h1{
+    margin: 0px 0px 3% 0px;
+    font-size: 43px;
+    font-weight: 100;
 }
-button{
+form{
+    padding: 0% 12% 0% 12% !important;
+    // margin-top: 3% !important;
+}
+h2{
+    font-family:'proxima' !important;
+    margin-top: 1.6%;
+    position: fixed;
+    margin-left: -2%;
+    font-weight: 500;
+    color:  #2E6B0B
+}
+
+
+span {
+    color: #2E6B0B;
+}
+img{
+    width: 4%;
+    position: relative;
+    float: right;
+    right: 4%;
+    margin-top: 2%;
+    height: 4%;
+}
+.form-group{
+    display: flex;
     width: 100%;
-    background: #98D81D !important;
-  border-color:  #98D81D !important;
-  color: white !important;
-  font-size: 17px;
+    margin-bottom: 15px;
+    border-color:  #2E6B0B;
 }
-label{
-    font-size: 16px;
+.form-control{
+    border: none !important;
+    border-bottom: 1px solid lightgrey !important;
+    color:  #2E6B0B;
+    font-size: 14px;
+}
+.form-control:focus{
+    border-color: black;
+}
+.fgpassword {
+    margin-top: 17%;
+    text-align: center;
+    cursor: pointer;
+    p {
+        font-size: 15px;
+        color:  #2E6B0B;
+    }
+}
+h1,p{
+    color:  #2E6B0B;
+}
+::placeholder{
+    color:  #2E6B0B;
+}
+button {
+    width: 19%;
+    background: #98D81D !important;
+    border-color: #98D81D !important;
+    color: white !important;
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 3px;
+}
+
+label {
+    font-size  : 16px;
     font-weight: 500;
 }
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+  }
+  
+  /* Style the form icons */
+  .icon {
+    padding: 10px;
+    // background: dodgerblue;
+    color: green;
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  /* Style the input fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border: 2px solid dodgerblue;
+  }

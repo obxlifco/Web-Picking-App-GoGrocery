@@ -1,5 +1,7 @@
 .container {
     padding: 6% 3% 1% 5%;
+    background: white;
+    border-radius: 3px;
 }
 h4 {
     margin-left: -2%;
@@ -608,10 +610,12 @@ html {
     scroll-behavior: smooth;
   }
   .mat-focus-indicator:active{
-    color:#98D81D
+    color:#98D81D;
+    background: white !important;
   }
   mat-tab-link:active{
     color: #98D81D !important;
+    background: white !important;
   }
  a:hover{
     text-decoration: none !important;
