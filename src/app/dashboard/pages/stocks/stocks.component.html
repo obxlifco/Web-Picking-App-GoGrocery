@@ -9,14 +9,15 @@
             <div class="col-md-3 col-left grid-margin">
                 <label for="parentcat">Parent Category</label>
                 <select #parentcat (click)="opencategory_modal('Category')" class="browser-default custom-select">
-                    <option selected>Category</option>
+                    <option selected>All</option>
                     <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
                 </select>
             </div>
             <div class="col-md-3 col-left grid-margin">
                 <label for="childcat">Child Category</label>
-                <select #childcat (click)="opensub_category_modal('Sub Category')" class="browser-default custom-select">
-                    <option selected>Sub Category</option>
+                <select #childcat (click)="opensub_category_modal('Sub Category')"
+                    class="browser-default custom-select">
+                    <option selected>All</option>
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
                 </select>
             </div>
@@ -75,19 +76,17 @@
                         <td colspan="3.5">
                             <strong>AED
                                 {{plist?.channel_currency_product_price?.price}}</strong><br>
-                            <!-- <span class="editprice"
-                                >edit
-                                Price</span> -->
-
-                                <button matRipple 
+                            <button matRipple
                                 (click)="editprice($event,plist?.channel_currency_product_price?.price,plist?.id,i,plist?.product_stock?.stock)"
                                 type="button" class="btn btn-primary btn-sm globalbutton editprice">Edit Price
-                                </button>
+                            </button>
                         </td>
 
                         <td colspan="3.5">
                             <!-- <h5>switch button</h5> -->
-                            <ui-switch color="#98D81D"  [checked]="plist?.product_stock?.stock > 0"  (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)"></ui-switch>
+                            <ui-switch color="#98D81D" [checked]="plist?.product_stock?.stock > 0"
+                                (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)">
+                            </ui-switch>
                             <!-- <mat-slide-toggle
                                 (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)"
                                 [checked]="plist?.product_stock?.stock > 0"></mat-slide-toggle> -->

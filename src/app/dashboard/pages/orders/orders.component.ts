@@ -16,8 +16,8 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
-// import { jsPDF } from "jspdf";
-// import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
 
 // import * as jsPDF from 'jspdf'
 
@@ -30,8 +30,8 @@ declare var window: any
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  @ViewChild('bnumber', { static: true }) billnumber: ElementRef | any;
-  @ViewChild('footer', { static: true }) footerid: ElementRef | any;
+  @ViewChild('bnumber', { static: false }) billnumber: ElementRef | any;
+  @ViewChild('footer', { static: false }) footerid: ElementRef | any;
   // @ViewChild('printwithsku', { static: false }) withsku: ElementRef | any;
   // @ViewChild('printwithOutsku', { static: false }) withoutsku: ElementRef | any;
 
@@ -162,6 +162,8 @@ export class OrdersComponent implements OnInit {
   //call when we completing the order
   processOrder() {
     this.getcounter()
+    console.log("value : ",this.billnumber.nativeElement.value);
+    
     if (this.billnumber.nativeElement.value) {
       if (this.userOrderdata.PickerCounter === 0) {
         this.openConfirmationDialog()
@@ -405,23 +407,24 @@ export class OrdersComponent implements OnInit {
     } else {
       setTimeout(() => {
         innerContents = document.getElementById(templayout);
-        this.commonfunc.generatePDF(innerContents)
+        // this.commonfunc.generatePDF(innerContents)
         // console.log("Inner Content :",innerContents);
         
-        // var imgWidth = 600;
-        // html2canvas(innerContents).then(canvas => {
-        //   let totalPages = canvas.height / imgWidth;
-        //   var pdf: any = new jsPDF('p', 'pt', [canvas.width, imgWidth]);
-        //   // console.log(pdf);
-        //   for (let i = 1; i <= totalPages; i++) {
-        //     var imgData = canvas.toDataURL("image/png",10);
-        //     pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
-        //     //  pdf.addPage(canvas.width,imgWidth*i);
-        //   }
-        //   // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
-        //   pdf.save('pickerlist.pdf');
-        //   this.isdownload = false
-        // })
+        var imgWidth = 600;
+        html2canvas(innerContents).then(canvas => {
+          let totalPages = canvas.height / imgWidth;
+          // var pdf: any = new jsPDF('p', 'pt', 'a4');
+          var pdf: any = new jsPDF('p', 'pt', 'a4');
+          // console.log(pdf);
+          for (let i = 1; i <= totalPages; i++) {
+            var imgData = canvas.toDataURL("image/png",10);
+            pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
+            //  pdf.addPage(canvas.width,imgWidth*i);
+          }
+          // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
+          pdf.save('pickerlist.pdf');
+          this.isdownload = false
+        })
         this.isdownload = false
       }, 600)
     }
