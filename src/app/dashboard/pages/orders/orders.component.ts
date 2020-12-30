@@ -16,12 +16,12 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
-import { jsPDF } from "jspdf";
+// import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 
 // import * as jsPDF from 'jspdf'
 
-// declare var jsPDF: any;
+declare var jsPDF: any;
 // declare var $: any
 declare var window: any
 @Component({
@@ -61,6 +61,11 @@ export class OrdersComponent implements OnInit {
     PickerCounter: 0, //set the counter to check if product selected in list
     warehouseName: ''
   }
+  keyValueOF_superStore={
+    key:0,
+    value:'',
+    apistatus:''
+  }
   paymentonlineTimer = false
   isOrderList = false
   order_Substitute_Time: any
@@ -91,18 +96,24 @@ export class OrdersComponent implements OnInit {
   navTablink: any = [
     {
       name: 'In-Processing',
-      type: ''
+      type: '',
+      key:100,
     },
     {
       name: 'Shipped',
-      type: 'shipped'
+      type: 'shipped',
+      key:1
+
     },
     {
       name: 'Cancelled',
-      type: 'cancelled'
+      type: 'cancelled',
+      key:2
+
     }, {
       name: 'Completed',
-      type: 'complete'
+      type: 'complete',
+      key:4
     }
   ]
   activeLink = this.navTablink[0];
@@ -120,7 +131,11 @@ export class OrdersComponent implements OnInit {
     // console.log("picker Nme : ", this.userOrderdata.picker_name);
     // this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     this.activated_route.params.subscribe(v => {
-      // console.log("activated route data :", v.orderstatus)
+      console.log("activated route data :", v)
+    if(v.key)
+    this.keyValueOF_superStore.value=v.value
+    this.keyValueOF_superStore.key=parseInt(v.key)
+    this.keyValueOF_superStore.apistatus="dashboard"
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
         for (let i = 0; i < this.navTablink.length; i++) {
@@ -141,7 +156,9 @@ export class OrdersComponent implements OnInit {
     this.orderDetaildata["data"] = []
     this.getOrderlistData()
   }
-  setordertype(type: any) {
+  setordertype(type: any,key:any,value:any) {
+    this.keyValueOF_superStore.key=key
+    this.keyValueOF_superStore.value=value
     this.userOrderdata.orderlistType = type;
     this.getOrderlistData()
   }
@@ -210,7 +227,7 @@ export class OrdersComponent implements OnInit {
       this.userOrderdata.warehouse_id = res.warehouse_id
       this.userOrderdata.website_id = res.website_id
       this.userOrderdata.user_id = res.user_id
-      if (this.userOrderdata.orderlistType !== 'complete') {
+      if (res.warehouse_id !== null && this.userOrderdata.orderlistType !== 'complete') {
         this.apiService.postData("picker-orderlist/", data).subscribe((data: any) => {
           // console.log(data);
           if (data.status !== 0) {
@@ -234,7 +251,11 @@ export class OrdersComponent implements OnInit {
             this.globalitem.showError("No Orderlist found ", "No Order")
           }
         })
-      } else if (this.userOrderdata.orderlistType === 'complete') {
+      }if(this.userOrderdata.orderlistType === 'complete'){
+        this.getCompletedOrders()
+      } else if (this.keyValueOF_superStore.apistatus === 'dashboard'&& res.warehouse_id === null) {
+        console.log("else if");
+        
         this.getCompletedOrders()
       }
     })
@@ -331,7 +352,7 @@ export class OrdersComponent implements OnInit {
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
 
-   printdata(skustatus: any, printstatus: any) {
+   printdata(skustatus: any, printstatus: any,pdfName:any) {
     this.isdownload = true
     var innerContents: any
     let templayout: any;
@@ -411,22 +432,42 @@ export class OrdersComponent implements OnInit {
         // console.log("Inner Content :",innerContents);
         
         var imgWidth = 600;
-        html2canvas(innerContents).then(canvas => {
-          let totalPages = canvas.height / imgWidth;
-          // var pdf: any = new jsPDF('p', 'pt', 'a4');
-          var pdf: any = new jsPDF('p', 'pt', 'a4');
-          // console.log(pdf);
-          for (let i = 1; i <= totalPages; i++) {
-            var imgData = canvas.toDataURL("image/png",10);
-            pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
-            //  pdf.addPage(canvas.width,imgWidth*i);
-          }
-          // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
-          pdf.save('pickerlist.pdf');
-          this.isdownload = false
-        })
+        // html2canvas(innerContents).then(canvas => {
+        //   let totalPages = canvas.height / imgWidth;
+        //   // var pdf: any = new jsPDF('p', 'pt', 'a4');
+        //   var pdf: any = new jsPDF('p', 'pt', 'a4');
+        //   for (let i = 1; i <= totalPages; i++) {
+        //     var imgData = canvas.toDataURL("image/png",10);
+        //     pdf.addImage(imgData, 0, 0, 500, imgWidth * i);
+        //     //  pdf.addPage(canvas.width,imgWidth*i);
+        //   }
+        //   // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
+        //   pdf.save('pickerlist.pdf');
+        //   this.isdownload = false
+        // })
+
+          html2canvas(innerContents, { allowTaint: true }).then(canvas => {
+           let HTML_Width = canvas.width;
+           let HTML_Height = canvas.height;
+           let top_left_margin = 15;
+           let PDF_Width = HTML_Width + (top_left_margin * 2);
+           let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+           let canvas_image_width = HTML_Width;
+           let canvas_image_height = HTML_Height;
+           let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+           canvas.getContext('2d');
+           let imgData = canvas.toDataURL("image/jpeg", 1.0);
+           let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+           pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+           for (let i = 1; i <= totalPDFPages; i++) {
+             pdf.addPage([PDF_Width, PDF_Height], 'p');
+             pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+           }
+            pdf.save(pdfName+".pdf");
+         });
+       
         this.isdownload = false
-      }, 600)
+      }, 1600)
     }
   }
   //edit unit weight and price
@@ -918,22 +959,23 @@ export class OrdersComponent implements OnInit {
 
   //get completed orders list
   getCompletedOrders() {
+    var today = new Date();
     let data = {
       advanced_search: [{
         comparer: 1,
         field: "order_status",
         field_id: 76,
         input_type: "multi_select",
-        key: [4],
-        key2: "Completed",
+        key: [this.keyValueOF_superStore.key],
+        key2: this.keyValueOF_superStore.value,
         name: "order_status",
         show_name: "Order Status",
       }],
       warehouse_id: this.userOrderdata.warehouse_id,
+      date: "2020-03-27##" + today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0'),
       website_id: this.userOrderdata.website_id,
       per_page: 500,
       // page :1,
-      user_id: this.userOrderdata.user_id,
       model: "EngageboostOrdermaster",
       order_by: "",
       order_type: "",
