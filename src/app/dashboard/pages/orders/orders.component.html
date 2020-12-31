@@ -305,27 +305,27 @@
                         style="margin-bottom: 3%;">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin"
                             style="display: block;">
-                            <button [disabled]="!userOrderdata.picker_name" type="button"
+                            <button type="button"
                                 (click)="printdata('withoutsku','print','')" class="btn btn-primary globalbutton">
                                 <mat-icon style="margin-right: 4px;">print</mat-icon>Print Receipt
                             </button>
 
-                            <button [disabled]="!userOrderdata.picker_name" id="cmd" type="button"
+                            <button  id="cmd" type="button"
                                 (click)="printdata('withoutsku','download','receipt_gog_'+orderDetaildata['data'][0]?.custom_order_id)" class="btn btn-primary globalbutton">
                                 <mat-icon>get_app</mat-icon>Download Receipt
                             </button>
-                            <button type="button" [disabled]="!userOrderdata.picker_name"
+                            <button type="button"
                                 (click)="printdata('withsku','print','')" class="btn btn-primary csv-btn globalbutton">
                                 <mat-icon>print</mat-icon> Print Picking List
                             </button>
-                            <button type="button" [disabled]="!userOrderdata.picker_name"
+                            <button type="button" 
                                 (click)="printdata('withsku','download','picking_list_gog_'+orderDetaildata['data'][0]?.custom_order_id)" class="btn btn-primary csv-btn globalbutton">
                                 <mat-icon>get_app</mat-icon> Download picking List
                             </button>
                         </div>
                     </div>
                     <div style="margin-bottom: 2%;">
-                        <button [disabled]="!userOrderdata.picker_name"
+                        <button
                             *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'"
                             (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','','')"
                             type="button" class="btn btn-primary globalbutton">
@@ -797,25 +797,25 @@
                         <h6 class="h6">Items/Products</h6>
                     </th>
                     <th class="th">
-                        <h6 class="h6">Unit weight</h6>
+                        <h6 class="h6" style="text-align: end;">Unit weight</h6>
                     </th>
-                    <th class="th">
+                    <th class="th" style="text-align: end;">
                         <h6 class="h6">Unit Price</h6>
                     </th>
 
                     <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index" style="font-size: 16px;margin-bottom: 2px;">
                         <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
-                        <td style="text-align: center;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
-                        <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>
                     <tr style="font-size: 16px;margin-bottom: 2px;" *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
-                        <td style="text-align: center;width: 90px;">{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
+                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
                             {{products?.product.uom.uom_name}}</td>
-                        <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>
@@ -948,28 +948,28 @@
                     <th class="th sku">
                         <h6 class="h6">SKU</h6>
                     </th>
-                    <th class="th">
+                    <th class="th" style="text-align: end;">
                         <h6 class="h6">Unit weight</h6>
                     </th>
-                    <th class="th">
+                    <th class="th" style="text-align: end;">
                         <h6 class="h6">Unit Price</h6>
                     </th>
 
                     <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index" style="font-size: 16px;margin-bottom: 2px;">
                         <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
                         <td >{{products?.product.sku}}</td>
-                        <td style="text-align: center;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
-                        <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>
                     <tr style="font-size: 16px;margin-bottom: 2px;" *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
                         <td>{{products?.product.sku}}</td>
-                        <td style="text-align: center;width: 90px;">{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
+                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight * products?.quantity/products?.quantity) | number}}
                             {{products?.product.uom.uom_name}}</td>
-                        <td> {{orderDetaildata['data'][0]?.currency_code}}
+                        <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>

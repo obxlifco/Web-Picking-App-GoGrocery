@@ -173,22 +173,25 @@ export class CommonfunctionService {
   }
 
   //convert html to pdf
-  generatePDF(elementID:any){
-    console.log("Inner Content :",elementID);
-        
-        var imgWidth = 600;
-        html2canvas(elementID).then(canvas => {
-          let totalPages = canvas.height / imgWidth;
-          var pdf: any = new jsPDF('p', 'pt', [canvas.width, imgWidth]);
-          // console.log(pdf);
-          for (let i = 1; i <= totalPages; i++) {
-            var imgData = canvas.toDataURL("image/png",10);
-            pdf.addImage(imgData, 0, 1, canvas.width, imgWidth * i);
-            //  pdf.addPage(canvas.width,imgWidth*i);
-          }
-          // pdf.addImage(imgData, 0, 0, canvas.width, imgWidth)
-          pdf.save('pickerlist.pdf');
-          // this.isdownload = false
-        })
+  generatePDF(elementID: any, pdfName: any) {
+    html2canvas(elementID, { allowTaint: true }).then(canvas => {
+      let HTML_Width = canvas.width;
+      let HTML_Height = canvas.height;
+      let top_left_margin = 15;
+      let PDF_Width = HTML_Width + (top_left_margin * 2);
+      let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+      let canvas_image_width = HTML_Width;
+      let canvas_image_height = HTML_Height;
+      let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+      canvas.getContext('2d');
+      let imgData = canvas.toDataURL("image/png", 10);
+      let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+      pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+      for (let i = 1; i <= totalPDFPages; i++) {
+        pdf.addPage([PDF_Width, PDF_Height], 'p');
+        pdf.addImage(imgData, 'PNG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+      }
+      pdf.save(pdfName + ".pdf");
+    });
   }
 }
