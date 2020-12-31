@@ -46,6 +46,10 @@
             <div style="width: 100%;">
                 <!-- Detail of order list data -->
                 <table class="table table-data">
+                    <tr *ngIf="userOrderdata.warehouse_id === null || userOrderdata.warehouse_id === ''">
+                        <td>Store </td>
+                        <td>{{userOrderdata?.storename}}</td>
+                    </tr>
                     <tr>
                         <td>
                             <label for="orderby">Order prepared by</label>
@@ -135,15 +139,12 @@
                                 {{orderDetaildata['data'][0]?.delivery_state_name}}
                             </p>
                             <div class="highlight_edits hovercolor"
-                                style="background-color:#98D81D; display: initial;margin-left: 3%;padding: 1% !important;"
-                                [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' }"
-                                *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ">
+                                style="background-color:#98D81D; display: initial;margin-left: 3%;padding: 1% !important;">
                                 <span style="color: white;cursor: pointer;"
-                                    [ngStyle]="{'pointer-events':userOrderdata.picker_name === null || userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete'  ? 'none' : 'auto' }"
                                     (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
                                 </span>
                             </div>
-
+<!-- 
                             <div *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'shipped' && userOrderdata.orderlistType !== 'complete'"
                                 class="highlight_edits hovercolor" style="display: initial;margin-left: 3%;padding: 1%;"
                                 [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
@@ -151,7 +152,7 @@
                                     [ngStyle]="{'pointer-events':userOrderdata.picker_name === null ? 'none' : 'auto' }"
                                     (click)="openmap(orderDetaildata['data'][0]?.customer_addressbook)">View in map
                                 </span>
-                            </div>
+                            </div> -->
 
                         </td>
                     </tr>
@@ -650,7 +651,7 @@
                     [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
                     <div *ngFor="let order of orderlistdata['data']" class="scroll-inner-data">
                         <mat-card class="orderlist-card"
-                            (click)="getOrderDetailData(order?.id,order?.shipment_id,order?.order_status,order?.picker_name,order?.substitute_status)">
+                            (click)="getOrderDetailData(order?.id,order?.shipment_id,order?.order_status,order?.picker_name,order?.substitute_status,order?.assign_wh_name,123)">
                             <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
                                 <mat-card-title>{{order?.custom_order_id}} New</mat-card-title>
                             </mat-card-header>
@@ -686,17 +687,17 @@
                             <mat-card-content>
                                 <div>
                                     <strong>- Ordered On : </strong><br>
-                                    <span>{{order?.created | date : 'medium'}} </span><br>
-                                    <span>{{order?.created | datepipe}}</span>
+                                    <span class="orderlistinfocolor">{{order?.created | date : 'medium'}} </span><br>
+                                    <span  class="orderlistinfocolor">{{order?.created | datepipe}}</span>
                                 </div>
                                 <div>
                                     <strong>- Delivery Address : </strong><br>
-                                    <span>{{order?.billing_name}},
+                                    <span  class="orderlistinfocolor">{{order?.billing_name}},
                                         {{order?.delivery_street_address}}, {{order?.delivery_state_name}} </span>
                                 </div>
                                 <div>
-                                    <strong>- This order is assaign to : </strong><br>
-                                    <span>{{order?.order_shipment?.created_by_name}}</span>
+                                    <span>- This order is assaign to : </span><br>
+                                    <strong>{{order?.order_shipment?.created_by_name}}</strong>
                                 </div>
                                 <div>
                                     <!-- <strong>Price : </strong><br> -->
@@ -944,7 +945,7 @@
                     <th class="th" style="text-align: left;">
                         <h6 class="h6">Items/Products</h6>
                     </th>
-                    <th class="th">
+                    <th class="th sku">
                         <h6 class="h6">SKU</h6>
                     </th>
                     <th class="th">
@@ -956,7 +957,7 @@
 
                     <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index" style="font-size: 16px;margin-bottom: 2px;">
                         <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
-                        <td>{{products?.product.sku}}</td>
+                        <td >{{products?.product.sku}}</td>
                         <td style="text-align: center;width: 90px;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
                         <td> {{orderDetaildata['data'][0]?.currency_code}}

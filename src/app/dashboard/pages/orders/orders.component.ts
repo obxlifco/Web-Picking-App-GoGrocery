@@ -59,12 +59,14 @@ export class OrdersComponent implements OnInit {
     payment_type_id: '',
     order_id_for_substitute_checking: 0,
     PickerCounter: 0, //set the counter to check if product selected in list
-    warehouseName: ''
+    warehouseName: '',
+    storename: '',//for generic data
+    storecode: ''
   }
-  keyValueOF_superStore={
-    key:0,
-    value:'',
-    apistatus:''
+  keyValueOF_superStore = {
+    key: 0,
+    value: '',
+    apistatus: ''
   }
   paymentonlineTimer = false
   isOrderList = false
@@ -97,23 +99,23 @@ export class OrdersComponent implements OnInit {
     {
       name: 'In-Processing',
       type: '',
-      key:100,
+      key: 100,
     },
     {
       name: 'Shipped',
       type: 'shipped',
-      key:1
+      key: 1
 
     },
     {
       name: 'Cancelled',
       type: 'cancelled',
-      key:2
+      key: 2
 
     }, {
       name: 'Completed',
       type: 'complete',
-      key:4
+      key: 4
     }
   ]
   activeLink = this.navTablink[0];
@@ -132,10 +134,10 @@ export class OrdersComponent implements OnInit {
     // this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     this.activated_route.params.subscribe(v => {
       console.log("activated route data :", v)
-    if(v.key)
-    this.keyValueOF_superStore.value=v.value
-    this.keyValueOF_superStore.key=parseInt(v.key)
-    this.keyValueOF_superStore.apistatus="dashboard"
+      if (v.key)
+        this.keyValueOF_superStore.value = v.value
+      this.keyValueOF_superStore.key = parseInt(v.key)
+      this.keyValueOF_superStore.apistatus = "dashboard"
       if (v.orderstatus) {
         this.userOrderdata.orderlistType = v.orderstatus
         for (let i = 0; i < this.navTablink.length; i++) {
@@ -156,9 +158,9 @@ export class OrdersComponent implements OnInit {
     this.orderDetaildata["data"] = []
     this.getOrderlistData()
   }
-  setordertype(type: any,key:any,value:any) {
-    this.keyValueOF_superStore.key=key
-    this.keyValueOF_superStore.value=value
+  setordertype(type: any, key: any, value: any) {
+    this.keyValueOF_superStore.key = key
+    this.keyValueOF_superStore.value = value
     this.userOrderdata.orderlistType = type;
     this.getOrderlistData()
   }
@@ -179,8 +181,8 @@ export class OrdersComponent implements OnInit {
   //call when we completing the order
   processOrder() {
     this.getcounter()
-    console.log("value : ",this.billnumber.nativeElement.value);
-    
+    console.log("value : ", this.billnumber.nativeElement.value);
+
     if (this.billnumber.nativeElement.value) {
       if (this.userOrderdata.PickerCounter === 0) {
         this.openConfirmationDialog()
@@ -236,7 +238,7 @@ export class OrdersComponent implements OnInit {
             this.totalProductpage = data.total_page//total page
             this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
             this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status)
+              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
 
             if (this.currentPage === 1) {
               this.orderlistdata["data"] = data.response
@@ -251,11 +253,11 @@ export class OrdersComponent implements OnInit {
             this.globalitem.showError("No Orderlist found ", "No Order")
           }
         })
-      }if(this.userOrderdata.orderlistType === 'complete'){
+      } if (this.userOrderdata.orderlistType === 'complete') {
         this.getCompletedOrders()
-      } else if (this.keyValueOF_superStore.apistatus === 'dashboard'&& res.warehouse_id === null) {
+      } else if (this.keyValueOF_superStore.apistatus === 'dashboard' && res.warehouse_id === null) {
         console.log("else if");
-        
+
         this.getCompletedOrders()
       }
     })
@@ -282,7 +284,7 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any) {
+  getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any, storename: any, storecode: any) {
     // this.IsTimeComplete = ''
     // console.log("order id :", orderid, "shipment_id: ", shipment_id, " order_status: ", order_status, " picker_name: ", picker_name, " substitute_status: ", substitute_status);
     this.userOrderdata.picker_name = picker_name;
@@ -290,6 +292,10 @@ export class OrdersComponent implements OnInit {
     this.userOrderdata.order_status = order_status
     this.userOrderdata.shipment_id = shipment_id
     this.userOrderdata.substitute_status = substitute_status
+    this.userOrderdata.storename = storename
+    this.userOrderdata.storecode = storecode
+    console.log("store name : ", storename);
+
     let data = {
       website_id: this.userOrderdata.website_id,
       order_id: orderid,
@@ -352,7 +358,7 @@ export class OrdersComponent implements OnInit {
     this.modalservice.openModal(latlang, MapmodalComponent)
   }
 
-   printdata(skustatus: any, printstatus: any,pdfName:any) {
+  printdata(skustatus: any, printstatus: any, pdfName: any) {
     this.isdownload = true
     var innerContents: any
     let templayout: any;
@@ -407,6 +413,11 @@ export class OrdersComponent implements OnInit {
               text-align: end;
               padding-right: 6% !important;
           }
+          .rightcol{
+            text-align: -webkit-right;
+        }.sku{
+          text-align:center;
+        }
     
           @media print 
     {
@@ -430,7 +441,7 @@ export class OrdersComponent implements OnInit {
         innerContents = document.getElementById(templayout);
         // this.commonfunc.generatePDF(innerContents)
         // console.log("Inner Content :",innerContents);
-        
+
         var imgWidth = 600;
         // html2canvas(innerContents).then(canvas => {
         //   let totalPages = canvas.height / imgWidth;
@@ -446,26 +457,26 @@ export class OrdersComponent implements OnInit {
         //   this.isdownload = false
         // })
 
-          html2canvas(innerContents, { allowTaint: true }).then(canvas => {
-           let HTML_Width = canvas.width;
-           let HTML_Height = canvas.height;
-           let top_left_margin = 15;
-           let PDF_Width = HTML_Width + (top_left_margin * 2);
-           let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-           let canvas_image_width = HTML_Width;
-           let canvas_image_height = HTML_Height;
-           let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-           canvas.getContext('2d');
-           let imgData = canvas.toDataURL("image/jpeg", 1.0);
-           let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-           pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-           for (let i = 1; i <= totalPDFPages; i++) {
-             pdf.addPage([PDF_Width, PDF_Height], 'p');
-             pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
-           }
-            pdf.save(pdfName+".pdf");
-         });
-       
+        html2canvas(innerContents, { allowTaint: true }).then(canvas => {
+          let HTML_Width = canvas.width;
+          let HTML_Height = canvas.height;
+          let top_left_margin = 15;
+          let PDF_Width = HTML_Width + (top_left_margin * 2);
+          let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+          let canvas_image_width = HTML_Width;
+          let canvas_image_height = HTML_Height;
+          let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+          canvas.getContext('2d');
+          let imgData = canvas.toDataURL("image/jpeg", 1.0);
+          let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+          pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+          for (let i = 1; i <= totalPDFPages; i++) {
+            pdf.addPage([PDF_Width, PDF_Height], 'p');
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+          }
+          pdf.save(pdfName + ".pdf");
+        });
+
         this.isdownload = false
       }, 1600)
     }
@@ -482,7 +493,7 @@ export class OrdersComponent implements OnInit {
     const dialogRef = this.dialog.open(EditproductweightComponent, { width: '500px', data: { data: data } });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
-      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
     });
   }
 
@@ -508,7 +519,7 @@ export class OrdersComponent implements OnInit {
       this.apiService.postData("picker-sendapproval/", data).subscribe((data: any) => {
         if (data.status === 1) {
           this.timerProductSentApproval(this.order_Substitute_Time, 10)
-          this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+          this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
           this.globalitem.showSuccess(data.message, "Subtitute Sent")
           this.ApprovalTimer(10000)
           // this.reloadpage()
@@ -553,7 +564,7 @@ export class OrdersComponent implements OnInit {
     const dialogRef = this.dialog.open(AddnewproductComponent, { width: '500px', data: { data: data } });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
-      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
 
       // if (result.data.subtitutestatus === "productadded") {
       //   setTimeout(() => {
@@ -738,7 +749,7 @@ export class OrdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
       this.price = result.price
-      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+      this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
     });
   }
 
@@ -756,7 +767,7 @@ export class OrdersComponent implements OnInit {
     this.apiService.postData("picker-updateorderdetails/", data).subscribe((data: any) => {
       if (data.status === 1) {
         this.globalitem.showSuccess(data.message, "Time Updated")
-        this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+        this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
         this.gettotalCost()
       } else {
         this.globalitem.showError(data.message, "Warn")
@@ -839,7 +850,7 @@ export class OrdersComponent implements OnInit {
     this.subscription = timer(0, timeValue).pipe(
       switchMap(async () => {
         this.getOrderlistData()
-        this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status)
+        this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
         if (this.userOrderdata.substitute_status === "none") {
           this.isProductSendFor_Approval = true
         }
@@ -990,7 +1001,7 @@ export class OrdersComponent implements OnInit {
         this.orderlistdata["data"] = data.results[0].result //json response
         this.totalProductpage = data.per_page_count//total page
         this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-          this.orderlistdata["data"][0].picker_name, "done")
+          this.orderlistdata["data"][0].picker_name, "done", this.orderlistdata["data"][0].assign_wh_name, 123)
         if (this.currentPage === 1) {
           this.orderlistdata["data"] = data.results[0].result
           this.totalProductpage = data.total_page
@@ -1004,12 +1015,13 @@ export class OrdersComponent implements OnInit {
       }
     })
   }
+
   //totalcost for print
   gettotalCost() {
     this.totalProductItems = 0;
     this.printerTotalcost = 0
-    let tempcost:any=0
-    let tempproductitem:any=0
+    let tempcost: any = 0
+    let tempproductitem: any = 0
     this.db.getwarehouseName().then(res => { this.userOrderdata.warehouseName = res });
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity

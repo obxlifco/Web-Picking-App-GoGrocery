@@ -33,6 +33,7 @@ th {
     }
     strong{
         font-size: 16px;
+        font-weight: 500;
     }
     mat-card-header {
         background             : green;
@@ -45,8 +46,8 @@ th {
     }
 
     mat-card-title {
-        font-size : 17px;
-        width     : 100%;
+        font-size : 16px;
+        // width     : 100%;
         margin    : 4px;
         text-align: inherit;
     }
@@ -538,6 +539,9 @@ input[type=number]::-webkit-outer-spin-button {
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex{
     background: white !important;
     background-color: white !important;
+}
+.orderlistinfocolor{
+    color: gray;
 }
 @media print {
     .printdata{
