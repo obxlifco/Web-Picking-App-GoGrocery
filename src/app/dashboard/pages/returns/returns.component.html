@@ -7,31 +7,134 @@
     <div class="body">
 
         <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-                <input placeholder="Date" type="date" class="form-control">
+            <div class="col-md-8 grid-margin">
+                <div>
+                    <label for="date1">Date</label>
+                    <div class="dateinput">
+                        <input  [(ngModel)]="date" #date1 placeholder="Date" type="date" class="form-control">
+                        <mat-icon matRipple class="clearicon"
+                            *ngIf="date !== null || date"
+                            (click)="cleardatefield()">clear</mat-icon>
+                    </div>
+                  
+                </div><br>
+                <div>
+                    <label for="ordernum">Order Number</label>
+                    <input [(ngModel)]="ordernumber" placeholder="Order Number" #ordernum type="text" class="form-control">
+                </div><br>
+                <div>
+                    <label for="bnum">Bill Number</label>
+                <input [(ngModel)]="billnumber" placeholder="Bill Number" #bnum type="text" class="form-control">
+                </div>
             </div>
-            <div class="col-md-4 stretch-card grid-margin">
-                <input placeholder="Order Number" type="text" class="form-control">
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 grid-margin">
+                <label for="bnum">Search product</label>
+                <input placeholder="Product Name" [(ngModel)]="productName" type="text" class="form-control">
             </div>
-            <div class="col-md-4 stretch-card grid-margin">
-                <input placeholder="Shop Bill Number" type="text" class="form-control">
+            <div class="col-md-3 stretch-card grid-margin">
+                <button type="button" style="margin-top: auto;" (click)="searchreturnproduct()" class="btn btn-outline-secondary globalbutton">Search</button>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3 stretch-card grid-margin">
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle value="product">Product</mat-button-toggle>
-                    <mat-button-toggle value="sku">SKU</mat-button-toggle>
-                  </mat-button-toggle-group>
-            </div>
-            <div class="col-md-6 stretch-card grid-margin">
-                <input placeholder="Product Name" type="text" class="form-control">
-            </div>
-            <div class="col-md-3 stretch-card grid-margin">
-                <button type="button" class="btn btn-outline-secondary globalbutton">Search</button>
+        <div class="row orderinfo" *ngIf="returnproductData['data']?.order_products?.length">
+            <div class="col-md-12 stretch-card grid-margin">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <div class="orderadd">
+                                <h4>Order {{returnproductData['data']?.custom_order_id}}</h4>
+                                <p>Bill Number:{{returnproductData['data']?.invoice_number}}</p>
+                                <p>
+                                    {{returnproductData['data']?.billing_name}},
+                                    {{returnproductData['data']?.delivery_street_address}},
+                                    {{returnproductData['data']?.delivery_state_name}}
+                                </p>
+                                <p>{{returnproductData['data']?.delivery_phone}}</p>
+                            </div>
+                            <div class="order-summary">
+                                <h4>Order Summary</h4>
+                                <table class="subtable">
+                                    <tr>
+                                        <td class="left-col">
+                                            Subtotal
+                                        </td>
+                                        <td class="right-col">
+                                            <span>{{returnproductData['data']?.currency_code}} {{returnproductData['data']?.net_amount | number}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left-col">
+                                            Shipping Cost
+                                        </td>
+                                        <td class="right-col">
+                                            <span>{{returnproductData['data']?.currency_code}} {{returnproductData['data']?.shipping_cost}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left-col">
+                                            Shipping Discount
+                                        </td>
+                                        <td class="right-col">
+                                            <span>{{returnproductData['data']?.currency_code}} {{returnproductData['data']?.cart_discount}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid gray;">
+                                        <td class="left-col">
+                                            Return Amount
+                                        </td>
+                                        <td class="right-col">
+                                            <span>{{returnproductData['data']?.currency_code}} {{returnproductData['data']?.return_amount}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="left-col">
+                                           <strong>Total Price</strong> 
+                                        </td>
+                                        <td class="right-col">
+                                            <strong>{{returnproductData['data']?.currency_code}}
+                                                {{returnproductData['data']?.gross_amount | number}}</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    <tr *ngFor="let returnprod of returnproductData['data']?.order_products;let i=index" class="table">
+                        <td style="width: min-content;">
+                            <div style="display: flex;">
+                            <img class="productimg"  [src]="returnprod?.product?.product_images[0]?.link+''+returnprod?.product?.product_images[0]?.img" alt="No image">
+                            <div style="padding-top:2%">
+                                <strong> {{returnprod?.product?.name}} </strong>
+                                <p>{{returnprod?.product?.weight}} {{returnprod?.product?.uom?.uom_name}}</p>
+                            </div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>Qty: {{returnprod?.quantity}}</strong><br><br>
+                            <span>{{returnproductData['data']?.currency_code}} {{returnprod?.product_price | number}}</span>
+                        </td>
+                        <td>
+                            <strong>Return Qty</strong><br><br>
+                        <button (click)="increment(i)" type="button" *ngIf="returnprod?.returns === 0" class="btn btn-danger">Return</button>
+                        <div class="custombutton" *ngIf="returnprod?.returns !== 0">
+                            <!-- [ngStyle]="{'pointer-events':returnprod?.returns === returnprod?.quantity  ? 'none' : 'auto' }" -->
+                            <mat-icon matRipple class="left-icon" (click)="decrement(i)">minimize</mat-icon>
+                            <p>{{returnprod?.returns}}</p>
+                            <mat-icon matRipple class="right-icon" (click)="increment(i)">add</mat-icon>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
+        <div *ngIf="!returnproductData['data']?.order_products?.length">
+            <app-emptystate></app-emptystate>
+        </div>
+        <button type="button" style="margin-top: 2%;width: 100%;" (click)="confirmReturn()" class="btn btn-outline-secondary globalbutton">Confirm Return</button>
     </div>
 </div>
 

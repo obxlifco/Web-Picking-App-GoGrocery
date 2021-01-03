@@ -1,11 +1,12 @@
 .container {
-    padding: 6% 3% 1% 5%;
-    background: white;
+    padding      : 6% 3% 1% 5%;
+    background   : white;
     border-radius: 3px;
 }
+
 h4 {
     margin-left: -2%;
-    font-size: 21px;
+    font-size  : 21px;
 }
 
 table,
@@ -28,13 +29,15 @@ th {
     padding  : 0px;
     font-size: 17px;
 
-    span{
+    span {
         font-size: 16px;
     }
-    strong{
-        font-size: 16px;
+
+    strong {
+        font-size  : 16px;
         font-weight: 500;
     }
+
     mat-card-header {
         background             : green;
         color                  : white;
@@ -46,10 +49,10 @@ th {
     }
 
     mat-card-title {
-        font-size : 16px;
+        font-size    : 16px;
         // width     : 100%;
-        margin    : 4px;
-        text-align: inherit;
+        margin       : 4px;
+        text-align   : inherit;
     }
 }
 
@@ -148,9 +151,11 @@ h4 {
     margin-bottom: 22%;
     padding-top  : 14%;
 }
-.rightcol{
+
+.rightcol {
     text-align: -webkit-right;
 }
+
 .add-items {
 
     h6 {
@@ -171,25 +176,26 @@ h4 {
         bottom       : 8.7%;
         z-index      : -1;
     }
-    mat-icon{
-        left: 0%;
-    position: relative;
-    bottom: -6px;
+
+    mat-icon {
+        left    : 0%;
+        position: relative;
+        bottom  : -6px;
     }
 }
 
 table {
-    width: 100%;
+    width    : 100%;
     font-size: 17px;
 }
 
 .btn-light {
     background-color: DodgerBlue;
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
+    border          : none;
+    color           : white;
+    padding         : 12px 16px;
+    font-size       : 16px;
+    cursor          : pointer;
 
     mat-icon {
         color        : green;
@@ -215,8 +221,9 @@ table {
     // right   : 6%;
     // margin: 0% 2% 0% 2%;
 }
-.printbtn{
-    button{
+
+.printbtn {
+    button {
         margin-right: 0.5%;
     }
 }
@@ -335,7 +342,7 @@ h3 {
 
 .subtitute_data {
     padding: 3% 4% 0% 0%;
-    
+
     img {
         width   : 50%;
         right   : 0px;
@@ -376,27 +383,32 @@ h3 {
         margin     : auto;
     }
 }
-.skeletonorderlist{
-    padding: 2% 2% 1% 2%;
+
+.skeletonorderlist {
+    padding   : 2% 2% 1% 2%;
     background: white;
-    margin: 5%;
-    .leftcol{
-        width: 10%;
+    margin    : 5%;
+
+    .leftcol {
+        width        : 10%;
         padding-right: 25px;
     }
-    .centercol{
-        width: 34%;
+
+    .centercol {
+        width        : 34%;
         padding-right: 25px;
     }
-    .rightcol{
+
+    .rightcol {
         width: 34%;
     }
 }
+
 .newprice {
-    top   : 0%;
-    bottom: 0%;
-    margin: auto;
-    color : white;
+    top      : 0%;
+    bottom   : 0%;
+    margin   : auto;
+    color    : white;
     font-size: 14px;
 }
 
@@ -411,10 +423,10 @@ h3 {
 }
 
 .highlight_edits {
-    background-color: #98D81D;
-    border-color:  #98D81D;
-    width           : fit-content;
-    border-radius   : 3px;
+    background-color   : #98D81D;
+    border-color       : #98D81D;
+    width              : fit-content;
+    border-radius      : 3px;
     // padding         : 2%;
 
     p {
@@ -428,11 +440,13 @@ h3 {
         /* Firefox */
     }
 }
-.hovercolor:hover{
-    background: #2E6B0B!important;
-  border-color:  #2E6B0B !important;
-  color: white !important;
+
+.hovercolor:hover {
+    background  : #2E6B0B !important;
+    border-color: #2E6B0B !important;
+    color       : white !important;
 }
+
 //   .main-panel {
 //     height: 30px;
 //     overflow-y: scroll;
@@ -441,6 +455,7 @@ h3 {
     height  : 2rem;
     overflow: scroll;
 }
+
 ::ng-deep.mat-form-field-underline {
     visibility: hidden;
 }
@@ -520,119 +535,139 @@ h3 {
 @media (min-width:1281px) {
     /* hi-res laptops and desktops */
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
+
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
     // background   : blue !important;
-    border-radius: 4px 4px 4px 4px !important;
-    padding      : 0.75em 0.75em 0 0.75em;
-    color        : black !important;
-    box-shadow   : none;
-    border       : none;
-    height: 50px;
-    background: white !important;
+    border-radius   : 4px 4px 4px 4px !important;
+    padding         : 0.75em 0.75em 0 0.75em;
+    color           : black !important;
+    box-shadow      : none;
+    border          : none;
+    height          : 50px;
+    background      : white !important;
     background-color: white !important;
-    color: black!important;
+    color           : black !important;
 }
-::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex{
-    background: white !important;
+
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+    background      : white !important;
     background-color: white !important;
 }
-.orderlistinfocolor{
+
+.orderlistinfocolor {
     color: gray;
 }
+
 @media print {
-    .printdata{
-        h6{
-            font-size: 20px;
+    .printdata {
+        h6 {
+            font-size  : 20px;
             font-weight: bold;
         }
-        table{
+
+        table {
             background-color: black;
         }
     }
-  }
-  #printdiv{
-    visibility:hidden;
-    height:0px;
-    overflow: hidden;
-  }
-  #printdatatest{
-    visibility:auto;
-    height:0px;
-    overflow: hidden;
-  }
-  .printdata{
-    background: white;
+}
+
+#printdiv {
+    visibility: hidden;
+    height    : 0px;
+    overflow  : hidden;
+}
+
+#printdatatest {
+    visibility: auto;
+    height    : 0px;
+    overflow  : hidden;
+}
+
+.printdata {
+    background : white;
     line-height: 2;
     // width: 50%;
     // display: none;
-    
-     .h6{
-          font-size: 15px;
-          font-weight: bolder;
-          margin: 1% 0% 1% 0%;
-        }
-        .table1{
-            line-height: normal;
-            width:100%;
-        }
-        .th{
-            text-align: inherit;
-            background: white;
-            color: black;
-        } 
-        .mat-divider{
-            margin: 4px 0px 4px 0px;
-            border: 1px solid #8a8484;
-        }
-        .printfooter{
-            text-align: center;
-            margin-top:4% !important;
-            h6{
-              font-size: 15px;
-              margin: 2% 0% 2% 0%;
-              font-weight: bolder;
-            }
-        }
-        .leftcol{
-            text-align: end;
-            padding-right: 6% !important;
-        }
-  
-        @media print 
-  {
-     @page
-     {
-      size: 5.5in 8.5in ;
-      size: portrait;
-      margin:minimum;
+
+    .h6 {
+        font-size  : 15px;
+        font-weight: bolder;
+        margin     : 1% 0% 1% 0%;
     }
-  }
+
+    .table1 {
+        line-height: normal;
+        width      : 100%;
+    }
+
+    .th {
+        text-align: inherit;
+        background: white;
+        color     : black;
+    }
+
+    .mat-divider {
+        margin: 4px 0px 4px 0px;
+        border: 1px solid #8a8484;
+    }
+
+    .printfooter {
+        text-align: center;
+        margin-top: 4% !important;
+
+        h6 {
+            font-size  : 15px;
+            margin     : 2% 0% 2% 0%;
+            font-weight: bolder;
+        }
+    }
+
+    .leftcol {
+        text-align   : end;
+        padding-right: 6% !important;
+    }
+
+    @media print {
+        @page {
+            size  : 5.5in 8.5in;
+            size  : portrait;
+            margin: minimum;
+        }
+    }
 }
+
 html {
     scroll-behavior: smooth;
-  }
-  .mat-focus-indicator:active{
-    color:#98D81D;
-    background: white !important;
-  }
-  mat-tab-link:active{
-    color: #98D81D !important;
-    background: white !important;
-  }
- a:hover{
-    text-decoration: none !important;
-    color: #2E6B0B !important;;
 }
+
+.mat-focus-indicator:active {
+    color     : #98D81D;
+    background: white !important;
+}
+
+mat-tab-link:active {
+    color     : #98D81D !important;
+    background: white !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+    color          : #2E6B0B !important;
+    ;
+}
+
 ::ng-deep.mat-ink-bar {
     background-color: #98D81D !important;
-    height: 3px !important;
+    height          : 3px !important;
 }
-button{
-    background: #98D81D !important;
-  border-color:  #98D81D !important;
-  color: white !important;
-  }
+
+button {
+    background  : #98D81D !important;
+    border-color: #98D81D !important;
+    color       : white !important;
+}

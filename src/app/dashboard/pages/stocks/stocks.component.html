@@ -62,9 +62,9 @@
                     <tr *ngFor="let plist of pickerProductList['data'];let i=index">
                         <td colspan="6">
                             <div style="display: flex;">
-                                <img class="productimg" *ngIf="plist?.product_images"
+                                <img class="productimg" *ngIf="plist?.product_images" (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                     [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
-                                <img class="productimg" *ngIf="!plist?.product_images"
+                                <img class="productimg" *ngIf="!plist?.product_images" 
                                     src="assets/images/product/defaultproductimg.jpg">
                                 <div>
                                     <h6>{{plist?.name}}</h6>

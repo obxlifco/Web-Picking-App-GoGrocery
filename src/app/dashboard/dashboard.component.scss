@@ -31,10 +31,13 @@
   .navheader{
     position: fixed;
     z-index: 12;
+    width: -webkit-fill-available;
+    overflow: hidden;
+    display: inline-flex;
   }
   .title{
     margin: auto;
-    width: 40%;
+    // width: 40%;
     font-family:'proxima' !important;
     
   }

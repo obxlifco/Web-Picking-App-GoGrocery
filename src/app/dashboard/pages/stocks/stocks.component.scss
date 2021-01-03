@@ -100,7 +100,9 @@ span{
     height  : 40rem;
     overflow: scroll;
 }
-
+img{
+    cursor: pointer;
+}
 .productimg {
     width : fit-content !important;
     height: 100px !important;

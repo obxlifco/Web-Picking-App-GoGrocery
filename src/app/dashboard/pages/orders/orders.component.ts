@@ -309,6 +309,7 @@ export class OrdersComponent implements OnInit {
       let temdata: any = []
       temdata = data
       this.orderDetaildata["data"] = temdata.response
+      this.product_billnumber=this.orderDetaildata['data'][0]?.channel_order_id
       this.paymentOnlineTime = this.datePipe.transform(this.orderDetaildata["data"][0]?.created, "MMM d, y, h:mm:ss a");
       this.currenttime = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
 
@@ -633,7 +634,7 @@ export class OrdersComponent implements OnInit {
   }
 
   BillnumberModal(billnumbr: any) {
-    // console.log("bill number : ", billnumbr);
+    console.log("bill number : ", billnumbr);
     let data = {
       website_id: this.userOrderdata.website_id,
       order_id: this.userOrderdata.order_id,
@@ -645,9 +646,8 @@ export class OrdersComponent implements OnInit {
       data: { data: data }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed', result);
+      console.log('The dialog was closed', result);
       this.product_billnumber = result.billnumber
-
     });
   }
 

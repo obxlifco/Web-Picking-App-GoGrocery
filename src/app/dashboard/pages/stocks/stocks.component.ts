@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from 'src/app/components/addnewproduct/addnewproduct.component';
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
+import { ImagemagnifyComponent } from 'src/app/components/imagemagnify/imagemagnify.component';
 import { MessagedialogComponent } from 'src/app/components/messagedialog/messagedialog.component';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -182,18 +183,14 @@ export class StocksComponent implements OnInit {
     }
     this.apiService.postData("picker-searchstock/", data).subscribe((data: any) => {
       console.log(data);
-      
       if(this.productpage === 1){
         this.pickerProductList["data"]=data.response
         this.totalProductpage=data.total_page
         console.log("page 1");
-        
       }else{
         console.log("page n");
         this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];
       }
-     
-      
       this.IsDataLoaded = false
     })
   }
@@ -246,6 +243,12 @@ export class StocksComponent implements OnInit {
       // this.searchProducts()
 
     })
+  }
+  imagemagnifyModal(imageurl:any,imagename:any){
+    imageurl=imageurl.slice(0, -8)
+    console.log("image url is :",imageurl);
+    imageurl = imageurl +'400x400/'+imagename
+    this.modalservice.openModal(imageurl,ImagemagnifyComponent)
   }
   editprice(event:any,price:any,productid:any,productindex:any,IsInstock:any){
     let data={

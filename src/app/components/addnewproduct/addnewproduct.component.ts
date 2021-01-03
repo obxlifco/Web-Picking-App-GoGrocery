@@ -35,7 +35,7 @@ export class AddnewproductComponent implements OnInit {
     // product_id: '',
     searchproductlist: ''
   }
-  ISkeleton=false
+  ISkeleton = false
   // for pagination on scroll
   productpage: any = 1
   totalProductpage: any;
@@ -56,7 +56,7 @@ export class AddnewproductComponent implements OnInit {
     item: []
 
   }
-  AddmoreProducts:any=[]
+  AddmoreProducts: any = []
 
   constructor(public router: Router,
     public db: DatabaseService,
@@ -98,12 +98,12 @@ export class AddnewproductComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.parentcategory = result.data;
-      this.subcategory.name="Sub Category"
-      this.subcategory.id=''
-      if(result.data === "undefined"){
+      this.subcategory.name = "Sub Category"
+      this.subcategory.id = ''
+      if (result.data === "undefined") {
         // this.subcategory.name="Sub Category"
         // this.subcategory.id=''
-        this.parentcategory.id =''
+        this.parentcategory.id = ''
       }
     });
   }
@@ -149,7 +149,7 @@ export class AddnewproductComponent implements OnInit {
   }
 
   getProductlistData() {
-    this.ISkeleton=true
+    this.ISkeleton = true
     this.db.getUserData().then(res => {
       // console.log("user data inside dashboard : ", res);
       let data = {
@@ -185,32 +185,32 @@ export class AddnewproductComponent implements OnInit {
         // console.log(data);
 
         this.addCustomAttribute(data.response)
-       
+
       })
     })
   }
-  addCustomAttribute(data:any){
-    let isselect={
-      Is_Select:0,
-      quantity:1
+  addCustomAttribute(data: any) {
+    let isselect = {
+      Is_Select: 0,
+      quantity: 1
     }
-    this.ISkeleton=false
-    if(this.userProductData.searchproductlist === 'picker-productlist/'){
+    this.ISkeleton = false
+    if (this.userProductData.searchproductlist === 'picker-productlist/') {
       this.pickerProductList["data"] = data
-      for(var i=0;i<data.length;i++){
-        Object.assign( this.pickerProductList["data"][i],isselect)
+      for (var i = 0; i < data.length; i++) {
+        Object.assign(this.pickerProductList["data"][i], isselect)
       }
-     
-      console.log("add prodcut list",data);
-    }else{
+
+      console.log("add prodcut list", data);
+    } else {
       console.log("substitute list");
-      
+
       this.pickerProductList["data"] = data
     }
   }
 
   searchProducts(value: any) {
-    this.ISkeleton=true
+    this.ISkeleton = true
     if (value === "search") {
       this.totalProductpage = 0;
       this.productpage = 1
@@ -252,7 +252,7 @@ export class AddnewproductComponent implements OnInit {
     }
     this.apiService.postData(this.userProductData.searchproductlist, data).subscribe((data: any) => {
       console.log(data);
-      this.ISkeleton=false
+      this.ISkeleton = false
       this.addCustomAttribute(data.response)
       if (data.status === 0) {
         this.pickerProductList["data"] = []
@@ -367,32 +367,32 @@ export class AddnewproductComponent implements OnInit {
 
   //this method is for adding more than 0 products  
   addMoreProduct(searchURL: any) {
-   
+
     this.productQuantity = []
-    this.productsIDS=[]
-    console.log("add more products : ",this.AddmoreProducts);
-    
+    this.productsIDS = []
+    console.log("add more products : ", this.AddmoreProducts);
+
     for (var i = 0; i < this.AddmoreProducts.length; i++) {
-        if (this.pickerProductList["data"][i].id === this.productsIDS[i]) {
-          // if(this.pickerProductList["data"][i].quantity === null){
-          //   this.pickerProductList["data"][i].quantity = 1
-          //   this.productQuantity.push(this.pickerProductList["data"][i].quantity )//push quantity to arrays according to selected id's
-          // }else{
-          //   this.productQuantity.push(this.pickerProductList["data"][i].quantity)//push quantity to arrays according to selected id's
-          // }
-         
+      if (this.pickerProductList["data"][i].id === this.productsIDS[i]) {
+        // if(this.pickerProductList["data"][i].quantity === null){
+        //   this.pickerProductList["data"][i].quantity = 1
+        //   this.productQuantity.push(this.pickerProductList["data"][i].quantity )//push quantity to arrays according to selected id's
+        // }else{
+        //   this.productQuantity.push(this.pickerProductList["data"][i].quantity)//push quantity to arrays according to selected id's
+        // }
+
       }
       this.productQuantity.push(this.AddmoreProducts[i].quantity)
       this.productsIDS.push(this.AddmoreProducts[i].id)
       this.productsIDS = this.filterArray(this.productsIDS)
-  
+
       // if (this.pickerProductList["data"][i].quantity > 0) {
 
       // }
     }
-   
-    console.log("productsIDS : ",this.productsIDS,' Quantity : ',this.productQuantity," Products : ",this.AddmoreProducts);
-    
+
+    console.log("productsIDS : ", this.productsIDS, ' Quantity : ', this.productQuantity, " Products : ", this.AddmoreProducts);
+
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
@@ -408,8 +408,8 @@ export class AddnewproductComponent implements OnInit {
     if (this.AddmoreProducts.length > 0) {
       this.apiService.postData(searchURL, data).subscribe((data: any[]) => {
         let tempdata: any = data
-        this.ISkeleton=false
-        this.AddmoreProducts=[]
+        this.ISkeleton = false
+        this.AddmoreProducts = []
         this.globalitem.showSuccess("Product has been added sucessfully in Picker order List !", "Product Addedd")
         if (tempdata.status === 1 && tempdata.api_status === 'success') {
           this.dialogRef.close();
@@ -425,34 +425,34 @@ export class AddnewproductComponent implements OnInit {
   openproductModalAsSubtituteProduct() {
 
   }
-  selectMoreproduct(index: any,productid:any, item: any){
+  selectMoreproduct(index: any, productid: any, item: any) {
     for (var i = 0; i < this.pickerProductList["data"].length; i++) {
       if (i === index) {
         if (this.pickerProductList["data"][i].Is_Select === 0) {
-            this.pickerProductList["data"][i].Is_Select = 1;
-            if (this.AddmoreProducts.length === 0) {
-              this.AddmoreProducts.push(item)
-              console.log("push 1");
-            } else if (this.pickerProductList["data"][i].id !== this.AddmoreProducts[i]?.id) {
-              console.log("push 2", i);
-                this.AddmoreProducts.push(item)
-              
-            } else if (this.AddmoreProducts[i]?.id === undefined) {
-              //nothing
-              console.log("nothing to do");
-              this.AddmoreProducts = []
+          this.pickerProductList["data"][i].Is_Select = 1;
+          if (this.AddmoreProducts.length === 0) {
+            this.AddmoreProducts.push(item)
+            console.log("push 1");
+          } else if (this.pickerProductList["data"][i].id !== this.AddmoreProducts[i]?.id) {
+            console.log("push 2", i);
+            this.AddmoreProducts.push(item)
 
-          } else{
+          } else if (this.AddmoreProducts[i]?.id === undefined) {
+            //nothing
+            console.log("nothing to do");
+            this.AddmoreProducts = []
+
+          } else {
             console.log("else executed");
-            
+
             // this.AddmoreProducts.push(item)
           }
         } else if (this.pickerProductList["data"][i].Is_Select === 1) {
-          console.log("index : ",index);
-          
+          console.log("index : ", index);
+
           this.pickerProductList["data"][i].Is_Select = 0
           // this.productsIDS.splice(this.productsIDS.indexOf(this.pickerProductList["data"][index].id), 1)
-         this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(this.pickerProductList["data"][index]), 1)
+          this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(this.pickerProductList["data"][index]), 1)
           // this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(index, 1))
         } else {
 

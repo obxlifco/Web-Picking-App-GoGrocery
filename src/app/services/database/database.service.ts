@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import {LocalStorageService} from 'ngx-webstorage';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +7,14 @@ import {LocalStorageService} from 'ngx-webstorage';
 export class DatabaseService {
 
   STORAGE_KEY: any = "cartlist"
-  USER_DATA:any="user";
-  IP_ADDRESS:any="userip"
-  NOTIFICATION_TIME:any="notiTime"
-  ORDER_IDS:any="orderids"
-  AVERAGE_DATA:any="aeveragedata"//for sae report
-  WAREHOUSE_NAME:any="warehousename"
+  USER_DATA: any = "user";
+  IP_ADDRESS: any = "userip"
+  NOTIFICATION_TIME: any = "notiTime"
+  ORDER_IDS: any = "orderids"
+  AVERAGE_DATA: any = "aeveragedata"//for sae report
+  WAREHOUSE_NAME: any = "warehousename"
 
-  constructor(private storage:LocalStorageService) { }
+  constructor(private storage: LocalStorageService) { }
 
   setUserData(data: any) {
     // console.log("data inside :", data);
@@ -24,18 +24,18 @@ export class DatabaseService {
   async getUserData() {
     return this.storage.retrieve(this.USER_DATA)
   }
-  
+
   clearstorage() {
     this.storage.clear(this.USER_DATA);
   }
 
   // Returns true when user is looged in and email is verified
   isLoggedIn(): boolean {
-    const user =this.storage.retrieve(this.USER_DATA);
+    const user = this.storage.retrieve(this.USER_DATA);
     return (user !== null) ? true : false;
   }
 
-  setToken(token:any){
+  setToken(token: any) {
     // this.storage.store(this.USER_TOEKN, token);
   }
 
@@ -45,11 +45,11 @@ export class DatabaseService {
   }
 
   // Ip Address data
-  setIP(data:any){
+  setIP(data: any) {
     this.storage.store(this.IP_ADDRESS, data);
   }
 
-  async getIP(){
+  async getIP() {
     return this.storage.retrieve(this.IP_ADDRESS)
   }
 
@@ -60,12 +60,12 @@ export class DatabaseService {
   }
 
   async getNotificationTime() {
-    let data=this.storage.retrieve(this.NOTIFICATION_TIME)
+    let data = this.storage.retrieve(this.NOTIFICATION_TIME)
     // console.log("timer data : ",data);
-    
-    if(data === null){
-      return 5*60000 
-    }else{
+
+    if (data === null) {
+      return 5 * 60000
+    } else {
       return data
     }
   }
@@ -80,18 +80,18 @@ export class DatabaseService {
   }
   //set cancellation rates
 
-  setcancellationRate(data:any){
+  setcancellationRate(data: any) {
     this.storage.store(this.AVERAGE_DATA, data);
   }
-  async getcancellationRate(){
+  async getcancellationRate() {
     return this.storage.retrieve(this.AVERAGE_DATA)
   }
   //setter and getter for warehouse name
-  setwarehouseName(name:any){
+  setwarehouseName(name: any) {
     this.storage.store(this.WAREHOUSE_NAME, name);
   }
-  async getwarehouseName(){
+  async getwarehouseName() {
     return this.storage.retrieve(this.WAREHOUSE_NAME)
   }
-  
+
 }

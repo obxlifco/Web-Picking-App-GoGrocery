@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <mat-accordion>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                        <mat-expansion-panel-header>
+                        <mat-expansion-panel-header matTooltipPosition="above" matTooltip="Select payment method selection">
                             <mat-panel-title>
                                 Payment Methods
                             </mat-panel-title>
@@ -74,8 +74,8 @@
 
                                 <mat-grid-list cols="4" rowHeight="3:1">
                                     <mat-grid-tile *ngFor="let subtask of paymentmethod.subtasks">
-                                        <mat-checkbox matRipple *ngIf="subtask.name !== ''" [(ngModel)]="subtask.completed"
-                                            (ngModelChange)="updateAllComplete()">
+                                        <mat-checkbox matRipple *ngIf="subtask.name !== ''"
+                                            [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
                                             {{subtask.name}}
                                         </mat-checkbox>
                                     </mat-grid-tile>
@@ -150,14 +150,15 @@
                         <span *ngIf="saleData.totalorder && completelist['data']['currency_code']">
                             {{saleData.grandtotal/saleData.totalorder | number}}</span>
                         <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
-                    </td>  
+                    </td>
                 </tr>
                 <tr>
-                    <td><span>Cancel Rate</span></td>  
+                    <td><span>Cancel Rate</span></td>
                     <td style="width: 60%;">
                         <span *ngIf="saleData.totalorder === 0">0.0</span>
                         <span *ngIf="saleData.totalorder > 0 && completelist['data']['currency_code']">
-                            {{ averageData?.cancelledorders/(averageData?.cancelledorders + saleData.totalorder)*100  | number |slice:0:2}}%</span>
+                            {{ averageData?.cancelledorders/(averageData?.cancelledorders + saleData.totalorder)*100 |
+                            number |slice:0:2}}%</span>
                         <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
                     </td>
                 </tr>
@@ -166,12 +167,12 @@
 
         <div class="row" style="margin-bottom: 3%;">
             <div class="col-md-2" style="max-width: fit-content;">
-                <button matRipple type="button" class="btn btn-success globalbutton" [disabled]="saleData.totalorder === 0"
-                    (click)="getCSVFile()">Generate CSV</button>
+                <button matRipple type="button" class="btn btn-success globalbutton"
+                    [disabled]="saleData.totalorder === 0" (click)="getCSVFile()">Generate CSV</button>
             </div>
             <div class="col-md-4">
-                <button matRipple type="button" class="btn btn-success globalbutton" [disabled]="saleData.totalorder === 0"
-                    (click)="generateSaleReport()">Generate Order Report</button>
+                <button matRipple type="button" class="btn btn-success globalbutton"
+                    [disabled]="saleData.totalorder === 0" (click)="generateSaleReport()">Generate Order Report</button>
             </div>
         </div>
     </div>

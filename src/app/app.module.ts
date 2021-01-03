@@ -63,6 +63,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TestComponent } from './test/test.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { ImagemagnifyComponent } from './components/imagemagnify/imagemagnify.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +93,8 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     MessagedialogComponent,
     SalesreportComponent,
     NotfoundComponent,
-    TestComponent 
+    TestComponent,
+    ImagemagnifyComponent 
   ],
   imports: [
     BrowserModule,
@@ -133,7 +137,8 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     MatCheckboxModule,
     MatExpansionModule,
     MatTabsModule,
-    UiSwitchModule
+    UiSwitchModule,
+    MatTooltipModule
     // fs
     // MatMomentDateModule
   ],

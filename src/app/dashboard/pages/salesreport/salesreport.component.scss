@@ -11,6 +11,7 @@
     margin-right: 45px;
     overflow: hidden;
     border-radius: 3px;
+    width: auto;
 }
 label {
     font-weight: 500;
@@ -137,4 +138,10 @@ button {
     background  : #98D81D !important;
     border-color: #98D81D !important;
     color       : white !important;
+}
+
+@media only screen and (min-width: 1024px) {
+    .body{
+        padding: 11% 1% 0% 2% !important;
+    }
 }
