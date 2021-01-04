@@ -65,6 +65,7 @@ import { TestComponent } from './test/test.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ImagemagnifyComponent } from './components/imagemagnify/imagemagnify.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -138,7 +139,8 @@ import { ImagemagnifyComponent } from './components/imagemagnify/imagemagnify.co
     MatExpansionModule,
     MatTabsModule,
     UiSwitchModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatInputModule
     // fs
     // MatMomentDateModule
   ],

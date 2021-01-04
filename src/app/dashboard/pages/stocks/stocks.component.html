@@ -52,6 +52,37 @@
                 </div>
             </div>
         </div>
+        <!-- import bulk product -->
+        <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+                <!-- <button type="button" (click)="searchProducts('search')"
+                class="btn btn-outline-secondary globalbutton">Import</button> -->
+
+                <input type="file" #csvReader name="Import" id="txtFileUpload" (change)="uploadListener($event)" accept="*" />
+                <button type="button" (click)="searchProducts('search')"
+                class="btn btn-outline-secondary globalbutton">Import Product Price</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+             <table>
+                <th>id</th>
+                <th>firstName</th>
+                <th>lastName</th>
+                <th>age</th>
+                <th>position</th>
+                <th>mobile</th>
+                <tr *ngFor="let record of records;let i = index;">    
+                    <td> <span>{{record.id}}</span> </td>    
+                    <td> <span>{{record.firstName}}</span> </td>    
+                    <td> <span>{{record.lastName}}</span> </td>    
+                    <td> <span>{{record.age}}</span> </td>    
+                    <td> <span>{{record.position}}</span> </td>    
+                    <td> <span>{{record.mobile}}</span> </td>    
+                  </tr>    
+             </table>
+            </div>
+        </div>
         <div class="row" class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
             [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
             <div class="col-md-12 stretch-card grid-margin table-data">

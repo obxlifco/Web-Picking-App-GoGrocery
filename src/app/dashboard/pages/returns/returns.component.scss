@@ -34,11 +34,33 @@ mat-button-toggle {
     }
     .clearicon{
         position: absolute;
-        right: 10%;
+        right: 2%;
         top: 15%;
     }
 }
+mat-form-field{
+    width: 100%;
+    border: 1px solid lightgray;
+    height: 46px;
+    padding: 2% 4% 0% 1%;
+    border-radius: 3px;
+    padding-top: 0px;
 
+    input{
+        border: none !important;
+    }
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background: white !important;
+    border    : none !important;
+}
+::ng-deep.mat-calendar-body-selected {
+    color     : white;
+    background: green;
+}
+// ::ng-deep.mat-form-field-flex {
+//     border: 1px solid lightgray !important;
+// }
 mat-button-toggle-group{
     height: 90%;
 }

@@ -9,7 +9,7 @@
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'home'">Dashboard</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'orders'" (click)="navigateOrders()">Orders</a>
       <a *ngIf="isWarehouseID" routerLinkActive="active-link" mat-list-item [routerLink]="'stocks'">Stocks</a>
-      <a mat-list-item [routerLink]="'returns'">Returns</a>
+      <a *ngIf="isWarehouseID" mat-list-item [routerLink]="'returns'">Returns</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'salesreport'" (click)="navigateSale()">Sales
         Report</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'appsettings'">App Settings</a>
