@@ -66,6 +66,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ImagemagnifyComponent } from './components/imagemagnify/imagemagnify.component';
 import { MatInputModule } from '@angular/material/input';
+import { ProductimportComponent } from './components/productimport/productimport.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { MatInputModule } from '@angular/material/input';
     SalesreportComponent,
     NotfoundComponent,
     TestComponent,
-    ImagemagnifyComponent 
+    ImagemagnifyComponent,
+    ProductimportComponent 
   ],
   imports: [
     BrowserModule,

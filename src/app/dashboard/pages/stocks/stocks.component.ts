@@ -4,6 +4,8 @@ import { DialogData } from 'src/app/components/addnewproduct/addnewproduct.compo
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
 import { ImagemagnifyComponent } from 'src/app/components/imagemagnify/imagemagnify.component';
 import { MessagedialogComponent } from 'src/app/components/messagedialog/messagedialog.component';
+import { ProductimportComponent } from 'src/app/components/productimport/productimport.component';
+import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
 import { CSVRecord } from 'src/app/core/utilities/csvrecord';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -17,10 +19,7 @@ import { ModalService } from 'src/app/services/modal/modal.service';
 })
 export class StocksComponent implements OnInit {
 
-  public records: any[] = [];  
-
-
-  userOrderdata = {
+   userOrderdata = {
     warehouse_id: '',
     website_id: '',
     user_id: '',
@@ -53,6 +52,7 @@ export class StocksComponent implements OnInit {
     public apiService : ApiService,
     public globalitem : GlobalitemService,
     public dialog: MatDialog,
+    public commonfunc:CommonfunctionService
     ) {
       // this.pickerProductList=[]
       this.pickerProductList["data"]=[]
@@ -279,77 +279,12 @@ export class StocksComponent implements OnInit {
   }
 
   //test bulk product listing
-  uploadListener($event: any): void {  
-  
-    let text = [];  
-    let files = $event.srcElement.files;  
-  
-    if (this.isValidCSVFile(files[0])) {  
-  
-      let input = $event.target;  
-      let reader = new FileReader();  
-      reader.readAsText(input.files[0]);  
-  
-      reader.onload = () => {  
-        let csvData = reader.result;  
-        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);  
-  
-        let headersRow = this.getHeaderArray(csvRecordsArray);  
-  
-        this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
-        console.log("records : ",this.records);
-        
-      };  
-  
-      reader.onerror = function () {  
-        console.log('error is occured while reading file!');  
-      };  
-  
-    } else {  
-      alert("Please import valid .csv file.");  
-      this.fileReset();  
-    }  
+  importproduct(): void {  
+   this.modalservice.openModal('nodata',ProductimportComponent)
   }  
 
 
-  getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
-    let csvArr = [];  
  
-    for (let i = 1; i < csvRecordsArray.length; i++) {  
-      let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
-      if (curruntRecord.length == headerLength) {  
-        let csvRecord: CSVRecord = new CSVRecord();  
-        console.log("csv file data : ",curruntRecord);
-  
-        // csvRecord.id = curruntRecord[0];  
-        // csvRecord.firstName = curruntRecord[1];  
-        // csvRecord.lastName = curruntRecord[2];  
-        // csvRecord.age = curruntRecord[3]?.trim();  
-        // csvRecord.position = curruntRecord[4]?.trim();  
-        // csvRecord.mobile = curruntRecord[5]?.trim();  
-        csvArr.push(csvRecord);  
-      }  
-    }  
-    return csvArr;  
-  }  
-  
-  isValidCSVFile(file: any) {  
-    return file.name.endsWith(".csv");  
-  }  
-  
-  getHeaderArray(csvRecordsArr: any) {  
-    let headers = (<string>csvRecordsArr[0]).split(',');  
-    let headerArray = [];  
-    for (let j = 0; j < headers.length; j++) {  
-      headerArray.push(headers[j]);  
-    }  
-    return headerArray;  
-  }  
-  
-  fileReset() {  
-    // this.csvReader.nativeElement.value = "";  
-    this.records = [];  
-  }  
 }  
   
 

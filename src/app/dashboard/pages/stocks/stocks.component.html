@@ -55,15 +55,13 @@
         <!-- import bulk product -->
         <div class="row">
             <div class="col-md-12 stretch-card grid-margin col-left">
-                <!-- <button type="button" (click)="searchProducts('search')"
-                class="btn btn-outline-secondary globalbutton">Import</button> -->
-
-                <input type="file" #csvReader name="Import" id="txtFileUpload" (change)="uploadListener($event)" accept="*" />
-                <button type="button" (click)="searchProducts('search')"
+                <button type="button" (click)="importproduct()" style="margin-right: 1%;"
+                class="btn btn-outline-secondary globalbutton">Import</button>
+                <button type="button" (click)="importproduct()"
                 class="btn btn-outline-secondary globalbutton">Import Product Price</button>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-12 stretch-card grid-margin col-left">
              <table>
                 <th>id</th>
@@ -82,7 +80,7 @@
                   </tr>    
              </table>
             </div>
-        </div>
+        </div> -->
         <div class="row" class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
             [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
             <div class="col-md-12 stretch-card grid-margin table-data">
