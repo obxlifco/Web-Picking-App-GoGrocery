@@ -1,0 +1,43 @@
+.form-control {
+    margin-right: 4%;
+    padding     : 3px;
+}
+
+h4 {
+    font-size  : 20px;
+    font-weight: 500;
+    margin     : 0px;
+}
+
+h1 {
+    text-align: center;
+    font-size : 20px;
+    color     : green;
+    margin    : 1%;
+}
+
+.downloadoption {
+    display: flex;
+    p {
+        cursor: pointer;
+        color : red;
+        margin: 0.5% 0% 0% 5%;
+        width : fit-content;
+        font-size: 16px;
+    }
+
+    img {
+        width   : 1.7%;
+        position: absolute;
+        cursor: pointer;
+    }
+}
+
+::ng-deep.ngx-file-drop__drop-zone {
+    height: 150px !important;
+    border: 2px dotted green !important;
+}
+
+::ng-deep.ngx-file-drop__content {
+    padding-top: 7% !important;
+}

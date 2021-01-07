@@ -36,6 +36,7 @@
     "mat-timepicker": "^5.0.1",
     "ng-mat-select-infinite-scroll": "^2.1.1",
     "ngx-countdown": "^11.0.0",
+    "ngx-file-drop": "^10.1.1",
     "ngx-infinite-scroll": "^10.0.0",
     "ngx-skeleton-loader": "^2.6.0",
     "ngx-spinner": "^10.0.1",

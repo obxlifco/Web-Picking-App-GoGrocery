@@ -105,11 +105,7 @@
                         </tr>
                     </div>
                     </div>
-                    <!-- if data not found -->
-                    <div class="item" *ngIf="ISkeleton">
-                        <ngx-skeleton-loader *ngFor="let item of [1,2,3,4,5,6,7,9,10]"></ngx-skeleton-loader>
-                      </div>
-                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0 && !ISkeleton"></app-emptystate>
+                   
                 </table>
             </div>
         </div>
@@ -185,7 +181,12 @@
                         </div>
                     </div>
                     <!-- if data not found -->
-                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0"></app-emptystate>
+                    <!-- <app-emptystate *ngIf="pickerProductList['data']?.length === 0"></app-emptystate> -->
+                     <!-- if data not found -->
+                     <div class="item" *ngIf="ISkeleton">
+                        <ngx-skeleton-loader *ngFor="let item of [1,2,3,4,5,6,7,9,10]"></ngx-skeleton-loader>
+                      </div>
+                    <app-emptystate *ngIf="pickerProductList['data']?.length === 0 && !ISkeleton"></app-emptystate>
                 </table>
             </div>
         </div>

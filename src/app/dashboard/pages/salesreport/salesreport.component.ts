@@ -40,15 +40,15 @@ export class SalesreportComponent implements OnInit {
   lastdate: any = "";
   currentpage: any = 1
   getmonth: any = "1"
-  getyear: any = "2020";
+  getyear: any = "2021";
   saleData = {
     totalorder: 0,
     shippingcost: 0,
-    coupendiscount:0,
-    shippingDiscount:0,
+    coupendiscount: 0,
+    shippingDiscount: 0,
     subtotal: 0,
     grandtotal: 0,
-    testorders:0
+    testorders: 0
   }
   advancedsearch: any = []
   generalcounter: any = 0
@@ -74,7 +74,7 @@ export class SalesreportComponent implements OnInit {
     ]
   };
   allComplete: boolean = false;
-  averageData:any=[]
+  averageData: any = []
 
   //merging data for multi selection payment method
   orderlistsaleData: any = []
@@ -82,14 +82,14 @@ export class SalesreportComponent implements OnInit {
   mergeFirstPaymentData: any = new Array()
   IsMerge = false;
 
-
+  currentdate = new Date()
   constructor(public apiService: ApiService, public commonfunc: CommonfunctionService,
     public datePipe: DatePipe,
     public globalitem: GlobalitemService,
     public db: DatabaseService) {
     this.monthname = this.commonfunc.monthname;
     this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
-
+    this.getyear = this.currentdate.getFullYear()
   }
 
   ngOnInit(): void {
@@ -100,7 +100,7 @@ export class SalesreportComponent implements OnInit {
 
   }
   datemodal() {
-   
+
   }
 
   setcompleteparam() {
@@ -123,10 +123,10 @@ export class SalesreportComponent implements OnInit {
     // this.completelist["data"]["grandtotal"] = 0
   }
 
-  getCancellationandCompleteRate(){
+  getCancellationandCompleteRate() {
     this.db.getcancellationRate().then(res => {
       // console.log("cancellation report : ",res);
-      this.averageData=res
+      this.averageData = res
     });
   }
   getOrderlistData(date: any) {
@@ -157,7 +157,7 @@ export class SalesreportComponent implements OnInit {
         // this.advancedsearch = []
         // this.setcompleteparam()
         if (data.results[0].result.length !== 0) {
-          let incomingdata:any;
+          let incomingdata: any;
           if (data.count > this.generalcounter) {
             incomingdata = this.commonfunc.getcompletedOrders(data.results[0].result, this.paymentmethodid)
             this.orderlistsaleData = [... this.orderlistsaleData, ...data.results[0].result]
@@ -182,9 +182,9 @@ export class SalesreportComponent implements OnInit {
             // console.log("this.saleData:", this.saleData ," and test oreders : ",incomingdata.testorderFound);
             // console.log("test orders : ",incomingdata);
             //for test order removing we used testorderfound
-            if(incomingdata?.testorderFound === undefined){
+            if (incomingdata?.testorderFound === undefined) {
 
-            }else{
+            } else {
               this.saleData.totalorder = data.count - this.saleData.testorders
               // this.saleData.testorders=incomingdata.testorderFound
             }
@@ -194,10 +194,10 @@ export class SalesreportComponent implements OnInit {
             // console.log("paymentmethodlastids ",this.paymentmethodlastids);
             if (this.paymentmethodlastids === undefined) {
               // console.log("mergeFirstPaymentData ",this.mergeFirstPaymentData);
-              
+
               if (this.mergeFirstPaymentData.length !== 0) {
                 // console.log(" mergeFirstPaymentData enterd");
-                
+
                 this.saleData.totalorder += this.mergeFirstPaymentData.totalorder
                 this.saleData.shippingcost += this.mergeFirstPaymentData.shippingcost
                 this.saleData.subtotal += this.mergeFirstPaymentData.subtotal
@@ -205,8 +205,8 @@ export class SalesreportComponent implements OnInit {
                 this.mergeFirstPaymentData = []
                 // console.log("subtotal : ", this.saleData.subtotal);
               }
-            //for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
-            }if (this.paymentmethodlastids !== undefined) {
+              //for first time ,if we have ids then we pass second ids and get again sale list and merg with old sale data
+            } if (this.paymentmethodlastids !== undefined) {
               // this.orderlistsaleMergrray['data']=data.results[0].result
               let tempdata = {
                 totalorder: this.saleData.totalorder,
@@ -225,13 +225,13 @@ export class SalesreportComponent implements OnInit {
             }
           }
         } if (data.results[0].result.length === 0 || data.results[0].result === []) {
-          if(this.paymentmethodlastids !== undefined){//incase of first selected payment method have no result then we check and call aagain
+          if (this.paymentmethodlastids !== undefined) {//incase of first selected payment method have no result then we check and call aagain
             this.setSecondID()
-          }else{
-            if(this.mergeFirstPaymentData.length === 0){
-             this.saleData.totalorder=0
-            this.setfieldvalue()  // thi
-            }else{
+          } else {
+            if (this.mergeFirstPaymentData.length === 0) {
+              this.saleData.totalorder = 0
+              this.setfieldvalue()  // thi
+            } else {
               this.saleData.totalorder = this.mergeFirstPaymentData.totalorder
               this.saleData.shippingcost = this.mergeFirstPaymentData.shippingcost
               this.saleData.subtotal = this.mergeFirstPaymentData.subtotal
@@ -251,7 +251,7 @@ export class SalesreportComponent implements OnInit {
   }
 
   //getting completed orders in case of pagination(to call multiple time api)
-  setSecondID(){
+  setSecondID() {
     this.advancedsearch = []
     this.setcompleteparam()
     this.advancedsearch.push({
@@ -271,8 +271,8 @@ export class SalesreportComponent implements OnInit {
   //set filed value
   setfieldvalue() {
     // this.completelist["data"].length = 0
-    this.saleData.totalorder=0
-    this.saleData.testorders=0
+    this.saleData.totalorder = 0
+    this.saleData.testorders = 0
     this.completelist['data']['currency_code'] = '0.'
     this.saleData.grandtotal = parseFloat('00')
     this.saleData.shippingcost = parseFloat('00')
@@ -290,7 +290,7 @@ export class SalesreportComponent implements OnInit {
     if (this.paymentmethodid !== "both") {
       let temparray: any = this.paymentmethod.subtasks
       let secondtemarray: any = []
-      this.mergeFirstPaymentData=[]
+      this.mergeFirstPaymentData = []
       this.advancedsearch = []
       this.setcompleteparam()
       for (let i = 0; i < temparray.length; i++) {
@@ -313,8 +313,8 @@ export class SalesreportComponent implements OnInit {
           }
         }
       }
-    }if (this.paymentmethodid === "both") {
-      this.mergeFirstPaymentData=[]
+    } if (this.paymentmethodid === "both") {
+      this.mergeFirstPaymentData = []
       this.advancedsearch = []
       this.setcompleteparam()
     }
@@ -349,9 +349,9 @@ export class SalesreportComponent implements OnInit {
   // download csv file
   getCSVFile() {
     // console.log(" data : ",this.completelist["data"]["subtotal"] ,this.completelist["data"]["grandtotal"]);
-    let temarray: any = [] 
-    console.log("this.saleData.shippingDiscount : ",this.saleData.shippingDiscount);
-       
+    let temarray: any = []
+    console.log("this.saleData.shippingDiscount : ", this.saleData.shippingDiscount);
+
     let data1: any = {
       'Total Orders': this.saleData.totalorder,
       'Subtotal': this.saleData.subtotal,
@@ -359,12 +359,12 @@ export class SalesreportComponent implements OnInit {
       'Shipping Discount': this.saleData.shippingDiscount,
       'Coupon Discount': this.saleData.coupendiscount,
       'Grand Total': this.saleData.grandtotal + " " + this.completelist['data']['currency_code'],
-      'Cancel Rate':this.commonfunc.precise_round(this.averageData?.cancelledorders/(this.averageData?.cancelledorders + this.saleData.totalorder)*100, 1)+"%",
-      'Average Value':this.commonfunc.precise_round(this.saleData.grandtotal/this.saleData.totalorder,3)
+      'Cancel Rate': this.commonfunc.precise_round(this.averageData?.cancelledorders / (this.averageData?.cancelledorders + this.saleData.totalorder) * 100, 1) + "%",
+      'Average Value': this.commonfunc.precise_round(this.saleData.grandtotal / this.saleData.totalorder, 3)
     }
 
     if (this.saleData.totalorder !== 0) {
-      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs','Shipping Discount','Coupon Discount', 'Grand Total','Cancel Rate','Average Value']
+      let paramdata = ['Total Orders', 'Subtotal', 'Shipping Costs', 'Shipping Discount', 'Coupon Discount', 'Grand Total', 'Cancel Rate', 'Average Value']
       // console.log("csv file : ", paramdata);
       temarray.push(data1)
       this.commonfunc.downloadFile(temarray, 'sales report', paramdata, 'footerdata')
@@ -390,10 +390,10 @@ export class SalesreportComponent implements OnInit {
       // console.log("all true");
       this.advancedsearch = []
       this.setcompleteparam()
-      this.paymentmethodid =  this.paymentmethod.id;
+      this.paymentmethodid = this.paymentmethod.id;
       this.paymentmethodname = this.paymentmethod.name;
     } else if (!this.allComplete) {
-      this.paymentmethodid =  this.paymentmethod.id;
+      this.paymentmethodid = this.paymentmethod.id;
       this.advancedsearch = []
       this.setcompleteparam()
       // console.log("not complete",this.paymentmethodid ,this.allComplete);
@@ -415,8 +415,8 @@ export class SalesreportComponent implements OnInit {
           this.paymentmethodid = this.paymentmethod.subtasks[i].id
           this.paymentmultyids.push(this.paymentmethod.subtasks[i].id)
           this.paymentmethodname = this.paymentmethod.subtasks[i].name
-          if(counter === this.paymentmethod.subtasks.length){
-            this.paymentmethodid=this.paymentmethod.id
+          if (counter === this.paymentmethod.subtasks.length) {
+            this.paymentmethodid = this.paymentmethod.id
           }
           // console.log("id : ",this.paymentmethod.subtasks[i].id);
           // console.log("counter value ",counter);
@@ -459,7 +459,7 @@ export class SalesreportComponent implements OnInit {
   generateSaleReport() {
     // console.log("order list :", this.orderlistsaleData);
     let counter = 0
-    let diff :any
+    let diff: any
     //set footer with total charges
     let footerdata = {
       Subtotal: 0,
@@ -470,39 +470,40 @@ export class SalesreportComponent implements OnInit {
     }
     let temarray: any = []
     for (let i = 0; i < this.orderlistsaleData.length; i++) {
-      if(!this.orderlistsaleData[i].customer?.first_name?.includes("Test") && !this.orderlistsaleData[i]?.customer?.first_name?.includes("test")&&
-      !this.orderlistsaleData[i]?.customer?.last_name?.includes("Test") && !this.orderlistsaleData[i]?.customer?.last_name?.includes("test")){
-      footerdata.Subtotal += this.orderlistsaleData[i].net_amount
-      footerdata.ShippingCost += this.orderlistsaleData[i].shipping_cost
-      footerdata.ShippingDiscount += this.orderlistsaleData[i].cart_discount
-      footerdata.OtherDiscount += this.orderlistsaleData[i].gross_discount_amount
-      footerdata.GrandTotal += this.orderlistsaleData[i].gross_amount
-      let data: any = {
-        'Order Number': this.orderlistsaleData[i].custom_order_id,
-        'Order Date': this.datePipe.transform(this.orderlistsaleData[i].created, "yyyy-M-d"),
-        'Customer Name': this.orderlistsaleData[i].customer.first_name + " " + this.orderlistsaleData[i].customer.last_name,
-        // 'Prepared By':this.orderlistsaleData[i].assign_to,
-        // 'Bill Number': this.orderlistsaleData[i].custom_order_id,
-        'Payment Method': this.orderlistsaleData[i].payment_method_name,
-        'Subtotal': this.orderlistsaleData[i].net_amount,
-        'Shipping Cost': this.orderlistsaleData[i].shipping_cost,
-        'Shipping Discount': this.orderlistsaleData[i].cart_discount,
-        'Other Discount': this.orderlistsaleData[i].gross_discount_amount,
-        'Grand Total': this.orderlistsaleData[i].gross_amount,
+      if (!this.orderlistsaleData[i].customer?.first_name?.includes("Test") && !this.orderlistsaleData[i]?.customer?.first_name?.includes("test") &&
+        !this.orderlistsaleData[i]?.customer?.last_name?.includes("Test") && !this.orderlistsaleData[i]?.customer?.last_name?.includes("test")) {
+        footerdata.Subtotal += this.orderlistsaleData[i].net_amount
+        footerdata.ShippingCost += this.orderlistsaleData[i].shipping_cost
+        footerdata.ShippingDiscount += this.orderlistsaleData[i].cart_discount
+        footerdata.OtherDiscount += this.orderlistsaleData[i].gross_discount_amount
+        footerdata.GrandTotal += this.orderlistsaleData[i].gross_amount
+        let data: any = {
+          'Order Number': this.orderlistsaleData[i].custom_order_id,
+          'Order Date': this.datePipe.transform(this.orderlistsaleData[i].created, "yyyy-M-d"),
+          'Customer Name': this.orderlistsaleData[i].customer.first_name + " " + this.orderlistsaleData[i].customer.last_name,
+          // 'Prepared By':this.orderlistsaleData[i].assign_to,
+          // 'Bill Number': this.orderlistsaleData[i].custom_order_id,
+          'Payment Method': this.orderlistsaleData[i].payment_method_name,
+          'Subtotal': this.orderlistsaleData[i].net_amount,
+          'Shipping Cost': this.orderlistsaleData[i].shipping_cost,
+          'Shipping Discount': this.orderlistsaleData[i].cart_discount,
+          'Other Discount': this.orderlistsaleData[i].gross_discount_amount,
+          'Grand Total': this.orderlistsaleData[i].gross_amount,
+        }
+        // let averagevalue = totalamount/total OrdersComponent
+        //cancellation average  cancellation value /total oredsr * 100 will be in percentage
+        counter++
+        temarray.push(data)
+        // console.log("Index: ", counter,this.saleData.testorders);
+
+      } if (this.orderlistsaleData.length === counter + this.saleData.testorders) {
+        // console.log("CSV file : ", temarray, this.orderlistsaleData.length, i)
+        let paramdata: any = ['Order Number', 'Order Date', 'Customer Name', 'Payment Method', 'Subtotal', 'Shipping Cost', 'Shipping Discount', 'Other Discount', 'Grand Total']
+        this.commonfunc.downloadFile(temarray, "order products", paramdata, footerdata)
+      } else {
+        console.log("else is executed", this.orderlistsaleData.length, " others ", counter + this.saleData.testorders, " testorders : ", this.saleData.testorders);
+
       }
-      // let averagevalue = totalamount/total OrdersComponent
-      //cancellation average  cancellation value /total oredsr * 100 will be in percentage
-       counter++
-      temarray.push(data)
-      // console.log("Index: ", counter,this.saleData.testorders);
-     
-    } if (this.orderlistsaleData.length  === counter + this.saleData.testorders) {
-      // console.log("CSV file : ", temarray, this.orderlistsaleData.length, i)
-      let paramdata: any = ['Order Number', 'Order Date', 'Customer Name', 'Payment Method', 'Subtotal', 'Shipping Cost', 'Shipping Discount', 'Other Discount', 'Grand Total']
-      this.commonfunc.downloadFile(temarray, "order products", paramdata, footerdata)
-    }else{
-      console.log("else is executed" ,this.orderlistsaleData.length ," others ",counter + this.saleData.testorders, " testorders : ",this.saleData.testorders);
-      
     }
-  }}
+  }
 }

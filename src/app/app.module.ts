@@ -67,6 +67,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ImagemagnifyComponent } from './components/imagemagnify/imagemagnify.component';
 import { MatInputModule } from '@angular/material/input';
 import { ProductimportComponent } from './components/productimport/productimport.component';
+import { BulkproductdataComponent } from './components/bulkproductdata/bulkproductdata.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -97,7 +99,8 @@ import { ProductimportComponent } from './components/productimport/productimport
     NotfoundComponent,
     TestComponent,
     ImagemagnifyComponent,
-    ProductimportComponent 
+    ProductimportComponent,
+    BulkproductdataComponent 
   ],
   imports: [
     BrowserModule,
@@ -142,7 +145,8 @@ import { ProductimportComponent } from './components/productimport/productimport
     MatTabsModule,
     UiSwitchModule,
     MatTooltipModule,
-    MatInputModule
+    MatInputModule,
+    NgxFileDropModule
     // fs
     // MatMomentDateModule
   ],

@@ -1,11 +1,12 @@
-import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop'
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
 import { ApiService } from 'src/app/services/api/api.service';
+import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 import * as XLSX from 'xlsx'
+import { DialogData } from '../addnewproduct/addnewproduct.component';
+var $: any
 @Component({
   selector: 'app-productimport',
   templateUrl: './productimport.component.html',
@@ -13,155 +14,120 @@ import * as XLSX from 'xlsx'
 })
 export class ProductimportComponent implements OnInit {
 
-  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef |any ;
-  files:any = [];
-  filename:any
-  DBFields:any=[]
-  
-  title:any;
-  file:any=File;
-  arrayBuffer:any
-  filelist:any
-  constructor(public commonfunc : CommonfunctionService,public apiService:ApiService,
-    public dialogRef: MatDialogRef<ProductimportComponent>) {
-     
-     }
+  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef | any;
+  public files: NgxFileDropEntry[] = [];
+  filename: any
+  isFileDrop = true
+  DBFields: any = []
+  fileToUpload: any = File;
+  title: any;
+  file: any;
+  arrayBuffer: any
+  filelist: any
+  userdata = {
+    website_id: '1',
+    userid: '',
+  }
+  subUrl: any
+  usermodalData: any = []
+  importproducts: any = []
+  constructor(public commonfunc: CommonfunctionService, public apiService: ApiService, public globalitem: GlobalitemService,
+    public dialogRef: MatDialogRef<ProductimportComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    // console.log("Modal data : ", data);
+    let tempdata: any = data
+    this.usermodalData = tempdata.data
+    this.userdata.website_id = tempdata.data.website_id
+  }
 
   ngOnInit(): void {
   }
 
-  uploadListener($event: any): void {  
-  
-    let text = [];  
-    let files = $event.srcElement.files;  
-    console.log("file is : ",$event);
-    // this.commonfunc.uploadListener($event)
-    // setTimeout(()=>{
-    //   this.commonfunc.getRecord().then((res: any)=>{
-    //     console.log("respone of records : ",res);
-    //     this.importProducts($event,res)
-    //   })
-    // },200)
-   
-   
-  this.file= $event.target.files[0];     
-  let fileReader = new FileReader();    
-  fileReader.readAsArrayBuffer(this.file);     
-  fileReader.onload = (e) => {    
-      this.arrayBuffer = fileReader.result;    
-      var data = new Uint8Array(this.arrayBuffer);    
-      var arr = new Array();    
-      for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
-      var bstr = arr.join("");    
-      var workbook = XLSX.read(bstr, {type:"binary"});    
-      var first_sheet_name = workbook.SheetNames[0];    
-      var worksheet = workbook.Sheets[first_sheet_name];    
-      console.log("json Data : ",XLSX.utils.sheet_to_json(worksheet,{raw:true}));    
-      // console.log("worksheet : ",worksheet);    
-        var arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true});     
-            this.filelist = [];    
-            console.log(this.filelist)   
-            // this.importProducts($event,XLSX.utils.sheet_to_json(worksheet,{raw:true}))    
-}  
-   
-    
-    
-  }
-  closeModal(){
+  closeModal() {
     this.dialogRef.close()
   }
 
-  importProducts(event:any,objectData:any){
-    let files = event.srcElement;  
-  
-    const file = event.target.files[0];
-    let product='product'
-    let data={
-      import_file: (objectData),
-      website_id: 1,
-      with_category: 0,
-      import_file_type: product,
-      
-    }
-    this.apiService.postbulkData("import_file_products/", data,file,event.target).subscribe((data: any[]) => {
-      console.log(data);
 
-    })
+  fileChange(event: any) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.file = fileList[0];
+    }
+  }
+  uploadFile() {
+    let file: any = this.file
+    console.log("files data : ",   this.files);
+    let toastLabel: any;
+    const formData = new FormData();
+    formData.append('import_file', file);
+    formData.append("website_id", this.userdata.website_id);
+    formData.append("import_file_type", 'price');
+    if (this.usermodalData.importsatus === "price") {
+      this.subUrl = "import_price/"
+      toastLabel = "Price"
+    } else if (this.usermodalData.importsatus === "stock") {
+      this.subUrl = "import_sheet/"
+      formData.append("company_id", '0');
+      toastLabel = "Stock"
+    }
+    // file[0].inProgress = true;
+    let fileRxtention=this.files[0]?.relativePath.slice(this.files[0]?.relativePath.length-3)
+    console.log("file extention : ",fileRxtention);
+    
+    if(file !== undefined && fileRxtention !== "jpg" && fileRxtention !== "png" && fileRxtention !== "pdf" && fileRxtention !== "peg"){
+      // this.apiService.upload(this.subUrl, formData).subscribe((data: any) => {
+      //   this.closeModal()
+      //   this.globalitem.showSuccess(toastLabel + " will be updated soon", "")
+      // })
+    }else{
+      this.globalitem.showError("Please select Excel File","")
+    }
   }
 
-  onClick() {
-        const fileUpload :any = this.fileUpload.nativeElement;fileUpload.onchange = () => {
-        for (let index = 0; index < fileUpload.files.length; index++)
-        {
-         const file = fileUpload.files[index];
-         this.files.push({ data: file, inProgress: false, progress: 0});
-        }
-          this.uploadFile(this.files);
-        };
-        fileUpload.click();
+  downloadsample() {
+    let url: any = ''
+    // console.log("modal status : ", this.usermodalData);
+    if (this.usermodalData.importsatus === "price") {
+      url = 'http://www.gogrocery.ae:8062/media/importfile/sample/price_import_sheet.xls'
+    } else if (this.usermodalData.importsatus === "stock") {
+      url = 'http://www.gogrocery.ae:8062/media/importfile/sample/stock_import.xls'
     }
-  uploadFile(file:any) {
-    console.log("files is : ",file);
-    
-        const formData = new FormData();  
-        formData.append('import_file', file[0].data);  
-        formData.append("website_id", '1');
-        formData.append("with_category", '0');
-        formData.append("import_file_type", 'product');
-        file[0].inProgress = true;
-        this.apiService.upload('import_file_products/',formData).subscribe((data: any) => {
-            console.log("response : ",data);
-            this.filename=data.filename;
-                this.DBFields=data.db_fields
-                this.savefileData()
-          })
+    if (url) {
+      this.commonfunc.generalDownloadfile(url)
+    }
 
-        // this.apiService.upload('import_file_products/',formData).pipe(
-        //   map((event:any) => {
-        //     console.log("event value : ",event);
-        //     this.filename=event.body.filename;
-        //     this.DBFields=event.body.db_fields
-        //     this.savefileData()
-        //   }),  
-        //   catchError((error: HttpErrorResponse) => {
-        //     console.log("failed");
-            
-        //     file[0].inProgress = false;
-        //     return of(`Upload failed: ${file[0].data.name}`);
-        //   })).subscribe((event: any) => {
-        //     if (typeof (event) === 'object') {
-        //       console.log(event.body);
-        //     }  
-        //   });  
+  }
+
+  // drag and drop files 
+  public dropped(files: NgxFileDropEntry[]) {
+    this.isFileDrop = true
+    this.files = files;
+    for (const droppedFile of files) {
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file1: File) => {
+          // Here you can access the real file
+          this.file = file1
+          // console.log(droppedFile.relativePath, file1);
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        // console.log(droppedFile.relativePath, fileEntry);
       }
+    }
+  }
 
+  public fileOver(event: any) {
+    this.isFileDrop = false
+    console.log(event);
+  }
 
-      savefileData(){
-        let mapProductlist :any=[]
-        console.log("db fileds : ",this.DBFields);
-        for(let i=0;i<this.DBFields.length;i++){
-        
-          this.DBFields[i].field_label={
-            field_name: this.DBFields[i].model_field_value,
-            id:0
-          }
-
-        // let  plist = [
-        //   this.DBFields[i].field_label={
-        //     field_name: this.DBFields[i].model_field_value,
-        //     id:0
-        //   },
-        //     ];
-        }
-        console.log("db fileds : ",this.DBFields);
-        let data={
-          category_id: 511,
-          filename: this.filename,
-          map_fields: mapProductlist,
-          website_id: 1,
-          with_category: 0
-        }
-        console.log("mapProductlist : ",mapProductlist);
-        
-      }
+  public fileLeave(event: any) {
+    this.isFileDrop = true
+    console.log(event);
+  }
 }
+
+

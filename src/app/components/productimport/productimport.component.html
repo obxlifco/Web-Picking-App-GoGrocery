@@ -1,18 +1,41 @@
 <div class="container">
     <div class="row main-header">
         <div class="col-md-8 stretch-card grid-margin">
+            <h4>{{this.usermodalData.imptitle}}</h4>
         </div>
         <div class="col-md-4 grid-margin" style="text-align: end;">
             <mat-icon (click)="closeModal()">clear</mat-icon>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 grid-margin">
-            <!-- <h6 >click file</h6> -->
-            <button  (click)="onClick()" type="button" class="btn btn-primary">Upload</button><br>
-            <input type="file" #fileUpload class="form-control" (change)="uploadListener($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            <!-- <input type="file" #csvReader name="Import" id="txtFileUpload" (change)="uploadListener($event)" accept="*" /> -->
+    <div class="center">
+        <ngx-file-drop
+            accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)"
+            (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                <img *ngIf="isFileDrop" width="23%" src="assets/images/product/upload.JPG" alt=""><br>
+                <span style="color: green;font-size: 20px;" *ngIf="!files.length">Drag and Drop File here</span>
+                <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+                <span style="color: green;" *ngFor="let item of files; let i=index"> {{ item.relativePath }} </span>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <h1>OR</h1>
+                <input class="form-control" type="file" (change)="fileChange($event)" placeholder="Upload file"
+                    accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            </div>
         </div>
     </div>
-
+    <div class="downloadoption">
+        <img (click)="downloadsample()" src="assets/images/product/download.png" alt="">
+        <p (click)="downloadsample()">Download Sample Excel File</p>
+    </div>
+    
+    <div>
+        <button style="margin-top:2%;float: right;" (click)="uploadFile()" type="button"
+            class="btn globalbutton">Save</button>
+        <button style="margin:2% 2% 0% 0%;float: right;background: red;border-color: red;" (click)="closeModal()"
+            type="button" class="btn btn-primary">Cancel</button>
+    </div>
 </div>

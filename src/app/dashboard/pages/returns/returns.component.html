@@ -16,9 +16,11 @@
                             *ngIf="date !== null || date"
                             (click)="cleardatefield()">clear</mat-icon>
                     </div> -->
+                    <label for="ordernumberstatus">Choose a date</label><br>
                     <mat-form-field class="dateinput">
-                        <mat-label>Choose a date</mat-label>
-                        <input [(ngModel)]="date" type="text" matInput [matDatepicker]="picker">
+                        <!-- <mat-label>Choose a date</mat-label> -->
+                        
+                        <input [(ngModel)]="date" placeholder="Date" type="text" matInput [matDatepicker]="picker">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-icon matRipple class="clearicon" *ngIf="date !== null || date" (click)="cleardatefield()">
@@ -43,13 +45,11 @@
         <div class="row" style="margin-top: 3%;">
             <div class="col-md-6 grid-margin">
                 <label for="bnum">Search product</label>
-                <input placeholder="Product Name" [(ngModel)]="productName" type="text" class="form-control">
-            </div>
-            <div class="col-md-3 stretch-card grid-margin">
-                <button type="button" style="margin-top: auto;" (click)="searchreturnproduct()"
-                    class="btn btn-outline-secondary globalbutton">Search</button>
+                <input style="width: 68%;" placeholder="Product Name" [(ngModel)]="productName" type="text" class="form-control">
             </div>
         </div>
+        <button type="button" style="margin-top: auto;" (click)="searchreturnproduct()"
+        class="btn btn-outline-secondary globalbutton">Search</button>
 
         <div class="row orderinfo" *ngIf="returnproductData['data']?.order_products?.length">
             <div class="col-md-12 stretch-card grid-margin">

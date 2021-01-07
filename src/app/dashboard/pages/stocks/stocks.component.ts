@@ -70,7 +70,6 @@ export class StocksComponent implements OnInit {
       this.userOrderdata.warehouse_id=res.warehouse_id
       this.userOrderdata.website_id=res.website_id
       this.userOrderdata.user_id=res.user_id
-
       let data = {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
@@ -279,8 +278,13 @@ export class StocksComponent implements OnInit {
   }
 
   //test bulk product listing
-  importproduct(): void {  
-   this.modalservice.openModal('nodata',ProductimportComponent)
+  importproduct(importsatus:any,importtitle:any): void { 
+    let data={
+      importsatus:importsatus,
+      imptitle:importtitle,
+      website_id:this.userOrderdata.website_id
+    } 
+   this.modalservice.openModal(data,ProductimportComponent)
   }  
 
 

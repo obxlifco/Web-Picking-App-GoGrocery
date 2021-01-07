@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row main-header">
+        <div class="col-md-8 stretch-card grid-margin">
+        </div>
+        <div class="col-md-4 grid-margin" style="text-align: end;">
+            <mat-icon (click)="closeModal()">clear</mat-icon>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <!-- <h6 >click file</h6> -->
+            <button style="margin-bottom:2%"  (click)="onClick()" type="button" class="btn btn-primary">Upload</button><br>
+            <input type="file" #fileUpload class="form-control" (change)="uploadListener($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            <!-- <input type="file" #csvReader name="Import" id="txtFileUpload" (change)="uploadListener($event)" accept="*" /> -->
+            <button  (click)="step1()" type="button" class="btn btn-primary">Continue</button><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <h6 >Field Mapping</h6>   <button  (click)="closeModal()" type="button" class="btn btn-primary">Cancel</button><br>
+            <div>
+                <h6>1. Please Select the below primary category</h6>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-left grid-margin">
+                    <select class="browser-default custom-select" [(ngModel)]="selectCetgory.firstCategory">
+                        <option value="" selected>Select Category</option>
+                        <option [value]="item.id" (click)="SetpreviouscateID(item.id)" *ngFor="let item of categorylist">{{item?.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-left grid-margin">
+                    <select class="browser-default custom-select" [(ngModel)]="selectCetgory.secondCategory">
+                        <option value="" selected>Select Category</option>
+                        <option [value]="item.id" (click)="SetpreviouscateID(item.id)" *ngFor="let item of categorylist">{{item?.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-left grid-margin">
+                    <select class="browser-default custom-select" [(ngModel)]="selectCetgory.thirdCategory">
+                        <option value="" selected>Select Category</option>
+                        <option [value]="item.id" (click)="SetpreviouscateID(item.id)" *ngFor="let item of categorylist">{{item?.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-left grid-margin">
+                    <select class="browser-default custom-select" [(ngModel)]="selectCetgory.fourthCategory">
+                        <option value="" selected>Select Category</option>
+                        <option [value]="item.id" (click)="SetpreviouscateID(item.id)" *ngFor="let item of categorylist">{{item?.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <button (click)="step2()" (click)="onClick()" type="button" class="btn btn-primary">Continue</button><br>
+        </div>
+    </div>
+
+</div>

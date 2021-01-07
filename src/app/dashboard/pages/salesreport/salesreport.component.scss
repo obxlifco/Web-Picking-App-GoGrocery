@@ -1,12 +1,15 @@
 .body {
     // padding: 11% 3% 2% 3%;
-    padding : 8% 1% 0% 2%;
+    // padding: 8% 1% 0% 4.2% !important;
+    
     position: inherit;
     display : block;
     overflow: hidden;
 }
 .container{
-    margin-left: 45px;
+    // padding: 7% 5% 3% 5%;
+    // margin-left: 45px;
+    margin: 0% 5%;
     background: white;
     margin-right: 45px;
     overflow: hidden;
@@ -39,7 +42,7 @@ mat-expansion-panel {
 }
 
 h4 {
-    font-size  : 19px;
+    font-size  : 20px;
     font-weight: 500;
 }
 
@@ -53,6 +56,7 @@ h4 {
 
 select {
     height: 50px;
+    width: 24.6%;
 }
 
 button {
@@ -102,13 +106,6 @@ mat-icon {
     border-radius: 100%;
 }
 
-.example-section {
-    // margin: 12px 0;
-}
-
-.example-margin {
-    // margin: 0 12px;
-}
 
 ul {
     list-style-type: none;
@@ -116,10 +113,6 @@ ul {
 }
 
 ::ng-deep .mat-checkbox-checked.mat-accent {
-    .mat-checkbox-ripple .mat-ripple-element {
-        // background-color: gray !important;
-    }
-
     .mat-checkbox-background,
     .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
         background-color: green;
@@ -142,6 +135,6 @@ button {
 
 @media only screen and (min-width: 1024px) {
     .body{
-        padding: 11% 1% 0% 2% !important;
+        padding: 8% 1% 0% 4.2% !important
     }
 }

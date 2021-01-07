@@ -19,7 +19,7 @@ strong{
     padding: 4% 0% 0% 0%;
 }
 button{
-    height: fit-content;
+    width: 20%;
 }
 mat-button-toggle {
     width: 100px;
@@ -31,6 +31,7 @@ mat-button-toggle {
 
     input{
         display: initial;
+        width: 50%;
     }
     .clearicon{
         position: absolute;
@@ -39,7 +40,7 @@ mat-button-toggle {
     }
 }
 mat-form-field{
-    width: 100%;
+    width: 50%;
     border: 1px solid lightgray;
     height: 46px;
     padding: 2% 4% 0% 1%;
@@ -64,6 +65,14 @@ mat-form-field{
 mat-button-toggle-group{
     height: 90%;
 }
+input{
+    width: 50%;
+}
+label {
+  
+    font-weight: 500;
+    font-size  : 16px;
+}
 .orderinfo{
     border: 1px solid lightgray;
     border-radius: 4px;
@@ -83,9 +92,6 @@ mat-button-toggle-group{
         font-size: 15px;
         line-height: 1.5;
         width: 50%;
-    }
-    .orderadd{
-
     }
     .order-summary{
         margin-bottom: 4%;
