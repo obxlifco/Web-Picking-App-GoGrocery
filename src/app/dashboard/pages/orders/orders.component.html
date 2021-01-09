@@ -308,7 +308,7 @@
                             style="display: block;">
                             <button type="button" (click)="printdata('withoutsku','print','')"
                                 class="btn btn-primary globalbutton">
-                                <mat-icon style="margin-right: 4px;">print</mat-icon>Print Receipt
+                                <mat-icon matRipple style="margin-right: 4px;">print</mat-icon>Print Receipt
                             </button>
 
                             <button id="cmd" type="button"
@@ -332,7 +332,7 @@
                             *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'"
                             (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','','')"
                             type="button" class="btn btn-primary globalbutton">
-                            <mat-icon style="left: -4%;">control_point</mat-icon>Add More
+                            <mat-icon matRipple style="left: -4%;">control_point</mat-icon>Add More
                         </button>
                         <!-- <button [disabled]="!userOrderdata.picker_name" type="button"
                     *ngIf="userOrderdata.orderlistType !== 'cancelled'"
@@ -653,7 +653,67 @@
                     infiniteScroll [infiniteScrollDistance]="0.05" [scrollWindow]="false" [infiniteScrollThrottle]="500"
                     [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
                     <div *ngFor="let order of orderlistdata['data']" class="scroll-inner-data">
-                        <mat-card class="orderlist-card"
+                        <!-- check if order status == 0 then we need to show only  new order-->
+                        <mat-card *ngIf="order.order_status === 0 && this.userOrderdata.orderlistType === 'new'" class="orderlist-card"
+                            (click)="getOrderDetailData(order?.id,order?.shipment_id,order?.order_status,order?.picker_name,order?.substitute_status,order?.assign_wh_name,123)">
+                            <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
+                                <mat-card-title>{{order?.custom_order_id}} New</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: green;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'none'">
+                                <mat-card-title>{{order?.custom_order_id}} Assigned
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: 	#00CED1;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'pending'|| order?.shipping_status === 'pending' && order?.order_status === 100">
+                                <mat-card-title>{{order?.custom_order_id}} Subs.Out
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: gray;"
+                                *ngIf="order?.order_shipment?.shipment_status === 'Shipped' && order?.order_status === 1 || order?.shipping_status === 'Shipped' && order?.order_status === 1">
+                                <mat-card-title>{{order?.custom_order_id}} In-Shipping
+                                </mat-card-title>
+                            </mat-card-header>
+
+                            <mat-card-header style="background-color: #00008B;"
+                                *ngIf="order?.order_status === 100 && order?.substitute_status === 'done' || order?.shipping_status === 'Picking' && order?.order_status === 100">
+                                <mat-card-title>{{order?.custom_order_id}} Subs.In
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color: #800080" *ngIf="order?.order_status === 2">
+                                <mat-card-title>{{order?.custom_order_id}} Cancelled
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-header style="background-color:black" *ngIf="order?.order_status === 4">
+                                <mat-card-title>{{order?.custom_order_id}} Completed
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div>
+                                    <strong>- Ordered On : </strong><br>
+                                    <span class="orderlistinfocolor">{{order?.created | date : 'medium'}} </span><br>
+                                    <span class="orderlistinfocolor">{{order?.created | datepipe}}</span>
+                                </div>
+                                <div>
+                                    <strong>- Delivery Address : </strong><br>
+                                    <span class="orderlistinfocolor">{{order?.billing_name}},
+                                        {{order?.delivery_street_address}}, {{order?.delivery_state_name}} </span>
+                                </div>
+                                <div>
+                                    <span>- This order is assaign to : </span><br>
+                                    <strong>{{order?.order_shipment?.created_by_name}}</strong>
+                                </div>
+                                <div>
+                                    <!-- <strong>Price : </strong><br> -->
+                                    <strong>{{order?.gross_amount}} {{order?.currency_code}} </strong>
+                                </div>
+                                <div>
+                                    <!-- <span>Payment status :</span><br> -->
+                                    <strong>{{order?.payment_method_name}}</strong>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card *ngIf="order.order_status !== 0 && this.userOrderdata.orderlistType !== 'new'" class="orderlist-card"
                             (click)="getOrderDetailData(order?.id,order?.shipment_id,order?.order_status,order?.picker_name,order?.substitute_status,order?.assign_wh_name,123)">
                             <mat-card-header *ngIf="order?.order_status === 0" style="background-color: red;">
                                 <mat-card-title>{{order?.custom_order_id}} New</mat-card-title>

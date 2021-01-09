@@ -15,12 +15,12 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->
-        <mat-icon *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon matRipple *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>GOG Picking App {{loginRouterLink}}</span>
-      <mat-icon (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge > 0" matBadgeColor="warn"
+      <mat-icon matRipple (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge > 0" matBadgeColor="warn"
         style="right: 7%;position: absolute;" class="logout">notifications</mat-icon>
-      <mat-icon class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new</mat-icon>
+      <mat-icon matRipple class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new</mat-icon>
       <!-- <button  class="logout-menu" mat-button [matMenuTriggerFor]="menu" (click)="logout()" #menuTrigger>logout</button> -->
       <mat-menu #menu="matMenu">
         <button (click)=" logout()" mat-menu-item>Logout</button>

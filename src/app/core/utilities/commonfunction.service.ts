@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -9,7 +9,7 @@ import { CSVRecord } from './csvrecord';
 export class CommonfunctionService {
   counter = 0;
   pdfMake: any;
-  public records: any[] = []; 
+  public records: any[] = [];
 
   constructor(public db: DatabaseService) { }
   public warehouse_id: any = ''
@@ -198,101 +198,96 @@ export class CommonfunctionService {
   }
 
   //import bulk products
-async getRecord(){
-  return this.records
-}
- uploadListener($event: any){  
-  
-    let text = [];  
-    let files = $event.srcElement.files;  
-  
-    if (this.isValidCSVFile(files[0])) {  
-  
-      let input = $event.target;  
-      let reader = new FileReader();  
-      reader.readAsText(input.files[0]);  
-  
-      reader.onload = () => {  
-        let csvData = reader.result;  
-        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);  
-  
-        let headersRow = this.getHeaderArray(csvRecordsArray);  
-  
-        this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
-        console.log("records : ",this.records);
-        // return this.records
-      };  
-  
-      reader.onerror = function () {  
-        console.log('error is occured while reading file!');  
-      };  
-  
-    } else {  
-      alert("Please import valid .csv file.");  
-      this.fileReset();  
-    }  
-    // return this.records
-    
-  }  
+  async getRecord() {
+    return this.records
+  }
+  // uploadListener($event: any) {
+  //   let text = [];
+  //   let files = $event.srcElement.files;
+  //   if (this.isValidCSVFile(files[0])) {
+  //     let input = $event.target;
+  //     let reader = new FileReader();
+  //     reader.readAsText(input.files[0]);
+  //     reader.onload = () => {
+  //       let csvData = reader.result;
+  //       let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
 
-  getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
-    let csvArr = [];  
- 
-    for (let i = 1; i < csvRecordsArray.length; i++) {  
-      let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
-      if (curruntRecord.length == headerLength) {  
-        let csvRecord: CSVRecord = new CSVRecord();  
-        console.log("csv file data : ",curruntRecord);
-        csvRecord.productName = curruntRecord[0];  
-        csvRecord.sku = curruntRecord[1];  
-        csvRecord.parentsku = curruntRecord[2];  
-        csvRecord.size = curruntRecord[3]?.trim();  
-        csvRecord.colour = curruntRecord[4]?.trim();  
-        csvRecord.brand = curruntRecord[5]?.trim();  
-        csvRecord.largdescription = curruntRecord[6];  
-        csvRecord.smalldescription = curruntRecord[7];  
-        csvRecord.features = curruntRecord[8];  
-        csvRecord.saletaxclass = curruntRecord[9]?.trim();  
-        csvRecord.grossweight = curruntRecord[10]?.trim();  
-        csvRecord.price = curruntRecord[11]?.trim();  
-        csvRecord.barcode = curruntRecord[12];  
-        csvRecord.metapagetitle = curruntRecord[13];  
-        csvRecord.maetakeyword = curruntRecord[14];  
-        csvRecord.metadescription = curruntRecord[15]?.trim();  
-        csvRecord.metapageurl = curruntRecord[16]?.trim();  
-        csvRecord.image1 = curruntRecord[17]?.trim();  
-        csvRecord.image2 = curruntRecord[18];  
-        csvRecord.image3 = curruntRecord[19];  
-        csvRecord.image4 = curruntRecord[20];  
-        csvRecord.image5 = curruntRecord[21]?.trim();  
-        csvRecord.hsncode = curruntRecord[22]?.trim();  
-        csvRecord.maxorderunit = curruntRecord[23]?.trim();  
-        csvRecord.unitofmeasurment = curruntRecord[24]?.trim();  
-        csvArr.push(csvRecord);  
-      }  
-    }  
-    return csvArr;  
-  }  
-  
-  isValidCSVFile(file: any) {  
-    return file.name.endsWith(".csv");  
-  }  
-  
-  getHeaderArray(csvRecordsArr: any) {  
-    let headers = (<string>csvRecordsArr[0]).split(',');  
-    let headerArray = [];  
-    for (let j = 0; j < headers.length; j++) {  
-      headerArray.push(headers[j]);  
-    }  
-    return headerArray;  
-  }  
-  
-  fileReset() {  
+  //       let headersRow = this.getHeaderArray(csvRecordsArray);
+
+  //       this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+  //       console.log("records : ", this.records);
+  //       // return this.records
+  //     };
+  //     reader.onerror = function () {
+  //       console.log('error is occured while reading file!');
+  //     };
+
+  //   } else {
+  //     alert("Please import valid .csv file.");
+  //     this.fileReset();
+  //   }
+  //   // return this.records
+
+  // }
+
+  // getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
+  //   let csvArr = [];
+
+  //   for (let i = 1; i < csvRecordsArray.length; i++) {
+  //     let curruntRecord = (<string>csvRecordsArray[i]).split(',');
+  //     if (curruntRecord.length == headerLength) {
+  //       let csvRecord: CSVRecord = new CSVRecord();
+  //       console.log("csv file data : ", curruntRecord);
+  //       csvRecord.productName = curruntRecord[0];
+  //       csvRecord.sku = curruntRecord[1];
+  //       csvRecord.parentsku = curruntRecord[2];
+  //       csvRecord.size = curruntRecord[3]?.trim();
+  //       csvRecord.colour = curruntRecord[4]?.trim();
+  //       csvRecord.brand = curruntRecord[5]?.trim();
+  //       csvRecord.largdescription = curruntRecord[6];
+  //       csvRecord.smalldescription = curruntRecord[7];
+  //       csvRecord.features = curruntRecord[8];
+  //       csvRecord.saletaxclass = curruntRecord[9]?.trim();
+  //       csvRecord.grossweight = curruntRecord[10]?.trim();
+  //       csvRecord.price = curruntRecord[11]?.trim();
+  //       csvRecord.barcode = curruntRecord[12];
+  //       csvRecord.metapagetitle = curruntRecord[13];
+  //       csvRecord.maetakeyword = curruntRecord[14];
+  //       csvRecord.metadescription = curruntRecord[15]?.trim();
+  //       csvRecord.metapageurl = curruntRecord[16]?.trim();
+  //       csvRecord.image1 = curruntRecord[17]?.trim();
+  //       csvRecord.image2 = curruntRecord[18];
+  //       csvRecord.image3 = curruntRecord[19];
+  //       csvRecord.image4 = curruntRecord[20];
+  //       csvRecord.image5 = curruntRecord[21]?.trim();
+  //       csvRecord.hsncode = curruntRecord[22]?.trim();
+  //       csvRecord.maxorderunit = curruntRecord[23]?.trim();
+  //       csvRecord.unitofmeasurment = curruntRecord[24]?.trim();
+  //       csvArr.push(csvRecord);
+  //     }
+  //   }
+  //   return csvArr;
+  // }
+
+  // isValidCSVFile(file: any) {
+  //   return file.name.endsWith(".csv");
+  // }
+
+  // getHeaderArray(csvRecordsArr: any) {
+  //   let headers = (<string>csvRecordsArr[0]).split(',');
+  //   let headerArray = [];
+  //   for (let j = 0; j < headers.length; j++) {
+  //     headerArray.push(headers[j]);
+  //   }
+  //   return headerArray;
+  // }
+
+  fileReset() {
     // this.csvReader.nativeElement.value = "";  
-    this.records = [];  
-  } 
+    this.records = [];
+  }
 
-  generalDownloadfile(url:any){
+  generalDownloadfile(url: any) {
     let dwldLink = document.createElement("a");
     let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
     if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
@@ -304,5 +299,24 @@ async getRecord(){
     document.body.appendChild(dwldLink);
     dwldLink.click();
     document.body.removeChild(dwldLink);
+  }
+
+  //this function will check the file is in correct formate for bulk product price and stock
+  isFileAllowed(fileName: string) {
+    let isFileAllowed = false;
+    const allowedFiles = ['.xls', '.xlsx',];
+    const regex = /(?:\.([^.]+))?$/;
+    const extension = regex.exec(fileName);
+    if (isDevMode()) {
+      console.log('extension du fichier : ', extension);
+    }
+    if (undefined !== extension && null !== extension) {
+      for (const ext of allowedFiles) {
+        if (ext === extension[0]) {
+          isFileAllowed = true;
+        }
+      }
+    }
+    return isFileAllowed;
   }
 }

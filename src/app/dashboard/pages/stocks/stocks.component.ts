@@ -34,7 +34,8 @@ export class StocksComponent implements OnInit {
     product_id:'',
     order_product_id:'',
     category_id:'',
-    searchProductvalue:''
+    searchProductvalue:'',
+    company_id:''
   }
   
   pickerProductList:any=[]
@@ -70,6 +71,7 @@ export class StocksComponent implements OnInit {
       this.userOrderdata.warehouse_id=res.warehouse_id
       this.userOrderdata.website_id=res.website_id
       this.userOrderdata.user_id=res.user_id
+      this.userOrderdata.company_id=res.company_id
       let data = {
         warehouse_id: res.warehouse_id,
         website_id: res.website_id,
@@ -282,13 +284,11 @@ export class StocksComponent implements OnInit {
     let data={
       importsatus:importsatus,
       imptitle:importtitle,
-      website_id:this.userOrderdata.website_id
+      website_id:this.userOrderdata.website_id,
+      company_id:this.userOrderdata.company_id
     } 
    this.modalservice.openModal(data,ProductimportComponent)
   }  
-
-
- 
 }  
   
 

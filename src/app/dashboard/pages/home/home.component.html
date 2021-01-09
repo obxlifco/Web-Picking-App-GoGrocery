@@ -65,7 +65,7 @@
                                         <ngx-skeleton-loader *ngIf="totalorders !== 0 && !totalorders" style="width: 100%;"></ngx-skeleton-loader>
                                     </td>
                                 </tr>
-                                <tr (click)="navigatePocessingOrder(0,'Pending')">
+                                <tr (click)="navigateNewOrder(0,'new')">
                                     <td matRipple class="mainpadding"><span>Pending or New</span></td>
                                     <td matRipple>
                                         <p *ngIf="orderdata['data'].pending_order === 0 || orderdata['data'].pending_order > 0">{{orderdata['data'].pending_order}}</p>
@@ -75,8 +75,7 @@
                                 <tr (click)="navigatePocessingOrder(100,'Processing')">
                                     <td matRipple class="mainpadding"><span>In-Processing</span></td>
                                     <td matRipple>
-                                        <p *ngIf="orderdata['data'].pending_order === 0 || orderdata['data'].pending_order > 0">{{orderdata['data'].pending_order +
-                                            orderdata['data'].processing_order}}</p>
+                                        <p *ngIf="orderdata['data'].pending_order === 0 || orderdata['data'].pending_order > 0">{{orderdata['data'].processing_order}}</p>
                                             <ngx-skeleton-loader *ngIf="orderdata['data'].pending_order !== 0 && orderdata['data'].pending_order < 0" style="width: 100%;"></ngx-skeleton-loader>
                                         </td>
                                 </tr>

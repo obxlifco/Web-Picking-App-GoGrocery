@@ -71,10 +71,13 @@ orderAttribute={
     console.log("processing order : ", this.orderdata['data'].processing_order);
 
     if (this.orderdata['data'].processing_order + this.orderdata['data'].pending_order !== 0) {
-      this.router.navigate(['dashboard/orders',{ key :key,value:value }])
+      // this.router.navigate(['dashboard/orders',{ key :key,value:value }])
+      this.router.navigate(['dashboard/orders', { orderstatus: 'In-Processing',key :key,value:value }])
     }
   }
-
+  navigateNewOrder(key:any,value:any){
+this.router.navigate(['dashboard/orders',{ key :key,value:value }])
+  }
 
   getcompleteCounter() {
     var today = new Date();
@@ -231,6 +234,7 @@ orderAttribute={
       this.db.setcancellationRate(data2)
       }
     }
-    
   }
+
+ 
 }

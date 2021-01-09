@@ -16,13 +16,7 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
-// import { jsPDF } from "jspdf";
-import html2canvas from 'html2canvas';
 
-// import * as jsPDF from 'jspdf'
-
-declare var jsPDF: any;
-// declare var $: any
 declare var window: any
 @Component({
   selector: 'app-orders',
@@ -54,7 +48,7 @@ export class OrdersComponent implements OnInit {
     grn_quantity: 0,
     product_id: '',
     order_product_id: '',
-    orderlistType: null,
+    orderlistType: "new",
     ordernonlistType: '',
     payment_type_id: '',
     order_id_for_substitute_checking: 0,
@@ -93,12 +87,16 @@ export class OrdersComponent implements OnInit {
   customErrorStateMatcher: any
   printerTotalcost: any = 0; //for total cost of products printing
   totalProductItems: any = 0//for printer product quantity
-
   //testing tabs
   navTablink: any = [
     {
+      name: 'New Order',
+      type: 'new',
+      key: 0,
+    },
+    {
       name: 'In-Processing',
-      type: '',
+      type: 'In-Processing',
       key: 100,
     },
     {
@@ -130,8 +128,10 @@ export class OrdersComponent implements OnInit {
     public modalservice: ModalService,
     private activated_route: ActivatedRoute,
     public globalitem: GlobalitemService) {
+      
     // console.log("picker Nme : ", this.userOrderdata.picker_name);
     // this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
+    // this.getuserData()
     this.activated_route.params.subscribe(v => {
       console.log("activated route data :", v)
       if (v.key)
@@ -139,9 +139,12 @@ export class OrdersComponent implements OnInit {
       this.keyValueOF_superStore.key = parseInt(v.key)
       this.keyValueOF_superStore.apistatus = "dashboard"
       if (v.orderstatus) {
+        console.log("order status  ");
+        
         this.userOrderdata.orderlistType = v.orderstatus
         for (let i = 0; i < this.navTablink.length; i++) {
           if (this.navTablink[i].type === this.userOrderdata.orderlistType) {
+            console.log("conditions true : ",this.navTablink[i].type ,this.userOrderdata.orderlistType);
             this.activeLink = this.navTablink[i];
           }
         }
@@ -151,6 +154,32 @@ export class OrdersComponent implements OnInit {
       }
     })
     this.startcounter()
+    console.log("order type : ",this.userOrderdata.orderlistType);
+    if(this.userOrderdata.orderlistType === "new"){
+      this. setNewOrderApiAttribute()
+    }
+  }
+
+  setNewOrderApiAttribute(){
+    let data=[{
+      comparer: 1,
+      field: "order_status",
+      field_id: 76,
+      input_type: "multi_select",
+      key: [0],
+      key2: "Pending",
+      name: "order_status",
+      show_name: "Order Status",
+    }]
+    this.getnewOrders(data)
+  }
+
+  getuserData(){
+    this.db.getUserData().then(res => {
+      this.userOrderdata.warehouse_id = res.warehouse_id
+      this.userOrderdata.website_id = res.website_id
+      this.userOrderdata.user_id = res.user_id
+    })
   }
 
   ngOnInit(): void {
@@ -162,7 +191,11 @@ export class OrdersComponent implements OnInit {
     this.keyValueOF_superStore.key = key
     this.keyValueOF_superStore.value = value
     this.userOrderdata.orderlistType = type;
-    this.getOrderlistData()
+    if(this.userOrderdata.orderlistType !== "new"){
+      this.getOrderlistData()
+    }else{
+      this.setNewOrderApiAttribute()
+    }
   }
   movetofooter(value: any) {
     let innerContents: any;
@@ -171,7 +204,6 @@ export class OrdersComponent implements OnInit {
     } else {
       innerContents = document.getElementById("header");
     }
-
     // const targetElement = this.footerid.nativeElement
     innerContents.scrollIntoView({ behavior: "smooth" })
   }
@@ -182,7 +214,6 @@ export class OrdersComponent implements OnInit {
   processOrder() {
     this.getcounter()
     console.log("value : ", this.billnumber.nativeElement.value);
-
     if (this.billnumber.nativeElement.value) {
       if (this.userOrderdata.PickerCounter === 0) {
         this.openConfirmationDialog()
@@ -237,8 +268,7 @@ export class OrdersComponent implements OnInit {
             this.orderlistdata["data"] = data.response //json response
             this.totalProductpage = data.total_page//total page
             this.orderlistdata["data"].payment_type_id = data?.response?.payment_type_id
-            this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+            this.orderlistDetaildata()
 
             if (this.currentPage === 1) {
               this.orderlistdata["data"] = data.response
@@ -261,6 +291,17 @@ export class OrdersComponent implements OnInit {
         this.getCompletedOrders()
       }
     })
+  }
+  orderlistDetaildata(){
+    let temarray :any=[]
+    for(let i=0;i<this.orderlistdata["data"].length;i++){
+      if(this.orderlistdata["data"][i].order_status !== 0){
+        temarray.push(this.orderlistdata["data"][i])
+      }
+    }
+    this.orderlistdata["data"]=temarray
+    this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
   }
 
   //when to assaign user name to order
@@ -998,5 +1039,38 @@ export class OrdersComponent implements OnInit {
     this.printerTotalcost += tempcost
   }
 
-
+ //get new orders
+ getnewOrders(advancedsearch:any[]){
+  this.db.getUserData().then(res => {
+    this.userOrderdata.warehouse_id = res.warehouse_id
+    this.userOrderdata.website_id = res.website_id
+    this.userOrderdata.user_id = res.user_id
+ 
+  let data={
+    advanced_search: [{
+      comparer: 1,
+      field: "order_status",
+      field_id: 76,
+      input_type: "multi_select",
+      key: [0],
+      key2: "Pending",
+      name: "order_status",
+      show_name: "Order Status",
+    }
+    ],
+    model: "EngageboostOrdermaster",
+    screen_name: "list",
+    userid: this.userOrderdata.user_id,
+    warehouse_id: this.userOrderdata.warehouse_id,
+    website_id: this.userOrderdata.website_id
+  }
+  this.apiService.postData("global_list/", data).subscribe((data: any) => {
+    this.orderlistdata["data"]=data.results[0].result
+    console.log("order list data : ",this.orderlistdata["data"]);
+    
+    this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+    this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+  })
+})
+}
 }

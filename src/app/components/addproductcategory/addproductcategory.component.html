@@ -12,7 +12,7 @@
         <h4>Select Category</h4>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
-        <mat-icon (click)="closeModal()">clear</mat-icon>
+        <mat-icon matRipple (click)="closeModal()">clear</mat-icon>
     </div>
 </div>
   <div class="body">
@@ -24,7 +24,7 @@
 
     <div class="content" role="main" *ngIf="categorylist['data']?.length">
       <div class="form-group" class="form-inline md-form form-sm active-cyan active-cyan-2">
-        <mat-icon class="right-icon">search</mat-icon>
+        <mat-icon matRipple class="right-icon">search</mat-icon>
         <input class="form-control form-control-sm ml-3 w-75" type="email" placeholder="Search" id="search-text"
           aria-describedby="search-text" [(ngModel)]="searchText" autofocus>
       </div>

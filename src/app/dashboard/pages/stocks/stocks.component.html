@@ -56,9 +56,9 @@
         <div class="row">
             <div class="col-md-12 stretch-card grid-margin col-left">
                 <button type="button" (click)="importproduct('price','Import Product Price')" style="margin-right: 1%;"
-                class="btn btn-outline-secondary globalbutton">Import product price</button>
+                    class="btn btn-outline-secondary globalbutton">Import product price</button>
                 <button type="button" (click)="importproduct('stock','Import Stock')"
-                class="btn btn-outline-secondary globalbutton">Import stock</button>
+                    class="btn btn-outline-secondary globalbutton">Import stock</button>
             </div>
         </div>
         <!-- <div class="row">
@@ -81,8 +81,9 @@
              </table>
             </div>
         </div> -->
-        <div class="row"  *ngIf="pickerProductList['data']?.length" class="search-results" infiniteScroll [infiniteScrollDistance]="0.01" [scrollWindow]="false"
-            [infiniteScrollThrottle]="500" [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
+        <div class="row" *ngIf="pickerProductList['data']?.length" class="search-results" infiniteScroll
+            [infiniteScrollDistance]="0.01" [scrollWindow]="false" [infiniteScrollThrottle]="500"
+            [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
             <div class="col-md-12 stretch-card grid-margin table-data">
                 <table class="table">
                     <th colspan="5">Product Info</th>
@@ -91,9 +92,10 @@
                     <tr *ngFor="let plist of pickerProductList['data'];let i=index">
                         <td colspan="6">
                             <div style="display: flex;">
-                                <img class="productimg" *ngIf="plist?.product_images" (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
+                                <img class="productimg" *ngIf="plist?.product_images"
+                                    (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                     [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
-                                <img class="productimg" *ngIf="!plist?.product_images" 
+                                <img class="productimg" *ngIf="!plist?.product_images"
                                     src="assets/images/product/defaultproductimg.jpg">
                                 <div>
                                     <h6>{{plist?.name}}</h6>
@@ -122,7 +124,6 @@
                         </td>
                     </tr>
                     <!-- Skeleton and empty state-->
-                   
                 </table>
             </div>
         </div>

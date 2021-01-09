@@ -31,8 +31,9 @@
               "src/assets"
             ],
             "allowedCommonJsDependencies": [
-              "lodash",
-              "rxjs-compat"
+              "xlsx",
+              "jspdf",
+              "jsPDF"
            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -58,12 +59,12 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "10mb",
+                  "maximumWarning": "1000mb",
                   "maximumError": "1000mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "10mb",
+                  "maximumWarning": "1000mb",
                   "maximumError": "1000mb"
                 }
               ]

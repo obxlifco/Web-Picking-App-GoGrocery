@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, isDevMode, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop'
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
@@ -27,6 +27,7 @@ export class ProductimportComponent implements OnInit {
   userdata = {
     website_id: '1',
     userid: '',
+    company_id: ''
   }
   subUrl: any
   usermodalData: any = []
@@ -38,6 +39,7 @@ export class ProductimportComponent implements OnInit {
     let tempdata: any = data
     this.usermodalData = tempdata.data
     this.userdata.website_id = tempdata.data.website_id
+    this.userdata.company_id = tempdata.data.company_id
   }
 
   ngOnInit(): void {
@@ -47,7 +49,6 @@ export class ProductimportComponent implements OnInit {
     this.dialogRef.close()
   }
 
-
   fileChange(event: any) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -56,7 +57,7 @@ export class ProductimportComponent implements OnInit {
   }
   uploadFile() {
     let file: any = this.file
-    console.log("files data : ",   this.files);
+    console.log("files data : ", this.files);
     let toastLabel: any;
     const formData = new FormData();
     formData.append('import_file', file);
@@ -67,20 +68,16 @@ export class ProductimportComponent implements OnInit {
       toastLabel = "Price"
     } else if (this.usermodalData.importsatus === "stock") {
       this.subUrl = "import_sheet/"
-      formData.append("company_id", '0');
+      formData.append("company_id", this.userdata.company_id);
       toastLabel = "Stock"
     }
-    // file[0].inProgress = true;
-    let fileRxtention=this.files[0]?.relativePath.slice(this.files[0]?.relativePath.length-3)
-    console.log("file extention : ",fileRxtention);
-    
-    if(file !== undefined && fileRxtention !== "jpg" && fileRxtention !== "png" && fileRxtention !== "pdf" && fileRxtention !== "peg"){
-      // this.apiService.upload(this.subUrl, formData).subscribe((data: any) => {
-      //   this.closeModal()
-      //   this.globalitem.showSuccess(toastLabel + " will be updated soon", "")
-      // })
-    }else{
-      this.globalitem.showError("Please select Excel File","")
+    if (file !== undefined && this.commonfunc.isFileAllowed(this.files[0]?.relativePath)) {
+      this.apiService.upload(this.subUrl, formData).subscribe((data: any) => {
+        this.closeModal()
+        this.globalitem.showSuccess(toastLabel + " will be updated soon", "")
+      })
+    } else {
+      this.globalitem.showError("Please select Excel File", "")
     }
   }
 
@@ -95,7 +92,6 @@ export class ProductimportComponent implements OnInit {
     if (url) {
       this.commonfunc.generalDownloadfile(url)
     }
-
   }
 
   // drag and drop files 
@@ -121,12 +117,12 @@ export class ProductimportComponent implements OnInit {
 
   public fileOver(event: any) {
     this.isFileDrop = false
-    console.log(event);
+    // console.log(event);
   }
 
   public fileLeave(event: any) {
     this.isFileDrop = true
-    console.log(event);
+    // console.log(event);
   }
 }
 

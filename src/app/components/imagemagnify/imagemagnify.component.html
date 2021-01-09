@@ -3,8 +3,12 @@
         <div class="col-md-8 stretch-card grid-margin">
         </div>
         <div class="col-md-4 grid-margin" style="text-align: end;">
-            <mat-icon (click)="closeModal()">clear</mat-icon>
+            <mat-icon matRipple matRipple (click)="closeModal()">clear</mat-icon>
         </div>
     </div>
-<img width="100%" [src]="imagedata?.data" alt="">
+<img *ngIf="imagedata?.data" width="100%" [src]="imagedata?.data" alt="">
+<div *ngIf="!imagedata?.data" style="height: 100px;">
+    <ngx-skeleton-loader style="height: -webkit-fill-available !important;">
+    </ngx-skeleton-loader>
+</div>
 </div>
