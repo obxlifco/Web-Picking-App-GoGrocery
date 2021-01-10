@@ -69,6 +69,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ProductimportComponent } from './components/productimport/productimport.component';
 import { BulkproductdataComponent } from './components/bulkproductdata/bulkproductdata.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AssaignpickerComponent } from './components/assaignpicker/assaignpicker.component';
+import { EditstoreComponent } from './dashbord/pages/editstore/editstore.component';
 
 @NgModule({
   declarations: [
@@ -96,11 +99,13 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     AppsettingsComponent,
     MessagedialogComponent,
     SalesreportComponent,
+    EditstoreComponent,
     NotfoundComponent,
     TestComponent,
     ImagemagnifyComponent,
     ProductimportComponent,
-    BulkproductdataComponent 
+    BulkproductdataComponent,
+    AssaignpickerComponent, 
   ],
   imports: [
     BrowserModule,
@@ -146,7 +151,8 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     UiSwitchModule,
     MatTooltipModule,
     MatInputModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    MatProgressSpinnerModule
     // fs
     // MatMomentDateModule
   ],

@@ -10,22 +10,16 @@ import { GlobalitemService } from 'src/app/services/globalitem/globalitem.servic
 import { OrdersComponent } from '../orders/orders.component';
 // import * as monthname from '../../../core/utilities/monthname/monthname.json';
 
-export interface PaymentMethodInter {
-  name: string;
-  completed: boolean;
-  id: any;
-  type: any
-  color: ThemePalette;
-  subtasks?: PaymentMethodInter[];
-}
-export interface product {
-  id: number
-  name: string
-  brand: string
-  color: string
-  price: number
-}
+// export interface PaymentMethodInter {
+//   name: string;
+//   completed: boolean;
+//   id: any;
+//   type: any
+//   color: ThemePalette;
+//   subtasks?: PaymentMethodInter[];
+// }
 
+var testvar :any = CommonfunctionService
 @Component({
   selector: 'app-salesreport',
   templateUrl: './salesreport.component.html',
@@ -61,18 +55,19 @@ export class SalesreportComponent implements OnInit {
     end: new FormControl(null, Validators.required),
   })
   primarycolor: any = "#007bff"
-  paymentmethod: PaymentMethodInter = {
-    name: 'Online Payment/Cash Payment',
-    type: "Select All",
-    completed: false,
-    color: this.primarycolor,
-    id: 'both',
-    subtasks: [
-      { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: true, color: 'primary' },
-      { name: 'Card On Delivery', id: 59, type: "Cash On Delivery", completed: true, color: 'primary' },
-      { name: 'Online Payment', type: "Online Payment", id: 51, completed: true, color: 'primary' },
-    ]
-  };
+  paymentmethod:any=[]
+  // paymentmethod: PaymentMethodInter = {
+  //   name: 'Online Payment/Cash Payment',
+  //   type: "Select All",
+  //   completed: false,
+  //   color: this.primarycolor,
+  //   id: 'both',
+  //   subtasks: [
+  //     { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: true, color: 'primary' },
+  //     { name: 'Card On Delivery', id: 59, type: "Cash On Delivery", completed: true, color: 'primary' },
+  //     { name: 'Online Payment', type: "Online Payment", id: 51, completed: true, color: 'primary' },
+  //   ]
+  // };
   allComplete: boolean = false;
   averageData: any = []
 
@@ -87,6 +82,9 @@ export class SalesreportComponent implements OnInit {
     public datePipe: DatePipe,
     public globalitem: GlobalitemService,
     public db: DatabaseService) {
+      this.paymentmethod=commonfunc.getPaymentMethod()
+      console.log("payment method : ",this.paymentmethod);
+      
     this.monthname = this.commonfunc.monthname;
     this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
     this.getyear = this.currentdate.getFullYear()
@@ -385,7 +383,7 @@ export class SalesreportComponent implements OnInit {
 
   //checkbox
   updateAllComplete() {
-    this.allComplete = this.paymentmethod.subtasks != null && this.paymentmethod.subtasks.every(t => t.completed);
+    this.allComplete = this.paymentmethod.subtasks != null && this.paymentmethod.subtasks.every((t: { completed: any; }) => t.completed);
     if (this.allComplete) {
       // console.log("all true");
       this.advancedsearch = []
@@ -408,7 +406,7 @@ export class SalesreportComponent implements OnInit {
       return false;
     }
     let counter = 0
-    if (this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete) {
+    if (this.paymentmethod.subtasks.filter((t: { completed: any; }) => t.completed).length > 0 && !this.allComplete) {
       for (var i = 0; i < this.paymentmethod.subtasks.length; i++) {
         if (this.paymentmethod.subtasks[i].completed === true) {
           counter++;
@@ -429,13 +427,13 @@ export class SalesreportComponent implements OnInit {
 
         }
       }
-    } else if (this.paymentmethod.subtasks.filter(t => t.completed).length === 0 && !this.allComplete) {
+    } else if (this.paymentmethod.subtasks.filter((t: { completed: any; }) => t.completed).length === 0 && !this.allComplete) {
       // console.log("not all completed", this.paymentmethod.subtasks);
       this.advancedsearch = []
       this.setcompleteparam()
     }
 
-    return this.paymentmethod.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+    return this.paymentmethod.subtasks.filter((t: { completed: any; }) => t.completed).length > 0 && !this.allComplete;
   }
 
   setAll(completed: boolean) {
@@ -452,7 +450,7 @@ export class SalesreportComponent implements OnInit {
     if (this.paymentmethod.subtasks == null) {
       return;
     }
-    this.paymentmethod.subtasks.forEach(t => t.completed = completed);
+    this.paymentmethod.subtasks.forEach((t: { completed: boolean; }) => t.completed = completed);
   }
 
   //generate sale report

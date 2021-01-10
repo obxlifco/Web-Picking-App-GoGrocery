@@ -11,6 +11,7 @@ import { SalesreportComponent } from './dashboard/pages/salesreport/salesreport.
 import { AuthguardGuard } from './services/authguard/authguard.guard';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { TestComponent } from './test/test.component';
+import { EditstoreComponent } from './dashbord/pages/editstore/editstore.component';
 
 // const routes: Routes = [
 //   { path: 'login', component: LoginComponent },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
       { path: 'returns', component: ReturnsComponent,canActivate: [AuthguardGuard] },
       { path: 'stocks', component: StocksComponent ,canActivate: [AuthguardGuard]},
       { path: 'salesreport', component: SalesreportComponent,canActivate: [AuthguardGuard] },
+      { path: 'editstore', component: EditstoreComponent,canActivate: [AuthguardGuard] },
       { path: 'appsettings', component: AppsettingsComponent ,canActivate: [AuthguardGuard]},
     ]
   },  

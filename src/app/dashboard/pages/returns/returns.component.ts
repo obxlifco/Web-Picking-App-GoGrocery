@@ -54,7 +54,7 @@ export class ReturnsComponent implements OnInit {
             this.setcustomreturnvalue()
             this.buttondisablerfunc()
           } else {
-            this.globalitem.showError(data.message, "")
+            this.globalitem.showError("Order Not Found", "")
           }
 
         })
@@ -83,13 +83,6 @@ export class ReturnsComponent implements OnInit {
     }
   }
 
-  // getSlectedItemlength(){
-  //   for (var i = 0; i < this.returnproductData["data"]?.order_products.length; i++){
-  //     if(this.returnproductData["data"]?.order_products[i].returns > 0){
-
-  //     }
-  //   }
-  // }
   cleardatefield() {
     this.date = null
   }
@@ -116,35 +109,7 @@ export class ReturnsComponent implements OnInit {
       }
       this.Substituteproductlist(index)
     }
-
-
-    // if(this.returnproductData["data"]?.order_products[index].custom_return === 0 ){
-    //   if(this.returnproductData["data"].order_products[index].commentStatus === 0){
-    //     this.returnproductData["data"].order_products[index].commentStatus = 1
-    //   }else{
-    //       this.returnproductData["data"].order_products[index].commentStatus = 0
-    //       }
-    // }
-    //   this.buttondisablerfunc()
   }
-  // buttondisablerfunc(){
-  //   let counter=0
-  //   for (var i = 0; i < this.returnproductData["data"]?.order_products.length; i++) {
-  //     console.log("status ",this.returnproductData["data"]?.order_products[i]?.commentStatus);
-  //     if(this.returnproductData["data"]?.order_products[i]?.commentStatus === 1 || this.returnproductData["data"]?.order_substitute_products[i]?.commentStatus === 1){
-  //       counter++;
-  //     }
-  //     if(this.returnproductData["data"]?.order_products.length === i+1){
-  //       if(counter > 0){
-  //         console.log("true");
-  //         this.isConfirmreturn=true;
-  //       }else{
-  //         this.isConfirmreturn=false;
-  //         console.log("false");
-  //       }
-  //     }
-  //   }
-  // }
 
   decrement(index: any, listStatus: any) {
     if (listStatus === "orderprodt") {
@@ -186,6 +151,7 @@ export class ReturnsComponent implements OnInit {
     }
     this.buttondisablerfunc()
   }
+
   Substituteproductlist(index: any) {
     console.log("before ", this.returnproductData["data"]?.order_substitute_products[index].custom_return);
     if (this.returnproductData["data"]?.order_substitute_products[index].custom_return === 0) {
@@ -197,6 +163,7 @@ export class ReturnsComponent implements OnInit {
     }
     this.buttondisablerfunc()
   }
+
   buttondisablerfunc() {
     let prodlistcounter = 0;
     let substitutecounter = 0
@@ -234,6 +201,7 @@ export class ReturnsComponent implements OnInit {
       console.log("false");
     }
   }
+  
   confirmReturn(returnstatus: any) {
     let returnDetail: any = []
     if (returnstatus === "partial") {
@@ -258,7 +226,7 @@ export class ReturnsComponent implements OnInit {
       if (data.status === 1) {
         this.globalitem.showSuccess(data.message, "")
       } else {
-        this.globalitem.showError(data.message, "")
+        this.globalitem.showError("Order Not Found", "")
       }
     })
   }

@@ -32,19 +32,19 @@
                         [(ngModel)]="ordernumber" placeholder="Order Number" #ordernumberstatus type="text"
                         class="form-control">
                 </div><br>
-                <div>
+                <!-- <div>
                     <label for="bnum">Bill Number</label>
                     <input [(ngModel)]="billnumber" placeholder="Bill Number" #bnum type="text" class="form-control">
-                </div>
+                </div> -->
             </div>
         </div>
-        <div class="row" style="margin-top: 3%;">
+        <!-- <div class="row" style="margin-top: 3%;">
             <div class="col-md-6 grid-margin">
                 <label for="bnum">Search product</label>
                 <input style="width: 68%;" placeholder="Product Name" [(ngModel)]="productName" type="text"
                     class="form-control">
             </div>
-        </div>
+        </div> -->
         <button type="button" style="margin-top: auto;" (click)="searchreturnproduct()"
             class="btn btn-outline-secondary globalbutton">Search</button>
         <div class="row orderinfo" *ngIf="returnproductData['data']?.order_products?.length">

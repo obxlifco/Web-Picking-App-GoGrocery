@@ -59,7 +59,16 @@ public upload(subUrl:any,formData:any) {
       return this.httpClient.post<any>(this.apiUrl + subUrl, formData, { headers });
   }
 
-  // getfile
+  public updateData(subUrl:any,data:any) {
+    const headers = {
+      'Authorization': 'Token 09c3b932ba526c5038c54a6c4995a229b9606cb6',
+      'content-type': 'application/json',
+      'Accept':'application/json, text/plain, */*'
+    };
+        return this.httpClient.put<any>(this.apiUrl + subUrl, data, { headers });
+    }
+    
+    // getfile
   getfileData() :any{
     let url ='http://www.gogrocery.ae:8062/media/importfile/sample/product_import_sheet.xls'
     const headers = {

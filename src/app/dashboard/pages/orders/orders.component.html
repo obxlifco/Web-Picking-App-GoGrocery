@@ -57,14 +57,28 @@
                         </td>
                         <td 
                             [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'shipped'|| userOrderdata.orderlistType === 'complete' ? 'none' : 'auto' }">
-                            <div class="form-group">
+                            <div class="form-group" *ngIf="this.userOrderdata.orderlistType === 'new'">
+                                <input type="text"
+                                    [disabled]="userOrderdata.picker_name" #username 
+                                     class="form-control"
+                                    (click)="PickernameModal()"
+                                    placeholder="Order prepared by" id="orderby">
+                                    <!-- (keyup.enter)="AssaignorderToUser(username.value)" -->
+                                <!-- <p *ngIf="userOrderdata.picker_name === undefined">None</p> -->
+                            </div>
+                            <div class="form-group" *ngIf="this.userOrderdata.orderlistType !== 'new'">
                                 <input *ngIf="userOrderdata.picker_name !== undefined" type="text"
                                     [disabled]="userOrderdata.picker_name" #username [value]="userOrderdata.picker_name"
                                     (keyup.enter)="AssaignorderToUser(username.value)" class="form-control"
+                                    
                                     placeholder="Order prepared by" id="orderby">
                                 <p *ngIf="userOrderdata.picker_name === undefined">None</p>
                             </div>
                         </td>
+                    </tr>
+                    <tr *ngIf="orderDetaildata['data'][0]?.invoice_number">
+                        <td>Order ID </td>
+                        <td>{{orderDetaildata['data'][0]?.invoice_number}}</td>
                     </tr>
                     <tr>
                         <td>Bill Number</td>
@@ -175,9 +189,9 @@
                                     [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
                                     'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'black' : 'black' }">
                                     {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
-                                    <p style="display: contents;color: white;margin-top: 2%;"
+                                    <p style="display: contents;color: black;margin-top: 2%;"
                                         *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped'">
-                                        {{orderDetaildata['data'][0]?.slot_end_time}}</p>
+                                        {{orderDetaildata['data'][0]?.time_slot_id}}</p>
                                     <!-- <mat-form-field appearance="fill"
                                         *ngIf="userOrderdata.orderlistType === 'shipped' || userOrderdata.orderlistType === 'cancelled'">
                                         <input style="color: white !important;background-color:gray"
@@ -196,11 +210,11 @@
                                     <!-- [disabled]="!userOrderdata.picker_name" -->
                                     <mat-form-field appearance="fill"
                                         *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'">
-                                        <input style="color: black !important;caret-color: transparent;width: 50%;"
+                                        <input style="color: black !important;caret-color: transparent;"
                                             [ngStyle]="{'background-color':userOrderdata.orderlistType === 'shipped' ? 'gray' : 'white' }"
-                                            matTimepicker #t="matTimepicker" #time="ngModel" [strict]="false" mode="24h"
-                                            [value]="datetime" [ngModel]="datetime"
-                                            [placeholder]="orderDetaildata['data'][0]?.slot_end_time" name="time"
+                                            matTimepicker #t="matTimepicker" #time="ngModel" [strict]="false" mode="12h"
+                                            [value]="orderDetaildata['data'][0]?.time_slot_id"  [ngModel]="datetime"
+                                            [placeholder]="orderDetaildata['data'][0]?.time_slot_id" name="time"
                                             [errorStateMatcher]="customErrorStateMatcher"
                                             (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
                                             (invalidInput)="invalidInputHandler()">
@@ -215,10 +229,8 @@
                                             class="btn btn-primary btn-sm globalbutton">Edit time</button>
                                         <!-- <mat-error *ngIf="time.touched && time.invalid">Invalid Date</mat-error> -->
                                     </mat-form-field>
-
                                 </div>
                             </div>
-
                         </td>
                     </tr>
                     <tr>
@@ -794,10 +806,11 @@
         </table>
     </div>
     <!-- skeleton end -->
-    <div *ngIf="!orderlistdata['data'].length && isOrderList">
-        <img style="margin-top: 4%;" src="assets/images/product/noresult.svg" alt="">
+    <div *ngIf="!orderlistdata['data'].length && isOrderList" style="text-align: center;">
+        <img style="margin-top: 4%;" width="50%" src="assets/images/product/noresult.jpg" alt="">
     </div>
 </div>
+<!-- print and download pdf files  -->
 <div style="height: 1px;">
     <!-- printing pickerlist -->
     <div *ngIf="isdownload" class="container printdata" #printwithOutsku id="printwithOutsku">
@@ -849,7 +862,8 @@
                     <tr>
                         <!-- {{orderDetaildata['data'][0]?.time_slot_id | slice:-7}} -->
                         <td>Delivery Time</td>
-                        <td class="rightcol">{{datetime | date:'HH:mm'}}</td>
+                        <td class="rightcol" *ngIf="datetime">{{datetime | date:'h:mm'}}</td>
+                        <td  class="rightcol" *ngIf="!datetime">{{orderDetaildata['data'][0]?.time_slot_id}}</td>
                     </tr>
                 </table>
                 <div class="mat-divider"></div>
@@ -1001,7 +1015,9 @@
                     <tr>
                         <!-- {{orderDetaildata['data'][0]?.time_slot_id | slice:-7}} -->
                         <td>Delivery Time</td>
-                        <td class="rightcol">{{datetime | date:'HH:mm'}}</td>
+                        <!-- <td class="rightcol">{{datetime | date:'HH:mm'}}</td> -->
+                        <td class="rightcol" *ngIf="datetime">{{datetime | date:'h:mm'}}</td>
+                        <td  class="rightcol" *ngIf="!datetime">{{orderDetaildata['data'][0]?.time_slot_id}}</td>
                     </tr>
                 </table>
                 <div class="mat-divider"></div>

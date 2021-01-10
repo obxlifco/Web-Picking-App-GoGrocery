@@ -16,6 +16,7 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardComponent } from '../../dashboard.component';
 import { AddproductasSubtituteComponent } from 'src/app/components/addproductas-subtitute/addproductas-subtitute.component';
 import { CommonfunctionService } from 'src/app/core/utilities/commonfunction.service';
+import { AssaignpickerComponent } from 'src/app/components/assaignpicker/assaignpicker.component';
 
 declare var window: any
 @Component({
@@ -83,7 +84,7 @@ export class OrdersComponent implements OnInit {
   //below date var is sample max and min date
   // minValue: any = new Date();
   // maxValue: any = this.minValue.getDate() + 3;
-  datetime: any = new Date();
+  datetime: any;
   customErrorStateMatcher: any
   printerTotalcost: any = 0; //for total cost of products printing
   totalProductItems: any = 0//for printer product quantity
@@ -153,25 +154,18 @@ export class OrdersComponent implements OnInit {
         }
       }
     })
-    this.startcounter()
+    
     console.log("order type : ",this.userOrderdata.orderlistType);
     if(this.userOrderdata.orderlistType === "new"){
+      this.startcounter()
       this. setNewOrderApiAttribute()
+    }else{
+      this.getOrderlistData()
     }
   }
 
   setNewOrderApiAttribute(){
-    let data=[{
-      comparer: 1,
-      field: "order_status",
-      field_id: 76,
-      input_type: "multi_select",
-      key: [0],
-      key2: "Pending",
-      name: "order_status",
-      show_name: "Order Status",
-    }]
-    this.getnewOrders(data)
+    this.getnewOrders()
   }
 
   getuserData(){
@@ -185,7 +179,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderlistdata["data"] = []
     this.orderDetaildata["data"] = []
-    this.getOrderlistData()
+    
   }
   setordertype(type: any, key: any, value: any) {
     this.keyValueOF_superStore.key = key
@@ -320,7 +314,12 @@ export class OrdersComponent implements OnInit {
       // this.orderlistdata["data"] = data
       this.globalitem.showSuccess(data.message, "Success")
       // this.reloadpage()
-      this.getOrderlistData()
+      if(this.userOrderdata.orderlistType !== "new"){
+        this.getOrderlistData()
+      }else{
+        this.getnewOrders()
+      }
+      
       // this.getOrderDetailData( this.userOrderdata.order_id,  this.userOrderdata.shipment_id,  this.userOrderdata.order_status,  this.userOrderdata.picker_name,  this.userOrderdata.substitute_status)
     })
   }
@@ -353,7 +352,8 @@ export class OrdersComponent implements OnInit {
       this.product_billnumber=this.orderDetaildata['data'][0]?.channel_order_id
       this.paymentOnlineTime = this.datePipe.transform(this.orderDetaildata["data"][0]?.created, "MMM d, y, h:mm:ss a");
       this.currenttime = this.datePipe.transform(new Date(), "MMM d, y, h:mm:ss a");
-
+      this.orderDetaildata['data'][0].time_slot_id=this.orderDetaildata['data'][0]?.time_slot_id.slice(-9)
+      
       if (this.orderDetaildata["data"][0]?.order_substitute_products) {
         // console.log("entered in if ",this.orderDetaildata["data"]?.order_substitute_products);
         this.order_Substitute_Time = this.datePipe.transform(this.orderDetaildata["data"][0]?.order_substitute_products[0]?.created, "MMM d, y, h:mm:ss a")
@@ -381,7 +381,10 @@ export class OrdersComponent implements OnInit {
 
       if (this.userOrderdata.orderlistType === 'cancelled' || this.userOrderdata.orderlistType === 'complete' || this.userOrderdata.orderlistType === 'shipped') {
       } else {
-        this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
+        if(this.userOrderdata.orderlistType === "new"){
+          this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
+        }
+        
       }
 
       // let time: any = this.orderDetaildata['data'][0]?.order_activity[0]?.activity_date;
@@ -692,6 +695,25 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  PickernameModal(){
+    
+    let data = {
+      website_id: this.userOrderdata.website_id,
+      order_id: this.userOrderdata.order_id,
+      user_id: this.userOrderdata.user_id,
+      order_status: this.userOrderdata.order_status,
+      shipment_id: this.userOrderdata.shipment_id,
+    }
+    const dialogRef = this.dialog.open(AssaignpickerComponent, {
+      width: '500px',
+      data: { data: data }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      this.userOrderdata.picker_name = result.pickername
+    });
+  }
+
   // to notfy customer using bell icon with badge
   declinedProduct() {
     let data = {
@@ -760,7 +782,7 @@ export class OrdersComponent implements OnInit {
   //update detail order data with time
   timeChangeHandler(event: any, starttime: any) {
     this.datetime = event
-    // console.log("date Event : ", event)
+    console.log("date Event : ", this.datetime)
     let data = {
       website_id: this.userOrderdata.website_id,
       user_id: this.userOrderdata.user_id,
@@ -875,11 +897,6 @@ export class OrdersComponent implements OnInit {
     let milisecond = Date.parse(modifiedTime) - Date.parse(this.currenttime) //when subs product sent for a approval, thne time will start for ten minutes
     var seconds: any = (milisecond / 1000).toFixed(0);
     this.leftTime = Math.floor(seconds / 60) * 60000 / 900;
-    // console.log("left minutes : ", this.leftTime);
-
-    //check if timer is available ore not
-    // console.log("current Time : ", this.currenttime, "modifiedTime ", modifiedTime);
-
     if (Date.parse(modifiedTime) > Date.parse(this.currenttime)) {
       this.paymentonlineTimer = false
       // console.log("timer is greater false");
@@ -1040,7 +1057,7 @@ export class OrdersComponent implements OnInit {
   }
 
  //get new orders
- getnewOrders(advancedsearch:any[]){
+ getnewOrders(){
   this.db.getUserData().then(res => {
     this.userOrderdata.warehouse_id = res.warehouse_id
     this.userOrderdata.website_id = res.website_id
@@ -1067,9 +1084,14 @@ export class OrdersComponent implements OnInit {
   this.apiService.postData("global_list/", data).subscribe((data: any) => {
     this.orderlistdata["data"]=data.results[0].result
     console.log("order list data : ",this.orderlistdata["data"]);
-    
-    this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-    this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+    if(data.results[0].result.length > 0){
+      this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+      this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+    }else{
+      this.orderlistdata["data"]=[]
+      this.isOrderList=true
+    }
+   
   })
 })
 }

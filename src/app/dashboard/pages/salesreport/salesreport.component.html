@@ -29,7 +29,7 @@
                     <form [formGroup]="rangeFormGroup">
                         <label style="display: block;" for="rangedate">Select Range Date</label>
                         <mat-form-field appearance="fill" #rangedate
-                            style="border-radius: 4%;box-shadow : 0 6px 11px -9px #d3d2d2;border: 1px solid  #d3d2d2;height:52px">
+                            style="border-radius: 4%;box-shadow : 0 6px 11px -9px #d3d2d2;border: 1px solid  #d3d2d2;height:52px;">
                             <mat-label>Enter a date range</mat-label>
                             <mat-icon matRipple
                                 *ngIf="rangeFormGroup.value.start !== null && rangeFormGroup.value.end !== null"
@@ -48,12 +48,12 @@
                     <div style="display: flex;">
                         <mat-checkbox class="example-margin" matRipple [checked]="allComplete"
                         [indeterminate]="someComplete()" (change)="setAll($event.checked)">
-                        {{paymentmethod.type}}
+                        {{paymentmethod?.type}}
                     </mat-checkbox>
-                    <div *ngFor="let subtask of paymentmethod.subtasks" style="margin-left: 2%;">
-                        <mat-checkbox matRipple *ngIf="subtask.name !== ''"
+                    <div *ngFor="let subtask of paymentmethod?.subtasks" style="margin-left: 2%;">
+                        <mat-checkbox matRipple *ngIf="subtask?.name !== ''"
                             [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
-                            {{subtask.name}}
+                            {{subtask?.name}}
                         </mat-checkbox>
                     </div>
                 </div>

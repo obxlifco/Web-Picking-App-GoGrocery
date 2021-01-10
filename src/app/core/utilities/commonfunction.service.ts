@@ -1,8 +1,19 @@
 import { Injectable, isDevMode } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { CSVRecord } from './csvrecord';
+
+export interface PaymentMethodInter {
+  name: string;
+  completed: boolean;
+  id: any;
+  type: any
+  color: ThemePalette;
+  subtasks?: PaymentMethodInter[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -318,5 +329,23 @@ export class CommonfunctionService {
       }
     }
     return isFileAllowed;
+  }
+  // payment method
+  getPaymentMethod():any{
+   let primarycolor: any = "#007bff"
+  let  paymentmethod: PaymentMethodInter = {
+      name: 'Online Payment/Cash Payment',
+      type: "Select All",
+      completed: false,
+      color: primarycolor,
+      id: 'both',
+      subtasks: [
+        { name: 'Cash On Delivery', id: 16, type: "Cash On Delivery", completed: true, color: 'primary' },
+        { name: 'Card On Delivery', id: 59, type: "Card On Delivery", completed: true, color: 'primary' },
+        { name: 'Online Payment', type: "Online Payment", id: 51, completed: true, color: 'primary' },
+      ]
+    };
+
+    return paymentmethod;
   }
 }
