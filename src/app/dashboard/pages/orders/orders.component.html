@@ -226,7 +226,7 @@
                                         <!-- <mat-icon [disabled]="!userOrderdata.picker_name" matSuffix
                                             >access_time</mat-icon> -->
                                         <!-- Error that will be shown when the input date is invalid -->
-                                        <button
+                                        <button [disabled]="!userOrderdata.picker_name"
                                             (timeChange)="timeChangeHandler($event,orderDetaildata['data'][0]?.slot_start_time)"
                                             (click)="t.showDialog()"
                                             style="position: absolute;display: inline;margin-top: -5%;" type="button"
@@ -344,7 +344,7 @@
                         </div>
                     </div>
                     <div style="margin-bottom: 2%;">
-                        <button
+                        <button [disabled]="!userOrderdata.picker_name"
                             *ngIf="userOrderdata.orderlistType !== 'cancelled' && userOrderdata.orderlistType !== 'complete' && userOrderdata.orderlistType !== 'shipped'"
                             (click)="openDialog('picker-productlist/','picker-addmoreproduct','Add New Product','',1,'','','')"
                             type="button" class="btn btn-primary globalbutton">
@@ -832,7 +832,8 @@
                 <tr>
                     <td>Picker Name</td>
                     <td class="rightcol">
-                        <div>{{orderDetaildata['data'][0]?.picker_name}}</div>
+                        <div *ngIf="userOrderdata.picker_name">{{orderDetaildata['data'][0]?.picker_name}}</div>
+                        <div *ngIf="!userOrderdata.picker_name">Unassigned</div>
                     </td>
                 </tr>
             </table>
@@ -985,7 +986,8 @@
                 <tr>
                     <td>Picker Name</td>
                     <td class="rightcol">
-                        <div>{{orderDetaildata['data'][0]?.picker_name}}</div>
+                        <div *ngIf="userOrderdata.picker_name">{{orderDetaildata['data'][0]?.picker_name}}</div>
+                        <div *ngIf="!userOrderdata.picker_name">Unassigned</div>
                     </td>
                 </tr>
             </table>

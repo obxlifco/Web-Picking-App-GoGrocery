@@ -302,9 +302,9 @@ export class OrdersComponent implements OnInit {
       this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
                 this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
     }else{
-      this.orderlistdata["data"]=[]
-      console.log("length of order list :", this.orderlistdata["data"]);
+      this.orderlistdata["data"].length=0
       this.isOrderList=true
+  
     }
    
   }
@@ -338,7 +338,12 @@ export class OrdersComponent implements OnInit {
   getOrderDetailData(orderid: any, shipment_id: string, order_status: string, picker_name: any, substitute_status: any, storename: any, storecode: any) {
     // this.IsTimeComplete = ''
     // console.log("order id :", orderid, "shipment_id: ", shipment_id, " order_status: ", order_status, " picker_name: ", picker_name, " substitute_status: ", substitute_status);
-    this.userOrderdata.picker_name = picker_name;
+    if(picker_name === undefined){
+      this.userOrderdata.picker_name = null;
+    }else{
+      this.userOrderdata.picker_name = picker_name;
+    }
+   
     this.userOrderdata.order_id = orderid
     this.userOrderdata.order_status = order_status
     this.userOrderdata.shipment_id = shipment_id
