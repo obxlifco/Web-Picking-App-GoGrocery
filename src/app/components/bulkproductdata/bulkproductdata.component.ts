@@ -47,7 +47,7 @@ export class BulkproductdataComponent implements OnInit {
   
     let text = [];  
     let files = $event.srcElement.files;  
-    console.log("file is : ",$event);
+    // console.log("file is : ",$event);
     // this.commonfunc.uploadListener($event)
     // setTimeout(()=>{
     //   this.commonfunc.getRecord().then((res: any)=>{
@@ -61,7 +61,7 @@ export class BulkproductdataComponent implements OnInit {
   let fileReader = new FileReader();    
   fileReader.readAsArrayBuffer(this.file);     
   fileReader.onload = (e) => {    
-    console.log("file reader result : ",fileReader.result);
+    // console.log("file reader result : ",fileReader.result);
     
       this.arrayBuffer = fileReader.result;    
       var data = new Uint8Array(this.arrayBuffer);    
@@ -71,11 +71,11 @@ export class BulkproductdataComponent implements OnInit {
       var workbook = XLSX.read(bstr, {type:"binary"});    
       var first_sheet_name = workbook.SheetNames[0];    
       var worksheet = workbook.Sheets[first_sheet_name];    
-      console.log("json Data : ",XLSX.utils.sheet_to_json(worksheet,{raw:true}));    
+      // console.log("json Data : ",XLSX.utils.sheet_to_json(worksheet,{raw:true}));    
       // console.log("worksheet : ",worksheet);    
         var arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true});     
             this.filelist = [];    
-            console.log(this.filelist)   
+            // console.log(this.filelist)   
             // this.importProducts($event,XLSX.utils.sheet_to_json(worksheet,{raw:true}))    
 }  
    
@@ -131,7 +131,7 @@ export class BulkproductdataComponent implements OnInit {
         formData.append("import_file_type", 'product');
         file[0].inProgress = true;
         this.apiService.upload('import_file_products/',formData).subscribe((data: any) => {
-            console.log("response : ",data);
+            // console.log("response : ",data);
             this.importproducts=data
            this.categorylist=data.category_list
             this.filename=data.filename;
@@ -166,11 +166,11 @@ export class BulkproductdataComponent implements OnInit {
           website_id: this.userdata.website_id,
         }
         this.apiService.upload('get_child_category/',data).subscribe((data: any) => {
-          console.log("response : ",data);
+          // console.log("response : ",data);
         });
       }
 readexcelFile(data:any){
-  console.log("files data is : ",data);
+  // console.log("files data is : ",data);
   
   // var arr = new Array();    
   //     for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
@@ -187,7 +187,7 @@ readexcelFile(data:any){
       savefileData(){
         let mapProductlist :any=[]
         var jsonVariable:any = {};
-        console.log("db fileds : ",this.DBFields);
+        // console.log("db fileds : ",this.DBFields);
         for(let i=0;i<this.DBFields.length;i++){
             jsonVariable[this.DBFields[i].field_label]={
             field_name: this.DBFields[i].model_field_value,
@@ -203,7 +203,7 @@ readexcelFile(data:any){
           website_id: 1,
           with_category: 0
         }
-        console.log("tmp name : ",jsonVariable);
+        // console.log("tmp name : ",jsonVariable);
         // console.log("mapProductlist : ",data);
       }
 

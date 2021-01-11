@@ -100,7 +100,7 @@ export class ReturnsComponent implements OnInit {
     } else {
       for (var i = 0; i < this.returnproductData["data"]?.order_substitute_products.length; i++) {
         if (i === index) {
-          console.log("entered : ", this.returnproductData["data"]);
+          // console.log("entered : ", this.returnproductData["data"]);
           if (this.returnproductData["data"]?.order_substitute_products[i].returns < this.returnproductData["data"]?.order_substitute_products[i].quantity) {
             let templength = this.returnproductData["data"]?.order_substitute_products[i].returns + 1 //increment the quantity
             this.returnproductData["data"].order_substitute_products[i].returns = templength; //assaign quantity to input
@@ -141,7 +141,7 @@ export class ReturnsComponent implements OnInit {
   }
 
   orderproductlist(index: any) {
-    console.log("before ", this.returnproductData["data"]?.order_products[index].custom_return);
+    // console.log("before ", this.returnproductData["data"]?.order_products[index].custom_return);
     if (this.returnproductData["data"]?.order_products[index].custom_return === 0) {
       if (this.returnproductData["data"].order_products[index].commentStatus === 0) {
         this.returnproductData["data"].order_products[index].commentStatus = 1
@@ -153,7 +153,7 @@ export class ReturnsComponent implements OnInit {
   }
 
   Substituteproductlist(index: any) {
-    console.log("before ", this.returnproductData["data"]?.order_substitute_products[index].custom_return);
+    // console.log("before ", this.returnproductData["data"]?.order_substitute_products[index].custom_return);
     if (this.returnproductData["data"]?.order_substitute_products[index].custom_return === 0) {
       if (this.returnproductData["data"].order_substitute_products[index].commentStatus === 0) {
         this.returnproductData["data"].order_substitute_products[index].commentStatus = 1
@@ -169,7 +169,7 @@ export class ReturnsComponent implements OnInit {
     let substitutecounter = 0
     let fullreturncounter = 0
     for (var i = 0; i < this.returnproductData["data"]?.order_substitute_products.length; i++) {
-      console.log("status ", this.returnproductData["data"]?.order_substitute_products[i]?.commentStatus);
+      // console.log("status ", this.returnproductData["data"]?.order_substitute_products[i]?.commentStatus);
       if (this.returnproductData["data"]?.order_substitute_products[i]?.commentStatus === 1 || this.returnproductData["data"]?.order_products[i]?.commentStatus === 1) {
         prodlistcounter++;
       }
@@ -178,7 +178,7 @@ export class ReturnsComponent implements OnInit {
       }
     }
     for (var i = 0; i < this.returnproductData["data"]?.order_products.length; i++) {
-      console.log("status ", this.returnproductData["data"]?.order_products[i]?.commentStatus);
+      // console.log("status ", this.returnproductData["data"]?.order_products[i]?.commentStatus);
       if (this.returnproductData["data"]?.order_products[i]?.commentStatus === 1 || this.returnproductData["data"]?.order_substitute_products[i]?.commentStatus === 1) {
         substitutecounter++;
       }
@@ -189,16 +189,16 @@ export class ReturnsComponent implements OnInit {
     if (fullreturncounter > 0) {
       this.isFullreturn = false;
     } else {
-      console.log("counter : ",fullreturncounter);
+      // console.log("counter : ",fullreturncounter);
       // this.isFullreturn = true;
     }
 
     if (substitutecounter + prodlistcounter > 0) {
-      console.log("true");
+      // console.log("true");
       this.isConfirmreturn = true;
     } else {
       this.isConfirmreturn = false;
-      console.log("false");
+      // console.log("false");
     }
   }
   
@@ -219,9 +219,9 @@ export class ReturnsComponent implements OnInit {
       product_tax_price: 0,
       return_details: returnDetail
     }
-    console.log("data is : ", data);
+    // console.log("data is : ", data);
     this.apiservice.postData("picker-confirmreturn/", data).subscribe((data: any) => {
-      console.log("response data : ", data);
+      // console.log("response data : ", data);
 
       if (data.status === 1) {
         this.globalitem.showSuccess(data.message, "")

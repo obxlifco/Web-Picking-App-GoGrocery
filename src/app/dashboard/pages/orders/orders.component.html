@@ -10,7 +10,11 @@
         </mat-button-toggle-group>
     </div> -->
     <div class="row pickerinput">
-
+        <div class="row" style="width: 50%;margin-top: 1%;" *ngIf="!orderlistdata['data'].length">
+        <div>
+            <h4>Order Details</h4>
+        </div>
+    </div>
         <div class="row" style="width: 50%;margin-top: 1%;" *ngIf="orderlistdata['data'].length">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stretch-card grid-margin" style="padding: 4% 9% 3% 3%;">
                 <div>
@@ -77,7 +81,7 @@
                         </td>
                     </tr>
                     <tr *ngIf="orderDetaildata['data'][0]?.invoice_number">
-                        <td>Order ID </td>
+                        <td>Invoice Number </td>
                         <td>{{orderDetaildata['data'][0]?.invoice_number}}</td>
                     </tr>
                     <tr>
@@ -188,7 +192,7 @@
                                 <div
                                     [ngStyle]="{'pointer-events':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'none' : 'auto' ,
                                     'color':userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped' ? 'black' : 'black' }">
-                                    {{orderDetaildata['data'][0]?.time_slot_date | date : 'longDate'}}
+                                    {{orderDetaildata['data'][0]?.time_slot_date | date : 'd MMM, y' }}
                                     <p style="display: contents;color: black;margin-top: 2%;"
                                         *ngIf="userOrderdata.orderlistType === 'cancelled' || userOrderdata.orderlistType === 'complete' || userOrderdata.orderlistType === 'shipped'">
                                         {{orderDetaildata['data'][0]?.time_slot_id}}</p>

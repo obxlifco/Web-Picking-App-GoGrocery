@@ -37,7 +37,7 @@ export class ModalService {
 
   async closeCategoryModal() {
     return this.dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed in service page', result);
+      // console.log('The dialog was closed in service page', result);
       return result;
     });
   }

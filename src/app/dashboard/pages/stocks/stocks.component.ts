@@ -66,7 +66,7 @@ export class StocksComponent implements OnInit {
 
   getuserData(){
     this.db.getUserData().then(res => {
-      console.log("user data inside dashboard : ", res);
+      // console.log("user data inside dashboard : ", res);
 
       this.userOrderdata.warehouse_id=res.warehouse_id
       this.userOrderdata.website_id=res.website_id
@@ -100,7 +100,7 @@ export class StocksComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.parentcategory = result.data;
       this.subcategory.name="Sub Category"
       this.subcategory.id=''
@@ -128,7 +128,7 @@ export class StocksComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.subcategory = result.data;
     });
   }
@@ -153,14 +153,14 @@ export class StocksComponent implements OnInit {
   }
 
   searchProducts(value:any) {
-    console.log("subcategory.id",this.subcategory.id);
+    // console.log("subcategory.id",this.subcategory.id);
     
-    console.log("stockStatus : ",this.stockStatus);
+    // console.log("stockStatus : ",this.stockStatus);
     if(value === "search"){
       this.totalProductpage=0;
       this.productpage=1
       this.pickerProductList["data"]=[]
-      console.log("enter");
+      // console.log("enter");
       
     }
     let temcategory:any;
@@ -168,11 +168,11 @@ export class StocksComponent implements OnInit {
       temcategory= this.parentcategory.id
     }
     if(this.subcategory.id !== undefined && this.subcategory.id){
-      console.log("no child cat");
+      // console.log("no child cat");
       
       temcategory= this.subcategory.id
     }
-    console.log("child Category : ", this.subcategory.id , "Parent Category : ",this.parentcategory.id);
+    // console.log("child Category : ", this.subcategory.id , "Parent Category : ",this.parentcategory.id);
     
     this.IsDataLoaded = true
     let data = {
@@ -187,13 +187,13 @@ export class StocksComponent implements OnInit {
       // product_stock_ids: 1
     }
     this.apiService.postData("picker-searchstock/", data).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if(this.productpage === 1){
         this.pickerProductList["data"]=data.response
         this.totalProductpage=data.total_page
-        console.log("page 1");
+        // console.log("page 1");
       }else{
-        console.log("page n");
+        // console.log("page n");
         this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];
       }
       this.IsDataLoaded = false
@@ -203,8 +203,8 @@ export class StocksComponent implements OnInit {
     console.log('scrolled!!',ev);
     this.productpage++;
     if(this.productpage <= this.totalProductpage){
-      console.log(" this.totalProductpage : ",this.totalProductpage );
-      console.log("  this.productpage : ", this.productpage );
+      // console.log(" this.totalProductpage : ",this.totalProductpage );
+      // console.log("  this.productpage : ", this.productpage );
       this.searchProducts("novalue")
     }else{
       // this.globalitem.showError("No more data is available ","No Data")
@@ -242,7 +242,7 @@ export class StocksComponent implements OnInit {
       stock:stockstatus
     }
     this.apiService.postData("picker-managestock/", data).subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       // this.pickerProductList["data"] = data
       // this.IsDataLoaded = false
       // this.searchProducts()
@@ -251,7 +251,7 @@ export class StocksComponent implements OnInit {
   }
   imagemagnifyModal(imageurl:any,imagename:any){
     imageurl=imageurl.slice(0, -8)
-    console.log("image url is :",imageurl);
+    // console.log("image url is :",imageurl);
     imageurl = imageurl +'400x400/'+imagename
     this.modalservice.openModal(imageurl,ImagemagnifyComponent)
   }
@@ -268,8 +268,8 @@ export class StocksComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log('Dialog result:',res,productindex);
-      console.log("Modal Data : ",this.pickerProductList["data"]);
+      // console.log('Dialog result:',res,productindex);
+      // console.log("Modal Data : ",this.pickerProductList["data"]);
       this.pickerProductList["data"][productindex].channel_currency_product_price.price = res.price
       if(res.price > 0){
         this.pickerProductList["data"][productindex].product_stock.stock = IsInstock

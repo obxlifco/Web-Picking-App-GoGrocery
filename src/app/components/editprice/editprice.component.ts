@@ -19,7 +19,7 @@ export class EditpriceComponent implements OnInit {
     public dialogRef: MatDialogRef<EditpriceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
-      console.log("incoming modal data : ",data);
+      // console.log("incoming modal data : ",data);
       
       this.modaldata=data
      }
@@ -53,7 +53,7 @@ export class EditpriceComponent implements OnInit {
         notes:"qwewqewq"
       }
       Object.assign(data,pricedata)
-      console.log("object data is ",data);
+      // console.log("object data is ",data);
       
     }else{
       let detailpricedata={

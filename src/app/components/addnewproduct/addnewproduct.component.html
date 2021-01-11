@@ -45,7 +45,7 @@
             <div class="col-md-12 stretch-card grid-margin table-data" #selector>
                 <table class="table">
                     <div>
-                        <th style="width: 63%;">Product Info</th>
+                        <th style="width: 70%;">Product Info</th>
                         <th>Price</th>
                         <th style="text-align: end;width: 100%;">Quantity</th>
                         <!-- <th style="text-align: center;" colspan="3">app-stocks</th> -->
@@ -62,25 +62,25 @@
                                 </div>
                             </div>
                         <tr *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
-                            <td  (click)="selectMoreproduct(i,plist?.id,plist)"
+                            <td  
                              colspan="3">
                                 <div style="display: flex;">
-                                    <img class="productimg"
+                                    <img class="productimg" (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                         [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
                                     <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
-                                    <div>
+                                    <div (click)="selectMoreproduct(i,plist?.id,plist)">
                                         <h6>{{plist?.name}}</h6>
                                         <span>{{plist.weight}} {{plist.uom_name}}</span>
                                     </div>
                                 </div>
                             </td>
                             <td  (click)="selectMoreproduct(i,plist?.id,plist)"
-                             colspan="3" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                             colspan="3" style="width: 36%;text-align: -webkit-center;padding-left: 10%;padding-top: 4%;">
                                 <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
                                     {{plist?.channel_currency_product_price.price}}</strong><br>
                             </td>
-                            <td colspan="3">
+                            <td colspan="3" style="padding-top: 4%;">
                                 <!-- <span *ngIf="plist?.quantity">Qty:{{plist?.quantity}}</span> -->
                                 <div>
                                     <div class="btn-left">
@@ -114,7 +114,7 @@
             <div class="col-md-12 stretch-card grid-margin table-data" #selector>
                 <table class="table"  >
                     <div>
-                        <th colspan="7" style="width: 86%;">Product Info</th>
+                        <th colspan="7" style="width: 91%;">Product Info</th>
                         <th colspan="5">Price</th>
                         <!-- <th style="text-align: end;width: 100%;">Stock</th> -->
                     </div>
@@ -126,7 +126,7 @@
                                 *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0">
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
-                                        <img class="productimg"
+                                        <img class="productimg"  (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                             [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img"
                                             alt="">
                                         <!-- <img *ngIf="!plist?.name" style="width: 19%;"
@@ -147,7 +147,7 @@
                     <!-- substitute list -->
                     <div *ngIf="pickerProductList['data']?.length !== 0" class="search-results" infiniteScroll [infiniteScrollDistance]="0.05"  [scrollWindow]="false"
                     [infiniteScrollThrottle]="500"  [alwaysCallback]="true" [infiniteScrollContainer]="selector" (scrolled)="onScrollDown($event)">
-                        <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row">
+                        <div *ngFor="let plist of pickerProductList['data'];let i=index;" class="col-row" style="width: 100% !important;">
                             <!-- layover selection -->
                             <div class="layover-root"
                                 (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.channel_id,plist)"
@@ -159,21 +159,21 @@
                             <!-- [ngStyle]="{'background-color':plist?.quantity === 1 ? 'gray' : 'white' }" -->
                             <tr style="height: 100px;"
                                 *ngIf="plist?.channel_currency_product_price.price > 0 && plist?.product_stock.stock !== 0"
-                                (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
+                                >
                                 <td colspan="7" style="width: 57%;">
                                     <div style="display: flex;">
-                                        <img class="productimg"
+                                        <img class="productimg"  (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                             [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img"
                                             alt="">
                                         <!-- <img *ngIf="!plist?.name" style="width: 19%;"
                                         src="assets/images/product/defaultproductimg.JPG" alt=""> -->
-                                        <div>
+                                        <div style="width: 100%;" (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
                                             <h6>{{plist?.name}}</h6>
                                             <span>{{plist.weight}} {{plist.uom_name}}</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td colspan="5" style="width: 36%;text-align: -webkit-center;padding-left: 10%;">
+                                <td colspan="5" style="text-align: end;padding-top: 4%;" (click)="selectSubstituteproduct(i,plist?.substitute_status,plist?.id,plist?.channel_currency_product_price.id,plist)">
                                     <strong *ngIf="plist?.channel_currency_product_price.price > 0">AED
                                         {{plist?.channel_currency_product_price.price}}</strong><br>
                                 </td>

@@ -30,7 +30,7 @@ export class MapmodalComponent implements OnInit {
   }
 
   initmap(data:any){
-    console.log("lat long : ",data.data);
+    // console.log("lat long : ",data.data);
     
     const mapProperties = {
       center: new google.maps.LatLng(data.data.lat_val, data.data.long_val),

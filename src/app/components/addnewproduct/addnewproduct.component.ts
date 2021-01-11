@@ -6,6 +6,7 @@ import { DatabaseService } from 'src/app/services/database/database.service';
 import { GlobalitemService } from 'src/app/services/globalitem/globalitem.service';
 import { AddproductasSubtituteComponent } from '../addproductas-subtitute/addproductas-subtitute.component';
 import { AddproductcategoryComponent } from '../addproductcategory/addproductcategory.component';
+import { ImagemagnifyComponent } from '../imagemagnify/imagemagnify.component';
 
 export interface DialogData {
 
@@ -66,7 +67,7 @@ export class AddnewproductComponent implements OnInit {
     public dialogRef: MatDialogRef<AddnewproductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.pickerProductList["data"] = []
-    console.log("modal incoming data : ", data);
+    // console.log("modal incoming data : ", data);
     // this.userProductData.order_id = ""+data ;
     let temp: any = data
     this.incomingmodalData = temp.data
@@ -96,7 +97,7 @@ export class AddnewproductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
       this.parentcategory = result.data;
       this.subcategory.name = "Sub Category"
       this.subcategory.id = ''
@@ -136,7 +137,7 @@ export class AddnewproductComponent implements OnInit {
         // this.getProductlistData()
         this.selectSubstituteproduct(this.selectedproductids.index, 1, this.selectedproductids.relatedproductid, this.selectedproductids.relatedproducttype, this.selectedproductids.item)
       } else {
-        console.log("modal closed");
+        // console.log("modal closed");
 
       }
 
@@ -201,9 +202,9 @@ export class AddnewproductComponent implements OnInit {
         Object.assign(this.pickerProductList["data"][i], isselect)
       }
 
-      console.log("add prodcut list", data);
+      // console.log("add prodcut list", data);
     } else {
-      console.log("substitute list");
+      // console.log("substitute list");
 
       this.pickerProductList["data"] = data
     }
@@ -215,13 +216,11 @@ export class AddnewproductComponent implements OnInit {
       this.totalProductpage = 0;
       this.productpage = 1
       this.pickerProductList["data"] = []
-      console.log("enter");
-
     }
 
     let temcategory: any = undefined;
     if (this.parentcategory.id !== undefined && this.parentcategory.id) {
-      console.log("else true ", this.parentcategory.id);
+      // console.log("else true ", this.parentcategory.id);
       temcategory = this.parentcategory.id
     }
     if (this.subcategory.id !== undefined && this.subcategory.id) {
@@ -251,13 +250,11 @@ export class AddnewproductComponent implements OnInit {
       Object.assign(data, category_ids);
     }
     this.apiService.postData(this.userProductData.searchproductlist, data).subscribe((data: any) => {
-      console.log(data);
       this.ISkeleton = false
       this.addCustomAttribute(data.response)
       if (data.status === 0) {
         this.pickerProductList["data"] = []
-        console.log("data length ", this.pickerProductList["data"].length);
-
+        // console.log("data length ", this.pickerProductList["data"].length);
         //  this.globalitem.showError(data.message,"No Substitute")
       } else if (this.productpage === 1) {
         // this.pickerProductList["data"]=data.response
@@ -293,7 +290,19 @@ export class AddnewproductComponent implements OnInit {
       }
     }
   }
-
+  // magnify image
+  imagemagnifyModal(imageurl:any,imagename:any){
+    imageurl=imageurl.slice(0, -8)
+    // console.log("image url is :",imageurl);
+    imageurl = imageurl +'400x400/'+imagename
+    let data={
+      data:imageurl
+    }
+    const dialogRef = this.dialog.open(ImagemagnifyComponent, {
+      width: '500px',
+      data: { data: imageurl }
+    });
+  }
   //Add product into list
   productIncrment(index: any, substitutestatus: any, relatedproductid: any, relatedproducttype: any) {
     // console.log("index ++: ", index, " substitutestatus : ", substitutestatus);
@@ -338,9 +347,6 @@ export class AddnewproductComponent implements OnInit {
         sub_product_qtys: this.productQuantity,
         // quantity:this.productQuantity
       }
-
-      console.log("product ids ", this.productsIDS);
-      console.log("product QTY ", this.productQuantity);
       this.apiService.postData(subUrl, data).subscribe((data: any) => {
 
         if (data.status === 1 && data.api_status === 'success') {
@@ -370,7 +376,7 @@ export class AddnewproductComponent implements OnInit {
 
     this.productQuantity = []
     this.productsIDS = []
-    console.log("add more products : ", this.AddmoreProducts);
+    // console.log("add more products : ", this.AddmoreProducts);
 
     for (var i = 0; i < this.AddmoreProducts.length; i++) {
       if (this.pickerProductList["data"][i].id === this.productsIDS[i]) {
@@ -391,8 +397,7 @@ export class AddnewproductComponent implements OnInit {
       // }
     }
 
-    console.log("productsIDS : ", this.productsIDS, ' Quantity : ', this.productQuantity, " Products : ", this.AddmoreProducts);
-
+    // console.log("productsIDS : ", this.productsIDS, ' Quantity : ', this.productQuantity, " Products : ", this.AddmoreProducts);
     let data = {
       website_id: this.userProductData.website_id,
       warehouse_id: this.userProductData.warehouse_id,
@@ -432,24 +437,16 @@ export class AddnewproductComponent implements OnInit {
           this.pickerProductList["data"][i].Is_Select = 1;
           if (this.AddmoreProducts.length === 0) {
             this.AddmoreProducts.push(item)
-            console.log("push 1");
           } else if (this.pickerProductList["data"][i].id !== this.AddmoreProducts[i]?.id) {
-            console.log("push 2", i);
             this.AddmoreProducts.push(item)
-
           } else if (this.AddmoreProducts[i]?.id === undefined) {
             //nothing
-            console.log("nothing to do");
             this.AddmoreProducts = []
 
           } else {
-            console.log("else executed");
-
             // this.AddmoreProducts.push(item)
           }
         } else if (this.pickerProductList["data"][i].Is_Select === 1) {
-          console.log("index : ", index);
-
           this.pickerProductList["data"][i].Is_Select = 0
           // this.productsIDS.splice(this.productsIDS.indexOf(this.pickerProductList["data"][index].id), 1)
           this.AddmoreProducts.splice(this.AddmoreProducts.indexOf(this.pickerProductList["data"][index]), 1)
@@ -470,10 +467,6 @@ export class AddnewproductComponent implements OnInit {
       this.selectedproductids.relatedproducttype = relatedproducttype,
       this.selectedproductids.item = item
 
-
-    console.log("index : ", index);
-    console.log("Api Data : ", this.pickerProductList["data"]);
-
     if (substitutestatus === 1) {
       for (var i = 0; i < this.pickerProductList["data"].length; i++) {
         if (i === index) {
@@ -485,9 +478,7 @@ export class AddnewproductComponent implements OnInit {
               this.productsIDS = this.filterArray(this.productsIDS)
               if (this.subtituteSelectedProducts.length === 0) {
                 this.subtituteSelectedProducts.push(item)
-                console.log("push 1");
               } else if (this.pickerProductList["data"][i].id !== this.subtituteSelectedProducts[i]?.id) {
-                console.log("push 2", i);
                 if (this.subtituteSelectedProducts.length < 2) {
                   this.subtituteSelectedProducts.push(item)
                 } else {
@@ -496,12 +487,10 @@ export class AddnewproductComponent implements OnInit {
 
               } else if (this.subtituteSelectedProducts[i]?.id === undefined) {
                 //nothing
-                console.log("nothing to do");
                 this.subtituteSelectedProducts = []
 
               }
             } else {
-              console.log("ebd last output");
               this.globalitem.showError("You cannot select more than 2 items ", "Warning")
             }
 
@@ -519,7 +508,7 @@ export class AddnewproductComponent implements OnInit {
         }
       }
 
-      console.log(" this.subtituteSelectedProducts list : ", this.subtituteSelectedProducts, this.pickerProductList["data"]);
+      // console.log(" this.subtituteSelectedProducts list : ", this.subtituteSelectedProducts, this.pickerProductList["data"]);
 
     } else {
       this.openSub_modal('picker-add-product-as-substitute/', this.incomingmodalData.substituteData.product_id, relatedproductid, relatedproducttype, AddproductasSubtituteComponent, 'Sub Category')
@@ -531,9 +520,8 @@ export class AddnewproductComponent implements OnInit {
     console.log('scrolled!!', ev);
     this.productpage++;
     if (this.productpage <= this.totalProductpage) {
-      console.log(" this.totalProductpage : ", this.totalProductpage);
-      console.log("  this.productpage : ", this.productpage);
-
+      // console.log(" this.totalProductpage : ", this.totalProductpage);
+      // console.log("  this.productpage : ", this.productpage);
       this.searchProducts("novalue")
     } else {
       // this.globalitem.showError("No more data is available ","No Data")

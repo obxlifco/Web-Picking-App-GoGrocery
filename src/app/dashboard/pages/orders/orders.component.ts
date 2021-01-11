@@ -134,13 +134,13 @@ export class OrdersComponent implements OnInit {
     // this.datetime = this.datetime.getHours() + ':' + this.datetime.getMinutes()
     // this.getuserData()
     this.activated_route.params.subscribe(v => {
-      console.log("activated route data :", v)
+      // console.log("activated route data :", v)
       if (v.key)
         this.keyValueOF_superStore.value = v.value
       this.keyValueOF_superStore.key = parseInt(v.key)
       this.keyValueOF_superStore.apistatus = "dashboard"
       if (v.orderstatus) {
-        console.log("order status  ");
+        // console.log("order status  ");
         
         this.userOrderdata.orderlistType = v.orderstatus
         for (let i = 0; i < this.navTablink.length; i++) {
@@ -157,11 +157,13 @@ export class OrdersComponent implements OnInit {
     
     console.log("order type : ",this.userOrderdata.orderlistType);
     if(this.userOrderdata.orderlistType === "new"){
-      this.startcounter()
+      
       this. setNewOrderApiAttribute()
     }else{
       this.getOrderlistData()
+      this.startcounter()
     }
+
   }
 
   setNewOrderApiAttribute(){
@@ -293,9 +295,18 @@ export class OrdersComponent implements OnInit {
         temarray.push(this.orderlistdata["data"][i])
       }
     }
-    this.orderlistdata["data"]=temarray
-    this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
-              this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+    console.log("length of order list :",temarray);
+    // isOrderList
+    if(temarray.length > 0){
+      this.orderlistdata["data"]=temarray
+      this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
+                this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+    }else{
+      this.orderlistdata["data"]=[]
+      console.log("length of order list :", this.orderlistdata["data"]);
+      this.isOrderList=true
+    }
+   
   }
 
   //when to assaign user name to order
@@ -334,7 +345,7 @@ export class OrdersComponent implements OnInit {
     this.userOrderdata.substitute_status = substitute_status
     this.userOrderdata.storename = storename
     this.userOrderdata.storecode = storecode
-    console.log("store name : ", storename);
+    // console.log("store name : ", storename);
 
     let data = {
       website_id: this.userOrderdata.website_id,
@@ -367,7 +378,7 @@ export class OrdersComponent implements OnInit {
         }
       }//payment id 2 for payment online 
       if (this.orderDetaildata["data"][0]?.payment_type_id === 2) {
-        console.log("timer");
+        // console.log("timer");
         this.timerProductSentApproval(this.paymentOnlineTime, 30)
       }
       this.userOrderdata.shipment_id = this.orderDetaildata["data"][0].shipment_id
@@ -569,7 +580,7 @@ export class OrdersComponent implements OnInit {
     //   }
     // })
 
-    const dialogRef = this.dialog.open(AddnewproductComponent, { width: '500px', data: { data: data } });
+    const dialogRef = this.dialog.open(AddnewproductComponent, { width: '700px',height:"650px", data: { data: data } });
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
       this.getOrderDetailData(this.userOrderdata.order_id, this.userOrderdata.shipment_id, this.userOrderdata.order_status, this.userOrderdata.picker_name, this.userOrderdata.substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
@@ -711,6 +722,9 @@ export class OrdersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.userOrderdata.picker_name = result.pickername
+      this.userOrderdata.orderlistType="In-Processing"
+    this.activeLink = this.navTablink[1];
+      this.getOrderlistData()
     });
   }
 
@@ -1083,10 +1097,11 @@ export class OrdersComponent implements OnInit {
   }
   this.apiService.postData("global_list/", data).subscribe((data: any) => {
     this.orderlistdata["data"]=data.results[0].result
-    console.log("order list data : ",this.orderlistdata["data"]);
+    // console.log("order list data : ",this.orderlistdata["data"]);
     if(data.results[0].result.length > 0){
       this.getOrderDetailData(this.orderlistdata["data"][0].id, this.orderlistdata["data"][0].shipment_id, this.orderlistdata["data"][0].order_status,
       this.orderlistdata["data"][0].picker_name, this.orderlistdata["data"][0].substitute_status, this.userOrderdata.storename, this.userOrderdata.storecode)
+      // this.getLatestOrder(this.userOrderdata.order_id_for_substitute_checking, 'insidePage')
     }else{
       this.orderlistdata["data"]=[]
       this.isOrderList=true

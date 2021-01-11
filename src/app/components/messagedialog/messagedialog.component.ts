@@ -15,7 +15,7 @@ export class MessagedialogComponent implements OnInit {
   constructor(public globalitem:GlobalitemService, 
     public dialogRef: MatDialogRef<MessagedialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
-      console.log("Incoming Data : ",data);
+      // console.log("Incoming Data : ",data);
       this.incomingmodaldata=data
       this.price=this.incomingmodaldata.data.price
     }
@@ -27,7 +27,7 @@ export class MessagedialogComponent implements OnInit {
     this.dialogRef.close()
   }
   updatePrice(){
-    console.log("price");
+    // console.log("price");
     // if stock = 0 then it will out of stock other wise it will be in stock
     if( this.incomingmodaldata.data.IsInstock > 0){
       if(this.price > 0){

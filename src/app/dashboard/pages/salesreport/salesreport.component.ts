@@ -83,7 +83,7 @@ export class SalesreportComponent implements OnInit {
     public globalitem: GlobalitemService,
     public db: DatabaseService) {
       this.paymentmethod=commonfunc.getPaymentMethod()
-      console.log("payment method : ",this.paymentmethod);
+      // console.log("payment method : ",this.paymentmethod);
       
     this.monthname = this.commonfunc.monthname;
     this.lastdate = this.getyear + "-" + this.getmonth + "-" + 1 + "##" + this.getyear + "-" + this.getmonth + "-" + this.getDaysInMonth(12, this.getyear)
@@ -215,7 +215,7 @@ export class SalesreportComponent implements OnInit {
               // console.log("amounts are : ",tempdata);
               this.mergeFirstPaymentData = tempdata//merge data with old and set new value for ids
               if (this.paymentmethodlastids) {
-                console.log("second id");
+                // console.log("second id");
                 this.generalcounter = 0
                 // this.mergeFirstPaymentData=[]
                 this.setSecondID()
@@ -348,7 +348,7 @@ export class SalesreportComponent implements OnInit {
   getCSVFile() {
     // console.log(" data : ",this.completelist["data"]["subtotal"] ,this.completelist["data"]["grandtotal"]);
     let temarray: any = []
-    console.log("this.saleData.shippingDiscount : ", this.saleData.shippingDiscount);
+    // console.log("this.saleData.shippingDiscount : ", this.saleData.shippingDiscount);
 
     let data1: any = {
       'Total Orders': this.saleData.totalorder,
@@ -499,7 +499,7 @@ export class SalesreportComponent implements OnInit {
         let paramdata: any = ['Order Number', 'Order Date', 'Customer Name', 'Payment Method', 'Subtotal', 'Shipping Cost', 'Shipping Discount', 'Other Discount', 'Grand Total']
         this.commonfunc.downloadFile(temarray, "order products", paramdata, footerdata)
       } else {
-        console.log("else is executed", this.orderlistsaleData.length, " others ", counter + this.saleData.testorders, " testorders : ", this.saleData.testorders);
+        // console.log("else is executed", this.orderlistsaleData.length, " others ", counter + this.saleData.testorders, " testorders : ", this.saleData.testorders);
 
       }
     }

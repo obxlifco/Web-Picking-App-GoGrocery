@@ -18,7 +18,7 @@ export class AddproductasSubtituteComponent implements OnInit {
     public dialogRef: MatDialogRef<AddproductasSubtituteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { 
-    console.log("incoming data modal : ",data);
+    // console.log("incoming data modal : ",data);
     
   this.modalData=data
 
@@ -35,7 +35,7 @@ export class AddproductasSubtituteComponent implements OnInit {
       related_product_type:5
     }
     this.apiService.postData(this.modalData.data.URl, data).subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       this.dialogRef.close({ event: 'close', data: "none"});
     })
   }else{

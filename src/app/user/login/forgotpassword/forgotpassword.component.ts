@@ -38,7 +38,7 @@ export class ForgotpasswordComponent implements OnInit {
       email:this.email,
     }
       this.apiService.postData("picker-forgot-password/", data).subscribe((data: any) => {
-        console.log("latestorders : ", data);
+        // console.log("latestorders : ", data);
         if(data.status === 1){
           this.globalitems.showSuccess(data.message,"Sent")
           this.dialogRef.close()

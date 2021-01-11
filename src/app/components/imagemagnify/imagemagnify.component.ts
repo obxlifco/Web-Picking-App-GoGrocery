@@ -12,7 +12,7 @@ export class ImagemagnifyComponent implements OnInit {
   constructor(public dialog: MatDialog,
     public dialogRef: MatDialogRef<ImagemagnifyComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
-      console.log("data is : ",data);
+      // console.log("data is : ",data);
       this.imagedata=data   
     }
 

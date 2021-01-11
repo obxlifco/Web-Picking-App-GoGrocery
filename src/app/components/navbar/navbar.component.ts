@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     private db: DatabaseService,
     private notificationservice : NotificationserviceService
   ) {
-    console.log("router link : ", this.loginRouterLink);
+    // console.log("router link : ", this.loginRouterLink);
     router.events.subscribe((url: any) =>
       this.getURL(url.url)
     );
@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
   }
   getURL(url?: any) {
     this.loginRouterLink = url?.url
-    console.log("router link : ", this.loginRouterLink);
+    // console.log("router link : ", this.loginRouterLink);
   }
   ngOnInit(): void {
     this.isLoggedIn$ = this.db.isLoggedIn(); 
@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
   logout() {
 
     this.db.getUserData().then(res => {
-      console.log("user data inside dashboard : ", res);
+      // console.log("user data inside dashboard : ", res);
       this.db.getIP().then(data1 => {
         data1.api
 
@@ -83,7 +83,7 @@ export class NavbarComponent implements OnInit {
         }
 
         this.apiService.postData("picker-logout/", data).subscribe((data: any) => {
-          console.log("logout : ", data);
+          // console.log("logout : ", data);
           if (data.status === 1) {
             // this.globalitems.showSuccess("You have Sucessfully logout", "Success")
             this.db.SignOut();

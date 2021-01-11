@@ -69,7 +69,7 @@ export class EditstoreComponent implements OnInit {
         for (let i = 0; i < this.storeData["data"].payment_option.length; i++) {
           for (let j = 0; j < this.paymentmethod.subtasks.length; j++) {
             if (this.storeData["data"].payment_option[i].payment_method_id === this.paymentmethod.subtasks[j].id) {
-              console.log("payment id : ", this.paymentmethod.subtasks[j]);
+              // console.log("payment id : ", this.paymentmethod.subtasks[j]);
 
               this.paymentmethod.subtasks[j].completed = true
             }
@@ -85,7 +85,7 @@ export class EditstoreComponent implements OnInit {
       let managerids: any = ""
       let paymentids: any = []
       let warehouse_category: any = []
-      console.log("number length : ",this.phonenumber.nativeElement.value.length);
+      // console.log("number length : ",this.phonenumber.nativeElement.value.length);
       
       if (this.phonenumber.nativeElement.value.length >= 10 && this.phonenumber.nativeElement.value.length <= 12) {
         this.isSaved = false
@@ -111,7 +111,7 @@ export class EditstoreComponent implements OnInit {
           t = "0"
         } else {
           t = this.storeData["data"].warehouse.channel_id
-          console.log("channel id : ", this.storeData["data"].warehouse.channel_id);
+          // console.log("channel id : ", this.storeData["data"].warehouse.channel_id);
         }
         let data = {
           address: this.storeData["data"].warehouse.address,
@@ -155,9 +155,9 @@ export class EditstoreComponent implements OnInit {
           website_id: this.website_id,
           zipcode: this.storeData["data"].warehouse.zipcode,
         }
-        console.log("data modal : ", data, " payment method : ", this.paymentmethod);
+        // console.log("data modal : ", data, " payment method : ", this.paymentmethod);
         this.apiService.updateData("warehouse/" + this.warehouse_id + "/", data).subscribe((data: any) => {
-          console.log("data");
+          // console.log("data");
           if (data.status === 1) {
             this.isSaved = true
             this.globalitem.showSuccess(data.message, "")

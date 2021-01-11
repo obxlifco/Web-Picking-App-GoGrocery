@@ -60,14 +60,14 @@ export class LoginComponent implements OnInit {
     
     // this.globalitem.showSpinner()
     this.apiservice.postData("picker-login/", this.loginForm.value).subscribe((res: any[]) => {
-      console.log(res);
+      // console.log(res);
       let data:any=res;
       if(data.status === 0){
         this.globalitem.showError(data.message, "Error")
-        console.log("form value : ",);
+        // console.log("form value : ",);
       }else{
         // this.globalitem.showSuccess("You have Successfully login", "Success")
-        console.log("form value : ",this.loginForm.username);
+        // console.log("form value : ",this.loginForm.username);
         if(this.loginForm.value.username === "supermgr"){
           let warehouseids={
             warehouse_id:null
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
   navigateproduct() {
     setTimeout(() => {
       this.router.navigate(['products']);
-      console.log("inside login");
+      // console.log("inside login");
 
     }, 1500);
   }
@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
   }
 
   showpassword(event:any){
-    console.log("event Value : ",event);
+    // console.log("event Value : ",event);
     if (event.checked) {
       this.showpasswordValue.nativeElement.setAttribute('type', 'text');
       // span.innerHTML = 'hide';

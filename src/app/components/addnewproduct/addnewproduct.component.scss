@@ -35,7 +35,7 @@
             border-radius: 6px;
 
             mat-icon {
-                margin-top: 2%;
+                margin-top: 1%;
             }
 
             input {
@@ -96,8 +96,10 @@
     background: white;
     z-index   : 6;
     position  : relative;
+    // margin-top: 5%;
     margin-top: 5%;
-
+    /* margin-bottom: -7px; */
+    height: 10%;
     button {
         width   : 100%;
         z-index : 11;
@@ -153,7 +155,7 @@
         position  : absolute;
         opacity   : 0.5;
         z-index   : 1;
-        margin-top: -5%;
+        margin-top: -3%;
         opacity   : 0.3;
     }
 
@@ -175,5 +177,6 @@
     overflow: hidden;
 }
 img{
-    width: 35% !important;
+    width: 44% !important;
+    cursor: pointer;
 }

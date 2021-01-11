@@ -57,7 +57,7 @@ export class ProductimportComponent implements OnInit {
   }
   uploadFile() {
     let file: any = this.file
-    console.log("files data : ", this.files);
+    // console.log("files data : ", this.files);
     let toastLabel: any;
     const formData = new FormData();
     formData.append('import_file', file);

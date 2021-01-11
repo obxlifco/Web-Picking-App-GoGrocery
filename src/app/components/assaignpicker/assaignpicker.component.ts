@@ -20,35 +20,21 @@ export class AssaignpickerComponent implements OnInit {
     public dialogRef: MatDialogRef<AssaignpickerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
-      console.log("incoming modal data : ",data);
+      // console.log("incoming modal data : ",data);
       
       
       this.modaldata=data
-      this.pickername=this.modaldata.data.billnumber
+      // this.pickername=this.modaldata.data.billnumber
      }
 
   ngOnInit(): void {
   }
 
   closeModal(){
-    let billdta:any
-    if(this.modaldata.data.billnumber === "Enter Bill Number"){
-      billdta="Enter Bill Number"
-      this.dialogRef.close({ event: 'close', billnumber:billdta})
-    }else{
-      billdta=this.modaldata.data.billnumber
-      this.dialogRef.close({ event: 'close', billnumber:billdta})
-    }
-    
+    this.dialogRef.close();    
   }
   savePickerName(){
     
-    let data={
-      website_id:this.modaldata.data.website_id,
-      order_id:this.modaldata.data.order_id,
-      user_id:this.modaldata.data.user_id,
-      order_bill_number:this.pickername
-    }
     if(this.pickername.length !== 0){
 
       let data = {
@@ -61,17 +47,17 @@ export class AssaignpickerComponent implements OnInit {
       }
       
 
-    // this.apiservice.postData('picker-generatepicklist/', data).subscribe((data: any) => 
-    // {
-    //   if(data.status === 1){
-    //     this.globalitem.showSuccess("Name added successfully ","NAme Updated")
-    //     this.dialogRef.close({ event: 'close', pickername: this.pickername});
-    //   }else{
-    //     this.globalitem.showError(data.message,"")
-    //     // this.dialogRef.close({ event: 'close', billnumber: this.bill_number});
-    //   }
+    this.apiservice.postData('picker-generatepicklist/', data).subscribe((data: any) => 
+    {
+      if(data.status === 1){
+        this.globalitem.showSuccess(data.message,"Name Updated")
+        this.dialogRef.close({ event: 'close', pickername: this.pickername});
+      }else{
+        this.globalitem.showError(data.message,"")
+        // this.dialogRef.close({ event: 'close', billnumber: this.bill_number});
+      }
       
-    // })
+    })
   }else{
     this.globalitem.showError("First you need to Enter Picker name","Bill Number")
   }

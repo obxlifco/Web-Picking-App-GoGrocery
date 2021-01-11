@@ -68,7 +68,7 @@ orderAttribute={
   }
 
   navigatePocessingOrder(key:any,value:any) {
-    console.log("processing order : ", this.orderdata['data'].processing_order);
+    // console.log("processing order : ", this.orderdata['data'].processing_order);
 
     if (this.orderdata['data'].processing_order + this.orderdata['data'].pending_order !== 0) {
       // this.router.navigate(['dashboard/orders',{ key :key,value:value }])
@@ -81,7 +81,7 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
 
   getcompleteCounter() {
     var today = new Date();
-    console.log("New Date Is : 2020-03-27##" + today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0'));
+    // console.log("New Date Is : 2020-03-27##" + today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0'));
     this.db.getUserData().then(res => {
       // console.log("payment method ID : ", this.rangeFormGroup.controls.paymentmethodid.value);
       let data: any;
@@ -153,7 +153,7 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
 
        if (this.currentpage > data.per_page_count) {
         this.currentpage = data.per_page_count
-        console.log("pages are equal",this.currentpage,data.per_page_count);
+        // console.log("pages are equal",this.currentpage,data.per_page_count);
         
       } else if (data.per_page_count > this.currentpage) {
         this.currentpage++
@@ -210,7 +210,7 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
       }else if(data[i].order_status === 4){
         // compcounter++;
         this.orderAttribute.completeorders++
-        console.log("complete Order : ", this.orderdata['data']['completeorders'] );
+        // console.log("complete Order : ", this.orderdata['data']['completeorders'] );
         
       }
 
@@ -222,7 +222,7 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
         this.orderdata['data'].shipped_order= this.orderAttribute.shipped_order
         this.orderdata['data'].cancel_order= this.orderAttribute.cancel_order
         this.orderdata['data']['completeorders']= this.orderAttribute.completeorders
-        console.log("else is executed",data.length,this.orderdata['data']);
+        // console.log("else is executed",data.length,this.orderdata['data']);
         this.totalorders =  this.orderdata['data'].pending_order +
         this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
         this.orderdata['data']?.cancel_order + this.orderdata['data']['completeorders']

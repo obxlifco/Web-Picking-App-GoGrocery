@@ -56,7 +56,7 @@ export class AppsettingsComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.db.setNotificationTime(event.target.value * 60000)
     this.gobalitems.showSuccess("Notification time change successfully ", "Notification")
     // timer(0, 60000).pipe(

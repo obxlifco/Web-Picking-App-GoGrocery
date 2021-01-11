@@ -11,7 +11,7 @@
       <a *ngIf="isWarehouseID" routerLinkActive="active-link" mat-list-item [routerLink]="'stocks'">Stocks</a>
       <a *ngIf="isWarehouseID" mat-list-item [routerLink]="'returns'">Returns</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'salesreport'" (click)="navigateSale()">Sales Report</a>
-      <a mat-list-item routerLinkActive="active-link" [routerLink]="'editstore'">Edit Store</a>
+      <a mat-list-item *ngIf="isWarehouseID" routerLinkActive="active-link" [routerLink]="'editstore'">Edit Store</a>
       <a mat-list-item routerLinkActive="active-link" [routerLink]="'appsettings'">App Settings</a>
       <!-- <a mat-list-item [routerLink]="'/test'">Test</a> -->
     </mat-nav-list>

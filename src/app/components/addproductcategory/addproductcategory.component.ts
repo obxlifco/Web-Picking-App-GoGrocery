@@ -27,7 +27,7 @@ export class AddproductcategoryComponent implements OnInit {
     public globalitem: GlobalitemService,
     public dialogRef: MatDialogRef<AddproductcategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      console.log("modal incoming data : ",data);
+      // console.log("modal incoming data : ",data);
       this.incomingModalData=data
       // this.categorylist["data"]=[]
       this.getCategories()
@@ -56,7 +56,7 @@ export class AddproductcategoryComponent implements OnInit {
   }
 
   listItem(data:any){
-    console.log("data : ",data);
+    // console.log("data : ",data);
     
     this.dialogRef.close({ event: 'close', data: data});
   }
@@ -70,11 +70,11 @@ export class AddproductcategoryComponent implements OnInit {
         parent_id:this.incomingModalData.data.parent_id,
         isparent:0
       }
-      console.log("going data : ",data);
+      // console.log("going data : ",data);
       let temparray:any=[]
       
       this.apiService.postData(this.incomingModalData.data.URl, data).subscribe((data: any) => {
-        console.log(data);
+        // console.log(data);
         this.categorylist["data"]=data
         if(this.incomingModalData.data.parent_id === null){
           for(let i=0;i<data.response?.length;i++){
@@ -83,7 +83,7 @@ export class AddproductcategoryComponent implements OnInit {
             }
           }
           this.categorylist["data"]=temparray
-          console.log("Parent Category ", this.categorylist["data"]);
+          // console.log("Parent Category ", this.categorylist["data"]);
           
         }else{
           for(let i=0;i<data?.response?.length;i++){
@@ -92,7 +92,7 @@ export class AddproductcategoryComponent implements OnInit {
             }
         }
         this.categorylist["data"]=temparray
-        console.log("child Category ",temparray);
+        // console.log("child Category ",temparray);
       }
       })  
     }
