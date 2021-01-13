@@ -1,0 +1,14 @@
+<div class="content">
+    <h6>App settings</h6>
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <strong for="time">Order Notification Time</strong><br>
+            <select placeholder="Sub-Category" #time (change)="onChange($event)" [(ngModel)]="timerValue"
+                class="browser-default custom-select">
+                <option *ngFor="let timerval of timerData" [value]="timerval.value">
+                    {{timerval.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>

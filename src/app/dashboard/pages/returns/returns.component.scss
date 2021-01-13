@@ -1,0 +1,127 @@
+.header12 {
+    height       : 10px;
+
+    h4 {
+        font-weight: 500;
+        font-size: 20px;
+    }
+}
+.conatiner{
+    padding: 7% 5% 3% 3%;
+    background: white;
+    margin: 0% 5%;
+    font-size: 16px;
+}
+strong{
+    font-weight: 500;
+}
+.body {
+    padding: 4% 0% 0% 0%;
+}
+button{
+    width: 20%;
+}
+mat-button-toggle {
+    width: 100px;
+    [type=button]{
+        margin-top: -5% !important;
+    }
+}
+.dateinput{
+
+    input{
+        display: initial;
+        width: 50%;
+    }
+    .clearicon{
+        position: absolute;
+        right: 2%;
+        top: 15%;
+    }
+}
+mat-form-field{
+    width: 50%;
+    border: 1px solid lightgray;
+    height: 46px;
+    padding: 2% 4% 0% 1%;
+    border-radius: 3px;
+    padding-top: 0px;
+
+    input{
+        border: none !important;
+    }
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background: white !important;
+    border    : none !important;
+}
+::ng-deep.mat-calendar-body-selected {
+    color     : white;
+    background: green;
+}
+// ::ng-deep.mat-form-field-flex {
+//     border: 1px solid lightgray !important;
+// }
+mat-button-toggle-group{
+    height: 90%;
+}
+input{
+    width: 50%;
+}
+label {
+  
+    font-weight: 500;
+    font-size  : 16px;
+}
+.orderinfo{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding-top: 1%;
+    h4{
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: auto;
+    }
+    p{
+        font-size: 15px;
+    }
+    .right-col{
+        text-align: end;
+    }
+    .subtable{
+        font-size: 15px;
+        line-height: 1.5;
+        width: 50%;
+    }
+    .order-summary{
+        margin-bottom: 4%;
+    }
+    table{
+        width: 100%;
+      
+    }
+    img{
+        width: 28%;
+        height: 100px;
+    }
+    .custombutton{
+        width: 100px;
+        height: 40px;
+        border: 1px solid lightgray;
+        border-radius: 3px;
+        color: #968c8c;
+        position: inherit;
+        .left-icon{
+            width: 38px;
+            margin-left: 6px;
+        }
+        p{
+            display: contents;
+        }
+        .right-icon{
+            margin-top: 8px;
+            position: absolute;
+            margin-left: 16px;
+        }
+    }
+}

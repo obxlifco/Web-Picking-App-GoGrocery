@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "gogproduction",
+    "public": "dist/gog-picking-app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+  ]
+  }
+}

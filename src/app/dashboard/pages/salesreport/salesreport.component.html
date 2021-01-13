@@ -1,0 +1,243 @@
+<div class="container">
+    <div class="body">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Sales Report</h4>
+            </div>
+        </div>
+        <!-- header data -->
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <label for="month">Month</label><br>
+                    <select #month class="browser-default custom-select" (change)="setSearchattribute($event,'month')"
+                        [(ngModel)]="getmonth">
+                        <option value="nomonth">All</option>
+                        <option [selected]="item.name" *ngFor="let item of monthname;let i=index" [value]="i+1">
+                            {{item.name}}</option>
+                    </select>
+                </div><br>
+                <div>
+                    <label for="year">Year</label><br>
+                    <select #year class="browser-default custom-select" [(ngModel)]="getyear"
+                        (change)="setSearchattribute($event,'year')">
+                        <option selected value="2021">2021</option>
+                        <option  value="2020">2020</option>
+                    </select>
+                </div><br>
+                <div>
+                    <form [formGroup]="rangeFormGroup">
+                        <label style="display: block;" for="rangedate">Select Range Date</label>
+                        <mat-form-field appearance="fill" #rangedate
+                            style="border-radius: 4%;box-shadow : 0 6px 11px -9px #d3d2d2;border: 1px solid  #d3d2d2;height:52px;">
+                            <mat-label>Enter a date range</mat-label>
+                            <mat-icon matRipple
+                                *ngIf="rangeFormGroup.value.start !== null && rangeFormGroup.value.end !== null"
+                                (click)="cleardatefield()">clear</mat-icon>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matRipple formControlName="start" matStartDate placeholder="Start date">
+                                <input matRipple formControlName="end" matEndDate placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                    </form>
+                </div><br>
+                <div>
+                    <label for="year">Payment Methods</label>
+                    <div style="display: flex;">
+                        <mat-checkbox class="example-margin" matRipple [checked]="allComplete"
+                        [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                        {{paymentmethod?.type}}
+                    </mat-checkbox>
+                    <div *ngFor="let subtask of paymentmethod?.subtasks" style="margin-left: 2%;">
+                        <mat-checkbox matRipple *ngIf="subtask?.name !== ''"
+                            [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
+                            {{subtask?.name}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+            <button style="margin-top: auto;margin-bottom: 1.6%;    margin-left: auto;" matRipple type="button"
+                    class="btn btn-primary btnsearch globalbutton" (click)="Searchorders()">Search</button> 
+        </div>
+        <!-- old design -->
+        <!-- <div class="row">
+            <div class="col-md-3" style="max-width: fit-content;">
+                <label for="month">Month</label>
+                <select #month class="browser-default custom-select" (change)="setSearchattribute($event,'month')"
+                    [(ngModel)]="getmonth">
+                    <option value="nomonth">All</option>
+                    <option [selected]="item.name" *ngFor="let item of monthname;let i=index" [value]="i+1">
+                        {{item.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3" style="max-width: fit-content;">
+                <label for="year">Year</label>
+                <select #year class="browser-default custom-select" [(ngModel)]="getyear"
+                    (change)="setSearchattribute($event,'year')">
+                    <option value="2021">2021</option>
+                    <option selected value="2020">2020</option>
+                </select>
+            </div>
+            <div class="col-md-3" style="display: contents;">
+
+                <form [formGroup]="rangeFormGroup">
+                    <label style="display: block;" for="rangedate">Select Range Date</label>
+                    <mat-form-field appearance="fill" #rangedate
+                        style="border-radius: 4%;box-shadow : 0 6px 11px -9px #d3d2d2;border: 1px solid  #d3d2d2;height:52px">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-icon matRipple
+                            *ngIf="rangeFormGroup.value.start !== null && rangeFormGroup.value.end !== null"
+                            (click)="cleardatefield()">clear</mat-icon>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matRipple formControlName="start" matStartDate placeholder="Start date">
+                            <input matRipple formControlName="end" matEndDate placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </form>
+            </div>
+                <div class="col-md-3" style="max-width: fit-content;">
+                    <label for="year">Payment Methods</label>
+                    <div style="display: flex;">
+                        <mat-checkbox class="example-margin" matRipple [checked]="allComplete"
+                        [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                        {{paymentmethod.type}}
+                    </mat-checkbox>
+                    <div *ngFor="let subtask of paymentmethod.subtasks">
+                        <mat-checkbox matRipple *ngIf="subtask.name !== ''"
+                            [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
+                            {{subtask.name}}
+                        </mat-checkbox>
+                    </div>
+                   
+                    </div>
+                </div>
+               
+            
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header matTooltipPosition="above" matTooltip="Select payment method selection">
+                            <mat-panel-title>
+                                Payment Methods
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <section class="example-section">
+                            <span class="example-list-section">
+                                <mat-checkbox class="example-margin" matRipple [checked]="allComplete"
+                                    [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                                    {{paymentmethod.type}}
+                                </mat-checkbox>
+                            </span>
+                            <span class="example-list-section">
+                                <mat-grid-list cols="4" rowHeight="3:1">
+                                    <mat-grid-tile *ngFor="let subtask of paymentmethod.subtasks">
+                                        <mat-checkbox matRipple *ngIf="subtask.name !== ''"
+                                            [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
+                                            {{subtask.name}}
+                                        </mat-checkbox>
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </span>
+                        </section>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div> -->
+        <!-- table data -->
+       
+    </div>
+    <table class="table" matRipple>
+        <!-- <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Cost</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr>
+                <td>Total Orders</td>
+                <td>
+                    <p *ngIf="completelist['data']['currency_code']">{{saleData.totalorder}}</p>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr>
+            <tr>
+                <td>Subtotal</td>
+                <td>
+                    <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                        {{saleData.subtotal | number}}</p>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr>
+            <tr>
+                <td>Shipping Costs</td>
+                <td>
+                    <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                        {{saleData.shippingcost | number}}</p>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>Shipping Discount</td>
+                <td>
+                    <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                        {{saleData.shippingDiscount | number}}</p>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr>
+            <tr>
+                <td>Coupon Discount</td>
+                <td>
+                    <p *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                        {{saleData.coupendiscount | number}}</p>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr> -->
+            <tr>
+                <td><strong>Grand Total</strong></td>
+                <td style="width: 60%;">
+                    <strong *ngIf="completelist['data']['currency_code']">{{completelist['data']['currency_code']}}
+                        {{saleData.grandtotal | number}}</strong>
+                    <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader>
+                </td>
+            </tr>
+            <tr>
+                <td><span>Average Value</span></td>
+                <td style="width: 60%;">
+                    <span *ngIf="saleData.totalorder === 0">0.0</span>
+                    <span *ngIf="saleData.totalorder && completelist['data']['currency_code']">
+                        {{saleData.grandtotal/saleData.totalorder | number}}</span>
+                    <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
+                </td>
+            </tr>
+            <tr>
+                <td><span>Cancel Rate</span></td>
+                <td style="width: 60%;">
+                    <span *ngIf="saleData.totalorder === 0">0.0</span>
+                    <span *ngIf="saleData.totalorder > 0 && completelist['data']['currency_code']">
+                        {{ averageData?.cancelledorders/(averageData?.cancelledorders + saleData.totalorder)*100 |
+                        number |slice:0:2}}%</span>
+                    <!-- <ngx-skeleton-loader *ngIf="!completelist['data']['currency_code']"></ngx-skeleton-loader> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row" style="margin-bottom: 3%;">
+        <div class="col-md-2" style="max-width: fit-content;">
+            <button matRipple type="button" class="btn btn-success globalbutton"
+                [disabled]="saleData.totalorder === 0" (click)="getCSVFile()">Generate CSV</button>
+        </div>
+        <div class="col-md-4">
+            <button matRipple type="button" class="btn btn-success globalbutton"
+                [disabled]="saleData.totalorder === 0" (click)="generateSaleReport()">Generate Order Report</button>
+        </div>
+    </div>
+</div>

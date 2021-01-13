@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav style="border-right: 4px solid #aed86e;" #drawer class="sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <mat-toolbar style="background: white;">
+      <img matRipple style="height: 64px !important" src="assets/images/gog.jpg" alt="logo">
+    </mat-toolbar>
+    <mat-nav-list (click)="close()">
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'home'">Dashboard</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'orders'" (click)="navigateOrders()">Orders</a>
+      <a *ngIf="isWarehouseID" routerLinkActive="active-link" mat-list-item [routerLink]="'stocks'">Stocks</a>
+      <a *ngIf="isWarehouseID" mat-list-item [routerLink]="'returns'">Returns</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'salesreport'" (click)="navigateSale()">Sales
+        Report</a>
+      <a mat-list-item *ngIf="isWarehouseID" routerLinkActive="active-link" [routerLink]="'editstore'">Edit Store</a>
+      <a mat-list-item routerLinkActive="active-link" [routerLink]="'appsettings'">App Settings</a>
+      <!-- <a mat-list-item [routerLink]="'/test'">Test</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="navheader" style="background: #aed86e !important;" color="primary">
+      <button matRipple type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->
+        <mat-icon matRipple *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="title">{{title}} {{loginRouterLink}}</span>
+      <!-- <mat-icon matRipple (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge !== 0"
+        matBadgeColor="warn" style="right: 15%;position: absolute;" class="logout">notifications</mat-icon> -->
+
+      <!-- <mat-icon matRipple *ngIf="totalbadge === 0" style="right: 15%;position: absolute;" class="logout">notifications
+      </mat-icon>
+      <mat-icon matRipple class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new
+      </mat-icon> -->
+      <mat-icon matRipple (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge !== 0"
+        matBadgeColor="warn" style="right: 5%;position: fixed;" class="logout">notifications</mat-icon>
+      <mat-icon matRipple *ngIf="totalbadge === 0" style="right: 5%;position: fixed;" class="logout">notifications
+      </mat-icon>
+      <mat-icon matRipple class="logout-menu" style="right: 2%;position: fixed;" mat-button [matMenuTriggerFor]="menu"
+        #menuTrigger>power_settings_new
+      </mat-icon>
+      <!-- <button  class="logout-menu" mat-button [matMenuTriggerFor]="menu" (click)="logout()" #menuTrigger>logout</button> -->
+      <mat-menu #menu="matMenu">
+        <div (click)=" logout()" mat-menu-item>Logout</div>
+      </mat-menu>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <router-outlet></router-outlet> -->

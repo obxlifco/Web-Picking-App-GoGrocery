@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Edit Store</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <label for="contactperson1">Contact Person</label>
+                <input
+                    [(ngModel)]="contactperson" placeholder="person name" #contactperson1 type="text"
+                    class="form-control">
+            </div><br>
+            <div>
+                <label for="phoneNumber1">Phone Number</label>
+                <input
+                    [(ngModel)]="phoneNumber" placeholder="phone number" #phoneNumber1 type="number"
+                    class="form-control">
+            </div><br>
+            <div>
+                <label for="deliverTimeModifier1">Delivery Time Modifier</label>
+                <input
+                    [(ngModel)]="deliverTimeModifier" placeholder="time modifier" #deliverTimeModifier1 type="number"
+                    class="form-control">
+            </div><br>
+            <div>
+                <label for="year">Payment Methods</label>
+                <div style="display: flex;">
+                    <mat-checkbox class="example-margin" matRipple [checked]="allComplete"
+                    [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                    {{paymentmethod?.type}}
+                </mat-checkbox>
+                <div *ngFor="let subtask of paymentmethod?.subtasks" style="margin-left: 2%;">
+                    <mat-checkbox matRipple *ngIf="subtask?.name !== ''"
+                        [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
+                        {{subtask?.name}}
+                    </mat-checkbox>
+                </div>
+            </div>
+            </div><br>
+            <button type="button" (click)="savestoreInfo()" *ngIf="isSaved"
+            class="btn btn-outline-secondary globalbutton">Update</button>
+            <button *ngIf="!isSaved" type="button" class="btn btn-outline-secondary globalbutton">
+            <div class="spinner-border text-light" ></div>
+        </button>
+            
+        </div>
+    </div>
+</div>

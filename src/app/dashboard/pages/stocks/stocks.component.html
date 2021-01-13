@@ -1,0 +1,139 @@
+<div class="conatiner">
+    <div class="row main-header">
+        <div class="col-md-12 stretch-card grid-margin">
+            <h4>Manage Stock</h4>
+        </div>
+    </div>
+    <div class="body">
+        <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Parent Category</label>
+                <select #parentcat (click)="opencategory_modal('Category')" class="browser-default custom-select">
+                    <option selected>All</option>
+                    <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
+                </select>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="childcat">Child Category</label>
+                <select #childcat (click)="opensub_category_modal('Sub Category')"
+                    class="browser-default custom-select">
+                    <option selected>All</option>
+                    <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
+                </select>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="stock">Stock</label>
+                <select #stock class="browser-default custom-select" [(ngModel)]="stockStatus">
+                    <option value="" selected>Yes/No</option>
+                    <option value="y">In-stock</option>
+                    <option value="n">Out of stock</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="price">Has Price</label>
+                <select #price class="browser-default custom-select" [(ngModel)]="cat_price">
+                    <option value="" selected>Yes/No</option>
+                    <option value="y">Yes</option>
+                    <option value="n">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+                <div class="search-container">
+                    <div class="custom-input">
+                        <input (keyup.enter)="searchProducts('search')" [(ngModel)]="userOrderdata.searchProductvalue"
+                            placeholder="Search for product" type="text" class="form-control">
+                        <!-- <mat-icon class="right-icon">search</mat-icon> -->
+                    </div>
+                    <!-- <button type="button" class="btn btn-outline-secondary">Scan</button> -->
+                    <button type="button" (click)="searchProducts('search')"
+                        class="btn btn-outline-secondary globalbutton">Search</button>
+                </div>
+            </div>
+        </div>
+        <!-- import bulk product -->
+        <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+                <button type="button" (click)="importproduct('price','Import Product Price')" style="margin-right: 1%;"
+                    class="btn btn-outline-secondary globalbutton">Import product price</button>
+                <button type="button" (click)="importproduct('stock','Import Stock')"
+                    class="btn btn-outline-secondary globalbutton">Import stock</button>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+             <table>
+                <th>id</th>
+                <th>firstName</th>
+                <th>lastName</th>
+                <th>age</th>
+                <th>position</th>
+                <th>mobile</th>
+                <tr *ngFor="let record of records;let i = index;">    
+                    <td> <span>{{record.id}}</span> </td>    
+                    <td> <span>{{record.firstName}}</span> </td>    
+                    <td> <span>{{record.lastName}}</span> </td>    
+                    <td> <span>{{record.age}}</span> </td>    
+                    <td> <span>{{record.position}}</span> </td>    
+                    <td> <span>{{record.mobile}}</span> </td>    
+                  </tr>    
+             </table>
+            </div>
+        </div> -->
+        <div class="row" *ngIf="pickerProductList['data']?.length" class="search-results" infiniteScroll
+            [infiniteScrollDistance]="0.01" [scrollWindow]="false" [infiniteScrollThrottle]="500"
+            [alwaysCallback]="true" (scrolled)="onScrollDown($event)">
+            <div class="col-md-12 stretch-card grid-margin table-data">
+                <table class="table">
+                    <th colspan="5">Product Info</th>
+                    <th colspan="3.5" style="width: 20%;">Price</th>
+                    <th colspan="3.5" style="text-align: center;">Stock</th>
+                    <tr *ngFor="let plist of pickerProductList['data'];let i=index">
+                        <td colspan="6">
+                            <div style="display: flex;">
+                                <img class="productimg" *ngIf="plist?.product_images"
+                                    (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
+                                    [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
+                                <img class="productimg" *ngIf="!plist?.product_images"
+                                    src="assets/images/product/defaultproductimg.jpg">
+                                <div>
+                                    <h6>{{plist?.name}}</h6>
+                                    <span>{{plist?.weight}} {{plist?.uom_name}}</span><br>
+                                    <span>SKU {{plist?.sku}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td colspan="3.5">
+                            <strong>AED
+                                {{plist?.channel_currency_product_price?.price}}</strong><br>
+                            <button matRipple
+                                (click)="editprice($event,plist?.channel_currency_product_price?.price,plist?.id,i,plist?.product_stock?.stock)"
+                                type="button" class="btn btn-primary btn-sm globalbutton editprice">Edit Price
+                            </button>
+                        </td>
+
+                        <td colspan="3.5">
+                            <!-- <h5>switch button</h5> -->
+                            <ui-switch color="#98D81D" [checked]="plist?.product_stock?.stock > 0"
+                                (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)">
+                            </ui-switch>
+                            <!-- <mat-slide-toggle
+                                (change)="onChange($event,plist?.channel_currency_product_price?.price,plist?.id,i)"
+                                [checked]="plist?.product_stock?.stock > 0"></mat-slide-toggle> -->
+                        </td>
+                    </tr>
+                    <!-- Skeleton and empty state-->
+                </table>
+            </div>
+        </div>
+        <div *ngIf="!pickerProductList['data']?.length && IsDataLoaded === true">
+            <ngx-skeleton-loader style="width: 100%;" *ngFor="let item of [1,2,3,4]">
+            </ngx-skeleton-loader>
+        </div>
+        <div *ngIf="!pickerProductList['data']?.length  && IsDataLoaded === false">
+            <!-- if data not found -->
+            <app-emptystate></app-emptystate>
+        </div>
+    </div>
+</div>

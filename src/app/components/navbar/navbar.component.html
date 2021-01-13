@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav   #drawer    class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar><img style="height: 64px !important" src="assets/logo/gog.svg" alt="logo" /></mat-toolbar>
+    <mat-nav-list (click)="close()">
+      <a mat-list-item [routerLink]="'home'">Dashboard</a>
+      <a mat-list-item [routerLink]="'orders'">Orders</a>
+      <a mat-list-item [routerLink]="'stocks'">Stocks</a>
+      <a mat-list-item [routerLink]="'returns'">Returns</a>
+      <a mat-list-item [routerLink]="'appsettings'">App Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="navheader" style="background-color: rgb(90, 90, 221) !important;" color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <!-- <mat-icon  *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon> -->
+        <mat-icon matRipple *ngIf="loginRouterLink !== '/login'" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>GOG Picking App {{loginRouterLink}}</span>
+      <mat-icon matRipple (click)="navigatLatestOrder()" [matBadge]="totalbadge" *ngIf="totalbadge > 0" matBadgeColor="warn"
+        style="right: 7%;position: absolute;" class="logout">notifications</mat-icon>
+      <mat-icon matRipple class="logout-menu" mat-button [matMenuTriggerFor]="menu" #menuTrigger>power_settings_new</mat-icon>
+      <!-- <button  class="logout-menu" mat-button [matMenuTriggerFor]="menu" (click)="logout()" #menuTrigger>logout</button> -->
+      <mat-menu #menu="matMenu">
+        <button (click)=" logout()" mat-menu-item>Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <router-outlet></router-outlet> -->

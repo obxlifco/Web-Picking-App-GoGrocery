@@ -1,0 +1,119 @@
+.main-header {
+    height: 11px;
+
+    h4 {
+        font-weight: 500;
+        font-size  : 20px;
+    }
+}
+
+.conatiner {
+    padding: 8% 5% 3% 3%;
+    margin-left: 45px;
+    background: white;
+    margin-right: 45px;
+    overflow: hidden;
+    margin-bottom: 4%;
+    border-radius: 3px;
+}
+
+label {
+    float      : left;
+    font-weight: 500;
+    font-size  : 16px;
+}
+table{
+    background: white;
+    // test
+    position: relative;
+    border-collapse: collapse;
+    border: none;
+}
+th{
+    font-size: 17px;
+    font-weight: 500;
+    background: white;
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+.body {
+    padding: 4% 0% 0% 0%;
+
+    .col-left {
+        text-align: right;
+
+        .custom-input {
+            width        : 100%;
+            display      : flex;
+            border       : 1px solid lightgray;
+            border-radius: 6px;
+
+            mat-icon {
+                margin-top: 2%;
+            }
+
+            input {
+                border: none;
+            }
+        }
+
+        .search-container {
+            width  : 100%;
+            display: flex;
+
+            button {
+                margin-left: 3%;
+            }
+        }
+    }
+
+    .col-right {
+        text-align: right;
+    }
+}
+::ng-deep.switch.switch-medium {
+    min-width: 61px !important;
+}
+.table-data {
+    table {
+        width: 100%;
+    }
+span{
+    font-size: 17px;
+}
+    h6 {
+        font-size  : 17px;
+        margin     : 0px;
+        font-weight: 500;
+    }
+}
+
+.editprice {
+    color :white;
+    cursor: pointer;
+    margin-top: 3%;
+}
+
+.search-results {
+    height  : 40rem;
+    overflow: scroll;
+}
+img{
+    cursor: pointer;
+}
+.productimg {
+    width : fit-content !important;
+    height: 100px !important;
+}
+
+@media only screen and (max-width: 360) and (max-height: 640) {
+    .conatiner {
+        padding: 18% 5% 3% 5% !important;
+    }
+}
+
+th {
+    border-bottom: 1px solid #dee2e6;
+}

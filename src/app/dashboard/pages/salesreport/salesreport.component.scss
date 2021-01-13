@@ -1,0 +1,140 @@
+.body {
+    // padding: 11% 3% 2% 3%;
+    // padding: 8% 1% 0% 4.2% !important;
+    
+    position: inherit;
+    display : block;
+    overflow: hidden;
+}
+.container{
+    // padding: 7% 5% 3% 5%;
+    // margin-left: 45px;
+    margin: 0% 5%;
+    background: white;
+    margin-right: 45px;
+    overflow: hidden;
+    border-radius: 3px;
+    width: auto;
+}
+label {
+    font-weight: 500;
+    font-size  : 16px;
+}
+
+section {
+    background   : white;
+    width        : fit-content;
+    border-radius: 1%;
+    // padding: 1%;
+    box-shadow   : 0 1px 13px -9px #d3d2d2;
+    width        : auto;
+}
+
+mat-expansion-panel {
+    width : 49%;
+    margin: 9px 0px 9px 0px;
+
+}
+
+.mat-accordion>.mat-expansion-panel-spacing:last-child {
+    margin-bottom: 10px !important;
+    margin-top   : 10px !important;
+}
+
+h4 {
+    font-size  : 20px;
+    font-weight: 500;
+}
+
+.btnsearch {
+    margin-top   : 0.2%;
+    margin-left  : 2%;
+    width        : 18%;
+    height       : 42px;
+    margin-bottom: 1%;
+}
+
+select {
+    height: 50px;
+    width: 24.6%;
+}
+
+button {
+    height: 100%;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #2E6B0B !important;
+  }
+.table {
+    width           : 58%;
+    margin-bottom   : 1rem;
+    color           : #212529;
+    background      : white;
+    // margin-top   : 2%;
+    border          : 1px solid lightgray;
+    font-size       : 17px;
+    margin-top: 1px;
+}
+
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+    background      : white;
+    border-radius   : 4px 4px 4px 4px !important;
+    padding         : 0.75em 0.75em 0 0.75em;
+    color           : black !important;
+    // box-shadow   : 0 6px 11px -9px #d3d2d2;
+    // border       : 1px solid  #d3d2d2;
+    height          : 50px;
+}
+
+mat-label {
+    color: black;
+}
+
+::ng-deep.mat-form-field-underline {
+    visibility: hidden;
+}
+
+::ng-deep.mat-calendar-body-selected {
+    color     : white;
+    background: green;
+}
+
+mat-icon {
+    position     : absolute;
+    right        : 0px;
+    top          : -7px;
+    border-radius: 100%;
+}
+
+
+ul {
+    list-style-type: none;
+    margin-top     : 4px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent {
+    .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: green;
+    }
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: gray;
+}
+
+::ng-deep.loader.progress {
+    background-image: linear-gradient(90deg, rgba(136, 204, 151, 0), rgba(98, 81%, 23%, 1), rgba(255, 255, 255, 0)) !important;
+}
+
+button {
+    background  : #98D81D !important;
+    border-color: #98D81D !important;
+    color       : white !important;
+}
+
+@media only screen and (min-width: 1024px) {
+    .body{
+        padding: 8% 1% 0% 4.2% !important
+    }
+}

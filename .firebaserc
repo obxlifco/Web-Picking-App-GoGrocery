@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "myapp-f8321": {
+      "hosting": {
+        "gog-picking-app": [
+          "myapp-f8321"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "myapp-f8321"
+  }
+}
