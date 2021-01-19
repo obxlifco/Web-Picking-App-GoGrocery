@@ -829,18 +829,34 @@ export class OrdersComponent implements OnInit {
   }
   //this method use for to check substitute is there are not 
   getsubtitteStatus() {
+    let counter= 0;
     for (var i = 0; i < this.orderDetaildata['data'][0]?.order_substitute_products.length; i++) {
       if (this.orderDetaildata['data'][0]?.order_substitute_products[i].send_approval === "approve" || this.orderDetaildata['data'][0]?.order_substitute_products[i].send_approval === "declined") {
         // counter=0
         this.IS_Subtitute = true
+        
+        // console.log("counter in if ",  counter);
+        
       } else {
-        // console.log("true");
+        // counter=0
+        counter=1
+        
         this.IS_Subtitute = false
       }
+      console.log(this.orderDetaildata['data'][0]?.order_substitute_products.length," i ",i+1);
+      
+      if(this.orderDetaildata['data'][0]?.order_substitute_products.length === i+1){
+        // console.log("enterd ",counter);
+        if(counter === 1){
+          this.IS_Subtitute = false
+        }
+      }
+    
     }
     if (this.orderDetaildata['data'][0]?.order_substitute_products.length === 0) {
       this.IS_Subtitute = true
     }
+    
   }
   handleEvent(event: any) {
     // console.log("event occur : ", event);

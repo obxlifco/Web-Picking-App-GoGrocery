@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "gogproduction",
+    "site": "gogpicking",
     "public": "dist/gog-picking-app",
     "ignore": [
       "firebase.json",
