@@ -583,7 +583,7 @@
                             style="margin-bottom: 10%;">
                             <!-- <div class="row" style="padding: 0%;"
                                 *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'"> -->
-                            <div class="row" style="padding: 0%;">
+                            <div class="row" style="padding: 0%;" *ngIf="subtitute.send_approval !== 'declined'&& subtitute.send_approval !=='approve'">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stretch-card grid-margin">
                                     <img class="productimg" style="width: 100%;"
                                         [src]="subtitute?.product.product_images[0]?.link+''+subtitute?.product.product_images[0]?.img"
