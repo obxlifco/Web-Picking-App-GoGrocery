@@ -9,8 +9,6 @@ import { DatabaseService } from 'src/app/services/database/database.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-
   orderdata: any = []
   genericOrderData:any=[]
   totalorders: any;
@@ -179,8 +177,9 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
         totaloreders: this.totalorders
       }
       this.db.setcancellationRate(data)
+      console.log("if total orders : ", this.totalorders);
     } else {
-      this.totalorders = this.orderdata['data'].pending_order + this.orderdata['data'].pending_order +
+      this.totalorders = this.orderdata['data'].pending_order +
         this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
         this.orderdata['data']?.cancel_order
       // console.log("total orders : ",this.totalorders,this.orderdata['data'].pending_order);
@@ -190,7 +189,10 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
         totaloreders: this.totalorders
       }
       this.db.setcancellationRate(data)
+      console.log("else total orders : ", this.totalorders);
     }
+
+    
   }
   getgenericData(data:any=[],totaldatalength:any){
     // console.log("else is executed",data.length,this.orderdata['data']);
@@ -226,12 +228,15 @@ this.router.navigate(['dashboard/orders',{ key :key,value:value }])
         this.totalorders =  this.orderdata['data'].pending_order +
         this.orderdata['data'].processing_order + this.orderdata['data']?.shipped_order +
         this.orderdata['data']?.cancel_order + this.orderdata['data']['completeorders']
+        console.log("total orders : ", this.totalorders);
+        
       let data2 = {
         cancelledorders: this.orderdata['data']?.cancel_order,
         completedOrders: this.orderdata['data']['completeorders'],
         totaloreders: this.totalorders
       }
       this.db.setcancellationRate(data2)
+      console.log("total orders : ", this.totalorders);
       }
     }
   }
