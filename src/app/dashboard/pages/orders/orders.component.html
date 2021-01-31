@@ -380,6 +380,7 @@
                                 <td style="line-height:2">
                                     <h6 style="color: green;">{{products?.product.name}}</h6>
                                     <!-- <br> -->
+                                    <p *ngIf="products?.custom_field_name" style="font-size: 17px;margin: 0px;color: black;"><span style="color: green;">{{products?.custom_field_name}}:</span> {{products?.custom_field_value}}</p>
                                     <span>SKU: {{products?.product.sku}}</span><br>
                                     Quantity Ordered: <span>{{products?.quantity}}</span><br>
                                     Unit Price: <span>{{orderDetaildata['data'][0]?.currency_code}}
@@ -495,6 +496,7 @@
                                         <!-- <button (click)="openEditModal(subt_products)" type="button"
                                             class="btn btn-danger">Edit
                                             Weight</button><br> -->
+                                            <p *ngIf="subt_products?.custom_field_name" style="font-size: 17px;margin: 0px;color: black;"><span style="color: green;">{{subt_products?.custom_field_name}}:</span> {{subt_products?.custom_field_value}}</p>
                                         <span>SKU: {{subt_products?.product.sku}}</span><br>
                                         Quantity Ordered: <span>{{subt_products?.quantity}}</span><br>
                                         Unit Price: <span>{{subt_products?.product_price}}</span><br>
@@ -813,7 +815,7 @@
 </div>
 <!-- print and download pdf files  -->
 <div style="height: 1px;">
-    <!-- printing pickerlist -->
+    <!-- printing pickerlist *ngIf="isdownload"-->
     <div *ngIf="isdownload" class="container printdata" #printwithOutsku id="printwithOutsku">
         <div>
             <h6 class="h6">Store</h6>
@@ -884,8 +886,8 @@
 
                     <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index"
                         style="font-size: 16px;margin-bottom: 2px;">
-                        <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
-                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
+                        <td style="text-align: end;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
                         <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
@@ -893,8 +895,8 @@
                     </tr>
                     <tr style="font-size: 16px;margin-bottom: 2px;"
                         *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
-                        <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
-                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
+                        <td style="text-align: end;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}}
                             {{products?.product.uom.uom_name}}</td>
                         <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
@@ -968,7 +970,7 @@
     </div>
     <!-- <div id="editor"></div> -->
     <!-- print pickerlist product with SKU-->
-    <div *ngIf="isdownload" class="container printdata" #printwithsku id="printwithsku">
+    <div *ngIf="isdownload"  class="container printdata" #printwithsku id="printwithsku">
         <div>
             <h6 class="h6">Store</h6>
             <!-- <mat-divider></mat-divider> -->
@@ -1042,9 +1044,9 @@
 
                     <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index"
                         style="font-size: 16px;margin-bottom: 2px;">
-                        <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
+                        <td style="line-height: 1;"> <p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
                         <td>{{products?.product.sku}}</td>
-                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="text-align: end;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}} {{products?.product.uom.uom_name}}</td>
                         <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}
                             {{products?.product_price * products?.quantity |
@@ -1052,9 +1054,9 @@
                     </tr>
                     <tr style="font-size: 16px;margin-bottom: 2px;"
                         *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
-                        <td style="line-height: 1;">{{products?.quantity}} x {{products?.product.name}}</td>
+                        <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
                         <td>{{products?.product.sku}}</td>
-                        <td style="text-align: end;width: 90px;">{{conertvaluetodecimal(products?.weight *
+                        <td style="text-align: end;">{{conertvaluetodecimal(products?.weight *
                             products?.quantity/products?.quantity) | number}}
                             {{products?.product.uom.uom_name}}</td>
                         <td style="text-align: end;"> {{orderDetaildata['data'][0]?.currency_code}}

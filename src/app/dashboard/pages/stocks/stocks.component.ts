@@ -213,8 +213,10 @@ export class StocksComponent implements OnInit {
   }
 
   onChange(event:any,price:any,productid:any,productindex:any){
+    console.log();
+    
     this.userOrderdata.product_id=productid
-    if(event.checked === true && price === 0){
+    if(event === true && price === 0){
       const dialogRef = this.dialog.open(MessagedialogComponent, {
         width: '500px',
         data: { data: 'novalue' }
@@ -223,9 +225,12 @@ export class StocksComponent implements OnInit {
         this.searchProducts("novalue") 
       });
     }else{
-      if(event.checked === true){
+      console.log("event :",event);
+      // if(event.checked === true)
+      if(event === true){
         this.updateProductPice(price,productid,100)
       }else{
+        console.log("else :",event);
         this.updateProductPice(price,productid,0)
       }
       
