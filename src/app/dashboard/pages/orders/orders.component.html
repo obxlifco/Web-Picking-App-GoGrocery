@@ -817,6 +817,9 @@
 <div style="height: 1px;">
     <!-- printing pickerlist *ngIf="isdownload"-->
     <div *ngIf="isdownload" class="container printdata" #printwithOutsku id="printwithOutsku">
+       <div style="width:100%; text-align:center;height: auto;">
+        <img width="30%" [src]="'https://d1fw2ui0wj5vn1.cloudfront.net/Lifco/lifco/warehouselogo/800x800/'+userOrderdata.warehouselogo" alt="">
+       </div>
         <div>
             <h6 class="h6">Store</h6>
             <!-- <mat-divider></mat-divider> -->
@@ -970,7 +973,11 @@
     </div>
     <!-- <div id="editor"></div> -->
     <!-- print pickerlist product with SKU-->
-    <div *ngIf="isdownload"  class="container printdata" #printwithsku id="printwithsku">
+    <!-- *ngIf="isdownload" -->
+    <div  *ngIf="isdownload" class="container printdata" #printwithsku id="printwithsku">
+        <div style="width:100%; text-align:center;height: auto;">
+            <img width="30%" [src]="'https://d1fw2ui0wj5vn1.cloudfront.net/Lifco/lifco/warehouselogo/800x800/'+userOrderdata.warehouselogo" alt="">
+           </div>
         <div>
             <h6 class="h6">Store</h6>
             <!-- <mat-divider></mat-divider> -->

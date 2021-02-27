@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { DialogData } from 'src/app/components/addnewproduct/addnewproduct.component';
 import { AddproductcategoryComponent } from 'src/app/components/addproductcategory/addproductcategory.component';
 import { ImagemagnifyComponent } from 'src/app/components/imagemagnify/imagemagnify.component';
@@ -35,10 +38,15 @@ export class StocksComponent implements OnInit {
     order_product_id:'',
     category_id:'',
     searchProductvalue:'',
-    company_id:''
+    company_id:'',
+    getcategoryPrice:'',
+    totalOrders:0,
+    pricelistCategoryIDS:''
   }
-  
+  // spinner attribute
+  ispricelistLoad=false
   pickerProductList:any=[]
+  priceListProductLIst:any=[]
   stockStatus:any='';
   parentcategory: any = []
   subcategory: any = []
@@ -53,11 +61,12 @@ export class StocksComponent implements OnInit {
     public apiService : ApiService,
     public globalitem : GlobalitemService,
     public dialog: MatDialog,
+    public datePipe: DatePipe,
     public commonfunc:CommonfunctionService
     ) {
       // this.pickerProductList=[]
       this.pickerProductList["data"]=[]
-      
+      this.priceListProductLIst["data"]=[]
     this.getuserData()
    }
 
@@ -102,6 +111,7 @@ export class StocksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
       this.parentcategory = result.data;
+      this.userOrderdata.pricelistCategoryIDS=this.parentcategory.id
       this.subcategory.name="Sub Category"
       this.subcategory.id=''
       if(result.data === "undefined"){
@@ -130,6 +140,7 @@ export class StocksComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed', result);
       this.subcategory = result.data;
+      this.userOrderdata.pricelistCategoryIDS=this.subcategory.id
     });
   }
 
@@ -166,10 +177,11 @@ export class StocksComponent implements OnInit {
     let temcategory:any;
     if(this.parentcategory.id !== undefined  && this.parentcategory.id){
       temcategory= this.parentcategory.id
+      this.userOrderdata.getcategoryPrice = this.parentcategory.id
     }
     if(this.subcategory.id !== undefined && this.subcategory.id){
       // console.log("no child cat");
-      
+      this.userOrderdata.getcategoryPrice = this.subcategory.id
       temcategory= this.subcategory.id
     }
     // console.log("child Category : ", this.subcategory.id , "Parent Category : ",this.parentcategory.id);
@@ -294,6 +306,74 @@ export class StocksComponent implements OnInit {
     } 
    this.modalservice.openModal(data,ProductimportComponent)
   }  
+
+  // get all stock data
+  getAllstockprice(value:any){
+    this.ispricelistLoad=true
+    if(value === "firstapicall"){
+      this.totalProductpage=0;
+      this.productpage=1
+      this.priceListProductLIst["data"]
+    }
+    let data = {
+      website_id: this.userOrderdata.website_id,
+      warehouse_id: this.userOrderdata.warehouse_id,
+      page: this.productpage,
+      search:this.userOrderdata.searchProductvalue,
+      per_page: 5000,
+      category_id:  this.userOrderdata.pricelistCategoryIDS,
+      in_stock: 'y',
+      has_price:'y',
+      // product_stock_ids: 1
+    }
+ 
+    this.apiService.postData("picker-searchstock/", data).subscribe((data: any) => {
+      // console.log("all stock data : " ,data);
+      if(this.productpage === 1){
+        this.priceListProductLIst["data"]=data.response
+        this.totalProductpage=data.total_page
+        this.userOrderdata.totalOrders=data.total_order
+        this.productpage++;
+        this.getAllstockprice("novalue")
+      }else if(this.productpage <= this.totalProductpage){
+        this.priceListProductLIst["data"] = [... this.priceListProductLIst["data"], ...data.response];
+        this.productpage++;
+        console.log("total product pages if else: ",this.productpage);
+        this.getAllstockprice("novalue")
+      }else{
+        this.ispricelistLoad=false
+        console.log("total pages : ",this.totalProductpage);
+        console.log("total product pages : ",this.productpage);
+        console.log("all data ",this.priceListProductLIst["data"]);
+        this.downloadCSV(this.priceListProductLIst["data"])
+        // this.pickerProductList["data"] = [... this.pickerProductList["data"], ...data.response];
+      }
+    });
+  }
+
+  downloadCSV(orderproducts: any) {
+    console.log("order produts list : ", orderproducts);
+    let counter = 0
+    let temarray: any = []
+    for (let i = 0; i < orderproducts.length; i++) {
+      let data = {
+        'SKU': orderproducts[i].sku,
+        'Price': orderproducts[i].channel_currency_product_price.price,
+        'Unit': orderproducts[i].weight +""+orderproducts[i].uom_name,
+      }
+      counter++
+      temarray.push(data)
+      // console.log("Index: ", counter);
+      if (orderproducts.length === counter) {
+        // console.log("CSV file : ", temarray, orderproducts.length, i)
+        this.db.getwarehouseName().then(res => {
+          let paramdata: any = ['SKU','Price', 'Unit']
+          this.commonfunc.downloadFile(temarray, 'latest_stock_prices_'+res.warehouse_name+"_"+this.userOrderdata.warehouse_id+"_"+this.datePipe.transform(new Date(), "d_m_yy"), paramdata, '')
+        })
+      }
+    }
+  }
+
 }  
   
 

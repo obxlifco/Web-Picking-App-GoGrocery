@@ -35,6 +35,7 @@
     "mat-select-filter": "^2.3.7",
     "mat-timepicker": "^5.0.1",
     "ng-mat-select-infinite-scroll": "^2.1.1",
+    "ng-pick-datetime": "^7.0.0",
     "ngx-countdown": "^11.0.0",
     "ngx-file-drop": "^10.1.1",
     "ngx-infinite-scroll": "^10.0.0",

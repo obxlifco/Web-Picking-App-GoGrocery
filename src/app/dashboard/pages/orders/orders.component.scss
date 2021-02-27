@@ -595,11 +595,16 @@ input[type=number]::-webkit-outer-spin-button {
 .printdata {
     background : white;
     line-height: 2;
+    // font-size: 23px;
+    line-height: 2;
+    font-weight: 700;
     // width: 50%;
     // display: none;
-
+*{
+    font-family: Arial;
+}
     .h6 {
-        font-size  : 15px;
+        font-size  : 16px;
         font-weight: bolder;
         margin     : 1% 0% 1% 0%;
     }

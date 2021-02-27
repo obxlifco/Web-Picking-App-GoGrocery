@@ -72,6 +72,9 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AssaignpickerComponent } from './components/assaignpicker/assaignpicker.component';
 import { EditstoreComponent } from './dashbord/pages/editstore/editstore.component';
+import { ProductpromotionsComponent } from './dashboard/pages/productpromotions/productpromotions.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { ProductpromotionmodelComponent } from './components/productpromotionmodel/productpromotionmodel.component';
 
 @NgModule({
   declarations: [
@@ -105,13 +108,17 @@ import { EditstoreComponent } from './dashbord/pages/editstore/editstore.compone
     ImagemagnifyComponent,
     ProductimportComponent,
     BulkproductdataComponent,
-    AssaignpickerComponent, 
+    AssaignpickerComponent,
+    ProductpromotionsComponent,
+    ProductpromotionmodelComponent, 
   ],
   imports: [
     BrowserModule,
     CommonModule,
+    OwlDateTimeModule,
     FormsModule,
     InfiniteScrollModule,
+    OwlNativeDateTimeModule,
     ReactiveFormsModule,
     AppRoutingModule,
     // AngularFireModule.initializeApp(environment.firebaseConfig),

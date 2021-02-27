@@ -1,0 +1,157 @@
+<div class="conatiner">
+    <div class="row main-header">
+        <div class="col-md-12 stretch-card grid-margin">
+            <h4>Product Promotions</h4>
+        </div>
+    </div>
+    <div class="body">
+        <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Discount Name</label>
+                <input [(ngModel)]="promotionsAttribute.discountName" placeholder="Enter product name" type="text" class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">By Percentage of the Original Price</label>
+                <select #parentcat [(ngModel)]="promotionsAttribute.applybyprice" class="browser-default custom-select">
+                    <option value="" selected>By Percentage of the Original Price</option>
+                    <option value="">By Fixed Amount</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Percentage Amount(%)</label>
+                <input [(ngModel)]="promotionsAttribute.percentageAmount" placeholder="enter percentage" value="1"
+                    type="text" class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Priority</label>
+                <input [(ngModel)]="promotionsAttribute.priority" placeholder="enter priority" value="1" type="text"
+                    class="form-control">
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Percentage Amount(%)</label>
+                <input  [(ngModel)]="promotionsAttribute.percentageAmount"
+                placeholder="enter percentage" value="1" type="text" class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Priority</label>
+                <input  [(ngModel)]="promotionsAttribute.priority"
+                placeholder="enter priority" value="1" type="text" class="form-control">
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Discount Start</label>
+                <input class="dateinput" [owlDateTime]="datestart" [(ngModel)]="discountStartDate" [owlDateTimeTrigger]="datestart" placeholder="Start Time">
+                 <owl-date-time #datestart></owl-date-time>
+                <!-- <owl-date-time-inline [(ngModel)]="discountStart"></owl-date-time-inline> -->
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Discount End</label>
+                <!-- <owl-date-time-inline [(ngModel)]="discountEndDate"></owl-date-time-inline> -->
+                <input class="dateinput" [(ngModel)]="discountEndDate" [owlDateTime]="dateend" [owlDateTimeTrigger]="dateend" placeholder="End Time">
+                <owl-date-time #dateend></owl-date-time>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Store Name</label>
+                <input  [(ngModel)]="promotionsAttribute.storeName" placeholder="Enter product name" type="text"
+                    class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Offer Type</label>
+                <select #parentcat [(ngModel)]="promotionsAttribute.offerType" class="browser-default custom-select">
+                    <option value="Normal Offers" selected>Normal Offers</option>
+                    <option value="Hot Offers">Hot Offers</option>
+                    <option value="Todays Offers">Todays Offers</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Store Name</label>
+                <input  [(ngModel)]="promotionsAttribute.storeName"
+                placeholder="Enter product name" type="text" class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Offer Type</label>
+                <select #parentcat [(ngModel)]="promotionsAttribute.offerType" class="browser-default custom-select">
+                    <option value="" selected>Normal Offers</option>
+                    <option value="">Hot Offers</option>
+                    <option value="">Todays Offers</option>
+                </select>
+            </div>
+        </div> -->
+
+        <!-- discount Based on -->
+        <div class="row">
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Discount Based On</label>
+                <select #parentcat (change)="setDiscountbased($event)" class="browser-default custom-select">
+                    <option value="category" selected>CATEGORY</option>
+                    <option value="sku">SKU</option>
+                    <option value="orderAmount">Order Amount</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-left grid-margin">
+                <label for="parentcat">Condition</label>
+                <select #parentcat class="browser-default custom-select">
+                    <option value="" selected>Equals To</option>
+                    <option value="" *ngIf="masterconditionsinputSelectins !== 'orderAmount'">Not Equals To</option>
+                    <option value="" *ngIf="masterconditionsinputSelectins === 'orderAmount'">Equals or less than
+                    </option>
+                    <option value="" *ngIf="masterconditionsinputSelectins === 'orderAmount'">Equals or Greater than
+                    </option>
+                </select>
+            </div>
+            <!-- <div class="col-md-3 col-left grid-margin" *ngIf="masterconditionsinputSelectins === 'orderAmount'">
+                <label for="parentcat">Condition</label>
+                <select #parentcat class="browser-default custom-select">
+                    <option value="" selected>Equals To</option>
+                    <option value="">Equals or less than</option>
+                    <option value="">Equals or Greater than</option>
+                </select>
+            </div> -->
+            <div class="col-md-3 col-left grid-margin" *ngIf="masterconditionsinputSelectins === 'orderAmount'">
+                <label for="parentcat">Values</label>
+                <input [(ngModel)]="promotionsAttribute.orderAmount" placeholder="Enter amount" type="number"
+                    class="form-control">
+            </div>
+            <div class="col-md-3 col-left grid-margin" *ngIf="masterconditionsinputSelectins === 'sku'">
+                <label for="parentcat">Values</label>
+                <input [(ngModel)]="promotionsAttribute.productSku" (click)="openproductSKU('')"
+                    placeholder="Enter product name" type="text" class="form-control">
+            </div>
+            <!-- category row -->
+            <div style="width: 50%;display: flex;" *ngIf="masterconditionsinputSelectins === 'category'">
+                <div class="col-md-6 col-left grid-margin">
+                    <label for="parentcat">Parent Category</label>
+                    <select #parentcat (click)="opencategory_modal('Category')" class="browser-default custom-select">
+                        <option selected>All</option>
+                        <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">
+                            {{parentcategory.name}}
+                    </select>
+                </div>
+                <div class="col-md-6 col-left grid-margin">
+                    <label for="childcat">Child Category</label>
+                    <select #childcat (click)="opensub_category_modal('Sub Category')"
+                        class="browser-default custom-select">
+                        <option selected>All</option>
+                        <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- save promotions -->
+        <div class="row">
+            <div class="col-md-12 stretch-card grid-margin col-left">
+                <button (click)="promoteNow()" type="button" style="margin-right: 1%;" class="btn btn-outline-secondary globalbutton">Promote
+                    Now</button>
+
+                <!-- <mat-spinner *ngIf="ispricelistLoad" diameter="40"></mat-spinner> -->
+            </div>
+        </div>
+    </div>
+</div>

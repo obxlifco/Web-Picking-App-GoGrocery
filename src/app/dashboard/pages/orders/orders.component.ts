@@ -56,7 +56,8 @@ export class OrdersComponent implements OnInit {
     PickerCounter: 0, //set the counter to check if product selected in list
     warehouseName: '',
     storename: '',//for generic data
-    storecode: ''
+    storecode: '',
+    warehouselogo:''
   }
   keyValueOF_superStore = {
     key: 0,
@@ -442,10 +443,19 @@ export class OrdersComponent implements OnInit {
           background: white;
           line-height: 2;
           // width: 50px !important;
+          line-height: 2;
+          font-weight: 900;
+          font-weight:bold;
+          // width: 50%;
+          // display: none;
+      *{
+          font-family: Arial;
+      }
         }
           .h6{
-            font-size: 15px;
-            font-weight: bolder;
+            font-size: 20px;
+            font-weight:700;
+            font-family: Arial;
             margin: 1% 0% 1% 0%;
           }
           .table1{
@@ -479,7 +489,21 @@ export class OrdersComponent implements OnInit {
         }.sku{
           text-align:center;
         }
-    
+        td{
+          font-size: 18px;
+          font-weight: 600;
+          font-family: Arial;
+        }
+        span{
+          font-size: 16px;
+          font-weight: 800;
+          font-family: Arial;
+        }
+        strong{
+          font-size: 18px;
+          font-weight: 800;
+          font-family: Arial;
+        }
           @media print 
     {
        @page
@@ -502,7 +526,7 @@ export class OrdersComponent implements OnInit {
         innerContents = document.getElementById(templayout);
         this.commonfunc.generatePDF(innerContents,pdfName)
         this.isdownload = false
-      }, 1600)
+      }, 1800)
     }
   }
   //edit unit weight and price
@@ -1078,7 +1102,9 @@ export class OrdersComponent implements OnInit {
     this.printerTotalcost = 0
     let tempcost: any = 0
     let tempproductitem: any = 0
-    this.db.getwarehouseName().then(res => { this.userOrderdata.warehouseName = res });
+    this.db.getwarehouseName().then(res => { 
+      this.userOrderdata.warehouseName = res.warehouse_name;
+    this.userOrderdata.warehouselogo=res.warehouse_logo});
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
       this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
       this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;

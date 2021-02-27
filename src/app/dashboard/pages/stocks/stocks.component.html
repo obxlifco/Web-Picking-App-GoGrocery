@@ -6,14 +6,14 @@
     </div>
     <div class="body">
         <div class="row">
-            <div class="col-md-3 col-left grid-margin">
+            <div class="col-md col-left grid-margin">
                 <label for="parentcat">Parent Category</label>
                 <select #parentcat (click)="opencategory_modal('Category')" class="browser-default custom-select">
                     <option selected>All</option>
                     <option *ngIf="parentcategory.name" selected [ngValue]="parentcategory.name">{{parentcategory.name}}
                 </select>
             </div>
-            <div class="col-md-3 col-left grid-margin">
+            <div class="col-md col-left grid-margin">
                 <label for="childcat">Child Category</label>
                 <select #childcat (click)="opensub_category_modal('Sub Category')"
                     class="browser-default custom-select">
@@ -21,7 +21,7 @@
                     <option *ngIf="subcategory.name" selected [ngValue]="subcategory.name">{{subcategory.name}}
                 </select>
             </div>
-            <div class="col-md-3 col-left grid-margin">
+            <div class="col-md col-left grid-margin">
                 <label for="stock">Stock</label>
                 <select #stock class="browser-default custom-select" [(ngModel)]="stockStatus">
                     <option value="" selected>Yes/No</option>
@@ -29,7 +29,7 @@
                     <option value="n">Out of stock</option>
                 </select>
             </div>
-            <div class="col-md-3 col-left grid-margin">
+            <div class="col-md col-left grid-margin">
                 <label for="price">Has Price</label>
                 <select #price class="browser-default custom-select" [(ngModel)]="cat_price">
                     <option value="" selected>Yes/No</option>
@@ -57,8 +57,12 @@
             <div class="col-md-12 stretch-card grid-margin col-left">
                 <button type="button" (click)="importproduct('price','Import Product Price')" style="margin-right: 1%;"
                     class="btn btn-outline-secondary globalbutton">Import product price</button>
-                <button type="button" (click)="importproduct('stock','Import Stock')"
+                <button style="margin-right: 1%;" type="button" (click)="importproduct('stock','Import Stock')"
                     class="btn btn-outline-secondary globalbutton">Import stock</button>
+                    <button style="margin-right: 1%;" type="button" (click)="getAllstockprice('firstapicall')"
+                    class="btn btn-outline-secondary globalbutton">Download Latest Stock Price <span *ngIf="userOrderdata.totalOrders">({{userOrderdata.totalOrders}})</span>
+                </button>
+                <mat-spinner *ngIf="ispricelistLoad" diameter="40"></mat-spinner>
             </div>
         </div>
         <!-- <div class="row">

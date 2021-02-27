@@ -1,0 +1,28 @@
+.conatiner {
+    padding: 8% 5% 3% 3%;
+    margin-left: 45px;
+    background: white;
+    margin-right: 45px;
+    overflow: hidden;
+    margin-bottom: 4%;
+    border-radius: 3px;
+}
+.main-header {
+    height: 11px;
+
+    h4 {
+        font-weight: 500;
+        font-size  : 20px;
+    }
+}
+.body {
+    padding: 4% 0% 0% 0%;
+}
+.dateinput{
+    width: 100%;
+    /* border-color: lightgray; */
+    border: 1px solid lightgray;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 11px;
+}

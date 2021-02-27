@@ -25,20 +25,18 @@ export class ApiService {
   }
 
   postData(subUrl: string = "", data: any = []): any {
-    // console.log("api url is : ",this.apiUrl+subUrl);
-    //  this.httpClient.post(this.apiUrl+subUrl,tempdata,
-    //   {
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'Authorization': 'Token 09c3b932ba526c5038c54a6c4995a229b9606cb6',
-    //       'Accept': 'form-data',
-    //       // 'data-raw' : 
-    //   }
-    // });
-
     const headers = {
       'content-type': 'application/json',
       'Authorization': 'Token 09c3b932ba526c5038c54a6c4995a229b9606cb6',
+      // 'Accept': 'form-data' 
+    };
+    return this.httpClient.post<any>(this.apiUrl + subUrl, data, { headers });
+  }
+  
+  //post without token
+  postwithoutTokenData(subUrl: string = "", data: any = []): any {
+    const headers = {
+      'content-type': 'application/json',
       // 'Accept': 'form-data' 
     };
     return this.httpClient.post<any>(this.apiUrl + subUrl, data, { headers });

@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <!-- <label formArrayName="orders2" *ngFor="let order of productFormArray.controls; let i = index">
+      <input type="checkbox" [formControlName]="i">
+      {{productdata[i].name}}
+    </label>
+    <button>submit</button> -->
+    <table class="table">
+        <th>
+            <mat-checkbox class="example-margin" matRipple></mat-checkbox>
+            <!-- <input  class="form-control" type="checkbox"> -->
+        </th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Default Price</th>
+        <tr formArrayName="orders" *ngFor="let list of productFormArray.controls; let i = index">
+            <td>
+                <mat-checkbox [formControlName]="i" class="example-margin" matRipple></mat-checkbox>
+                <!-- <input class="form-control"  type="checkbox" [formControlName]="i"></td> -->
+            <td>{{productdata[i]._id}}</td>
+            <td>{{productdata[i]._source.name}}</td>
+            <td>{{productdata[i]._source.sku}}</td>
+            <td>{{productdata[i]?._source.default_price}}</td>
+        </tr>
+    </table>
+    <button (click)="cancel()" class="button btn-light">Cancel</button>
+    <button class="button btn-light">Save</button>
+  </form>
+

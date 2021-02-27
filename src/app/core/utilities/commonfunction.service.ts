@@ -187,7 +187,7 @@ export class CommonfunctionService {
 
   //convert html to pdf
   generatePDF(elementID: any, pdfName: any) {
-    html2canvas(elementID, { allowTaint: true }).then(canvas => {
+    html2canvas(elementID, { useCORS : false,allowTaint: false,logging: true,imageTimeout: 20000}).then(canvas => {
       let HTML_Width = canvas.width;
       let HTML_Height = canvas.height;
       let top_left_margin = 15;
@@ -197,13 +197,15 @@ export class CommonfunctionService {
       let canvas_image_height = HTML_Height;
       let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
       canvas.getContext('2d');
-      let imgData = canvas.toDataURL("image/png", 10);
+      let imgData = canvas.toDataURL("image/png;", 10)
       let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
       for (let i = 1; i <= totalPDFPages; i++) {
         pdf.addPage([PDF_Width, PDF_Height], 'p');
         pdf.addImage(imgData, 'PNG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
       }
+      console.log("reached");
+      
       pdf.save(pdfName + ".pdf");
     });
   }

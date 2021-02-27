@@ -7,6 +7,9 @@
     }
 }
 
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: #98D81D;
+}
 .conatiner {
     padding: 8% 5% 3% 3%;
     margin-left: 45px;

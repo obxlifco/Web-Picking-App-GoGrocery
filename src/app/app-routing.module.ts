@@ -1,3 +1,4 @@
+import { ProductpromotionsComponent } from './dashboard/pages/productpromotions/productpromotions.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
       { path: 'salesreport', component: SalesreportComponent,canActivate: [AuthguardGuard] },
       { path: 'editstore', component: EditstoreComponent,canActivate: [AuthguardGuard] },
       { path: 'appsettings', component: AppsettingsComponent ,canActivate: [AuthguardGuard]},
+      { path: 'productpromotions', component: ProductpromotionsComponent ,canActivate: [AuthguardGuard]},
     ]
   },  
   {path: '404', component: NotfoundComponent},
