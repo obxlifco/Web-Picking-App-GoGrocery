@@ -9,6 +9,9 @@ table{
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
     background-color: #2E6B0B !important;
   }
+  tr{
+      cursor: pointer;
+  }
   th,button{
     font-size: 17px;
     font-weight: 500;
@@ -20,7 +23,7 @@ table{
 }
 button{
     bottom: -25px;
-    background: var(--green);
+    background: var(--lightgreen);
     color: white;
     width: 22%;
     height: 56px;

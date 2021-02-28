@@ -28,7 +28,7 @@ export class ApiService {
     const headers = {
       'content-type': 'application/json',
       'Authorization': 'Token 09c3b932ba526c5038c54a6c4995a229b9606cb6',
-      // 'Accept': 'form-data' 
+      // 'Accept': 'form-data'
     };
     return this.httpClient.post<any>(this.apiUrl + subUrl, data, { headers });
   }

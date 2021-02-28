@@ -75,6 +75,7 @@ import { EditstoreComponent } from './dashbord/pages/editstore/editstore.compone
 import { ProductpromotionsComponent } from './dashboard/pages/productpromotions/productpromotions.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ProductpromotionmodelComponent } from './components/productpromotionmodel/productpromotionmodel.component';
+import { DatecomparePipe } from './core/pipe/datecompare.pipe';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { ProductpromotionmodelComponent } from './components/productpromotionmod
     BulkproductdataComponent,
     AssaignpickerComponent,
     ProductpromotionsComponent,
-    ProductpromotionmodelComponent, 
+    ProductpromotionmodelComponent,
+    DatecomparePipe, 
   ],
   imports: [
     BrowserModule,
