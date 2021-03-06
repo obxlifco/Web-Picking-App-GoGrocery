@@ -47,7 +47,7 @@ export class ProductpromotionmodelComponent implements OnInit {
     if(selectedproductsku.length !== 0){
   this.dialogRef.close({ event: 'close', data: selectedproductsku});
     }else{
-      this.globalitem.showError("please select one product","")
+      // this.globalitem.showError("please select one product","")
     }
   }
 

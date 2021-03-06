@@ -29,9 +29,13 @@
     </table>
 </div>
     </div>
-    <div *ngIf="!productdata?.length">
+    <div *ngIf="!productdata?.length && IsDataLoaded === true">
         <ngx-skeleton-loader style="width: 100%;" *ngFor="let item of [1,2,3,4]">
         </ngx-skeleton-loader>
+    </div>
+    <div *ngIf="!productdata?.length  && IsDataLoaded === false">
+        <!-- if data not found -->
+        <app-emptystate></app-emptystate>
     </div>
     <button (click)="cancel()" class="button btn-light">Cancel</button>
     <!-- <button class="button btn-light">Save</button> -->
