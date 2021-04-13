@@ -96,11 +96,32 @@
                     <tr *ngFor="let plist of pickerProductList['data'];let i=index">
                         <td colspan="6">
                             <div style="display: flex;">
+                                <!-- plist?.product_images[0]?.link+''+plist?.product_images[0]?.img -->
                                 <img class="productimg" *ngIf="plist?.product_images"
                                     (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
+                                    [src]="getImageurl(plist)" alt="">
+                                    <!-- it shows simple image if 0 index -->
+                                    <!-- <ng-container *ngIf="plist.product_images.length === 1">
+                                        <img class="productimg" *ngIf="plist?.product_images"
+                                    (click)="imagemagnifyModal(plist?.product_images[0]?.link,plist?.product_images[0]?.img)"
                                     [src]="plist?.product_images[0]?.link+''+plist?.product_images[0]?.img" alt="">
-                                <img class="productimg" *ngIf="!plist?.product_images"
-                                    src="assets/images/product/defaultproductimg.jpg">
+                                    </ng-container>
+                                    <!-- show imag using loop -->
+                                    <!-- <ng-container *ngIf="plist.product_images.length > 1">
+                                    <ng-container *ngFor="let images of plist.product_images;let j=index;let last = last;trackBy:trackByIsCover">
+                                        <img class="productimg" *ngIf="plist?.product_images && images.is_cover === 1 "
+                                        (click)="imagemagnifyModal(plist?.product_images[j]?.link,plist?.product_images[j]?.img)"
+                                        [src]="images?.link+''+images?.img" alt="">
+                                    </ng-container>
+                                    <ng-container>
+                                        <img class="productimg" *ngIf="plist.product_images[plist.product_images.length-1]?.is_cover === 0"
+                                    (click)="imagemagnifyModal(plist?.product_images[plist.product_images.length-1]?.link,plist?.product_images[plist.product_images.length-1]?.img)"
+                                    [src]="plist?.product_images[plist.product_images.length-1]?.link+''+plist?.product_images[plist.product_images.length-1]?.img" alt="">
+                                    </ng-container>
+                                </ng-container> --> 
+                                    
+                                <!-- <img class="productimg" *ngIf="!plist?.product_images"
+                                    src="assets/images/product/defaultproductimg.jpg"> -->
                                 <div>
                                     <h6>{{plist?.name}}</h6>
                                     <span>{{plist?.weight}} {{plist?.uom_name}}</span><br>
