@@ -59,9 +59,12 @@
                     class="btn btn-outline-secondary globalbutton">Import product price</button>
                 <button style="margin-right: 1%;" type="button" (click)="importproduct('stock','Import Stock')"
                     class="btn btn-outline-secondary globalbutton">Import stock</button>
-                    <button style="margin-right: 1%;" type="button" (click)="getAllstockprice('firstapicall')"
-                    class="btn btn-outline-secondary globalbutton">Download Latest Stock Price <span *ngIf="userOrderdata.totalOrders">({{userOrderdata.totalOrders}})</span>
+                    <button style="margin-right: 1%;" type="button" (click)="downloadStockPrices()"
+                    class="btn btn-outline-secondary globalbutton">Download Latest Stock Price <span *ngIf="userOrderdata.totalOrders&&stockStatus!=='n'&& cat_price !== 'y'">({{userOrderdata.totalOrders}})</span>
                 </button>
+                <button style="margin-right: 1%;" type="button" (click)="downloadOutOfStockPrice()" *ngIf="stockStatus==='n'&& cat_price === 'y'"
+                class="btn btn-outline-secondary globalbutton">Download Out Of Stock with Price <span *ngIf="userOrderdata.totalOrders&&stockStatus==='n'&& cat_price === 'y'">({{userOrderdata.totalOrders}})</span>
+            </button>
                 <mat-spinner *ngIf="ispricelistLoad" diameter="40"></mat-spinner>
             </div>
         </div>

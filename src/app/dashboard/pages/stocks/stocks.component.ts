@@ -41,7 +41,9 @@ export class StocksComponent implements OnInit {
     company_id: '',
     getcategoryPrice: '',
     totalOrders: 0,
-    pricelistCategoryIDS: ''
+    pricelistCategoryIDS: '',
+    stockhasprice:'',
+    outOfStockstatus:''
   }
   // spinner attribute
   ispricelistLoad = false
@@ -306,9 +308,21 @@ export class StocksComponent implements OnInit {
     }
     this.modalservice.openModal(data, ProductimportComponent)
   }
+  downloadOutOfStockPrice(){
+    this.userOrderdata.stockhasprice=this.cat_price
+    this.userOrderdata.outOfStockstatus=this.stockStatus
+    // console.log("stockStatus :",this.stockStatus," price:",this.cat_price);
+    
+    this.downloadStockcustomData('firstapicall')
+  }
+  downloadStockPrices(){
+    this.userOrderdata.stockhasprice="y"
+    this.userOrderdata.outOfStockstatus="y"
+    this.downloadStockcustomData('firstapicall',)
+  }
 
   // get all stock data
-  getAllstockprice(value: any) {
+  downloadStockcustomData(value: any) {
     this.ispricelistLoad = true
     if (value === "firstapicall") {
       this.totalProductpage = 0;
@@ -322,24 +336,29 @@ export class StocksComponent implements OnInit {
       search: this.userOrderdata.searchProductvalue,
       per_page: 5000,
       category_id: this.userOrderdata.pricelistCategoryIDS,
-      in_stock: 'y',
-      has_price: 'y',
+      in_stock: this.userOrderdata.outOfStockstatus,
+      has_price:this.userOrderdata.stockhasprice,
       // product_stock_ids: 1
     }
 
     this.apiService.postData("picker-searchstock/", data).subscribe((data: any) => {
-      // console.log("all stock data : " ,data);
+      console.log("all stock data : " ,data);
+      if(data.response.length===0){
+        this.ispricelistLoad=false
+        this.globalitem.showError(data.message,data.api_status)
+      }
+      // if(data.response.length)
       if (this.productpage === 1) {
         this.priceListProductLIst["data"] = data.response
         this.totalProductpage = data.total_page
         this.userOrderdata.totalOrders = data.total_order
         this.productpage++;
-        this.getAllstockprice("novalue")
+        this.downloadStockcustomData("novalue")
       } else if (this.productpage <= this.totalProductpage) {
         this.priceListProductLIst["data"] = [... this.priceListProductLIst["data"], ...data.response];
         this.productpage++;
         console.log("total product pages if else: ", this.productpage);
-        this.getAllstockprice("novalue")
+        this.downloadStockcustomData("novalue")
       } else {
         this.ispricelistLoad = false
         console.log("total pages : ", this.totalProductpage);

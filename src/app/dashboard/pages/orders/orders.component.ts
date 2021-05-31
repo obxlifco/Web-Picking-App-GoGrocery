@@ -1106,8 +1106,10 @@ export class OrdersComponent implements OnInit {
       this.userOrderdata.warehouseName = res.warehouse_name;
     this.userOrderdata.warehouselogo=res.warehouse_logo});
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_products.length; i++) {
-      this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
-      this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;
+      if(this.orderDetaildata['data'][0]?.order_products[i]?.shortage === 0){
+        this.totalProductItems += this.orderDetaildata['data'][0]?.order_products[i]?.quantity
+        this.printerTotalcost += this.orderDetaildata['data'][0]?.order_products[i]?.product_price * this.orderDetaildata['data'][0]?.order_products[i]?.quantity;
+      }
     }
     for (let i = 0; i < this.orderDetaildata['data'][0]?.order_substitute_products.length; i++) {
       tempproductitem += this.orderDetaildata['data'][0]?.order_substitute_products[i]?.quantity

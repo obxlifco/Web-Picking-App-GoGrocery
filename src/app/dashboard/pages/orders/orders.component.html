@@ -884,10 +884,10 @@
                         <h6 class="h6" style="text-align: end;">Unit weight</h6>
                     </th>
                     <th class="th" style="text-align: end;">
-                        <h6 class="h6">Unit Price</h6>
+                        <h6 class="h6">Total Price</h6>
                     </th>
-
-                    <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index"
+                    <ng-container *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index">
+                    <tr  *ngIf="products.shortage === 0"
                         style="font-size: 16px;margin-bottom: 2px;">
                         <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
                         <td style="text-align: end;">{{conertvaluetodecimal(products?.weight *
@@ -896,6 +896,7 @@
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>
+                </ng-container>
                     <tr style="font-size: 16px;margin-bottom: 2px;"
                         *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
@@ -1048,8 +1049,8 @@
                     <th class="th" style="text-align: end;">
                         <h6 class="h6">Unit Price</h6>
                     </th>
-
-                    <tr *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index"
+                    <ng-container *ngFor="let products of orderDetaildata['data'][0]?.order_products, let i=index">
+                    <tr *ngIf="products.shortage === 0"
                         style="font-size: 16px;margin-bottom: 2px;">
                         <td style="line-height: 1;"> <p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
                         <td>{{products?.product.sku}}</td>
@@ -1059,6 +1060,7 @@
                             {{products?.product_price * products?.quantity |
                             currency:'':''}}</td>
                     </tr>
+                    </ng-container>
                     <tr style="font-size: 16px;margin-bottom: 2px;"
                         *ngFor="let products of orderDetaildata['data'][0]?.order_substitute_products, let i=index">
                         <td style="line-height: 1;"><p>{{products?.quantity}} x {{products?.product.name}} <span *ngIf="products?.custom_field_name" class="prep_options">({{products?.custom_field_value}})</span></p></td>
