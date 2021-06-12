@@ -1,0 +1,38 @@
+<div class="write_commentbox show" id="myDIV">
+    <form [formGroup]="reviewForm" (ngSubmit)="reviewForm.valid && addReview(reviewForm)">
+        <h3>Review This Product</h3>
+        <div class="rowcus">
+            <div class="rating_stargrp">
+                <span class="icon-star" [ngClass]="{'select': rating >= 1}" (click)="chageRating(1)" style="cursor:pointer;"></span>
+                <span class="icon-star" [ngClass]="{'select': rating >= 2}" (click)="chageRating(2)" style="cursor:pointer;"></span>
+                <span class="icon-star" [ngClass]="{'select': rating >= 3}" (click)="chageRating(3)" style="cursor:pointer;"></span>
+                <span class="icon-star" [ngClass]="{'select': rating >= 4}" (click)="chageRating(4)" style="cursor:pointer;"></span>
+                <span class="icon-star" [ngClass]="{'select': rating >= 5}" (click)="chageRating(5)" style="cursor:pointer;"></span>
+            </div>
+            
+            <p class="str_text grn" *ngIf="rating == 0">{{rateText}}</p>
+            <p class="str_text grn" *ngIf="rating >= 3">{{rateText}}</p>
+            <p class="str_text" *ngIf="rating == 2" style="color:#FF9F00">{{rateText}}</p>
+            <p class="str_text" *ngIf="rating == 1" style="color:#FF6161">{{rateText}}</p>
+            
+        </div>
+        <mat-error *ngIf="ratevalid">Please select your <strong>rate</strong></mat-error>
+        <h3>Review This Product</h3>
+        <div class="rowcus">
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Enter review title..." formControlName="review_title">
+                <mat-error *ngIf="reviewForm.controls.review_title?.errors && reviewForm.controls.review_title?.errors.required">This is a <strong>required</strong> field</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="rowcus">
+            <mat-form-field appearance="outline">
+                <textarea matInput placeholder="Enter review description..." formControlName="review_message"></textarea>
+                <mat-error *ngIf="reviewForm.controls.review_message?.errors && reviewForm.controls.review_message?.errors.required">This is a <strong>required</strong> field</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="btnrow">
+            <button class="red_midumbtn">SUBMIT</button>
+            <button class="red_line_medum_btn" (click)="onReset()">CANCEL</button>
+        </div>
+    </form>
+</div>

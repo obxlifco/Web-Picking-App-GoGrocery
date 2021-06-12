@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="hind-bold.otf">
+            <string>Hind-Bold</string>
+        </array>
+        <array key="hind-medium.otf">
+            <string>Hind-Medium</string>
+        </array>
+        <array key="hind-regular.otf">
+            <string>Hind-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="EighteenPlus" id="iN0-l3-epB" customClass="EighteenPlus" customModule="GoGrocery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKw-4Z-0I7">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.67000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OAt-Co-J5Z">
+                    <rect key="frame" x="32" y="109" width="256" height="350"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Verification" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-1Y-ECk">
+                            <rect key="frame" x="55.5" y="45" width="145.5" height="28"/>
+                            <fontDescription key="fontDescription" name="Hind-Bold" family="Hind" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The sale and delivery of tobacco based products are prohibited by law to persons under age the of 21." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9RO-uk-kUl">
+                            <rect key="frame" x="8" y="105" width="240" height="59"/>
+                            <fontDescription key="fontDescription" name="Hind-Medium" family="Hind" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izj-Gu-GnQ">
+                            <rect key="frame" x="8" y="196" width="240" height="40"/>
+                            <color key="backgroundColor" red="0.2538556159" green="0.60393756629999995" blue="0.2541613579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="qyF-TH-t5y"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Hind-Regular" family="Hind" pointSize="16"/>
+                            <state key="normal" title="I'm 21 years or above">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGB-Ph-Uh5">
+                            <rect key="frame" x="8" y="244" width="240" height="40"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="fMb-XS-GAl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Hind-Regular" family="Hind" pointSize="16"/>
+                            <state key="normal" title="I'm  below 21 years old">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="iRN-1Y-ECk" firstAttribute="centerX" secondItem="OAt-Co-J5Z" secondAttribute="centerX" id="1lD-vJ-Lc4"/>
+                        <constraint firstItem="9RO-uk-kUl" firstAttribute="top" secondItem="iRN-1Y-ECk" secondAttribute="bottom" constant="32" id="2MD-l4-RIS"/>
+                        <constraint firstItem="Izj-Gu-GnQ" firstAttribute="top" secondItem="9RO-uk-kUl" secondAttribute="bottom" constant="32" id="34Y-oi-gSi"/>
+                        <constraint firstItem="iRN-1Y-ECk" firstAttribute="top" secondItem="OAt-Co-J5Z" secondAttribute="top" constant="45" id="37q-gB-6Nl"/>
+                        <constraint firstItem="9RO-uk-kUl" firstAttribute="centerX" secondItem="OAt-Co-J5Z" secondAttribute="centerX" id="7Og-2v-kTo"/>
+                        <constraint firstAttribute="trailing" secondItem="Izj-Gu-GnQ" secondAttribute="trailing" constant="8" id="Hwg-37-Cqc"/>
+                        <constraint firstItem="Izj-Gu-GnQ" firstAttribute="leading" secondItem="OAt-Co-J5Z" secondAttribute="leading" constant="8" id="ORj-vj-C5u"/>
+                        <constraint firstItem="9RO-uk-kUl" firstAttribute="leading" secondItem="OAt-Co-J5Z" secondAttribute="leading" constant="8" id="R2b-Cg-rJd"/>
+                        <constraint firstItem="vGB-Ph-Uh5" firstAttribute="top" secondItem="Izj-Gu-GnQ" secondAttribute="bottom" constant="8" id="UjG-v3-Cz3"/>
+                        <constraint firstAttribute="trailing" secondItem="9RO-uk-kUl" secondAttribute="trailing" constant="8" id="c3E-gh-7dI"/>
+                        <constraint firstAttribute="trailing" secondItem="vGB-Ph-Uh5" secondAttribute="trailing" constant="8" id="gUb-ny-bwE"/>
+                        <constraint firstItem="Izj-Gu-GnQ" firstAttribute="centerX" secondItem="OAt-Co-J5Z" secondAttribute="centerX" id="gau-0H-TPk"/>
+                        <constraint firstItem="vGB-Ph-Uh5" firstAttribute="leading" secondItem="OAt-Co-J5Z" secondAttribute="leading" constant="8" id="imS-If-mT6"/>
+                        <constraint firstItem="vGB-Ph-Uh5" firstAttribute="centerX" secondItem="OAt-Co-J5Z" secondAttribute="centerX" id="rTD-6A-NcG"/>
+                        <constraint firstAttribute="height" constant="350" id="rrh-3h-vyI"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="OAt-Co-J5Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0fO-Qv-9r0"/>
+                <constraint firstItem="OAt-Co-J5Z" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="2R3-Ev-Dvg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="DKw-4Z-0I7" secondAttribute="bottom" id="7lI-gH-8Bs"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DKw-4Z-0I7" secondAttribute="trailing" id="GMU-WN-AHm"/>
+                <constraint firstItem="DKw-4Z-0I7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="HEC-Dz-GZ4"/>
+                <constraint firstItem="OAt-Co-J5Z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="PmH-H8-yxn"/>
+                <constraint firstItem="DKw-4Z-0I7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="U6b-XD-KiA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OAt-Co-J5Z" secondAttribute="trailing" constant="32" id="UV9-ZD-vb1"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="btnAboveAge" destination="Izj-Gu-GnQ" id="q6W-vR-chJ"/>
+                <outlet property="btnBelowAge" destination="vGB-Ph-Uh5" id="8gM-WK-nlP"/>
+                <outlet property="lblText" destination="9RO-uk-kUl" id="Gc4-Xt-1Eg"/>
+                <outlet property="viewEighteen" destination="OAt-Co-J5Z" id="8lx-44-Bo5"/>
+            </connections>
+            <point key="canvasLocation" x="131.25" y="111.97183098591549"/>
+        </view>
+    </objects>
+</document>

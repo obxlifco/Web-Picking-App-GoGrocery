@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+
+        app:cardCornerRadius="8dp"
+        android:layout_marginBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/my_order_bg"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_orderId"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="14dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtOrdeid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:textAlignment="viewStart"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:fontFamily="@font/hind_medium"
+                    android:text="@string/my_orders_row_orderno"
+                    android:textColor="@color/grey_new" />
+
+                <TextView
+                    android:id="@+id/tvOrderNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:textAlignment="viewStart"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@+id/txtOrdeid"
+                    android:fontFamily="@font/hind_medium"
+                    android:text="12458-7452-1510"
+                    android:textColor="@color/grey_new" />
+
+
+
+                <ImageView
+                    android:id="@+id/ivToDetail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                  android:layout_alignParentEnd="true"
+                    android:layout_marginTop="14dp"
+android:padding="10dp"
+                    android:layout_marginEnd="16dp"
+                     />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_orderSummery"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/rl_orderId"
+                android:paddingBottom="10dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/ll_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/date"
+                        android:textColor="@color/green_new" />
+                    <TextView
+                        android:id="@+id/tvDateNTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="14 Sept. 2019, 11:12 AM"
+                        android:textColor="@color/grey_new" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_date"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/store"
+                        android:textColor="@color/green_new" />
+                    <TextView
+                        android:id="@+id/tvStoreName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="4dp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="Lifco"
+                        android:textColor="@color/grey_new" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_totalAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_store"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/order_list_total_amount"
+                        android:textColor="@color/green_new" />
+                    <TextView
+                        android:id="@+id/tvTotalAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="51.01 AED"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/grey_new" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_totalAmount"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/_address"
+                        android:textColor="@color/green_new" />
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="4dp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="Address Name"
+                        android:textColor="@color/grey_new" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_address"
+                    android:orientation="horizontal">
+                    <TextView
+android:id="@+id/txtPaymentmode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/my_orders_row_order_pm"
+                        android:textColor="@color/green_new" />
+                    <TextView
+                        android:id="@+id/tvPaymentMode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="Cash on delivery"
+                        android:textColor="@color/grey_new" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/ll_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/ll_payment"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="0.5"
+                        android:textSize="15sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/tvOrderStatus"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/hind_medium"
+                        android:text="@string/_status"
+                        android:textColor="@color/green_dark_new" />
+                    <TextView
+                        android:id="@+id/tvOrderStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/hind_medium"
+
+                        android:textColor="@color/green_new" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_reOrder"
+                android:layout_width="match_parent"
+                android:layout_marginStart="44dp"
+                android:layout_marginEnd="44dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_below="@+id/rl_orderSummery"
+                android:paddingBottom="10dp"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:background="@drawable/green_round_side"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:fontFamily="@font/hind_medium"
+                    android:text="Re-Order">
+
+                </TextView>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/icon_right">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/txtPaymentStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_reOrder"
+                android:layout_marginLeft="16dp"
+                android:visibility="gone"
+                android:fontFamily="@font/hind_medium"
+                android:text="@string/my_orders_row_order_ps"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvPaymentStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_reOrder"
+                android:layout_marginStart="5dp"
+                android:visibility="gone"
+                android:layout_toRightOf="@+id/txtPaymentStatus"
+                android:fontFamily="@font/hind_medium"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtOrderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPaymentStatus"
+                android:layout_marginLeft="16dp"
+                android:visibility="gone"
+                android:fontFamily="@font/hind_medium"
+                android:text="Order Status: "
+                android:textColor="@color/black" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPaymentStatus"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                android:layout_toRightOf="@+id/txtOrderStatus"
+                android:fontFamily="@font/hind_medium"
+                android:text=""
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txtOrderTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtOrderStatus"
+                android:layout_marginLeft="16dp"
+                android:visibility="gone"
+                android:fontFamily="@font/hind_medium"
+                android:text="Delivery Time: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvOrderTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtOrderStatus"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toRightOf="@+id/txtOrderTime"
+                android:fontFamily="@font/hind_medium"
+                android:text=""
+                android:visibility="gone"
+                android:textColor="@color/black" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tvPaymentStatus"
+                android:layout_marginTop="8dp"
+                android:background="@color/view_divider_clr"
+                android:visibility="gone" />
+
+            <!--   <TextView
+                   android:visibility="gone"
+                   android:id="@+id/tvOrderStatus"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/view1"
+                   android:layout_marginLeft="16dp"
+                   android:layout_marginTop="16dp"
+                   android:layout_marginBottom="16dp"
+                   android:fontFamily="@font/hind_medium"
+                   android:text="Approved"
+                   android:textColor="@color/black" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPaymentStatus"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_toLeftOf="@+id/tvPayNow"
+                    android:background="@drawable/my_order_cancel_bg"
+                    android:fontFamily="@font/hind_semibold"
+                    android:text="CANCEL"
+                    android:textColor="@color/app_red_clr"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvPayNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/my_order_payment_paynow_bg"
+                    android:fontFamily="@font/hind_semibold"
+                    android:text="PAY NOW"
+                    android:textColor="#0B9444"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--  <LinearLayout
+          android:id="@+id/rowBG"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:gravity="right"
+          android:orientation="horizontal">
+
+
+          <RelativeLayout
+              android:id="@+id/add"
+              android:layout_width="85dp"
+              android:layout_height="match_parent"
+              android:background="@color/app_red_clr"
+              android:clickable="true"
+              android:focusable="true"
+              android:orientation="vertical">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_centerInParent="true"
+                  android:background="?android:selectableItemBackground"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:src="@drawable/ic_delete_white"
+                      android:tint="@android:color/white" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:layout_marginLeft="8dp"
+                      android:layout_marginTop="4dp"
+                      android:layout_marginRight="8dp"
+                      android:ellipsize="end"
+                      android:gravity="center"
+                      android:maxLines="1"
+                      android:text="Cancel"
+                      android:textColor="@android:color/white"
+                      android:textSize="12sp" />
+              </LinearLayout>
+          </RelativeLayout>
+
+
+      </LinearLayout>-->
+</RelativeLayout>

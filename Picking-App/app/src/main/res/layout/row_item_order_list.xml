@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+
+            android:layout_gravity="center"
+           android:layout_marginBottom="@dimen/_2sdp"
+
+           >
+
+            <ImageView
+                android:id="@+id/ivPicItemRow"
+                android:layout_width="@dimen/_58sdp"
+                android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="center"
+                android:src="@drawable/ic_product_default" />
+
+            <TextView
+                android:id="@+id/tvIsSubsItemRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@color/appColorBlue"
+                android:gravity="center|bottom"
+                android:layout_gravity="bottom"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/txtSubstitute"
+                android:textColor="@color/appColorWhite"
+                android:textSize="@dimen/_6sdp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_3sdp"
+     android:layout_weight="0.3"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/tvNameItemRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ellipsize="marquee"
+                    android:gravity="start"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="MTR KARAN Powder"
+                    android:textColor="@color/appGreen"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/llSkuItemRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SKU:"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvSkuItemRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:gravity="start|center"
+                    android:text=""
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llBarcodeItemRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barcode:"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvBarcodeItemRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:gravity="start|center"
+                    android:text=""
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llEditWeightOrderListRow"
+                    android:background="@drawable/bg_red_round_corner"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_2sdp">
+
+                    <TextView
+                        android:id="@+id/tvEditWeightOrderListRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="@string/txtEditWeight"
+                        android:textColor="@color/appColorWhite"
+                        android:textSize="@dimen/_6sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llCustomFieldRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_custom_field_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+android:text="Prep Options"
+                        android:textColor="@color/appGreen"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_custom_field_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:gravity="center|start|end"
+android:singleLine="true"
+                        android:text=" Open back site"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llUnitWeightItemRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtUnitWeight"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvUnitWeightItemRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:gravity="start|center"
+                        android:text="20g"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llWeightItemRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtTotalWeight"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvWeightItemRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:gravity="start|center"
+                        android:text="20g"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtUnitPrice"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvPriceItemRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:text="$ 48"
+                        android:gravity="start|center"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtTotalPricee"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvTotalPriceItemRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:text="$ 48"
+                        android:gravity="start|center"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtOrderedQty"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+
+                    <TextView
+                        android:id="@+id/tvQtyItemRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="8"
+                        android:gravity="start|center"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtAvailable"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@drawable/bg_rect_green_border_round_corner"
+                        android:padding="1dp">
+
+                        <TextView
+                            android:id="@+id/tvDecreaseAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appGreen"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="@color/appColorWhite"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:id="@+id/tvValueAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appColorWhite"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="@color/appColorBlack"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:id="@+id/tvIncreaseAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appGreen"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/appColorWhite"
+                            android:textSize="@dimen/_8sdp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtNotAvailable"
+                        android:textColor="@color/appColorBlack"
+                        android:textSize="@dimen/_7sdp" />
+
+                    <LinearLayout
+                        android:id="@+id/llNotAvailable"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@drawable/bg_rect_dark_round_corner"
+                        android:padding="1dp">
+
+                        <TextView
+                            android:id="@+id/tvDecreaseNotAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appColorDarkGrey"
+                            android:gravity="center"
+                            android:text="-"
+                            android:textColor="@color/appColorWhite"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:id="@+id/tvValueNotAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appColorWhite"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="@color/appColorBlack"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:id="@+id/tvIncreaseNotAvail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/appColorDarkGrey"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/appColorWhite"
+                            android:textSize="@dimen/_8sdp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDoneRowItemList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="false"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_green_tick" />
+
+    </LinearLayout>
+</FrameLayout>

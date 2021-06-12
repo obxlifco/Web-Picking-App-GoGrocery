@@ -1,0 +1,127 @@
+<div class="loada" *ngIf="popupLoder">
+    <mat-spinner></mat-spinner>
+</div>
+<form #productTypeMaster="ngForm" novalidate (ngSubmit)="productTypeMaster.valid && addProductType(productTypeMaster)">
+    <input type="hidden" name="hsn_id" [(ngModel)]="formModel.id">
+    <div class="md-toolbar-tools">
+        <h2 md-dialog-title>Price Type Setup </h2>
+        <!-- <button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs" [disabled]="isbuttonDisable">Save</button>
+        <button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button> -->
+    </div>
+    <mat-dialog-content>
+        <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+        <div class="pop-body" layout="column">
+            <!-- <mat-form-field class="md-block" appearance="outline">
+                <mat-label>Price Type</mat-label>
+                <mat-select placeholder="Price Type" #priceTypeId="ngModel" name="priceTypeId" [(ngModel)]="formModel.priceTypeId"
+                    required (selectionChange)="loadDefaultProductMasterSettings(formModel.priceTypeId)">
+                    <mat-option *ngFor="let priceType of priceMasterList" [value]="priceType.id">{{priceType.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="priceTypeId.errors && priceTypeId.errors.required">
+                    This is a <strong>required</strong> field
+                </mat-error>
+            </mat-form-field> -->
+            <ng-select [ngClass]="{ 'custom_error_red': priceTypeId.errors && priceTypeId.errors.required && (priceTypeId.dirty || priceTypeId.touched || productTypeMaster.submitted) }"
+                [items]="priceMasterList"
+                required
+                placeholder="Price Type"
+                bindLabel="name" bindValue="id"
+                #priceTypeId="ngModel" name="priceTypeId" [(ngModel)]="formModel.priceTypeId"
+                (change)="loadDefaultProductMasterSettings(formModel.priceTypeId)"
+            >
+            </ng-select>
+            <p class="custom_error" *ngIf="priceTypeId.errors && priceTypeId.errors.required && (priceTypeId.dirty || priceTypeId.touched || productTypeMaster.submitted)">This is a <strong>required</strong> field</p>
+            <mat-form-field class="md-block" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name"
+                    pattern="^(?!\s*$|\s).*$">
+                <mat-error *ngIf="name.errors && name.errors.required">
+                    This is a
+                    <strong>required</strong> field
+                </mat-error>
+                <mat-error *ngIf="name.errors && name.errors.pattern">
+                    White space is not allowed at beginning.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="md-block" appearance="outline" *ngIf="formModel.priceTypeId == 2">
+                <mat-label>Min Quantity</mat-label>
+                <input matInput placeholder="Min Quantity" required #min_quantity="ngModel" name="min_quantity"
+                    [(ngModel)]="formModel.min_quantity" pattern="^(?!\s*$|\s).*$" type="number" min="0" oninput="this.value = Math.abs(this.value)">
+                <mat-error *ngIf="min_quantity.errors && min_quantity.errors.required">
+                    This is a
+                    <strong>required</strong> field
+                </mat-error>
+                <mat-error *ngIf="min_quantity.errors && min_quantity.errors.pattern">
+                    White space is not allowed at beginning.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="md-block" appearance="outline" *ngIf="formModel.priceTypeId == 2">
+                <mat-label>Max Quantity</mat-label>
+                <input matInput placeholder="Max Quantity" required #max_quantity="ngModel" name="max_quantity"
+                    [(ngModel)]="formModel.max_quantity" pattern="^(?!\s*$|\s).*$" type="number" min="1" oninput="this.value = Math.abs(this.value)">
+                <mat-error *ngIf="max_quantity.errors && max_quantity.errors.required">
+                    This is a
+                    <strong>required</strong> field
+                </mat-error>
+                <mat-error *ngIf="max_quantity.errors && max_quantity.errors.pattern">
+                    White space is not allowed at beginning.
+                </mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field class="md-block" appearance="outline">
+                <mat-label>Store</mat-label>
+                <mat-select placeholder="Select store" #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id"
+                    required multiple>
+                    <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="warehouse_id.errors && warehouse_id.errors.required">
+                    This is a <strong>required</strong> field
+                </mat-error>
+            </mat-form-field> -->
+            <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || productTypeMaster.submitted) }"
+                [items]="warehouse_list"
+                required
+                [multiple]="true"
+                placeholder="Store"
+                bindLabel="name" bindValue="id"
+                #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id"
+            >
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                        <span class="ng-value-label">{{item.name}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                </div>
+                <div class="ng-value" *ngIf="items.length > 1">
+                        <span class="ng-value-label">{{items.length - 1}} more...</span>
+                </div>
+            </ng-template>
+            <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+            </ng-template> -->
+            </ng-select>
+            <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || productTypeMaster.submitted)">This is a <strong>required</strong> field</p>
+            <!-- <mat-form-field class="md-block" appearance="outline">
+                <mat-label>Barcodes</mat-label>
+                <mat-chip-list #chipList aria-label="Barcode selection">
+                    <mat-chip *ngFor="let barcode of barcodes" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeBarcode(barcode)">
+                        {{barcode.name}}
+                        <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Barcodes" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addBarcodes($event)">
+                </mat-chip-list>
+            </mat-form-field> -->
+
+        </div>
+        <div class="clear"></div>
+    </mat-dialog-content>
+    <mat-dialog-actions layout="row">
+        <label class="hidden-sm hidden-xs">Fields marked with
+            <span class="error">*</span> are compulsory.</label>
+        <span flex></span>
+        <button type="submit" mat-raised-button class="btn-main" [disabled]="isbuttonDisable">Save</button>
+        <button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
+</form>

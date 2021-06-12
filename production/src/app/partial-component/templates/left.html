@@ -1,0 +1,47 @@
+<section class="left-part">
+	<div [ngClass]="{ 'left-scroll scrollbar':true,'active':user_menu }">
+		<ul class="nav-left resp-tab">
+			<li *ngFor="let menu of menu_list.Frontend" [ngClass]="{'isparent sub-li': (menu.child.length>0)}" [class.parent]="selected == menu.id" (click)="(menu.child.length==0) && setActive(menu.id,0)"> 
+				<a *ngIf="menu.child.length==0" [routerLink] = "menu.link" (click)="globalService.addTab(menu.id,menu.link,menu.name,0);"> 
+					<div class="nav-icon"><span class="{{menu.css_class}}"></span></div>
+					<span>{{menu.name}}</span>
+				</a> 
+				<a *ngIf="menu.child.length>0" href="javascript:void(0)" (click)="setActive(menu.id,menu.child.length)"> <!-- (click)="menu.child.length == 0 && globalService.addTab(menu.id,menu.link,menu.name,0)" -->
+					<div class="nav-icon"><span class="{{menu.css_class}}"></span></div>
+					<span>{{menu.name}}</span>
+				</a> 
+				<ul *ngIf="menu.child.length>0">
+					<li *ngFor="let submenu of menu.child"  (click)="setActive(submenu.id,0)">
+						<a class="menu-switch" *ngIf="submenu.link!='null'" [routerLink] = "submenu.link" (click)="globalService.reloadGridOrder(submenu.id);globalService.addTab(submenu.id,submenu.link,submenu.name,0)" routerLinkActive="active">{{submenu.name}}</a>
+						<a *ngIf="submenu.link=='null'" href="javascript:void(0)">{{submenu.name}}</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div [ngClass]="{ 'left-scroll':true, 'active': admin_menu }">
+		<ul class="nav-left bot-nav">
+		  <li *ngFor="let menu of menu_list.Admin" [ngClass]="{'isparent sub-li': (menu.child.length>0)}" [class.parent]="selected == menu.id"> 
+			  <a href="javascript:void(0)" (click)="setActive(menu.id,menu.child.length)">
+			  	<div class="nav-icon"><span class="{{menu.css_class}}"></span></div>
+				<span>{{menu.name}}</span>
+			  </a>
+			  <ul class="scrollbar" style="display:block">
+				  <li *ngFor="let submenu of menu.child"  (click)="setActive(submenu.id,0)">
+				  	<a class="menu-switch" *ngIf="submenu.link!='null'" [routerLink] = "submenu.link" (click)="globalService.addTab(submenu.id,submenu.link,submenu.name,0)" routerLinkActive="active">{{submenu.name}}</a>
+					<a *ngIf="submenu.link=='null'" href="javascript:void(0)">{{submenu.name}}</a>
+				  </li>
+			  </ul>
+		  </li>
+		</ul>
+	</div>
+	<ul class="nav-left bot-nav">
+		<li class="admin"> <a href="javascript:void(0)" (click)="toggleMenu()">
+			<div class="nav-icon" ><span id="menu_icon" [ngClass]="{'icon-setings':!admin_menu,'icon-bms':admin_menu}"></span></div>
+			<span id="menuText">{{menu_text}}</span></a> </li>
+		<li class="menu-class"> <a href="javascript:void(0)" (click)="changeClass()">
+				&copy; GoGrocery All Rights Reserved.
+		<div class="nav-icon"><span class="icon-left"></span><span class="icon-right"></span></div>
+		</a> </li>
+	</ul>
+</section>

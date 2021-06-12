@@ -1,0 +1,162 @@
+<section class="right-part addall_page">
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<form #addCourier="ngForm" novalidate (ngSubmit)="addCourier.valid && addEditCourier(addCourier)">
+			<input type="hidden" name="id" [(ngModel)]="formModel.id">
+			<input type="hidden" name="edit_type" [(ngModel)]="formModel.edit_type">
+			<div class="topheading">
+				<h1>{{(formModel.userId>0)?'Edit':'Add'}} Courier
+					<div class="btn-header">
+						<div class="btn-header">
+							<button type="submit" mat-raised-button class="btn-main">Save</button>
+							<button type="button" mat-raised-button class="btn-line"
+								(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+							<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</h1>
+			</div>
+			<div class="clear"></div>
+			<div class="box">
+				<div class="fixed-width">
+					<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Shipping Method Name</mat-label>
+										<input matInput placeholder="Shipping Method Name" required #method_name="ngModel"
+											name="method_name" [(ngModel)]="formModel.method_name" pattern="[a-zA-Z0-9_]+.*$">
+										<mat-error *ngIf="method_name.errors && method_name.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="method_name.errors && method_name.errors.pattern">
+											This is not a <strong>valid</strong> input
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Alias Name</mat-label>
+										<input matInput placeholder="Alias Name" #short_name="ngModel" name="short_name"
+											[(ngModel)]="formModel.short_name">
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Tracking URL</mat-label>
+										<input matInput placeholder="Tracking URL" #tracking_url="ngModel" name="tracking_url"
+											[(ngModel)]="formModel.tracking_url">
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Tracking No. Prefix</mat-label>
+										<input matInput placeholder="Tracking No. Prefix" #awb_prefix="ngModel" name="awb_prefix"
+											[(ngModel)]="formModel.awb_prefix">
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Tracking No. Sufix</mat-label>
+										<input matInput placeholder="Tracking No. Sufix" #awb_suffix="ngModel" name="awb_suffix"
+											[(ngModel)]="formModel.awb_suffix">
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Applicable Zipcode</mat-label>
+										<input matInput placeholder="Applicable Zipcode" #zip_code="ngModel" name="zip_code"
+											[(ngModel)]="formModel.zip_code">
+									</mat-form-field>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-4"><br>
+									<mat-radio-group name="tracking_type" [(ngModel)]="formModel.tracking_type"
+										(change)="radioChange($event)">
+										<mat-radio-button value="Awb" style="padding-right: 50px;">AWB</mat-radio-button>
+										<mat-radio-button value="Range">Range</mat-radio-button>
+									</mat-radio-group>
+								</div>
+								<div class="col-sm-4" *ngIf="formModel.tracking_type == 'Awb'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Awb Number</mat-label>
+										<!-- <textarea matInput placeholder="Awb Number(Please add multiple awb number with comma seperator)"
+											#awb_number="ngModel" name="awb_number" [(ngModel)]="formModel.awb_number"></textarea> -->
+										<input matInput placeholder="Awb Number" #awb_number="ngModel" name="awb_number" [(ngModel)]="formModel.awb_number">
+										<mat-hint>Please add multiple awb number with comma seperator</mat-hint>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-2" *ngIf="formModel.tracking_type == 'Range'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Tracking Range From</mat-label>
+										<input matInput placeholder="Tracking Range From" #tracking_id_start="ngModel"
+											name="tracking_id_start" [(ngModel)]="formModel.tracking_id_start" type="number" min="0">
+									</mat-form-field>
+								</div>
+
+								<div class="col-sm-2" *ngIf="formModel.tracking_type == 'Range'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Tracking Range To</mat-label>
+										<input matInput placeholder="Tracking Range To" #tracking_id_end="ngModel" name="tracking_id_end"
+											[(ngModel)]="formModel.tracking_id_end" type="number" min="1">
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4"><br>
+									<mat-radio-group [(ngModel)]="formModel.method_type" name="method_type">
+										<mat-radio-button value="Manual" [disabled]="true" style="padding-right: 50px;">Manual</mat-radio-button>
+										<mat-radio-button value="Auto" [disabled]="true">Auto</mat-radio-button>
+									</mat-radio-group>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<!-- <div class="col-sm-4" *ngIf="formModel.tracking_type == 'Awb'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Awb Number</mat-label>
+										<textarea matInput placeholder="Awb Number(Please add multiple awb number with comma seperator)"
+											#awb_number="ngModel" name="awb_number" [(ngModel)]="formModel.awb_number"></textarea>
+									</mat-form-field>
+								</div> -->
+
+								<!-- <div class="col-sm-4" *ngIf="formModel.tracking_type == 'Range'">
+									<div class="col-sm-6">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Tracking Range From</mat-label>
+											<input matInput placeholder="Tracking Range From" #tracking_id_start="ngModel"
+												name="tracking_id_start" [(ngModel)]="formModel.tracking_id_start" type="number" min="0">
+										</mat-form-field>
+									</div>
+
+									<div class="col-sm-4" *ngIf="formModel.tracking_type == 'Range'">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Tracking Range To</mat-label>
+											<input matInput placeholder="Tracking Range To" #tracking_id_end="ngModel" name="tracking_id_end"
+												[(ngModel)]="formModel.tracking_id_end" type="number" min="1">
+										</mat-form-field>
+									</div>
+								</div> -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ///////////////Buttons//// -->
+				<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Save</button>
+					<button type="button" mat-raised-button class="btn-line"
+						(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div>
+				<div class="clear"></div>
+				<!-- ///////////////Buttons//// -->
+			</div>
+			<div class="clear"></div>
+		</form>
+	</div>
+</section>

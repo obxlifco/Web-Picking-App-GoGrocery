@@ -1,0 +1,124 @@
+
+<form #navForm="ngForm" novalidate (ngSubmit)="navForm.valid && addEditNavigation(navForm)">
+	<input type="hidden" name="userId" [(ngModel)]="formModel.id">
+	
+	<div class="md-toolbar-tools">
+		<h2 mat-dialog-title>{{ (formModel.id>0)?'Edit':'Add' }} Navigation</h2>
+	</div>
+	
+	<!-- HEADER SECTION -->
+	<mat-dialog-content *ngIf="data.header_footer==0">
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column"> 
+		 	
+		 	<mat-form-field *ngIf="formModel.id==0">
+				<mat-select required placeholder="Menu Name" #page_id="ngModel" name="page_id" [(ngModel)]="formModel.page_id" (change)="changeMenuPage()">
+					<mat-option value="cat">[Select Category]</mat-option>
+					<mat-option *ngFor="let page of page_list" [value]="page.id">{{page.page_name}}</mat-option>
+				</mat-select>
+				<mat-error *ngIf="page_id.errors && page_id.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<mat-form-field *ngIf="formModel.id>0">
+				<input matInput placeholder="Menu Name" required #page_id="ngModel" name="page_id" [(ngModel)]="formModel.name" [disabled]="true">
+			</mat-form-field>
+		 			
+			
+			<button type="button" mat-button class="editor-btn-main-line" *ngIf="formModel.page_id=='cat'" [matMenuTriggerFor]="main_menu">
+				{{(formModel.category_name)?'Select Category: '+formModel.category_name:'Select Category'}}
+			</button>
+			<mat-menu #main_menu="matMenu">
+			  	<ng-container *ngFor="let parent of category_list">
+				    <button type="button" *ngIf="parent.child.length==0" mat-menu-item (click)="setCategory(parent)">{{ parent.name }}</button>
+				    <button type="button" *ngIf="parent.child.length>0" mat-menu-item [matMenuTriggerFor]="sub_menu" (click)="setCategory(parent)">{{ parent.name }}</button>
+				    <mat-menu #sub_menu="matMenu">
+				       <button type="button" *ngFor="let child of parent.child" mat-menu-item (click)="setCategory(child)">{{ child.name }}</button>
+				    </mat-menu>	
+				</ng-container>
+			</mat-menu>
+			<div class="clear"></div>
+
+			<mat-checkbox name="show_sub_menu_opt"  [(ngModel)]="enable_parent_menu" id="list-all" (change)="showSubMenu($event)">Add as Submenu</mat-checkbox>
+			<div class="clear20"></div>
+			<mat-form-field *ngIf="enable_parent_menu">
+				<mat-select required placeholder="Parent Menu Name" #parent_id="ngModel" name="parent_id" [(ngModel)]="formModel.parent_id">
+					<mat-option *ngFor="let menu of parent_menu" [value]="menu.id">{{menu.name}}</mat-option>
+				</mat-select>
+				<mat-error *ngIf="parent_id.errors && parent_id.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+
+		</div>
+		
+	</mat-dialog-content>	
+
+	<!-- FOOTER SECTION -->
+	<mat-dialog-content *ngIf="data.header_footer==1">
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column"> 
+		 	
+		 	<mat-checkbox name="show_label_opt"  [(ngModel)]="enable_label_menu" id="show_label_opt" (change)="showFooterLabel($event)">Add as Label</mat-checkbox>
+		 	<mat-form-field *ngIf="enable_label_menu">
+				<input matInput placeholder="Label Name (EN)" required #label="ngModel" name="label" [(ngModel)]="formModel.label">
+				<mat-error *ngIf="label.errors && label.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<mat-form-field *ngIf="enable_label_menu">
+				<input matInput placeholder="Label Name (TH)" #label_th="ngModel" name="label_th" [(ngModel)]="formModel.label_th">
+			</mat-form-field>
+
+			<ng-container *ngIf="!enable_label_menu">
+				<mat-form-field *ngIf="formModel.id==0">
+					<mat-select required placeholder="Menu Name" #page_id="ngModel" name="page_id" [(ngModel)]="formModel.page_id" (change)="changeMenuPage()">
+						<mat-option value="cat">[Select Category]</mat-option>
+						<mat-option *ngFor="let page of page_list" [value]="page.id">{{page.page_name}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="page_id.errors && page_id.errors.required">
+				      This is a <strong>required</strong> field
+				    </mat-error>
+				</mat-form-field>
+				<mat-form-field *ngIf="formModel.id>0">
+					<input matInput placeholder="Menu Name" required #page_id="ngModel" name="page_id" [(ngModel)]="formModel.name" [disabled]="true">
+				</mat-form-field>
+			 	
+				<button type="button" mat-button class="editor-btn-main-line" *ngIf="formModel.page_id=='cat'" [matMenuTriggerFor]="main_menu">
+					{{(formModel.category_name)?'Select Category: '+formModel.category_name:'Select Category'}}
+				</button>
+				<mat-menu #main_menu="matMenu">
+				  	<ng-container *ngFor="let parent of category_list">
+					    <button type="button" *ngIf="parent.child.length==0" mat-menu-item (click)="setCategory(parent)">{{ parent.name }}</button>
+					    <button type="button" *ngIf="parent.child.length>0" mat-menu-item [matMenuTriggerFor]="sub_menu" (click)="setCategory(parent)">{{ parent.name }}</button>
+					    <mat-menu #sub_menu="matMenu">
+					       <button type="button" *ngFor="let child of parent.child" mat-menu-item (click)="setCategory(child)">{{ child.name }}</button>
+					    </mat-menu>	
+					</ng-container>
+				</mat-menu>
+				<div class="clear"></div>
+
+				<mat-form-field>
+					<mat-select required placeholder="Parent Menu Name" #parent_id="ngModel" name="parent_id" [(ngModel)]="formModel.parent_id">
+						<mat-option *ngFor="let menu of parent_menu" [value]="menu.id">{{menu.name}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="parent_id.errors && parent_id.errors.required">
+				      This is a <strong>required</strong> field
+				    </mat-error>
+				</mat-form-field>
+			</ng-container>
+
+		</div>
+		
+	</mat-dialog-content>
+
+	<mat-dialog-actions layout="row">
+		  	
+		  	<button mat-raised-button class="btn-main" type="submit">Save</button>
+		  	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>
+	
+

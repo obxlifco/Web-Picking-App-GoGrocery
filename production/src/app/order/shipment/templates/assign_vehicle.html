@@ -1,0 +1,44 @@
+<div class="pop_wrap">
+	<form #assignVehicleForm="ngForm" novalidate (ngSubmit)="assignVehicleForm.valid && saveAssignVehicle()">
+		<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+		<h4 mat-dialog-title>
+			Select Your Vehicle Number & Delivery Executive
+	    </h4>
+		<mat-dialog-content style="min-width: 500px;">
+			<div class="pop-body">
+				<div class="box productbox">
+					<div class="row" *ngFor="let vehicleArr of formModel.driverVehicleArr; let vehicle_count=index;">
+						<div class="col-sm-6">
+							<mat-form-field appearance="outline">
+								<mat-label>Delivery Executive</mat-label>
+								<mat-select required placeholder="Delivery Executive" #user_id="ngModel" name="user_id_{{vehicle_count}}" [(ngModel)]="vehicleArr.user_id">
+									<mat-option *ngFor="let driver of formModel.available_driver" [value]="driver.user_id">{{driver.name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="user_id.errors && user_id.errors.required">
+									Please select Delivery Executive
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-sm-6">
+							<mat-form-field appearance="outline">
+								<mat-label>Vehicle No</mat-label>
+								<mat-select placeholder="Vehicle No" #vehicle_id="ngModel" name="vehicle_id_{{vehicle_count}}" [(ngModel)]="vehicleArr.vehicle_id">
+									<mat-option *ngFor="let vehicle of formModel.available_vehicle" [value]="vehicle.id">{{vehicle.vehicle_number}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="vehicle_id.errors && vehicle_id.errors.required">
+									Please select Vehicle No
+								</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</mat-dialog-content>
+		<hr>
+		<mat-dialog-actions layout="row" class="div-pop-bottom">
+			<button mat-raised-button class="btn-main" type="submit">Save</button>
+			<button mat-raised-button [mat-dialog-close]="true" class="btn-line" type="button">Cancel</button>
+		</mat-dialog-actions>
+	</form>
+</div>

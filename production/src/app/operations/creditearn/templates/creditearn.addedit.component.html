@@ -1,0 +1,131 @@
+<section class="right-part filter-pad addall_page">
+      <form #formId="ngForm" novalidate (ngSubmit)="formId.valid && addEdit(formId)">
+       <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+         <div class="topheading">
+            <h1>Credit Points Earn Setup
+               <div class="btn-header hidden-xs">
+                <button type="submit" mat-raised-button class="btn-main">Continue</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+               </div>
+               <div class="clear"></div>
+            </h1>
+         </div>
+         <div class="filter">
+            <div class="stap">
+               <ul *ngIf="add_edit=='add'">
+                  <li class="active"><div class="nom"></div>Discount Information</li>
+                  <li ><div class="nom"></div>Condition</li>
+               </ul>
+               <ul *ngIf="formModel.formId>0 && add_edit=='edit'">
+                  <li class="active"><a (click)="_globalService.setTab(tabIndex,'/credit_points_earn/edit/'+formModel.formId)" [routerLink]="['/credit_points_earn/edit/'+formModel.formId]"><div class="nom"></div>Discount Information</a></li>
+                  <li ><a (click)="_globalService.setTab(tabIndex,'/credit_points_earn/conditions/edit/'+formModel.formId)" [routerLink]="['/credit_points_earn/conditions/edit/'+formModel.formId]"><div class="nom"></div>Condition</a></li>
+               </ul>
+             <div class="clear"></div>
+            </div>
+         </div>	
+         <div class="clear"></div>
+         <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+                 
+          <div class="box">
+               <div class="fixed-width">
+                  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                  <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                 
+                     <div class="row">
+                        <div class="col-sm-4">
+                           <mat-form-field appearance="outline"  class="md-block">
+                              <mat-label>Name</mat-label>
+                              <input matInput placeholder="Name" required #name="ngModel"  name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+                              <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="name.errors && name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                           <mat-form-field appearance="outline"  class="md-block">
+                              <mat-label>Start date Time</mat-label>
+                              <input matInput [owlDateTime]="startDate" [owlDateTimeTrigger]="startDate"  placeholder="Start date Time" required #loyal_start_date="ngModel" name="loyal_start_date" [(ngModel)]="formModel.loyal_start_date" pattern="^(?!\s*$|\s).*$" (focus)="startDate.open()">
+                              <owl-date-time #startDate></owl-date-time>
+                              <mat-error *ngIf="loyal_start_date.errors && loyal_start_date.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="loyal_start_date.errors && loyal_start_date.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                           <mat-form-field appearance="outline"  class="md-block">
+                              <mat-label>End date time</mat-label>
+                              <input matInput [owlDateTime]="endDate" [owlDateTimeTrigger]="endDate" placeholder="End date time" required #loyal_end_date="ngModel" name="loyal_end_date" [(ngModel)]="formModel.loyal_end_date" pattern="^(?!\s*$|\s).*$" (focus)="endDate.open()">
+                              <owl-date-time #endDate></owl-date-time>
+                              <mat-error *ngIf="loyal_end_date.errors && loyal_end_date.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="loyal_end_date.errors && loyal_end_date.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                           </mat-form-field>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline"  class="md-block">
+                                 <mat-label>Description</mat-label>
+                                 <input matInput placeholder="Description" required #loyalty_desc="ngModel"  name="loyalty_desc" [(ngModel)]="formModel.loyalty_desc" pattern="^(?!\s*$|\s).*$">
+                                 <mat-error *ngIf="loyalty_desc.errors && loyalty_desc.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                 <mat-error *ngIf="loyalty_desc.errors && loyalty_desc.errors.pattern"> White space is not allowed at beginning.</mat-error>                                                            
+                              </mat-form-field>
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline" >
+                              <mat-label>Earn Type</mat-label>                              
+                              <mat-select required placeholder="Earn Type" #applied_as="ngModel" name="applied_as" [(ngModel)]="formModel.applied_as">
+                                 <mat-option  value="percentage">Percentage</mat-option>
+                                 <mat-option value="fixed">Fixed</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="applied_as?.errors && applied_as?.errors"> This is a <strong>required</strong> field </mat-error>
+                              </mat-form-field>
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline"  class="md-block">
+                                 <mat-label>Valid for (days)</mat-label>
+                                 <input matInput placeholder="Valid for (days)" required #loyalty_expire_days="ngModel"  name="loyalty_expire_days" [(ngModel)]="formModel.loyalty_expire_days" pattern="[0-9]*">
+                                 <mat-error *ngIf="loyalty_expire_days.errors && loyalty_expire_days.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                 <mat-error *ngIf="loyalty_expire_days.errors && loyalty_expire_days.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                              </mat-form-field>
+                           </div>
+                        </div>
+                     </div>	
+                     <div class="row">
+                        <div class="col-sm-6">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline"  class="md-block">
+                                 <mat-label>Spend per X</mat-label>
+                                 <input matInput placeholder="Spend per X" required #per_rupees="ngModel"  name="per_rupees" [(ngModel)]="formModel.per_rupees" pattern="^\d*\.?\d*$">
+                                 <mat-error *ngIf="per_rupees.errors && per_rupees.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                 <mat-error *ngIf="per_rupees.errors && per_rupees.errors.pattern"> This is not a <strong>valid</strong> input </mat-error> 
+                              </mat-form-field>
+                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                           <mat-form-field appearance="outline"  class="md-block">
+                              <mat-label>And Get</mat-label>
+                              <input matInput placeholder="And Get" required #points="ngModel"  name="points" [(ngModel)]="formModel.points" pattern="^\d*\.?\d*$">
+                              <mat-error *ngIf="points.errors && points.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="points.errors && points.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                           </mat-form-field>
+                        </div>
+                     </div>
+               </div>
+             <!-- ///////////////Buttons//// -->
+             <div class="btn-header hidden-xs">
+                <button type="submit" mat-raised-button class="btn-main">Continue</button>
+                <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+             </div> 
+             <div class="clear"></div> 
+             <!-- ///////////////Buttons//// --> 
+          </div>
+            <div class="clear"></div>	
+       </div>
+    </form>	
+ </section>
+ 
+ 

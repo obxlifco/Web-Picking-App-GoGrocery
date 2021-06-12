@@ -1,0 +1,28 @@
+<div class="popup_wrap filterpop">
+	<div class="toppart">
+		<div class="leftpart">
+			<div class="head">Show/Hide Columns</div>
+			<div class="innersec">
+				<ul>
+					<li *ngFor="let column of gridColumns; let indexNumber = index;"><mat-checkbox name="{{column.field}}" id="{{column.field}}" [checked]="column.show" (change)="toggleCheck(indexNumber,$event)">{{column.title}}</mat-checkbox></li>
+				</ul>
+			</div>
+		</div>
+		<div cdkDropList class="rightpart example-list" (cdkDropListDropped)="drop($event)">
+			<ng-container *ngFor="let item of appliedColumns">
+				<div class="itemrow example-box"  cdkDrag>
+					<!-- <div class="text" *ngIf="item.disabled"><span class="icon-new_bar"></span> <del>{{item.title}}</del></div> -->
+					<div class="text" *ngIf="!item.disabled"><span class="icon-new_bar"></span> {{item.title}}</div>
+				</div>
+			</ng-container>
+			
+		</div>
+	</div>
+	<div class="footpart">
+		<div class="btn-header  hidden-xs">
+			<!-- <button mat-raised-button class="btn-main" type="submit" (click)="addEditAdvanceInfo()">Continue</button> -->
+			<button mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+			<button mat-raised-button class="btn-main" type="button" (click)="applyChanges()">Apply</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/txtEditProductStock"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llDialogClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close_black" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/appColorMediumGrey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/bg_rect_round_corner"
+            android:orientation="vertical"
+            android:layout_above="@+id/tvAddProductDialog"
+            android:padding="@dimen/_10sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/txtSetProductStock"
+                android:textColor="@color/appColorBlack"
+                android:textSize="@dimen/_9sdp"
+                />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rgEditStock"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_5sdp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbInStockEditStock"
+                    android:text="@string/txtInStock"
+                    android:textSize="@dimen/_8sdp"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbOutofStockEditStock"
+                    android:text="@string/txtOutofStock"
+                    android:textSize="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </RadioGroup>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rect_round_corner"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:gravity="end"
+                    android:id="@+id/spEditStock"
+                    android:layout_marginStart="@dimen/_3sdp"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvAddEditStock"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/bg_green_round_corner"
+            android:text="@string/txtUpdateStock"
+            android:textColor="@color/appColorWhite"
+            android:textSize="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,1 @@
+# from pos.views.mytestview import MyTestPos

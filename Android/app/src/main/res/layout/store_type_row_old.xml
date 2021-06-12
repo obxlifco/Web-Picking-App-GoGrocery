@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/ivWarehouse"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/image_not_available"
+                    app:riv_corner_radius="4dp" />
+
+                <TextView
+                    android:id="@+id/tvWarehouseTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/proxima_regular"
+                    android:maxLines="2"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/warehouse_warehouse"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_new"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:ignore="RtlCompat" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvAvailable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="end"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/proxima_regular"
+                android:gravity="center"
+                android:text="@string/not_available_here"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat"
+                android:padding="@dimen/_3sdp"
+                android:background="@color/quantum_yellow"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

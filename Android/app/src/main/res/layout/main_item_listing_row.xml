@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_6sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="84dp"
+            android:layout_below="@+id/tvDiscountOffer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toLeftOf="@+id/ivSavelist"
+            android:layout_toRightOf="@+id/ivVeg"
+            android:src="@drawable/image_not_available" />
+
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvDiscountOffer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentTop="true"
+            android:text="@string/_20_off"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:textColor="#ED1C24"
+            android:textSize="12sp"
+            app:fontFamily="@font/proxima_regular" />
+        <TextView
+            android:id="@+id/tvItemBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivItemImage"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/hind_medium"
+            android:visibility="invisible" />
+        <LinearLayout
+            android:id="@+id/ll_itemPriceLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/tvItemBrand"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvDiscountedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textAlignment="viewStart"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/current_curremcy_zero"
+                android:textColor="@color/green_dark_new"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                app:fontFamily="@font/proxima_regular" />
+            <TextView
+                android:id="@+id/tvOriginalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_curremcy_zero"
+android:layout_marginStart="3dp"
+                android:visibility="gone"
+                android:textSize="@dimen/_8sdp"
+
+                app:fontFamily="@font/proxima_regular" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_itemPriceLayout"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:lineSpacingMultiplier="0.7"
+            android:lines="1"
+            android:maxLines="1"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:fontFamily="@font/proxima_regular" />
+
+        <TextView
+            android:id="@+id/tvUOM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvItemName"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/proxima_regular"
+            android:text="50 gm"
+            android:textSize="@dimen/_7sdp"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUOM"
+android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivAddCart"
+                android:layout_width="28dp"
+                android:visibility="visible"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:src="@drawable/ic_add_cart" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+           android:layout_marginBottom="6dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_3sdp">
+
+                <LinearLayout
+                    android:id="@+id/llAddToCart"
+                    style="@style/Base.Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_17sdp"
+                    android:background="@drawable/white_border"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/rlMinus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_cart_minus_bg">
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="12dp"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/minus" />
+                    </RelativeLayout>
+
+
+                    <EditText
+                        android:id="@+id/etQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/hind_semibold"
+                        android:inputType="number"
+                        android:text="1"
+                        android:editable="false"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlPlus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_cart_plus_bg">
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="12dp"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/plus" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llSoldOut"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#90000000"
+            android:clickable="true"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/proxima_regular"
+                android:text="Sold Out"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

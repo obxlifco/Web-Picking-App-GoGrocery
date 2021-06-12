@@ -1,0 +1,23 @@
+<div class="profile_outer orderdistory">
+    <div class="box">
+      <div class="profile_pic styleCursor" (click)="navigateToUrl('profile/profiledetails')">
+        <img src="assets/images/Layer 45.png">
+      </div>
+      <div class="profilename" *ngIf="this.authenticationService.userFirstName!=undefined">
+      {{this.authenticationService.userFirstName}} {{this.authenticationService.userLastName}}
+      <!-- <p>Edit your name, email, etc.</p> -->
+      </div>
+    </div>
+    <div class="menu">
+      <ul>
+      <li (click)="navigateToUrl('/profile/profiledetails')"><a href="javascript:void(0)" [ngClass]="activatedMenu == 'profiledetails' ? 'active' : ''"><span class="icon-profile1"></span>Profile</a></li>
+      <li (click)="navigateToUrl('/profile/delivery-address')"><a  href="javascript:void(0)" [ngClass]="activatedMenu == 'delivery-address' ? 'active' : ''"><span class="icon-location"></span>Delivery Address</a></li>
+      <li (click)="navigateToUrl('/profile/change-password')"><a href="javascript:void(0)" [ngClass]="activatedMenu == 'change-password' ? 'active' : ''"><span class="icon-lock"></span>Change Password</a></li>
+      <li><a (click)="navigateToUrl('/profile/order-history')" href="javascript:void(0)" [ngClass]="activatedMenu == 'order-history' ? 'active' : ''"><span class="icon-shopping-cart"></span>Order History</a></li>
+      <li><a (click)="navigateToUrl('/profile/wishlist')" href="javascript:void(0)" [ngClass]="activatedMenu == 'wishlist' ? 'active' : ''"><span class="icon-heart_like"></span>Wishlist</a></li>
+      <li><a (click)="navigateToUrl('/profile/my-wallet')" href="javascript:void(0)" [ngClass]="activatedMenu == 'my-wallet' ? 'active' : ''"><span class="icon-wallet-_new"></span>My Wallet</a></li>
+      <li><a (click)="navigateToUrl('/profile/save-list')" href="javascript:void(0)" [ngClass]="activatedMenu == 'save-list' ? 'active' : ''"><span class="icon-wishlist"></span>Save List</a></li>
+      <li (click)="this.authenticationService.logout()"><a href="javascript:void(0)"><span class="icon-logout"></span>Logout</a></li>
+      </ul>
+    </div>
+</div>

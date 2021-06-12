@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TwoFragment">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ttt"
+        android:layout_below="@id/toolbar">
+
+
+
+        <RelativeLayout
+            android:id="@+id/spin"
+            android:layout_width="match_parent"
+            android:layout_margin="3dp"
+            android:layout_height="40dp"
+
+            android:visibility="gone"
+            android:background="@drawable/spinner_border_home"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/distributor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/drop" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="#111111"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+   <!-- <LinearLayout
+        android:id="@+id/btm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/next1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/theme_color"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Day End"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/next2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/theme_color"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/btm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="end"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/dist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/theme_color"
+            android:padding="10dp"
+            android:text="Distributor >>"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ttt"
+        android:layout_above="@id/btm"
+        android:padding="4dp"
+        android:scrollbars="vertical" />
+
+
+
+</RelativeLayout>
+

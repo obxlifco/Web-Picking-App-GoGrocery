@@ -1,0 +1,76 @@
+<section class="pmc_order_con login-bg">
+    <form #loginForm="ngForm" novalidate (ngSubmit)="loginForm.valid && userRegister(loginForm)">
+        <div class="loginbox">
+          <div class="crossbtn"><a href="#"><span class="icon-cross_sml"></span></a></div>
+          <div class="image_panel" style="background-image:url(assets/images/loging_bg.jpg)"></div>
+          <div class="text_panel">
+              <div class="head">Welcome to Go grocery</div>
+              <div class="row">
+                  <button class="facebookbtn"><span><img src="assets/images/facebook.png"></span>Facebook</button>
+                  <button class="google"><span><img src="assets/images/google.png"></span>Google</button>
+              </div>
+              <div class="ortext">Or Register with</div>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput placeholder="Address">
+                  </mat-form-field>
+             </div>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile No</mat-label>
+                    <input matInput placeholder="Mobile No">
+                  </mat-form-field>
+             </div>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput placeholder="Email Address">
+                  </mat-form-field>
+             </div>
+              <div class="row">
+                <mat-form-field appearance="outline">
+                   <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password">
+                  </mat-form-field>
+             </div>
+             <div class="row">
+                 <button class="signin_btn">SIGN UP</button>
+             </div>
+          </div>
+        </div>
+    </form>
+</section>
+<section *ngIf="otpWindow" class="pmc_order_con login-bg">
+  <form #otpForm="ngForm" novalidate (ngSubmit)="otpForm.valid && otpVerification(1)">
+    <div class="login-box">
+      <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+      <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+      <div class="clearfix"></div>
+      <div class="login-heading">Enter One Time Password (OTP)</div>
+      <div class="login-sub-heading">(OTP has been sent to your registered Email.)</div>
+      <div class="row justify-content-between align-items-center">
+            <div class="col-md-12">              
+                <mat-form-field>
+                  <input matInput placeholder="OTP" #otp="ngModel" name="otp_number" [(ngModel)]="otpValue" required>
+                  <mat-error *ngIf="otp.errors && otp.errors.required">
+                    This is a <strong>required</strong> field
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <button mat-raised-button class="btn-main btn-lg btn-block" type="ngSubmit" >VERIFY</button>
+            </div>
+       </div>
+        <div *ngIf="isDisabled" class="login-sub-heading" style="padding-top:5px;">
+          If not get OTP <a href="javascript:;" [class.disabled]="isDisabled" (click)="otpResend(1)">resend</a> now
+        </div>
+    </div>
+  </form>
+</section>

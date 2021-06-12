@@ -1,0 +1,317 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="locationType == 'Z'">
+        <form #zoneAreaSubareaForm="ngForm" novalidate (ngSubmit)="zoneAreaSubareaForm.valid && addEditZone(zoneAreaSubareaForm)">
+            <input type="hidden" name="zoneId" [(ngModel)]="formModel.zoneId">
+            <div class="topheading">
+                <h1>{{(formModel.zoneId>0)?'Edit':'Add'}} Zone
+            <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+              </div>
+          </div>
+          <div class="clear"></div>
+          </h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Name</mat-label>
+                                        <input matInput placeholder="Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="name.errors && name.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Office Address 1</mat-label>
+                                        <input matInput placeholder="Office Address 1" required #zonal_office_address1="ngModel" name="zonal_office_address1" [(ngModel)]="formModel.zonal_office_address1" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="zonal_office_address1.errors && zonal_office_address1.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="zonal_office_address1.errors && zonal_office_address1.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Office Address 2</mat-label>
+                                        <input matInput placeholder="Office Address 2" required #zonal_office_address2="ngModel" name="zonal_office_address2" [(ngModel)]="formModel.zonal_office_address2" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="zonal_office_address2.errors && zonal_office_address2.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="zonal_office_address2.errors && zonal_office_address2.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>City</mat-label>
+                                        <input matInput placeholder="City" required #city="ngModel" name="city" [(ngModel)]="formModel.city" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="city.errors && city.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="city.errors && city.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Country</mat-label>
+                                        <mat-select required placeholder="Country" #zone_country="ngModel" name="zone_country" [(ngModel)]="formModel.zone_country" (selectionChange)="getState(zone_country.value)">
+                                            <mat-option *ngFor="let country of country_list" [value]="country.id">{{country.country_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="zone_country.errors && zone_country.errors.required">Please select country</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': zone_country.errors && zone_country.errors.required && (zone_country.dirty || zone_country.touched || zoneAreaSubareaForm.submitted) }"
+                                        [items]="country_list"
+                                        required
+                                        placeholder="Country"
+                                        bindLabel="country_name" bindValue="id"
+                                        #zone_country="ngModel" name="zone_country" [(ngModel)]="formModel.zone_country"
+                                        (change)="getState(formModel.zone_country)"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="zone_country.errors && zone_country.errors.required && (zone_country.dirty || zone_country.touched || zoneAreaSubareaForm.submitted)">Please select country</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>State</mat-label>
+                                        <mat-select placeholder="State" #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id">
+                                            <mat-option *ngFor="let state of state_list" [value]="state.id">{{state.state_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="state_id.errors && state_id.errors.required">Please select state</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select
+                                        [items]="state_list"
+                                        placeholder="State"
+                                        bindLabel="state_name" bindValue="id"
+                                        #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id"
+                                        >
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>PIN Codes</mat-label>
+                                        <input matInput placeholder="PIN Codes" required #zone_zipcode="ngModel" name="zone_zipcode" [(ngModel)]="formModel.zone_zipcode">
+                                        <mat-error *ngIf="zone_zipcode.errors && zone_zipcode.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="zone_zipcode.errors && zone_zipcode.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Store</mat-label>
+                                        <mat-select required placeholder="Store" #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id">
+                                            <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="warehouse_id.errors && warehouse_id.errors.required">Please select zone</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || zoneAreaSubareaForm.submitted) }"
+                                        [items]="warehouse_list"
+                                        required
+                                        placeholder="Store"
+                                        bindLabel="name" bindValue="id"
+                                        #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || zoneAreaSubareaForm.submitted)">Please select store</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Zonal Manager</mat-label>
+                                        <mat-select required placeholder="Zonal Manager" #manager_id="ngModel" name="manager_id" [(ngModel)]="formModel.manager_id">
+                                            <mat-option *ngFor="let manager of managerList" [value]="manager.id">{{manager.employee_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="manager_id.errors && manager_id.errors.required">Please select country</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': manager_id.errors && manager_id.errors.required && (manager_id.dirty || manager_id.touched || zoneAreaSubareaForm.submitted) }"
+                                        [items]="managerList"
+                                        required
+                                        placeholder="Zonal Manager"
+                                        bindLabel="employee_name" bindValue="id"
+                                        #manager_id="ngModel" name="manager_id" [(ngModel)]="formModel.manager_id"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="manager_id.errors && manager_id.errors.required && (manager_id.dirty || manager_id.touched || zoneAreaSubareaForm.submitted)">Please select zonal manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+
+    <div class="body-part" *ngIf="locationType == 'A'">
+        <form #areaForm="ngForm" novalidate (ngSubmit)="areaForm.valid && addEditArea(areaForm)">
+            <input type="hidden" name="zoneId" [(ngModel)]="formModel.zoneId">
+            <div class="topheading">
+                <h1>{{(formModel.zoneId>0)?'Edit':'Add'}} Area
+            <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+              </div>
+          </div>
+          <div class="clear"></div>
+          </h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <mat-form-field appearance="outline"  class="md-block"><mat-label>Area Name</mat-label>
+                                <input matInput placeholder="Area Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                <mat-error *ngIf="name.errors && name.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- <mat-form-field appearance="outline" ><mat-label>Zone</mat-label>
+                                <mat-select required placeholder="Zone" #areaZoneId="ngModel" name="areaZoneId" [(ngModel)]="formModel.zone_id">
+                                    <mat-option *ngFor="let zoneMaster of zoneList" [value]="zoneMaster.id">{{zoneMaster.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="areaZoneId.errors && areaZoneId.errors.required">Please select zone</mat-error>  
+                            </mat-form-field> -->
+                            <ng-select [ngClass]="{ 'custom_error_red': areaZoneId.errors && areaZoneId.errors.required && (areaZoneId.dirty || areaZoneId.touched || areaForm.submitted) }"
+                                    [items]="zoneList"
+                                    required
+                                    placeholder="Zone"
+                                    bindLabel="name" bindValue="id"
+                                    #areaZoneId="ngModel" name="areaZoneId" [(ngModel)]="formModel.zone_id"
+                                    >
+                                </ng-select>
+                                <p class="custom_error" *ngIf="areaZoneId.errors && areaZoneId.errors.required && (areaZoneId.dirty || areaZoneId.touched || areaForm.submitted)">Please select zone</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+
+
+     <div class="body-part" *ngIf="locationType == 'S'">
+        <form #subAreaForm="ngForm" novalidate (ngSubmit)="subAreaForm.valid && addEditSubArea(subAreaForm)">
+            <input type="hidden" name="zoneId" [(ngModel)]="formModel.zoneId">
+            <div class="topheading">
+                <h1>{{(formModel.zoneId>0)?'Edit':'Add'}} Sub Area
+            <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+              </div>
+          </div>
+          <div class="clear"></div>
+          </h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Sub Area Name</mat-label>
+                                        <input matInput placeholder="Sub Area Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="name.errors && name.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>                               
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                     <!-- <mat-form-field appearance="outline" ><mat-label>Zone</mat-label>
+                                        <mat-select required placeholder="Zone" #areaZoneId="ngModel" name="areaZoneId" [(ngModel)]="formModel.zone_id" (selectionChange)="getZipCodeArea(areaZoneId.value)">
+                                            <mat-option *ngFor="let zoneMaster of zoneList" [value]="zoneMaster.id">{{zoneMaster.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="areaZoneId.errors && areaZoneId.errors.required">Please select zone</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': areaZoneId.errors && areaZoneId.errors.required && (areaZoneId.dirty || areaZoneId.touched || subAreaForm.submitted) }"
+                                        [items]="zoneList"
+                                        required
+                                        placeholder="Zone"
+                                        bindLabel="name" bindValue="id"
+                                        #areaZoneId="ngModel" name="areaZoneId" [(ngModel)]="formModel.zone_id"
+                                        (change)="getZipCodeArea(formModel.zone_id)"
+                                    >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="areaZoneId.errors && areaZoneId.errors.required && (areaZoneId.dirty || areaZoneId.touched || subAreaForm.submitted)">Please select zone</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>ZIP Code</mat-label>
+                                        <mat-select required placeholder="ZIP Code" #subAreaZipCode="ngModel" name="subAreaZipCode" [(ngModel)]="formModel.zipcode" >
+                                            <mat-option *ngFor="let zipcode of zipCodeList" [value]="zipcode.zip_code">{{zipcode.zip_code}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="subAreaZipCode.errors && subAreaZipCode.errors.required">Please select zipcode</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': subAreaZipCode.errors && subAreaZipCode.errors.required && (subAreaZipCode.dirty || subAreaZipCode.touched || subAreaForm.submitted) }"
+                                        [items]="zipCodeList"
+                                        required
+                                        placeholder="ZIP Code"
+                                        bindLabel="zip_code" bindValue="id"
+                                        #subAreaZipCode="ngModel" name="subAreaZipCode" [(ngModel)]="formModel.zipcode"
+                                    >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="subAreaZipCode.errors && subAreaZipCode.errors.required && (subAreaZipCode.dirty || subAreaZipCode.touched || subAreaForm.submitted)">Please select zipcode</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Area</mat-label>
+                                        <mat-select required placeholder="Area" #areaId="ngModel" name="areaId" [(ngModel)]="formModel.area_id">
+                                            <mat-option *ngFor="let areaMaster of zipAreaList" [value]="areaMaster.id">{{areaMaster.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="areaId.errors && areaId.errors.required">Please select area</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': areaId.errors && areaId.errors.required && (areaId.dirty || areaId.touched || subAreaForm.submitted) }"
+                                        [items]="zipAreaList"
+                                        required
+                                        placeholder="Area"
+                                        bindLabel="name" bindValue="id"
+                                        #areaId="ngModel" name="areaId" [(ngModel)]="formModel.area_id"
+                                    >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="areaId.errors && areaId.errors.required && (areaId.dirty || areaId.touched || subAreaForm.submitted)">Please select area</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Minimum order amount</mat-label>
+                                        <input  matInput placeholder="Minimum order amount" required #min_order_amount="ngModel" name="min_order_amount" [(ngModel)]="formModel.min_order_amount" pattern="^\d*(\.\d{0,2})?$">
+                                        <mat-error *ngIf="min_order_amount.errors && min_order_amount.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="min_order_amount.errors && min_order_amount.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+
+</section>

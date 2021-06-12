@@ -1,0 +1,116 @@
+@charset "utf-8";
+/* CSS Document For Before Login */
+@import url(font-face.css);
+.maincontainer{overflow: hidden; height:100%;position: relative;z-index: 1;background: #f0f0f0;box-sizing: border-box;}
+.clear{ clear: both; height: 0}
+.login-bg{width: 100%; min-height: 100%; background: url(../images/log-bg.jpg) center no-repeat; background-size: cover;position: relative;}
+.login-header{height: 90px; padding: 25px 0;background: #fff;text-align: center;}
+.login-header .logo{display: inline-block;height: 100%; margin: 0 auto;}
+.login-header .logo img ,.login-header .logo svg{width: auto; height: 100%;display: block;}
+.login-box{ position: absolute;width: 100%; max-width: 500px;background: #fff;transform: translate(-50%,-50%); left: 50%; top: 50%;padding: 40px;}
+.login-box p{font-size:15px; line-height: 24px;color: #58595b; margin-bottom: 20px}
+.login-box h2{color: #db315b;}
+footer{ position: absolute; bottom: 50px; color: #fff;width: 100%; display: block; text-align: center; letter-spacing: .5px;}
+.loader{position: fixed; z-index: 50;width: 100%;left: 0; top: 0}
+.loader-bg{position: fixed; z-index: 10;width: 100%;height: 100%; left: 0; top: 0;}
+
+.loader mat-progress-linear.mat-default-theme.mat-hue-3.mat-accent .mat-container,.loader mat-progress-linear.mat-hue-3.mat-accent .mat-container{background: rgba(255,255,255,.3)}
+.loader mat-progress-linear .md-bar.md-bar2 {background-color: #009FD6;}
+
+input:-webkit-autofill,input:autofill,textarea:webkit-autofill,textarea:autofill{background: none !important;}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~Form Part~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+label.text {padding: 2px 0 2px 20px;margin: 10px 0 !important; text-align: right; float: right}
+
+
+.login-box mat-input-container,.login-box  button{width: 100%;}
+.login-box  button.mat-raised-button{color: #fff;text-transform: uppercase;letter-spacing: 0.5px; text-align: center;    padding :10px 0;margin: 20px 0; font-size: 16px;font-family: 'gibsonsemibold';}
+.login-box  .btn-google{background: #de4635;}
+.login-box  .icon-google-plus{font-size: 26px; margin: -8px 10px 0 0; display: inline-block;}
+.login-box .btn-black{background: #000; transition: all .3s;}
+.login-box  .btn-black:hover{background: rgba(219,49,86,1)}
+.login-box .btn-black .mat-ripple-element {background: rgba(255,255,255,.2)}
+mat-checkbox{    padding: 7px 0;display: block;font-family: 'gibsonregular' !important;}
+
+
+
+.mat-placeholder-required{color: #db315b;}
+.mat-input-underline{background-color: rgba(0,0,0,.3);}
+.mat-input-placeholder{color: rgba(0,0,0,.6);font-size: 16px!important;}
+.mat-input-element{color: rgba(0,0,0,.87)!important;font-size: 16px!important;}
+.mat-focused .mat-input-placeholder{color:#643988;}
+.mat-input-ripple{background:#643988}
+
+.pw-filled{position: relative;}
+.show-pw{position: absolute!important; right: 0px;color: rgba(219,49,86,1)!important;top: 10px;z-index: 1;cursor: pointer}
+.show-pw:before{width: 100%;height: 100%; content:'\e92b';  font-family: 'icomoon';font-size: 20px; }
+.pw-filled.show .show-pw:before{ content: "\e92c";}
+
+.alert {padding: 15px;margin-bottom: 20px;border: 1px solid transparent;border-radius: 4px;}
+.alert-success {color: #3c763d;background-color: #dff0d8;border-color: #d6e9c6;}
+.alert-danger {color: #a94442;background-color: #f2dede;border-color: #ebccd1;}
+.alert-warning {color: #8a6d3b;background-color: #fcf8e3;border-color: #faebcc;}
+
+.ng-trigger-routerTransition,ng-component{ width: 100%; height: 100%; overflow: hidden;  }
+
+.loada{position: fixed;width: 100%; height: 100%; left: 0 ; top: 0; display: flex;align-items: center; justify-content: center;text-align: center;    background: rgba(255,255,255,.3);z-index: 10;}
+.loada .mat-spinner path{stroke: #643988;}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~End Form Part~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.input-help {display: none;position:absolute;z-index: 100;top: -6px;left: 100%;width:200px;padding:10px;background:#fefefe;font-size:.875em;border-radius:5px;box-shadow:0 1px 3px #aaa;border:1px solid #ddd;}
+.input-help::before {content: "\25C0";position: absolute;top:10px;left:-12px;font-size:16px;line-height:16px;color:#ddd;text-shadow:none;}
+.input-help h4 {margin:0;padding:0;  font-weight: normal;font-size: 1.1em;}
+
+/* Always hide the input help when it's pristine */
+input.ng-pristine + .input-help {display: none;}
+
+/* Hide the invalid box while the input has focus */
+.ng-invalid:focus + .input-help {/*display: none;*/}
+
+/* Show the help box once it has focus */
+.immediate-help:focus + .input-help {display: block;}
+
+/* Immediate help should be red when pristine */
+.immediate-help.ng-pristine:focus + .input-help {border-color:#ec3f41;}
+.immediate-help.ng-pristine:focus + .input-help::before {color:#ec3f41;}
+
+/* Help should be green when input is valid */
+.ng-valid + .input-help {border-color:#3a7d34;}
+.ng-valid + .input-help::before {color:#3a7d34;}
+
+/* Help should show and be red when invalid */
+.ng-invalid + .input-help {display: block;border-color: #ec3f41;}
+.ng-invalid + .input-help::before {color: #ec3f41;}
+
+/* Style input help requirement bullets */
+.input-help ul {list-style: none;padding:0;margin: 10px 0 0 0;}
+
+/* Default each bullet to be invalid with a red cross and text */
+.input-help li {padding-left: 22px;line-height: 24px;color:#ec3f41;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA1CAYAAABIkmvkAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAJwAAACcBKgmRTwAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8wOS8xMlhq+BkAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAEA0lEQVRIie2WW2jbVRzHv//zT5rkn0ub61zaNdEiPqTC9EFRhtgJk63qg3Wr0806pswNiYgDUXxwyryCEB8UBevtaSCCDHQoboKyoVvVzfRmL2napU0mrdbl8s//dy4+dM1M28n64FsPnIdz+XzO75zfOXA0pRRWU7o/uS9FxOc+3/vlIQBgq4F3fHxvKuIPJ9cFwi9uTXU8BwDa1Uaw/aN7UusCkWRbPI5yxcTI2Bgy49kXrkrwwIedqYg/nGyLXwsJiYHBYWTGs7Cq5Kpt4cA3PXft+2rX40vhrt7OVLgplIzHYuBKoH9gCKMjGVE1LdfJl86YDAAOfN2ziZP4NODyv9/z2fanFuH7P9iWCjcFk/FYK4QSGLgEk0WeUy/3mQCgPXFs9xbBRW883NrssDvQN3hWcOLPEPGWiD94MBaPQymBoaERjI9mBSfu+fHwL+biItpjR3e6JFfloDeAaGQ9SpUycvlp6ExHJBKGYsDvgyMYH81KTsL90yuX4VoWdh3pMqSQpWBjAC3RZkgpYEkCFDA8NIqJ0UlFxI3Tr/5aB9elsau305BcloKBAFpjLeBSYGRwDBNjk4oTN06/dnYZXCcAgK1vbzYkl6VwOATihOzYlOLEjTOvn1sRXiYAgDsP32YIKUuWaXFOwtP3xrnqleAVBQBwy/M3GZy4+PnN3/4TvqJgNWVVj2lNsCZYE6wJ1gRrgv9dYAMAHHw2Bl2fUEpBVavtLPVW/78nVR/Zk4CupzVHA6zChSOK0yHv0S8GFyK4BMPhAJxOgLE03/9kYhE2dz+agKaldY8bDaEQ7D5ft7Roy+UIlCooy5LQdaZ5vVBEgGmmrT172yVxaIylmdcDm9cHc2oK1Zm8kETvLAo0pRRk8mmnEqKouVw68zVCzP8F/uccFHHoXi/sjT6Y53Mw83mhOHn8J7416wQAwPftd0ouiswwdJu/CRASkBKQAmYuBzNfWIC/O173W6llwfbeu6Yi8tDsrAQJYGICyGQAIWDO5KUkaxlcJwAASdSmaWAQHCACOAc4h6YzJi1qWymNNUHlwYcT0JDWXQbACYhGgeh6gHM4Ghuh2/R0YePNiaUCTSmFcvdDCY1paZvhht3nQ2VmGmahICSR5vQHmDt6DcozeZSnp2FdLLZHhwdq94SVd+xMaJqWtrkM2L1uVHILpy0t8igidymXExfHMzBCQbhCIdga7Onz8etqkdgkUYTZbYCSqORmULlQEIq4J3jyexMA8jdu9BRzuaKyLN3udkNjDEqICID+2hbm797Wwez24/T3vJTE3aFTP9Sd9vT1NziVEMUGr1c35+Y2b5jKnqgNKqWglMLspjs6/rj1dudie2mdao07J5s3dCzt/werJTyI1yYqpQAAAABJRU5ErkJggg==) no-repeat  2px -34px;
+}
+
+/* Set to green check and text when valid */
+.input-help li.valid {color:#3a7d34;background-position: 2px 6px;}
+
+
+mat-progress-bar{position: absolute !important;left: 0;top: 1px;}
+@media (max-width:800px) {
+
+.input-help {left: 0;top: 50px;width: 100%;}
+.input-help::before {content: ''; border-color: transparent transparent #ddd transparent; border-width: 10px; border-style: solid; top: -21px;left: 20px; }
+.ng-valid + .input-help::before {color:#3a7d34;border-color: transparent transparent #3a7d34 transparent; }
+.ng-invalid + .input-help::before {color: #ec3f41;border-color: transparent transparent #ec3f41 transparent; }
+}
+
+@media (max-width:650px) {
+	/*main.ng-trigger-routerTransition{position: absolute;height: auto; z-index: 1;left: 0;transform: translate(0%,-50%);top: 50%;}*/
+	.login-bg{position: absolute;left: 0;top: 0}
+	.login-bg:before{content: '';background-color: rgba(255,255,255,.9);position: absolute;;width: 100%;height: 100%;left: 0;top: 0;}
+	.login-header {height: 60px;padding: 15px 0;position: relative;z-index: 1}
+	.login-box{padding: 25px; background: none}
+	footer{color: #db315b;bottom: 5px; font-size: 10px;}
+	.login-box h2{font-size: 24px;margin-bottom: 10px; text-align: center;}
+	.login-box p{font-size:13px; line-height: 20px;color: #58595b; margin-bottom: 20px ;text-align: center;}
+	.login-box a{display: block;text-align: center;width: 100%;}
+}

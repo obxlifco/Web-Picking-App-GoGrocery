@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivItemImage"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/dummy_item_img" />
+
+
+            <TextView
+                android:id="@+id/tvItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ivItemImage"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:ellipsize="end"
+                android:fontFamily="@font/hind_medium"
+                android:lines="1"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:textAlignment="viewStart"
+                android:text="Organic Moong Dal Yellow Split"
+                android:textColor="@color/grey_new" />
+            <LinearLayout
+                android:id="@+id/ll_preparationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                android:layout_below="@+id/tvItemName"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvCustomFieldName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/hind_medium"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textAlignment="viewStart"
+                    android:singleLine="true"
+                    android:text="Preparation Type"
+                    android:textColor="@color/green_dark_new"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvCustomFieldValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="500 gm"
+                    android:ellipsize="end"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/grey_new"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/hind_medium" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_preparationView"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:ellipsize="end"
+                android:fontFamily="@font/hind_medium"
+                android:lines="1"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:textColor="@color/grey_new" />
+
+            <TextView
+                android:id="@+id/tvProductUOM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvQuantity"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:ellipsize="end"
+                android:fontFamily="@font/hind_medium"
+                android:lines="1"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:textColor="@color/grey_new" />
+
+            <TextView
+                android:id="@+id/tvUnitPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProductUOM"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:text="@string/unit_price"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:textAlignment="viewStart"
+                android:textColor="@color/grey_new"
+                app:fontFamily="@font/hind_medium" />
+
+            <TextView
+                android:id="@+id/tvOriginalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProductUOM"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/tvUnitPrice"
+                android:text="@string/current_curremcy_zero"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:textAlignment="viewStart"
+                android:visibility="gone"
+                android:textColor="@color/grey_new"
+                app:fontFamily="@font/hind_medium" />
+
+            <RelativeLayout
+                android:id="@+id/rlPricingDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvUnitPrice"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/ivItemImage">
+
+                <TextView
+                    android:id="@+id/tvDiscountedPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/price"
+                    android:textSize="12sp"
+                    android:ellipsize="end"
+                    android:textAlignment="viewStart"
+
+                    android:textColor="@color/grey_new"
+                    app:fontFamily="@font/hind_medium" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

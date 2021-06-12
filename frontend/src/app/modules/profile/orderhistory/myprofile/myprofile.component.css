@@ -1,0 +1,5 @@
+.ng-select.custom ::ng-deep .ng-select-container  {            
+    height: 61px !important;
+    margin-top: 7px;
+    margin-bottom: 22px;
+}

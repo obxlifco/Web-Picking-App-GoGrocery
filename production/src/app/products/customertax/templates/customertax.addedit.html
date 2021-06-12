@@ -1,0 +1,60 @@
+<section class="right-part">
+        <div class="body-part">
+            <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEditPriceFormula(formData)">
+                <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+                <div class="topheading">
+                    <h1>{{(formModel.formId>0)?'Edit':'Add'}} Customer tax Class
+                <div class="btn-header">
+                <div class="btn-header">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  </div>
+              </div>
+              <div class="clear"></div>
+              </h1> </div>
+                <div class="clear"></div>
+                <div class="box">
+                    <div class="fixed-width">
+                        <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                 <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+                                    <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                    <mat-error *ngIf="name.errors && name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-6">
+                                 <!-- <mat-form-field appearance="outline">
+                                    <mat-label>Group name</mat-label>
+                                    <mat-select required placeholder="Group name" #customer_type="ngModel" name="customer_type" [(ngModel)]="formModel.customer_type" >
+                                        <mat-option *ngFor="let item of customer_group_list" [value]="item.id">{{item.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="customer_type.errors && customer_type.errors.required">Please select customer group</mat-error>  
+                                </mat-form-field> -->
+                                <ng-select [ngClass]="{ 'custom_error_red': customer_type.errors && customer_type.errors.required && (customer_type.dirty || customer_type.touched || formData.submitted) }"
+                                    [items]="customer_group_list"
+                                    required
+                                    placeholder="Group name"
+                                    bindLabel="name" bindValue="id"
+                                    #customer_type="ngModel" name="customer_type" [(ngModel)]="formModel.customer_type"
+                                >
+                                </ng-select>
+                                <p class="custom_error" *ngIf="customer_type.errors && customer_type.errors.required && (customer_type.dirty || customer_type.touched || formData.submitted)">Please select customer group</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ///////////////Buttons//// -->
+                    <div class="btn-header hidden-xs">
+                        <button type="submit" mat-raised-button class="btn-main">Save</button>
+                        <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                    </div>
+                    <div class="clear"></div>
+                    <!-- ///////////////Buttons//// -->
+                </div>
+                <div class="clear"></div>
+            </form>
+        </div>
+    </section>

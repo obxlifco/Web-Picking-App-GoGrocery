@@ -1,0 +1,104 @@
+<form #pageForm="ngForm" novalidate (ngSubmit)="pageForm.valid && addPage(pageForm)">
+<section class="right-part">
+    <div class="topheading">
+				<h1>Manage Store
+						<div class="btn-header">
+								<div class="btn-header">
+								<button type="submit" mat-raised-button class="btn-main">Save</button>
+												<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+										<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+								</div>
+						</div>
+						<div class="clear"></div>
+				</h1> 
+		</div>
+    <div class="body-part">
+		<div class="box">
+			<div class="fixed-width">
+				<div class="row">
+						<div class="col-sm-4">
+							<mat-form-field appearance="outline" class="md-block">
+								<mat-label>Page Name (EN)</mat-label>
+								<input matInput placeholder="Page Name (EN)" required #page_name="ngModel"  name="page_name" [(ngModel)]="formModel.page_name" (blur)="createUrl(page_name.value)">
+								<mat-error *ngIf="page_name.errors && page_name.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+						</mat-form-field>
+					</div>
+					<!-- <div class="col-sm-4">
+							<mat-form-field appearance="outline" class="md-block">
+								<mat-label>Page Name (AR)</mat-label>
+								<input matInput placeholder="Page Name (TH)" #page_name_th="ngModel" name="page_name_th" [(ngModel)]="formModel.page_name_th">
+							</mat-form-field>
+					</div> -->
+					<div class="col-sm-4">
+						<mat-form-field appearance="outline" class="md-block">
+							<mat-label>Page Title (EN)</mat-label>
+							<input matInput placeholder="Page Title (EN)" required #page_title="ngModel"  name="page_title" [(ngModel)]="formModel.page_title">
+							<mat-error *ngIf="page_title.errors && page_title.errors.required">
+								This is a <strong>required</strong> field
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">	
+					<!-- <div class="col-sm-4">
+							<mat-form-field appearance="outline" class="md-block">
+								<mat-label>Page Title (AR)</mat-label>
+								<input matInput placeholder="Page Title (AR)" #page_title_th="ngModel"  name="page_title_th" [(ngModel)]="formModel.page_title_th">
+							</mat-form-field>
+					</div> -->
+					<div class="col-sm-4">
+						<mat-form-field appearance="outline">
+								<mat-label>Page URL</mat-label>
+								<input matInput placeholder="Page URL" required #url="ngModel" name="url" [(ngModel)]="formModel.url" (blur)="createUrl(url.value)">
+								<mat-error *ngIf="url.errors && url.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+					</div>
+					<div class="col-sm-4">
+						<mat-form-field appearance="outline">
+								<mat-label>Page Keyword</mat-label>
+								<input matInput placeholder="Page Keyword" required #meta_key="ngModel"  name="meta_key" [(ngModel)]="formModel.meta_key">
+								<mat-error *ngIf="meta_key.errors && meta_key.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field appearance="outline" class="md-block">
+							<mat-label>Page Meta Data</mat-label>
+							<input matInput placeholder="Page Meta Data" required #meta_data="ngModel"  name="meta_data" [(ngModel)]="formModel.meta_data">
+							<mat-error *ngIf="meta_data.errors && meta_data.errors.required">
+								This is a <strong>required</strong> field
+							</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-6">
+					<mat-form-field appearance="outline">
+							<mat-label>Page Description</mat-label>
+							<input matInput placeholder="Page Description" required #meta_desc="ngModel"  name="meta_desc" [(ngModel)]="formModel.meta_desc">
+							<mat-error *ngIf="meta_desc.errors && meta_desc.errors.required">
+								This is a <strong>required</strong> field
+							</mat-error>
+						</mat-form-field>
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="btn-header hidden-xs">
+			<button type="submit" mat-raised-button class="btn-main">Save</button>
+			<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		</div> 
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+</form>
+

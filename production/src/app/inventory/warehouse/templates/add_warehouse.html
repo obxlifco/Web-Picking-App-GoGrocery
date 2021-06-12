@@ -1,0 +1,398 @@
+<div class="loada" *ngIf="popupLoder">
+	<mat-spinner></mat-spinner>
+</div>
+<section class="right-part addall_page">
+  	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+  		<form #warehouseForm="ngForm" novalidate (ngSubmit)="warehouseForm.valid && addEditWarehouse(warehouseForm)">
+		<input type="hidden" name="warehouseId" [(ngModel)]="formModel.warehouseId">
+		  	<div class="topheading">
+			  	<h1>{{(formModel.warehouseId)?'Edit':'Add'}} Store 
+				  	<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Save</button>
+			          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  	</div>
+				  	<div class="clear"></div>
+			  	</h1>
+		  	</div>
+		  	<div class="clear"></div>
+			<div class="box">
+				<div class="fixed-width">
+					<div class="row">
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Store Name</mat-label>
+								<input matInput placeholder="Store Name" required #name="ngModel"  name="name" [(ngModel)]="formModel.name">
+								<mat-error *ngIf="name.errors && name.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Store Code</mat-label>
+								<input matInput placeholder="Store Code" required #code="ngModel"  name="code" [(ngModel)]="formModel.code">
+								<mat-error *ngIf="code.errors && code.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Contact Person</mat-label>
+								<input matInput placeholder="Contact Person" #contact_person="ngModel"  name="contact_person" [(ngModel)]="formModel.contact_person">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Email</mat-label>
+								<input matInput placeholder="Email" required #email="ngModel"  name="email" [(ngModel)]="formModel.email" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}"  >
+								<mat-error *ngIf="email.errors && email.errors.required">
+									This is a <strong>required</strong> field
+								</mat-error>
+								<mat-error *ngIf="email.errors && email.errors.pattern">
+									Enter a valid <strong>email</strong> address
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Phone</mat-label>
+								<input matInput placeholder="Phone" #phone="ngModel"  name="phone" [(ngModel)]="formModel.phone" minlength="10" maxlength="12">
+							</mat-form-field>
+							<mat-error *ngIf="phone.errors && phone.errors.minlength">
+								Phone number should be between 10 to 12 characters
+							</mat-error>
+							<mat-error *ngIf="phone.errors && phone.errors.maxlength">
+								Phone number should be between 10 to 12 characters
+							</mat-error>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Address</mat-label>
+								<input matInput  placeholder="Address" #address="ngModel" name="address" [(ngModel)]="formModel.address" ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+							</mat-form-field>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>City</mat-label>
+								<input matInput placeholder="City" #city="ngModel"  name="city" [(ngModel)]="formModel.city">
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Zip Code</mat-label>
+								<input matInput placeholder="Zip Code" #zipcode="ngModel"  name="zipcode" [(ngModel)]="formModel.zipcode" minlength="6" maxlength="6">
+							</mat-form-field>
+							<mat-error *ngIf="zipcode.errors && zipcode.errors.minlength">
+								Zip Code should be of 6 characters
+							</mat-error>
+							<mat-error *ngIf="zipcode.errors && zipcode.errors.maxlength">
+								Zip Code should be of 6 characters
+							</mat-error>
+						</div>
+						<div class="col-md-4">
+							<div  class="md-block">
+								<!-- <mat-form-field appearance="outline" >
+								<mat-label>Country</mat-label>
+									<mat-select placeholder="Country" #country_id="ngModel" name="country_id" [(ngModel)]="formModel.country_id" (selectionChange)="get_states(country_id.value)">
+										<mat-option *ngFor="let country of List.country_list" [value]="country.id">{{country.country_name}}</mat-option>
+									</mat-select>
+								</mat-form-field> -->
+								<ng-select [items]="List.country_list"
+									placeholder="Country"
+									bindLabel="country_name" bindValue="id"
+									#country_id="ngModel" name="country_id" [(ngModel)]="formModel.country_id"
+									(change)="getStates(formModel.country_id)"
+								>
+								</ng-select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="md-block">
+								<!-- <mat-form-field appearance="outline" >
+								<mat-label>State</mat-label>
+									<mat-select placeholder="State" #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id">
+										<mat-option *ngFor="let state of List.state_list" [value]="state.id">{{state.state_name}}</mat-option>
+									</mat-select>
+								</mat-form-field> -->
+								<ng-select [items]="List.state_list"
+									placeholder="State"
+									bindLabel="state_name" bindValue="id"
+									#state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id"
+								>
+								</ng-select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div  class="md-block">
+								<mat-form-field appearance="outline"  class="md-block">
+									<mat-label>Service Area Range (miles)</mat-label>
+									<input matInput placeholder="Range Area" #max_distance_sales="ngModel"  name="max_distance_sales" (keypress)="isNumber($event)" [(ngModel)]="formModel.max_distance_sales" >
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="md-block">
+								<!-- <mat-form-field appearance="outline" >
+								<mat-label>Applicable Channel</mat-label>
+								<mat-select placeholder="Applicable Channel" #applicable_channel_id="ngModel" name="applicable_channel_id" [(ngModel)]="formModel.applicable_channel_id" multiple>
+									<mat-option *ngFor="let channel of List.channel_list" [value]="channel.id">{{channel.name}}</mat-option>
+								</mat-select>
+								</mat-form-field> -->
+								<ng-select [items]="List.channel_list"
+										[multiple]="true"
+										placeholder="Applicable Channel"
+										bindLabel="name" bindValue="id"
+										#applicable_channel_id="ngModel" name="applicable_channel_id" [(ngModel)]="formModel.applicable_channel_id"
+										style="margin-top: 6px !important;"
+								>
+								<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+										<div class="ng-value" *ngFor="let item of items | slice:0:1">
+												<span class="ng-value-label">{{item.name}}</span>
+												<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+										</div>
+										<div class="ng-value" *ngIf="items.length > 1">
+												<span class="ng-value-label">{{items.length - 1}} more...</span>
+										</div>
+								</ng-template>
+								<!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+										<input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+								</ng-template> -->
+								</ng-select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-4">
+							<div  class="md-block">
+								<!-- <mat-form-field appearance="outline" >
+								<mat-label>Store Managers</mat-label>
+								<mat-select placeholder="Store Managers" #manager_id="ngModel" name="manager_id" [(ngModel)]="formModel.manager_id" multiple>
+									<mat-option *ngFor="let user of List.user_list" [value]="user.id">{{user.username}}</mat-option>
+								</mat-select>
+								</mat-form-field> -->
+								<ng-select [items]="List.user_list"
+										[multiple]="true"
+										placeholder="Store Managers"
+										bindLabel="username" bindValue="id"
+										#manager_id="ngModel" name="manager_id" [(ngModel)]="formModel.manager_id"
+										style="margin-top: 8px !important;"
+								>
+								<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+										<div class="ng-value" *ngFor="let item of items | slice:0:1">
+												<span class="ng-value-label">{{item.username}}</span>
+												<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+										</div>
+										<div class="ng-value" *ngIf="items.length > 1">
+												<span class="ng-value-label">{{items.length - 1}} more...</span>
+										</div>
+								</ng-template>
+								<!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+										<input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+								</ng-template> -->
+								</ng-select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="md-block">
+								<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Order Id Starts With</mat-label>
+								<input matInput placeholder="Order Id Starts With" #order_id_format="ngModel"  name="order_id_format" [(ngModel)]="formModel.order_id_format">
+							</mat-form-field>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Shipping Id Starts With</mat-label>
+								<input matInput placeholder="Shipping Id Starts With"#shipping_id_format="ngModel"  name="shipping_id_format" [(ngModel)]="formModel.shipping_id_format">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Invoice Id Starts With</mat-label>
+								<input matInput placeholder="Invoice Id Starts With" #invoice_id_format="ngModel"  name="invoice_id_format" [(ngModel)]="formModel.invoice_id_format">
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<div  class="md-block">
+								<!-- <mat-form-field appearance="outline" >
+								<mat-label>Applicable Country</mat-label>
+								<mat-select required placeholder="Applicable Country" #applicable_country_id="ngModel" name="applicable_country_id" [(ngModel)]="formModel.applicable_country_id" multiple>
+									<mat-option *ngFor="let country of List.country_list" [value]="country.id">{{country.country_name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="applicable_country_id.errors && applicable_country_id.errors.required && (applicable_country_id.dirty || applicable_country_id.touched || warehouseForm.submitted)">
+									Please Select atleast one Country
+								</mat-error>
+								</mat-form-field> -->
+								<ng-select [ngClass]="{ 'custom_error_red': applicable_country_id.errors && applicable_country_id.errors.required && (applicable_country_id.dirty || applicable_country_id.touched || warehouseForm.submitted) }"
+									[items]="List.country_list"
+									required
+									[multiple]="true"
+									placeholder="Applicable Country"
+									bindLabel="country_name" bindValue="id"
+									#applicable_country_id="ngModel" name="applicable_country_id" [(ngModel)]="formModel.applicable_country_id"
+									style="margin-top: 8px !important;"
+								>
+								<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+									<div class="ng-value" *ngFor="let item of items | slice:0:1">
+											<span class="ng-value-label">{{item.country_name}}</span>
+											<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+									</div>
+									<div class="ng-value" *ngIf="items.length > 1">
+											<span class="ng-value-label">{{items.length - 1}} more...</span>
+									</div>
+								</ng-template>
+								<!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+									<input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+								</ng-template> -->
+								</ng-select>
+								<p class="custom_error" *ngIf="applicable_country_id.errors && applicable_country_id.errors.required && (applicable_country_id.dirty || applicable_country_id.touched || warehouseForm.submitted)">Please Select atleast one Country</p>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Latitude</mat-label>
+								<input matInput placeholder="Lattitude" #latitude="ngModel" required  name="latitude" [(ngModel)]="formModel.latitude">
+							</mat-form-field>
+						</div>
+
+						<div class="col-md-2">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Longitude</mat-label>
+								<input matInput placeholder="Longitude" #longitude="ngModel" required  name="longitude" [(ngModel)]="formModel.longitude">
+							</mat-form-field>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Minimum Order Amount</mat-label>
+								<input matInput placeholder="Minimum Order Amount" #min_order_amount="ngModel" required  name="min_order_amount" [(ngModel)]="formModel.min_order_amount">
+							</mat-form-field>
+						</div>
+						<div class="col-md-4">
+							<ng-select [ngClass]="{ 'custom_error_red': selected_store_type.errors && selected_store_type.errors.required && (selected_store_type.dirty || selected_store_type.touched || warehouseForm.submitted) }"
+								[items]="store_type_list"
+								[multiple]="true"
+								placeholder="Store Category Type"
+								bindLabel="name" bindValue="id"
+								#selected_store_type="ngModel" name="selected_store_type" [(ngModel)]="selectedStoreType"
+								style="margin-top: 8px !important;" (change)="getStoreTypeCategory(selectedStoreType)"
+							>
+							<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+									<div class="ng-value" *ngFor="let item of items | slice:0:2">
+											<span class="ng-value-label">{{item.name}}</span>
+											<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+									</div>
+									<div class="ng-value" *ngIf="items.length > 2">
+											<span class="ng-value-label">{{items.length - 2}} more...</span>
+									</div>
+							</ng-template>
+							</ng-select>
+						</div>
+						<div class="col-md-4">
+							<ng-select [ngClass]="{ 'custom_error_red': selected_category.errors && selected_category.errors.required && (selected_category.dirty || selected_category.touched || warehouseForm.submitted) }"
+								[items]="category_list"
+								[multiple]="true"
+								placeholder="Select Store Category"
+								bindLabel="name" bindValue="id"
+								#selected_category="ngModel" name="selected_category" [(ngModel)]="selectedCategory"
+								style="margin-top: 8px !important;"
+							>
+							<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+									<div class="ng-value" *ngFor="let item of items | slice:0:2">
+											<span class="ng-value-label">{{item.name}}</span>
+											<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+									</div>
+									<div class="ng-value" *ngIf="items.length > 2">
+											<span class="ng-value-label">{{items.length - 2}} more...</span>
+									</div>
+							</ng-template>
+							</ng-select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<ng-select
+								[items]="payment_option_list"
+								[multiple]="true"
+								placeholder="Select Payment Option"
+								bindLabel="name" bindValue="id"
+								#selected_payment_option="ngModel" name="selected_payment_option" [(ngModel)]="selectedPaymentOption"
+								style="margin-top: 8px !important;"
+							>
+							<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+									<div class="ng-value" *ngFor="let item of items | slice:0:1">
+											<span class="ng-value-label">{{item.name}}</span>
+											<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+									</div>
+									<div class="ng-value" *ngIf="items.length > 1">
+											<span class="ng-value-label">{{items.length - 1}} more...</span>
+									</div>
+							</ng-template>
+							</ng-select>
+						</div>
+						<div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Delivery Time Modifier</mat-label>
+								<input matInput placeholder="Delivery Time Modifier" pattern="[0-6]" #expected_delivery_time="ngModel" name="expected_delivery_time" [(ngModel)]="formModel.expected_delivery_time">
+								<mat-error *ngIf="expected_delivery_time.errors && expected_delivery_time.errors.pattern">
+									Please enter numeric value that are 0 to 6 only.
+								</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<br>
+							<div class="file_upload">
+								<button mat-raised-button class="btn-main" type="button">
+									<mat-icon class="icon-upload-cloud"></mat-icon>Browse Logo
+									<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+									 (change)="selectWarehouseLogo($event)" />
+								</button>
+								<span class="ml-1">{{file_selection_tool}}</span>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="photobox" *ngIf="formModel.fileUrl != '' && formModel.fileUrl != undefined">
+								<div class=" propic">
+									<img src="{{formModel.fileUrl}}" height="200" width="200" class="product_image" style="margin-top:10px;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row">
+						<div class="col-md-6">
+							<mat-form-field appearance="outline"  class="md-block">
+								<input matInput placeholder="Store Color Code" #text_color="ngModel"  name="text_color" [(ngModel)]="formModel.text_color" [(colorPicker)]="color" (blur)="colorChange(color)" readonly="true">
+							</mat-form-field>
+						</div>
+						<div class="col-md-6"></div>
+					</div>   -->
+				</div>
+				<!-- ///////////////Buttons//// -->
+				<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Save</button>
+					<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div> 
+				<div class="clear"></div> 
+				<!-- ///////////////Buttons//// --> 
+			</div>
+		  	<div class="clear"></div>
+	  	</form>
+	</div>
+</section>

@@ -1,0 +1,260 @@
+<div class="editor-heading">{{widget.label}}
+  <!-- <button (click)="close()" mat-icon-button class="editor-btn-main-ripple"><i class="fa fa-times editor-icon" aria-hidden="true"></i></button> -->
+  <div class="add_more_button" *ngIf="addedMoreItem"><button (click)="addNewItem()" mat-icon-button type="button" style="background-color: green;"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+  <div class="clear"> </div>
+
+</div>
+<div class="editor-scroll">
+  <mat-accordion *ngIf="widget.type != 3 && widget.type != 4">
+    <mat-expansion-panel *ngFor="let block of widget.insertables; let i=index;" [expanded]="i==0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{block.label}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div  *ngFor="let insertable of block.properties">
+        
+        <!-- GENERAL SECTIONS -->
+        <ng-container *ngIf="!insertable.is_file && !insertable.is_icon">
+          
+          <mat-form-field *ngIf="!insertable.field"> 
+            <input type="text" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value"  (ngModelChange)="modelChange()"/>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>  
+          
+          <mat-form-field *ngIf="insertable.field=='textarea'"> 
+            <textarea rows="5" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()"></textarea>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="insertable.field=='colorpicker'"> 
+            <input type="text" matInput placeholder="{{insertable.label}}" [(colorPicker)]="insertable.value" [value]="insertable.value"  (ngModelChange)="modelChange()" (blur)="modelChange()"/>
+            <span matSuffix [style.backgroundColor]="insertable.value">&nbsp;&nbsp;</span>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+          <mat-form-field *ngIf="insertable.field == 'selectbox'">
+            <mat-label>{{insertable.label}}</mat-label>
+            <mat-select [(value)] = "insertable.value">
+              <mat-option *ngFor="let option of insertable.options" [value]="option.id">{{option[insertable['selector_key_name']]}}</mat-option>
+              
+            </mat-select>
+            
+          </mat-form-field>
+
+          <!-- <ng-container *ngIf="insertable.field=='editor'">
+            <ckeditor [config]="editor_config" #editor name="editor" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()" debounce="500"></ckeditor>
+          </ng-container> -->  
+
+          <mat-form-field *ngIf="insertable.field=='editor'"> 
+            <textarea id="inline-editor${{insertable.selector}}" contenteditable="true" rows="1" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()"></textarea>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+          
+        </ng-container>
+        
+
+        <!-- ICON SECTIONS -->
+        <button *ngIf="widget.type==1 && insertable.is_icon && !insertable.is_file" type="button" mat-icon-button class="editor-btn-blue" (click)="selectIcon(insertable.value,insertable.selector)"><mat-icon class="fa fa-paperclip editor-icon"></mat-icon></button> <label *ngIf="widget.type==1 && insertable.is_icon && !insertable.is_file" class="editor-text-blue">Insert Icon</label>
+        <div class="clear"></div>
+
+        <!-- IMAGE SECTIONS -->
+        
+        
+        <ng-container *ngIf="widget.type==1 && insertable.is_file && !insertable.is_icon">
+          
+          <div class="editor-image-box" [style.background-image]="'url('+insertable.value+')'">
+            <input style="display: none;" type="file" #file accept="image/*" (change)="fileChoose($event,insertable.selector,i)">
+            <button mat-button class="editor-btn-white editor-btn-rounded" (click)="file.click()">Replace </button>
+            <button mat-icon-button class="editor-btn-white" (click)="onDropboxLoad(insertable.selector,i)"><i class="fa fa-dropbox" aria-hidden="true"></i></button>
+          </div>
+          <mat-form-field *ngIf="((!insertable.type) || (insertable.type && insertable.type!=2))"> <!-- class="editor-input" -->
+            <input matInput placeholder="Image Url" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()">
+          </mat-form-field>
+          <mat-form-field *ngIf="insertable.type && insertable.type==2 ">
+            <input matInput placeholder="Image Url" [(ngModel)]="insertable.url" (blur)="insertUrl(insertable.selector,i)">
+          </mat-form-field>
+          
+          <!-- <div class="editor-heading2">Choose from image library</div>
+          <button mat-button class="editor-btn-blue editor-btn-rounded btn-block">Image library</button> -->
+          <div class="clear10"></div>
+          
+        </ng-container>
+
+      </div>  
+      
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+  <mat-accordion *ngIf="widget.type==3">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Fields
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row custom-fil"  *ngFor="let item of widget.insertables[0].fields; let i=index ">
+        <div class="col-auto">
+        
+          <!-- //////////Teaxbox/////// -->
+          <mat-form-field class="md-block" *ngIf="item.input_type=='Textbox' || item.input_type=='Email' || item.input_type=='Phone'">
+              <input matInput placeholder="{{item.field_label}}" readonly [required]="item.value_required=='y'">
+          </mat-form-field>  
+          <!-- //////////Dropdown/////// -->
+          <mat-form-field *ngIf="item.input_type=='Dropdown'">
+            <mat-select placeholder="{{item.field_label}}"  disabled [required]="item.value_required=='y'">
+              <mat-option value="{{item_custom}}" *ngFor="let item_custom of item.custom_values">{{item_custom}}</mat-option>
+            </mat-select>
+          </mat-form-field> 
+          <!-- //////////Radio/////// -->  
+
+          <div *ngIf="item.input_type=='Radio'">
+            
+            <label class="example-margin">{{item.field_label}}<span *ngIf="item.value_required=='y'">*</span>:</label><br>
+            <mat-radio-group disabled [required]="item.value_required=='y'">
+              <div *ngFor="let item_custom of item.custom_values">
+                  <mat-radio-button class="my-1" name="{{item.field_label}}" value="{{item_custom}}" >{{item_custom}}</mat-radio-button>
+              </div>
+            </mat-radio-group>  
+          </div>
+
+          <!-- //////////Checkbox/////// -->  
+          <div class="c-check" *ngIf="item.input_type=='Checkbox'">
+            <label class="example-margin">{{item.field_label}}<span *ngIf="item.value_required=='y'">*</span>: </label><br>
+            <div *ngFor="let item_custom of item.custom_values">
+                <mat-checkbox class="my-1"  name="{{item.field_label}}" value="{{item_custom}}" disabled [required]="item.value_required=='y'">{{item_custom}}</mat-checkbox>
+            </div>  
+          </div>
+
+          <!-- //////////Teaxtarea/////// --> 
+          <mat-form-field *ngIf="item.input_type=='Textarea'">
+            <textarea matInput placeholder="{{item.field_label}}" name="{{item.field_label}}" readonly [required]="item.value_required=='y'"></textarea>
+          </mat-form-field> 
+        </div>  
+        <div class="col-auto ml-auto">
+          <!-- //////////Buttons/////// -->  
+          <button mat-icon-button type="button" (click)="addField('edit',i)">
+            <mat-icon class="fa fa-pencil"></mat-icon>
+          </button>
+          <button mat-icon-button type="button" (click)="deleteField(i)">
+            <mat-icon class="fa fa-trash"></mat-icon>
+          </button>
+          <div class="clear"></div>
+        </div>
+      </div> 
+      <div class="clear10"></div>
+      <button type="button" mat-icon-button class="editor-btn-blue" (click)="addField()"><mat-icon class="fa fa-plus editor-icon"></mat-icon></button> <label class="editor-text-blue">Add Field</label>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Settings
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container>
+        <!-- GENERAL SECTIONS -->
+        <mat-form-field> 
+          <input type="text" matInput placeholder="Reset Button Text" [(ngModel)]="widget.insertables[0].reset_button_text"  (ngModelChange)="modelChange()"/>
+        </mat-form-field>
+        <mat-form-field> 
+          <input type="text" matInput placeholder="Submit Button Text" [(ngModel)]="widget.insertables[0].submit_button_text"  (ngModelChange)="modelChange()"/>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-select placeholder="Redirect Page" [(ngModel)]="widget.insertables[0].submit_url">
+            <mat-option value="{{page.url}}" *ngFor="let page of page_list">{{page.page_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion *ngIf="widget.type == 4">
+    <mat-expansion-panel class="positionrelative"  *ngFor="let block of widget.insertables[0]['properties']; let i=index;">
+      <mat-expansion-panel-header>
+        <i (click)="deleteinsertablewiget(block)" *ngIf="widget.insertables[0]['properties'].length>=2" class="fa fa-times positionabs"></i>
+
+        <mat-panel-title>
+          {{block.label}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngIf="block.is_file && !block.is_icon">
+          
+          <div class="editor-image-box" [style.background-image]="'url('+block.value+')'">
+            <input style="display: none;" type="file" #file accept="image/*" (change)="fileChoose($event,block.selector,i)">
+            <button mat-button class="editor-btn-white editor-btn-rounded" (click)="file.click()">Replace </button>
+            <button mat-icon-button class="editor-btn-white" (click)="onDropboxLoad(block.selector,i)"><i class="fa fa-dropbox" aria-hidden="true"></i></button>
+          </div>
+          <mat-form-field *ngIf="((!block.type) || (block.type && block.type!=2))"> <!-- class="editor-input" -->
+            <input matInput placeholder="Image Url" [(ngModel)]="block.value" (ngModelChange)="modelChange()">
+          </mat-form-field>
+          <mat-form-field *ngIf="block.type && block.type==2 ">
+            <input matInput placeholder="Image Url" [(ngModel)]="block.url" (blur)="insertUrl(block.selector,i)">
+          </mat-form-field>
+        </ng-container>
+       <button *ngIf="block.is_icon && !block.is_file" type="button" mat-icon-button class="editor-btn-blue" (click)="selectIcon(block.value,block.selector)"><mat-icon class="fa fa-paperclip editor-icon"></mat-icon></button> <label *ngIf="block.is_icon && !block.is_file" class="editor-text-blue">Insert Icon</label>
+        <div class="clear"></div>
+
+      <div  *ngFor="let insertable of block.associative_fields">
+        
+        <!-- GENERAL SECTIONS -->
+        <ng-container *ngIf="!insertable.is_file && !insertable.is_icon">
+          
+          <mat-form-field *ngIf="!insertable.field"> 
+            <input type="text" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value"  (ngModelChange)="modelChange()"/>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>  
+          
+          <mat-form-field *ngIf="insertable.field=='textarea'"> 
+            <textarea rows="5" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()"></textarea>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="insertable.field=='colorpicker'"> 
+            <input type="text" matInput placeholder="{{insertable.label}}" [(colorPicker)]="insertable.value" [value]="insertable.value"  (ngModelChange)="modelChange()" (blur)="modelChange()"/>
+            <span matSuffix [style.backgroundColor]="insertable.value">&nbsp;&nbsp;</span>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+
+          <!-- <ng-container *ngIf="insertable.field=='editor'">
+            <ckeditor [config]="editor_config" #editor name="editor" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()" debounce="500"></ckeditor>
+          </ng-container> -->  
+
+          <mat-form-field *ngIf="insertable.field=='editor'"> 
+            <textarea id="inline-editor${{insertable.selector}}" contenteditable="true" rows="1" matInput placeholder="{{insertable.label}}" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()"></textarea>
+            <mat-hint align="end" *ngIf="insertable.is_hint">{{insertable.hint_text}}</mat-hint>
+          </mat-form-field>
+          
+        </ng-container>
+        
+
+        <!-- ICON SECTIONS -->
+       
+
+        <!-- IMAGE SECTIONS -->
+        
+        
+        <ng-container *ngIf="insertable.is_file && !insertable.is_icon">
+          <div class="editor-image-box" [style.background-image]="'url('+insertable.value+')'">
+            <input style="display: none;" type="file" #file accept="image/*" (change)="fileChoose($event,insertable.selector,i)">
+            <button mat-button class="editor-btn-white editor-btn-rounded" (click)="file.click()">Replace </button>
+            <button mat-icon-button class="editor-btn-white" (click)="onDropboxLoad(insertable.selector,i)"><i class="fa fa-dropbox" aria-hidden="true"></i></button>
+          </div>
+          <mat-form-field *ngIf="((!insertable.type) || (insertable.type && insertable.type!=2))"> <!-- class="editor-input" -->
+            <input matInput placeholder="Image Url" [(ngModel)]="insertable.value" (ngModelChange)="modelChange()">
+          </mat-form-field>
+          <mat-form-field *ngIf="insertable.type && insertable.type==2 ">
+            <input matInput placeholder="Image Url" [(ngModel)]="insertable.url" (blur)="insertUrl(insertable.selector,i)">
+          </mat-form-field>
+          <div class="clear10"></div>
+        </ng-container>
+
+      </div>  
+      
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>
+<div class="clear10"></div>
+<button mat-button class="editor-btn-main-line btn-blo" (click)="close()"><i class="fa fa-save editor-icon"></i>Save</button>
+<button mat-button class="editor-btn-main-line btn-blo" (click)="close()"><i class="fa fa-remove editor-icon"></i>Cancel</button>

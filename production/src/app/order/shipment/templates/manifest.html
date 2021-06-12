@@ -1,0 +1,138 @@
+<section class="right-part filter-pad picklist_invoice">
+	<form #manifestForm="ngForm">
+		<input type="hidden" name="shipment_id" [(ngModel)]="formModel.shipment_id">
+		<div class="topheading">
+			<h1>Delivery Note
+				<div class="btn-header shipment-top-btn shipment-two-btn">
+					<button mat-raised-button class="btn-main" type="button" (click)="manifestContinue(manifestForm)">Continue</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="manifestContinue(manifestForm)">Cancel</button>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/grn/'+formModel.shipment_id)" [routerLink]="['/shipment/grn/'+formModel.shipment_id]">
+							<div class="nom"></div>Picking
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/invoice/'+formModel.shipment_id)" [routerLink]="['/shipment/invoice/'+formModel.shipment_id]">
+							<div class="nom"></div>Invoice
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/delivery_planner/'+formModel.shipment_id)" [routerLink]="['/shipment/delivery_planner/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Planner
+						</a>
+					</li>
+					<li class="active">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/manifest/'+formModel.shipment_id)" [routerLink]="['/shipment/manifest/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Note
+						</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="body-part" *ngIf="_globalService.isFormLoaded == 'Yes'">
+			<div class="box">
+				<div class="fixed-width">
+					<div class="row">
+						<div class="col-12 col-lg-6">
+							<div class="delivery_wrap">
+								<div class="delivery-note-div">
+									<span class="userlabltext">Manifest No. :</span>
+									<span class="userlbtdetail manifest_no_val">{{formModel.manifest_details.manifest_no}}&nbsp;</span>
+									<div class="clear"></div>
+								</div>
+								<div class="delivery-note-div">
+									<span class="userlabltext">Manifest Date :</span>
+									<span class="userlbtdetail manifest_no_val">{{formModel.manifest_details.created}}&nbsp;</span>
+									<div class="clear"></div>
+								</div>
+								<div class="delivery-note-div">
+									<span class="userlabltext">Zone :</span>
+									<span class="userlbtdetail manifest_no_val">{{formModel.manifest_details.zone_name}}&nbsp;</span>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+								<button mat-raised-button class="btn-main" type="button" (click)="createManifest()">Create Manifest</button>
+								<button mat-raised-button class="btn-pink ml-1" type="button" (click)="printManifest()"><span class="icon-printer"></span>
+									Print</button>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="delivery_wrap">
+								<div class="delivery-note-textarea">
+									<mat-form-field class="md-block" appearance="outline">
+										<mat-label>Message</mat-label>
+										<textarea matInput placeholder="Message" #comment="ngModel" name="comment" [(ngModel)]="formModel.manifest_details.comment"
+										 rows="5"></textarea>
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-12">
+							<div class="table-list delivery_wrap table-wrap">
+								<table>
+									<tr>
+										<th>
+											<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+										</th>
+										<th>Order ID</th>
+										<th>Order Date</th>
+										<th>Delivery Date</th>
+
+										<th>Vehicle No</th>
+										<th>Delivery Boy Name</th>
+
+										<th>Distance</th>
+										<th>Time</th>
+
+										<th style="width:6%;">Customer Name</th>
+										<th>Phone</th>
+										<th style="width:12%;">Delivery Address</th>
+										<th>No. of Items</th>
+									</tr>
+									<tr [class.chec]="InvoiceOrder.selected" *ngFor="let InvoiceOrder of formModel.orderData; let index=index;">
+										<td data-th="">
+											<mat-checkbox name="InvoiceOrder.Selected" id="shipment_order_id{{InvoiceOrder.order.id}}" [checked]="InvoiceOrder.selected"
+											 (change)="toggleCheck(InvoiceOrder.order.id,$event)"></mat-checkbox>
+										</td>
+										<td data-th="Order ID">{{InvoiceOrder.custom_order_id}}</td>
+										<td data-th="Order Date">{{InvoiceOrder.OrderList.created}}</td>
+										<td data-th="Delivery Date">{{InvoiceOrder.order.time_slot_date}}</td>
+
+										<td data-th="Vehicle No">{{InvoiceOrder.OrderList.vehicle_no}}</td>
+										<td data-th="Delivery Boy Name">{{InvoiceOrder.OrderList.DriverName}}</td>
+
+										<td data-th="Distance">{{InvoiceOrder.OrderList.distance}}</td>
+										<td data-th="Time">{{InvoiceOrder.OrderList.time_required}}</td>
+
+										<td data-th="Customer Name">{{InvoiceOrder.OrderList.delivery_name}}</td>
+										<td data-th="Phone">{{InvoiceOrder.OrderList.delivery_phone}}</td>
+										<td data-th="Delivery Address">{{InvoiceOrder.OrderList.delivery_street_address}}
+											{{InvoiceOrder.OrderList.delivery_street_address1}}</td>
+										<td data-th="No. of Items">{{InvoiceOrder.total_quantity}}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div id="printsection" style="display: none" [innerHTML]="formModel.printsection | safeHtml"></div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs btn-footer">
+				<button mat-raised-button class="btn-main" type="button" (click)="manifestContinue(manifestForm)">Continue</button>
+				<button mat-raised-button class="btn-line" type="button" (click)="manifestContinue(manifestForm)">Cancel</button>
+			</div>
+			<!-- ///////////////Buttons//// -->
+			<div class="clear"></div>
+		</div>
+	</form>
+</section>

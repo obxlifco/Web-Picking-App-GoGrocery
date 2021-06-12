@@ -1,0 +1,161 @@
+<section class="right-part filter-pad addall_page">
+    <form >
+        <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+            <div class="topheading">
+                <h1>Product Setup
+				  <div class="btn-header">
+					  	<button mat-raised-button class="btn-main" (click)="addEditSupplierForm()">Continue</button>
+						<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						<label class="hidden-xs hidden-sm">Fields marked with <span class="error" >*</span> are compulsory.</label>
+				  </div>
+				  <div class="clear"></div>
+			  </h1>
+            </div>
+            <div class="filter">
+                <div class="stap">
+                    <ul *ngIf="formModel.productId>0 && add_edit=='edit'">
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId)" [routerLink]="['/products/edit/'+formModel.productId]">
+                                <div class="nom"></div>Basic Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step2')" [routerLink]="['/products/edit/'+formModel.productId+'/step2']">
+                                <div class="nom"></div>Advanced Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step3')" [routerLink]="['/products/edit/'+formModel.productId+'/step3']">
+                                <div class="nom"></div>Pricing</a>
+                        </li>
+                        <li class="active">
+                            <div class="nom"></div>Supplier
+                        </li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step5')" [routerLink]="['/products/edit/'+formModel.productId+'/step5']">
+                                <div class="nom"></div>Collections</a>
+                        </li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step6')" [routerLink]="['/products/edit/'+formModel.productId+'/step6']">
+                            <div class="nom"></div>Related Products</a>
+                        </li>
+                        
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']">
+                                <div class="nom"></div>Substitute Products</a>
+                        </li>
+
+                    </ul>
+                    <ul *ngIf="add_edit=='add'">
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/add')" [routerLink]="['/products/add']">
+                                <div class="nom"></div>Basic Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/add/step2')" [routerLink]="['/products/add/step2']">
+                                <div class="nom"></div>Advanced Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/add/step3')" [routerLink]="['/products/add/step3']">
+                                <div class="nom"></div>Pricing</a>
+                        </li>
+                        <li class="active">
+                            <div class="nom"></div>Supplier</li>
+                        <li>
+                            <div class="nom"></div>Collections</li>
+                        <li>
+                            <div class="nom"></div>Related Products</li>
+                        <li>
+                            <div class="nom"></div>Substitute Products</li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+               
+            </div>
+            <div class="filter_bottomsec">
+                <div class="inner_subhead">Product Supplier</div>
+                <div class="selectand_btnsec">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <button class="pinkbutonadd" (click)="add_supplier()" mdTooltip="Add Supplier" type="button" style="float: right;"><span
+                                class="icon-add"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="cus_frm_box topgap">
+                <div class="supplier_detailsacco_wrap" >
+                    <mat-accordion multi="true" *ngFor="let item of warehouse_list; let masterIndex=index;">
+                        <mat-expansion-panel *ngIf="item.data.length>0"  [expanded]=true style="margin-bottom: 20px;">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title (click)="$event.stopPropagation();">
+                                    {{item.name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-list addspl">
+                                <table>
+                                    <tr>
+                                        <th width="30">
+                                            <!-- <mat-checkbox name="selectedAll" id="list-all"></mat-checkbox> -->
+                                        </th>
+                                        <th align="left">
+                                            Supplier Name
+                                        </th>
+                                        <th align="left">
+                                            Product SKU
+                                        </th>
+                                        <th align="left">
+                                            Product Name
+                                        </th>
+                                        <th width="10%" align="right">
+                                            Cost Per Unit
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let supplier of item.data; let itemIndex=index;">
+                                        <td width="30">
+                                            <a href="javascript:void(0)" (click)="delete_supplier(item.id,supplier.supplier)" class="smlicon gray"><span class="icon-multiply_new"></span></a>
+                                        </td>
+                                        <td align="left">
+                                            {{supplier.supplier_name}}
+                                        </td>
+                                        <td align="left">
+                                            {{supplier.product_sku}}
+                                        </td>
+                                        <td align="left">
+                                            {{supplier.product_name}}
+                                        </td>
+                                        <td align="right">
+                                            <input matInput type="number" class="add_edit_price" id="base_cost_{{itemIndex}}_{{masterIndex}}" name="base_cost_{{itemIndex}}_{{masterIndex}}"
+                                                    [(ngModel)]="supplier.base_cost" pattern="\d+(\.\d{1,2})?">                                            
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="item.data.length==0">
+                                        <td colspan="5" align="center">No records found</td>
+                                        </tr>
+                                </table>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <div class="blanktable" *ngIf="warehouse_supplier_count==0">
+                        <p>No supplier is assigned to this product.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_fixedpart">
+                <div class="btn-header  hidden-xs">
+                    <!-- <button mat-raised-button class="btn-main" type="submit" (click)="addEditAdvanceInfo()">Continue</button> -->
+                    <button mat-raised-button class="btn-main" type="submit" (click)="addEditSupplierForm()">Continue</button>
+                    <button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="btn-header left">
+                    <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step3')" [routerLink]="['/products/edit/'+formModel.productId+'/step3']">
+                        Back
+                    </a>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,29 @@
+<div class="cartbox deleverybox">
+  <div class="head">Delivery Options</div>
+    <div class="addressbox">
+        <div class="left_radio"><!-- <mat-radio-button></mat-radio-button> --></div>
+        <div class="addressdetailsbox">
+            <div class="addresssec">
+                <div class="subhead">
+                    <h3>Select Delivery Slot                     
+                    </h3>                  <!--  <p>6 Items @ $320.00 | Delivery Charges : $30.00</p> -->
+                </div>
+            </div>
+            <div class="droptimesec">               
+                   <mat-form-field>
+                      <mat-label>Select slot</mat-label>
+                      <mat-select [(ngModel)]="tomeSlot" (ngModelChange)="onChangeTimeSlot($event)">
+                        <mat-option *ngFor="let tomeSlot of allDeliverySlot" [value]="tomeSlot">{{tomeSlot['slot_name']}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+            </div>
+        </div>
+    </div>
+     <div class="addressbox">
+       <mat-form-field appearance="outline">
+            <mat-label>Add note to this order</mat-label>
+            <input matInput placeholder="Add note to this order" maxlength="200" (keyup)="sendMessageToParent('')"  [(ngModel)]="delivery_note">
+        </mat-form-field>
+     </div>
+  
+</div>

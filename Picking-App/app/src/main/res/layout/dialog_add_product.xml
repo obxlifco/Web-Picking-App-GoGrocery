@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvHeaderAddProductDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/txtAddSubstituteProduct"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llDialogClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:scaleType="centerCrop"
+                android:padding="4dp"
+                android:src="@drawable/ic_close_black" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/appColorMediumGrey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_margin="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rect_round_corner"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/etSearchAddProductDialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@android:color/transparent"
+                android:focusableInTouchMode="true"
+                android:hint="@string/txtSearchForProduct"
+                android:imeOptions="flagNoExtractUi|actionSearch"
+                android:inputType="text"
+                android:textColor="@color/appColorDarkGrey"
+                android:textSize="@dimen/_7sdp"
+                android:textColorHint="@color/appColorDarkGrey"/>
+
+            <LinearLayout
+                android:id="@+id/llSearchAddProductDialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:src="@drawable/ic_search"
+                    android:visibility="visible" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvScanAddProductDialog"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_1sdp"
+            android:layout_weight=".2"
+            android:background="@drawable/bg_rect_round_corner_black_border"
+            android:gravity="center"
+            android:text="@string/txtScan"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_6sdp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rect_round_corner"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:id="@+id/spCategoryAddProductDialog"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="end"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rect_round_corner"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="end"
+                android:id="@+id/spSubCategoryAddProductDialog"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tvAddProductDialog"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/bg_rect_round_corner"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_grey_round_corner"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/txtProductInfo"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_weight=".2"
+                    android:gravity="center"
+                    android:text="@string/txtPricee"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="center"
+                    android:text="@string/txtStock"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSelectProductDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_rect_round_corner"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/txtSelectedProduct"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSelectProductDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:scrollbars="vertical"
+                    android:scrollIndicators="right"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@color/appColorBlack" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAddProductDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <ProgressBar
+                    android:id="@+id/pg_dialog"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"
+                    android:layout_height="@dimen/_26sdp">
+
+                </ProgressBar>
+
+                <TextView
+                    android:id="@+id/tvNoValueProductDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/txtNoData"
+                    android:textColor="@color/appColorDarkGrey"
+                    android:textSize="@dimen/_7sdp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAddProductDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/bg_green_round_corner"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/txtAddProducts"
+            android:textColor="@color/appColorWhite"
+            android:textSize="@dimen/_8sdp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</LinearLayout>

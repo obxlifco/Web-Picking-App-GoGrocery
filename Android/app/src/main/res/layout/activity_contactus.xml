@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.Contactus">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv1"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/back_btn_width"
+                    android:layout_height="@dimen/back_btn_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:padding="4dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+
+                    android:fontFamily="@font/montserrat"
+
+                    android:text="@string/toolbar_title_contact_us"
+                    android:textColor="@color/grey_new"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:typeface="sans" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cv1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_110sdp"
+                    android:layout_marginTop="@dimen/_26sdp"
+                    android:src="@drawable/quality_standard">
+
+                </ImageView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/_30sdp"
+
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/iv_back0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/illustrations">
+
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/iv_call"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:padding="4dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/call">
+
+                            </ImageView>
+
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="16dp"
+
+                            android:gravity="center"
+                            android:textColor="@color/grey_new"
+                            android:textSize="24sp"
+                            android:fontFamily="@font/proxima_regular"
+                            android:visibility="visible"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_us">
+
+                        </TextView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/_30sdp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/iv_back1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/illustrations">
+
+                            </ImageView>
+                            <ImageView
+                                android:id="@+id/iv_email"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:padding="4dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/envelope">
+
+                            </ImageView>
+
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginStart="46dp"
+                            android:layout_marginEnd="46dp"
+                            android:gravity="center"
+                            android:layout_below="@+id/iv_back1"
+                            android:textColor="@color/grey_new"
+                            android:textSize="24sp"
+                            android:fontFamily="@font/proxima_regular"
+                            android:visibility="visible"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email_us">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/illustrations">
+
+                    </ImageView>
+                    <ImageView
+                        android:id="@+id/iv_sendfeedBack"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="4dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/send_feedback">
+
+                    </ImageView>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginEnd="46dp"
+                    android:gravity="center"
+                    android:textColor="@color/grey_new"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:visibility="visible"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_feedback">
+
+                </TextView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+        </ProgressBar>
+
+
+    </RelativeLayout>
+    <!--
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+
+             >
+
+            </WebView>-->
+
+
+
+
+
+</layout>
+
+
+

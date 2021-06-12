@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="177dp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp">
+
+
+        <ImageView
+            android:id="@+id/ivSbc"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/dummy_item_img"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/wishlist"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/ivSbc"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/veg_sign"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvItemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivSbc"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Healthy"
+            app:fontFamily="@font/hind_medium"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvItemCategory"
+            android:text="Organic Moong Dal Yellow Split"
+            android:textColor="@color/green_dark_new"
+            app:fontFamily="@font/proxima_regular"
+            android:textSize="@dimen/_10sdp"/>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvItemName"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#EDEDED"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/tvGrams"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="500gm"
+                android:textColor="@color/black"
+                app:fontFamily="@font/hind_medium" />
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/tvSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tvGrams"
+                android:text=" - "
+                android:textColor="@color/black"
+                app:fontFamily="@font/hind_medium" />
+
+            <TextView
+                android:textSize="12sp"
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tvSeparator"
+                android:textColor="@color/black"
+                app:fontFamily="@font/hind_medium" />
+
+            <ImageView
+                android:id="@+id/ivExpandVariant"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="8dp"
+                android:rotation="270"
+                android:src="@drawable/back_arrow" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl1"
+            android:layout_marginTop="@dimen/_2sdp">
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice"
+               android:textSize="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:fontFamily="@font/proxima_regular"
+                android:text="@string/current_curremcy_zero"/>
+
+            <TextView
+                android:textSize="8sp"
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/tvDiscounrPrice"
+                android:textColor="@color/black"
+                app:fontFamily="@font/proxima_regular"
+                android:text="500 gm"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:visibility="gone"
+                android:textSize="12sp"
+                android:id="@+id/tvDiscountOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/tvOriginalPrice"
+                android:text="(20% OFF)"
+                android:textColor="#ED1C24"
+                app:fontFamily="@font/hind" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl2"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/green_btn_ng"
+            android:text="@string/atc"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

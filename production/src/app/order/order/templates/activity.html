@@ -1,0 +1,39 @@
+<div class="box productbox order_activity">
+        <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="innerhead main">Order Activity</div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12">
+                    <div class="cusrow">
+                            <div class="inpt_plsbtn">
+                                <mat-form-field  appearance="outline">
+                                        <mat-label>Note</mat-label>
+                                    <input matInput placeholder="Note" name="" type="text" [(ngModel)]="formModel.activity_msg" (keyup)="postOrderActivities($event)" (keydown.enter)="$event.preventDefault()">
+                                </mat-form-field>
+                             </div>
+                             <button mat-raised-button class="btn-main addbtn" type="button" (click)="postActivity()">Post</button>
+                        </div>
+                        <div class="activity_feedbox">
+                            <div class="cusrow add" *ngFor="let activity of order_activity">
+                                <div class="conround"><span class="icon-reports"></span></div>
+                                <div class="textsec">
+                                    <p>
+                                        {{activity.activity_comments}}
+                                    </p>
+                                    <span>{{_globalService.convertDate(activity.activity_date, 'dd-MM-yyyy h:mm a')}}</span>
+                                </div>
+                                <div class="clear"></div>
+                    
+                    
+                    
+                            </div>
+                        </div>
+            </div>
+        </div>        
+    
+    <!-- <div class="cusrow add">
+        <button class="showmorebtn">Show more... </button>
+    </div> -->
+</div>

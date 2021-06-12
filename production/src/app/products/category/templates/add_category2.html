@@ -1,0 +1,438 @@
+<section class="right-part filter-pad addall_page">
+  	
+	<form #basicinfoForm="ngForm" novalidate (ngSubmit)="basicinfoForm.valid && addEditAdditional()" enctype="multipart/form-data">
+			<input type="hidden" name="categoryId" [(ngModel)]="formModel.categoryId">
+		<div class="topheading">
+			<h1>Category Setup
+				<div class="btn-header hidden-xs">
+				  <button type="submit" mat-raised-button class="btn-main">Continue</button>
+				  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				  <label>Fields marked with <span class="error" >*</span> are compulsory.</label>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+					<ul *ngIf="formModel.categoryId>0 && add_edit=='edit'">
+						<li class="done"><a (click)="_globalService.setTab(tabIndex,'/category/edit/'+formModel.categoryId)" [routerLink]="['/category/edit/'+formModel.categoryId]"><div class="nom"></div>Basic Info</a></li>
+						<li class="active"><div class="nom"></div>Advanced Info</li>
+					</ul>
+					<ul *ngIf="add_edit=='add'">
+						<li class="done"><a [routerLink]="['/category/add']"><div class="nom"></div>Basic Info</a></li>
+						<li class="active"><div class="nom"></div>Advanced Info</li>
+					</ul>
+				
+				<div class="clear"></div>
+			</div>
+		  </div> 
+		<div class="clear5"></div>
+			<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+				<div class="addfrmfild_btnrow">
+					<button type="button" mat-raised-button class="btn-line-pink mat-raised-button" *ngIf="show" (click)="show_import()">Import Custom Fields</button>
+					<button type="button" mat-raised-button class="btn-pink mat-raised-button" (click)="show_pop(0)" *ngIf="show">Add Custom Fields</button>
+					<button type="button" mat-raised-button class="btn-pink mat-raised-button" *ngIf="!show" (click)="show_custom()">Manage Custom Fields</button>
+				</div>	
+
+				<div id="view_part" *ngIf="!show">
+					<div class="row">
+				
+						<div class="col-md-12">
+							<div class="fixed-width">
+								<div *ngIf="default_active_list.length>0" class="universalbox">
+				
+									<div class="boxs" accordianBox *ngIf="compulsory_list!=''">
+										<div class="box-header" style="cursor:pointer;"> Compulsory Information <span class="acc_icon icon-minus"></span>
+										</div>
+										<div class="box-body">
+											<div class="row">
+												<ng-container *ngFor="let item of compulsory_list; let c=index;">
+												
+													<div class="col-sm-6">
+														<div class="custom-filds new com">
+															<!-- /////////	Custom	   -->
+															<!-- //////////Teaxbox/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Textbox'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<input matInput placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																	</mat-form-field>
+																</div>
+															</div>
+															<!-- Text box Langusge -->
+															<span *ngIf="item.input_type=='Textbox'">
+																<div class="inner tex"  *ngFor="let lang of item.lang_data;let langcount:index">
+																	<div class="textbox">
+																		<mat-form-field class="md-block" appearance="outline">
+																			<mat-label>{{lang.field_value}}</mat-label>
+																			<input matInput placeholder="{{lang.field_value}}" name="{{lang.field_value}}" [(ngModel)]="formModel[lang.field_value]">
+																		</mat-form-field>
+																	</div>
+																</div>
+															</span>
+															<!-- //////////Dropdown/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Dropdown'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<mat-select placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																			<mat-option value="{{item_custom}}" *ngFor="let item_custom of item.custom_values">{{item_custom}}</mat-option>
+																		</mat-select>
+																	</mat-form-field>
+																</div>
+																<!-- fjhkfh -->
+																<div class="textbox" *ngFor="let lang of item.lang_data;let langcount:index">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<mat-select placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																			<mat-option value="{{item_custom}}" *ngFor="let item_custom of item.custom_values">{{item_custom}}</mat-option>
+																		</mat-select>
+																	</mat-form-field>
+																</div>
+															</div>
+																
+
+															<!-- //////////Radio/////// -->
+															<div class="inner" *ngIf="item.input_type=='Radio'">
+																<div class="left">{{item.field_label}}:</div>
+																<div class="right">
+																	<mat-radio-group [(ngModel)]="formModel[item.field_id]" name="{{item.field_label}}">
+																		<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																			<mat-radio-button class="my-1" value="{{item_custom}}">{{item_custom}}</mat-radio-button>
+																		</div>
+																	</mat-radio-group>
+																</div>
+																<!-- edit cancel sml btn End -->
+															</div>
+															<!-- //////////Checkbox/////// -->
+															<div class="inner" *ngIf="item.input_type=='Checkbox'">
+																<div class="left">{{item.field_label}}:</div>
+																<div class="right">
+																	<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																		<mat-checkbox class="my-1" name="{{item_custom}}" [(ngModel)]="formModel[item_custom]" value="{{item_custom}}">{{(item_custom)}}</mat-checkbox>
+																	</div>
+																</div>
+															</div>
+															<!-- //////////Teaxtarea/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Textarea'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<textarea matInput placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]"></textarea>
+																	</mat-form-field>
+																</div>
+
+																<!-- <div class="textbox" *ngFor="let lang of all_languages">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}} ({{ lang.name}}) </mat-label>
+																		<textarea matInput placeholder="{{item.field_label}} ({{ lang.name}})" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]"></textarea>
+																	</mat-form-field>
+																</div> -->
+
+															</div>
+															<!-- //////////Date/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Date'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<input matInput [matDatepicker]="picker" required (focus)="picker.open()" placeholder="{{item.field_label}}"
+																		 name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+																		<mat-datepicker #picker></mat-datepicker>
+																	</mat-form-field>
+																</div>
+															</div>
+															<!-- /////////	Custom	   -->
+														</div>
+													</div>
+													<div class="clear" *ngIf="(c+1)%2==0"></div>
+												</ng-container>
+											</div>
+										</div>
+									</div>
+				
+									<div class="boxs" accordianBox *ngIf="optional_list!=''">
+										<div class="box-header" style="cursor:pointer;"> Optional Information <span class="acc_icon icon-addsvg"></span>
+										</div>
+										<div class="box-body">
+											<div class="row">
+												<ng-container *ngFor="let item of optional_list; let o=index">
+													<div class="col-sm-6">
+														<div class="custom-filds new com">
+															<!-- /////////	Custom	   -->
+															<!-- //////////Teaxbox/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Textbox'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<input matInput placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																	</mat-form-field>
+																</div>
+																<div class="textbox"  *ngFor="let lang of item.lang_data;let langcount:index">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<input matInput placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																	</mat-form-field>
+																</div>
+															</div>
+															<!-- //////////Dropdown/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Dropdown'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<mat-select placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																			<mat-option value="{{item_custom}}" *ngFor="let item_custom of item.custom_values">{{item_custom}}</mat-option>
+																		</mat-select>
+																	</mat-form-field>
+																</div>
+															</div>
+															<!-- Language Gropdown -->
+															<span *ngIf="item.input_type=='Dropdown'">
+																<div class="inner tex" *ngFor="let lang of item.lang_data;let langcount:index">
+																	<div class="textbox" >
+																		<mat-form-field class="md-block" appearance="outline">
+																			<mat-label>{{item.field_label}}</mat-label>
+																			<mat-select placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																				<mat-option value="{{item_custom}}" *ngFor="let item_custom of item['custom_values_'+lang.language_code]">{{item_custom}}</mat-option>
+																			</mat-select>
+																		</mat-form-field>
+																	</div>
+																</div>
+															</span>
+															<!-- //////////Radio/////// -->
+															<div class="inner" *ngIf="item.input_type=='Radio'">
+																<div class="left">{{item.field_label}}:</div>
+																<div class="right">
+																	<mat-radio-group [(ngModel)]="formModel[item.field_id]" name="{{item.field_label}}">
+																		<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																			<mat-radio-button class="my-1" value="{{item_custom}}">{{item_custom}}</mat-radio-button>
+																		</div>
+																	</mat-radio-group>
+																</div>
+																<!-- edit cancel sml btn End -->
+															</div>
+															<!-- //////////Checkbox/////// -->
+															<div class="inner" *ngIf="item.input_type=='Checkbox'">
+																<div class="left">{{item.field_label}}:</div>
+																<div class="right">
+																	<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																		<mat-checkbox class="my-1" name="{{item_custom}}" [(ngModel)]="formModel[item_custom]" value="{{item_custom}}">{{(item_custom)}}</mat-checkbox>
+																	</div>
+																</div>
+															</div>
+															<!-- //////////Teaxtarea/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Textarea'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<textarea matInput placeholder="{{item.field_label}}" name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]"></textarea>
+																	</mat-form-field>
+																</div>
+
+																<div class="textbox" *ngFor="let lang of item.lang_data;let langcount:index">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{ lang.field_lable_value}}</mat-label>
+																		<textarea matInput placeholder="{{ lang.field_lable_value}}" name="{{lang.field_name}}" [(ngModel)]="lang.field_value"></textarea>
+																	</mat-form-field>
+																</div>
+
+															</div>
+															<!-- //////////Date/////// -->
+															<div class="inner tex" *ngIf="item.input_type=='Date'">
+																<div class="textbox">
+																	<mat-form-field class="md-block" appearance="outline">
+																		<mat-label>{{item.field_label}}</mat-label>
+																		<input matInput [matDatepicker]="picker" required (focus)="picker.open()" placeholder="{{item.field_label}}"
+																		 name="{{item.field_id}}" [(ngModel)]="formModel[item.field_id]">
+																		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+																		<mat-datepicker #picker></mat-datepicker>
+																	</mat-form-field>
+																</div>
+															</div>
+															<!-- /////////	Custom	   -->
+														</div>
+													</div>
+													<div class="clear" *ngIf="(o+1)%2==0"></div>
+				
+				
+												</ng-container>
+				
+				
+											</div>
+										</div>
+									</div>
+				
+				
+								</div>
+								
+								<div class="universalbox" *ngIf="default_active_list.length==0">
+									<p>No custom fields are available for this category!!!.</p>
+									<p>If you want to add custom fields click on 'Edit Field'</p>
+								</div>
+				
+							</div>
+						</div>
+					</div>
+				
+					<div class="clear10"></div>
+				
+				</div>
+				<div id="edit_part" *ngIf="show">
+				
+					<div class="row">
+						<div class="col-md-12">
+							<div class="fixed-width">
+								<div class="universalbox">
+									<div *ngIf="default_list==''">
+										<p>No custom fields are available for this category!!!.</p>
+										<p>If you want to add custom fields click on Tools then 'Add more Field' Or 'Import'</p>
+									</div>
+									<div class="row">
+										<ng-container *ngFor="let item of default_list; let i=index">
+											<div class="col-sm-6">
+												<div class="custom-filds new" >
+													<!-- //////////Teaxbox/////// -->
+													<div class="inner tex" *ngIf="item.input_type=='Textbox'">
+														<div class="textbox">
+															<mat-form-field class="md-block">
+																<input matInput placeholder="{{item.field_label}}" name="categoryName" readonly>
+															</mat-form-field>
+														</div>
+														<div class="editbtnsec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+													</div>
+													<!-- //////////Dropdown/////// -->
+													<div class="inner tex" *ngIf="item.input_type=='Dropdown'">
+														<div class="textbox">
+															<mat-form-field class="md-block">
+																<mat-select placeholder="{{item.field_label}}">
+																	<mat-option value="{{item_custom}}" *ngFor="let item_custom of item.custom_values">{{item_custom}}</mat-option>
+																</mat-select>
+															</mat-form-field>
+														</div>
+														<div class="editbtnsec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+													</div>
+													<!-- //////////Radio/////// -->
+													<div class="inner radiobox" *ngIf="item.input_type=='Radio'">
+														<div class="left">{{item.field_label}}:</div>
+														<div class="right">
+															<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																<mat-radio-button name="{{item.field_label}}" value="{{item_custom}}">{{item_custom}}</mat-radio-button>
+															</div>
+														</div>
+														<!-- edit cancel sml btn -->
+														<div class="editbtn_sec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+														<!-- edit cancel sml btn End -->
+													</div>
+													<!-- //////////Checkbox/////// -->
+													<div class="inner" *ngIf="item.input_type=='Checkbox'">
+														<div class="left">{{item.field_label}}:</div>
+														<div class="right">
+															<div class="cellcus" *ngFor="let item_custom of item.custom_values">
+																<mat-checkbox name="{{item.field_label}}" value="{{item_custom}}" readonly>{{item_custom}}</mat-checkbox>
+															</div>
+														</div>
+														<div class="editbtn_sec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+													</div>
+													<!-- </div> -->
+													<!-- //////////Teaxtarea/////// -->
+													<div class="inner tex" *ngIf="item.input_type=='Textarea'">
+														<div class="textbox">
+															<mat-form-field class="md-block">
+																<textarea matInput placeholder="{{item.field_label}}" name="{{item.field_label}}" readonly></textarea>
+															</mat-form-field>
+														</div>
+														<div class="editbtnsec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+													</div>
+													<!-- //////////Date/////// -->
+													<div class="inner tex" *ngIf="item.input_type=='Date'">
+														<div class="textbox">
+															<mat-form-field class="md-block">
+																<input matInput placeholder="{{item.field_label}}" name="{{item.field_label}}" readonly>
+															</mat-form-field>
+														</div>
+														<div class="editbtnsec">
+															<button mat-icon-button type="button" (click)="show_pop(item.field_id)">
+																<mat-icon class="icon-edit-box"></mat-icon>
+															</button>
+															<button mat-icon-button type="button" (click)="deleteCustom(item.field_id)">
+																<mat-icon class="icon-delete-box"></mat-icon>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="clear" *ngIf="(i+1)%2==0"></div>
+										</ng-container>
+									</div>
+									<div class="clear20"></div>
+									<div class="row" *ngIf="default_list!=''">
+										<div class="btn-header hidden-xs">
+					
+											<button type="button" mat-raised-button class="btn-main" (click)="save_custom()">Save</button>
+											<button type="button" mat-raised-button class="btn-line ml-1" (click)="show_custom()">Cancel</button>
+					
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				
+				
+				</div>
+			<div class="clear"></div>	
+			<!-- ///////////////Buttons//// -->
+							<div class="bottom_fixedpart">
+								<div class="btn-header hidden-xs">
+									<button type="submit" mat-raised-button class="btn-main">Continue</button>
+									<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+								</div>
+								<div class="btn-header left">
+									<a (click)="_globalService.setTab(tabIndex,'/category/edit/'+formModel.categoryId)" [routerLink]="['/category/edit/'+formModel.categoryId]">
+										Back
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+			   
+			  <!-- ///////////////Buttons//// -->
+		</div>						  
+	</form>	  	
+</section>

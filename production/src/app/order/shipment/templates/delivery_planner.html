@@ -1,0 +1,108 @@
+<section class="right-part filter-pad picklist_invoice">
+	<form #deliveryPlannerForm="ngForm">
+		<input type="hidden" name="shipment_id" [(ngModel)]="formModel.shipment_id">
+		<div class="topheading">
+			<h1>Delivery Planner
+				<div class="btn-header shipment-top-btn shipment-two-btnbig">
+					<button mat-raised-button class="btn-main" type="button" (click)="deliveryPlannerContinue(deliveryPlannerForm)">Continue</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<button mat-raised-button class="btn-main" type="button" (click)="pop_assign_vehicle(formModel.shipment_id);">Assign
+						Vehicle</button>
+					<!-- <button mat-raised-button class="btn-pink" type="button" (click)="remove_from_shipment(formModel.shipment_id);" style="margin-left:10px;">Remove From Shipment</button> -->
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/grn/'+formModel.shipment_id)" [routerLink]="['/shipment/grn/'+formModel.shipment_id]">
+							<div class="nom"></div>Picking
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/invoice/'+formModel.shipment_id)" [routerLink]="['/shipment/invoice/'+formModel.shipment_id]">
+							<div class="nom"></div>Invoice
+						</a>
+					</li>
+					<li class="active">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/delivery_planner/'+formModel.shipment_id)" [routerLink]="['/shipment/delivery_planner/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Planner
+						</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/manifest/'+formModel.shipment_id)" [routerLink]="['/shipment/manifest/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Note
+						</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="body-part">
+			<div class="box">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="table-list table-wrap">
+							<table>
+								<tr>
+									<th>
+										<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+									</th>
+									<th>Order ID</th>
+									<th>Order Date</th>
+									<th>Delivery Date</th>
+
+									<th>Vehicle No</th>
+									<th>Delivery Boy Name</th>
+									<th>Distance</th>
+									<th>Time</th>
+
+									<th style="width:6%;">Customer Name</th>
+									<th>Phone</th>
+									<th style="width:12%;">Delivery Address</th>
+									<th>No. of Items</th>
+									<th>Order By</th>
+								</tr>
+								<tr [class.chec]="InvoiceOrder.selected" *ngFor="let InvoiceOrder of formModel.orderData; let index=index;">
+									<td data-th="">
+										<mat-checkbox name="InvoiceOrder.Selected" id="shipment_order_id{{InvoiceOrder.order.id}}" [checked]="InvoiceOrder.selected"
+										 (change)="toggleCheck(InvoiceOrder.order.id,$event)"></mat-checkbox>
+										<!-- <span class="dropdownArrow"></span> -->
+									</td>
+									<td data-th="Order ID">{{InvoiceOrder.custom_order_id}}</td>
+									<td data-th="Order Date">{{InvoiceOrder.OrderList.created}}</td>
+									<td data-th="Delivery Date">{{InvoiceOrder.order.time_slot_date}}</td>
+
+									<td data-th="Vehicle No">{{InvoiceOrder.OrderList.vehicle_no}}</td>
+									<td data-th="Delivery Boy Name">{{InvoiceOrder.OrderList.DriverName}}</td>
+									<td data-th="Distance">{{InvoiceOrder.OrderList.distance}}</td>
+									<td data-th="Time">{{InvoiceOrder.OrderList.time_required}}</td>
+
+									<td data-th="Customer Name">{{InvoiceOrder.OrderList.delivery_name}}</td>
+									<td data-th="Phone">{{InvoiceOrder.OrderList.delivery_phone}}</td>
+									<td data-th="Delivery Address">{{InvoiceOrder.OrderList.delivery_street_address}}
+										{{InvoiceOrder.OrderList.delivery_street_address1}}</td>
+									<td data-th="No. of Items">{{InvoiceOrder.total_quantity}}</td>
+									<td data-th="Order By">
+										<input class="sort_by_distance" type="number" name="sort_by_distance_{{index}}" pattern="[0-9]+"
+										 #sort_by_distance="ngModel" [(ngModel)]="InvoiceOrder.sort_by_distance">
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs btn-footer">
+				<button mat-raised-button class="btn-main" type="button" (click)="deliveryPlannerContinue(deliveryPlannerForm)">Continue</button>
+				<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+			<!-- ///////////////Buttons//// -->
+			<div class="clear"></div>
+		</div>
+	</form>
+</section>

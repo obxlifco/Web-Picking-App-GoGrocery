@@ -1,0 +1,370 @@
+<!--  <section *ngIf="isCMS"> 
+      <div class="container container-lg">
+              <h2 class="pro_title">{{widget_data.heading_text}}</h2>
+            <ul class="product-list home">
+                <li>
+                    <div class="product-box">
+                        <div class="h_pro_img">
+                            <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                            
+                        </div>
+                        <div class="h_pro_desc text-center">
+                            <p>Category 1</p>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="product-box">
+                        <div class="h_pro_img">
+                            <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                           
+                        </div>
+                        <div class="h_pro_desc text-center">
+                           <p>Category 2</p>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="product-box">
+                        <div class="h_pro_img">
+                            <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                            
+                        </div>
+                        <div class="h_pro_desc text-center">
+                            <p>Category 3</p>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="product-box">
+                        <div class="h_pro_img">
+                            <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                            
+                        </div>
+                        <div class="h_pro_desc text-center">
+                           <p>Category 4</p>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+<section *ngIf="!isCMS && categories_list.length">
+    <div class="cus_container">
+        <div class="home_productrow">
+            <div class="head">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <h4>{{widget_data.heading_text}}</h4>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn_viw_all">View All<span class="icon-right-arrow"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pro_row">
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-3" *ngFor="let cat of categories_list; let i=index">
+                        <div class="home_pro_box" *ngIf="i < 4">
+                            <a href="javascript:void(0)" [routerLink]="['/listing/']" [queryParams]="{ 'category_id': cat.id}" >
+                            <img *ngIf="cat.image" [src]="S3_URL_CATEGORY+cat.image">
+                            <img *ngIf="!cat.image" [src]="'https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg'">
+                            </a>
+                            <div class="h_pro_desc">
+                            <p style="text-align:center">{{cat.name}}</p> 
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<section class="container-fluid" *ngIf="isCMS">
+  <div class="row">
+      <div class="col-12">
+          <div class="container_cuswrap">
+                  <div class="innerheader">
+                          <h3>{{widget_data.heading_text}}</h3>
+                              
+                          <!-- <div class="showall_text"><a href="javascript:void(0)">Show All Category<span class="icon-back"></span></a> </div> -->
+                      </div>
+              <div class="product_row">
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/capcicum.jpg"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/noimg.png"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/noimg.png"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/noimg.png"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/noimg.png"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+                <div class="productblog listingblog listingblogeditor">
+                   <div class="off_text">
+                      <span class="ng-star-inserted">(20% OFF)</span>
+                   </div>
+                   <div class="likecard">
+                      <a href="javascript:void(0)"><span class="icon-wishlist"></span></a>
+                      <div class="addproduct_drop hide">
+                         <div class="head">Add Items to Shop List false</div>
+                         <div class="inputout">
+                            <input name="list_name" placeholder="Enter Name" type="text" ng-reflect-name="list_name">
+                         </div>
+                         <ul class="addpro"></ul>
+                      </div>
+                   </div>
+                   <div class="imagebox"><img src="/assets/images/noimg.png"></div>
+                   <div class="textbox">
+                      <div class="textrow">
+                         <p>Haribo Happy Cola Lemon Fresh 160G</p>
+                      </div>
+                   </div>
+                   <div class="bottomkartbox">
+                      <div class="textrow pri">
+                         <p class="pricerow pri">AED 7.20 <span class="ng-star-inserted">AED 9.00</span></p>
+                      </div>
+                   </div>
+                   <div class="textrow last add_count">
+                      <button class="add_tocard ng-star-inserted">ADD TO CART</button>
+                      <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a></div>
+                   </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!--  When the list is not cms -->
+<section  class="container-fluid" *ngIf="!isCMS && category_wise_product.length > 0">
+  <div class="row">
+    <div class="col-12">
+        <div class="container_cuswrap">
+                <div class="innerheader home">
+                        <h3>{{widget_data.heading_text}}</h3>  
+                        <!-- <div class="showall_text"><a href="#">Show All Category<span class="icon-back"></span></a></div> -->
+                    </div>
+            <div class="product_row home">
+                <div class="productblog listingblog" *ngFor="let singleProduct of category_wise_product|slice:0:6;let i= index;">
+                  <!-- <ng-container (click)="navigateToDetails(singleProduct['selected_product']['slug'])"> -->
+                      <!-- {{singleProduct['is_wishlist'] | json}} -->
+                    <div class="off_text">
+                      <span *ngIf="singleProduct['selected_product']['disc_type'] == 1 && singleProduct['selected_product']['discount_amount'] > 0">({{singleProduct['selected_product']['discount_amount']}}% OFF)</span>
+                       <span *ngIf="singleProduct['selected_product']['disc_type'] == 2 && singleProduct['selected_product']['discount_amount'] > 0">({{singleProduct['selected_product']['discount_amount']}} OFF)</span>
+                      
+                    </div>
+                    <div class="likecard">
+                        <a href="javascript:void(0)" (click)="getSaveList(singleProduct.id,'n')">
+                            <span class="icon-wishlist"></span>
+                        </a>
+                        <div [ngClass]="singleProduct.isSaveList?'addproduct_drop': 'addproduct_drop hide'" >
+                            <div class="head">Add Items to Shop List {{singleProduct.isSaveList}}</div>
+                            <div class="inputout">
+                                <input type="text" placeholder="Enter Name"  #list_name="ngModel"  name="list_name" [(ngModel)]="formModel.list_name" (keyup.enter)="addNewSaveList(i,singleProduct.id, formModel.list_name);">
+                            </div>
+                            <ul class="addpro">
+                                <li *ngFor="let savelist of savelist_data; let j=index" (click)="addToSaveList(singleProduct.id, savelist.id, savelist.is_checked)">
+                                    <mat-checkbox name="is_checked_parentcat_{{j}}"  [(ngModel)]="savelist.is_checked" id="is_checked_parentcat_{{j}}">{{savelist.savelist_name}}</mat-checkbox>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="imagebox" (click)="navigateToDetails(singleProduct['selected_product']['slug'])">
+                         <img [src]="singleProduct['selected_product']['product_image']|imagetransform:['product','400','cover']">
+                    </div>
+                    <div class="textbox">
+                            <div class="vag_simbol" [ngClass]="singleProduct['selected_product']['veg_nonveg_type'] != null && singleProduct['selected_product']['veg_nonveg_type'] == 'Non Veg' ? 'non_veg' : 'veg'" *ngIf="singleProduct['selected_product']['veg_nonveg_type'] != null && singleProduct['selected_product']['veg_nonveg_type'] != 'NA'"></div>
+                            <div class="textrow">
+                               <p><span *ngIf="singleProduct['selected_product']['brand_name']">{{singleProduct['selected_product']['brand_name']}}</span>{{singleProduct['selected_product']['name']}}</p>
+                            </div>
+                            
+                    </div>
+                    <div class="bottomkartbox">
+                        <!-- <div class="textrow selectrow" *ngIf="singleProduct['selected_product'].length > 1">
+                            <mat-form-field appearance="outline">
+                              <mat-select [(ngModel)] = "singleProduct['selected_product']">
+                               <mat-option *ngFor="let variantProduct of singleProduct['variant_product']" [value]="variantProduct">{{variantProduct['weight']}}-${{variantProduct['default_price']}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                       </div> -->
+                       <div class="textrow pri">
+                           <p class="pricerow pri">{{singleProduct['selected_product']['new_default_price_unit'] | money}}
+                                <span *ngIf="singleProduct['selected_product']['new_default_price_unit'] != singleProduct['selected_product']['default_price'] ">{{singleProduct['selected_product']['default_price'] | money}}</span> 
+                                
+                           </p>  
+                       </div>
+                      <!--  <div class="textrow last">
+                           <button class="add_tocard" (click)="cartService.addItem(singleProduct['selected_product']['id'],1)">ADD TO CART</button>
+                           <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                       </div> -->
+                       <!-- <div class="textrow last" *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]">
+                           <button class="add_tocard" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],1)">ADD TO CART</button>
+                           <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                       </div> -->
+                    </div>
+                    <div class="textrow last add_count" >
+                      <ng-container *ngIf="singleProduct['selected_product']['stock_data'] && singleProduct['selected_product']['stock_data']['real_stock'] > 0;else out_of_stock">
+                        <button class="add_tocard" *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],1)">ADD TO CART</button>
+                        
+                        <div class="count_box" *ngIf="cartService.cartDetails['cart_list'] && cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]">
+                            <button class="count_btn" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']-1)"><span class="icon-minus"></span></button>
+                                <div class="count_no">{{cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']}}</div>
+                            <button class="count_btn" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']+1)"><span class="icon-plus"></span></button>
+                        </div>
+                        <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                      </ng-container>
+                      <ng-template #out_of_stock>
+                        <button class="add_tocard out_of_stock">Out Of Stock</button>
+                    </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>

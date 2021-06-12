@@ -1,0 +1,292 @@
+<section class="right-part filter-pad addall_page">
+    <form #priceSetupForm="ngForm" novalidate (ngSubmit)="priceSetupForm.valid && priceSetup()">
+        <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+            <div class="topheading">
+                <h1>Product Setup
+                <div class="btn-header">
+                        <!-- <button mat-raised-button class="btn-main" type="submit" (click)="addEditAdvanceInfo()">Continue</button> -->
+                        <button mat-raised-button class="btn-main" type="submit">Continue</button>
+                        <button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                        <label class="hidden-xs hidden-sm">Fields marked with <span class="error" >*</span> are compulsory.</label>
+                </div>
+                <div class="clear"></div>
+                </h1>
+            </div>
+            <div class="filter">
+                <div class="stap">
+                    <ul *ngIf="formModel.productId>0 && add_edit=='edit'">
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId)" [routerLink]="['/products/edit/'+formModel.productId]">
+                                <div class="nom"></div>Basic Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step2')" [routerLink]="['/products/edit/'+formModel.productId+'/step2']">
+                                <div class="nom"></div>Advanced Info</a>
+                        </li>
+                        <li class="active">
+                            <div class="nom"></div>Pricing</li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step4')" [routerLink]="['/products/edit/'+formModel.productId+'/step4']">
+                                <div class="nom"></div>Supplier</a>
+                        </li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step5')" [routerLink]="['/products/edit/'+formModel.productId+'/step5']">
+                                <div class="nom"></div>Collections</a>
+                        </li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step6')" [routerLink]="['/products/edit/'+formModel.productId+'/step6']">
+                                <div class="nom"></div>Related Products</a>
+                        </li>
+                        <!-- <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']">
+                                <div class="nom"></div>Up-sells</a>
+                        </li>
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']">
+                                <div class="nom"></div>Cross-sells</a>
+                        </li> -->
+                        <!-- <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Associated Products</a></li> -->
+                        <li>
+                            <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']">
+                                <div class="nom"></div>Substitute Products</a>
+                        </li>
+
+                    </ul>
+                    <ul *ngIf="add_edit=='add'">
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/add')" [routerLink]="['/products/add']">
+                                <div class="nom"></div>Basic Info</a>
+                        </li>
+                        <li class="done">
+                            <a (click)="_globalService.setTab(tabIndex,'/products/add/step2')" [routerLink]="['/products/add/step2']">
+                                <div class="nom"></div>Advanced Info</a>
+                        </li>
+                        <li class="active">
+                            <div class="nom"></div>Pricing</li>
+                        <li>
+                            <div class="nom"></div>Supplier</li>
+                        <li>
+                            <div class="nom"></div>Variant Products</li>
+                        <li>
+                            <div class="nom"></div>Related Products</li>
+                        <!-- <li>
+                            <div class="nom"></div>Up-sells</li>
+                        <li>
+                            <div class="nom"></div>Cross-sells</li> -->
+                        <li>
+                            <div class="nom"></div>Substitute Products</li>
+
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="filter_bottomsec price_resp">
+                <!-- 
+              <div class="price_search">
+                    <div class="clear"></div>
+                    <button mat-raised-button class="btn-main" (click)="addPriceType()" type="button"> Add Price Type</button>
+                </div>
+                -->
+                <div class="inner_subhead">Pricing Information</div>
+                <div class="selectand_btnsec">
+                        <div class="row">
+                                <div class="col-sm-5">
+					<div class="custom_selection">
+                                        <!-- <mat-form-field class="md-block" appearance="outline"> 
+                                                <mat-select placeholder="Select Store" #warehouseId="ngModel" name="warehouseId" [(ngModel)]="formModel.warehouseId" multiple (ngModelChange)="warehouse_change($event)">
+                                                        <mat-option *ngFor="let warehouse of warehouselist" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+                                                </mat-select>
+                                        </mat-form-field> -->
+                                        <ng-select [items]="warehouselist"
+                                                [multiple]="true"
+                                                placeholder="Select Store"
+                                                bindLabel="name" bindValue="id"
+                                                #warehouseId="ngModel" name="warehouseId" [(ngModel)]="formModel.warehouseId"
+                                                (change)="warehouse_change(formModel.warehouseId)"
+                                                style="width: 340px !important; margin-left: -140px !important;"
+                                        >
+                                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                        <span class="ng-value-label">{{item.name}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                        <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                        </ng-template>
+                                        <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                <input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+                                        </ng-template> -->
+                                        </ng-select>
+					</div>
+                                </div>
+                                <!-- <div class="customselectbox"> -->
+                                <div class="col-sm-5">
+                                        <div class="custom_selection">
+                                                <!-- <mat-form-field class="md-block" appearance="outline">
+                                                		<mat-select placeholder="Price Type" #priceTypeId="ngModel" name="priceTypeId" [(ngModel)]="formModel.priceTypeId"
+                                                                multiple (ngModelChange)="pricetype_change($event)">
+                                                                <mat-option *ngFor="let priceType of priceMasterList" [value]="priceType.id">{{priceType.name}}</mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="priceTypeId.errors && priceTypeId.errors.required">
+                                                                This is a <strong>required</strong> field
+                                                        </mat-error>
+                                                </mat-form-field> -->
+                                                <ng-select [items]="priceMasterList"
+                                                        [multiple]="true"
+                                                        placeholder="Price Type"
+                                                        bindLabel="name" bindValue="id"
+                                                        #priceTypeId="ngModel" name="priceTypeId" [(ngModel)]="formModel.priceTypeId"
+                                                        (change)="pricetype_change(formModel.priceTypeId)"
+                                                >
+                                                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                        <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                                <span class="ng-value-label">{{item.name}}</span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                        </div>
+                                                        <div class="ng-value" *ngIf="items.length > 1">
+                                                                <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                        </div>
+                                                </ng-template>
+                                                <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                        <input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+                                                </ng-template> -->
+                                                </ng-select>
+                                        </div>
+                                        
+                                </div>
+                                <div class="col-sm-2">
+                                        <button class="addpinkbtn" (click)="addPriceType()" mdTooltip="Add Price Type" type="button"><span class="icon-add"></span></button>
+                                </div>
+                        </div>
+                </div>
+            </div>    
+           
+            <div class="clear"></div>
+            <div class="cus_frm_box topgap">
+                <div class="supplier_detailsacco_wrap">
+                        <!-- <h1>My adata</h1> -->
+                    <mat-accordion  multi="true" *ngIf="productPriceArr.length > 0">
+                
+                        <mat-expansion-panel *ngFor="let priceDetails of productPriceArr ; let masterIndex=index; " [expanded]="masterIndex === 0">
+                            <mat-expansion-panel-header>
+                                
+                                <mat-panel-title >
+                                  {{priceDetails.name}} <a href="javascript:void(0)" class="mat_title_del"> <span class="icon-bin"></span></a>
+                                </mat-panel-title>
+                                <div class="cus_matopen"><span class="icon-addsvg"></span></div>
+                                <div class="cus_matoclose"><span class="icon-minus"></span></div>
+                            </mat-expansion-panel-header>
+                            <div class="table-list product_price">
+                               
+                                <table class="product_warehouse"> 
+                                    <thead>
+                                    <tr>
+                                        <th align="center">
+
+                                        </th>
+                                        <th align="center">
+                                                Store Name
+                                        </th>
+                                        <th align="center">
+                                                MRP
+                                        </th>
+                                        <th align="center" >
+                                                Sale Price
+                                        </th>
+                                        <th align="center">
+                                                Cost
+                                        </th>
+                                        <th align="center">
+                                                Margin(%)
+                                        </th>
+                                        <th align="center" >
+                                                Profit
+                                        </th>
+                                        <th align="center">
+                                                Start Date
+                                        </th>
+                                        <th align="center" >
+                                                End Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let warehouseWisePrice of priceDetails.data; let quantityIndex=index;">
+                                                <td align="center"> 
+                                                        <a href="javascript:void(0)" class="smlicon gray price_delete_btn" (click)="del_pricetype_row(masterIndex,quantityIndex)"><span class="icon-multiply_new"></span></a>
+                                                </td>
+                                                <td align="center"  data-th="Store Name"> 
+                                                        {{warehouseWisePrice.warehouse_name}}
+                                                </td>
+                                                <td  align="center"  data-th="MRP">
+                                                        <mat-form-field appearance="outline" class="input-decor">
+                                                                <input matInput  type="" id="mrp_{{quantityIndex}}_{{masterIndex}}"  name="mrp_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].mrp" pattern="\d+(\.\d{1,2})?">
+                                                        </mat-form-field>
+                                                </td>
+                                                <td  align="center" data-th="Sale Price">
+                                                        <mat-form-field appearance="outline" class="input-decor">
+                                                                <input matInput type="" id="price_{{quantityIndex}}_{{masterIndex}}"  name="price_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].price" (ngModelChange)="price_change($event,masterIndex,quantityIndex)" pattern="\d+(\.\d{1,2})?">
+                                                        </mat-form-field>
+                                                </td>
+                                                <td align="center"  data-th="Cost">
+                                                        <mat-form-field appearance="outline" class="input-decor">
+                                                                <input matInput  type="" id="cost_{{quantityIndex}}_{{masterIndex}}"  name="cost_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].cost" (ngModelChange)="cost_change($event,masterIndex,quantityIndex)" pattern="\d+(\.\d{1,2})?">
+                                                        </mat-form-field>
+                                                </td>
+                                                <td align="center"  data-th="Margin(%)">
+                                                        <mat-form-field appearance="outline" class="input-decor">
+                                                                <input matInput  type="" id="margin_{{quantityIndex}}_{{masterIndex}}"  name="margin_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].margin" (ngModelChange)="margin_change($event,masterIndex,quantityIndex)" pattern="\d+(\.\d{1,2})?">                                                               
+                                                        </mat-form-field>
+                                                </td>
+                                                <td align="center" data-th="Profit">
+                                                        <mat-form-field appearance="outline" class="input-decor">
+                                                                <input matInput disabled type="" id="profit_{{quantityIndex}}_{{masterIndex}}"  name="profit_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].profit">
+                                                        </mat-form-field>
+                                                </td>
+                                                <td align="center"  data-th=" Start Date">
+                                                        <mat-form-field appearance="outline" class="date-decor">
+                                                                <input required matInput  [owlDateTime]="picker" [owlDateTimeTrigger]="picker" type="text" id="start_date_{{quantityIndex}}_{{masterIndex}}"  name="start_date_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].start_date" >
+                                                                <owl-date-time #picker></owl-date-time>
+                                                        </mat-form-field>
+                                                </td>
+                                                <td align="center"  data-th=" End Date">
+                                                        <mat-form-field appearance="outline" class="date-decor">
+                                                                <input matInput [owlDateTime]="picker1" [owlDateTimeTrigger]="picker1" type="text" id="end_date_{{quantityIndex}}_{{masterIndex}}"  name="end_date_{{quantityIndex}}_{{masterIndex}}" [(ngModel)]="warehouseWisePrice.warehousedata[0].end_date">
+                                                                <owl-date-time #picker1></owl-date-time>
+                                                        </mat-form-field>
+                                                </td>
+                                        </tr>
+                                </tbody>
+                                </table>
+                               
+                                
+                            </div>
+                        </mat-expansion-panel>
+					</mat-accordion>
+					<div class="blanktable" *ngIf="productPriceArr.length == 0">
+						<p>Price information is not available.</p>
+					</div>
+                </div>
+                <!-- Supplier Details -->
+            </div>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <!-- ///////////////Buttons//// -->
+          
+            <div class="bottom_fixedpart">
+                    <div class="btn-header  hidden-xs ">
+                            <!-- <button mat-raised-button class="btn-main" type="submit" (click)="addEditAdvanceInfo()">Continue</button> -->
+                            <button mat-raised-button class="btn-main" type="submit">Continue</button>
+                            <button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button> 
+                    </div>
+
+                <div class="btn-header left back_button_responsive">
+                        <a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step2')" [routerLink]="['/products/edit/'+formModel.productId+'/step2']">
+                                Back
+                        </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

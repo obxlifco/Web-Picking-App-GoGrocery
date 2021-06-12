@@ -1,0 +1,47 @@
+ <form #customForm="ngForm" novalidate (ngSubmit)="customForm.valid && addEditField(customForm)">
+	<div class="md-toolbar-tools">
+		<h2>{{(add_edit=='add')?'Add':'Edit'}} Fields </h2>
+    </div>
+	<div class="pop-body" layout="column">
+		<div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+		<mat-form-field class="md-block">
+			<input matInput placeholder="Label Name" required #field_label="ngModel" name="field_label" [(ngModel)]="formModel.field_label">
+		    <mat-error *ngIf="field_label.errors && field_label.errors.required">
+		      Enter Label Name
+		    </mat-error>
+	  	</mat-form-field>
+	  	<mat-form-field>
+			<mat-select required placeholder="Field Type" #input_type="ngModel" name="input_type" [(ngModel)]="formModel.input_type" (change)="OnchangeField($event.value)">
+				<mat-option value="Textbox">Textbox <i class="icon-input pull-right"></i></mat-option>
+				<mat-option value="Email">Email <i class="icon-input pull-right"></i></mat-option>
+				<mat-option value="Phone">Phone <i class="icon-input pull-right"></i></mat-option>
+				<mat-option value="Textarea">Textarea <i class="icon-textarea pull-right"></i></mat-option>
+				<mat-option value="Checkbox">Checkbox <i class="icon-check-box pull-right"></i></mat-option>
+				<mat-option value="Radio">Radio <i class="icon-radio-button pull-right"></i></mat-option>
+				<mat-option value="Dropdown">Dropdown <i class="icon-select pull-right"></i></mat-option>
+				<!-- <mat-option value="Date">Date <i class="icon-calendar pull-right"></i></mat-option> -->
+			</mat-select>
+			<mat-error *ngIf="input_type.errors && input_type.errors.required && (input_type.dirty || input_type.touched || customForm.submitted)">
+		      Please choose an option
+		    </mat-error>
+	    </mat-form-field>
+		<div  class="md-block">
+			<mat-checkbox #is_optional="ngModel" name="is_optional" [(ngModel)]="formModel.is_optional">It’s a mandatory field</mat-checkbox>
+	  	</div>
+	  	<div  class="clear10"></div>
+	  	
+	    <mat-form-field class="md-block" *ngIf="show_desc">
+		    	<textarea matInput placeholder="Value" #custom_values="ngModel"  name="custom_values" [(ngModel)]="formModel.custom_values" rows="5"></textarea>
+	    </mat-form-field>
+	    <span *ngIf="show_desc">Comma separate to add new Value</span>
+
+	    <mat-form-field class="md-block">
+			<input matInput placeholder="Default Value" #default_values="ngModel" name="default_values" [(ngModel)]="formModel.default_values">
+		</mat-form-field>
+			
+	</div>
+	<mat-dialog-actions layout="row">
+		<button mat-raised-button class="btn-main" type="submit">Save</button>
+	  	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

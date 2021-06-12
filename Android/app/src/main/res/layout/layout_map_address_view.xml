@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+
+    android:background="@android:color/transparent">
+
+
+    <RadioButton
+
+        android:id="@+id/rbSelection"
+android:button="@null"
+        android:drawableEnd="@drawable/custom_btn_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp" />
+
+
+
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:textAlignment="viewStart"
+            android:text="@string/mobile"
+   android:gravity="start"
+
+         android:layout_toStartOf="@+id/rbSelection"
+            android:fontFamily="@font/proxima_regular"
+
+            android:textColor="@color/grey_new" />
+
+
+
+</RelativeLayout>
+
+
+

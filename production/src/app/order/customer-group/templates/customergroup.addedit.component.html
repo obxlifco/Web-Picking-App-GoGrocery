@@ -1,0 +1,66 @@
+<section class="right-part addall_page">
+        <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+            <form #managerForm="ngForm" novalidate (ngSubmit)="managerForm.valid && addEditManeger(managerForm)">
+                <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+                <div class="topheading">
+                    <h1>{{(formModel.formId>0)?'Edit':'Add'}} Customer Group
+                <div class="btn-header">
+                <div class="btn-header">
+                  <button type="submit" mat-raised-button class="btn-main">Save</button>
+                        <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                    
+                  </div>
+              </div>
+              <div class="clear"></div>
+              </h1> </div>
+                <div class="clear"></div>
+                <div class="box">
+                    <div class="fixed-width">
+                        <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <mat-form-field appearance="outline"  class="md-block"><mat-label>Group Name</mat-label>
+                                            <input matInput placeholder="Group Name" required #group_name="ngModel" name="group_name" [(ngModel)]="formModel.group_name" pattern="^(?!\s*$|\s).*$">
+                                            <mat-error *ngIf="group_name.errors && group_name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                            <mat-error *ngIf="group_name.errors && group_name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <div class="col-sm-6">
+                                        <mat-form-field appearance="outline"  class="md-block" (click)="openPopup()"><mat-label>Customer List</mat-label>
+                                            <input matInput placeholder="Customer List" readonly required #customer_ids="ngModel" name="customer_ids" [(ngModel)]="formModel.customer_ids" >
+                                            <mat-error *ngIf="customer_ids.errors && customer_ids.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <mat-radio-group required #view_type="ngModel" name="view_type" [(ngModel)]="formModel.view_type">
+                                            <mat-radio-button class="example-margin" value="withoutlogin">
+                                                Without Login
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin" value="withlogin">
+                                                With Login
+                                            </mat-radio-button>
+                                        </mat-radio-group>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ///////////////Buttons//// -->
+                    <div class="btn-header hidden-xs">
+                        <button type="submit" mat-raised-button class="btn-main">Save</button>
+                        <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                    </div>
+                    <div class="clear"></div>
+                    <!-- ///////////////Buttons//// -->
+                </div>
+                <div class="clear"></div>
+            </form>
+        </div>
+    </section>

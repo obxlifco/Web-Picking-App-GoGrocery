@@ -1,0 +1,618 @@
+<section class="right-part">
+   <div class="body-part">
+      <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && saveDeliveryTimeSlot(formData)">
+         <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+         <div class="topheading">
+            <h1>
+               <span class="icon-settings"></span>
+               Delivery Slot Settings
+               <div class="btn-header">
+                  <div class="btn-header">
+                     <button type="submit" mat-raised-button class="btn-main">Save Slot</button>
+                     <button type="button" mat-raised-button class="btn-line"
+                        (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  </div>
+               </div>
+               <div class="clear"></div>
+            </h1>
+         </div>
+         <div class="clear"></div>
+         <div class="box">
+            <!-- <div class="fixed-width"> -->
+            <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+            <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+            <div class="row">
+               <div class="col-sm-12">
+                  <!-- Edit By Sankar -->
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="table-list res_table slot-table"> 
+                           <table width="90%">
+                              <tr>
+                                 <ng-container>
+                                    <th>Days</th>
+                                    <th>Maximum Order</th>
+                                    <th>Store</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Cutt Off Time</th>
+                                    <th>Applied As</th>
+                                    <th></th>
+                                 </ng-container>
+                              </tr>
+                              
+                              <!--SUNDAY STRAT-->
+                              <tr *ngFor="let day of sunday; let i=index; let first=first; let last=last;">
+                                 <ng-container >
+                                    <td width="">
+                                       <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'1-'+i}}" name="sunday_{{day.is_checked+'1-'+i}}" [(ngModel)]="day.is_checked">Sunday</mat-slide-toggle>
+                                       
+                                    </td>
+                                    <td width="10%">
+                                          <mat-form-field  appearance="outline"><input matInput type="number" minlength="1"  required title="Enter number of orders" placeholder="No. of Orders" id="sunday_{{day.no_of_order+'-'+i}}" name="{{day.no_of_order+'-'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field>
+                                    </td>
+                                    <td>
+                                       <div class="zonenm_box">
+                                          <!-- <mat-form-field  appearance="outline">
+                                             <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="sunday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                             </mat-select>
+                                          </mat-form-field> -->
+                                          <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                             [items]="warehouse_list"
+                                             required
+                                             [multiple]="true"
+                                             placeholder="Store"
+                                             bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                             #warehouse_id="ngModel" name="sunday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                             >
+                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                   <span class="ng-value-label">{{item.name}}</span>
+                                                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                   <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                             </ng-template>
+                                          </ng-select>
+                                          <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="sunday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="sunday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                          <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="sunday_{{day.cutoff_time+'_'+i}}" name="{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                          <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <mat-select title="Select time slot preferred day "
+                                             title="Select time slot preferred day " placeholder="Select day"
+                                             id="{{day.based_on+'_'+i}}" name="sunday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                             <mat-option  value="SameDay">SameDay</mat-option>
+                                             <mat-option value="NextDay">NextDay</mat-option>
+                                          </mat-select>
+                                       </mat-form-field>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i>0">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(1,i)" title="Remove">x</a><br>
+                                       <a  href="javascript:void(0);" (click)="add_more(i,1)" title="Add More">+</a> 
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="!last">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(1,i)" title="Remove">x</a>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i==0">
+                                       <a  href="javascript:void(0);" (click)="add_more(i,1)" title="Add More">+</a>
+                                    </td>
+                                 </ng-container>
+                              </tr>
+                              <!--SUNDAY END-->
+                              <!--MONDAY END-->
+                              <tr *ngFor="let day of monday; let i=index; let first = first; let last=last;">
+                                    <ng-container >
+                                       <td width="">
+                                          <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'2-'+i}}" name="monday_{{day.is_checked+'2-'+i}}" [(ngModel)]="day.is_checked">Monday</mat-slide-toggle>
+                                       </td>
+                                       <td width="10%">
+                                          <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="monday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                       </td>
+                                       <td>
+                                          <div class="zonenm_box">
+                                             <!-- <mat-form-field  appearance="outline">
+                                                <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="monday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                   <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                                </mat-select>
+                                             </mat-form-field> -->
+                                             <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                                [items]="warehouse_list"
+                                                required
+                                                [multiple]="true"
+                                                placeholder="Store"
+                                                bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                                #warehouse_id="ngModel" name="monday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                             >
+                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                   <span class="ng-value-label">{{item.name}}</span>
+                                                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                   <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                             </ng-template>
+                                          </ng-select>
+                                          <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="monday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                             <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="monday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                             <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="monday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                             <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <mat-select title="Select time slot preferred day "
+                                                title="Select time slot preferred day " placeholder="Select day"
+                                                id="{{day.based_on+'_'+i}}" name="monday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                                <mat-option  value="SameDay">SameDay</mat-option>
+                                                <mat-option value="NextDay">NextDay</mat-option>
+                                             </mat-select>
+                                          </mat-form-field>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i>0">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(2,i)" title="Remove">x</a><br>
+                                          <a  href="javascript:void(0);" (click)="add_more(i,2)" title="Add More">+</a> 
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="!last">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(2,i)" title="Remove">x</a>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i==0">
+                                          <a  href="javascript:void(0);" (click)="add_more(i,2)" title="Add More">+</a>
+                                       </td>
+                                    </ng-container>
+                              </tr>
+                              <!--TUESDAY END-->
+                              <tr *ngFor="let day of tuesday; let i=index; let first = first; let last=last;">
+                                 <ng-container >
+                                    <td width="">
+                                       <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'3-'+i}}" name="tuesday_{{day.is_checked+'3-'+i}}" [(ngModel)]="day.is_checked">Tuesday</mat-slide-toggle>
+                                    </td>
+                                    <td width="10%">
+                                       <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="tuesday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                    </td>
+                                    <td>
+                                       <div class="zonenm_box">
+                                          <!-- <mat-form-field  appearance="outline">
+                                             <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="tuesday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                             </mat-select>
+                                          </mat-form-field> -->
+                                          <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                             [items]="warehouse_list"
+                                             required
+                                             [multiple]="true"
+                                             placeholder="Store"
+                                             bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                             #warehouse_id="ngModel" name="tuesday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                             >
+                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                   <span class="ng-value-label">{{item.name}}</span>
+                                                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                   <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                             </ng-template>
+                                          </ng-select>
+                                          <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="tuesday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="tuesday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                          <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="tuesday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                          <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <mat-select title="Select time slot preferred day "
+                                             title="Select time slot preferred day " placeholder="Select day"
+                                             id="{{day.based_on+'_'+i}}" name="tuesday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                             <mat-option  value="SameDay">SameDay</mat-option>
+                                             <mat-option value="NextDay">NextDay</mat-option>
+                                          </mat-select>
+                                       </mat-form-field>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i>0">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(3,i)" title="Remove">x</a><br>
+                                       <a  href="javascript:void(0);" (click)="add_more(i,3)" title="Add More">+</a> 
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="!last">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(3,i)" title="Remove">x</a>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i==0">
+                                       <a  href="javascript:void(0);" (click)="add_more(i,3)" title="Add More">+</a>
+                                    </td>
+                                 </ng-container>
+                              </tr>
+                              <!--TUESDAY END-->
+                              <!--WEDNES END-->
+                              <tr *ngFor="let day of wednesday; let i=index; let first = first; let last=last;">
+                                    <ng-container >
+                                       <td width="">
+                                          <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'4-'+i}}" name="wednesday_{{day.is_checked+'4-'+i}}" [(ngModel)]="day.is_checked">Wednesday</mat-slide-toggle>
+                                       </td>
+                                       <td width="10%">
+                                          <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="wednesday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                       </td>
+                                       <td>
+                                          <div class="zonenm_box">
+                                             <!-- <mat-form-field  appearance="outline">
+                                                <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                   <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                                </mat-select>
+                                             </mat-form-field> -->
+                                             <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                                [items]="warehouse_list"
+                                                required
+                                                [multiple]="true"
+                                                placeholder="Store"
+                                                bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                                #warehouse_id="ngModel" name="{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                                >
+                                                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                   <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                      <span class="ng-value-label">{{item.name}}</span>
+                                                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                   </div>
+                                                   <div class="ng-value" *ngIf="items.length > 1">
+                                                      <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                   </div>
+                                                </ng-template>
+                                             </ng-select>
+                                             <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="wednesday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                             <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="wednesday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                             <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="wednesday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                             <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <mat-select title="Select time slot preferred day "
+                                                title="Select time slot preferred day " placeholder="Select day"
+                                                id="{{day.based_on+'_'+i}}" name="wednesday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                                <mat-option  value="SameDay">SameDay</mat-option>
+                                                <mat-option value="NextDay">NextDay</mat-option>
+                                             </mat-select>
+                                          </mat-form-field>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i>0">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(4,i)" title="Remove">x</a><br>
+                                          <a  href="javascript:void(0);" (click)="add_more(i,4)" title="Add More">+</a> 
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="!last">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(4,i)" title="Remove">x</a>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i==0">
+                                          <a  href="javascript:void(0);" (click)="add_more(i,4)" title="Add More">+</a>
+                                       </td>
+                                    </ng-container>
+                              </tr>
+                              <!--WEDNESDAY END-->
+                              <!--THURSDAY END-->
+                              <tr *ngFor="let day of thursday; let i=index; let first = first; let last=last;">
+                                    <ng-container >
+                                       <td width="">
+                                          <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'5-'+i}}" name="thursday_{{day.is_checked+'5-'+i}}" [(ngModel)]="day.is_checked">Thursday</mat-slide-toggle>
+                                       </td>
+                                       <td width="10%">
+                                          <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="thursday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                       </td>
+                                       <td>
+                                          <div class="zonenm_box">
+                                             <!-- <mat-form-field  appearance="outline">
+                                                <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="thursday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                   <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                                </mat-select>
+                                             </mat-form-field> -->
+                                             <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                                [items]="warehouse_list"
+                                                required
+                                                [multiple]="true"
+                                                placeholder="Store"
+                                                bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                                #warehouse_id="ngModel" name="thursday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                                >
+                                                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                   <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                      <span class="ng-value-label">{{item.name}}</span>
+                                                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                   </div>
+                                                   <div class="ng-value" *ngIf="items.length > 1">
+                                                      <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                   </div>
+                                                </ng-template>
+                                             </ng-select>
+                                             <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="thursday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                             <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="thursday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                             <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="thursday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                             <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                          </mat-form-field>
+                                       </td>
+                                       <td>
+                                          <mat-form-field  appearance="outline">
+                                             <mat-select title="Select time slot preferred day "
+                                                title="Select time slot preferred day " placeholder="Select day"
+                                                id="{{day.based_on+'_'+i}}" name="thursday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                                <mat-option  value="SameDay">SameDay</mat-option>
+                                                <mat-option value="NextDay">NextDay</mat-option>
+                                             </mat-select>
+                                          </mat-form-field>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i>0">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(5,i)" title="Remove">x</a><br>
+                                          <a  href="javascript:void(0);" (click)="add_more(i,5)" title="Add More">+</a> 
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="!last">
+                                          <a  class="del"  href="javascript:void(0);" (click)="remove(5,i)" title="Remove">x</a>
+                                       </td>
+                                       <td class="delslot-iconround" *ngIf="last && i==0">
+                                          <a  href="javascript:void(0);" (click)="add_more(i,5)" title="Add More">+</a>
+                                       </td>
+                                    </ng-container>
+                              </tr>
+                              <!--THURSDAY END-->
+                              <!--FRIDAY END-->
+                              <tr *ngFor="let day of friday; let i=index; let first = first; let last=last;">
+                                 <ng-container >
+                                    <td width="">
+                                       <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'6-'+i}}" name="friday_{{day.is_checked+'6-'+i}}" [(ngModel)]="day.is_checked">Friday</mat-slide-toggle>
+                                    </td>
+                                    <td width="10%">
+                                       <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="friday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                    </td>
+                                    <td>
+                                       <div class="zonenm_box">
+                                          <!-- <mat-form-field  appearance="outline">
+                                             <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="friday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                             </mat-select>
+                                          </mat-form-field> -->
+                                          <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                             [items]="warehouse_list"
+                                             required
+                                             [multiple]="true"
+                                             placeholder="Store"
+                                             bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                             #warehouse_id="ngModel" name="friday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                             >
+                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                   <span class="ng-value-label">{{item.name}}</span>
+                                                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                   <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                             </ng-template>
+                                          </ng-select>
+                                          <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="friday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="friday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                          <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="friday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                          <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <mat-select title="Select time slot preferred day "
+                                             title="Select time slot preferred day " placeholder="Select day"
+                                             id="{{day.based_on+'_'+i}}" name="friday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                             <mat-option  value="SameDay">SameDay</mat-option>
+                                             <mat-option value="NextDay">NextDay</mat-option>
+                                          </mat-select>
+                                       </mat-form-field>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i>0">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(6,i)" title="Remove">x</a><br>
+                                       <a  href="javascript:void(0);" (click)="add_more(i,6)" title="Add More">+</a> 
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="!last">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(6,i)" title="Remove">x</a>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i==0">
+                                       <a  href="javascript:void(0);" (click)="add_more(i,6)" title="Add More">+</a>
+                                    </td>
+                                 </ng-container>
+                              </tr>
+                              <!--FRIDAY END-->
+                              <!--SATURDAY END-->
+                              <tr *ngFor="let day of saturday; let i=index; let first = first; let last=last;">
+                                 <ng-container >
+                                    <td width="">
+                                       <mat-slide-toggle class="cus" *ngIf="i==0" [checked]="day.is_checked==1"  id="{{day.is_checked+'7-'+i}}" name="saturday_{{day.is_checked+'7-'+i}}" [(ngModel)]="day.is_checked">Saturday</mat-slide-toggle>
+                                    </td>
+                                    <td width="10%">
+                                       <mat-form-field  appearance="outline"><input matInput type="number" minlength="1" required title="Enter number of orders" placeholder="No. of Orders" id="{{day.no_of_order+'_'+i}}" name="saturday_{{day.no_of_order+'_'+i}}" [(ngModel)]="day.no_of_order"></mat-form-field >
+                                    </td>
+                                    <td>
+                                       <div class="zonenm_box">
+                                          <!-- <mat-form-field  appearance="outline">
+                                             <mat-select required placeholder="Store" id="{{day.warehouse_ids+'-'+i}}" name="saturday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids" multiple>
+                                                <mat-option *ngFor="let item of warehouse_list" [value]="item.id">{{item.name}}</mat-option>
+                                             </mat-select>
+                                          </mat-form-field> -->
+                                          <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                                             [items]="warehouse_list"
+                                             required
+                                             [multiple]="true"
+                                             placeholder="Store"
+                                             bindLabel="name" bindValue="id" id="{{day.warehouse_ids+'-'+i}}"
+                                             #warehouse_id="ngModel" name="saturday_{{day.warehouse_ids+'-'+i}}" [(ngModel)]="day.warehouse_ids"
+                                             >
+                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                   <span class="ng-value-label">{{item.name}}</span>
+                                                   <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                </div>
+                                                <div class="ng-value" *ngIf="items.length > 1">
+                                                   <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                                </div>
+                                             </ng-template>
+                                          </ng-select>
+                                          <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">Please select store</p>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input title="Select time slot start time" placeholder="From" matInput id="{{day.start_time+'_'+i}}" name="saturday_{{day.start_time+'_'+i}}" [(ngModel)]="day.start_time" [format]=24 [ngxTimepicker]="picker2"> 
+                                          <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select time slot end time" placeholder="To" id="{{day.end_time+'_'+i}}" name="saturday_{{day.end_time+'_'+i}}" [(ngModel)]="day.end_time" [format]=24 [ngxTimepicker]="picker1">
+                                          <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <input matInput title="Select default cutt off time" placeholder="Cutt off Time" required  id="{{day.cutoff_time+'_'+i}}" name="saturday_{{day.cutoff_time+'_'+i}}" [(ngModel)]="day.cutoff_time" pattern="" [format]=24 [ngxTimepicker]="picker0">
+                                          <ngx-material-timepicker #picker0></ngx-material-timepicker>
+                                       </mat-form-field>
+                                    </td>
+                                    <td>
+                                       <mat-form-field  appearance="outline">
+                                          <mat-select title="Select time slot preferred day "
+                                             title="Select time slot preferred day " placeholder="Select day"
+                                             id="{{day.based_on+'_'+i}}" name="saturday_{{day.based_on+'_'+i}}" [(ngModel)]="day.based_on">
+                                             <mat-option  value="SameDay">SameDay</mat-option>
+                                             <mat-option value="NextDay">NextDay</mat-option>
+                                          </mat-select>
+                                       </mat-form-field>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i>0">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(7,i)" title="Remove">x</a><br>
+                                       <a  href="javascript:void(0);" (click)="add_more(i,7)" title="Add More">+</a> 
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="!last">
+                                       <a  class="del"  href="javascript:void(0);" (click)="remove(7,i)" title="Remove">x</a>
+                                    </td>
+                                    <td class="delslot-iconround" *ngIf="last && i==0">
+                                       <a  href="javascript:void(0);" (click)="add_more(i,7)" title="Add More">+</a>
+                                    </td>
+                                 </ng-container>
+                              </tr>
+                              
+                              <!--SATURDAY END-->
+                           </table>
+
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Edit By Sankar -->
+               </div>
+            </div>
+            <!-- </div> -->
+            <!-- ///////////////Buttons//// -->
+            <div class="bottom_fixedpart">
+
+               <div class="btn-header hidden-xs">
+                  <button type="submit" mat-raised-button class="btn-main" >Save Slot</button>
+						<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  
+               </div>
+            </div>
+            
+            <div class="clear"></div>
+            <!-- ///////////////Buttons//// -->
+         </div>
+         <div class="clear"></div>
+      </form>
+      <!-- New Design end -->
+
+   </div>
+</section>

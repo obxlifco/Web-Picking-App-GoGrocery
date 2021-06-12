@@ -1,0 +1,87 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid odetails">
+  <div class="row">
+    <div class="col-12">
+      <div class="listing_container">
+        <div class="list_right_section details">
+          <div class="details_topsml_menu">
+            <ul>
+                <li (click)="navigate(0)"><a href="javascript:void(0)">Home /</a></li>
+                <li (click)="navigate(1)"><a href="javascript:void(0)">My Account /</a></li>
+                <li><a href="javascript:void(0)">Order History</a></li>
+            </ul>
+          </div>
+          <div class="cart_outer orderhistory">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-3">
+                 <app-left-panel-profile [activatedMenu] = "'order-history'"></app-left-panel-profile>
+              </div>
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="cartbox deleverybox orderhistory">
+                  <div class="head headnew">
+                    Order History
+                  </div>
+                  <div>
+                    <mat-tab-group (selectedTabChange) ="onTabChange($event)">
+                      <mat-tab label="Product Substitutions"></mat-tab>
+                      <mat-tab label="Present Order"></mat-tab>
+                      <mat-tab label="Past Order"></mat-tab>
+                    </mat-tab-group>
+                  </div>
+                  <!-- order history table -->
+                  <div class="orderhistory_table_wrap">
+                    <table cellpadding="" cellspacing="">
+                      <tr>
+                        <th>ORDER ID</th>
+                        <th>ORDER DATE & TIME</th>
+                        <th>AMOUNT</th>
+                        <th>PAYMENT MODE</th>
+                        <th>PAYMENT STATUS</th>
+                        <th>ORDER STATUS</th>
+                        <th>Actions</th>
+                        <th></th>
+                      </tr>
+                        <tr *ngFor="let item of orders; let i=index;">
+                          <td *ngIf = "selectedTabIndex != 0" deta-th="ORDER ID" [routerLink]="['/profile/view-order/'+item.id]" style='cursor:pointer;'>{{item.custom_order_id}}</td>
+                          <td *ngIf = "selectedTabIndex == 0" deta-th="ORDER ID" [routerLink]="['/substitute-product/'+item.id]" style='cursor:pointer;'>{{item.custom_order_id}}</td>
+                          <td deta-th="ORDER DATE & TIME">{{item.created | date:"medium"}}</td>
+                          <td deta-th="AMOUNT">{{item.gross_amount | money}}</td>
+                          <td deta-th="PAYMENT MODE">{{item.payment_method_name!="" ? item.payment_method_name : "&nbsp;"}}</td>
+                          <td deta-th="PAYMENT STATUS">{{item.str_payment_status}}</td>
+                          <td deta-th="ORDER STATUS">
+                            <span
+                              [ngClass]="item.str_order_status=='Approved'?'approved':(item.str_order_status=='Delivered'?'devevered':(item.str_order_status=='Cancelled'?'cencel':'others'))">{{item.str_order_status}}
+                            </span>
+                          </td>
+                          <!-- <td deta-th="">
+                            <button class="apply_paybtn" *ngIf="item.str_order_status=='Approved';" (click)="openCheckout()">Pay Now</button>
+                          </td> -->
+                          <td deta-th="" class="lasttd">
+                            <div *ngIf="item.str_order_status!='Cancelled' && selectedTabIndex != 0 ; else showOther" class="payment_option_pay_button">
+                              <!-- <button class="apply_paybtn" *ngIf="item.shipment_status=='Invoicing';" [routerLink]="['/profile/place-order/'+item.id]" style="margin-left: 10px;">Pay Now</button> -->
+                              <button class="apply_cancelbtn" style="margin-left: 10px;" *ngIf="item.shipment_status == 'Invoicing' || item.shipment_status == 'Pending' || item.shipment_status == 'Picking' || item.shipment_status == '' ; else showOth" (click)="cancel_now(item.id)">Cancel</button>
+                            </div>
+                            
+                            <button class="apply_paybtn" *ngIf="item.str_order_status=='Completed';" (click)="reOrder(item)">Repeat Order</button>
+                          </td>
+                          <ng-template #showOther>
+                            <td deta-th="ACTIONS"><span class="">---</span></td>
+                          </ng-template>
+                          <ng-template #showOth>
+                            <td deta-th="ORDER STATUS"><span class="">---</span></td>
+                          </ng-template>
+                        </tr>
+                        <tr *ngIf="orders.length==0 && !isProcessing"><td deta-th="ORDER ID" >No order present.</td></tr>
+                    </table>
+                  </div>
+                  <!-- order history table -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- --- listing middle --- -->

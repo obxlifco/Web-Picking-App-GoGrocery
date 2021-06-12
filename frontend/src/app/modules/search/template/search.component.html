@@ -1,0 +1,334 @@
+<!-- mobile sort -->
+<div class="sort_wrap" #sortBox>
+  <div class="srt_cnt_box" >
+      <div class="head">Sort Options</div>
+      <ul>
+          <li>
+            <mat-radio-group [(ngModel)]="sorting_selected">
+              <mat-radio-button *ngFor="let sort_by of sorting_data;"  value="{{sort_by.name}}">{{sort_by.name}}</mat-radio-button>
+            </mat-radio-group>
+          </li>
+      </ul>
+      <div class="srtfoot">
+          <a href="javascript:void(0)" (click)="cancel_sorting()">Cancel</a>
+          <a href="javascript:void(0)" (click)="sort_now(sorting_selected)">apply</a>
+      </div>
+  </div>
+</div>
+<!-- mobile sort -->
+<!-- mobile filter body -->
+<div class="filterbody" #filterBox>
+ <div class="filterhead">
+     <div class="filter_name_box"><a href="javascript:void(0)"><span class="icon-left-arrow"></span>Filters</a></div>
+     <div class="filter_clr_all"><a href="javascript:void(0)" (click)="clearAll()">Clear All</a></div>
+  </div>
+  <div class="innerbody">
+    <div class="row">
+      <!-- BRAND AND CATEGORY  -->
+      <div class="left">
+          <ul *ngIf="filter_data_non_variation.length>0">
+            <li *ngFor="let filter_data of filter_data_non_variation" (click)="set_subcat(filter_data)"><a class="active" href="javascript:void(0)">{{filter_data.field_name}}</a></li>
+          </ul>
+          <!-- <ul *ngIf="filter_price.length>0">
+            <li *ngFor="let price_filter of filter_price" (click)="set_subcat('price_filter')"><a href="javascript:void(0)">{{price_filter.field_name}}</a></li>
+          </ul> -->
+          <ul *ngIf="filter_data_variation.length>0">
+            <li *ngFor="let item of filter_data_variation" (click)="set_subcat(item)"><a href="javascript:void(0)">{{item.field_name}}</a></li>
+          </ul>
+      </div>
+      
+      <div class="right" >
+        <ul *ngIf="subCat.length>0 && isPriceFilter==false">
+          <li *ngFor="let filter_data_child of subCat"><mat-checkbox *ngIf="filter_data_child.name!=null" [(ngModel)]="filter_data_child.is_checked" value="{{filter_data_child.id}}"
+            (change)="changeStatus()" style="text-transform: capitalize;">{{filter_data_child.name}}</mat-checkbox></li>
+          </ul>
+          <!-- <div class="price_box" *ngIf="isPriceFilter">
+            <p style="width: 230px;margin-top: 7px;"></p>
+            <div class="custom-slider" *ngIf="sliderOption && objectKeys(sliderOption).length > 0">
+              <ng5-slider [ngModel]="selectedPriceRange" (ngModelChange)="onChangePriceRangeValue($event)" [options]="sliderOption"></ng5-slider>
+            </div>
+          </div> -->
+      </div>
+      <!-- BRAND AND CATEGORY -->
+    </div>
+  </div>
+
+  
+  <div class="filterfoot">
+      <button _ngcontent-c1="" (click)="filter_now_cancel()" class="basketbtn">cancel</button>
+      <button _ngcontent-c1="" (click)="apply_filter()" class="checkoutbtn">Apply</button>
+  </div>
+</div>
+<!-- mobile filter body -->
+<!--  [routerLink]="breadcrumb.url" [routerLink]="breadcrumb.url"  (click)="getSubCategorydata(breadcrumb.id,breadcrumb.slug)"  [queryParams]="{ 'name': breadcrumb.slug, 'qurystring':breadcrumb.id}"-->
+<section class="inner_pagebanner">
+  <div class="container_cuswrap">
+    <div class="mannermenu" *ngIf="product_list.length>0">
+      <ul>
+        <li *ngFor="let breadcrumb of breadcrumbs ;let i=index">
+          <div *ngIf="breadcrumbs.length -1 !=i;else other_content1">
+            <div *ngIf="breadcrumb.slug;else other_content2"><a href="javascript:void(0)" [routerLink]="[breadcrumb.url,breadcrumb.slug]">{{breadcrumb.name}}</a><span>/</span></div>
+            <ng-template #other_content2> <a href="javascript:void(0)" [routerLink]="breadcrumb.url">{{breadcrumb.name}}</a><span>/</span></ng-template>
+          </div>
+          <ng-template #other_content1>
+        <li>{{breadcrumb.name}}</li>
+        </ng-template>
+        </li>
+      </ul>
+    </div>
+    <div class="banner_catagory">
+      <div class="cata_name" *ngIf="product_list.length>0">
+       <!--  {{product_list[0].category}} -->
+
+        <p>{{config.currentPageCount}} Products Founds by keyword <strong>{{searchKeyword}}</strong></p>
+      </div>
+      <div class="arrive_select" *ngIf="product_list.length>0">
+
+        <select type="select" [(ngModel)]="sorting_selected" (ngModelChange)="changesortvalue($event)">
+          <option *ngFor="let sort_by of sorting_data" value="{{sort_by.name}}">{{sort_by.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- --- listing middle --- -->
+<section class="container-fluid listing">
+  <p class="mobile-bredcumb head headnew" *ngIf="product_list.length>0">{{mobile_bredcumb}}</p>
+  <div class="row">
+    <div class="col-12">
+      <div class="listing_container">
+        <div class="list_left_section">
+          <div class="head">FILTERS</div>
+          <div class="clear"></div>
+          <div class="innerblog">
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let filter_data of filter_data_non_variation" [expanded]="defaultExpanded">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{filter_data.field_name}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let filter_data_child of filter_data.child">
+                  <div class="checkrow">
+                    <mat-checkbox [(ngModel)]="filter_data_child.is_checked" value="{{filter_data_child.id}}"
+                      (change)="changeStatus()" style="text-transform: capitalize;">{{filter_data_child.name}}
+                    </mat-checkbox>
+                  </div>
+                  <!-- <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div>
+                  <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div>
+                  <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div> -->
+                </div>
+
+              </mat-expansion-panel>
+
+
+              <!-- <mat-expansion-panel *ngFor="let price_filter of filter_price">
+
+                <mat-expansion-panel-header>
+
+                  <mat-panel-title *ngIf="price_filter.child.length > 0">
+                    {{price_filter.field_name}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let price_filter_child of price_filter.child">
+                  <div class="checkrow">
+                    <mat-checkbox [(ngModel)]="price_filter_child.is_checked" value="{{price_filter_child.id}}"
+                      (change)="changeStatus()" style="text-transform: capitalize;">{{price_filter_child.name}}
+                    </mat-checkbox>
+                  </div>
+                  <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div>
+                  <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div>
+                  <div class="checkrow"><mat-checkbox>Check me!</mat-checkbox></div>
+                </div>
+
+              </mat-expansion-panel> -->
+
+              <ng-container>
+                <mat-expansion-panel *ngFor="let filter_data of filter_data_variation" [expanded]="defaultExpanded">
+
+                  <mat-expansion-panel-header>
+
+                    <mat-panel-title *ngIf="filter_data.child.length > 0 && filter_data.field_name">
+                      {{filter_data.field_name}}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ng-container *ngFor="let filter_data_child of filter_data.child">
+                    <div *ngIf="filter_data_child.name">
+                      <div class="checkrow">
+                        <mat-checkbox [(ngModel)]="filter_data_child.is_checked" value="{{filter_data_child.id}}"
+                          (change)="changeStatus()" style="text-transform: capitalize;">{{filter_data_child.name}}
+                        </mat-checkbox>
+                      </div>
+
+                    </div>
+                  </ng-container>
+                </mat-expansion-panel>
+              </ng-container>
+
+            </mat-accordion>
+            <!-- <div class="price_box">
+              <p>Price </p>
+              <div class="custom-slider" *ngIf="sliderOption && objectKeys(sliderOption).length > 0">
+                <ng5-slider [ngModel]="selectedPriceRange" (ngModelChange)="onChangePriceRangeValue($event)" [options]="sliderOption"></ng5-slider>
+             </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="list_right_section">
+          <div class="chip_row" *ngIf="product_list.length>0">
+            <div class="chipblock" *ngFor="let selected_value of filter_selected">{{selected_value.name}}<a
+                href="javascript:void(0)" (click)="crossFilter(selected_value)"><span class="icon-close"></span></a>
+            </div>
+            <!-- <div class="chipblock">Fruits<a href="#"><span class="icon-close"></span></a></div> -->
+            <button class="chip_button" *ngIf="filter_selected.length >0" (click)="clearAll()">Clear All</button>
+            <div class="clear"></div>
+          </div>
+
+          <div class="product_section">
+            <div class="product_row product_infinite_list_container" infiniteScroll
+            [infiniteScrollDistance]="scrollDistance"
+            [infiniteScrollUpDistance]="scrollUpDistance"
+            [infiniteScrollThrottle]="throttle"
+            (scrolled)="onScroll()">
+              <ng-container *ngFor="let productlist of product_list; let i=index">
+              <div class="productblog listingblog" *ngIf="productlist['is_image_exists']">
+                <div class="off_text" *ngIf="productlist['channel_currency_product_price'] && productlist['channel_currency_product_price'].length > 0">{{getDiscountPriceOrPercentage(productlist['channel_currency_product_price'])}}</div>
+                <div class="likecard">
+                  <!-- save list start here    -->
+                  <a href="javascript:void(0)" (click)="getSaveList(productlist.id,'n')">
+                    <!-- <span class="icon-wishlist-2"></span>    -->
+                    <span class="icon-wishlist"></span>
+                  </a>
+                  <div [ngClass]="productlist.isSaveList?'addproduct_drop': 'addproduct_drop hide'" >
+                      <div class="head">Add Items to Shop List</div>
+                      <div class="inputout">
+                          <input type="text" placeholder="Enter Name"  #list_name="ngModel"  name="list_name" [(ngModel)]="formModel.list_name" (keyup.enter)="addNewSaveList(i,productlist.id, formModel.list_name);">
+                      </div>
+                      <ul class="addpro">
+                          <li *ngFor="let savelist of savelist_data; let j=index" (click)="addToSaveList(productlist.id, savelist.id, savelist.is_checked)">
+                            <mat-checkbox name="is_checked_{{j}}"  [(ngModel)]="savelist.is_checked" id="is_checked_{{j}}">{{savelist.savelist_name}}</mat-checkbox>
+                          </li>
+                          <!-- <li><mat-checkbox>Weekly Product</mat-checkbox></li>
+                          <li><mat-checkbox>Monthly Product</mat-checkbox></li>  -->
+                    </ul>
+                  </div>
+                  <!-- save list end here    -->
+                </div>
+                <ng-container>
+                  <a [href]="'/details/'+productlist.slug">
+                    <div class="imagebox" *ngIf="productlist.product_images">
+                      <img
+                        [src]="productlist.product_images.link+productlist.product_images.img"
+                        (error)="updateUrlImg($event,productlist)" alt="">
+                    </div>
+                    <div class="imagebox" *ngIf="!productlist.product_images ">
+                      <img src="assets/images/noimg.png">
+                    </div>
+
+                    <div class="textbox listingbox">
+                      <div
+                        [ngClass]="{'vag_simbol': productlist.veg_nonveg_type =='veg', 'non-veg':productlist.veg_nonveg_type =='non-veg' }">
+                      </div>
+                      <div class="textrow">
+                        <!-- <p><span>{{productlist.brand}}</span>{{productlist.name | slice:0:20}} {{productlist.name.length > 20 ? '...':''}}</p> -->
+                         <p><span>{{productlist.brand}}</span>{{productlist.name}}</p>
+                      </div>
+
+                    </div>
+                    <div class="bottomkartbox">
+                      <!-- <div class="textrow selectrow" >
+                          <div  *ngIf="productlist.variation.length >0 ">
+                                <mat-select matNativeControl aria-placeholder="sass" [(ngModel)]="productlist.selected"  (ngModelChange)="changeVariation(productlist.id,$event)" >
+                                    <mat-option *ngFor="let productvariation of productlist.variation"  value="{{productvariation.field_value}}">{{productvariation.field_show_value}}</mat-option>
+                                </mat-select>
+                            </div>
+                        </div> -->
+                      <div class="textrow pri">
+                        <div *ngFor="let produtprice of productlist.channel_currency_product_price">
+                          <!-- {{produtprice | json}} -->
+                          <!-- Need to add this condition  && produtprice.price_type==1 -->
+                          <p class="pricerow pri" *ngIf="produtprice.warehouse_id == warehouse_id">{{produtprice.new_default_price_unit | money}}
+                            <!-- <span>50.00</span> <span class="off">(30% OFF)</span> -->
+                            <span *ngIf="produtprice.new_default_price_unit != produtprice.price && produtprice.discount_price">{{produtprice.price | money}}</span>
+                            <span>{{productlist['weight']}} {{productlist['uom']}}</span> 
+                           <!--  <span class="off" *ngIf="produtprice.disc_type == 1 && produtprice.discount_price > 0">({{produtprice.discount_amount}}% OFF)</span>
+                            <span class="off" *ngIf="produtprice.disc_type == 2 && produtprice.discount_price > 0">({{produtprice.discount_amount}} OFF)</span> -->
+                          </p>
+                        </div>
+                      </div>
+                      <!-- <div class="textrow " >
+                          <p  class="pricerow pri" *ngIf="!produtprice">
+                          </p> -->
+                      <!-- <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>   -->
+                      <!-- <p class="pricerow pri"  *ngIf="produtprice.warehouse_id == warehouse_id"> -->
+
+                      <!-- ${{produtprice.price}} </p> -->
+                      <!-- <span _ngcontent-c1="">$50.00</span><span _ngcontent-c1="" class="off">(30% OFF)</span>< -->
+                      <!-- </div> -->
+
+                      
+                    </div>
+                  </a>
+
+                </ng-container>
+                <div class="textrow last add_count">
+                 
+                  <ng-container *ngIf="productlist['stock'] > 0;else out_of_stock">
+                    <button class="add_tocard"
+                      *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][productlist['id']]"
+                      (click)="cartService.addOrRemoveItem(productlist['id'],1)">ADD TO CART</button>
+                    <div class="count_box"
+                      *ngIf="cartService.cartDetails['cart_list'] && cartService.cartDetails['cart_list'][productlist['id']]">
+                      <button class="count_btn"
+                        (click)="cartService.addOrRemoveItem(productlist['id'],cartService.cartDetails['cart_list'][productlist['id']]['quantity']-1)"><span
+                          class="icon-minus"></span></button>
+                      <div class="count_no">{{cartService.cartDetails['cart_list'][productlist['id']]['quantity']}}</div>
+                      <button class="count_btn"
+                        (click)="cartService.addOrRemoveItem(productlist['id'],cartService.cartDetails['cart_list'][productlist['id']]['quantity']+1)"><span
+                          class="icon-plus"></span></button>
+                    </div>
+                  </ng-container>
+                  <ng-template #out_of_stock>
+                    <button class="add_tocard out_of_stock">Out Of Stock</button>
+                </ng-template>
+                </div>
+                
+              </div>
+            </ng-container>
+            </div>
+            <div *ngIf="product_list.length<1">
+              <p style="text-align: center" class="notfound">No Product Found In This Category</p>
+            </div>
+            <div class="short_filterfixed" >
+              <div class="shorttext" (click)="sort_now()"><a href="javascript:void(0)"><span class="icon-location_delivery-address"></span>sort</a></div>
+              <div class="shorttext" (click)="filter_now()"><a href="javascript:void(0)"><span class="icon-location_delivery-address"></span>filter</a></div>
+            </div>
+            <!-- <div class="showmore"><button class="showmorebtn">SHOW MORE PRODUCTS (124)</button></div> -->
+            
+          </div>
+         <!--  <div class="pagination" *ngIf="pagination.total_page >1">
+            <span *ngFor="let list of total_list | paginate: config"></span>
+            <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="getPage($event)" [maxSize]="maxSize">
+
+              <div class="previewbtn" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+                <a (click)="p.previous()"><span class="icon-left-arrow"></span>Preview</a>
+              </div>
+              <div class="pagicountbox" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                  <span>{{ page.label }}</span>
+                </a>
+                <a *ngIf="p.getCurrent() === page.value">
+                  <span>{{ page.label }}</span>
+                </a>
+              </div>
+              <div class="previewbtn" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+                <a (click)="p.next()">Next<span class="icon-right-arrow"></span></a>
+              </div>
+            </pagination-template>
+          </div> -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

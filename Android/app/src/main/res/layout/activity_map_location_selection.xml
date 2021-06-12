@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/svLocation"
+        android:layout_margin="8dp"
+        android:text="Search Location"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:fontFamily="@font/montserrat"
+        android:background="@drawable/login_edt_field_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <fragment
+
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MapLocationSelection" />
+
+    <Button
+        android:id="@+id/btnConfirmLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_red_clr"
+        android:fontFamily="@font/montserrat"
+        android:text="Confirm Location"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progressSpinKitView"
+        style="@style/SpinKitView.Small.ThreeBounce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/curve_corner_translucent_bg"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/green_new" />
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_margin="42dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ooops">
+
+        </ImageView>
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/txt"
+            android:layout_below="@+id/txt1"
+            android:text="@string/are_you_sure_that_you_want_to_reject_the_substitutions"
+            android:textColor="@color/black"
+            android:fontFamily="@font/hind"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:ellipsize="end"
+
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:layout_marginTop="16dp"
+            android:id="@+id/txt1"
+            android:textAlignment="center"
+            android:text="@string/you_don_t_want_any_replacement"
+            android:textColor="@color/app_red_clr"
+            android:fontFamily="@font/hind"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:ellipsize="end"
+
+            android:layout_below="@+id/iv_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/txt"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnNo"
+                android:background="@drawable/app_red_bg"
+                android:layout_weight="1"
+                android:text="@string/no"
+
+                android:layout_margin="8dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_margin="8dp"
+                android:textColor="@color/white"
+                android:background="@drawable/green_btn_ng"
+                android:layout_weight="1"
+                android:text="@string/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

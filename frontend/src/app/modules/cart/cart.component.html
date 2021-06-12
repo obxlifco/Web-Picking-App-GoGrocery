@@ -1,0 +1,485 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid odetails" *ngIf="isSyncData">
+	<div class="row">
+	    <div class="col-12">
+	        <div class="listing_container" *ngIf="objectkeys(cartService.cartDetails).length > 0 &&  objectkeys(cartService.cartDetails['cart_list']).length > 0;else empty_cart">
+	            <div class="list_right_section details">
+	                <div class="cart_outer">
+	                    <div class="row">
+	                        <div class="col-12 col-md-9">
+	                            <div class="cartbox">
+	                                <div class="head">My Cart <span>-{{objectkeys(cartService.cartDetails['cart_list']).length}} Items </span></div>
+	                                <div class="cartinner_box">
+	                                  <ul class="thead">
+	                                      <li class="descrip">ITEM DESCRIPTION</li>
+	                                      <li class="unit_price">UNIT PRICE</li>
+	                                      <li class="quntity">QUANTITY</li>
+	                                      <li class="subtotal">SUBTOTAL</li>
+	                                      <li class="del"></li>
+	                                  </ul>
+	                                  <ul class="row" *ngFor="let key of objectkeys(cartService.cartDetails['cart_list'])">
+	                                  	<ng-container *ngIf="key != 'total_amount'">
+											<li class="descrip" >
+												<div class="productbox"><img [src]="cartService.cartDetails['cart_list'][key]['product_image']|imagetransform:['product','200','cover']"></div>
+												<div class="product_data">
+													<p style="cursor:pointer;" (click)="navigateToDetailPage(cartService.cartDetails['cart_list'][key]['product_slug'])">{{cartService.cartDetails['cart_list'][key]['product_name']}}</p>
+													<div class="custom_fields_data">
+														<p>{{cartService.cartDetails['cart_list'][key] ['custom_field_name']}} </p>
+														<p>{{cartService.cartDetails['cart_list'][key] ['custom_field_value']}}</p>
+													</div>
+												</div>
+											</li>
+											<li class="unit_price">{{cartService.cartDetails['cart_list'][key]['new_default_price_unit'] | money}}
+												<span *ngIf="cartService.cartDetails['cart_list'][key]['new_default_price_unit'] != cartService.cartDetails['cart_list'][key]['default_price']">{{cartService.cartDetails['cart_list'][key]['default_price'] | money}}</span>
+											</li>
+											<li class="quntity">
+											<div class="count_box">
+												<button class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']-1)">
+													<span class="icon-minus"></span>
+												</button>
+												<div class="count_no">{{cartService.cartDetails['cart_list'][key]['quantity']}}</div>
+												<button  class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']+1)">
+													<span class="icon-plus"></span>
+												</button>
+											</div>
+											</li>
+											<li class="subtotal">{{cartService.cartDetails['cart_list'][key]['new_default_price'] | money}}</li>
+											<li class="del"><a href="javascript:void()" (click)="cartService.removeCartItem(key)"><span class="icon-trash"></span></a></li>
+	                                	</ng-container>
+	                                  </ul>
+	                                </div>
+	                                <div class="btnsec">
+	                                    <!-- <button class="checkoutbtn styleCursor" (click)="cartService.emptyCart()">EMPTY CART</button> -->
+	                                    <button class="basketbtn styleCursor" [routerLink]="['/home']">CONTINUE SHOPPING</button>
+									</div>
+									
+								</div>
+								<div class="mobile_delivery_wrap">
+									<div class="headinner headinner-cart"> My Cart - {{objectkeys(cartService.cartDetails['cart_list']).length}} Items </div>
+								</div>
+								<div class="mobile_cartbox">
+									<div class="inerblog_row" *ngFor="let key of objectkeys(cartService.cartDetails['cart_list'])">
+										
+										<div class="productbox"><img [src]="cartService.cartDetails['cart_list'][key]['product_image']|imagetransform:['product','200','cover']"></div>
+										<div class="right_containsec">
+											<div class="toptext" (click)="navigateToDetailPage(cartService.cartDetails['cart_list'][key]['product_slug'])">
+												<!-- <p>Healthy</p> -->
+												{{cartService.cartDetails['cart_list'][key]['product_name']}}
+												<div class="custom_fields_data">
+													<p>{{cartService.cartDetails['cart_list'][key] ['custom_field_name']}} </p>
+													<p>{{cartService.cartDetails['cart_list'][key] ['custom_field_value']}}</p>
+												</div>
+											</div>
+											<div class="bottom">
+												<div class="price">{{cartService.cartDetails['cart_list'][key]['new_default_price_unit'] | money}} <span *ngIf="cartService.cartDetails['cart_list'][key]['new_default_price_unit'] != cartService.cartDetails['cart_list'][key]['default_price']">{{cartService.cartDetails['cart_list'][key]['default_price'] | money}}</span></div>
+												<div class="countingbtn">
+													<div class="count_box">
+														<button class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']-1)"><span class="icon-minus"></span></button>
+														<div class="count_no">{{cartService.cartDetails['cart_list'][key]['quantity']}}</div>
+														<button class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']+1)"><span class="icon-plus"></span></button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+	                        </div>
+	                        <div class="col-12 col-md-3">
+	                            <div class="promocodebox">
+	                               <!--  <div class="subhead">
+	                                  Promo Code
+	                                  <button class="applybtn">apply</button>
+	                                </div> -->
+	                                <div class="ordersum">
+	                                    <h3>Order Summary</h3>
+	                                    <div class="row">
+	                                        <span>Subtotal</span>
+	                                        <span>{{cartService.cartDetails['total_amount'] | money}}</span>
+	                                    </div>
+	                                 <!--    <div class="row">
+	                                      <span>Discount </span>
+	                                      <span class="red">$5.00</span>
+	                                    </div>
+	                                    <div class="row">
+	                                      <span>Delivery Charges </span>
+	                                      <span>$3.00</span>
+	                                    </div>
+	                                    <div class="row">
+	                                      <span>Estimated Tax</span>
+	                                      <span>$3.00</span>
+	                                    </div> -->
+	                                </div>
+	                                <div class="footed">
+	                                    <span>Total Amount</span>
+	                                    <span>{{cartService.cartDetails['total_amount'] | money}}</span>
+	                                </div>
+	                            </div>
+	                            <div class="checkoutbtn_grn" (click)="navigateToUrl('/checkout')">CHECKOUT</div>
+	                        </div>
+						</div>
+						<div class="place_order_sticky">
+							<div class="pricesec">
+								{{cartService.cartDetails['total_amount'] | money}}
+								<!-- <p>view price details</p> -->
+							</div>
+							<div class="btnbox">
+								<button class="grn_midum_btn" (click)="navigateToUrl('/checkout')">CHECKOUT</button>
+							</div>
+						</div>
+	                </div>
+	                
+	               <!--  <div class="product_section">
+	                        <div class="innerheader">
+	                            <h3 >Best In Beverages</h3>
+	                        </div>
+	                    <div class="product_row">
+	                        <div class="productblog">
+	                            <div class="likecard">
+	                                <a href="#">
+	                                    <span class="icon-wishlist-2"></span>    
+	                                    <span class="icon-wishlist"></span>
+	                                </a>
+	                            </div>
+	                            <div class="imagebox">
+	                                 <img src="assets/images/Layer_16.png">
+	                            </div>
+	                            <div class="textbox">
+	                                    <div class="vag_simbol"></div>
+	                                    <div class="textrow">
+	                                       <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                    </div>
+	                                    <div class="textrow selectrow">
+	                                         <select placeholder="ssss">
+	                                             <option>Demo text 1</option>
+	                                             <option>Demo text 2</option>
+	                                             <option>Demo text 3</option>
+	                                             <option>Demo text 4</option>
+	                                         </select>  
+	                                    </div>
+	                                    <div class="textrow">
+	                                        <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                    </div>
+	                                    <div class="textrow last add_count">
+	                                          <button class="add_tocard">ADD TO CART</button>
+	                                            <div class="count_box">
+	                                                <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                    <div class="count_no">5</div>
+	                                                <button class="count_btn"><span class="icon-plus"></span></button>
+	                                            </div>
+	                                           
+	                                      </div>
+	                            </div>
+	                        </div>
+	    
+	                        <div class="productblog">
+	                                <div class="likecard wished">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                <div class="imagebox">
+	                                        <img src="assets/images/Layer_16.png">
+	                                </div>
+	                                <div class="textbox">
+	                                        <div class="vag_simbol non-veg"></div>
+	                                        <div class="textrow">
+	                                           <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                        </div>
+	                                        <div class="textrow selectrow">
+	                                             <select placeholder="ssss">
+	                                                 <option>Demo text 1</option>
+	                                                 <option>Demo text 2</option>
+	                                                 <option>Demo text 3</option>
+	                                                 <option>Demo text 4</option>
+	                                             </select>  
+	                                        </div>
+	                                        <div class="textrow">
+	                                            <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                        </div>
+	                                        <div class="textrow last add_count">
+	                                          <button class="add_tocard">ADD TO CART</button>
+	                                            <div class="count_box">
+	                                                <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                    <div class="count_no">5</div>
+	                                                <button class="count_btn"><span class="icon-plus"></span></button>
+	                                            </div>
+	                                           
+	                                        </div>
+	                                </div>
+	                        </div>
+	    
+	                        <div class="productblog">
+	                                    <div class="likecard">
+	                                        <a href="#">
+	                                            <span class="icon-wishlist-2"></span>    
+	                                            <span class="icon-wishlist"></span>
+	                                        </a>
+	                                    </div>
+	                                    <div class="imagebox">
+	                                            <img src="assets/images/Layer_16.png">
+	                                    </div>
+	                                    <div class="textbox">
+	                                            <div class="textrow">
+	                                               <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                            </div>
+	                                            <div class="textrow selectrow">
+	                                                 <select placeholder="ssss">
+	                                                     <option>Demo text 1</option>
+	                                                     <option>Demo text 2</option>
+	                                                     <option>Demo text 3</option>
+	                                                     <option>Demo text 4</option>
+	                                                 </select>  
+	                                            </div>
+	                                            <div class="textrow">
+	                                                <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                            </div>
+	                                            <div class="textrow last ">
+	                                                  <button class="add_tocard">ADD TO CART</button>
+	                                                    <div class="count_box">
+	                                                        <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                            <div class="count_no">5</div>
+	                                                        <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                    </div>
+	                                                   
+	                                              </div>
+	                                    </div>
+	                        </div>
+	    
+	                        <div class="productblog">
+	                                <div class="likecard wished">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                        <div class="imagebox">
+	                                                <img src="assets/images/Layer_16.png">
+	                                        </div>
+	                                        <div class="textbox">
+	                                                <div class="textrow">
+	                                                   <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                                </div>
+	                                                <div class="textrow selectrow">
+	                                                     <select placeholder="ssss">
+	                                                         <option>Demo text 1</option>
+	                                                         <option>Demo text 2</option>
+	                                                         <option>Demo text 3</option>
+	                                                         <option>Demo text 4</option>
+	                                                     </select>  
+	                                                </div>
+	                                                <div class="textrow">
+	                                                    <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                                </div>
+	                                                <div class="textrow last ">
+	                                                      <button class="add_tocard">ADD TO CART</button>
+	                                                        <div class="count_box">
+	                                                            <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                                <div class="count_no">5</div>
+	                                                            <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                        </div>
+	                                                       
+	                                                  </div>
+	                                        </div>
+	                        </div>
+	    
+	                        <div class="productblog">
+	                                <div class="likecard">
+	                                        <a href="#">
+	                                            <span class="icon-wishlist-2"></span>    
+	                                            <span class="icon-wishlist"></span>
+	                                        </a>
+	                                    </div>
+	                                        
+	                                            <div class="imagebox">
+	                                                    <img src="assets/images/Layer_16.png">
+	                                            </div>
+	                                            <div class="textbox">
+	                                                    <div class="textrow">
+	                                                       <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                                    </div>
+	                                                    <div class="textrow selectrow">
+	                                                         <select placeholder="ssss">
+	                                                             <option>Demo text 1</option>
+	                                                             <option>Demo text 2</option>
+	                                                             <option>Demo text 3</option>
+	                                                             <option>Demo text 4</option>
+	                                                         </select>  
+	                                                    </div>
+	                                                    <div class="textrow">
+	                                                        <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                                    </div>
+	                                                    <div class="textrow last add_count">
+	                                                          <button class="add_tocard">ADD TO CART</button>
+	                                                            <div class="count_box">
+	                                                                <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                                    <div class="count_no">5</div>
+	                                                                <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                            </div>
+	                                                           
+	                                                      </div>
+	                                            </div>
+	                        </div>
+
+	                        <div class="productblog">
+	                            <div class="likecard">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                    
+	                                        <div class="imagebox">
+	                                                <img src="assets/images/Layer_16.png">
+	                                        </div>
+	                                        <div class="textbox">
+	                                                <div class="textrow">
+	                                                   <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                                </div>
+	                                                <div class="textrow selectrow">
+	                                                     <select placeholder="ssss">
+	                                                         <option>Demo text 1</option>
+	                                                         <option>Demo text 2</option>
+	                                                         <option>Demo text 3</option>
+	                                                         <option>Demo text 4</option>
+	                                                     </select>  
+	                                                </div>
+	                                                <div class="textrow">
+	                                                    <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                                </div>
+	                                                <div class="textrow last add_count">
+	                                                      <button class="add_tocard">ADD TO CART</button>
+	                                                        <div class="count_box">
+	                                                            <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                                <div class="count_no">5</div>
+	                                                            <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                        </div>
+	                                                       
+	                                                  </div>
+	                                        </div>
+	                        </div>
+
+	                        <div class="productblog">
+	                            <div class="likecard">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                    
+	                                        <div class="imagebox">
+	                                                <img src="assets/images/Layer_16.png">
+	                                        </div>
+	                                        <div class="textbox">
+	                                                <div class="textrow">
+	                                                   <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                                </div>
+	                                                <div class="textrow selectrow">
+	                                                     <select placeholder="ssss">
+	                                                         <option>Demo text 1</option>
+	                                                         <option>Demo text 2</option>
+	                                                         <option>Demo text 3</option>
+	                                                         <option>Demo text 4</option>
+	                                                     </select>  
+	                                                </div>
+	                                                <div class="textrow">
+	                                                    <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                                </div>
+	                                                <div class="textrow last add_count">
+	                                                      <button class="add_tocard">ADD TO CART</button>
+	                                                        <div class="count_box">
+	                                                            <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                                <div class="count_no">5</div>
+	                                                            <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                        </div>
+	                                                       
+	                                                  </div>
+	                                        </div>
+	                        </div>
+
+	                        <div class="productblog">
+	                            <div class="likecard">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                    
+	                                        <div class="imagebox">
+	                                                <img src="assets/images/Layer_16.png">
+	                                        </div>
+	                                        <div class="textbox">
+	                                                <div class="textrow">
+	                                                   <p><span>Fresho</span>Fresh Tomatoes</p>
+	                                                </div>
+	                                                <div class="textrow selectrow">
+	                                                     <select placeholder="ssss">
+	                                                         <option>Demo text 1</option>
+	                                                         <option>Demo text 2</option>
+	                                                         <option>Demo text 3</option>
+	                                                         <option>Demo text 4</option>
+	                                                     </select>  
+	                                                </div>
+	                                                <div class="textrow">
+	                                                    <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+	                                                </div>
+	                                                <div class="textrow last add_count">
+	                                                      <button class="add_tocard">ADD TO CART</button>
+	                                                        <div class="count_box">
+	                                                            <button class="count_btn"><span class="icon-minus"></span></button>
+	                                                                <div class="count_no">5</div>
+	                                                            <button class="count_btn"><span class="icon-plus"></span></button>
+	                                                        </div>
+	                                                       
+	                                                  </div>
+	                                        </div>
+	                        </div>
+
+	                        <div class="productblog">
+	                            <div class="likecard">
+	                                    <a href="#">
+	                                        <span class="icon-wishlist-2"></span>    
+	                                        <span class="icon-wishlist"></span>
+	                                    </a>
+	                                </div>
+	                                    
+                                    <div class="imagebox">
+                                            <img src="assets/images/Layer_16.png">
+                                    </div>
+                                    <div class="textbox">
+                                            <div class="textrow">
+                                               <p><span>Fresho</span>Fresh Tomatoes</p>
+                                            </div>
+                                            <div class="textrow selectrow">
+                                                 <select placeholder="ssss">
+                                                     <option>Demo text 1</option>
+                                                     <option>Demo text 2</option>
+                                                     <option>Demo text 3</option>
+                                                     <option>Demo text 4</option>
+                                                 </select>  
+                                            </div>
+                                            <div class="textrow">
+                                                <p class="pricerow">$35.00 <span>$50.00</span> <span class="off">(30% OFF)</span></p>  
+                                            </div>
+                                            <div class="textrow last add_count">
+                                                  <button class="add_tocard">ADD TO CART</button>
+                                                    <div class="count_box">
+                                                        <button class="count_btn"><span class="icon-minus"></span></button>
+                                                            <div class="count_no">5</div>
+                                                        <button class="count_btn"><span class="icon-plus"></span></button>
+                                                    </div>
+                                              </div>
+                                    </div>
+	                        </div>
+	                    </div>
+	                </div> -->
+	            </div>
+	        </div>
+	        <ng-template #empty_cart>
+	        	<p class='empty_cart' style="height:300px;text-align:center;">Your Bag is Empty </p>
+	        </ng-template>
+	    </div>
+	</div>
+</section>
+<!-- --- listing middle --- -->

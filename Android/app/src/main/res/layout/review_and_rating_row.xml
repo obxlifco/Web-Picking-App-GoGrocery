@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_margin="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="4dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llrating"
+        android:gravity="center"
+        android:background="@drawable/two_rating_single_bg"
+        android:layout_width="46dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_white_star"
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/white"
+            android:text="2"
+            android:fontFamily="@font/hind_medium"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvReviewTitle"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/hind_semibold"
+        android:layout_toRightOf="@+id/llrating"
+        android:text="Wonderful &amp; Fresh Products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvReviewDescription"
+        android:fontFamily="@font/hind"
+        android:layout_below="@+id/llrating"
+        android:textColor="#737373"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvReviewNameNDate"
+        android:fontFamily="@font/hind_medium"
+        android:layout_below="@+id/tvReviewDescription"
+        android:textColor="#212121"
+        android:text="William Thomas, 31st October 2019"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

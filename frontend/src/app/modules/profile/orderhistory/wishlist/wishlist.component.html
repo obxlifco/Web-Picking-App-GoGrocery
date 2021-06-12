@@ -1,0 +1,61 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid">
+  <div class="row">
+	  <div class="col-12">
+		  <div class="listing_container">
+			  <div class="list_right_section details">
+				  <div class="details_topsml_menu">
+					  <ul>
+						<li (click)="navigate(0)"><a href="javascript:void(0)">Home /</a></li>
+						<li (click)="navigate(1)"><a href="javascript:void(0)">My Account /</a></li>
+						<li><a href="javascript:void(0)">Wishlist</a></li>
+					  </ul>
+				  </div>
+
+				  <div class="cart_outer orderhistory">
+					  <div class="row">
+						<div class="col-12 col-md-3">
+							<app-left-panel-profile [activatedMenu] = "'wishlist'"></app-left-panel-profile>
+						 
+						</div>
+						  <div class="col-12 col-md-9">
+							  <div class="cartbox deleverybox wishlistpage">
+								  <div class="head">
+									 Wishlist
+								 </div>
+								  <div class="orderhistory_table_wrap wishlist wishlistpageres">
+									  <table cellpadding="" cellspacing="">
+										  <tr>
+											  <th>Name</th>
+											  <th>PRICE</th>
+											  <th>CREATED</th>
+											  <th>ACTIONS</th>
+										  </tr>
+										  <ng-container *ngIf="wishlist.length>0">
+											<tr *ngFor="let item of wishlist; let i=index">
+												<td deta-th="Name" style="cursor:pointer;" (click)="navigateToDetailPage(item.product.slug)">{{item.product.name}}</td>
+												<td deta-th="AMOUNT">{{item.product.channel_price.channel_price | money}}</td>
+												<td deta-th="ORDER DATE & TIME">{{item.created | date: 'short'}}</td>
+												<td deta-th="ACTION">
+												  <div class="activiti_icn">
+													<a (click)="delete_item(item.product.id)"><span class="icon-trash"></span></a>
+													<a (click)="cartService.addOrRemoveItem(item.product.id,1)"><span class="icon-paper-bag"></span></a>
+												 </div>
+												</td>
+											</tr>
+										  </ng-container>
+										</table>
+										<div style="text-align:center;" *ngIf="wishlist.length==0">
+											<p >No record found</p>
+										</div>
+									</div>
+							  </div>
+						  </div>
+					 </div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </div>
+</section>
+<!-- --- listing middle --- -->

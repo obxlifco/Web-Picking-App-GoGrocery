@@ -1,0 +1,19 @@
+<section class="container">
+    <div class="row">
+        <div class="col-12">
+          <div class="successwrap">
+              <div class="tickicon"><span class="icon-iconfinder_v-10_3162599"></span></div>
+              <div class="successtext">Thank you, Your Payment is Successfull</div>
+              <!-- <p>
+                We are processing your order and you will recieve an email with order details. 
+                Once the order has been shipped you will receive another email with order tracking link.
+              </p> -->
+              <ng-container>
+                <div class="orderid_box">Your order ID : <span>{{orderId}}</span></div>
+                <div class="shopping" [routerLink]="['/home']">CONTINUE SHOPPING</div>
+              </ng-container>
+              <!-- <h1>{{pageData | json}}</h1> -->
+          </div>
+        </div>
+    </div>    
+</section>

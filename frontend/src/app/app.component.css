@@ -1,0 +1,9 @@
+.owl-carousel .owl-stage-outer{
+    height: -webkit-fill-available !important;
+}
+.textoverlay{
+    position:absolute;
+    color:#FFF;
+    font-size:12px;
+    display:block;
+}

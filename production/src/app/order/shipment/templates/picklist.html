@@ -1,0 +1,152 @@
+<section class="right-part filter-pad">
+  	<form #generatePicklist="ngForm" novalidate (ngSubmit)="generatePicklist.valid && addPicklist(generatePicklist)">
+		<input type="hidden" name="picklist_id" [(ngModel)]="formModel.picklist_id">
+		<div class="topheading">
+			<h1>Manage Pick List
+				<div class="btn-header">
+					<button mat-raised-button class="btn-main" type="submit">Continue</button>
+					<button mat-raised-button class="btn-pink" type="button"  (click)="_globalService.printPicklist('picklist-details-print')">Print</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul *ngIf="formModel.picklist_id > 0 && picklistDetails.picklist_status != 'Created'">
+					<li class="active"><a (click)="_globalService.setTab(tabIndex,'/picklist/picklist/'+formModel.picklist_id)" [routerLink]="['/picklist/picklist/'+formModel.picklist_id]"><div class="nom"></div>Pick List</a></li>
+                    <li><a (click)="_globalService.setTab(tabIndex,'/picklist/grn/'+formModel.picklist_id)" [routerLink]="['/picklist/grn/'+formModel.picklist_id]"><div class="nom"></div>Goods Received Note</a></li>
+                    <li><a (click)="_globalService.setTab(tabIndex,'/picklist/invoice/'+formModel.picklist_id)" [routerLink]="['/picklist/invoice/'+formModel.picklist_id]"><div class="nom"></div>Invoice</a></li>
+				</ul>
+				<ul *ngIf="picklistDetails.picklist_status=='Created'">
+					<li class="active"><div class="nom"></div>Pick List</li>
+					<li><div class="nom"></div>Goods Received Note</li>
+					<li><div class="nom"></div>Invoice</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>  
+		<div class="body-part" id="picklist-details">
+			<div class="clear"></div>
+			<div class="box">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="prodBarcode">
+							<ngx-barcode [bc-value]="picklistDetails.trents_picklist_no" [bc-display-value]="true" [bc-height]="30" [bc-width]="2"  [bc-background]="false"></ngx-barcode>
+						</div>
+						<p>Pick List No: {{picklistDetails.trents_picklist_no}}  </p>
+						<p>Date: {{picklistDetails.picklist_created_date | date : 'short'}}</p>
+					</div>
+					<div class="col-sm-4">
+						
+					</div>
+					<div class="col-sm-4">
+						<p>Store: {{picklistDetails.warehouse_name}}</p>
+						<p>Order Ids: {{picklistDetails.picklist_order_ids}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<div class="row">
+					<div class="col-sm-12">
+						<mat-slide-toggle aria-labelledby labelPosition="before" style="margin-left: 20px;"  (change)="showImage($event)">Show Image</mat-slide-toggle>
+						<div class="clear20"></div>
+					</div>
+					<div class="col-sm-12">
+						<div class="table-list">
+							<table>
+								<tr>
+									<!-- <th  class="align-middle text-center">Action</th> -->
+									<th>SI.No</th>
+									<th *ngIf="picklist_img" style="width:8%;">Image</th>
+									<th>Title</th>
+									<th>Product SKU</th>
+									<th>EAN</th>
+									<th>UOM</th>
+									<th>Variant</th>
+									<th>Quantity</th>
+								</tr>
+								<tr *ngFor="let pickListItem of picklistDetails.pickListItems; let s_no = index;">
+									<!-- <td class="align-middle text-center"><button mat-icon-button class="btn-pink" type="button" (click)="delete_picklist_product(pickListItem.order_id,pickListItem.id)"><mat-icon  class="icon-delete"></mat-icon></button></td>-->
+									<td class="align-middle">{{s_no+1}}</td>
+									<th *ngIf="picklist_img"><img *ngIf="pickListItem.product_image" [src]="img_base + pickListItem.product_image"></th>
+									<td class="align-middle">{{pickListItem.product_name}}</td>
+									<td class="align-middle">{{pickListItem.sku}}</td>
+									<td class="align-middle">{{pickListItem.ean}}</td>
+									<td class="align-middle">{{pickListItem.uom}}</td>
+									<td class="align-middle">{{pickListItem.variant}}</td>
+									<td class="align-middle">{{pickListItem.qty}}</td>
+								</tr>
+								<!-- <tr *ngIf="result_list_tags.length==0">
+									<td colspan="4" align="center">No records found</td>
+								</tr> -->
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div> 
+		<div class="body-part print-body" id="picklist-details-print">
+			<div class="clear"></div>
+				<div class="box">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="prodBarcode">
+								<ngx-barcode [bc-value]="picklistDetails.trents_picklist_no" [bc-display-value]="true" [bc-height]="30" [bc-width]="2"  [bc-background]="false"></ngx-barcode>
+							</div>
+							<p>Pick List No: {{picklistDetails.trents_picklist_no}}  </p>
+							<p>Date: {{picklistDetails.picklist_created_date | date : 'short'}}</p>
+						</div>
+						<div class="col-sm-4">
+							
+						</div>
+						<div class="col-sm-4">
+							<p>Store: {{picklistDetails.warehouse_name}}</p>
+							<p>Order Ids: {{picklistDetails.picklist_order_ids}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear20"></div>
+				<div class="box">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="table-list">
+								<table class="table table-bordered">
+									<tr>
+										<th>SI.No</th>
+										<th *ngIf="picklist_img">Image</th>
+										<th>Title</th>
+										<th>Product SKU</th>
+										<th>EAN</th>
+										<th>UOM</th>
+										<th>Variant</th>
+										<th>Quantity</th>
+									</tr>
+									<tr *ngFor="let pickListItem of picklistDetails.pickListItems; let s_no = index;">
+										<td class="align-middle">{{s_no+1}}</td>
+										<th *ngIf="picklist_img"><img [src]="img_base + pickListItem.product_image"></th>
+										<td class="align-middle">{{pickListItem.product_name}}</td>
+										<td class="align-middle">{{pickListItem.sku}}</td>
+										<td class="align-middle">{{pickListItem.ean}}</td>
+										<td class="align-middle">{{pickListItem.uom}}</td>
+										<td class="align-middle">{{pickListItem.variant}}</td>
+										<td class="align-middle">{{pickListItem.qty}}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="btn-header hidden-xs">
+			<button mat-raised-button class="btn-main" type="submit">Continue</button>
+			<button mat-raised-button class="btn-pink" type="button" (click)="_globalService.printPicklist('picklist-details-print')">Print</button>
+			<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		</div> 
+		<!-- ///////////////Buttons//// --> 
+		<div class="clear"></div>
+	</form>
+</section>

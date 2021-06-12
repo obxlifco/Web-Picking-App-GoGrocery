@@ -1,0 +1,30 @@
+<form #shipForm="ngForm" novalidate (ngSubmit)="shipForm.valid && poSent(shipForm)">
+	
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>PO Sent</h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-checkbox #send_email="ngModel" name="send_email" [(ngModel)]="formModel.send_email">Send mail to vendor</mat-checkbox>
+			<div class="clear20"></div>
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Vendor Email" #email="ngModel" name="email" [(ngModel)]="formModel.supplier_email" [required]="formModel.send_email" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+				<mat-error *ngIf="email.errors && email.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			     <mat-error *ngIf="email.errors && email.errors.pattern"> Enter a valid <strong>email</strong> address </mat-error>
+			</mat-form-field>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

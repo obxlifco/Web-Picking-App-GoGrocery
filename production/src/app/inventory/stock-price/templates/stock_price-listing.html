@@ -1,0 +1,102 @@
+<section class="right-part filter-pad inner_listing">
+	<div class="topheading">
+		<h1 class="autoclick">Stock and Price Management</h1>
+	</div>
+	<div class="report body-part addorderbody addorderbodypart place_gap" *ngIf="_globalService.isFormLoaded == 'Yes'">
+	<div class="innertab_sec top-header-btn">
+		<div class="tabhedouter">
+			<div class="whouse" *ngIf="isSuperAdmin == 'Y'">
+				<mat-form-field appearance="outline">
+					<mat-select class="m-0" floatPlaceholder="never" placeholder="Select Warehouse" #warehouse="ngModel" name="warehouse"
+					 [(ngModel)]="default_warehouse" (selectionChange)="callbackLoadStock(default_warehouse)">
+						<mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="whouse_category" >
+				<ng-select
+						[items]="category_list" placeholder="Select Category" bindLabel="name"
+						bindValue="id" #category="ngModel" name="category"
+						[(ngModel)]="categoryList" required multiple=true 
+						(change)="load_category_filter()" style="width: 300px;">
+						<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+							<div class="ng-value" *ngFor="let item of items | slice:0:1">
+								<span class="ng-value-label">{{item.name}}</span>
+								<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+							</div>
+							<div class="ng-value" *ngIf="items.length > 1">
+								<span class="ng-value-label">{{items.length - 1}} more...</span>
+							</div>
+						</ng-template>
+				</ng-select>
+			</div>
+		</div>
+		<div class="serch_and_filtersec" *ngIf="isSuperAdmin == 'Y'">
+			<div class="serch_sec_super_admin">
+				<a href="javascript:void(0)" class="default_cursor"><span class="icon-search1"></span></a>
+				<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="reload(1,1,'',filter,search.value)" (keyup.backspace)="clearSearchData()">
+				<span class="icn_crs" *ngIf="search_text!=''" (click)="clearMe()">×</span>
+			</div>
+		</div>
+		<div class="serch_and_filtersec" *ngIf="isSuperAdmin == 'N'">
+			<div class="serch_sec">
+				<a href="javascript:void(0)" class="default_cursor"><span class="icon-search1"></span></a>
+				<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="reload(1,1,'',filter,search.value)" (keyup.backspace)="clearSearchData()">
+				<span class="icn_crs" *ngIf="search_text!=''" (click)="clearMe()">×</span>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="body-part">
+			<div class="table-list stock_price_list"  infiniteScroll
+            [infiniteScrollDistance]="scrollDistance"
+            [infiniteScrollUpDistance]="scrollUpDistance"
+            [infiniteScrollThrottle]="throttle"
+            (scrolled)="onScroll()">
+					<table>
+						<tr>
+							<th class="short" (click)="reload(0,1,'name',filter,search.value)">Item Name<span [class]="(sortBy=='product_name')?sortClass:''"></span></th>
+							<!-- <th class="short" (click)="reload(0,1,'sku',filter,search.value)">SKU<span [class]="(sortBy=='sku')?sortClass:''"></span></th> -->
+							<th class="short" (click)="reload(0,1,'price',filter,search.value)">Price<span [class]="(sortBy=='price')?sortClass:''"></span></th>
+							<th class="short" (click)="reload(0,1,'real_stock',filter,search.value)">Stock<span [class]="(sortBy=='real_stock')?sortClass:''"></span></th>
+						</tr>
+						<tr *ngFor="let row of stock_list; let i = index" style="border-bottom: 1px solid #e1dada;">
+							<td align="left" valign="middle">
+								<div class='grn-image_custom stock-price_list'>
+									<img *ngIf = "row.product_image.length > 0" [src]="img_base + row.product_image[0].img">
+								</div>
+								<div class='grn-product'>
+									<p><span>{{row.product_name}}</span></p>
+									<p class="proid">{{row.sku}}</p>
+									<p><span>{{row.weight + ' ' + row.uom.uom_name}}</span></p>
+									<!-- <p *ngIf="row.real_stock < 1"><span>Not Available</span></p>
+									<p *ngIf="row.real_stock > 0"><span>Available</span></p> -->
+									<!-- <p>Available Qty : {{row.real_stock}}</p> -->
+								</div>	
+							</td>
+							<!-- <td data-th="SKU">{{row.sku}}</td> -->
+							<td data-th="Price">
+								{{row.product_price}}
+								<a href="javascript:void(0);" title='Change Price' class="editpencil toolTip" (click)="edit_price_pop(row.product_price, i, row.id);">
+									<span class="icon-edit"></span>
+								</a>
+							</td>
+							<td class="button_row">
+								<!-- <p><input type="button" (click)="inStock(row.id,1000)" value="In Stock" style="background: #643988; color: #ffffff;"></p>
+								<p><input type="button" (click)="inStock(row.id,0)" value="Out of Stock" style="background: #643988; color: #ffffff;"></p> -->
+								<p *ngIf="row.real_stock < 1"><span style="color: red;"><strong> Not Available </strong></span><button mat-raised-button class="btn-main" type="button" (click)="inStock(row.id,1000,i)">In Stock</button></p>
+								<p *ngIf="row.real_stock > 0"><span style="color: green;"><strong> Available </strong></span><button mat-raised-button class="btn-main" type="button" (click)="inStock(row.id,0,i)">Out of Stock</button></p>
+								<!-- <p>Available Qty : {{row.real_stock}}</p> -->
+							</td>
+						</tr>
+						<tr *ngIf="stock_list.length==0">
+							<td colspan="8" align="center" class="no_record">No records found</td>
+						</tr>
+				</table>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	</section>
+<div class="clear"></div>

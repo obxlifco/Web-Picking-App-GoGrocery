@@ -1,0 +1,62 @@
+<section>
+  <div class="pop_upbg">
+      <div class="popup_wrap">
+        <div class="backbtn"><a href="javascript:void(0)" (click)="close_dialog()"><span><mat-icon class="back_icon">arrow_back</mat-icon></span></a></div>
+        <div class="selectstore">
+            <div class="top_icon">
+                <div class="icon_one" alt=""></div>
+            </div>
+           
+            <!-- <div class="head">Select your store category to start shopping</div> -->
+            <div class="selectpopbody">
+              
+                <!-- *ngIf = "storecategorylist && storecategorylist.length > 0"
+                *ngFor="let storecategory of storecategorylist" -->
+                <div class="storeblog">
+                    <div class="heading">
+                        Select your Category to start shopping
+                    </div>
+                    <div class="storecategory_selection">
+                        <div class="storecategory_name">
+                            All
+                        </div>
+                        <div class="selection">
+                            <mat-slide-toggle [checked]="all" (change)="selectAll($event)"></mat-slide-toggle>
+                        </div>
+                    </div>
+                 
+                        <div class="storecategory_selection"  *ngFor="let storecategory of storecategorylist">
+                            <div class="storecategory_name">
+                               {{storecategory.name}}
+                            </div>
+                            <div class="selection">
+                                <mat-slide-toggle [checked]="storecategory['checked']"  (change)="onChange(storecategory['id'],$event.checked)"></mat-slide-toggle>
+                            </div>
+                        </div>
+                  
+                    <!-- <ng-container *ngFor="let storecategory of storeCategoryGroup"> -->
+                        <!-- <img class="storepic" style="border-radius: 5%; border: 1px solid black;height:155px!important;width:180px!important;" [src]="storecategory_logo_url+storecategory.image"  (click)="onStoreCategorySelect(storecategory['id'],storecategory['name'],storecategory['has_store'])" alt="show" > -->
+                        <!-- <div class="text-block" *ngIf = "storecategory.has_store==0">Not available here</div> -->
+                    <!-- </ng-container> -->
+                </div>
+            </div>
+        </div>
+        <div class="shopping_btn_section">
+            <button class="start-shopping-btn" (click)="startShopping()"><mat-icon>east</mat-icon>Start shopping</button>
+        </div>
+        
+    </div>
+  </div>
+</section>
+<!-- <section *ngIf="showConformationBox==1">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head">If you change store , your cart will be empty.</div>
+                <div class="head" style="color: red">Do you really want to change store ?</div>
+                <button class="add_tocard" style="width: 22%; float: right;" (click)="isStoreCategoryChange(1)">Yes</button>
+                <button class="add_tocard" style="width: 22%; background-color: red" (click)="isStoreCategoryChange(0)">No</button>
+            </div>
+        </div>
+    </div>
+</section> -->

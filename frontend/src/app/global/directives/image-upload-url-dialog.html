@@ -1,0 +1,22 @@
+<form #imgForm="ngForm" novalidate (ngSubmit)="imgForm.valid && insertLink(imgForm.value)">
+	<h2 mat-dialog-title>Insert Image Link</h2>
+	<mat-dialog-content>
+		<div class="pop-body" layout="column">
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Insert Link" required #imgLink="ngModel" name="imgLink" ngModel pattern='https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)'>
+			    <mat-error *ngIf="imgLink.errors && imgLink.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			    <mat-error *ngIf="imgLink.errors && imgLink.errors.pattern">
+			      Please enter a <strong>valid</strong> image url
+			    </mat-error>
+		  	</mat-form-field>
+		</div>		  	
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<label>Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" [mat-dialog-close]="true">Cancel</button>
+	</mat-dialog-actions>
+</form>

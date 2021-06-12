@@ -1,0 +1,27 @@
+
+<!-- website view -->
+<ng-container *ngIf="!isCMS && !isPromotion && isLoaded">
+	<header-part [ngClass]="{'fb-app': (is_facebook==true)}" [pageType]="pageType" (chnageWareHouse) = "onChangeWareHouse($event)" (chnageStoreType) = "onChangeStoreType($event)" (chnageLocation) = "onChangeLocation($event)" (selectDropdownOption) = "onselectDropdownOption($event)" *ngIf="!router.url.includes('approved-order')"></header-part>
+	<app-header-only-logo *ngIf="router.url.includes('approved-order')"></app-header-only-logo>
+	<app-loader></app-loader>
+	<div class="maincontainer1 formoblocaton_space" [class.basenopad] = "pageType==2" [class.distributor] = "is_dist" [ngClass]="{'fb-app': is_facebook==true} ">
+		<!-- <app-skelton></app-skelton> -->
+		<router-outlet #o="outlet"></router-outlet>
+	</div>
+	
+	<footer-part *ngIf="!router.url.includes('approved-order')" [pageType]="pageType"></footer-part>
+</ng-container>
+<!-- CMS Editor view -->
+<ng-container *ngIf="isCMS && !isPromotion">
+	<router-outlet #o="outlet"></router-outlet>
+	<!-- <app-view-page-builder></app-view-page-builder> -->
+</ng-container>
+
+<ng-container *ngIf="isPromotion">
+	<main>
+	</main>
+	<router-outlet #o="outlet"></router-outlet>
+	<!-- <app-view-page-builder></app-view-page-builder> -->
+</ng-container>
+
+<!-- *ngIf="!router.url.includes('app')" -->

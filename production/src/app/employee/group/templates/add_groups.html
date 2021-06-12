@@ -1,0 +1,84 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <form #groupForm="ngForm" novalidate (ngSubmit)="groupForm.valid && addEditGroup(groupForm)">
+            <input type="hidden" name="groupId" [(ngModel)]="formModel.groupId">
+            <div class="topheading">
+                <h1>{{(formModel.groupId>0)?'Edit':'Add'}} Group
+				  	<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Save</button>
+			          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  	</div>
+				  	<div class="clear"></div>
+			  	</h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                       <mat-label>Group Name</mat-label>
+                                        <input matInput placeholder="Group Name" required #groupName="ngModel" name="groupName" [(ngModel)]="formModel.groupName" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="groupName.errors && groupName.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="groupName.errors && groupName.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- <mat-form-field appearance="outline" appearance="outline">
+                                         <mat-label>Select Store</mat-label>
+                                        <mat-select placeholder="Select Store" #warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id">
+                                            <mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                    <ng-select
+									[items]="warehouse_list"
+									placeholder="Select Store"
+									bindLabel="name" bindValue="id"
+									#warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id"
+                                    >
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-block">
+                                        <mat-checkbox (change)="checkMenuAll(0,$event)" #checkedAll="ngModel" name="checkedAll" [(ngModel)]="checkAll">Check All</mat-checkbox>
+                                    </div>
+                                </div>
+                                <div class="clear20"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div accordianBox class="boxs" *ngFor="let menu of menu_list; let i = index">
+                                        <div class="box-header">
+                                            <mat-checkbox id="{{menu.id}}" name="checkall_{{menu.name}}" value="{{menu.id}}" [(ngModel)]="menu.Selected" (change)="checkMenuAll(menu.id)">{{menu.name}}</mat-checkbox> <span class="acc_icon" [ngClass]="{ 'icon-minus': (menu.child.length>0 && i==0), 'icon-addsvg': (menu.child.length>0)}"></span> </div>
+                                        <div class="box-body" *ngIf="menu.child.length>0">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-md-3" *ngFor="let submenu of menu.child; let j = index">
+                                                    <mat-checkbox name="check_{{submenu.name}}" id="{{submenu.id}}" value="{{submenu.id}}" (change)="checkMenu(menu.id,$event)" [(ngModel)]="submenu.Selected">{{submenu.name}}</mat-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>

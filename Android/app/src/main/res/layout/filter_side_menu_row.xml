@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:background="#F9F9F9"
+    android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:id="@+id/tvSideMenuCategory"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/hind"
+            android:text="lshxkashb"
+            android:textAllCaps="true"
+            android:textColor="#303030" />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/txt"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/hind"
+            android:text="lshxkashb"
+            android:textAllCaps="true"
+            android:textColor="#303030" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txt"
+            android:layout_alignBottom="@+id/txt"
+            android:layout_alignParentRight="true"
+            android:background="@color/view_divider_clr" />
+
+
+</RelativeLayout>

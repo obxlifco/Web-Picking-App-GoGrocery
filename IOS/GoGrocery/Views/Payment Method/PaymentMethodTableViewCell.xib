@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="hind-regular.otf">
+            <string>Hind-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentMethodTableViewCell" rowHeight="80" id="KGk-i7-Jjw" customClass="PaymentMethodTableViewCell" customModule="GoGrocery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-wC-qhb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio_unselect" translatesAutoresizingMaskIntoConstraints="NO" id="jPu-IK-7HI">
+                                <rect key="frame" x="8" y="8" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="O3V-vg-ueD"/>
+                                    <constraint firstAttribute="width" constant="25" id="Ufi-xS-sd9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash On Delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTY-3d-vdE">
+                                <rect key="frame" x="41" y="8" width="124" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="9H5-pf-ZAS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Hind-Regular" family="Hind" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oy3-3b-9vQ">
+                                <rect key="frame" x="262" y="8" width="42" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Hind-Regular" family="Hind" pointSize="15"/>
+                                <color key="textColor" name="buttonColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* For verification, an amount of AED 1 will be charged. The amount will be reversed automatically." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0B-OP-vJs">
+                                <rect key="frame" x="41" y="34" width="263" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="D3T-fq-mbN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Hind-Regular" family="Hind" pointSize="14"/>
+                                <color key="textColor" name="buttonColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uTY-3d-vdE" firstAttribute="leading" secondItem="jPu-IK-7HI" secondAttribute="trailing" constant="8" id="G12-Ue-TtL"/>
+                            <constraint firstItem="jPu-IK-7HI" firstAttribute="leading" secondItem="Ddb-wC-qhb" secondAttribute="leading" constant="8" id="ORr-JU-2w9"/>
+                            <constraint firstItem="f0B-OP-vJs" firstAttribute="trailing" secondItem="Oy3-3b-9vQ" secondAttribute="trailing" id="nQ4-LT-vDI"/>
+                            <constraint firstItem="f0B-OP-vJs" firstAttribute="top" secondItem="uTY-3d-vdE" secondAttribute="bottom" constant="1" id="tN5-h0-27x"/>
+                            <constraint firstItem="uTY-3d-vdE" firstAttribute="top" secondItem="Ddb-wC-qhb" secondAttribute="top" constant="8" id="uQO-vX-gYC"/>
+                            <constraint firstItem="jPu-IK-7HI" firstAttribute="top" secondItem="Ddb-wC-qhb" secondAttribute="top" constant="8" id="v43-kn-0Z6"/>
+                            <constraint firstItem="Oy3-3b-9vQ" firstAttribute="top" secondItem="Ddb-wC-qhb" secondAttribute="top" constant="8" id="vsO-mp-gF3"/>
+                            <constraint firstAttribute="trailing" secondItem="Oy3-3b-9vQ" secondAttribute="trailing" constant="16" id="xLT-lr-RRd"/>
+                            <constraint firstItem="f0B-OP-vJs" firstAttribute="leading" secondItem="uTY-3d-vdE" secondAttribute="leading" id="yZj-t0-fjj"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Ddb-wC-qhb" secondAttribute="bottom" id="XII-B3-3zs"/>
+                    <constraint firstAttribute="trailing" secondItem="Ddb-wC-qhb" secondAttribute="trailing" id="eYz-Yt-emp"/>
+                    <constraint firstItem="Ddb-wC-qhb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gI6-Wh-gNY"/>
+                    <constraint firstItem="Ddb-wC-qhb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yDw-iJ-JTz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgImage" destination="jPu-IK-7HI" id="Cza-fz-r8g"/>
+                <outlet property="lblPaymentType" destination="uTY-3d-vdE" id="sTV-sg-7jD"/>
+                <outlet property="lblTerms" destination="f0B-OP-vJs" id="H5K-5f-2ea"/>
+                <outlet property="lblTermsHeight" destination="D3T-fq-mbN" id="2IJ-Rr-UP7"/>
+            </connections>
+            <point key="canvasLocation" x="131.25" y="129.92957746478874"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="radio_unselect" width="30" height="30"/>
+        <namedColor name="buttonColor">
+            <color red="0.92941176470588238" green="0.10980392156862745" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

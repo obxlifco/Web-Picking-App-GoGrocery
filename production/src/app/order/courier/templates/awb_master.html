@@ -1,0 +1,56 @@
+<div style="position: relative;">
+<h4 md-dialog-title>AWB Number List
+	<div class="filter dialogFilter">	      
+        <button mat-icon-button mdTooltip="Reload" class="btn-main" (click)="generateGrid(1,1,'','','')"><mat-icon  class="icon-refresh"></mat-icon></button> 
+        <div class="search">
+          <mat-icon  class="icon-search"></mat-icon>
+          <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="search_awb_number(search.value,sortBy)">
+      	</div>
+      	<div class="clear"></div>
+	</div>
+</h4>
+<hr>
+<div class="action-box manage-tags in-popup">    	
+        <!-- ///////////Edit////////////// -->
+  		 <button mat-button (click)="openPop(individualRow.id)" *ngIf="bulk_tags_ids.length==1"><mat-icon  class="icon-edit"></mat-icon>Edit</button>
+  		<!-- /////////// Status Update////////////// -->		
+		 <!-- ///////////Delete/Block/Unblock////////////// -->
+	    <!-- <button mat-button (click)="updateStatusAll(2)"><mat-icon  class="icon-delete"></mat-icon>Delete</button>
+	    <button mat-button (click)="updateStatusAll(1)"><mat-icon  class="icon-lock"></mat-icon>Block</button>
+	    <button mat-button (click)="updateStatusAll(0)"><mat-icon  class="icon-unlock"></mat-icon>Unblock</button> -->
+	    <!-- <button mat-button>Push Product Info</button> -->
+
+        <button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(1,1,'','','')"><mat-icon  class="icon-close"></mat-icon></button>
+        
+
+  	</div>  
+
+<mat-dialog-content style="min-width: 500px;">
+	<div class="table-list">
+  		<table>
+			<tr>
+				<!-- <th class="check-select">
+					<mat-checkbox name="selectedAllTagList" [ngModel]="selectedAllTagList" id="selectedAllTagList" (change)="toggleCheckAllTags($event)"></mat-checkbox>
+				</th> -->
+				
+				<th class="short" (click)="search_awb_number(search.value,'awb_number')">AWB Number<span [class]="(sortBy=='awb_number')?sortClass:''"></span></th>
+				<th>Is Used</th>
+				<th class="short">Order Id</th>
+			</tr>
+			<tr [class.chec]="row.selected" *ngFor="let row of result_list_tags">
+				<!-- <td>
+					<mat-checkbox name="row.selected" id="awb_masters{{row.id}}" [checked]="row.selected" (change)="toggleCheckTags(row.id,$event)"></mat-checkbox>
+				</td> -->
+				<td>{{row.awb_number}}</td>
+				<td>{{row.isused}}</td>
+				<td>{{row.order_id}} </td>				
+			</tr>
+			<tr *ngIf="result_list_tags.length==0">
+			  	<td colspan="4" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+</mat-dialog-content>
+
+</div>

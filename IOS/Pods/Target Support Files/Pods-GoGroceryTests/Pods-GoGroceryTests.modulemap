@@ -1,0 +1,6 @@
+framework module Pods_GoGroceryTests {
+  umbrella header "Pods-GoGroceryTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

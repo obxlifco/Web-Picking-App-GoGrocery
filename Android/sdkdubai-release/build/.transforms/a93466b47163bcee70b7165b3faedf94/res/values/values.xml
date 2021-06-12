@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="SubTitle">#667284</color>
+    <color name="Title">#212d44</color>
+    <color name="billing_back">#F4F3F8</color>
+    <color name="black">#323232</color>
+    <color name="btnsBackgroung">#ced8e4</color>
+    <color name="colorAccent">#e60808</color>
+    <color name="colorControlActivated">#e60808</color>
+    <color name="colorControlNormal">#e60808</color>
+    <color name="colorEditBorder">#999999</color>
+    <color name="colorPrimary">#121d31</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorback">#F4F4F9</color>
+    <color name="colorback2">#F7F6FB</color>
+    <color name="edittext">#0000CC</color>
+    <color name="gray_dark">#5F5F5F</color>
+    <color name="gray_light">#E9ECF5</color>
+    <color name="priceBreakup">#d1395c</color>
+    <color name="primary">#F34235</color>
+    <color name="progress_bar_color">#0000CC</color>
+    <color name="searchTextColor">#212d44</color>
+    <color name="theme_color">#141C31</color>
+    <color name="title_bar_color">#CC0000</color>
+    <color name="txt_color">#BFE2FA</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="card_size">160dp</dimen>
+    <dimen name="font">14sp</dimen>
+    <item name="emiPlan" type="id"/>
+    <item name="procFee" type="id"/>
+    <item name="vaultCont" type="id"/>
+    <string name="access_code">Access Code</string>
+    <string name="address">Address</string>
+    <string name="amount">Amount</string>
+    <string name="app_name">SDK Library</string>
+    <string name="billingAddress">Billing Address</string>
+    <string name="cancel_url">Cancel Url</string>
+    <string name="card_cvv">Card CVV</string>
+    <string name="card_details">Card Details</string>
+    <string name="card_number">Card Number</string>
+    <string name="card_type">Card Type</string>
+    <string name="cardno">Card Number</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="currency">Currency</string>
+    <string name="customer_identifier">Customer Identifier</string>
+    <string name="cvv">CVV</string>
+    <string name="deliveryAddress">Delivery Address</string>
+    <string name="edit"><u>Edit</u></string>
+    <string name="email">Email Id</string>
+    <string name="emi_banks">EMI Banks</string>
+    <string name="emi_card_name">Card Name</string>
+    <string name="exp">Expiry Date (MM/YY)</string>
+    <string name="expiry_month">Expiry Month</string>
+    <string name="expiry_year">Expiry Year</string>
+    <string name="issuing_bank">Issuing Bank</string>
+    <string name="merchant_id">Merchant Id</string>
+    <string name="name">Name</string>
+    <string name="next_button">Next</string>
+    <string name="pay_button">Pay</string>
+    <string name="pay_opt">Payment Option</string>
+    <string name="redirect_url">Redirect Url</string>
+    <string name="rsa_url">RSA Key Url</string>
+    <string name="state">State</string>
+    <string name="tel">Telephone</string>
+    <string name="zip">Zip</string>
+</resources>

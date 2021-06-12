@@ -1,0 +1,55 @@
+<div class="pop_wrap">
+	<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+	<h4 mat-dialog-title>
+		Select Products
+	</h4>
+	<mat-dialog-content style="min-width: 500px;">
+		<div class="pop-body">
+			<div class="filter dialogFilter">
+		        <button mat-icon-button mdTooltip="Reload" class="btn-main" (click)="getallOrderProducts(data.trent_picklist_id,data.order_id, '')"><mat-icon  class="icon-refresh"></mat-icon></button> 
+		        &nbsp;
+		        <div class="search">
+		          <mat-icon  class="icon-search"></mat-icon>
+		          <input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="getallOrderProducts(data.trent_picklist_id,data.order_id,search.value)">
+		      	</div>
+		    </div>
+			<div class="clear"></div>
+			<div class="table-list">
+		  		<table>
+					<tr>
+						<th class="check-select">
+							<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="selectedAll" (change)="toggleCheckAll($event)"></mat-checkbox>
+						</th>
+						<th class="short">EAN<span [class]=""></span></th>
+						<th class="short">SKU<span [class]=""></span></th>
+						<th class="short">Title<span [class]=""></span></th>
+						<th class="short">Item Order<span [class]=""></span></th>
+						<th class="short">List Price<span [class]=""></span></th>
+					</tr>
+					<tr [class.chec]="row.selected" *ngFor="let row of result_list">
+						<td>
+							<mat-checkbox name="row.selected" id="tag_list{{row.id}}" [checked]="row.selected" (change)="toggleCheckCrates(row.id,$event)"></mat-checkbox>
+						</td>
+						<td>{{row.ean}}</td>
+						<td>{{row.sku}}</td>
+						<td>{{row.product_name}}</td>
+						<td class="align-middle text-center">
+							{{row.quantity}}
+						</td>
+						<td class="align-middle text-center">
+							{{row.default_price}}
+						</td>
+					</tr>
+					<tr *ngIf="result_list.length==0">
+					  	<td colspan="3" align="center">No records found</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</mat-dialog-content>
+	<hr>
+	<mat-dialog-actions layout="row" class="div-pop-bottom">
+		<button mat-raised-button class="btn-main" type="button" (click)="selectOrderProducts()">Save</button>
+		<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</div>

@@ -1,0 +1,121 @@
+<section class="right-part">
+  <div class="body-part">
+      <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEdit(formData)">
+          <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+          <div class="topheading">
+              <h1>{{(formModel.formId>0)?'Edit':'Add'}} Tax rules
+          <div class="btn-header">
+          <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+              <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+        </h1> </div>
+          <div class="clear"></div>
+          <div class="box">
+              <div class="fixed-width">
+                <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                  <div class="row">
+                      <div class="col-sm-4">
+                         <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Rule name</mat-label>
+                              <input matInput placeholder="Rule name" required #rule_name="ngModel" name="rule_name" [(ngModel)]="formModel.rule_name" pattern="^(?!\s*$|\s).*$">
+                              <mat-error *ngIf="rule_name.errors && rule_name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="rule_name.errors && rule_name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-4">
+                       <!-- <mat-form-field appearance="outline"  class="md-block">
+                          <mat-label>Tax Rate</mat-label>
+                          <mat-select placeholder="Tax Rate" required #tax_rate_id="ngModel" name="tax_rate_id" [(ngModel)]="formModel.tax_rate_id">
+                            <mat-option *ngFor="let item of tax_rate_list" [value]="item.id">{{item.name}}</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="tax_rate_id.errors && tax_rate_id.errors.required"> This is a <strong>required</strong> field </mat-error>
+                        </mat-form-field> -->
+                        <ng-select [ngClass]="{ 'custom_error_red': tax_rate_id.errors && tax_rate_id.errors.required && (tax_rate_id.dirty || tax_rate_id.touched || formData.submitted) }"
+                            [items]="tax_rate_list"
+                            required
+                            placeholder="Tax Rate"
+                            bindLabel="name" bindValue="id"
+                            #tax_rate_id="ngModel" name="tax_rate_id" [(ngModel)]="formModel.tax_rate_id"
+                          >
+                          </ng-select>
+                          <p class="custom_error" *ngIf="tax_rate_id.errors && tax_rate_id.errors.required && (tax_rate_id.dirty || tax_rate_id.touched || formData.submitted)">This is a <strong>required</strong> field</p>
+                      </div>
+                      <div class="col-sm-4">
+                         <!-- <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Product Tax Class</mat-label>
+                            <mat-select placeholder="Product Tax Class"  #product_tax_class_id="ngModel" name="product_tax_class_id" [(ngModel)]="formModel.product_tax_class_id" multiple>
+                              <mat-option *ngFor="let item of product_tax_list" [value]="item.id">{{item.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field> -->
+                          <ng-select
+                            [items]="product_tax_list"
+                            placeholder="Product Tax Class"
+                            [multiple]="true"
+                            bindLabel="name" bindValue="id"
+                            #product_tax_class_id="ngModel" name="product_tax_class_id" [(ngModel)]="formModel.product_tax_class_id"
+                            style="margin-top: 8px !important;"
+                          >
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                    <span class="ng-value-label">{{item.name}}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                            </div>
+                          </ng-template>
+                          </ng-select>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                     <!-- <mat-form-field appearance="outline"  class="md-block">
+                        <mat-label>Customer Tax Class</mat-label>
+                        <mat-select placeholder="Customer Tax Class" #customer_tax_class_id="ngModel" name="customer_tax_class_id" [(ngModel)]="formModel.customer_tax_class_id" multiple>
+                          <mat-option *ngFor="let item of customer_tax_list" [value]="item.id">{{item.tax_class_name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                      <ng-select
+                        [items]="customer_tax_list"
+                        placeholder="Customer Tax Class"
+                        [multiple]="true"
+                        bindLabel="tax_class_name" bindValue="id"
+                        #customer_tax_class_id="ngModel" name="customer_tax_class_id" [(ngModel)]="formModel.customer_tax_class_id"
+                        style="margin-top: 8px !important;"
+                      >
+                      <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                <span class="ng-value-label">{{item.tax_class_name}}</span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                                <span class="ng-value-label">{{items.length - 1}} more...</span>
+                        </div>
+                      </ng-template>
+                      </ng-select>
+                    </div>
+                    <div class="col-sm-6">
+                       <mat-form-field appearance="outline"  class="md-block">
+                          <mat-label>Priority</mat-label>
+                          <input matInput required placeholder="Priority" #priority="ngModel" name="priority"  [(ngModel)]="formModel.priority" pattern="[0-9]{1,3}">
+                        </mat-form-field>
+                        <mat-error *ngIf="priority.errors && priority.errors.pattern"> This is not a valid input</mat-error>
+                    </div>
+                  </div>
+              </div>
+              <!-- ///////////////Buttons//// -->
+              <div class="btn-header hidden-xs">
+                  <button type="submit" mat-raised-button class="btn-main">Save</button>
+                  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+              </div>
+              <div class="clear"></div>
+              <!-- ///////////////Buttons//// -->
+          </div>
+          <div class="clear"></div>
+      </form>
+  </div>
+</section>

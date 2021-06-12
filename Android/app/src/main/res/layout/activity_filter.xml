@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".view.FilterActivity">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="false"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="@dimen/back_btn_width"
+                            android:layout_height="@dimen/back_btn_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:src="@drawable/back_arrow_black" />
+
+                        <TextView
+                            android:id="@+id/tvListingTitle"
+                            style="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_toStartOf="@+id/ivSearch"
+                            android:layout_toLeftOf="@+id/ivSearch"
+                            android:layout_toEndOf="@+id/ivBack"
+                            android:layout_toRightOf="@+id/ivBack"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/montserrat"
+                            android:maxLines="1"
+                            android:text="Filters"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvClearAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:fontFamily="@font/montserrat"
+                            android:text="Clear all"
+                            android:textColor="#ED1C24"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_marginTop="8dp"
+            android:id="@+id/viewHeaderDvider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/cvHeader"
+            android:background="@drawable/test_divider" />
+
+        <RelativeLayout
+
+            android:id="@+id/rlLeftMenu"
+            android:background="#F9F9F9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewHeaderDvider">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="#F9F9F9"
+                android:id="@+id/rvSideMenuCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+            <View
+                android:visibility="invisible"
+                android:id="@+id/menuDividerBelow"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rvSideMenuCategory"
+                android:layout_marginLeft="159dp"
+                android:background="@color/view_divider_clr"
+                android:elevation="0dp" />
+            <View
+                android:visibility="gone"
+                android:id="@+id/menuDivider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/rvSideMenuCategory"
+                android:background="@color/view_divider_clr"
+                android:elevation="0dp" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRightMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/viewHeaderDvider"
+            android:layout_toRightOf="@+id/rlLeftMenu" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/green_new" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcvFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/change_pass_red_border_bg"
+                    android:text="@string/cancel"
+                    android:textColor="@color/app_red_clr" />
+
+                <Button
+                    android:id="@+id/btnApplyFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/app_red_bg"
+                    android:text="@string/apply"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</layout>

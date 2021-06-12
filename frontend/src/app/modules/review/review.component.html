@@ -1,0 +1,17 @@
+<div class="tab_innerbody">
+    <!-- top -->
+    <app-overall-review (formEvent) = "showform($event)" [productId] ="product_id"></app-overall-review>
+    <!-- top -->
+
+    <!-- middle -->
+    <ng-container *ngIf="showclass">
+        <app-add-review [productId] ="product_id" (showclass)="onResetClick($event)"></app-add-review>
+    </ng-container>
+    
+    <!-- middle -->
+    <!-- review box -->
+   <app-reviewlist [productId] ="product_id"></app-reviewlist>
+    <!-- review box -->
+   
+
+</div>

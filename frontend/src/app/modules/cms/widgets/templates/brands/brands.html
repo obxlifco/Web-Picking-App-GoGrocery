@@ -1,0 +1,156 @@
+<!--  <section *ngIf="isCMS">
+    <div class="container container-lg">
+          <h2 class="pro_title">{{widget_data.heading_text}}</h2>
+          <ul class="product-list home">
+              <li>
+                  <div class="product-box">
+                      <div class="h_pro_img">
+                          <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                          
+                      </div>
+                      <div class="h_pro_desc text-center">
+                          <p>Brand 2</p>
+                         
+                      </div>
+                  </div>
+              </li>
+              <li>
+                  <div class="product-box">
+                      <div class="h_pro_img">
+                          <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                         
+                      </div>
+                      <div class="h_pro_desc text-center">
+                          <p>Brand 2</p>
+                         
+                      </div>
+                  </div>
+              </li>
+              <li>
+                  <div class="product-box">
+                      <div class="h_pro_img">
+                          <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                          
+                      </div>
+                      <div class="h_pro_desc text-center">
+                          <p>Brand 3</p>
+                         
+                      </div>
+                  </div>
+              </li>
+              <li>
+                  <div class="product-box">
+                      <div class="h_pro_img">
+                          <img src="https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg">
+                          
+                      </div>
+                      <div class="h_pro_desc text-center">
+                          <p>Brand 4</p>
+                         
+                      </div>
+                  </div>
+              </li>
+          </ul>
+      </div>
+  </section> -->
+<section class="container-fluid" *ngIf="isCMS">
+      <div class="row">
+          <div class="col-12">
+              <div class="container_cuswrap">
+                  <div class="innerheader">
+                      <h3>{{widget_data.heading_text}}</h3>
+                      <!-- <div class="showall_text"><a href="#">Show All Brands<span class="icon-back"></span></a>
+                       </div> -->
+                  </div>
+                  <div class="brand_productrow">
+                      <div class="productblog cms_brand_blog"><img src="assets/images/Layer_39.png"></div>
+                      <div class="productblog cms_brand_blog"><img src="assets/images/Layer_39.png"></div>
+                      <div class="productblog cms_brand_blog"><img src="assets/images/Layer_39.png"></div>
+                      <div class="productblog cms_brand_blog"><img src="assets/images/Layer_39.png"></div>
+                      <div class="productblog cms_brand_blog "><img src="assets/images/Layer_39.png"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- <section class="container-fluid" *ngIf="!isCMS">
+      <div class="row">
+          <div class="col-12">
+              <div class="container_cuswrap">
+                  <div class="innerheader home">
+                      <h3>{{widget_data.heading_text}}</h3>
+                  </div>
+                  <div class="brand_productrow">
+                    <ng-container *ngIf="innerWidth > 1000">
+                      <div class="custom-nav-brand">
+                        
+                      </div>
+                    <owl-carousel [options]="carouselOptions"  [carouselClasses]="['owl-theme' ,'sliding']" [items]="brand_list">
+                       <ng-container *ngFor="let brand of brand_list; let i=index">
+                        <div class="productblog styleCursor" *ngIf="brand['brand_logo']">
+                         <img  [src]="S3_URL_CATEGORY+brand.brand_logo" onerror="this.src='assets/images/noimg.png'" [routerLink]="['/listing/brand/'+brand['slug']]" width="200" height="96">
+                      </div>
+                       </ng-container>
+                      </owl-carousel>
+                    </ng-container>
+                    <ng-container *ngIf="innerWidth < 1000">
+                      <ng-container *ngFor="let brand of brand_list; let i=index">
+                        <div class="productblog styleCursor" *ngIf="brand['brand_logo']">
+                             <img  [src]="S3_URL_CATEGORY+brand.brand_logo" onerror="this.src='assets/images/noimg.png'" [routerLink]="['/listing/brand/'+brand['slug']]" width="200" height="96">
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                  
+
+              </div>
+          </div>
+      </div>
+  </section> -->
+
+  
+ <!-- <section *ngIf="!isCMS">
+      <div class="container container-lg">
+        <h2 class="pro_title">{{widget_data.heading_text}}</h2>
+        <ul class="product-list home">
+             <li *ngFor="let brand of brand_list; let i=index">
+                
+                <div class="product-box" [routerLink]="['/brands/'+brand.id]" *ngIf="i < 10">
+                    <div class="h_pro_img">
+                        <img *ngIf="brand.image" [src]="S3_URL_CATEGORY+brand.image">
+                        <img *ngIf="!brand.image" [src]="'https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg'">
+                    </div>
+                    <div class="h_pro_desc">
+                        <p style="text-align:center">{{brand.name}}</p> 
+                    </div>
+                </div>
+            </li>
+             
+        </ul>
+      </div>  
+  </section>--> 
+<!--   <div class="cus_container" *ngIf="!isCMS">
+   <div class="home_productrow">
+          <div class="head">
+              <div class="row justify-content-between">
+                  <div class="col-12 col-lg-auto">
+                      <h4>{{widget_data.heading_text}}</h4>
+                  </div>
+              </div>
+          </div>
+          <div class="pro_row">
+              <div class="row">
+                 
+                     
+              <div class="col-12 col-lg-12">
+                      <div style="width:20%;float: left;padding-bottom:30px;padding-right:20px" *ngFor="let brand of brand_list; let i=index">
+                      <div class="feb_brand_box" >
+                        <img *ngIf="brand.image" [src]="S3_URL_CATEGORY+brand.image">
+                        <img *ngIf="!brand.image" src="/assets/images/86.png">
+                  </div>
+                  </div>
+                  </div> 
+              </div>
+          </div>
+  </div>
+ </div>  -->

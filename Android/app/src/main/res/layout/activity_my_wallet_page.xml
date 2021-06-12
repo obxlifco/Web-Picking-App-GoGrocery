@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MyWalletPage">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="false"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="@dimen/back_btn_width"
+                            android:layout_height="@dimen/back_btn_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:src="@drawable/back_arrow_black" />
+
+                        <TextView
+                            android:id="@+id/tvListingTitle"
+                            android:textColor="#202020"
+                            android:textSize="16sp"
+
+                            android:fontFamily="@font/montserrat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@+id/ivSearch"
+                            android:layout_toLeftOf="@+id/ivSearch"
+                            android:layout_toEndOf="@+id/ivBack"
+                            android:layout_toRightOf="@+id/ivBack"
+                            android:text="My Wallet" />
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/cartRl"
+                            android:layout_width="32dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp">
+
+
+                            <ImageView
+                                android:id="@+id/ivCart"
+                                android:layout_width="20dp"
+                                android:layout_height="22dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:src="@drawable/ic_cart" />
+
+                            <TextView
+                                android:id="@+id/badge_notification"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_gravity="right|end|top"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="-10dp"
+                                android:layout_marginRight="-10dp"
+                                android:layout_toLeftOf="@+id/ivCart"
+                                android:background="@drawable/badge_circle"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="0"
+                                android:textColor="@android:color/white"
+                                android:textSize="8sp"
+                                android:visibility="gone" />
+
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/ivWishList"
+                            android:layout_width="18dp"
+                            android:layout_height="22dp"
+                            android:layout_alignRight="@+id/cartRl"
+                            android:layout_alignBottom="@+id/cartRl"
+                            android:layout_marginRight="36dp"
+                            android:layout_marginBottom="-4dp"
+                            android:src="@drawable/location_pin"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/ivSearch"
+                            android:layout_width="18dp"
+                            android:layout_height="20dp"
+                            android:layout_alignRight="@+id/ivWishList"
+                            android:layout_alignBottom="@+id/ivWishList"
+                            android:layout_marginRight="32dp"
+                            android:src="@drawable/search"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <View
+            android:visibility="gone"
+            android:id="@+id/viewHeaderDvider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_below="@+id/cvHeader"
+            android:background="@drawable/test_divider" />
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:id="@+id/cvWalletDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewHeaderDvider">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivMyWallet"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@drawable/my_wallet" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                    android:layout_toRightOf="@+id/ivMyWallet"
+                    android:id="@+id/tvWalletPoints"
+                    android:layout_alignTop="@+id/ivMyWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind"
+                    android:text="200 Points"
+                    android:layout_marginBottom="-8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_below="@+id/tvWalletPoints"
+                    android:layout_toRightOf="@+id/ivMyWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind"
+                    android:text="(1 Point = AED 1.00)" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:visibility="gone"
+            android:layout_below="@+id/cvWalletDetail"
+            android:id="@+id/txtWalletDetail"
+            android:layout_width="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/my_wallet_detail"
+            android:textColor="#4C4C4C" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/txtWalletDetail"
+            android:id="@+id/rvWalletList"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/my_wallet_row_new"
+            android:layout_height="wrap_content"/>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/green_new" />
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,87 @@
+.mat-select {
+    display: inline-block;
+    width: 100%;
+    outline: 0;
+    height: 40px;
+    /* padding-top: 4px; */
+    /* padding-left: 12px; */
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 7px;
+}
+.product_row .productblog .textbox .textrow.selectrow {
+    margin: 0;
+    padding: 10px 0;
+    margin: 0;
+    height: 52px;
+}
+.product_row .productblog .textbox .textrow p {
+    padding: 0 0 5px 0;
+    margin: 0;
+    width: 100%;
+    color: #333333;
+    font-size: 16px;
+    font-family: 'Hind', sans-serif;
+    font-weight: 500;
+    height: 62px;
+}
+.product_row .productblog .textbox .textrow.last.add_count .add_tocard {
+    display: block;
+}
+.inner_pagebanner .mannermenu ul li a {
+    padding: 0px;
+    margin: 0;
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;    
+    font-weight: 500;
+    font-family: 'Hind', sans-serif;
+}
+.inner_pagebanner .mannermenu ul li {
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Hind', sans-serif;
+}
+.mat-checkbox-layout .mat-checkbox-label {
+    text-transform: capitalize;
+}
+.product_row{padding: 0;width: 100%; display: flex; flex-wrap: wrap; justify-content:flex-start; margin-left:-10px; margin-right: -10px }
+/* .product_row .productblog {
+    padding: 25px 16px 100px;
+    margin: 0 10px 20px 10px;
+    width: calc(20% - 20px);
+    background-color: #fff;
+    box-shadow:0px 0px 13px 5px rgba(187, 186, 186, 0.2);
+    -moz-box-shadow:0px 0px 13px 5px rgba(187, 186, 186, 0.2);
+    min-height: 300px;
+    max-height:510px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+} */
+mat-slider {
+  width: 100%;
+}
+.mobile-bredcumb{
+    display: none;
+}
+@media (max-width: 767px) {
+	.mobile-bredcumb{
+        display: initial;
+        padding: 0px 10px 10px 10px;
+        font-family: 'Hind', sans-serif;
+        font-weight: 600;
+    }
+}
+.product_infinite_list_container {
+    height: 100%;
+    
+}
+

@@ -1,0 +1,82 @@
+    user  nginx;
+    worker_processes  1;
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+    events {
+    worker_connections  1024;
+    }
+    http {
+     include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log  /var/log/nginx/access.log  main;
+    sendfile        on;
+    keepalive_timeout  1200;
+    etag off;
+    gzip on;
+    gzip_comp_level 2;
+    gzip_http_version 1.0;
+    gzip_proxied any;
+    gzip_min_length 256;
+    gzip_buffers 16 8k;
+    gzip_types text/plain text/css application/json application/x-javascript application/javascript text/xml application/xml application/xml+rss text/javascript application/vnd.ms-fontobject application/x-font-ttf font/opentype image/svg+xml image/x-icon application/json;
+
+    # Disable for IE < 6 because there are some known problems
+    gzip_disable "MSIE [1-6].(?!.*SV1)";
+    # Add a vary header for downstream proxies to avoid sending cached gzipped files to IE6
+    gzip_vary on;
+    # include /etc/nginx/conf.d/*.conf;
+    client_max_body_size 32m;
+    # Expires map
+    map $sent_http_content_type $expires {
+        default                    off;
+        text/html                  epoch;
+        text/css                   1h;
+        text/scss                   1h;
+        application/json            1h;
+        application/javascript     1h;
+        ~image/                    1h;
+    }
+    server {
+        listen 66;
+        listen [::]:66;
+
+        server_name navsoft.co.in;
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+        root  /usr/share/nginx/html;
+        index  index.html index.htm;
+        large_client_header_buffers 4 32k;
+        location / {
+               #try_files $uri $uri/ /index.html;
+               add_header 'Access-Control-Allow-Origin' '*';
+               add_header 'Access-Control-Allow-Credentials' 'true';
+               add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+               add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+               add_header 'Access-Control-Request-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+               add_header 'Access-Control-Max-Age' '151200';
+               proxy_read_timeout 300s;
+               proxy_connect_timeout 750000s;
+               proxy_pass http://app_frontend:4000;
+              # Set HTTP headers so that our app knows where the requests really come from
+               proxy_set_header HOST $host;
+               proxy_set_header X-Real-IP $remote_addr;
+               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         }
+         location /api/ {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+            add_header 'Access-Control-Max-Age' '151200'; 
+            proxy_pass http://webservices:8062;
+            # Set HTTP headers so that our app knows where the requests really come from
+            proxy_set_header HOST $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+     }   
+  }

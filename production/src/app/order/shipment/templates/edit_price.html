@@ -1,0 +1,66 @@
+<form #PriceChange="ngForm" novalidate (ngSubmit)="PriceChange.valid && saveEditPrice()">
+	<div class="pop_wrap">
+		<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+		<h4 mat-dialog-title>
+			Price Change
+	    </h4>
+		<mat-dialog-content style="min-width: 500px;">
+			<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+	   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+			<div class="pop-body">
+				<div class="box productbox">
+					<div class="md-block">
+						<mat-form-field appearance="outline"  class="md-block"><mat-label>SKU ID </mat-label>
+							<input matInput placeholder="SKU ID" #sku="ngModel" name="sku" [(ngModel)]="formModel.sku" disabled>
+						</mat-form-field>
+			  		</div>
+
+			  		<div class="md-block">
+						<mat-form-field appearance="outline"  class="md-block"><mat-label>Product Name </mat-label>
+							<input matInput placeholder="Product Name" #name="ngModel" name="name" [(ngModel)]="formModel.name" disabled>
+						</mat-form-field>
+			  		</div>
+
+			  		<div class="md-block">
+						<mat-form-field appearance="outline"  class="md-block"><mat-label>Existing Price </mat-label>
+							<input matInput placeholder="Existing Price" #old_product_price="ngModel" name="old_product_price" [(ngModel)]="formModel.old_product_price" disabled>
+						</mat-form-field>
+			  		</div>
+
+			  		<div class="md-block" *ngIf="formModel.product_weight > 0">
+						<mat-form-field appearance="outline" class="md-block"><mat-label>Weight </mat-label>
+							<input matInput type="number" placeholder="Weight" required #weight="ngModel" name="weight" [(ngModel)]="formModel.weight" (blur)="updatePrice()">
+							<mat-error *ngIf="weight.errors && weight.errors.required">
+						      	New Price is Required
+						    </mat-error>
+						</mat-form-field>
+			  		</div>
+
+					<div class="md-block">
+						<mat-form-field appearance="outline" class="md-block"><mat-label>New Price </mat-label>
+							<input matInput type="number" placeholder="New Price" required #product_price="ngModel" name="product_price" [(ngModel)]="formModel.product_price">
+							<mat-error *ngIf="product_price.errors && product_price.errors.required">
+						      	New Price is Required
+						    </mat-error>
+						</mat-form-field>
+			  		</div>
+
+			  		<div class="md-block">
+						<mat-form-field appearance="outline" class="md-block"><mat-label>Comments </mat-label>
+							<textarea matInput placeholder="Comments" #notes="ngModel" name="notes" [(ngModel)]="formModel.notes" rows="4"></textarea>
+							<!-- <mat-error *ngIf="notes.errors && notes.errors.required">
+								Comments is Required
+							</mat-error> -->
+						</mat-form-field>
+			  		</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</mat-dialog-content>
+		<hr>
+		<mat-dialog-actions layout="row" class="div-pop-bottom">
+			<button mat-raised-button class="btn-main" type="submit">Save</button>
+			<button mat-raised-button [mat-dialog-close]="true" class="btn-line" type="button">Cancel</button>
+		</mat-dialog-actions>
+	</div>
+</form>

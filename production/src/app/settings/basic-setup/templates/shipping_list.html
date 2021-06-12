@@ -1,0 +1,451 @@
+<section class="right-part filter-pad addall_page">
+    <div class="topheading">
+    	<div class="heading-left">
+	        <h1> Basic Setup
+				<div class="btn-header">
+					<button type="submit" mat-raised-button class="btn-main" [routerLink]="['/basicsetup']" (click)="globalService.deleteTab(tabIndex,parentId)">Continue</button>
+					<button type="button" mat-raised-button class="btn-line" (click)="globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				</div>
+				<div class="clear"></div>
+			</h1>
+	    </div>       
+    </div>
+    <div class="filter filter-stp">
+		<div class="stap">
+			<ul>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+settingsId]">Basic Setup</a></li>
+				<!-- <li class="done"><a [routerLink]="['/basicsetup/edit/'+settingsId+'/template']">Select Template</a></li> -->
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+settingsId+'/payment_gateway']">Payment Gateway</a></li>
+				<li class="active">Shipping</li>
+				<!-- <li>Channel Setup</li> -->
+			</ul>
+		</div>	
+	</div>
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="box matTabInside">
+			<mat-tab-group (selectedTabChange)="shipping_setup($event)" class="cus_matgrp">
+				<mat-tab tabindex="10">
+				    <ng-template mat-tab-label>
+						<span class="icon-fast-delivery icon2x tabheaderIcon"></span><span class="tabheaderText">Flat Shipping Method</span>
+				    </ng-template>
+				    <div class="heading heading-inside-tabs">
+						<span class="heading-inside-tabs-header">Flat Shipping Method</span> 
+						<mat-slide-toggle labelPosition="before" class="heading-inside-tabs-toggle" (change)="applicable_shippings($event,'Flat-Shipping','4')" [(ngModel)]="flatSippingMethodFlag"></mat-slide-toggle>
+						<button mat-raised-button class="btn-main btn-right" (click)="openPop('Flat-Shipping','')">Add Flat Rate</button>
+					</div>				    
+					<div class="grid">
+						<div class="action-box in-tab-action-box">
+							<label> {{bulk_ids.length}} Selected (out of all {{config.currentPageCount}}) </label>
+							<!-- ///////////Edit////////////// -->
+							<button mat-button (click)="openPop('Flat-Shipping',individualRow.id)" *ngIf="bulk_ids.length==1  && childData.ispopup=='Y' && show_btn.edit">
+								<mat-icon class="icon-edit"></mat-icon>Edit</button>
+							<!-- ///////////Delete/Block/Unblock////////////// -->
+							<button mat-button (click)="updateStatusAll(2)" *ngIf="show_btn.delete">
+								<mat-icon class="icon-delete"></mat-icon>
+								Delete</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Active' && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Inactive' && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+
+							<button mat-icon-button class="white-ripple pull-right" (click)="loadShippingMethod(0, '', '', '', '',4,0)">
+								<mat-icon class="icon-close"></mat-icon>
+							</button>							
+						</div>
+					<div class="table-list">
+						<table>
+							
+								<tr>
+									<th class="check-select">
+										<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event , 'Free-Shipping')"></mat-checkbox>
+									</th>
+									<ng-container *ngFor="let col of cols">
+										<th *ngIf="col.show == 1" class="short" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}" (click)="loadShippingMethod(0,1,col.field,filter,search.value,4,0)">{{col.title}}
+											<span [class]="(sortBy==col.field)?sortClass:''"></span>
+										</th>
+									</ng-container>
+								</tr>
+							
+							
+								<tr [class.chec]="row.selected" *ngFor="let row of flat_shipping_method_result">
+									<td>
+										<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheckShipping(row.id,$event , 'Free-Shipping')"></mat-checkbox>
+									</td>
+									<ng-container *ngFor="let col of cols">
+										<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+											<span [ngClass]="col.field=='isblocked' ? (row[col.field]=='Active'?'status-box shipped':'status-box pendings') : ''">
+												<ng-container *ngIf="col.field_type=='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])}}
+												</ng-container>
+												<ng-container *ngIf="col.field_type!='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+												</ng-container>
+											</span>
+										</td>
+									</ng-container>
+								</tr>
+								<tr *ngIf="pagination.total_page==0 && flat_shipping_method_result.length==0">
+									<td colspan="4" align="center">No records found</td>
+								</tr>
+							
+						</table>
+					</div>
+					<div class="clear"></div>
+					<div class="pagination-box" *ngIf="pagination.total_page>1">
+						<span *ngFor="let list of total_list | paginate: config"></span>
+						<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="loadShippingMethod(0,$event,'',filter,search.value,4,0)" [maxSize]="maxSize">
+							<ul class="pagination">
+								<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+									<a (click)="p.previous()">
+										<span class="icon-left"></span>
+									</a>
+								</li>
+								<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+									<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+										<span>{{ page.label }}</span>
+									</a>
+									<a *ngIf="p.getCurrent() === page.value">
+										<span>{{ page.label }}</span>
+									</a>
+								</li>
+								<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+									<a (click)="p.next()">
+										<span class="icon-right"></span>
+									</a>
+								</li>
+							</ul>
+						</pagination-template>
+					</div>
+					<div class="clear"></div>
+					</div>
+				</mat-tab>
+
+				<!-- <mat-tab>
+				    <ng-template mat-tab-label>
+				      	<span class="icon-table icon2x tabheaderIcon"></span><span class="tabheaderText">Table Rates</span>
+				    </ng-template>
+					<div class="heading heading-inside-tabs">
+						<span class="heading-inside-tabs-header">Table Rates</span>
+						<mat-slide-toggle labelPosition="before" class="heading-inside-tabs-toggle" (change)="applicable_shippings($event,'Table Rate',6)" [(ngModel)]="flatSippingMethodFlag" ></mat-slide-toggle>
+						<button mat-raised-button class="btn-main btn-right"  (click)="openPop('Table-Rate','')">Add Table Rate</button>
+					</div>
+					<div class="grid">
+						<div class="action-box in-tab-action-box">
+							<label> {{bulk_ids.length}} Selected (out of all {{config.currentPageCount}}) </label>
+							<button (click)="openPop(individualRow.id)" *ngIf="childData.table == 'EngageboostDiscountMasters' && childData.screen =='list1' && bulk_ids.length==1 && permission.view=='Y'"
+							 mat-button>
+								<mat-icon class="icon-search"></mat-icon>View</button>
+							
+							<button mat-button [routerLink]="['/'+childData.tablink+'/edit/'+individualRow.id+'']" *ngIf="bulk_ids.length==1 && permission.edit=='Y' && childData.ispopup=='N' && show_btn.edit"
+							 (click)="globalService.addTab('edit'+childData.tablink,childData.tablink+'/edit/'+individualRow.id+'','Edit '+childData.heading,childData.tabparrentid)">
+								<mat-icon class="icon-edit"></mat-icon>
+								Edit</button>
+							
+							<button mat-button *ngIf="bulk_ids.length==1 && permission.edit=='N' && show_btn.edit" (click)="dialogsService.alert('Permission Error', 'You have no permission to edit!')">
+								<mat-icon class="icon-edit"></mat-icon>
+								Edit</button>
+							
+							<button mat-button (click)="updateStatusAll(2)" *ngIf="show_btn.delete">
+								<mat-icon class="icon-delete"></mat-icon>
+								Delete</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Active' && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Inactive' && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+							<button mat-icon-button class="white-ripple pull-right" (click)="generateGrid(0,'','','','')">
+								<mat-icon class="icon-close"></mat-icon>
+							</button>
+						</div>
+						<div class="table-list">
+							<table>
+								
+								<tr>
+									<th class="check-select">
+										<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event,'Free-Shipping')"></mat-checkbox>
+									</th>
+									<ng-container *ngFor="let col of cols">
+										<th *ngIf="col.show == 1" class="short" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}" (click)="generateGrid(0,1,col.field,filter,search.value,5,1)">{{col.title}}
+											<span [class]="(sortBy==col.field)?sortClass:''"></span>
+										</th>
+									</ng-container>
+								</tr>
+								
+								
+								<tr [class.chec]="row.selected" *ngFor="let row of table_rate_result">
+									<td>
+										<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+									</td>
+									<ng-container *ngFor="let col of cols">
+										<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+											<span [ngClass]="col.field=='isblocked' ? (row[col.field]=='Active'?'status-box shipped':'status-box pendings') : ''">
+												<ng-container *ngIf="col.field_type=='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field]) }}
+												</ng-container>
+												<ng-container *ngIf="col.field_type!='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+												</ng-container>
+											</span>
+										</td>
+									</ng-container>
+								</tr>
+								<tr *ngIf="pagination.total_page==0 && result_list.length==0">
+									<td colspan="4" align="center">No records found</td>
+								</tr>
+								
+							</table>
+						</div>
+						<div class="clear"></div>
+					
+					
+						<div class="pagination-box" *ngIf="pagination.total_page>1">
+							<span *ngFor="let list of total_list | paginate: config"></span>
+							<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value,5,1)" [maxSize]="maxSize">
+								<ul class="pagination">
+									<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+										<a (click)="p.previous()">
+											<span class="icon-left"></span>
+										</a>
+									</li>
+									<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+										<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+											<span>{{ page.label }}</span>
+										</a>
+										<a *ngIf="p.getCurrent() === page.value">
+											<span>{{ page.label }}</span>
+										</a>
+									</li>
+									<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+										<a (click)="p.next()">
+											<span class="icon-right"></span>
+										</a>
+									</li>
+								</ul>
+							</pagination-template>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</mat-tab>
+ -->
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<span class="icon-giftbox icon2x tabheaderIcon"></span><span class="tabheaderText">Free Shipping</span>
+					</ng-template>
+					<div class="heading heading-inside-tabs">
+						<span class="heading-inside-tabs-header">Free Shipping</span>
+						<mat-slide-toggle labelPosition="before" class="heading-inside-tabs-toggle"  (change)="applicable_shippings($event,'Free Shipping',6)" [(ngModel)]="flatSippingMethodFlag"></mat-slide-toggle>
+						<button mat-raised-button class="btn-main btn-right" (click)="openPop('Free-Shipping','')">Add Free Shipping</button>
+					</div>
+					<div class="grid">
+						<div class="action-box in-tab-action-box">
+							<label> {{bulk_ids.length}} Selected (out of all {{config.currentPageCount}}) </label>
+							<!-- ///////////Edit////////////// -->
+							<button mat-button (click)="openPop('Free-Shipping',individualRow.id)" *ngIf="bulk_ids.length==1  && childData.ispopup=='Y' && show_btn.edit">
+								<mat-icon class="icon-edit"></mat-icon>Edit</button>
+							<!-- ///////////Delete/Block/Unblock////////////// -->
+							<button mat-button (click)="updateStatusAll(2)" *ngIf="show_btn.delete">
+								<mat-icon class="icon-delete"></mat-icon>
+								Delete</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Active' && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length==1 && individualRow.isblocked == 'Inactive' && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+							<button mat-button (click)="updateStatusAll(1)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-lock"></mat-icon>
+								Block</button>
+							<button mat-button (click)="updateStatusAll(0)" *ngIf="bulk_ids.length!=1 && show_btn.block">
+								<mat-icon class="icon-unlock"></mat-icon>
+								Unblock</button>
+
+							<button mat-icon-button class="white-ripple pull-right" (click)="loadShippingMethod(0, '', '', '', '',6,2)">
+								<mat-icon class="icon-close"></mat-icon>
+							</button>							
+						</div>
+						<div class="table-list">
+							<table>
+								
+									<tr>
+										<th class="check-select">
+											<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event,'Free-Shipping')"></mat-checkbox>
+										</th>
+										<ng-container *ngFor="let col of cols">
+											<th *ngIf="col.show == 1" class="short" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}" (click)="generateGrid(0,1,col.field,filter,search.value,6,2)">{{col.title}}
+												<span [class]="(sortBy==col.field)?sortClass:''"></span>
+											</th>
+										</ng-container>
+									</tr>
+								
+								
+									<tr [class.chec]="row.selected" *ngFor="let row of free_shipping_result">
+										<td>
+											<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+										</td>
+										<ng-container *ngFor="let col of cols">
+											<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+												<span [ngClass]="col.field=='isblocked' ? (row[col.field]=='Active'?'status-box shipped':'status-box pendings') : ''">
+													<ng-container *ngIf="col.field_type=='p'">
+														{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])}}
+													</ng-container>
+													<ng-container *ngIf="col.field_type!='p'">
+														{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+													</ng-container>
+												</span>
+											</td>
+										</ng-container>
+									</tr>
+									<tr *ngIf="pagination.total_page==0 && result_list.length==0">
+										<td colspan="4" align="center">No records found</td>
+									</tr>
+								
+							</table>
+						</div>
+						<div class="clear"></div>
+				
+				
+						<div class="pagination-box" *ngIf="pagination.total_page>1">
+							<span *ngFor="let list of total_list | paginate: config"></span>
+							<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value,6,2)" [maxSize]="maxSize">
+								<ul class="pagination">
+									<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+										<a (click)="p.previous()">
+											<span class="icon-left"></span>
+										</a>
+									</li>
+									<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+										<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+											<span>{{ page.label }}</span>
+										</a>
+										<a *ngIf="p.getCurrent() === page.value">
+											<span>{{ page.label }}</span>
+										</a>
+									</li>
+									<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+										<a (click)="p.next()">
+											<span class="icon-right"></span>
+										</a>
+									</li>
+								</ul>
+							</pagination-template>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</mat-tab>
+
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<span class="icon-delivery icon2x tabheaderIcon"></span><span class="tabheaderText">Cash On Delivery</span>
+					</ng-template>
+					<div class="heading heading-inside-tabs">
+						<span class="heading-inside-tabs-header">COD ZipCode</span>
+						<mat-slide-toggle labelPosition="before" class="heading-inside-tabs-toggle" (change)="applicable_shippings($event,'Flat-Shipping','23')"
+						 [(ngModel)]="flatSippingMethodFlag"></mat-slide-toggle>
+						<button mat-raised-button class="btn-main btn-right" (click)="openPop('COD-Zipcode','')">Add COD</button>
+					</div>
+					<div class="grid">
+						<div class="action-box in-tab-action-box">
+							<label> {{bulk_ids.length}} Selected (out of all {{config.currentPageCount}}) </label>
+							<!-- ///////////Edit////////////// -->
+				
+							<!-- ///////////Delete/Block/Unblock////////////// -->
+							<button mat-button (click)="updateStatusAllCOD(2)" *ngIf="show_btn.delete">
+								<mat-icon class="icon-delete"></mat-icon>
+								Delete</button>
+							<button mat-icon-button class="white-ripple pull-right" (click)="generateGrid(0,'','','','')">
+								<mat-icon class="icon-close"></mat-icon>
+							</button>
+						</div>
+				
+				
+						<div class="table-list">
+							<table>
+								
+									<tr>
+										<th class="check-select">
+											<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event,'Free-Shipping')"></mat-checkbox>
+										</th>
+										<ng-container *ngFor="let col of cols">
+											<th *ngIf="col.show == 1" class="short" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}" (click)="generateGrid(0,1,col.field,filter,search.value)">{{col.title}}
+												<span [class]="(sortBy==col.field)?sortClass:''"></span>
+											</th>
+										</ng-container>
+									</tr>
+								
+								
+								<tr [class.chec]="row.selected" *ngFor="let row of result_list">
+									<td>
+										<mat-checkbox name="row.selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+									</td>
+									<ng-container *ngFor="let col of cols">
+										<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+											<span [ngClass]="col.field=='isblocked' ? (row[col.field]=='Active'?'status-box shipped':'status-box pendings') : ''">
+												<ng-container *ngIf="col.field_type=='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field]) }}
+												</ng-container>
+												<ng-container *ngIf="col.field_type!='p'">
+													{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+												</ng-container>
+											</span>
+										</td>
+									</ng-container>
+								</tr>
+								<tr *ngIf="pagination.total_page==0 && result_list.length==0">
+									<td colspan="4" align="center">No records found</td>
+								</tr>
+								
+							</table>
+						</div>
+						<div class="clear"></div>
+				
+				
+						<div class="pagination-box" *ngIf="pagination.total_page>1">
+							<span *ngFor="let list of total_list | paginate: config"></span>
+							<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value)" [maxSize]="maxSize">
+								<ul class="pagination">
+									<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+										<a (click)="p.previous()">
+											<span class="icon-left"></span>
+										</a>
+									</li>
+									<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+										<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+											<span>{{ page.label }}</span>
+										</a>
+										<a *ngIf="p.getCurrent() === page.value">
+											<span>{{ page.label }}</span>
+										</a>
+									</li>
+									<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+										<a (click)="p.next()">
+											<span class="icon-right"></span>
+										</a>
+									</li>
+								</ul>
+							</pagination-template>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</mat-tab>
+
+			</mat-tab-group>
+	    </div>  	
+	</div>
+
+

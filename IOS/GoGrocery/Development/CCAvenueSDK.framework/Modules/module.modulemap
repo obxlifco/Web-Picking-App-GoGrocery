@@ -1,0 +1,6 @@
+framework module CCAvenueSDK {
+  umbrella header "CCAvenueSDK.h"
+
+  export *
+  module * { export * }
+}

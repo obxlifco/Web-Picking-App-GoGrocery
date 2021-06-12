@@ -1,0 +1,121 @@
+<h2 md-dialog-title>Select Category</h2>
+<mat-dialog-content class=" select-cat">
+	<div class="pop-body" layout="column">
+		<form #discountForm="ngForm" novalidate (ngSubmit)="discountForm.valid">
+
+			<section class="pop-head my-2">
+
+				<mat-radio-group #select_category="ngModel" name="select_category"
+					[(ngModel)]="formModel.select_category" required>
+					<mat-radio-button class="example-margin" value="1" ng-checked="true">Specific Category
+					</mat-radio-button>
+					<mat-radio-button class="example-margin" value="0">Select All</mat-radio-button>
+				</mat-radio-group>
+			</section>
+
+			<ng-container *ngIf="select_category.value==1">
+				<div *ngFor="let item of formModel.parent_categories; let index=index; let last=last;">
+					<div class="row">
+
+						<div class="col-xs-10 col-sm-4">
+							<div class="mandatory-select">
+								<mat-form-field appearance="outline">
+									<mat-label>Parent Category</mat-label>
+									<mat-select required placeholder="Parent Category" #categoryparent="ngModel"
+										name="categoryparent{{index}}" [(ngModel)]="item.category_1"
+										(selectionChange)="get_child_categories(item.category_1,index,1,1)">
+										<mat-option *ngFor="let category of parent_category_list" [value]="category.id">
+											{{category.name}}</mat-option>
+									</mat-select>
+									<mat-error
+										*ngIf="categoryparent.errors && categoryparent.errors.required && (categoryparent.dirty || categoryparent.touched || discountForm.submitted)">
+										This is a <strong>required</strong> field
+									</mat-error>
+								</mat-form-field>
+								<!-- <ng-select [ngClass]="{ 'custom_error_red': categoryparent.errors && categoryparent.errors.required && (categoryparent.dirty || categoryparent.touched || discountForm.submitted) }"
+									[items]="parent_category_list"
+									required
+									placeholder="Parent Category"
+									bindLabel="name" bindValue="id"
+									#categoryparent="ngModel" name="categoryparent{{index}}" [(ngModel)]="item.category_1"
+									(change)="get_child_categories(item.category_1,index,1,1)"
+								>
+								</ng-select>
+								<p class="custom_error" *ngIf="categoryparent.errors && categoryparent.errors.required && (categoryparent.dirty || parent_category_selected.touched || discountForm.submitted)">This is a <strong>required</strong> field</p> -->
+							</div>
+						</div>
+						<div class="col-xs-2 col-sm-push-6">
+							<button type="button" class="margin-auto20" mat-icon-button (click)="removeRow(index)"
+								*ngIf="formModel.parent_categories.length>1"><i class="icon-close"></i></button>
+						</div>
+						<div class="col-xs-10 col-sm-2 col-sm-pull-2">
+							<mat-form-field appearance="outline">
+								<mat-label>Category</mat-label>
+								<mat-select placeholder=" Category" #categorychild="ngModel"
+									name="categorychild{{index}}" [(ngModel)]="item.category_2"
+									(selectionChange)="get_child_categories(item.category_2,index,2,1)">
+									<mat-option *ngFor="let category of child_category_list[index]"
+										[value]="category.id">{{category.name}}</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<!-- <ng-select [items]="child_category_list[index]"
+								placeholder="Category"
+								bindLabel="name" bindValue="id"
+								#categorychild="ngModel" name="categorychild{{index}}" [(ngModel)]="item.category_2"
+								(change)="get_child_categories(item.category_2,index,2,1)"
+							>
+							</ng-select> -->
+						</div>
+						<div class="col-xs-10 col-sm-2 col-sm-pull-2">
+							<mat-form-field appearance="outline">
+								<mat-label>Category</mat-label>
+								<mat-select placeholder=" Category" #categorychild2="ngModel"
+									name="categorychild2{{index}}" [(ngModel)]="item.category_3"
+									(selectionChange)="get_child_categories(item.category_3,index,3,1)">
+									<mat-option *ngFor="let category of sub_child_category_list[index]"
+										[value]="category.id">{{category.name}}</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<!-- <ng-select [items]="sub_child_category_list[index]"
+								placeholder="Category"
+								bindLabel="name" bindValue="id"
+								#categorychild2="ngModel" name="categorychild2{{index}}" [(ngModel)]="item.category_3"
+								(change)="get_child_categories(item.category_3,index,3,1)"
+							>
+							</ng-select> -->
+						</div>
+						<div class="col-xs-10 col-sm-2 col-sm-pull-2">
+							<mat-form-field appearance="outline">
+								<mat-label>Category</mat-label>
+								<mat-select placeholder=" Category" #categorychild3="ngModel"
+									name="categorychild3{{index}}" [(ngModel)]="item.category_4">
+									<mat-option *ngFor="let category of sub_sub_child_category_list[index]"
+										[value]="category.id">{{category.name}}</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<!-- <ng-select [items]="sub_sub_child_category_list[index]"
+								placeholder="Category"
+								bindLabel="name" bindValue="id"
+								#categorychild3="ngModel" name="categorychild3{{index}}" [(ngModel)]="item.category_4"
+							>
+							</ng-select> -->
+						</div>
+					</div>
+					<hr class="visible-xs">
+					<div class="clear10" *ngIf="last"></div>
+					<button type="button" class="btn-pink" md-mini-fab (click)="addRow()" *ngIf="last"><i
+							class="icon-add"></i></button>
+					<label (click)="addRow()" *ngIf="last" class="ml-1 text-pink text-bold">Add new</label>
+				</div>
+
+			</ng-container>
+		</form>
+	</div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="saveCategory()">Save</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,1379 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]" date="1622027604968" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 26/5/21 4:43 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ggg.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ggg.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ggg.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_ic_launcher_round.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_ic_launcher_round.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-hdpi-v4_ic_launcher_round.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_credit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_credit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_credit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_webview.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_webview.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_webview.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_round_background.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_round_background.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_round_background.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_spinner_background.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_spinner_background.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_spinner_background.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_rupay.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_rupay.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_rupay.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/unknown_cc.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/unknown_cc.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/unknown_cc.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/up.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/up.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/up.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_wallet.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_wallet.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_wallet.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/cvv.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_net_banking.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_net_banking.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_net_banking.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_debit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_debit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_debit_card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/expand_less.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/expand_less.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_less.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_wallet.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_wallet.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_wallet.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_emi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_emi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_emi.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_expand_more.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_expand_more.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xhdpi-v4_expand_more.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/eze.jpg" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/eze.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/eze.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_mobile_upi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_mobile_upi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_mobile_upi.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_ic_launcher.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_ic_launcher.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xhdpi-v4_ic_launcher.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/axiom.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/axiom.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/axiom.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/ic_launcher.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/ic_launcher.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/rupay.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/rupay.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/rupay.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/ic_launcher_round.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/ic_launcher_round.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher_round.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_unknown_cc.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_unknown_cc.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_unknown_cc.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_ic_launcher.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_ic_launcher.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-mdpi-v4_ic_launcher.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ddd.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ddd.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ddd.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_wallet.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_wallet.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_wallet1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_down.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_down.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_down.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_expand_more.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_expand_more.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-mdpi-v4_expand_more.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_address_confirmation.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_address_confirmation.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_address_confirmation.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/expand_less.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/expand_less.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_less1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_saved_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_saved_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_saved_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/cc_back.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/cc_back.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/cc_back.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_border.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_border.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_border.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_payment_details.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_payment_details.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_payment_details.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_saved_card.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_saved_card.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_saved_card.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/down.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/down.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/down.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_menu_arrow_side.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_menu_arrow_side.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_menu_arrow_side.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_layout_bg.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_layout_bg.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_layout_bg.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_wallet.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_wallet.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_wallet.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_cash_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_cash_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_cash_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_debit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_debit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_debit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_viewpager_item.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_viewpager_item.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_viewpager_item.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_down.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_down.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_down.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_unknown_cc.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_unknown_cc.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_unknown_cc.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_amex.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_amex.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_amex.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/visa.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/visa.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/visa.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/expand_more.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/expand_more.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_more.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/maestro.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/maestro.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/maestro.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/jars/classes.jar" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/jars/classes.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/classes.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_half_circle_grey.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_half_circle_grey.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_half_circle_grey.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_menu_arrow_side.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_up.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_up.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_up.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cvv.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_neft.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_neft.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_neft.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_jcb.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_jcb.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_jcb.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/4252fd1e55a7a341fcd00b94304e8ebc/jetified-sdkdubai-release-runtime.jar" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/4252fd1e55a7a341fcd00b94304e8ebc/jetified-sdkdubai-release-runtime.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/jetified-sdkdubai-release-runtime.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_credit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_credit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_credit_card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_menu_arrow_side.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/expand_more.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/expand_more.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_more1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/expand_more.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/expand_more.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_more2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_new_debit_card.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_new_debit_card.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_new_debit_card.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_eee.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_eee.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_eee.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_net_banking.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_net_banking.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_net_banking.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_credit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_credit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_credit_card1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/expand_less.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/expand_less.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_less2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_master.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_master.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_master.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/ic_launcher_round.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/ic_launcher_round.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher_round1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_mobile_upi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_mobile_upi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_mobile_upi1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/ic_launcher.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/ic_launcher.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_dialog_type.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_dialog_type.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_dialog_type.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_expand_less.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_expand_less.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxhdpi-v4_expand_less.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_expand_less.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_expand_less.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxxhdpi-v4_expand_less.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_neft.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_neft.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_neft.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_expand_less.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_expand_less.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-mdpi-v4_expand_less.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/up.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/up.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/up1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_down.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_down.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_down.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_cash_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_cash_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_cash_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ccavenue.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/ccavenue.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ccavenue.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_credit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_credit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_credit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/up.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/up.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/up2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_half_circle_white.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_half_circle_white.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_half_circle_white.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_mobile_upi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/jcb.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/jcb.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/jcb.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_spinner_border_home.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_spinner_border_home.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_spinner_border_home.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_mobile_upi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_mobile_upi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_mobile_upi2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/expand_more.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/expand_more.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_more3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_cash_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_cash_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cash_card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/dinersclubinter.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/dinersclubinter.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/dinersclubinter.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/cc_back.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/cc_back.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/cc_back1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_drop.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_drop.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_drop.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_cash_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_cash_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_cash_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_menu_arrow_side.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_wallet.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_wallet.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_wallet.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_mobile_upi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_mobile_upi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_mobile_upi3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_maestro.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_maestro.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_maestro.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/ic_launcher.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xhdpi-v4/ic_launcher.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_debit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_debit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_debit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_neft.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_neft.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_neft1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_chevron_right_black_48dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_chevron_right_black_48dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_chevron_right_black_48dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_saved_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_saved_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_saved_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_saved_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_saved_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_saved_card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_net_banking.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_net_banking.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_net_banking.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ddd.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ddd.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_ddd.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_yellow.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_yellow.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_yellow.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_net_banking.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_net_banking.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_net_banking1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_up.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_up.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_up.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_layout_bg1.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_layout_bg1.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_layout_bg1.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_expand_less.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_expand_less.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-hdpi-v4_expand_less.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_saved_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_saved_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_saved_card1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_gradient.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_gradient.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_gradient.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_saved_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_saved_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_saved_card2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/d8783b9851ac26e371dc0d3a61e07d1c/jetified-sdkdubai-release.aar" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/d8783b9851ac26e371dc0d3a61e07d1c/jetified-sdkdubai-release.aar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/jetified-sdkdubai-release.aar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_emi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_emi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_emi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_menu_arrow_side1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_emi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_emi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_emi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cvv1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/expand_less.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/expand_less.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_less3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_item.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_item.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_spinner_item.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_mobile_upi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_unknown_cc.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_unknown_cc.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_unknown_cc.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_card_swipe.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_card_swipe.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_card_swipe.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_emi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_emi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_emi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_emi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_emi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_emi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_expand_more.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_expand_more.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxxhdpi-v4_expand_more.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_menu_arrow_side.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_menu_arrow_side.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_menu_arrow_side2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_cash_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_cash_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cash_card1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_style.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_style.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_spinner_style.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_down.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_down.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_down.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_saved_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_saved_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_saved_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_ic_launcher_round.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-mdpi-v4_ic_launcher_round.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-mdpi-v4_ic_launcher_round.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_cc_back.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_cc_back.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_cc_back.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_debit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_debit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_debit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_cc_back.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_cc_back.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_cc_back.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-ldpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-ldpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_net_banking.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_net_banking.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_net_banking.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/up.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/up.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/up3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_neft.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_neft.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_neft.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxxhdpi-v4_ic_launcher_round.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/cc_back.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/cc_back.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/cc_back2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/unknown_cc.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/unknown_cc.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/unknown_cc1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_chevron_right_black_48dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_chevron_right_black_48dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_chevron_right_black_48dp.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_ic_launcher.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_ic_launcher.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxhdpi-v4_ic_launcher.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/unknown_cc.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/unknown_cc.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/unknown_cc2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_mobile_upi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_debit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_debit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_debit_card1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_wallet.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_wallet.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_wallet2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_expand_more.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_expand_more.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxhdpi-v4_expand_more.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_cash_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_cash_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_cash_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/cc_back.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/cc_back.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/cc_back3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_cc_back.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_cc_back.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_cc_back.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_emi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_emi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_emi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_wallet.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_wallet.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_wallet.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_neft.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_neft.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_neft2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_emi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_emi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_emi1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/expand_more.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-mdpi-v4/expand_more.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_more4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/down.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/down.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/down1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-ldpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-ldpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-ldpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxhdpi-v4_ic_launcher_round.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_saved_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_saved_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_saved_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/master.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/master.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/master.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_down.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_down.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_down.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_credit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_credit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_credit_card2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_credit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_credit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_credit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_saved_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_saved_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_saved_card3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/down.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/down.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/down2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_net_banking.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_net_banking.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_net_banking2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/down.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/down.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/down3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-anydpi-v21_ic_arrow_back_black_24dp.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-anydpi-v21_ic_arrow_back_black_24dp.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-anydpi-v21_ic_arrow_back_black_24dp.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_net_banking.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_net_banking.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_net_banking.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_fragment_one.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_fragment_one.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_fragment_one.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_up.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_up.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_up.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/ic_launcher.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/ic_launcher.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/card.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_cc_back.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_cc_back.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_cc_back.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_wallet.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_wallet.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_wallet.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_cash_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_cash_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cash_card2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_neft.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_neft.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_neft.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_cash_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_cash_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cash_card3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_payment_options.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_payment_options.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_payment_options.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_pager_item.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_pager_item.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_pager_item.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_up.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_up.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_up.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_neft.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_neft.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_neft.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_debit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_debit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_debit_card2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/drop.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/drop.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drop.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_debit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_debit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_debit_card3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_expand_more.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_expand_more.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-hdpi-v4_expand_more.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_menu_arrow_side.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_discover.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_discover.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_discover.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_fragment_two.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_fragment_two.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_fragment_two.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_ic_launcher.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xxxhdpi-v4_ic_launcher.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xxxhdpi-v4_ic_launcher.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_debit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_debit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_debit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/ic_launcher.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/ic_launcher.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/up.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/up.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/up4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_arrow_back_black_24dp.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ccavenue.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ccavenue.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_ccavenue.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/card_swipe.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/card_swipe.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/card_swipe.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_net_banking.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-mdpi-v4_ic_net_banking.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-mdpi-v4_ic_net_banking.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_new_credit_card.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_new_credit_card.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_new_credit_card.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_dinersclubinter.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_dinersclubinter.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_dinersclubinter.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_border_white.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_border_white.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_border_white.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_expand_less.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_expand_less.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xhdpi-v4_expand_less.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_wallet.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_wallet.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_wallet3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_credit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxhdpi-v4_ic_credit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxhdpi-v4_ic_credit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_emi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_emi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_emi2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/eee.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/eee.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/eee.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_mobile_upi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_emi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_emi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_emi3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_neft.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_neft.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_neft.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_eze.jpg.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_eze.jpg.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_eze.jpg.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/unknown_cc.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/unknown_cc.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/unknown_cc3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_cash_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_cash_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_cash_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_dialog.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_activity_dialog.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_activity_dialog.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_rounded_border.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_rounded_border.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_rounded_border.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_arrow_back_black_24dp.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_arrow_back_black_24dp5.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_fff.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_fff.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_fff.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/discover.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/discover.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/discover.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/down.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/down.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/down4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/ic_launcher_round.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-hdpi-v4/ic_launcher_round.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher_round2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_wallet.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_wallet.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_wallet4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_mobile_upi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_mobile_upi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_mobile_upi4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_debit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_debit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_debit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_neft.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_neft.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_neft3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_emi.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_emi.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_emi4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/ic_launcher_round.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxhdpi-v4/ic_launcher_round.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher_round3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_ic_launcher.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-hdpi-v4_ic_launcher.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-hdpi-v4_ic_launcher.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_menu_arrow_side3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/mipmap-xhdpi-v4_ic_launcher_round.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/mipmap-xhdpi-v4_ic_launcher_round.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/amex.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/amex.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/amex.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_saved_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_saved_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_saved_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_up.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_up.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_up.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/04740718d28b353ac0ef069530d62746/jetified-sdkdubai-release-runtime/classes.dex" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/04740718d28b353ac0ef069530d62746/jetified-sdkdubai-release-runtime/classes.dex" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/classes.dex" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ggg.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_ggg.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_ggg.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cvv2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_menu_arrow_side.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_menu_arrow_side.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_net_banking.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_net_banking.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_net_banking3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_cash_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_cash_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cash_card4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_neft.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_neft.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_neft4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_credit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_credit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_credit_card3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_credit_card.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xhdpi-v4_ic_credit_card.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xhdpi-v4_ic_credit_card.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-hdpi-v4/ic_cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cvv3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/fff.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/fff.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/fff.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-xxxhdpi-v4_ic_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-xxxhdpi-v4_ic_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_cvv.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_cvv.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_cvv4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_debit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_debit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_debit_card4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_dinersclub.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_dinersclub.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_dinersclub.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_item_payment_option.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_item_payment_option.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_item_payment_option.xml.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_visa.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_visa.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_visa.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_net_banking.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxxhdpi-v4/ic_net_banking.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_net_banking4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_axiom.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable_axiom.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable_axiom.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_mobile_upi.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_mobile_upi.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/expand_less.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/expand_less.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/expand_less4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_saved_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xxhdpi-v4/ic_saved_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_saved_card4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/dinersclub.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable/dinersclub.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/dinersclub.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/ed3bc7df3b039f23a8e0d5c986cf4aaf/jetified-sdkdubai-release-api.jar" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/ed3bc7df3b039f23a8e0d5c986cf4aaf/jetified-sdkdubai-release-api.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/jetified-sdkdubai-release-api.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_cvv.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_ic_cvv.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_ic_cvv.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/ic_launcher_round.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/mipmap-xxxhdpi-v4/ic_launcher_round.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_launcher_round4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_unknown_cc.png.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/drawable-hdpi-v4_unknown_cc.png.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/drawable-hdpi-v4_unknown_cc.png.flat" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-xhdpi-v4/ic_menu_arrow_side.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_menu_arrow_side4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_credit_card.png" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/c6c3ad2abec6c2d0122a34663a70b6eb/jetified-sdkdubai-release/res/drawable-mdpi-v4/ic_credit_card.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/ic_credit_card4.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_item_promo.xml.flat" />
+    <option name="AFTER_PATH" value="../Android/sdkdubai-release/build/.transforms/181409e0cf077bd527f6c3251eb1d439/mumbai.dev.sdkdubai/layout_spinner_item_promo.xml.flat" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_5_21_4_43_PM_[Default_Changelist]/layout_spinner_item_promo.xml.flat" />
+  </binary>
+</changelist>

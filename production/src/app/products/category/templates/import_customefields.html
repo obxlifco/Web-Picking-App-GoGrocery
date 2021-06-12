@@ -1,0 +1,40 @@
+<div class="md-toolbar-tools">
+	<mat-radio-group #toggleImport="ngModel" name="toggleImport" [(ngModel)]="importOpt">
+		<mat-radio-button class="example-margin my-1" value="csv">CSV</mat-radio-button>
+	  	<mat-radio-button class="example-margin my-1" value="xls">XLSX / XLS</mat-radio-button>
+	</mat-radio-group>
+</div>
+<div class="clear10"></div>
+<div class="pop-head">
+	Import Custom Field
+</div>
+<mat-dialog-content class="file-up">
+
+	<ng-container *ngIf="importOpt=='xls'">
+		<div class="file_upload">
+			<button mat-raised-button class="btn-main" type="button"><mat-icon  class="icon-upload-cloud"></mat-icon>Upload File
+				<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="fileChooseXLS($event)" />
+			</button>
+			<span class="ml-1">No file choosen</span>
+		</div>
+		<div class="clear20"></div>
+		or <a href="{{sample_xls}}">Download sample Excel file</a>
+	</ng-container>
+	
+	<ng-container *ngIf="importOpt=='csv'">
+		<div class="file_upload">
+			<button mat-raised-button class="btn-main" type="button"><mat-icon  class="icon-upload-cloud"></mat-icon>Upload File
+				<input type="file" accept=".csv" (change)="fileChooseCSV($event)" />
+			</button>
+			<span class="ml-1">No file choosen</span>
+		</div>
+		<div class="clear20"></div>
+		or <a href="{{sample_csv}}">Download sample CSV file</a>
+	</ng-container>
+		
+	<div class="clear40"></div>
+</mat-dialog-content>	
+<style type="text/css">
+	.filebrowse{ position: absolute; top: 0; left: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+
+</style>		

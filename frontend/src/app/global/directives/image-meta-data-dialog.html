@@ -1,0 +1,22 @@
+<form #imgForm="ngForm" novalidate (ngSubmit)="imgForm.valid && insertMetaData(imgForm.value)">
+	<h2 mat-dialog-title>Image Meta Data</h2>
+	<mat-dialog-content>
+		<div class="pop-body" layout="column">
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Image Title" #imgTitle="ngModel" name="imgTitle" [(ngModel)]="formModel.img_title">
+			</mat-form-field>
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Alternate Name" #altName="ngModel" name="altName" [(ngModel)]="formModel.img_alt">
+			</mat-form-field>
+			<!-- <mat-form-field class="md-block">
+				<input type="number" matInput placeholder="Order" min="1" #imgOrder="ngModel" name="imgOrder" [(ngModel)]="formModel.img_order">
+			</mat-form-field> -->
+		</div>		  	
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<label>Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" [mat-dialog-close]="true">Cancel</button>
+	</mat-dialog-actions>
+</form>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragment.OfferFragment">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtRS"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/montserrat"
+                android:text="All Category"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#222222"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_height="28dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_nav_cross"
+                >
+
+            </ImageView>
+        </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/view_divider_clr"
+                android:layout_height="1.4dp">
+
+            </View>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSideMenuCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+
+                android:orientation="vertical" />
+            <FrameLayout
+                android:id="@+id/flSubmenu"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+<!--        <include layout="@layout/layout_no_offer_found"
+            android:id="@+id/layout_productSearch_noDataFound"
+
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="gone"/>-->
+    </LinearLayout>
+</layout>

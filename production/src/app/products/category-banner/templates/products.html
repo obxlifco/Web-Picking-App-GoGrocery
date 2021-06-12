@@ -1,0 +1,95 @@
+<h2 mat-dialog-title>
+	Select Products
+	<div class="filter dialogFilter pop-div-right">
+		<button mat-icon-button matTooltipClass="mat-tooltip-white" matTooltip="Reload" (click)="generateGrid(0, 1, 'id',filter,'')">
+			<mat-icon class="icon-refresh"></mat-icon>
+		</button>
+		<div class="search">
+			<mat-icon class="icon-search"></mat-icon>
+			<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(0,1,'id',filter,search.value)">
+		</div>
+		<div class="clear"></div>
+	</div>
+</h2>
+<mat-dialog-content style="min-width: 500px;">
+	<div class="table-list" *ngIf="showSkeletonLoaded">
+		<table>
+			<tr>
+				<th class="check-select">
+					<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+				</th>
+				<ng-container>
+					<th class="short" *ngFor="let item of temp_col"><span></span></th>
+				</ng-container>
+			</tr>
+			<tr *ngFor="let item of temp_result">
+				<td> This is the test
+					<div></div>
+					<ng-template>
+						<mat-checkbox name="Selected" id="list"></mat-checkbox>
+					</ng-template>
+				</td>
+				<ng-container>
+					<td *ngFor="let item of temp_col">
+						<ng-container>
+							<div class="skeleto-loader"></div>
+						</ng-container>
+					</td>
+				</ng-container>
+			</tr>
+		</table>
+	</div>
+
+	<div class="table-list" *ngIf="!showSkeletonLoaded">
+		<table>
+			<tr>
+				<th class="check-select">
+					<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+				</th>
+				<th class="short" (click)="generateGrid(0,1,'id',filter,search.value)">ID</th>
+				<th class="short" (click)="generateGrid(0,1,'name',filter,search.value)">Name</th>
+				<th class="short" (click)="generateGrid(0,1,'sku',filter,search.value)">SKU</th>
+				<th class="short">Price</th>
+			</tr>
+			<tr [class.chec]="row.Selected" *ngFor="let row of result_list">
+				<td>
+					<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.Selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+				</td>
+				<td>{{row.id}}</td>
+				<td>{{row.name}}</td>
+				<td>{{row.sku}}</td>
+				<td>{{row.default_price}}</td>
+			</tr>
+			<tr *ngIf="result_list.length==0">
+				<td colspan="5" align="center">No records found</td>
+			</tr>
+		</table>
+	</div>
+</mat-dialog-content>
+<mat-dialog-actions layout="row" class="div-pop-bottom">
+	<div class="pagination-box" *ngIf="pagination.total_page>1" style='position:relative;'>
+		<span *ngFor="let list of total_list | paginate: config"></span>
+		<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value)"
+		 [maxSize]="maxSize">
+			<ul class="pagination">
+				<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+					<a (click)="p.previous()"><span class="icon-left"></span></a>
+				</li>
+				<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+					<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+						<span>{{ page.label }}</span>
+					</a>
+					<a *ngIf="p.getCurrent() === page.value">
+						<span>{{ page.label }}</span>
+					</a>
+				</li>
+				<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+					<a (click)="p.next()"><span class="icon-right"></span></a>
+				</li>
+			</ul>
+		</pagination-template>
+	</div>
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="applyChanges()">Save</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

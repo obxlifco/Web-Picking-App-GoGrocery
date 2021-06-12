@@ -1,0 +1,50 @@
+<section class="pop_upbg">
+  <div class="loginbox location map">
+      <!-- <div class="crossbtn"><a href="javascript:void(0)"><span class="icon-cross_sml"></span></a></div> -->
+      <!-- <div class="head">Fine-tune Your Location</div>
+      <div class="subhead">Please move the pin to the exact location of delivery</div> -->
+      <!-- <div class="backbtn"><a href="javascript:void(0)" (click)="closeDialog()"><mat-icon class="back_icon">arrow_back</mat-icon></a></div> -->
+  
+      <div class="serchsec">
+      <div class="loc_icn">
+        <button (click)="setCurentAddress()" title="Locate me">
+          <span class="icon-location_delivery-address"></span>
+        </button>
+      </div>
+      <div class="search_icon">
+        <mat-icon matPrefix>search</mat-icon>
+      </div>
+      <div class="location_searching">
+        <!-- <mat-label>Enter Your Delivery address</mat-label> -->
+         <input type="text" class="form-control" [value]="address" (keydown.enter)="$event.preventDefault()" placeholder="Enter here your address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+       </div>
+      </div>
+      <div class="mapbox" #gmap>
+         <!--  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+            (dragEnd)="markerDragEnd($event)"></agm-marker>
+        </agm-map> -->
+    </div>
+    <div class="btnrow">
+      <!-- <button class="checkoutbtn" style="float: left" (click)="verifyWareHouseClose()">Close</button>    -->
+      <a class="confirm_location_btn" (click)="verifyWareHouseOnSelectedLocation()">
+        <div class="address_section">
+          <div class="icon">
+            <img src=".\assets\images\Group16190.png" width="75px" alt="">
+          </div>
+          <div class="delivey_address">
+            <div class="heading">
+              Deliver Here
+            </div>
+            <div class="address">
+              {{address}}
+            </div>
+          </div>
+          <div class="arrow_icon">
+            <mat-icon>arrow_forward_ios</mat-icon>
+          </div>
+        </div>
+      </a>   
+    </div>        
+  </div>
+  </section>

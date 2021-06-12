@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ProductListingPage">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="false"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/white"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivBack"
+                                android:layout_width="@dimen/back_btn_width"
+                                android:layout_height="@dimen/back_btn_height"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp"
+                                android:src="@drawable/back_arrow_black" />
+
+                            <TextView
+                                android:id="@+id/tvListingTitle"
+                                style="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginLeft="0dp"
+                                android:layout_toStartOf="@+id/ivSearch"
+                                android:layout_toLeftOf="@+id/ivSearch"
+                                android:layout_toEndOf="@+id/ivBack"
+                                android:layout_toRightOf="@+id/ivBack"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <RelativeLayout
+                                android:id="@+id/cartRl"
+                                android:layout_width="32dp"
+                                android:layout_height="26dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp">
+
+
+                                <ImageView
+                                    android:id="@+id/ivCart"
+                                    android:layout_width="20dp"
+                                    android:layout_height="22dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:src="@drawable/ic_cart" />
+
+                                <TextView
+                                    android:id="@+id/badge_notification"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="right|end|top"
+                                    android:layout_marginTop="3dp"
+                                    android:layout_marginEnd="-10dp"
+                                    android:layout_marginRight="-10dp"
+                                    android:layout_toLeftOf="@+id/ivCart"
+                                    android:background="@drawable/badge_circle"
+                                    android:gravity="center"
+                                    android:padding="3dp"
+                                    android:text="0"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="8sp"
+                                    android:visibility="visible" />
+
+
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:id="@+id/ivLocationPin"
+                                android:layout_width="18dp"
+                                android:layout_height="22dp"
+                                android:layout_alignRight="@+id/cartRl"
+                                android:layout_alignBottom="@+id/cartRl"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="36dp"
+                                android:layout_marginBottom="-4dp"
+                                android:src="@drawable/location_pin"
+                                android:visibility="visible" />
+
+                            <ImageView
+                                android:id="@+id/ivSearch"
+                                android:layout_width="18dp"
+                                android:layout_height="20dp"
+                                android:layout_alignRight="@+id/ivLocationPin"
+                                android:layout_alignBottom="@+id/ivLocationPin"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="32dp"
+                                android:src="@drawable/search"
+                                android:visibility="visible" />
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/viewHeaderDvider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/test_divider"
+            android:visibility="gone" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/sfl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cvHeader"
+            android:visibility="visible"
+            app:shimmer_duration="1000">
+
+            <include
+                android:id="@+id/includeShimmerLayout"
+                layout="@layout/shimmer_product_listing_layout" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItemListing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cvFooter"
+            android:layout_below="@+id/cvHeader"
+            android:visibility="gone" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlSort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv1"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginRight="8dp"
+                            android:src="@drawable/sort_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat"
+                            android:text="@string/listing_sort"
+                            android:textColor="#282828"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view_divider_clr" />
+
+                <RelativeLayout
+                    android:id="@+id/rlFilters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv2"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginRight="8dp"
+                            android:src="@drawable/listing_filter" />
+
+                        <TextView
+                            android:id="@+id/txtFilter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat"
+                            android:text="@string/listing_filtert"
+                            android:textColor="#282828"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivFilterAppliedTick"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginLeft="4dp"
+                            android:src="@drawable/filter_applied_tick"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/green_new" />
+
+
+        <include
+            android:id="@+id/somethingwentwrong"
+            layout="@layout/something_went_wrong"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noProductAvailable"
+            layout="@layout/no_product_found"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivfake"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</layout>

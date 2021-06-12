@@ -1,0 +1,47 @@
+<section class="right-part filter-pad">
+    <form #PreviewImportDataProduct="ngForm" novalidate (ngSubmit)="PreviewImportDataProduct.valid && BarcodeImportnData(PreviewImportDataProduct)">
+        <div class="topheading">
+            <h1>Preview Barcodes Import
+                <div class="btn-header">
+                    <button mat-raised-button class="btn-main" type="submit">Continue</button>
+                    <button mat-raised-button class="btn-line" type="button" (click)="globalService.deleteTab(tabIndex, parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+            </h1>
+        </div>
+        <div class="body-part">
+            <div class="table-list">
+                <table>
+                    <tr>
+                        <th class="check-select">
+                            <mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAllPreview($event)"></mat-checkbox>
+                        </th>
+                        <th>Import Status</th>
+                        <ng-container *ngFor="let col of columns">
+                            <th>{{col.label}}</th>
+                        </ng-container>                                             
+                    </tr>
+                    <tr [class.chec]="temp_rows.selected" [ngClass]="temp_rows.err_flag==1 ? 'checerror' : ''"  *ngFor="let temp_rows of temp_result_list" >
+                        <td>
+                            <mat-checkbox *ngIf="temp_rows.err_flag == 0" name="temp_rows.Selected" id="list{{temp_rows.id}}" [checked]="temp_rows.selected" (change)="toggleCheckPreview(temp_rows.id,$event)"></mat-checkbox>
+                        </td>
+                        <td><p *ngFor="let error_msg of temp_rows.error_text">
+                          {{temp_rows.error_text}}
+                        </p>
+                        </td>
+                        <ng-container *ngFor="let col of columns">
+                            <td>{{temp_rows[col.field_name]}}</td>
+                        </ng-container>
+                    </tr>
+                    <tr><ng-container *ngIf="temp_result_list.length==0"><td>No record found</td></ng-container></tr>
+                </table>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- <div class="btn-header hidden-xs">
+            <button mat-raised-button class="btn-main" type="submit">Continue</button>
+            <button mat-raised-button class="btn-line" type="button" (click)="globalService.deleteTab(tabIndex, parentId)">Cancel</button>
+        </div> 
+        <div class="clear"></div> -->
+    </form> 
+</section>

@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OneFragment">
+
+
+    <LinearLayout
+        android:id="@+id/head"
+        android:weightSum="1"
+        android:background="#F4F3F8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/billing"
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+           android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Billing"/>
+        <TextView
+            android:id="@+id/shipping"
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Shipping"/>
+        <TextView
+            android:id="@+id/promo"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Promotions &amp; Offers"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            >
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv1"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+                    <RelativeLayout
+                        android:id="@+id/ll_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+
+                        android:layout_marginRight="16dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivClose"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/ic_close"
+
+                            android:layout_alignParentStart="true"
+                            android:visibility="gone"
+                        />
+
+                        <ImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentStart="true"
+
+                            android:background="@drawable/ic_back"
+
+                            android:visibility="gone"
+                          />
+
+                    </RelativeLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/tv_toolbarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+
+                        android:fontFamily="@font/montserrat"
+
+                        android:text="@string/missing_items"
+                        android:textColor="@color/grey_new"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:typeface="sans" />
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/cv1"
+
+                android:background="@drawable/test_divider"
+                android:visibility="visible" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_gravity="center"
+                android:layout_marginTop="1.8dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center"
+
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_timeRemaining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/hind_medium"
+                        android:gravity="center"
+                        android:text="@string/txtTimeRemaining"
+                        android:textColor="@color/grey_new"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <Chronometer
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ll_footer"
+                android:layout_below="@+id/rl_toolbar">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/subsViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@color/browser_actions_divider_color" />
+
+
+                <LinearLayout
+                    android:id="@+id/llDone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80000000"
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:paddingBottom="14dp"
+                android:paddingTop="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBtn_submitReplacement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+              android:layout_marginStart="16dp"
+android:layout_weight="0.55"
+                    android:maxLines="1"
+                    android:background="@drawable/green_round_side"
+                    android:fontFamily="@font/hind_medium"
+                    android:gravity="center"
+                    android:paddingTop="12dp"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:visibility="visible"
+                    android:paddingBottom="12dp"
+                    android:text="@string/txtSubmitReplacement"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvBtn_notReplacement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind_medium"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:background="@drawable/gray_round_side_new"
+                    android:gravity="center"
+                    android:layout_weight="0.45"
+                    android:paddingTop="12dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:visibility="visible"
+                    android:paddingBottom="12dp"
+                    android:text="@string/txtDenyReplacement"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnReplaceItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_26sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:background="@drawable/green_round_side"
+                    android:fontFamily="@font/proxima_regular"
+                    android:text="Replace Item"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+
+
+
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/app_red_clr" />
+
+    </RelativeLayout>
+
+</layout>

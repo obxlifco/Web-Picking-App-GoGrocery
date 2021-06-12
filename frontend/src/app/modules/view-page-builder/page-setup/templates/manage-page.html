@@ -1,0 +1,16 @@
+<div class="mat-toolbar-tools">
+	<h2 mat-dialog-title>Manage Pages</h2>
+</div>
+<div class="clear"></div>
+<mat-dialog-content>
+	
+	<ul class="page-list">
+		<li *ngFor="let page of page_list">
+			<i class="icon-file"></i>
+			<a href="javascript:void(0)" (click)="page.isdefault!=2 && redirectPage(page.url)">{{page.page_name}}</a>
+			<button mat-icon-button *ngIf="page.isdefault==0" (click)="deletePage(page.id)" class="editor-btn-main-text"><mat-icon class="fa fa-trash-o"></mat-icon></button>
+			<button mat-icon-button (click)="editPage(page.id)" class="editor-btn-main-text"><mat-icon class="fa fa-pencil-square-o"></mat-icon></button>
+		</li>
+	</ul>
+
+</mat-dialog-content>

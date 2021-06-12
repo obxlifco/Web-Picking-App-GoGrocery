@@ -1,0 +1,254 @@
+<form #setupForm="ngForm" novalidate (ngSubmit)="setupForm.valid && addEditBasicSetup(setupForm)">
+<input type="hidden" name="settingsId" [(ngModel)]="formModel.settingsId">
+<section class="right-part filter-pad addall_page">
+    <div class="topheading">
+			  <h1>Basic Setup
+				  <div class="btn-header">
+				  	<button mat-raised-button class="btn-main" type="submit" >Continue</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  </div>
+				  <div class="clear"></div>
+			  </h1>
+		  </div>
+    <div class="filter">
+		<div class="stap">
+			<!-- <ul>
+				<li class="active">Basic Setup</li>
+				<li><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/template']">Select Template</a></li>
+				<li><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/payment_gateway']">Payment Gateway</a></li>
+				<li><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/shipping']">Shipping</a></li>
+				<li><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/channel_setup']">Channel Setup</a></li>
+			</ul> -->
+			<ul>
+				<li class="active">Basic Setup</li>
+				<!-- <li>Select Template</li> -->
+				<li>Payment Gateway</li>
+				<li>Shipping</li>
+				<!-- <li>Channel Setup</li> -->
+			</ul>
+		</div>
+    </div>
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="box">
+			<div class="fixed-width">
+				<div class="heading">Basic Info</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Business Name</mat-label>
+									<input matInput placeholder="Business Name" required name="business_name" #business_name="ngModel" [(ngModel)]="formModel.business_name">
+									<mat-error *ngIf="business_name.errors && business_name.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Address1</mat-label>
+									<input matInput placeholder="Address1" required name="address1" #address1="ngModel" [(ngModel)]="formModel.address1">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 ">
+								<!-- <mat-form-field appearance="outline"><mat-label>Industries</mat-label>
+									<mat-select placeholder="Industries" required #website_category_id="ngModel" name="website_category_id" [(ngModel)]="formModel.website_category_id">
+										<mat-option *ngFor="let indus_master_list of industrylist" [value]="indus_master_list.id">{{indus_master_list.name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="website_category_id.errors && website_category_id.errors.required">
+										This is a <strong>required</strong> field
+									</mat-error>
+								</mat-form-field> -->
+								<ng-select [ngClass]="{ 'custom_error_red': website_category_id.errors && website_category_id.errors.required && (website_category_id.dirty || website_category_id.touched || setupForm.submitted) }"
+									[items]="industrylist"
+									required
+									placeholder="Industries"
+									bindLabel="name" bindValue="id"
+									#website_category_id="ngModel" name="website_category_id" [(ngModel)]="formModel.website_category_id"
+								>
+								</ng-select>
+								<p class="custom_error" *ngIf="website_category_id.errors && website_category_id.errors.required && (website_category_id.dirty || website_category_id.touched || setupForm.submitted)">This is a <strong>required</strong> field</p>
+							</div>	
+							
+
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Address2</mat-label>
+									<input matInput placeholder="Address2" name="address2" #address2="ngModel" [(ngModel)]="formModel.address2">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">	
+							<div class="col-md-6">
+						  		<mat-form-field appearance="outline"><mat-label>Country</mat-label>
+							    	<input  matInput required placeholder="Country" [matAutocomplete]="tdAuto" name="country_id" #country_id="ngModel" [(ngModel)]="formModel.country_id" (ngModelChange)="filter_countries(formModel.country_id)">
+							    	<mat-error *ngIf="country_id.errors && country_id.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+							    </mat-form-field>
+							    <mat-autocomplete #tdAuto="matAutocomplete" [displayWith]="displayFn">
+								    <mat-option *ngFor="let country of country_list" [value]="country">
+								      <span>{{ country.country_name }}</span>
+								    </mat-option>
+							  	</mat-autocomplete>
+						  	</div>
+						  	<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>City</mat-label>
+									<input matInput required placeholder="City" name="city" #city="ngModel" [(ngModel)]="formModel.city">
+									<mat-error *ngIf="city.errors && city.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">  	
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>State</mat-label>
+									<input matInput required placeholder="State" name="state" #state="ngModel" [(ngModel)]="formModel.state">
+									<mat-error *ngIf="state.errors && state.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Zipcode</mat-label>
+									<input matInput required placeholder="Zipcode" name="postcode" #postcode="ngModel" [(ngModel)]="formModel.postcode" minlength="3" maxlength="10" pattern="^[A-Za-z0-9]*$">
+									<mat-error *ngIf="postcode.errors && postcode.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+								    <mat-error *ngIf="postcode.errors && (postcode.errors.minlength || postcode.errors.maxlength)">
+								      	Zip Code should be of 3 to 10 characters
+							    	</mat-error>
+							    	<mat-error *ngIf="postcode.errors && postcode.errors.pattern">
+						      			Only alphanumeric characters are allowed
+						    		</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Phone</mat-label>
+									<input matInput required placeholder="Phone" name="phone" #phone="ngModel" [(ngModel)]="formModel.phone" minlength="10" maxlength="14" pattern="^\+?\d+$">
+									<mat-error *ngIf="phone.errors && phone.errors.required">
+								      This is a <strong>required</strong> field
+								    </mat-error>
+								    <mat-error *ngIf="phone.errors && phone.errors.pattern">
+							      		Please enter a <strong>valid</strong> phone number
+							    	</mat-error>
+							    	<mat-error *ngIf="phone.errors && phone.errors.minlength">
+							      		Phone number should be between 10 to 14 characters
+							    	</mat-error>
+							    	<mat-error *ngIf="phone.errors && phone.errors.maxlength">
+						      			Phone number should be between 10 to 14 characters
+						    		</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Bank Name</mat-label>
+									<input matInput placeholder="Bank Name" name="bank_name" #bank_name="ngModel" [(ngModel)]="formModel.bank_name">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">	
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>IFSC Code</mat-label>
+									<input matInput placeholder="IFSC Code" name="ifsc_code" #ifsc_code="ngModel" [(ngModel)]="formModel.ifsc_code">
+								</mat-form-field>
+							</div>
+							<div class="col-sm-6 ">
+								<mat-form-field appearance="outline"><mat-label>Account Number</mat-label>
+									<input matInput placeholder="Account Number" name="account_no" #account_no="ngModel" [(ngModel)]="formModel.account_no">
+								</mat-form-field>
+							</div>
+						</div>	
+						
+					</div>
+					<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
+						
+						<div class="photo-up-box">
+							<div class="before" [hidden]="formModel.website_logo">
+						    	<button type="button" mat-raised-button class="btn-main" ><i class="icon-img mr-1"></i>Upload Logo</button>
+						    	<input class="filebrowse" type="file" accept="image/*" (change)="fileChoose($event,'website_logo',1)" />
+								<br><br>
+								<p>(The image must be less than 2MB and have a height and width greater than 150 px.)</p>
+						  	</div>
+						  	<div class="after" *ngIf="formModel.website_logo">
+						  		<img [src]="formModel.website_logo.url">
+						  		<div *ngIf="formModel.website_logo" (click)="delImg(formModel.settingsId,'formModel','website_logo',0)" class="photo-del">
+						  			<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+						  		</div>
+						  	</div>
+						</div>
+
+						<div class="photo-up-box" style="display: none;">
+							<div class="before" [hidden]="formModel.id_proof">
+						    	<button type="button" mat-raised-button class="btn-main"><i class="icon-img mr-1"></i>Upload Id Proof</button>
+								<input class="filebrowse" type="file" (change)="fileChoose($event,'id_proof',2)" />
+								<br><br>
+								<p>(The file must be less than 2MB and must have .pdf extension.)</p>
+						  	</div>
+						  	<div class="after" *ngIf="formModel.id_proof">
+						  		<ng-container>
+						  			<a [href]="formModel.id_proof.url" target="_blank">{{formModel.id_proof._file.name}}</a>
+						  		</ng-container>
+						  		
+						  		<div *ngIf="formModel.id_proof" (click)="delImg(formModel.settingsId,'formModel','id_proof',0)" class="photo-del">
+						  			<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+						  		</div>
+						  	</div>
+						</div>
+
+						<div class="photo-up-box" style="display: none;">
+							<div class="before" [hidden]="formModel.address_proof">
+						    	<button type="button" mat-raised-button class="btn-main"><i class="icon-img mr-1"></i>Upload Address Proof</button>
+						    	<input class="filebrowse" type="file" (change)="fileChoose($event,'address_proof',2)" />
+								<br><br>
+								<p>(The file must be less than 2MB and must have .pdf extension.)</p>
+						  	</div>
+						  	<div class="after" *ngIf="formModel.address_proof">
+						  		
+						  		<ng-container>
+						  			<a [href]="formModel.address_proof.url" target="_blank">{{formModel.address_proof._file.name}}</a>
+						  		</ng-container>
+						  		<div *ngIf="formModel.address_proof" (click)="delImg(formModel.settingsId,'formModel','address_proof',0)" class="photo-del">
+						  			<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+						  		</div>
+						  	</div>
+						</div>
+
+						<div class="photo-up-box" style="display: none;">
+							<div class="before" [hidden]="formModel.other_document">
+						    	<button type="button" mat-raised-button class="btn-main"><i class="icon-img mr-1"></i>Upload Others Document</button>
+						    	<input class="filebrowse" type="file" (change)="fileChoose($event,'other_document',2)" />
+								<br><br>
+								<p>(The file must be less than 2MB and must have .pdf extension.)</p>
+						  	</div>
+						  	<div class="after" *ngIf="formModel.other_document">
+						  		<ng-container>
+						  			<a [href]="formModel.other_document.url" target="_blank">{{formModel.other_document._file.name}}</a>
+						  		</ng-container>
+						  		<div *ngIf="formModel.other_document" (click)="delImg(formModel.settingsId,'formModel','other_document',0)" class="photo-del">
+						  			<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+						  		</div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="btn-header hidden-xs">
+			<button type="submit" mat-raised-button class="btn-main">Continue</button>
+			<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		</div> 
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+</form>
+
+<style type="text/css">
+	.filebrowse{ position: absolute; top: 0; left: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+</style>

@@ -1,0 +1,29 @@
+<section class="pop_upbg">
+  <div class="loginbox cart_option" style="padding: 20px">
+    <div class="crossbtn">
+      <a href="javascript:void(0)" (click)="close_dialog()"
+        ><span class="icon-cross_sml"></span
+      ></a>
+    </div>
+    <div class="head">{{ fieldLabel }}</div>
+    <div style="display: block">
+      <mat-radio-group
+        aria-label="Select an option"
+        class="preparation_list"
+        [(ngModel)]="custom_field_value"
+      >
+        <mat-radio-button *ngFor="let item of fieldValue" value="{{ item }}">{{
+          item
+        }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button
+      class="confirm_btn"
+      [ngClass]="custom_field_value ? 'confirm_btn' : 'confirm_btn_disable'"
+      [disabled]="!custom_field_value"
+      (click)="addItem()"
+    >
+      Confirm
+    </button>
+  </div>
+</section>

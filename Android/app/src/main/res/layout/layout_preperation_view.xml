@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:background="@android:color/transparent">
+
+
+    <RadioButton
+        android:id="@+id/rbNoPreparation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="start"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/my_order_bg"
+        android:button="@null"
+        android:layout_alignParentTop="true"
+        android:drawableRight="@drawable/custom_btn_radio"
+        android:drawablePadding="20dp"
+        android:fontFamily="@font/proxima_regular"
+        android:layoutDirection="rtl"
+        android:padding="@dimen/_10sdp"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+
+        android:visibility="visible" />
+
+
+</RelativeLayout>

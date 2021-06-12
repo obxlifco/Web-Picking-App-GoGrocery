@@ -1,0 +1,31 @@
+<form #addAwbMaster="ngForm" novalidate (ngSubmit)="addAwbMaster.valid && addAWBNumbers(addAwbMaster)">
+	<input type="hidden" name="courier_id" [(ngModel)]="formModel.courier_id">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.presetId)?'Edit':'Add'}} AWB Numbers </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-form-field appearance="outline"  class="md-block"><mat-label>AWB Numbers</mat-label>
+				<textarea matInput placeholder="AWB Numbers" #awb_numbers="ngModel" name="awb_numbers" [(ngModel)]="formModel.awb_numbers" pattern="^(?!\s*$|\s).*$" required></textarea>
+			    <mat-error *ngIf="awb_numbers.errors && awb_numbers.errors.required">
+			      AWB Numbers are Required
+			    </mat-error>
+			    <mat-error *ngIf="awb_numbers.errors && awb_numbers.errors.pattern">
+					White space is not allowed at beginning. 
+				</mat-error>
+				<mat-hint align="start"><strong>You can enter multiple AWB number with comma seprators.</strong> </mat-hint>
+		  	</mat-form-field>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

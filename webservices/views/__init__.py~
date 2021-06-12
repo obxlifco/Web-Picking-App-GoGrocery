@@ -1,0 +1,8 @@
+from webservices.views.loginview import login
+from webservices.views.loginview import insertdata
+from webservices.views.createuser import usercreate,createotp,checkotp 
+from webservices.views.mastermenu import MenuViewSet
+from webservices.views.forgotpassword import forgotpassword
+from webservices.views.changepassword import changepassword
+from webservices.views.createrole import add_role
+

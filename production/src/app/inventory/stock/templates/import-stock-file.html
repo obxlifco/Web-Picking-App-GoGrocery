@@ -1,0 +1,49 @@
+<div class="loada" *ngIf="popupLoder">
+	<mat-spinner></mat-spinner>
+</div>
+
+<form #StockImport="ngForm" novalidate (ngSubmit)="StockImport.valid && saveFileDataImport(StockImport)" enctype="multipart/form-data">
+	<div class="md-toolbar-tools" style="display:none">
+		<mat-radio-group #toggleImport="ngModel" name="toggleImport" [(ngModel)]="importOpt">
+			<!-- <mat-radio-button class="example-margin my-1" value="csv">CSV</mat-radio-button> -->
+			<mat-radio-button class="example-margin my-1" value="xls">XLSX / XLS</mat-radio-button>
+		</mat-radio-group>
+	</div>
+	<div class="clear10"></div>
+	<div class="pop-head uploadfile">
+		Import Stock
+	</div>
+	<mat-dialog-content class="file-up">
+		
+		<ng-container *ngIf="importOpt=='xls'">
+			<div class="file_upload">
+				<button mat-raised-button class="btn-main" type="button">
+					<mat-icon class="icon-upload-cloud"></mat-icon>Upload File
+					<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="importStockFileXLS($event)"
+					/>
+				</button>
+				<span class="ml-1">{{file_selection_tool}}</span>
+			</div>
+			<div class="clear20"></div>
+			<a href="{{sample_xls}}">Download sample Excel file</a>
+		</ng-container>
+
+		<ng-container *ngIf="importOpt=='csv'">
+			<div class="file_upload">
+				<button mat-raised-button class="btn-main" type="button">
+					<mat-icon class="icon-upload-cloud"></mat-icon>Upload File
+					<input type="file" accept=".csv" (change)="importStockFileXLS($event)" />
+				</button>
+				<span class="ml-1">No file choosen</span>
+			</div>
+			<div class="clear10"></div>
+			<a href="{{sample_csv}}">Download sample CSV file</a>
+		</ng-container>
+		<div class="clear10"></div>
+	</mat-dialog-content>
+		<mat-dialog-actions layout="row">
+			<button mat-raised-button class="btn-main" type="submit">Save</button>
+			<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+		</mat-dialog-actions>
+		<div class="clear10"></div>
+</form>

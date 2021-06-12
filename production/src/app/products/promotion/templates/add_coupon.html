@@ -1,0 +1,363 @@
+<section class="right-part filter-pad addall_page">
+  	<form #discountInfoForm="ngForm" novalidate (ngSubmit)="discountInfoForm.valid && addEditCoupon(discountInfoForm)">
+		<input type="hidden" name="discountId" [(ngModel)]="formModel.discountId">
+	  	<div class="topheading">
+		  	<h1>Discount Setup
+			  	<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Continue</button>
+		          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+			  	</div>
+			  	<div class="clear"></div>
+		  	</h1>
+	  	</div>
+	  	<div class="filter">
+		  	<div class="stap">
+				<ul *ngIf="add_edit=='add'">
+					<li class="active"><div class="nom"></div>Discount Information</li>
+					<li><div class="nom"></div>Condition</li>
+				</ul>
+				<ul *ngIf="formModel.discountId>0 && add_edit=='edit'">
+					<li class="active"><div class="nom"></div>Discount Information</li>
+					<li *ngIf="discount_master_type==1"><a (click)="_globalService.setTab(tabIndex,'/discount_coupon/edit/'+formModel.discountId+'/conditions')" [routerLink]="['/discount_coupon/edit/'+formModel.discountId+'/conditions']"><div class="nom"></div>Condition</a></li>
+					<li *ngIf="discount_master_type==0"><a (click)="_globalService.setTab(tabIndex,'/discount_product/edit/'+formModel.discountId+'/conditions')" [routerLink]="['/discount_product/edit/'+formModel.discountId+'/conditions']"><div class="nom"></div>Condition</a></li>
+		  		</ul>
+				<div class="clear"></div>
+		  	</div>
+		</div>	
+	  	<div class="clear"></div>
+  		<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+  				  
+			<div class="box">
+				<div class="fixed-width">
+				  	<div class="row">
+						<div class="col-sm-12">
+						  	<div class="row">
+							  	<div class="col-sm-4">
+							  		<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Discount Name</mat-label>
+												<input matInput placeholder="Discount Name" required #discountName="ngModel"  name="discountName" [(ngModel)]="formModel.name">
+												<mat-error *ngIf="discountName.errors && discountName.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="col-sm-4">
+										<div class="mandatory-select">
+											<mat-form-field appearance="outline">
+											<mat-label>Apply</mat-label>
+												<mat-select placeholder="Apply" #discountApply="ngModel" name="discountApply" [(ngModel)]="formModel.disc_type" required (selectionChange)="getDiscountType(formModel.disc_type)">
+													<mat-option value="1">By Percentage of the Original Price</mat-option>
+													<mat-option value="2">By Fixed Amount</mat-option>
+													<mat-option value="3" *ngIf="discount_master_type==1">Fixed Amount Discount For Whole Cart</mat-option>
+													<mat-option value="7" *ngIf="childData['tablink']=='discount_coupon'">Free Shipping Charge</mat-option>
+													<!-- <mat-option value="4" *ngIf="discount_master_type==0">By Freebies Item</mat-option>
+													<mat-option value="5" *ngIf="discount_master_type==0">By Freebies Item With Percentage</mat-option>
+													<mat-option value="6" *ngIf="discount_master_type==0">By Freebies Item With Fixed Amount</mat-option> -->
+												</mat-select>
+											<mat-error *ngIf="discountApply.errors && discountApply.errors.required && (discountApply.dirty || discountApply.touched || discountInfoForm.submitted)">
+														This is a <strong>required</strong> field
+											</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="col-sm-4" *ngIf="formModel.disc_type==2 ||formModel.disc_type==5 || formModel.disc_type==6 || formModel.disc_type==1 || formModel.disc_type==3">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label *ngIf="formModel.disc_type==2 || formModel.disc_type==6 || formModel.disc_type==3">Discount Amount</mat-label>
+											<mat-label *ngIf="formModel.disc_type==5 || formModel.disc_type==1">Percentage Amount (%)</mat-label>
+												<input matInput placeholder="Discount Amount" required #discountAmount="ngModel"  name="discountAmount" [(ngModel)]="formModel.amount" pattern="\d+(\.\d{1,2})?">
+												<mat-error *ngIf="discountAmount.errors && discountAmount.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+												<mat-error *ngIf="discountAmount.errors && discountAmount.errors.pattern">
+													Only valid <strong>decimal</strong> numbers are allowed
+												</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="col-sm-4" *ngIf="formModel.disc_type==7">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label *ngIf="formModel.disc_type==7">Shipping Amount(AED)</mat-label>
+												<input matInput [disabled]="isDisable" placeholder="Shipping Amount" required #shippingAmount="ngModel"  name="shippingAmount" [(ngModel)]="formModel.amount" pattern="\d+(\.\d{1,2})?">
+												<mat-error *ngIf="shippingAmount.errors && shippingAmount.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+												<mat-error *ngIf="shippingAmount.errors && shippingAmount.errors.pattern">
+													Only valid <strong>decimal</strong> numbers are allowed
+												</mat-error>
+										</mat-form-field>
+									</div>
+								<!-- <div class="col-sm-6">
+									<div class="mandatory-select">
+										<mat-form-field appearance="outline">
+										<mat-label>Status</mat-label>
+							  			<mat-select required placeholder="Status" #status="ngModel" name="status" [(ngModel)]="formModel.isblocked">
+											<mat-option value="n">Active</mat-option>
+											<mat-option value="y">Inactive</mat-option>
+										</mat-select>
+										<mat-error *ngIf="status.errors && status.errors.required && (status.dirty || status.touched || discountInfoForm.submitted)">
+									      This is a <strong>required</strong> field
+										</mat-error>
+										</mat-form-field>
+							  		</div>
+								</div> -->
+						  	</div>
+						  	<div class="row">
+									
+									<div class="col-sm-6" *ngIf="discount_master_type==0 && formModel.disc_type==5 || formModel.disc_type==6 || formModel.disc_type==4">
+										<mat-form-field appearance="outline" class="md-block" (click)="openPop()">
+											<mat-label>Select Free Items</mat-label>
+											<input matInput placeholder="Select Free Items" required #free_items="ngModel"  name="free_items" [(ngModel)]="formModel.free_items">
+											<!-- <textarea matInput placeholder="Select Free Items" required #free_items="ngModel"  name="free_items" [(ngModel)]="formModel.free_items"></textarea> -->
+											<mat-error *ngIf="free_items.errors && free_items.errors.required && (free_items.dirty || free_items.touched || discountInfoForm.submitted)">
+											This is a <strong>required</strong> field
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>	
+						  	<div class="row">
+							  	<div class="col-sm-4">
+							  		<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Discount Start</mat-label>
+							  			<input matInput placeholder="Discount Start" [owlDateTime]="picker" [owlDateTimeTrigger]="picker" required (focus)="picker.open()"  name="discountStartDate" #discountStartDate="ngModel" [(ngModel)]="formModel.disc_start_date">
+										<owl-date-time #picker></owl-date-time>
+										<mat-error *ngIf="discountStartDate.errors && discountStartDate.errors.required && (discountStartDate.dirty || discountStartDate.touched || discountInfoForm.submitted)">
+											This is a <strong>required</strong> field
+										</mat-error>
+							  		</mat-form-field>
+									</div>
+							  	<div class="col-sm-4">
+							  		<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Discount end</mat-label>
+							  			<input matInput placeholder="Discount end" [owlDateTime]="picker1" required [owlDateTimeTrigger]="picker1" (focus)="picker1.open()"  name="discountEndDate" #discountEndDate="ngModel" [(ngModel)]="formModel.disc_end_date">
+										<owl-date-time #picker1></owl-date-time>
+										<mat-error *ngIf="discountStartDate.errors && discountStartDate.errors.required && (discountStartDate.dirty || discountStartDate.touched || discountInfoForm.submitted)">
+											This is a <strong>required</strong> field
+										</mat-error>
+							  		</mat-form-field>
+									</div>
+									<div class="col-sm-4" *ngIf="discount_master_type==0">
+						  			<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Priority</mat-label>
+										<input matInput placeholder="Priority" #discountPriority="ngModel"  name="discountPriority" [(ngModel)]="formModel.discount_priority" pattern="^[0-9]*$">
+										<mat-error *ngIf="discountPriority.errors && discountPriority.errors.pattern">
+											Only numeric values are allowed.
+										</mat-error>
+								    </mat-form-field>
+									</div>
+									<div class="col-sm-4" *ngIf="discount_master_type==1">
+							  		<div class="mandatory-select">
+											<mat-form-field appearance="outline">
+											<mat-label>Coupon Type</mat-label>
+												<mat-select required placeholder="Coupon Type" #discountType="ngModel" name="discountType" [(ngModel)]="formModel.coupon_type">
+													<mat-option  value="2">Multiple use</mat-option>
+													<mat-option  value="1">Single use</mat-option>
+												</mat-select>
+												<mat-error *ngIf="discountType.errors && discountType.errors.required && (discountType.dirty || discountType.touched || discountInfoForm.submitted)">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+							  		</div>
+							  	</div>
+						  	</div>
+						  	<div class="clear"></div>
+						  	<div class="row" *ngIf="discount_master_type==1">
+							  	<div class="col-sm-4">
+							  		<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Prefix</mat-label>
+								    	<input matInput placeholder="Prefix" #discountPrefix="ngModel"  name="discountPrefix" [(ngModel)]="formModel.coupon_prefix">
+								    </mat-form-field>
+							  	</div>
+							  	<div class="col-sm-4">
+							  		<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Suffix</mat-label>
+								    	<input matInput placeholder="Suffix" #discountSuffix="ngModel"  name="discountSuffix" [(ngModel)]="formModel.coupon_suffix">
+								    </mat-form-field>
+									</div>
+									<div class="col-sm-4">
+						  			<div class="mandatory-select">
+										<mat-form-field appearance="outline">
+										<mat-label>Generate Options</mat-label>
+							  			<mat-select required placeholder="Generate Options" #discountOption="ngModel" name="discountOption" [(ngModel)]="formModel.generate_couponcode">
+											<mat-option  value="single">Single Code</mat-option>
+										  	<mat-option  value="multiple">Multiple Code</mat-option>
+										</mat-select>
+										<mat-error *ngIf="discountOption.errors && discountOption.errors.required && (discountOption.dirty || discountOption.touched || discountInfoForm.submitted)">
+									      This is a <strong>required</strong> field
+										</mat-error>
+										</mat-form-field>
+							  		</div>
+						  		</div>
+						  	</div>
+						  	<div class="row">
+							  	<div class="col-sm-4">
+							  		<div  class="md-block">
+										<!-- <mat-form-field appearance="outline">
+											<mat-label>Customer Group</mat-label>
+												<mat-select placeholder="Customer Group" #discountCustomerGrp="ngModel" name="discountCustomerGrp" [(ngModel)]="formModel.customer_group" multiple>
+												<mat-option *ngFor="let customergrp of customergrp_list" [value]="customergrp.id">{{customergrp.name}}</mat-option>
+											</mat-select>
+										</mat-form-field> -->
+										<ng-select
+											[items]="customergrp_list"
+											placeholder="Customer Group"
+											[multiple]="true"
+											bindLabel="name" bindValue="id"
+											#discountCustomerGrp="ngModel" name="discountCustomerGrp" [(ngModel)]="formModel.customer_group"
+											style="margin-top: 8px !important;"
+										>
+										<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+											<div class="ng-value" *ngFor="let item of items | slice:0:1">
+													<span class="ng-value-label">{{item.name}}</span>
+													<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+											</div>
+											<div class="ng-value" *ngIf="items.length > 1">
+													<span class="ng-value-label">{{items.length - 1}} more...</span>
+											</div>
+										</ng-template>
+										</ng-select>
+									</div>
+									</div>
+									<div class="col-sm-4">
+										<div  class="md-block">
+											<!-- <mat-form-field appearance="outline">
+											<mat-label>Store</mat-label>
+											<mat-select placeholder="Store" #discountWarehouse="ngModel" name="discountWarehouse" [(ngModel)]="formModel.warehouse" multiple>
+												<mat-option *ngFor="let item of all_warehouse" [value]="item.id">{{item.name}}</mat-option>
+											</mat-select>
+											</mat-form-field> -->
+											<ng-select
+												[items]="all_warehouse"
+												placeholder="Store"
+												[multiple]="true"
+												bindLabel="name" bindValue="id"
+												#discountWarehouse="ngModel" name="discountWarehouse" [(ngModel)]="formModel.warehouse"
+												style="margin-top: 8px !important;"
+											>
+											<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+												<div class="ng-value" *ngFor="let item of items | slice:0:1">
+														<span class="ng-value-label">{{item.name}}</span>
+														<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+												</div>
+												<div class="ng-value" *ngIf="items.length > 1">
+														<span class="ng-value-label">{{items.length - 1}} more...</span>
+												</div>
+											</ng-template>
+											</ng-select>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Description</mat-label>
+												<!-- <textarea matInput placeholder="Description" #discountDescription="ngModel"  name="discountDescription" [(ngModel)]="formModel.description"></textarea> -->
+												<input  matInput placeholder="Description" #discountDescription="ngModel"  name="discountDescription" [(ngModel)]="formModel.description">
+											</mat-form-field>
+									</div>
+							  </div>
+							  <div class="row" *ngIf="discount_master_type==0">
+									<div class="col-sm-4">
+										<div  class="md-block">
+											<mat-form-field appearance="outline">
+											<mat-label>Offer type</mat-label>
+											<mat-select placeholder="Offer type" #offer_type="ngModel" name="offer_type" [(ngModel)]="formModel.offer_type">
+												<mat-option  value="Normal Offers">Normal Offers</mat-option>
+												<mat-option  value="Hot Offers">Hot Offers</mat-option>
+												<mat-option  value="Todays Offers">Todays Offers</mat-option>
+											</mat-select>
+											</mat-form-field>
+										</div>
+									</div>
+							  </div>
+						  	<div class="clear20"></div>
+						  	<div class="row" *ngIf="discount_master_type==1">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Usage Limit Per User</mat-label>
+											<input type="number" matInput placeholder="No. of code" required #usage_limit_per_user="ngModel"  name="usage_limit_per_user" [(ngModel)]="formModel.usage_limit_per_user" min="1">
+											<mat-error *ngIf="usage_limit_per_user.errors && usage_limit_per_user.errors.required">
+												This is a <strong>required</strong> field
+											</mat-error>
+											<mat-error *ngIf="usage_limit_per_user.errors && usage_limit_per_user.errors.min">
+												Must be <strong>greater </strong> than zero
+											</mat-error>
+									</mat-form-field>
+								</div>
+									<div class="col-sm-4" *ngIf="formModel.generate_couponcode=='single'">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Coupon Code</mat-label>
+											<span mdPrefix>{{formModel.coupon_prefix}}</span>
+												<input matInput placeholder="Coupon Code" required #discountCode="ngModel"  name="discountCode" [(ngModel)]="formModel.coupon_code">
+												<span mdSuffix>{{formModel.coupon_suffix}}</span>
+												<mat-error *ngIf="discountCode.errors && discountCode.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="col-sm-4" *ngIf="formModel.generate_couponcode=='multiple'">
+										<mat-form-field appearance="outline" class="md-block" *ngIf="formModel.generate_couponcode=='multiple'">
+											<mat-label>No. of code</mat-label>
+												<input type="number" matInput placeholder="No. of code" required #noOfCode="ngModel"  name="noOfCode" [(ngModel)]="formModel.number_of_coupon" min="1">
+												<mat-error *ngIf="noOfCode.errors && noOfCode.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+												<mat-error *ngIf="noOfCode.errors && noOfCode.errors.min">
+													Must be <strong>greater </strong> than zero
+												</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="col-sm-4">
+										<button type="button" class="margin-auto20  btn-pink btn-pink-decor" mat-option-button (click)="generateCode(formModel.generate_couponcode)"  matTooltip="Generate Coupon">
+											<mat-option class="icon-tag"></mat-option>
+										</button>
+									</div>
+									
+							</div>
+							<div class="row" *ngIf="discount_master_type==1 && formModel.coupon_codes">
+								<div class="col-sm-12" *ngIf="generated">
+									<h6>New Generated Coupon Codes</h6>
+									<mat-chip-list>
+										<mat-chip *ngFor="let code of formModel.coupon_codes" color="(code.is_used=='y')?'accent':''">{{(formModel.coupon_prefix?formModel.coupon_prefix:'')+code.coupon_code+(formModel.coupon_suffix?formModel.coupon_suffix:'')}}</mat-chip>
+									</mat-chip-list><br>
+								</div>
+								<div class="col-sm-12" *ngIf="show_coupon">
+									<div class="row">
+										<div class="col-sm-12">
+												<mat-accordion>
+													<mat-expansion-panel  >
+														<mat-expansion-panel-header>
+														<mat-panel-title>
+															View All Coupon Codes
+														</mat-panel-title>
+														</mat-expansion-panel-header>
+														<div class="row">
+															<div class="col-sm-10">
+																<mat-chip-list>
+																	<mat-chip *ngFor="let item of formModel.coupon_codes_temp" color="(item.is_used=='y')?'accent':''">{{(formModel.coupon_prefix?formModel.coupon_prefix:'')+item.coupon_code+(formModel.coupon_suffix?formModel.coupon_suffix:'')}}</mat-chip>
+																</mat-chip-list>
+															</div>
+															<div class="col-sm-2">
+																<a mat-raised-button class="ok-btn-anc margin-auto20"  href="{{export_coupons}}" >Export Coupons</a>
+															</div>
+														</div>
+													</mat-expansion-panel><br>
+												</mat-accordion>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+				</div>
+				<!-- ///////////////Buttons//// -->
+				<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Continue</button>
+					<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div>
+				<div class="clear"></div> 
+				<!-- ///////////////Buttons//// --> 
+			</div>
+		  	<div class="clear"></div>
+		</div>
+	</form>
+</section>

@@ -1,0 +1,246 @@
+<section class="right-part filter-pad">
+	<!-- <form #addressInfoCustomer="ngForm" novalidate (ngSubmit)="addEditAddressInformation()"> -->
+	  <input type="hidden" name="customer_id" [(ngModel)]="formModel.customer_id">
+		<div class="topheading">
+			<h1>Address Information
+				<div class="btn-header">
+					<button mat-raised-button class="btn-main" (click)="change_tab(formModel.customer_id)">Continue</button>
+				  <button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				  <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul *ngIf="formModel.customer_id>0 && add_edit=='edit'">
+					<li class="done"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id)" [routerLink]="['/customers/edit/'+formModel.customer_id]"><div class="nom"></div>General Information</a></li>
+					<li class="active"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step2')" [routerLink]="['/customers/edit/'+formModel.customer_id+'/step2']"><div class="nom"></div>Address Information</a></li>
+					<li><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step3')" [routerLink]="['/customers/edit/'+formModel.customer_id+'/step3']"><div class="nom"></div>Order Details</a></li>
+					<!-- <li><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step4')" [routerLink]="['customers/edit/'+formModel.customer_id+'/step4']"><div class="nom"></div>Invoice List</a></li>					   -->
+				</ul>
+				<ul *ngIf="add_edit=='add'">
+					<li class="done"><div class="nom"></div>General Information</li>
+					<li class="active"><div class="nom"></div>Address Information</li>
+					<li><div class="nom"></div>Order Details</li>
+					<!-- <li><div class="nom"></div>Invoice List</li> -->
+			  </ul>
+				<div class="clear"></div>
+			</div>
+		</div>  
+	  <div class="body-part addorderbody addorderbodypart" style="padding-top: 24px !important;">
+		  <div class="filter_bottomsec">
+			  <div class="inner_subhead">Address Information</div>
+			  <div class="selectand_btnsec">
+				  <div class="row">
+					  <div class="col-sm-2">
+						  <button class="addpinkbtn" style="margin-top: 12px;" (click)="add_new()" mdTooltip="Add Price Type" type="button"><span class="icon-add"></span></button>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="blanktable" *ngIf="address_list.length == 0 && addNew!=true">
+			  No address found.
+		  </div>
+		  <mat-accordion multi="true">
+			  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="addNew==true" expanded >
+				  <mat-expansion-panel-header>
+				  <mat-panel-title>
+					  Add new address
+				  </mat-panel-title>
+				  <div class="cus_matopen"><span class="icon-addsvg"></span></div>
+				  <div class="cus_matoclose"><span class="icon-minus"></span></div>
+				  </mat-expansion-panel-header>
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Name</mat-label>
+								  <input matInput placeholder="Name" required #delivery_name_add="ngModel" name="delivery_name_add" [(ngModel)]="formModel.delivery_name_add" pattern="[a-zA-Z0-9_]+.*$">
+								  <mat-error *ngIf="delivery_name_add.errors && delivery_name_add.errors.required">
+									  Please enter name
+								  </mat-error>
+								  <mat-error *ngIf="delivery_name_add.errors && delivery_name_add.errors.pattern">
+									  White space is not allowed at beginning. 
+								  </mat-error>
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Email Address</mat-label>
+								  <input matInput placeholder="Email Address" #delivery_email_address_add="ngModel" name="delivery_email_address_add" [(ngModel)]="formModel.delivery_email_address_add" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+								  <mat-error *ngIf="delivery_email_address_add.errors && delivery_email_address_add.errors.required">
+									  Please enter email address
+								  </mat-error>
+								  <mat-error *ngIf="delivery_email_address_add.errors && delivery_email_address_add.errors.pattern" >
+									  Enter a valid <strong>email</strong> address
+								  </mat-error>
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Mobile No</mat-label>
+								  <input matInput placeholder="Mobile No" required #delivery_phone_add="ngModel" name="delivery_phone_add" [(ngModel)]="formModel.delivery_phone_add" pattern="^[0-9]*$">
+								  <mat-error *ngIf="delivery_phone_add.errors && delivery_phone_add.errors.required">
+									  Please enter mobile no
+								  </mat-error>
+								  <mat-error *ngIf="delivery_phone_add.errors && delivery_phone_add.errors.pattern">
+									  Only numeric values are allowed. 
+								  </mat-error>
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Address 1</mat-label>
+								  <input matInput placeholder="Address 1" #delivery_street_address_add="ngModel" name="delivery_street_address_add" [(ngModel)]="formModel.delivery_street_address_add">
+								  <mat-error *ngIf="delivery_street_address_add.errors && delivery_street_address_add.errors.required">
+										  Please enter address1
+								  </mat-error>
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Address 2</mat-label>
+								  <input matInput placeholder="Address 2" #delivery_street_address1_add="ngModel" name="delivery_street_address1_add" [(ngModel)]="formModel.delivery_street_address1_add">
+							  </mat-form-field>
+						  </div>
+						  <div class="col-md-4">
+							  <mat-form-field appearance="outline"><mat-label>Country</mat-label>
+								  <input  matInput required placeholder="Country" [matAutocomplete]="tdAuto" name="delivery_country_add" #delivery_country_add="ngModel" [(ngModel)]="formModel.delivery_country_add" (ngModelChange)="filter_countries(formModel.delivery_country_add)" >
+								  <mat-error *ngIf="delivery_country_add.errors && delivery_country_add.errors.required">
+								  This is a <strong>required</strong> field
+								  </mat-error>
+							  </mat-form-field>
+							  <mat-autocomplete #tdAuto="matAutocomplete" [displayWith]="displayFn">
+								  <mat-option *ngFor="let country of country_list" [value]="country" (click)="get_states(formModel.delivery_country_add.id)">
+								  <span >{{ country.country_name }}</span>
+								  </mat-option>
+							  </mat-autocomplete>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>State</mat-label>
+								  <mat-select placeholder="State" required #delivery_state_add="ngModel" name="delivery_state_add" [(ngModel)]="formModel.delivery_state_add">
+									  <mat-option *ngFor="let state of state_list" [value]="state.id">{{state.state_name}}</mat-option>
+								  </mat-select>
+								  <mat-error *ngIf="delivery_state_add.errors && delivery_state_add.errors.required">
+									  Please select state
+								  </mat-error>	
+							  </mat-form-field>								  		
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>City</mat-label>
+								  <input matInput required placeholder="City" #delivery_city_add="ngModel" name="delivery_city_add" [(ngModel)]="formModel.delivery_city_add">
+								  <mat-error *ngIf="delivery_city_add.errors && delivery_city_add.errors.required">
+									  Please enter city
+								  </mat-error>	
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Zipcode</mat-label>
+								  <input matInput required placeholder="Zipcode" #delivery_postcode_add="ngModel" name="delivery_postcode_add" [(ngModel)]="formModel.delivery_postcode_add">
+								  <mat-error *ngIf="delivery_postcode_add.errors && delivery_postcode_add.errors.required">
+									  Please enter zipcode
+								  </mat-error>
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <mat-slide-toggle #set_primary="ngModel" name="set_primary" [(ngModel)]="formModel.set_primary">Set Primary</mat-slide-toggle>
+				  <div class="btn-header hidden-xs">
+					  <button  mat-raised-button class="btn-main" (click)="addNewAddressSave()">Save</button>
+					  <button mat-raised-button class="btn-line" (click)="cancel_add()">Cancel</button>
+				  </div> 
+			  </mat-expansion-panel>
+			  <div *ngIf="addNew!=true" >
+				  <mat-expansion-panel  *ngFor="let address of address_list; let i=index" [expanded]="address.set_primary === 1" style="margin-bottom: 9px;" >
+					  <mat-expansion-panel-header>
+					  <mat-panel-title>
+						  Name: {{address.delivery_name}} | City: {{address.delivery_city}} | Pin: {{address.delivery_postcode}}
+					  </mat-panel-title>
+					  <div class="cus_matopen"><span class="icon-addsvg"></span></div>
+					  <div class="cus_matoclose"><span class="icon-minus"></span></div>
+					  </mat-expansion-panel-header>
+				  
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Name</mat-label>
+								  <input matInput placeholder="Name" required id="{{address.delivery_name+'_'+i}}" name="{{address.delivery_name+'_'+i}}" [(ngModel)]="address.delivery_name" pattern="[a-zA-Z0-9_]+.*$">
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Email Address</mat-label>
+								  <input matInput placeholder="Email Address" id="{{address.delivery_email_address+'_'+i}}" name="{{address.delivery_email_address+'_'+i}}" [(ngModel)]="address.delivery_email_address" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+									  
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Mobile No</mat-label>
+								  <input matInput placeholder="Mobile No" required id="{{address.delivery_phone+'_'+i}}" name="{{address.delivery_phone+'_'+i}}" [(ngModel)]="address.delivery_phone" pattern="^[0-9]*$">
+									  
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Address 1</mat-label>
+								  <input matInput placeholder="Address 1" id="{{address.delivery_street_address+'_'+i}}" name="{{address.delivery_street_address+'_'+i}}" [(ngModel)]="address.delivery_street_address">
+								  
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Address 2</mat-label>
+								  <input matInput placeholder="Address 2" id="{{address.delivery_street_address1+'_'+i}}" name="{{address.delivery_street_address1+'_'+i}}" [(ngModel)]="address.delivery_street_address1">
+							  </mat-form-field>
+						  </div>
+						  <!-- <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Country</mat-label>
+								  <mat-select placeholder="Country" required id="{{address.delivery_country+'_'+i}}" name="{{address.delivery_country+'_'+i}}" [(ngModel)]="address.delivery_country" (selectionChange)="get_states(address.delivery_country)">
+									  <mat-option *ngFor="let country of country_list" [value]="country.id">{{country.country_name}}</mat-option>
+								  </mat-select>
+								  
+							  </mat-form-field>
+						  </div> -->
+						  <div class="col-md-4">
+							  <mat-form-field appearance="outline"><mat-label>Country</mat-label>
+								  <input  matInput required placeholder="Country" id="{{address.delivery_country+'_'+i}}" [matAutocomplete]="ltdAuto" name="{{address.delivery_country+'_'+i}}" [(ngModel)]="address.delivery_country" (ngModelChange)="filter_countries(address.delivery_country)" >
+								  <!-- <mat-error *ngIf="delivery_country_add.errors && delivery_country_add.errors.required">
+								  This is a <strong>required</strong> field
+								  </mat-error> -->
+							  </mat-form-field>
+							  <mat-autocomplete #ltdAuto="matAutocomplete" [displayWith]="displayFn">
+								  <mat-option *ngFor="let country of country_list" [value]="country" (click)="get_states(address.delivery_country.id)">
+								  <span >{{ country.country_name }}</span>
+								  </mat-option>
+							  </mat-autocomplete>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>State</mat-label>
+								  <mat-select placeholder="State" id="{{address.delivery_state+'_'+i}}" name="{{address.delivery_state+'_'+i}}" [(ngModel)]="address.delivery_state">
+									  <mat-option *ngFor="let state of state_list" [value]="state.id">{{state.state_name}}</mat-option>
+								  </mat-select>
+								  
+							  </mat-form-field>								  		
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>City</mat-label>
+								  <input matInput required placeholder="City" id="{{address.delivery_city+'_'+i}}" name="{{address.delivery_city+'_'+i}}" [(ngModel)]="address.delivery_city">
+								  
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-4">
+							  <mat-form-field appearance="outline" ><mat-label>Zipcode</mat-label>
+								  <input matInput required placeholder="Zipcode" id="{{address.delivery_postcode+'_'+i}}" name="{{address.delivery_postcode+'_'+i}}" [(ngModel)]="address.delivery_postcode">
+								  
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <mat-slide-toggle id="{{address.set_primary+'_'+i}}" name="{{address.set_primary+'_'+i}}" [(ngModel)]="address.set_primary" >Set Primary</mat-slide-toggle>
+					  <div class="btn-header hidden-xs">
+						  <button mat-raised-button class="btn-main"  (click)="update_address(address.id)">Save</button>
+						  <button mat-raised-button class="btn-line" (click)="delete_address(address.id)">Delete</button>
+					  </div> 
+				  </mat-expansion-panel>
+			  </div>
+		  </mat-accordion>
+	  </div>  
+	<!-- </form>	   -->
+</section>

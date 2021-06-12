@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp"
+    android:layout_centerInParent="true"
+android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+
+    app:cardBackgroundColor="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivCategoryBanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            app:riv_corner_radius="8dp" />
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

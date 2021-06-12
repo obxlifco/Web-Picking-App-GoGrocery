@@ -1,0 +1,28 @@
+<div class="pop_wrap">
+	<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+	<h4 mat-dialog-title>
+		Order Edit Type {{custom_order_id}}
+	</h4>
+	<mat-dialog-content style="min-width: 500px;min-height: 110px;">
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body">
+			<div class="box productbox">
+				<mat-form-field appearance="outline">
+					<mat-label>Select Return Type</mat-label>
+					<mat-select required placeholder="Select Return Type" #return_order_type="ngModel" name="return_order_type" [(ngModel)]="formModel.return_order_type">
+						<mat-option [value]="1">Cancellation</mat-option>
+						<mat-option [value]="2">Partial Cancellation</mat-option>
+					</mat-select>
+					<mat-error *ngIf="return_order_type.errors && return_order_type.errors.required">Please select a return type</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<hr>
+	<mat-dialog-actions layout="row" class="div-pop-bottom">
+		<button mat-raised-button class="btn-main" type="button" (click)="saveReturnType()">Save</button>
+		<button mat-raised-button [mat-dialog-close]="true" class="btn-line" type="button">Cancel</button>
+	</mat-dialog-actions>
+</div>

@@ -1,0 +1,120 @@
+http://localhost:9200/_search/?q=Leia&pretty
+{"books":
+	[
+		{"_id":"1","name":"life in heaven","author":"Mike Smith"},
+		{"_id":"2","name":"get rich","author":"Joe Shmoe"},
+		{"_id":"3","name":"luxury properties","author":"Linda Jones"}
+	]
+} 
+
+POST books/book/1
+{"name":"life in heaven","author":"Mike Smith"}
+POST books/book/2
+{"name":"get rich","author":"Joe Shmoe"}
+
+GET books/book/1
+
+POST menus/menu/1
+{"name":"Dashboard","link":"","parent_id":"0","parent_name":"","parent_css":""}
+
+POST menus/menu/77
+{"name":"All Orders","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/117
+{"name":"Packing Slips","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/79
+{"name":"Invoices","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/193
+{"name":"Shipment","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/110
+{"name":"Customers","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/78
+{"name":"Credit Memos","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/191
+{"name":"Preset Management","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/143
+{"name":"Auto Responder","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+POST menus/menu/194
+{"name":"Courier Management","link":"","parent_id":"2","parent_name":"Sales & Orders","parent_css":"icon-sales-orders"}
+
+POST menus/menu/183
+{"name":"Overview","link":"","parent_id":"182","parent_name":"Shortcuts","parent_css":""}
+
+POST menus/menu/142
+{"name":"Marketplaces","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/146  
+{"name":"Ebay","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/192
+{"name":"Repricing","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/147
+{"name":"Amazon","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/170
+{"name":"Snapdeal","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/139
+{"name":"Facebook","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/141
+{"name":"Twitter","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+POST menus/menu/187
+{"name":"Flipkart","link":"","parent_id":"111","parent_name":"Marketplaces","parent_css":"icon-marketplaces"}
+
+POST menus/menu/96
+{"name":"Stock Management","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/95
+{"name":"Purchase Order","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/108
+{"name":"Suppliers","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/165
+{"name":"Stock Adjustment","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/94  
+{"name":"Warehouses","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/163
+{"name":"Payment Method","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+POST menus/menu/164
+{"name":"Shipping Method","link":"","parent_id":"7","parent_name":"Inventory","parent_css":"icon-inventory"}
+
+POST menus/menu/83
+{"name":"Products","link":"product","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/80
+{"name":"Categories","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/166
+{"name":"Brands","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/176
+{"name":"Reviews & Ratings","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/137
+{"name":"Coupons Promotion","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/131
+{"name":"Product Promotion","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/113
+{"name":"Contacts Group","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/114
+{"name":"Contacts","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/115
+{"name":"Segments","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/116
+{"name":"Campaign Templates","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+POST menus/menu/118
+{"name":"Email Campaign","link":"","parent_id":"3","parent_name":"Products & Promotions","parent_css":"icon-products-promotions"}
+
+
+
+POST menus/menu/134
+{"name":"Traffic Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+POST menus/menu/132
+{"name":"Sales Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+POST menus/menu/133
+{"name":"Product Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+POST menus/menu/135
+{"name":"Order Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+POST menus/menu/140
+{"name":"Customer Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+POST menus/menu/148
+{"name":"Campaign Report","link":"","parent_id":"7","parent_name":"Reports","parent_css":"icon-reports"}
+
+POST menus/menu/105
+{"name":"User Management","link":"users","parent_id":"10","parent_name":"Employees","parent_css":""}
+POST menus/menu/107
+{"name":"Group Management","link":"groups","parent_id":"10","parent_name":"Employees","parent_css":""}
+POST menus/menu/106
+{"name":"Role Management","link":"roles","parent_id":"10","parent_name":"Employees","parent_css":""}
+
+POST menus/menu/99
+{"name":"Basic Setup","link":"","parent_id":"4","parent_name":"Admin","parent_css":"icon-setings"}

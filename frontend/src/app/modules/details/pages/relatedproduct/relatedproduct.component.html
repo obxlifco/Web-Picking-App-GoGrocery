@@ -1,0 +1,81 @@
+<div class="row" *ngIf="relatedProductDetails && relatedProductDetails.length > 0">
+    <div class="col-12">
+        <div class="product_section">
+  <div class="innerheader"><h3>Similar Product</h3></div>
+  <div class="product_row details">
+    <div class="productblog details" *ngFor="let singleProduct of relatedProductDetails|slice:0:6;let i= index;"  (click)="navigateToUrl(singleProduct['selected_product']['slug'])" >
+                   <div class="off_text">
+                    <span class="off" *ngIf="singleProduct['selected_product']['disc_type'] == 1 && singleProduct['selected_product']['discount_amount'] > 0">({{singleProduct['selected_product']['discount_amount']}}% OFF)</span>
+                          <span class="off" *ngIf="singleProduct['selected_product']['disc_type'] == 2 && singleProduct['selected_product']['discount_amount'] > 0">(AED {{singleProduct['selected_product']['discount_amount'] | money}} OFF)</span>
+
+                     
+                   </div>
+                    <!-- <div class="likecard">
+                        <a href="javascaript:void(0)">
+                            <span class="icon-wishlist"></span>
+                        </a>
+                    </div> -->
+                    <div class="imagebox">
+                         <img [src]="singleProduct['selected_product']['product_image']|imagetransform:['product','400','cover']">
+                    </div>
+                    <div class="textbox">
+                        <div class="vag_simbol" [ngClass]="singleProduct['selected_product']['veg_nonveg_type'] != null && singleProduct['selected_product']['veg_nonveg_type'] == 'Non Veg' ? 'non_veg' : 'veg'" *ngIf="singleProduct['selected_product']['veg_nonveg_type'] != null && singleProduct['selected_product']['veg_nonveg_type'] != 'NA'"></div>
+                        <div class="textrow">
+                            <p><span>{{singleProduct['selected_product']['brand']['name']}}</span>{{singleProduct['selected_product']['name']}}</p>
+                        </div>
+                            
+                    </div>
+
+       
+
+                   
+
+                    <div class="bottomkartbox">
+                     <!--  <div class="textrow selectrow">
+                            <mat-form-field appearance="outline">
+                              <mat-select [(ngModel)] = "singleProduct['selected_product']">
+                                <ng-container *ngFor="let variantProduct of singleProduct['variant_product']">
+                                  <ng-container *ngFor="let customfields of variantProduct['custom_field']">
+                                    <mat-option  [value]="variantProduct" *ngIf="customfields['is_variant'] == 'Yes'">{{customfields['value']}}-${{variantProduct['default_price']}}</mat-option>
+                               </ng-container>
+                             </ng-container>
+                              </mat-select>
+                            </mat-form-field>
+                       </div> -->
+                       <!-- <div class="textrow">
+                           <p class="pricerow">Price ${{singleProduct['selected_product']['default_price']}}</p>  
+                       </div> -->
+                       <div class="textrow">
+                        <p class="pricerow">{{singleProduct['selected_product']['new_default_price_unit'] | money}}
+                          <span *ngIf="singleProduct['selected_product']['new_default_price_unit'] != singleProduct['selected_product']['default_price'] ">{{singleProduct['selected_product']['default_price'] | money}}</span> 
+                          <span>{{singleProduct['selected_product']['weight']}}{{singleProduct['selected_product']['uom']}}</span>
+                        </p>
+                       </div>
+                    </div>
+
+                    <div class="textrow last">
+                      <ng-container *ngIf="singleProduct['selected_product']['stock_details'] && singleProduct['selected_product']['stock_details'].length > 0 && singleProduct['selected_product']['stock_details'][0]['real_stock'] > 0;else out_of_stock">
+                        <div class="textrow last" *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]">
+                         <button class="add_tocard" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],1,singleProduct['product']['custom_field'])">ADD TO CART</button>
+                         <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                        </div>
+                       <div class="textrow last add_count" *ngIf="cartService.cartDetails['cart_list'] && cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]">
+                           <div class="count_box">
+                                <button class="count_btn" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']-1)"><span class="icon-minus"></span></button>
+                                    <div class="count_no">{{cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']}}</div>
+                                <button class="count_btn" (click)="cartService.addOrRemoveItem(singleProduct['selected_product']['id'],cartService.cartDetails['cart_list'][singleProduct['selected_product']['id']]['quantity']+1)"><span class="icon-plus"></span></button>
+                           </div>
+                           <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                        </div>
+                        <div class="likebox"><a class="liked" href="javascaript:void(0)"><span class="icon-valentines-heart"></span></a> </div>
+                      </ng-container>
+                      <ng-template #out_of_stock>
+                       <button class="add_tocard out_of_stock">OUT OF STOCK </button>
+                      </ng-template>
+                     </div>
+                </div>
+  </div>
+</div>
+    </div>
+</div>
+

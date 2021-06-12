@@ -1,0 +1,36 @@
+<div class="loada" *ngIf="popupLoder">
+	<mat-spinner></mat-spinner>
+</div>
+<form #stockForm="ngForm" novalidate (ngSubmit)="stockForm.valid && updateSafetyStock(stockForm)">
+	<input type="hidden" name="product_id" [(ngModel)]="formModel.product_id">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>Safety Stock </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			
+			<mat-form-field class="md-block">
+				<input matInput type="number" min="0" placeholder="Safety Stock" required #safety_stock="ngModel" name="safety_stock" [(ngModel)]="formModel.safety_stock" validateMin="0">
+				
+			    <mat-error *ngIf="safety_stock.errors && safety_stock.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			    <mat-error *ngIf="safety_stock.errors && !safety_stock.errors.validateMin">
+			      Please enter a <strong>minimum value</strong> of 0
+			    </mat-error>
+			</mat-form-field>
+			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

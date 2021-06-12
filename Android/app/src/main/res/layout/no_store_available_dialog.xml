@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/app_green_clr"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_margin="42dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv"
+            android:src="@drawable/pin_store"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:padding="14dp"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/txt"
+            android:text="@string/sorry"
+            android:textColor="@color/white"
+            android:fontFamily="@font/hind_semibold"
+            android:textSize="24sp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/iv"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt1"
+            android:textAlignment="center"
+            android:text="@string/error_no_store_msg"
+            android:textColor="@color/white"
+            android:fontFamily="@font/hind"
+            android:textSize="16sp"
+            android:ellipsize="end"
+
+            android:layout_below="@+id/txt"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtOk"
+            android:textAlignment="center"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:fontFamily="@font/hind"
+            android:textSize="16sp"
+            android:layout_below="@+id/txt1"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_border"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_26sdp"
+            android:paddingStart="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_10sdp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

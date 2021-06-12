@@ -1,0 +1,138 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <form #userForm="ngForm" novalidate (ngSubmit)="userForm.valid && addEditUser(userForm)">
+            <input type="hidden" name="userId" [(ngModel)]="formModel.userId">
+            <div class="topheading">
+                <h1>{{(formModel.userId>0)?'Edit':'Add'}} User
+				  	<div class="btn-header">
+						<div class="btn-header">
+							<button type="submit" mat-raised-button class="btn-main">Save</button>
+				          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+					  	</div>
+					</div>
+					<div class="clear"></div>
+			  	</h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                       <mat-label>Employee Name</mat-label>
+                                        <input matInput placeholder="Employee Name" required #empName="ngModel" name="empName" [(ngModel)]="formModel.empName" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="empName.errors && empName.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empName.errors && empName.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Designation</mat-label>
+                                        <input matInput placeholder="Designation" required #empDesignation="ngModel" name="empDesignation" [(ngModel)]="formModel.empDesignation" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="empDesignation.errors && empDesignation.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empDesignation.errors && empDesignation.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Password</mat-label>
+                                        <input type="password" matInput placeholder="Password" [required]="formModel.userId<1" #empPassword="ngModel" name="empPassword" [(ngModel)]="formModel.empPassword" minlength="8" maxlength="20" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}">
+                                        <mat-error *ngIf="empPassword.errors && empPassword.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empPassword.errors && empPassword.errors.pattern"> <span class="hint"> Your password must contain atleast
+                                            <strong>1 Capital letter ,1 special character,1 number and lowercase letters </strong>
+                                                <br />
+                                            </span> </mat-error>
+                                        <!-- <mat-error *ngIf="empPassword.errors && empPassword.errors.minlength">
+                                              Password should be between 8 to 20 characters
+                                        </mat-error> --></mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Phone</mat-label>
+                                        <input type="text" matInput placeholder="Phone" required #empPhone="ngModel" name="empPhone" [(ngModel)]="formModel.empPhone" pattern="^(?:\+971|00971|054|055|056|050|052|058|0)?[0-9]{7,}$">
+                                        <mat-error *ngIf="empPhone.errors && empPhone.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empPhone.errors && empPhone.errors.pattern"> Please enter a <strong>valid</strong> phone number </mat-error>
+                                        <mat-error *ngIf="empPhone.errors && empPhone.errors.minlength"> Phone number should be between 10 to 12 characters </mat-error>
+                                        <mat-error *ngIf="empPhone.errors && empPhone.errors.maxlength"> Phone number should be between 10 to 12 characters </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput placeholder="Username" required maxlength="40" #empUsername="ngModel" name="empUsername" [(ngModel)]="formModel.empUsername" [disabled]="formModel.userId>0" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="empUsername.errors && empUsername.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empUsername.errors && empUsername.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                   <!-- <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Role Assign</mat-label>
+                                        <mat-select placeholder="Role Assign" #role="ngModel" name="role" [(ngModel)]="formModel.role" required>
+                                            <mat-option *ngFor="let roles of rolelist" [value]="roles.id">{{roles.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="role.errors && role.errors.required && (role.dirty || role.touched || userForm.submitted)"> This is a <strong>required</strong> field </mat-error>
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': role.errors && role.errors.required && (role.dirty || role.touched || userForm.submitted) }"
+									[items]="rolelist"
+									required
+									placeholder="Role Assign"
+									bindLabel="name" bindValue="id"
+									#role="ngModel" name="role" [(ngModel)]="formModel.role"
+                                    >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="role.errors && role.errors.required && (role.dirty || role.touched || userForm.submitted)">This is a <strong>required</strong> field</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput placeholder="Email" required maxlength="40" #empEmail="ngModel" name="email" [(ngModel)]="formModel.empEmail" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+                                        <mat-error *ngIf="empEmail.errors && empEmail.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="empEmail.errors && empEmail.errors.pattern"> Enter a valid <strong>email</strong> address </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4" style="display:none;"><br>
+                                    <mat-checkbox id="empPasswordReset" name="empPasswordReset" [(ngModel)]="formModel.empPasswordReset">Require user to reset password</mat-checkbox>
+                                </div>
+                                 <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" appearance="outline">
+                                         <mat-label>Select Store</mat-label>
+                                        <mat-select placeholder="Select Store" #warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id">
+                                            <mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                    <ng-select
+                                        [items]="warehouse_list"
+                                        placeholder="Select Store"
+                                        bindLabel="name" bindValue="id"
+                                        #warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id"
+                                    >
+                                    </ng-select>
+                                 </div>
+
+                                <div class="col-sm-4"><br>
+                                    <mat-checkbox id="empPasswordSend" name="empPasswordSend" [(ngModel)]="formModel.empPasswordSend">Send Password By Email</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>

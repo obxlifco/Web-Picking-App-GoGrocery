@@ -1,0 +1,31 @@
+<form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEdit(formData)">
+	<input type="hidden" name="brandId" [(ngModel)]="formModel.brandId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.formId>0)?'Edit':'Add'}} Product tax Class </h2>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<div class="mandatory-select">
+                <div class="row">
+                    <div class="col-sm-12">
+                       <mat-form-field appearance="outline"  class="md-block">
+						   <mat-label>Name</mat-label>
+                            <input matInput placeholder="Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+                            <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                            <mat-error *ngIf="name.errors && name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>				
+		    </div>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

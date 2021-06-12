@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage"
+                android:background="@color/view_divider_clr" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+
+                android:orientation="horizontal">
+                <View
+
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+android:layout_marginEnd="@dimen/_8sdp"
+
+                    android:background="@color/view_divider_clr" />
+                <View
+
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@color/view_divider_clr" />
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand1"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage1"
+                android:layout_toEndOf="@+id/ivItemImage1"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName1"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand1"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage1"
+                android:background="@color/view_divider_clr" />
+
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice1"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/ivItemImage1"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/ivItemImage1"
+                android:background="@color/view_divider_clr" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand2"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage2"
+                android:layout_toEndOf="@+id/ivItemImage2"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName2"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand2"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage2"
+                android:background="@color/view_divider_clr" />
+
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice2"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/ivItemImage2"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/ivItemImage2"
+                android:background="@color/view_divider_clr" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand3"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage3"
+                android:layout_toEndOf="@+id/ivItemImage3"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName3"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand3"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage3"
+                android:background="@color/view_divider_clr" />
+
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice3"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/ivItemImage3"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/ivItemImage3"
+                android:background="@color/view_divider_clr" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand4"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage4"
+                android:layout_toEndOf="@+id/ivItemImage4"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName4"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand4"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage4"
+                android:background="@color/view_divider_clr" />
+
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice4"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/ivItemImage4"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/ivItemImage4"
+                android:background="@color/view_divider_clr" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/ivItemImage5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemBrand5"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/ivItemImage5"
+                android:layout_toEndOf="@+id/ivItemImage5"
+                android:background="@color/view_divider_clr" />
+
+            <View
+                android:id="@+id/tvItemName5"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/tvItemBrand5"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ivItemImage5"
+                android:background="@color/view_divider_clr" />
+
+
+            <TextView
+                android:id="@+id/tvDiscounrPrice5"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/ivItemImage5"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/ivItemImage5"
+                android:background="@color/view_divider_clr" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

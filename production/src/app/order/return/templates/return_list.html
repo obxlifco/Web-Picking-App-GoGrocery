@@ -1,0 +1,230 @@
+<section class="right-part filter-pad inner_listing">
+	<div class="topheading">
+		<h1>Manage {{childData.heading}}
+			<div class="btn-header hidden-xs">
+			</div>
+			<div class="clear"></div>
+		</h1>
+		</div>
+		<div class="innertab_sec" >
+			<div class="tabhedouter"></div>
+			<div class="serch_and_filtersec">
+				<div class="serch_sec">
+					<a href="javascript:void(0)"><span class="icon-search1"></span></a>
+					<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(1,page,'',filter,search.value,1)">
+				</div>
+				<div class="filter_section">
+					<button class="button" (click)="FiltertoggleCheck($event)"><span class="icon-filter"></span></button>
+					<button class="button"><span class="icon-columns" (click)="loadColumnLayout()"></span></button>
+					<button class="button" [matMenuTriggerFor]="tools"><span class="icon-menu"></span></button>
+					<mat-menu #tools="matMenu" xPosition="before" [overlapTrigger]="false">
+							<button mat-menu-item (click)="openImportBox(childData.tablink)" *ngIf="permission.import_field=='Y' && childData.is_import=='Y'">
+									<mat-icon class="icon-import"></mat-icon> Import
+							</button>
+							<button mat-menu-item *ngIf="permission.export=='Y' && childData.is_export=='Y'" (click)="OpenExportPopUp()">
+									<mat-icon class="icon-import"></mat-icon> Export
+							</button>
+					</mat-menu>
+				</div>
+			</div>
+	</div>
+	<div class="action-box">
+		<label> {{bulk_ids.length}} Selected  (out of all {{config.currentPageCount}}) </label>
+		<!--//////// VIEW ///////// -->
+		<button mat-button (click)="globalService.addTab('View Return Order'+childData.tablink,childData.tablink+'/view/'+individualRow.id+'','View '+childData.heading,childData.tabparrentid);globalService.navigateToUrl('/'+childData.tablink+'/view/'+individualRow.id+'');" *ngIf="bulk_ids.length==1 && permission.view=='Y'">
+			<mat-icon class="icon-search-box"></mat-icon>View
+		</button>
+		<button mat-button (click)="assign_driver(individualRow.id,individualRow.shipment_id,individualRow)"  *ngIf="bulk_ids.length==1">
+			<mat-icon class="icon-columns"></mat-icon>
+			Assign return pickup
+		</button>
+		<!-- ////// approve/decline request  /////// -->
+		<button mat-button (click)="processRequest(true,individualRow.id,individualRow.custom_order_id)" *ngIf="show_btn.edit && bulk_ids.length==1 && individualRow.return_status=='Pending'"><mat-icon  class="icon-check-box"></mat-icon>Approve Request</button>
+		<button mat-button (click)="processRequest(false,individualRow.id,individualRow.custom_order_id)" *ngIf="show_btn.edit && bulk_ids.length==1 && individualRow.return_status=='Pending'"><mat-icon  class="icon-delete-box"></mat-icon>Decline Request</button>
+		<button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(0,'','','','')"><mat-icon  class="icon-close"></mat-icon></button>
+	</div>
+	<div class="action-box orderfilter">
+		<div class="datepic_sec">
+				<div class="filtericon"><a href="javascript:void(0)"><span class="icon-filter"></span></a></div>
+				<div class="serchtagbox" *ngFor="let item of advanced_search; let i=index">
+					<p >{{item.show_name}}  
+						<span *ngIf="!item.comparer" class="icon-equal"></span>
+						<span *ngIf="item.comparer==1" class="icon-equal"></span>
+						<span *ngIf="item.comparer==2" class="icon-mathematical_symbol"></span>
+						<span *ngIf="item.comparer==3" class="icon-start-contains"></span>
+						<span *ngIf="item.comparer==4" class="icon-end-contains"></span>
+						<span *ngIf="item.comparer==5" class="icon-contains"></span>
+						<span *ngIf="item.comparer==6" class="icon-not-contains"></span>
+						<span *ngIf="item.comparer==7" class="icon-right"></span>
+						<span *ngIf="item.comparer==8" class="icon-left"></span>
+						<span class="icon-equals"></span> 
+						<i *ngIf="item.key2=='n' || item.key2=='y'; else notShow">
+							<p *ngIf="item.key2=='n'">
+								Active
+							</p>
+							<p *ngIf="item.key2=='y'">
+									Inctive
+								</p>
+						</i>
+						<ng-template #notShow>
+							<p *ngIf="item.key2; else showKey">
+									{{item.key2}}
+							</p>
+							<ng-template #showKey>
+								<p>
+									{{item.key}}
+								</p>
+							</ng-template>
+						</ng-template>
+						<a href="javascript:void(0)" (click)="remove_filter(i)"><span class="icon-close"></span></a>
+					</p>
+				</div>
+				<div class="filterdrop_wrap">
+						<mat-form-field appearance="outline">
+							<input  matInput placeholder="Select a column"  [matAutocomplete]="tdAuto" name="field_name" #field_name="ngModel" [(ngModel)]="formModel.field_name" (ngModelChange)="load_fiter_column()" >
+						</mat-form-field>
+						<mat-autocomplete  #tdAuto="matAutocomplete" >
+							<mat-option  *ngFor="let item of field_arr; let i=index;" [value]="item.field" (click)="get_data(item,i)">
+								<span >{{item.columns}}</span>
+							</mat-option>
+						</mat-autocomplete>
+						<!-- search tag -->
+				<div class="meta_keywordbox" id="meta_keywordbox" >
+						<div class="headsec">{{formModel.field_name_show}}</div>
+						<form #formdata="ngForm"  (ngSubmit)="formdata.valid && sendSearchData()">
+								<div class="innerbox">
+										<div class="innrow">
+											<div class="dropbtn">
+												<div class="dop_icnbox">
+													<span class="icon-equal" *ngIf="!formModel.search_type"></span>
+													<span class="icon-equal" *ngIf="formModel.search_type=='1'"></span>
+													<span class="icon-mathematical_symbol" *ngIf="formModel.search_type=='2'"></span>
+													<span class="icon-start-contains" *ngIf="formModel.search_type=='3'"></span>
+													<span class="icon-end-contains" *ngIf="formModel.search_type=='4'"></span>
+													<span class="icon-contains" *ngIf="formModel.search_type=='5'"></span>
+													<span class="icon-not-contains" *ngIf="formModel.search_type=='6'"></span>
+													<span class="icon-right" *ngIf="formModel.search_type=='7'"></span>
+													<span class="icon-left" *ngIf="formModel.search_type=='8'"></span>
+												</div>
+												<mat-select  class="myFilter" #search_type="ngModel" name="search_type" [(ngModel)]="formModel.search_type" >
+														<mat-option *ngFor="let item of ConditionArr" [value]="item.type" >{{item.name}}</mat-option>
+												</mat-select>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='text'">
+												<mat-form-field appearance="outline">
+													<input matInput  placeholder="Type here" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='float'">
+												<mat-form-field appearance="outline">
+													<input matInput  type="number" placeholder="Enter value" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='select'" >
+													<mat-form-field appearance="outline">
+														<mat-select #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data" placeholder="Search here" #singleSelect [multiple]="false">
+															<ngx-mat-select-search [formControl]="bankMultiFilterCtrl" placeholder="Search here" ></ngx-mat-select-search>
+															<mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank.id" (click)="change_search_val(bank.name)">
+																{{bank.name}}
+															</mat-option>
+														</mat-select>
+													</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='multi_select'">
+												<mat-form-field appearance="outline">
+													<mat-select #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data" placeholder="Search here" #singleSelect [multiple]="true">
+														<ngx-mat-select-search [formControl]="bankMultiFilterCtrl" name="auto_search" placeholder="Search here1"></ngx-mat-select-search>
+														<mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank.id" (click)="change_search_val(bank.name)">
+															{{bank.name}}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+										</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='fix_select'">
+												<mat-form-field appearance="outline">
+													<mat-select class="myFilter"  #search_data="ngModel" name="search_data" placeholder="Select" [(ngModel)]="formModel.search_data"  (ngModelChange)="get_select_data()" >
+															<mat-option *ngFor="let select_item of selectArr" [value]="select_item.id" (click)="change_search_val(select_item.name)">{{select_item.name}}</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='date'">
+												<mat-form-field appearance="outline">
+													<input matInput  placeholder="Select date" [owlDateTime]="picker1" [owlDateTimeTrigger]="picker1" (focus)="picker1.open()" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+													<owl-date-time #picker1 [pickerType]="'calendar'"></owl-date-time>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="footer">
+											<a href="javascript:void(0)" class="cnc" (click)="cancel_filter()">Cancel</a>
+											<a href="javascript:void(0)" class="apl" (click)="sendSearchData()">Apply</a>
+										</div>
+								</div>
+							</form>
+					</div>
+				</div>
+				<!-- search tag -->
+		</div>
+			<!--  <button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(0,'','','','',show_item_wise_order)"><mat-icon  class="icon-close"></mat-icon></button> -->
+			<button mat-icon-button  class="white-ripple pull-right" (click)="CloseFilter($event)"><mat-icon  class="icon-close"></mat-icon></button>
+	</div>
+	<div class="body-part">
+		<div class="table-list">
+			<table>
+				<tr>
+					<th class="check-select">
+						<mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+					</th>
+					<ng-container *ngFor="let col of cols">
+						<th *ngIf="col.show == 1" class="short" (click)="generateGrid(0,1,col.field,filter,search.value)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span></th>
+					</ng-container> 
+				</tr>
+				<tr [class.chec]="row.selected"  *ngFor="let row of result_list">
+					<td>
+						<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+					</td>
+					<ng-container *ngFor="let col of cols">
+					<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+						<span [ngClass]="col.field=='order_status' ? (row.class_name) : '' || col.field=='shipping_status'?(row.shipping_class_name) : '' || col.field=='return_status'?(row.return_status_name) : '' ">
+							<ng-container *ngIf="col.field_type=='p' && col.field!='tags'  && col.field!='custom_shipment_id' && col.field!='delivery_name'">
+								{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}
+							</ng-container>
+							<ng-container *ngIf="col.field_type!='p' && col.field!='tags' && col.field!='custom_order_id' && col.field!='delivery_name'">
+								{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+							</ng-container>
+							<ng-container *ngIf="col.field =='tags'" >
+								<div class="tagsClass" [ngStyle]="{'background-color':row.tags_color_code}" title="{{row.tags}}"></div>
+							</ng-container>
+							<ng-container *ngIf="col.field == 'custom_order_id' || col.field == 'delivery_name'">
+								<a href="javascript:void(0)" (click)="globalService.addTab('View Return Order'+childData.tablink,childData.tablink+'/view/'+row.id+'','View '+childData.heading,childData.tabparrentid);globalService.navigateToUrl('/'+childData.tablink+'/view/'+row.id+'');" *ngIf="col.field == 'custom_order_id'">{{row.custom_order_id}}</a>
+								<a href="javascript:void(0)" (click)="globalService.addTab('editcustomers','customers/edit/'+row.customer.id+'','Edit Customers',childData.tabparrentid);globalService.navigateToUrl('/customers/edit/'+row.customer.id+'')" *ngIf="col.field == 'delivery_name'">{{row.delivery_name}}</a>
+							</ng-container>
+						</span>
+					</td>
+					</ng-container>
+				</tr>
+				<tr *ngIf="pagination.total_page==0 && result_list.length==0">
+					<td [attr.colspan]="colSpanCount" align="center">No records found</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="clear"></div>
+</section>
+<div class="pagination-box" *ngIf="pagination.total_page>1">
+	  <span *ngFor="let list of total_list | paginate: config"></span>
+	  <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value,show_item_wise_order)" [maxSize]="maxSize">
+		<ul class="pagination">
+		  <li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+			<a (click)="p.previous()"><span class="icon-left"></span></a>
+		  </li>
+		  <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+			<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"><span>{{ page.label }}</span></a>
+			<a *ngIf="p.getCurrent() === page.value"><span>{{ page.label }}</span></a>
+		  </li>
+		  <li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+			<a (click)="p.next()"><span class="icon-right"></span></a>
+		  </li>
+		</ul>
+	  </pagination-template>
+</div>
+<div class="clear"></div>

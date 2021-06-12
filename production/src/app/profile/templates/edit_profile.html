@@ -1,0 +1,72 @@
+<form #userForm="ngForm" novalidate (ngSubmit)="userForm.valid && addEditUser(userForm)">
+	<input type="hidden" name="userId" [(ngModel)]="formModel.userId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>User Details</h2>
+		<button mat-raised-button class="btn-main" type="submit">Save</button>
+		<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+		 	<mat-form-field class="md-block" appearance="outline"><mat-label>Employee Name</mat-label>
+				<input matInput placeholder="Employee Name" required #empName="ngModel" name="empName" [(ngModel)]="formModel.empName">
+			    <mat-error *ngIf="empName.errors && empName.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+		  	</mat-form-field>
+		  	<mat-form-field class="md-block" appearance="outline"><mat-label></mat-label>
+	    		<input matInput placeholder="Designation" required #empDesignation="ngModel"  name="empDesignation" [(ngModel)]="formModel.empDesignation">
+		    	<mat-error *ngIf="empDesignation.errors && empDesignation.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" appearance="outline"><mat-label>Email</mat-label>
+				<input matInput placeholder="Email" required maxlength="40" #empEmail="ngModel" name="email" [(ngModel)]="formModel.empEmail" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+				<mat-error *ngIf="empEmail.errors && empEmail.errors.required">
+		      		This is a <strong>required</strong> field
+		    	</mat-error>
+		    	<mat-error *ngIf="empEmail.errors && empEmail.errors.pattern">
+		      		Enter a valid <strong>email</strong> address
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" appearance="outline"><mat-label>Phone</mat-label>
+				<input type="text" matInput placeholder="Phone" required #empPhone="ngModel" name="empPhone" [(ngModel)]="formModel.empPhone" minlength="10" maxlength="12" pattern="[7-9][0-9]{9}">
+				<mat-error *ngIf="empPhone.errors && empPhone.errors.required">
+		      		This is a <strong>required</strong> field
+		    	</mat-error>
+		    	<mat-error *ngIf="empPhone.errors && empPhone.errors.pattern">
+		      		Please enter a <strong>valid</strong> phone number
+		    	</mat-error>
+		    	<mat-error *ngIf="empPhone.errors && empPhone.errors.minlength">
+		      		Phone number should be between 10 to 12 characters
+		    	</mat-error>
+		    	<mat-error *ngIf="empPhone.errors && empPhone.errors.maxlength">
+	      			Phone number should be between 10 to 12 characters
+	    		</mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" appearance="outline"><mat-label>Username</mat-label>
+				<input matInput placeholder="Username" required maxlength="40" #empUsername="ngModel" name="empUsername" [(ngModel)]="formModel.empUsername" [disabled]="formModel.userId>0">
+				<mat-error *ngIf="empUsername.errors && empUsername.errors.required">
+		      		This is a <strong>required</strong> field
+		    	</mat-error>
+			</mat-form-field>
+			<div class="md-block">
+				<mat-select disabled required placeholder="Role Assign" #role="ngModel" name="role" [(ngModel)]="formModel.role">
+					<mat-option *ngFor="let role of rolelist" [value]="role.id">{{role.name}}</mat-option>
+				</mat-select>
+				<mat-error *ngIf="role.errors && role.errors.required && (role.dirty || role.touched || userForm.submitted)">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</div>
+
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<mat-dialog-actions layout="row">
+		  	<label>Fields marked with <span class="error">*</span> are compulsory.</label>
+		  	<span flex></span>
+		  	<button mat-raised-button class="btn-main" type="submit">Save</button>
+		  	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

@@ -1,0 +1,274 @@
+<div class="editor-container">
+  <!-- EDITOR HEADER -->
+  <div class="editor-header">
+    <div class="brand">
+      <a href="javscript:void(0)">
+        <!-- <img alt="Boostmysale" class="svg" src="https://d2vltvjwlghbux.cloudfront.net/backend/assets/images/prime-mall-logo.png"> -->
+      </a>
+    </div>
+    <ul class="editor-nav">
+      <li *ngIf="editorType==1">
+          <button mat-button [matMenuTriggerFor]="lan"  class="btn-sky-ripple">Content in language: {{selected_lang}} <i class="icon-down-arrow"></i></button>
+          <mat-menu #lan="matMenu" yPosition="above">
+            <button mat-menu-item (click)="setLang('en')">en</button>
+            <button mat-menu-item (click)="setLang('th')">th</button>
+          </mat-menu>
+      </li>
+      <li>
+        <button mat-button class="editor-btn-main" (click)="AddEditCMS()">Save</button>
+      </li>
+      <!-- <li>
+        <button mat-button class="editor-btn-main-line">Save & Publish</button>
+      </li> -->
+    </ul>
+  </div>
+  <!-- LEFT PANEL -->
+  <!-- Widget sections -->
+  <div class="editor-left-category">
+    <ul>
+      <li class="yellow" [class.hover]="widget_category[0].hover" [class.active]="widget_category[0].active" (click)="setActive(1)" *ngIf="editorType==1">
+        <div class="icon"><i class="icon-file"></i></div>
+        <div class="sape">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,22.3.127,43,0,0.332,0-.015,84.32-0.015,83.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>  
+        </div>
+        <div class="text">Pages</div>
+        <div class="editor-left">
+            <div class="editor-heading">Pages
+                <button (click)="closeWidgetCat($event)" mat-icon-button class="editor-btn-main-ripple"><i class="icon-close" aria-hidden="true"></i></button>
+            </div>
+            <div class="editor-scroll">
+                <ul class="sec-blog">
+                  <li (click)="openAddPageDialog()">
+                    <div class="icon-box"><i class="icon-add-page"></i></div>
+                    Add Page
+                  </li>
+                  <li (click)="openManagePageDialog()">
+                    <div class="icon-box"><i class="icon-paper-1"></i></div>
+                    Manage Page
+                  </li>
+                  <li (click)="openNavigationDialog(0)">
+                    <div class="icon-box"><i class="icon-menu"></i></div>
+                    Manage Header Navigation
+                  </li>
+                  <li (click)="openNavigationDialog(1)">
+                    <div class="icon-box"><i class="icon-menu"></i></div>
+                    Manage Footer Navigation
+                  </li>
+                </ul> 
+            </div>  
+        </div>
+      </li>
+      <li class="org" [class.hover]="widget_category[1].hover" [class.active]="widget_category[1].active" (click)="setActive(2)">
+        <div class="icon">
+            <i class="icon-images"></i>
+        </div>
+        <div class="sape" *ngIf="editorType==1">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,42.892.649,43-17,0-.332-0.015,101.32-0.014,100.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>
+        </div>
+
+        <div class="sape" *ngIf="editorType==2">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,22.3.127,43,0,0.332,0-.015,84.32-0.015,83.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>  
+        </div>
+
+        <div class="text">Images</div>
+        <div class="editor-left">
+          <div class="editor-heading">Image
+            <button mat-icon-button class="editor-btn-main-ripple" (click)="closeWidgetCat($event)"><i class="icon-close" aria-hidden="true"></i></button>
+          </div>
+          <div class="editor-scroll">
+             <ul class="sec-blog" cdkDropList #widgetlist="cdkDropList" [cdkDropListData]="widgets" [cdkDropListConnectedTo]="[receivedlist]" (cdkDropListDropped)="drop($event)">
+              <li *ngFor="let widget of widgets;" cdkDrag>
+                <div class="icon-box"><i class="{{widget.favicon}}"></i></div>
+                {{widget.label}}
+              </li>
+            </ul> 
+          </div>  
+        </div>
+      </li>
+      <li class="pink" [class.hover]="widget_category[2].hover" [class.active]="widget_category[2].active" (click)="setActive(3)">
+        <div class="icon"><i class="icon-letter-t"></i></div>
+        <div class="sape">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,42.892.649,43-17,0-.332-0.015,101.32-0.014,100.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>
+        </div>
+        <div class="text">Text</div>
+        <div class="editor-left">
+          <div class="editor-heading">Text<button mat-icon-button class="editor-btn-main-ripple" (click)="closeWidgetCat($event)"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+          <div class="editor-scroll">
+            <ul class="sec-blog" cdkDropList #widgetlist="cdkDropList" [cdkDropListData]="widgets" [cdkDropListConnectedTo]="[receivedlist]" (cdkDropListDropped)="drop($event)">
+              <li *ngFor="let widget of widgets;" cdkDrag>
+                <div class="icon-box"><i class="{{widget.favicon}}"></i></div>
+                {{widget.label}}
+              </li>
+            </ul> 
+          </div>  
+        </div>
+      </li>
+      <li class="green" [class.hover]="widget_category[3].hover" [class.active]="widget_category[3].active" (click)="setActive(4)">
+        <div class="icon"><i class="icon-full-box"></i></div>
+        <div class="sape">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,42.892.649,43-17,0-.332-0.015,101.32-0.014,100.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>
+        </div>
+        <div class="text">Product</div>
+        <div class="editor-left">
+          <div class="editor-heading">Product<button mat-icon-button class="editor-btn-main-ripple" (click)="closeWidgetCat($event)"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+          <div class="editor-scroll">
+            <ul class="sec-blog" cdkDropList #widgetlist="cdkDropList" [cdkDropListData]="widgets" [cdkDropListConnectedTo]="[receivedlist]" (cdkDropListDropped)="drop($event)">
+              <li *ngFor="let widget of widgets;" cdkDrag>
+                <div class="icon-box"><i class="{{widget.favicon}}"></i></div>
+                {{widget.label}}
+              </li>
+            </ul>
+          </div>  
+        </div>
+      </li>
+      <!-- <li class="brown" [class.hover]="widget_category[4].hover" [class.active]="widget_category[4].active" (click)="setActive(5)">
+        <div class="icon"><i class="icon-media"></i></div>
+        <div class="sape">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+            <path class="cls-1" d="M33,17c18.225,0,42.892.649,43-17,0-.332-0.015,101.32-0.014,100.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>
+        </div>
+        <div class="text">Media</div>
+        <div class="editor-left">
+          <div class="editor-heading">Media<button mat-icon-button class="editor-btn-main-ripple" (click)="closeWidgetCat($event)"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+          <div class="editor-scroll">
+            <ul class="sec-blog">
+              <li *ngFor="let widget of widgets;" dnd-draggable [dragEnabled]="true" [dragData]="widget" [dropZones]="['widget-dropZone']">
+                <div class="icon-box"><i class="{{widget.favicon}}"></i></div>
+                {{widget.label}}
+              </li>
+            </ul>
+          </div>  
+        </div>
+      </li> -->
+      <li class="pur" [class.hover]="widget_category[5].hover" [class.active]="widget_category[5].active" (click)="setActive(6)">
+        <div class="icon"><i class="icon-more-button-interface-symbol-of-three-horizontal-aligned-dots"></i></div>
+        <div class="sape">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 76 101">
+              <path class="cls-1" d="M33,17c18.225,0,42.892.649,43-17,0-.332-0.015,101.32-0.014,100.991C76,83.1,50.894,83,33,83A33,33,0,0,1,33,17Z"/>
+          </svg>
+        </div>
+        <div class="text">Others</div>
+        <div class="editor-left">
+          <div class="editor-heading">Others<button mat-icon-button class="editor-btn-main-ripple" (click)="closeWidgetCat($event)"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+          <div class="editor-scroll">
+            <ul class="sec-blog" cdkDropList #widgetlist="cdkDropList" [cdkDropListData]="widgets" [cdkDropListConnectedTo]="[receivedlist]" (cdkDropListDropped)="drop($event)">
+              <li *ngFor="let widget of widgets;" cdkDrag>
+                <div class="icon-box"><i class="{{widget.favicon}}"></i></div>
+                {{widget.label}}
+              </li>
+            </ul>
+          </div>    
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="editor-left-properties" *ngIf="showWidgetPanel">
+      <app-edit-widget *ngIf="editData" [data]="editData" (deleteWidget)="deleteWidget($event)" (closeWidget)="closeWidget()" (updateWidget)="updateWidget($event)"></app-edit-widget>
+  </div>
+  <!-- MIDDLE PANEL -->
+  <div class="editor-artboard-header">
+    <div class="editor-artboard-header-left"> </div>
+    <div class="editor-artboard-header-right">{{hostUrl}}</div>
+    <div class="clear"> </div>
+  </div>
+
+  <div cdkDropList #receivedlist="cdkDropList" [cdkDropListData]="receivedData" [cdkDropListConnectedTo]="widgetlist" (cdkDropListDropped)="drop($event)">
+
+  <div class="editor-artboard 1" *ngIf="editorType==1" #pageTemp>
+    <!-- <header-part [isCMS]="true"></header-part> -->
+    <div class="maincontainer" [class.distributor] = "is_dist" >
+        <div >
+          <div *ngFor="let data of receivedData; let i = index" cdkDrag (click)="setSection(i)" [class.selected]="i==selectedIndex">
+            <div class="editor-edit-btn">
+                <button *ngIf="data.dragData.getType()!=2" mat-icon-button class="editor-btn-blue" matTooltip="Edit Section" (click)="editItem(i)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button mat-icon-button class="editor-btn-blue" matTooltip="Delete Section" (click)="deleteWidget(i)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+            <div *ngIf="data.dragData.getType()==2" [innerHTML]="data.dragData.getHtml() | safeHtml"></div>
+            <ng-template  #dynamic></ng-template>
+          </div>
+        </div>
+    </div>
+    <!-- <footer-part [isCMS]="true"></footer-part> -->    
+  </div>
+  <div class="editor-artboard" *ngIf="editorType==2" #emailTemp>
+    <table cellpadding="0" cellspacing="0" width="600" border="0" align="center" style="font-family: arial">
+      <tr>
+        <td>
+              <!-- Header Section -->
+              <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                <tr>
+                  <td style="padding: 10px 20px;">
+                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                      <tr>
+                        <td>
+                          <a routerLink="" class="logo"><img src="{{cdnRootUrl}}assets/template/images/logo.jpg" alt="Boostmysale"></a>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </table>  
+                  </td>
+                </tr>
+              </table>
+              <!-- End Header Section -->
+              <div class="tablecontainer" >
+                  <div >
+                    <div *ngFor="let data of receivedData; let i = index" cdkDrag class="editor-section" (click)="setSection(i)" [class.selected]="i==selectedIndex">
+                      <div class="editor-edit-btn email-btn" style="display: none;">
+                          <button *ngIf="data.dragData.getType()!=2" mat-icon-button class="editor-btn-blue" matTooltip="Edit Section" (click)="editItem(i)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                          <button mat-icon-button class="editor-btn-blue" matTooltip="Delete Section" (click)="deleteWidget(i)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </div>
+                      <div *ngIf="data.dragData.getType()==2" [innerHTML]="data.dragData.getHtml() | safeHtml"></div>
+                      <ng-template #dynamic></ng-template>
+                    </div>
+                  </div>
+              </div>
+              <!-- Footer Section -->
+              <table cellpadding="0" cellspacing="0" width="100%" border="0" class="editor-section">
+                <tr>
+                  <td style="background: #dedede;">
+                    <table cellpadding="0" cellspacing="0" width="600" border="0">
+                      <tr>
+                        <td style="padding:20px 0px;" align="center">
+                          <div style="display: inline-block;">
+                            <img src="{{cdnRootUrl}}assets/template/images/twitter.png" style="display: inline-block;margin-right: 5px;">
+                            <img src="{{cdnRootUrl}}assets/template/images/fb.png" style="display: inline-block; margin-left: 5px;">
+                          </div>
+                        </td>
+                      </tr>
+                    </table>  
+                    <table cellpadding="0" cellspacing="0" width="600" border="0">
+                      <tr>
+                        <td style="padding:20px 0px;" align="center">
+                          Please do not reply to this email. <a class="disable-pointer" href="{{rootURI+'[[unsubscribe]]'}}">Click here</a> to unsubscribe.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:20px 0px;" align="center">
+                          © 2019 {{company_name}}. All Rights Reserved.
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <!-- End Footer Section -->
+        </td>
+      </tr>  
+    </table>
+  </div>
+  </div>
+  <!-- EDITOR FOOTER -->
+  <div class="editor-footer">&copy; {{currentYear}} {{company_name}}. All Rights Reserved.</div>
+</div>

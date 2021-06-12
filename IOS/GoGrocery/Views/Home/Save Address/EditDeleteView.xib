@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="hind-medium.otf">
+            <string>Hind-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="j8k-QD-2Ea" customClass="EditDeleteXibView" customModule="GoGrocery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="86"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SiO-uI-3Vg">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="86"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eo5-oV-D4x">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="86"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="K9B-hx-pBm">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="86"/>
+                            <subviews>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYC-se-wEM">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="43"/>
+                                    <subviews>
+                                        <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5A9-Dg-dn5">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="42"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="Hind-Medium" family="Hind" pointSize="14"/>
+                                            <state key="normal" title="Edit">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="5A9-Dg-dn5" secondAttribute="bottom" constant="1" id="3ky-uM-LCV"/>
+                                        <constraint firstItem="5A9-Dg-dn5" firstAttribute="leading" secondItem="DYC-se-wEM" secondAttribute="leading" id="Nnf-QH-Af6"/>
+                                        <constraint firstAttribute="trailing" secondItem="5A9-Dg-dn5" secondAttribute="trailing" id="k5h-0l-4Xd"/>
+                                        <constraint firstItem="5A9-Dg-dn5" firstAttribute="top" secondItem="DYC-se-wEM" secondAttribute="top" id="wXl-53-RAF"/>
+                                    </constraints>
+                                </view>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cL5-lZ-YDk">
+                                    <rect key="frame" x="0.0" y="43" width="150" height="43"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CF4-Uy-qKr">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="Hind-Medium" family="Hind" pointSize="14"/>
+                                            <state key="normal" title="Delete">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="CF4-Uy-qKr" firstAttribute="top" secondItem="cL5-lZ-YDk" secondAttribute="top" id="IEi-2V-UaF"/>
+                                        <constraint firstAttribute="bottom" secondItem="CF4-Uy-qKr" secondAttribute="bottom" id="rt9-k4-zrB"/>
+                                        <constraint firstItem="CF4-Uy-qKr" firstAttribute="leading" secondItem="cL5-lZ-YDk" secondAttribute="leading" id="vDv-8o-KM4"/>
+                                        <constraint firstAttribute="trailing" secondItem="CF4-Uy-qKr" secondAttribute="trailing" id="zZo-6F-3qz"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="K9B-hx-pBm" firstAttribute="leading" secondItem="Eo5-oV-D4x" secondAttribute="leading" id="FK3-OU-ilO"/>
+                        <constraint firstAttribute="trailing" secondItem="K9B-hx-pBm" secondAttribute="trailing" id="ON5-nC-1Mg"/>
+                        <constraint firstItem="K9B-hx-pBm" firstAttribute="top" secondItem="Eo5-oV-D4x" secondAttribute="top" id="VT5-SM-NSc"/>
+                        <constraint firstAttribute="bottom" secondItem="K9B-hx-pBm" secondAttribute="bottom" id="Zt1-hO-Nxm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Hdp-kK-PkE" firstAttribute="bottom" secondItem="SiO-uI-3Vg" secondAttribute="bottom" id="4cU-XZ-KiM"/>
+                <constraint firstItem="Hdp-kK-PkE" firstAttribute="bottom" secondItem="Eo5-oV-D4x" secondAttribute="bottom" id="6Cf-sG-71x"/>
+                <constraint firstItem="Eo5-oV-D4x" firstAttribute="leading" secondItem="Hdp-kK-PkE" secondAttribute="leading" id="CKK-Bb-fUt"/>
+                <constraint firstItem="Hdp-kK-PkE" firstAttribute="trailing" secondItem="SiO-uI-3Vg" secondAttribute="trailing" id="T0L-BX-NlO"/>
+                <constraint firstItem="SiO-uI-3Vg" firstAttribute="leading" secondItem="Hdp-kK-PkE" secondAttribute="leading" id="Ts0-my-duZ"/>
+                <constraint firstItem="SiO-uI-3Vg" firstAttribute="top" secondItem="Hdp-kK-PkE" secondAttribute="top" id="aTb-bM-1At"/>
+                <constraint firstItem="Hdp-kK-PkE" firstAttribute="trailing" secondItem="Eo5-oV-D4x" secondAttribute="trailing" id="gPo-T2-fW5"/>
+                <constraint firstItem="Eo5-oV-D4x" firstAttribute="top" secondItem="Hdp-kK-PkE" secondAttribute="top" id="wYo-lG-gb8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Hdp-kK-PkE"/>
+            <connections>
+                <outlet property="btnDelete" destination="CF4-Uy-qKr" id="hpU-Pd-hod"/>
+                <outlet property="btnEdit" destination="5A9-Dg-dn5" id="ZZi-mw-wBQ"/>
+                <outlet property="viewDelete" destination="cL5-lZ-YDk" id="5rd-cM-aUr"/>
+                <outlet property="viewEdit" destination="DYC-se-wEM" id="Zwc-ZV-4wX"/>
+                <outlet property="viewww" destination="Eo5-oV-D4x" id="L1V-JT-woj"/>
+            </connections>
+            <point key="canvasLocation" x="251.25" y="-169.01408450704224"/>
+        </view>
+    </objects>
+</document>

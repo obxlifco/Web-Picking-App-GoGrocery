@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.gogrocery.picking.activity.MainActivity.MainClickHandler" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appColorWhite">
+
+        <RelativeLayout
+            android:id="@+id/rlTopMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/picking_logo"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlNotifyOrder"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:onClick="@{clickHandler::onNotifyClicked}">
+                    <LinearLayout
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:id="@+id/llNotifyCount"
+                        android:background="@drawable/bg_badge"
+                        android:layout_toEndOf="@id/ivNotifyMain"
+                        android:gravity="center"
+                        android:visibility="invisible">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvNotifyCount"
+                            android:textSize="@dimen/_5sdp"
+                            android:textColor="@color/appColorWhite"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:id="@+id/ivNotifyMain"
+                        android:src="@drawable/ic_notification"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civProfileMain"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:civ_border_color="@color/appColorMediumGrey"
+                    app:civ_border_width="1dp"
+                    android:src="@drawable/ic_default_avatar"
+                    android:onClick="@{clickHandler::onProfileImageClicked}"/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@id/rlTopMain"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@color/appColorLightGrey" />
+
+        <FrameLayout
+            android:id="@+id/frameContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/appColorWhite"
+            android:layout_above="@id/tlMain"
+            android:layout_below="@id/rlTopMain"
+            android:layout_marginTop="@dimen/_2sdp"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_alignParentBottom="true"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/appGreen"
+            app:tabIndicatorGravity="top"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabPaddingTop="@dimen/_5sdp"
+            app:tabTextAppearance="@style/MyCustomTextAppearance">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/txtDashboard" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/txtOrders"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/txtStocks"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/txtReturns" />
+        </com.google.android.material.tabs.TabLayout>
+
+    </RelativeLayout>
+</layout>

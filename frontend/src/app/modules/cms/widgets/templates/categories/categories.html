@@ -1,0 +1,99 @@
+<section class="container-fluid" *ngIf="isCMS">
+      <div class="row">
+          <div class="col-12">
+              <div class="container_cuswrap">
+                  <div class="shop_category">
+                      <div class="innerheader">
+                          <h3>{{widget_data.heading_text}}</h3>
+                              
+                         <!--  <div class="showall_text"><a href="#">Show All Category<span class="icon-back"></span></a></div> -->
+                      </div>
+                      <div class="categoryrow">
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_a"><span class="icon-apple-black-silhouette-with-a-leaf"></span></div>
+                              <div class="text_sec">Fruits</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_b"><span class="icon-pumpkin-vegetable"></span></div>
+                              <div class="text_sec">Vegetables</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_c"><span class="icon-cupcake-dessert"></span></div>
+                              <div class="text_sec">Bakery</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_d"><span class="icon-coffee-beans"></span></div>
+                              <div class="text_sec">Coffee & Tea</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_e"><span class="icon-fish"></span></div>
+                              <div class="text_sec">Fish & Meat</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_f"><span class="icon-perfume-bottle"></span></div>
+                              <div class="text_sec">Personal Care</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_g"><span class="icon-drink"></span></div>
+                              <div class="text_sec">Beverages</div>
+                          </div>
+                          <div class="categorybox">
+                              <div class="image_sec cata_color_h"><span class="icon-cereals"></span></div>
+                              <div class="text_sec">Organic</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+ </section>
+ <section class="container-fluid" *ngIf="!isCMS && categories_list.length">
+    <div class="row">
+      <div class="col-12">
+        <div class="container_cuswrap">
+          <div class="shop_category">
+            <div class="innerheader">
+              <h3>{{widget_data.heading_text}}</h3>      
+              <!-- <div class="showall_text"><a href="#">Show All Category<span class="icon-back"></span></a></div> -->
+            </div>
+            
+            <ng-container *ngIf="innerWidth > 1000">
+              <div class="custom-nav">
+                
+              </div>
+              <div class="categoryrow" style="overflow: hidden;">
+                <owl-carousel [options]="carouselOptions"  [carouselClasses]="['owl-theme' ,'sliding']" [items]="categories_list"> 
+                <ng-container *ngFor="let cat of categories_list; let i=index;">  
+                  <div class="categorybox " *ngIf="cat.image">
+                    <a [routerLink]="['/listing/',cat.slug]">
+                      <div class="image_sec {{count}} {{category_color[i] ? category_color[i] : 'cata_color_g'}}" >
+                        <img *ngIf="cat.image" [src]="S3_URL_CATEGORY+cat.image">
+                        <img *ngIf="!cat.image" [src]="'https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg'">
+                    </div>
+                    <div class="text_sec">{{cat.name}}</div>
+                    </a>
+                   
+                  </div>
+                </ng-container>
+                </owl-carousel>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="innerWidth < 1000">
+              <div class="categoryrow">
+                <ng-container *ngFor="let cat of categories_list; let i=index">
+                <div class="categorybox" *ngIf="cat.image" [routerLink]="['/listing/',cat.slug]" >
+                  <div class="image_sec {{category_color[i]}}">
+                      <img *ngIf="cat.image" [src]="S3_URL_CATEGORY+cat.image">
+                      <img *ngIf="!cat.image" [src]="'https://d2vltvjwlghbux.cloudfront.net/frontend/assets/images/img1.jpg'">
+                  </div>
+                  <div class="text_sec">{{cat.name}}</div>
+                </div>
+            </ng-container>
+            </div>
+            </ng-container>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

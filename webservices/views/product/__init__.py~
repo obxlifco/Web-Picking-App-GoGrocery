@@ -1,0 +1,9 @@
+
+
+#--------------------product
+from webservices.views.product.BasicInformation import BasicInformationViewSet,Taxclasses,CustomerGroup,ProductRepricerule,UnitMesters,WarehouseMasters,producttax,CategoryMasters,ProductList
+from webservices.views.product.Productsetup import Productsetup
+from webservices.views.product.Reviews import ReviewsList
+from webservices.views.product.Discount import DiscountSet,DiscountList,DiscountConditions,DiscountConditionsSet
+from webservices.views.product.Brand import BrandList,Brand
+

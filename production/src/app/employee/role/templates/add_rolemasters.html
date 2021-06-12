@@ -1,0 +1,175 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <form #roleForm="ngForm" novalidate (ngSubmit)="roleForm.valid && addEditRole(roleForm)">
+            <input type="hidden" name="roleId" [(ngModel)]="formModel.roleId">
+            <div class="topheading">
+                <h1>{{(formModel.roleId>0)?'Edit':'Add'}} Role
+					<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Save</button>
+			          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+					</div>
+					<div class="clear"></div>
+			  	</h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                   <mat-form-field appearance="outline"  class="md-block">
+                                       <mat-label>Role Name</mat-label>
+                                        <input matInput placeholder="Role Name" required #roleName="ngModel" name="roleName" [(ngModel)]="formModel.roleName" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="roleName.errors && roleName.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="roleName.errors && roleName.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <div class="mandatory-select">
+                                       <mat-form-field appearance="outline"  class="md-block">
+                                       <mat-label>Status</mat-label>
+                                        <mat-select required placeholder="Status" #status="ngModel" name="status" [(ngModel)]="formModel.status">
+                                            <mat-option value="n">Active</mat-option>
+                                            <mat-option value="y">Inactive</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="status.errors && status.errors.required && (status.dirty || status.touched || roleForm.submitted)"> This is a <strong>required</strong> field </mat-error>
+                                    </mat-form-field>
+                                    </div>
+                                </div> -->
+                                <div class="col-sm-4">
+                                    <div class="mandatory-select">
+                                        <!-- <mat-form-field appearance="outline"  class="md-block">
+                                            <mat-label>Group Name</mat-label>
+                                            <mat-select required placeholder="Group Name" #groupId="ngModel" name="groupId" [(ngModel)]="formModel.group" (selectionChange)="getGroupPermissions(groupId.value)">
+                                                <mat-option *ngFor="let group of grouplist" [value]="group.id">{{group.name}}</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="groupId.errors && groupId.errors.required && (groupId.dirty || groupId.touched || roleForm.submitted)"> This is a <strong>required</strong> field </mat-error>
+                                        </mat-form-field> -->
+                                        <ng-select [ngClass]="{ 'custom_error_red': groupId.errors && groupId.errors.required && (groupId.dirty || groupId.touched || roleForm.submitted) }"
+                                            [items]="grouplist"
+                                            required
+                                            placeholder="Group Name"
+                                            bindLabel="name" bindValue="id"
+                                            #groupId="ngModel" name="groupId" [(ngModel)]="formModel.group"
+                                            (change)="getGroupPermissions(formModel.group)"
+                                        >
+                                        </ng-select>
+                                        <p class="custom_error" *ngIf="groupId.errors && groupId.errors.required && (groupId.dirty || groupId.touched || roleForm.submitted)">This is a <strong>required</strong> field</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" appearance="outline">
+                                         <mat-label>Select Store</mat-label>
+                                        <mat-select placeholder="Select Store" #warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id">
+                                            <mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                                    <ng-select
+                                        [items]="warehouse_list"
+                                        placeholder="Select Store"
+                                        bindLabel="name" bindValue="id"
+                                        #warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.warehouse_id"
+                                        >
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- <div class="col-sm-6">
+									<div class="md-block">
+										<mat-select required placeholder="User Role Type" #roleType="ngModel" name="roleType" [(ngModel)]="formModel.user_role_type">
+											<mat-option value="SuperAdmin">Super Admin</mat-option>
+											<mat-option value="CSExecutive">CS Executive</mat-option>
+											<mat-option value="User">User</mat-option>
+											<mat-option value="CSAdmin">CS Admin</mat-option>
+											<mat-option value="BCG">BCG</mat-option>
+											<mat-option value="BPCLAdmin">BPCL Admin</mat-option>
+											<mat-option value="BPCLProduct">BPCL Product</mat-option>
+											<mat-option value="Cashier">Cashier</mat-option>
+											<mat-option value="LC">LC</mat-option>
+											<mat-option value="LMDExecutive">LMD Executive</mat-option>
+											<mat-option value="MC">MC</mat-option>
+											<mat-option value="ME">ME</mat-option>
+											<mat-option value="OM">OM</mat-option>
+											<mat-option value="SalesExecutives">Sales Executives</mat-option>
+											<mat-option value="SalesManager">Sales Manager</mat-option>
+											<mat-option value="TrentUser">Trent User</mat-option>
+											<mat-option value="UHSAdmin">UHS Admin</mat-option>
+										</mat-select>
+										<mat-error *ngIf="roleType.errors && roleType.errors.required && (roleType.dirty || roleType.touched || roleForm.submitted)">
+									      This is a <strong>required</strong> field
+									    </mat-error>
+									</div>
+									
+								</div> --></div>
+                            <div class="row" *ngIf="masterlist.length">
+                                <div class="col-md-12">
+                                    <div class="md-block">
+                                        <mat-checkbox (change)="checkPermissionAll(0,$event)" #checkedAll="ngModel" name="checkedAll" [(ngModel)]="checkAll">Check All</mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="clear20"></div>
+                                    <div class="table-list only" *ngIf="masterlist.length">
+                                        <table>
+                                            <tr>
+                                                <th>Master's Name</th>
+                                                <th>All </th>
+                                                <th>Add</th>
+                                                <th>Edit</th>
+                                                <th>View </th>
+                                                <th>Status</th>
+                                                <th>Delete</th>
+                                                <th>Import</th>
+                                                <th>Export</th>
+                                            </tr>
+                                            <tr *ngFor="let master of masterlist;">
+                                                <td data-th="Master's Name">{{master.name}}</td>
+                                                <td data-th="All">
+                                                    <mat-checkbox id="All{{master.id}}" name="All{{master.id}}" value="{{master.id}}" [(ngModel)]="master.checkAll" (change)="checkPermissionAll(master.id,$event)"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Add">
+                                                    <mat-checkbox id="Add{{master.id}}" name="Add{{master.id}}" value="{{master.id}}" [(ngModel)]="master.add" (change)="checkPermission(master.id,$event)" *ngIf="master.id!=194"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Edit">
+                                                    <mat-checkbox id="Edit{{master.id}}" name="Edit{{master.id}}" value="{{master.id}}" [(ngModel)]="master.edit" (change)="checkPermission(master.id,$event)"></mat-checkbox>
+                                                </td>
+                                                <td data-th="View">
+                                                    <mat-checkbox id="View{{master.id}}" name="View{{master.id}}" value="{{master.id}}" [(ngModel)]="master.view" (change)="checkPermission(master.id,$event)"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Status">
+                                                    <mat-checkbox id="Status{{master.id}}" name="Status{{master.id}}" value="{{master.id}}" [(ngModel)]="master.block" (change)="checkPermission(master.id,$event)" *ngIf="master.id!=194"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Delete">
+                                                    <mat-checkbox id="Delete{{master.id}}" name="Delete{{master.id}}" value="{{master.id}}" [(ngModel)]="master.delete" (change)="checkPermission(master.id,$event)" *ngIf="master.id!=194"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Import">
+                                                    <mat-checkbox id="Import{{master.id}}" name="Import{{master.id}}" value="{{master.id}}" [(ngModel)]="master.import_field" (change)="checkPermission(master.id,$event)"></mat-checkbox>
+                                                </td>
+                                                <td data-th="Export">
+                                                    <mat-checkbox id="Export{{master.id}}" name="Export{{master.id}}" value="{{master.id}}" [(ngModel)]="master.export" (change)="checkPermission(master.id,$event)"></mat-checkbox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="btn-header hidden-xs">
+                <button type="submit" mat-raised-button class="btn-main">Save</button>
+                <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>                
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>

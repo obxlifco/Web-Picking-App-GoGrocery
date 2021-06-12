@@ -1,0 +1,32 @@
+ <section class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner_wrap">
+                    <div class="banner_main">
+                        <owl-carousel [options]="carouselOptions"  [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                            <div class="item" >
+                              <div> 
+                                  <div class="textoverlay banner_container"> 
+                                      <h1 [innerHTML]="widget_data.banner_heading | safeHtml"></h1>
+                                      <h1 [innerHTML]="widget_data.banner_sub_heading | safeHtml"></h1>
+                                      <p><a href="#"><span class="icon-add"></span>Shop Now</a> </p>
+                                  </div>
+                                    <img class="slide-image" style="height:500px" src="assets/images/home_image.png" >
+                              </div>
+                              
+                            </div>
+                            <div class="item" >
+                               <div> 
+                                  <div class="textoverlay banner_container">
+                                      <h1 [innerHTML]="widget_data.banner_heading | safeHtml"></h1>
+                                      <h1 [innerHTML]="widget_data.banner_sub_heading | safeHtml"></h1>
+                                       <p><a href="#"><span class="icon-add"></span>Shop Now</a> </p>
+                                  </div>
+                                  <img class="slide-image" style="height:500px" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" ></div>
+                               </div>
+                          </owl-carousel>
+                         </div>
+            </div>
+        </div>
+      </div>
+      </section>

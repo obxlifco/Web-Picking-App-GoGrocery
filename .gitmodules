@@ -1,0 +1,3 @@
+[submodule "angularApp"]
+	path = angularApp
+	url = http://192.168.0.65:8180/prime/primemall.git

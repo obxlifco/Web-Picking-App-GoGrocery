@@ -1,0 +1,25 @@
+
+<div class="login-box">
+	<form #forgotForm="ngForm" novalidate (ngSubmit)="forgotForm.valid && submitVerify(forgotForm.value)">
+		<h2>Enter Verification Code</h2>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+			<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<p>Please check your email for your verification code. </p>
+		<mat-form-field class="material">
+	    	<input matInput placeholder="Verification Code" required maxlength="40" #code="ngModel" name="code" ngModel>
+		    <mat-error *ngIf="code.errors && code.errors.required">
+		      This is a <strong>required</strong> field
+		    </mat-error>
+		    
+		</mat-form-field>
+		
+	    <div class="row">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-6"><label class="text text-right"><a [routerLink] = "['/login']">Back to Login</a></label></div>
+		</div>
+	    
+		<button mat-raised-button  class="btn-black" type="submit" data-text="VERIFY">VERIFY</button>
+		
+	</form>
+</div>
+	

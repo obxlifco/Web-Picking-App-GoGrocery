@@ -1,0 +1,54 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'GoGrocery' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for GoGrocery
+ pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    pod 'GooglePlacesSearchController'
+    pod 'GoogleMaps'
+    pod 'KYDrawerController'
+    pod 'IQKeyboardManagerSwift'
+    pod 'Alamofire'
+    pod 'SwiftyJSON'
+    pod 'SDWebImage', '~> 4.0'
+    pod 'DropDown'
+    pod 'CollapsibleTableSectionViewController', '~> 2.0.1'
+    pod 'Cosmos', '~> 21.0'
+    pod 'SVProgressHUD'
+  #   pod 'Google/SignIn'
+     pod 'GoogleSignIn'
+    pod 'SkyFloatingLabelTextField'
+   # pod 'Google/SignIn'
+    pod 'CountryPickerView'
+#    pod 'FacebookCore'
+#    pod 'FacebookLogin'
+#    pod 'FacebookShare'
+    pod 'ImageSlideshow', '~> 1.8.1'
+    pod 'ImageSlideshow/AFURL'
+    pod 'ImageSlideshow/Alamofire'
+    pod 'ImageSlideshow/SDWebImage'
+    pod 'ImageSlideshow/Kingfisher'
+    pod 'TagListView', '~> 1.0'
+    pod 'ViewPager-Swift'
+    pod 'GTProgressBar'
+    pod 'Firebase/Crashlytics'
+    pod 'Crashlytics', '~> 3.14.0'
+    pod 'Firebase/Analytics'
+     pod 'NVActivityIndicatorView'
+    pod 'Firebase/Messaging'
+  #  pod 'Firebase/Core'
+
+  target 'GoGroceryTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'GoGroceryUITests' do
+    # Pods for testing
+  end
+
+end

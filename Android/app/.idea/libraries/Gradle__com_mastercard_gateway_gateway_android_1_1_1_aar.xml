@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mastercard.gateway:gateway-android:1.1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f35d8a49517d5018dd65a542c793943/jetified-gateway-android-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f35d8a49517d5018dd65a542c793943/jetified-gateway-android-1.1.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mastercard.gateway/gateway-android/1.1.1/b79a40531ad73c79ee6d5dec9539f43035d9bd39/gateway-android-1.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mastercard.gateway/gateway-android/1.1.1/eb9a65722ddd6b5bf3bda947cded4936710ca504/gateway-android-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

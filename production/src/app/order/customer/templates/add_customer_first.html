@@ -1,0 +1,158 @@
+<section class="right-part filter-pad">
+	<form #basicInformationCustomer="ngForm" novalidate
+		(ngSubmit)="basicInformationCustomer.valid && addEditBasicInfoCustomer(basicInformationCustomer)">
+		<input type="hidden" name="customer_id" [(ngModel)]="formModel.customer_id">
+		<div class="topheading">
+			<h1>Customer Setup
+				<div class="btn-header">
+					<button mat-raised-button class="btn-main" type="submit">Continue</button>
+					<button mat-raised-button class="btn-line" type="button"
+						(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul *ngIf="formModel.customer_id>0 && add_edit=='edit'">
+					<li class="active">
+						<div class="nom"></div>General Information
+					</li>
+					<li><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step2')"
+							[routerLink]="['/customers/edit/'+formModel.customer_id+'/step2']">
+							<div class="nom"></div>Address Information
+						</a></li>
+
+					<li><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step3')"
+							[routerLink]="['/customers/edit/'+formModel.customer_id+'/step3']">
+							<div class="nom"></div>Order Details
+						</a></li>
+
+					<!-- <li><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step4')"
+							[routerLink]="['/customers/edit/'+formModel.customer_id+'/step4']">
+							<div class="nom"></div>Invoice Details
+						</a></li> -->
+				</ul>
+				<ul *ngIf="add_edit=='add'">
+					<li class="active"><div class="nom"></div>General Information</li>
+					<li><div class="nom"></div>Address Information</li>
+					<li><div class="nom"></div>Order Details</li>
+					<!-- <li><div class="nom"></div>Invoice List</li> -->
+				</ul>
+			</div>
+		</div>
+		<div class="body-part" >
+			<div class="filter_bottomsec" >
+				<div class="inner_subhead">Order Details</div>
+			</div>
+			<div class="box">
+				<div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+				<div class="fixed-width">
+						<div class="row">
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline" ><mat-label>First Name</mat-label>
+									<input matInput placeholder="First Name" required #firstName="ngModel" name="firstName"
+										[(ngModel)]="formModel.first_name" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="firstName.errors && firstName.errors.required">
+										Please enter first name
+									</mat-error>
+									<mat-error *ngIf="firstName.errors && firstName.errors.pattern">
+										White space is not allowed at beginning.
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline"  class="md-block"><mat-label>Last Name</mat-label>
+									<input matInput placeholder="Last Name" required #lastName="ngModel" name="lastName"
+										[(ngModel)]="formModel.last_name" pattern="[a-zA-Z0-9_]+.*$">
+									<mat-error *ngIf="lastName.errors && lastName.errors.required">
+										Please enter last name
+									</mat-error>
+									<mat-error *ngIf="lastName.errors && lastName.errors.pattern">
+										White space is not allowed at beginning.
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline" ><mat-label>Email Address</mat-label>
+									<input matInput placeholder="Email Address" required #email="ngModel" name="email"
+										[(ngModel)]="formModel.email" pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$">
+									<mat-error *ngIf="email.errors && email.errors.required">
+										Please enter email address
+									</mat-error>
+									<mat-error *ngIf="email.errors && email.errors.pattern">
+										Enter a valid <strong>email</strong> address
+									</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">
+							<!-- <div class="col-sm-4">
+								<div class="mandatory-select">
+									<mat-form-field appearance="outline" ><mat-label>Status</mat-label>
+										<mat-select required placeholder="Status" #status="ngModel" name="status"
+											[(ngModel)]="formModel.isblocked">
+											<mat-option value="n">Enabled</mat-option>
+											<mat-option value="y">Disabled</mat-option>
+										</mat-select>
+										<mat-error *ngIf="status.errors && status.errors.required">
+											Please select Status
+										</mat-error>
+									</mat-form-field>
+								</div>
+							</div> -->
+							<!-- <div class="col-sm-4">
+								<mat-form-field appearance="outline" ><mat-label>TIN</mat-label>
+									<input matInput placeholder="TIN" #tin="ngModel" name="tin" [(ngModel)]="formModel.tin">
+								</mat-form-field>
+							</div> -->
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline" ><mat-label>Customer Group</mat-label>
+									<mat-select placeholder="Customer Group" #group_id="ngModel" name="group_id"
+										[(ngModel)]="formModel.group_id">
+										<mat-option *ngFor="let group of customer_group" [value]="group.id">{{group.name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="group_id.errors && group_id.errors.required"> Please select customer group
+									</mat-error>
+								</mat-form-field>
+							</div>
+							
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline" ><mat-label>Mobile No</mat-label>
+									<input matInput placeholder="Mobile No" required #phone="ngModel" name="phone"
+										[(ngModel)]="formModel.phone" pattern="^[0-9]*$">
+									<mat-error *ngIf="phone.errors && phone.errors.required">
+										Please enter mobile no
+									</mat-error>
+									<mat-error *ngIf="phone.errors && phone.errors.pattern">
+										Only numeric values are allowed.
+									</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-4">
+								<mat-form-field appearance="outline"  class="md-block"><mat-label>VAT</mat-label>
+									<input matInput placeholder="VAT" #vat="ngModel" name="vat" [(ngModel)]="formModel.vat">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">
+							
+							
+						</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs">
+				<button mat-raised-button class="btn-main" type="submit">Continue</button>
+				<button mat-raised-button class="btn-line" type="button"
+					(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+
+			<!-- ///////////////Buttons//// -->
+			<div class="clear"></div>
+		</div>
+	</form>
+
+</section>

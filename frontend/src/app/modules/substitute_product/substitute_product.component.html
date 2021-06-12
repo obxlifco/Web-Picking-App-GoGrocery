@@ -1,0 +1,183 @@
+<!-- ---  Product Replacement --- -->
+<section class="container-fluid" *ngIf = "showConformationBox != 4 && showConformationBox != 3">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="listing_container">
+                <div class="product_replacementbox">
+                    <!-- mobile view -->
+                    <div class="alarmview">
+                        <p>Time Remaining: {{getMinutes(minute) +':'+ getSeconds(second)}}</p>
+                    </div>
+                    <div class="mobview_outofstock">
+                        <!-- <ng-container *ngIf="item?.substitute_products?.length > 0"> -->
+                        <div class="imagebox"><img class="slide-image"
+                            [src]="item?.product?.product_images[0]?.link+item?.product?.product_images[0]?.img">
+                        </div>
+                        <div class="text_sec">
+                          <p>Out Of Stock</p>
+                          <p>{{item?.product?.name}}</p>
+                          <!-- <p>{{item?.product?.sku}}</p> -->
+                          <p>Qty : {{item?.shortage}}</p>
+                          <p>
+                            <span>{{currency_code}}{{item?.product_price}} </span>
+                            <span>{{item?.product?.weight}}{{item?.product?.uom?.uom_name}}</span>
+                          </p>
+                        </div>
+                    <!-- </ng-container> -->
+                     </div>
+                    <!-- mobile view -->
+                    <div class="outofstock">
+                        <div class="head">
+                            <h3>Missing items {{currentItemIndex+1}} of {{shortageProducts.length}}</h3>
+                        </div>
+                        <div class="replace_productbox">
+                            <!-- if need add slider add fm here -->
+                            <div class="product_row">
+                                <div class="productblog">
+                                    <div class="imagebox">
+                                        <img class="slide-image"
+                                            [src]="item?.product?.product_images[0]?.link+item?.product?.product_images[0]?.img">
+                                    </div>
+                                    <div class="textbox">
+                                        <!-- <div class="vag_simbol non-veg"></div> -->
+                                        <div class="textrow">
+                                            <p>{{item?.product?.name}}</p>
+                                            <!-- <p>{{item?.product?.sku}}</p> -->
+                                            <p>Qty : {{item?.shortage}}</p>
+                                        </div>
+
+                                        <div class="textrow">
+                                            <p class="pricerow">{{currency_code}}{{item?.product_price}}
+                                                <span>{{item?.product?.weight}}{{item?.product?.uom?.uom_name}}</span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="textrow last">
+                                        <button class="add_tocard outofstockbtn">out of stock</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- if need add slider add fm here -->
+                        </div>
+                    </div>
+                    <div class="right_choose_replacement">
+                        <div class="head">
+                            <h3>Choose a replacement</h3>
+                            <p>
+                                <mat-icon>alarm</mat-icon>time remaining: {{getMinutes(minute) +':'+ getSeconds(second)}}
+                            </p>
+                        </div>
+                        <div class="replace_productbox">
+                            <a class="leftarrow" (click)="showNext()" *ngIf = "currentItemIndex+1 < shortageProducts.length"><span class="icon-right-arrow_new"></span></a>
+                            <div class="product_row substitute">
+                                <ng-container *ngFor="let element of item.substitute_products">
+                                <div class="productblog">
+                                    <div class="imagebox">
+                                        <img class="slide-image"
+                                            [src]="element?.product?.product_images[0]?.link+element?.product?.product_images[0]?.img">
+                                    </div>
+                                    <div class="textbox">
+                                        <!-- <div class="vag_simbol non-veg"></div> -->
+                                        <div class="textrow">
+                                            <p>{{element?.product?.name}}</p>
+                                            <!-- <p>{{element?.product?.sku}}</p> -->
+                                            <p>Qty : {{element?.quantity}}</p>
+                                        </div>
+
+                                        <div class="textrow">
+                                            <p class="pricerow">
+                                                {{currency_code}}{{element?.product_price}}
+                                                <span>{{element?.product?.weight}}{{element?.product?.uom?.uom_name}}</span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="textrow last add_count">
+                                        <ng-container *ngIf = "!element.selectedQuantity">
+                                            <button class="add_tocard" (click)="addItem(element,'addItem')">ADD ITEM</button>
+                                        </ng-container>
+                                        <div class="count_box" *ngIf = "element.selectedQuantity">
+                                            <button class="count_btn" (click)="RemoveItem(element)"><span class="icon-minus"></span></button>
+                                                <div class="count_no">{{element.selectedQuantity}}</div>
+                                            <button class="count_btn" (click)="addItem(element,'')"><span class="icon-plus"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="replacebtnbox">
+                        <div class="left"><button *ngIf = "currentItemIndex > 0" class="linebtn" (click)="showPrevious()">back</button></div>
+                        <!-- <div class="left"><button class="linebtn" (click)="showNext()">next</button></div> -->
+                        <div class="right">
+                            <button class="checkoutbtn" style="background: green !important;" (click)="submitReplacement()">submit replacement </button>
+                            <button class="checkoutbtn" (click)="showWarning()">I dont want replacement</button>
+                            <!-- <div class="time_remaining">Time Remaining: {{getMinutes(minute) +':'+ getSeconds(second)}}</div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="showConformationBox==1">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head" style="color: red">Are you sure that you want to reject the substitutions?</div>
+                <button class="add_tocard" style="width: 22%; float: right;" (click)="reSubstitute(1)">Yes</button>
+                <button class="add_tocard" style="width: 22%; float: left; background: gray !important;" (click)="reSubstitute(0)">No</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="showConformationBox==2">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head" style="color: red">You can add {{(item.shortage - getSelectedQauantity())}} more items</div>
+                <div class="head" style="color: red">Do you still want to submit ?</div>
+                <button class="add_tocard" style="width: 22%; float: right;" (click)="reSubstitute(2)">Yes</button>
+                <button class="add_tocard" style="width: 22%; float: left; background: gray !important;" (click)="reSubstitute(0)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="showConformationBox==3">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head" style="color: red">Your time has been expired,  you can not add substitute products</div>
+                <!-- <button class="add_tocard" style="width: 22%;" [routerLink]="['/home']">CONTINUE SHOPPING</button> -->
+                <div class="continue_shopping" [routerLink]="['/home']">CONTINUE SHOPPING</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="showConformationBox==4">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head" style="color: red">You already added substitute products</div>
+                <!-- <button class="add_tocard" style="width: 22%;" [routerLink]="['/home']">CONTINUE SHOPPING</button> -->
+                <div class="continue_shopping" [routerLink]="['/home']">CONTINUE SHOPPING</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="showConformationBox==5">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+            <div class="selectstore">
+                <div class="head" style="color: red">Are you sure that you want to accept these substitutions?</div>
+                <button class="add_tocard" style="width: 22%; float: right;" (click)="reSubstitute(1)">Yes</button>
+                <button class="add_tocard" style="width: 22%; float: left; background: gray !important;" (click)="reSubstitute(0)">No</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ---  Product Replacement --- -->

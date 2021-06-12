@@ -1,0 +1,76 @@
+<section class="right-part">
+  <div class="body-part">
+      <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEditBarcode(formData)">
+          <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+          <div class="topheading">
+              <h1>{{(formModel.formId>0)?'Edit':'Add'}} Barcode
+          <div class="btn-header">
+          <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+              <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+        </h1> </div>
+          <div class="clear"></div>
+          <div class="box">
+              <div class="fixed-width">
+                  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                  <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                  <div class="row">
+                    <div class="col-sm-6" *ngIf="formModel.formId>0">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Name</mat-label>
+                          <input matInput placeholder="Name" required #name_edit="ngModel" name="name_edit"  [(ngModel)]="formModel.name_edit" disabled> 
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6" *ngIf="!formModel.formId">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Product Name</mat-label>
+                          <input  matInput required placeholder="Product Name"  [matAutocomplete]="tdAuto" name="name" #name="ngModel" [(ngModel)]="formModel.name" (ngModelChange)="filter_products(formModel.name)" >
+                        </mat-form-field>
+                        <mat-autocomplete  #tdAuto="matAutocomplete" [displayWith]="displayFn">
+                          <mat-option  *ngFor="let item of product_list" [value]="item" >
+                            <span >{{item.name}}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline">
+                          <input matInput placeholder="Product SKU" required #sku="ngModel" name="sku" [(ngModel)]="formModel.sku" disabled> 
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field class="md-block" appearance="outline">
+                          <mat-chip-list #chipList>
+                            <mat-chip *ngFor="let item of barcode_list;" [selectable]="selectable" [removable]="removable" (removed)="remove(item)">
+                              {{item.name}}
+                              <mat-icon matChipRemove *ngIf="removable" class="icon-close"></mat-icon>
+                            </mat-chip>
+                            <input matInput placeholder="Barcodes" #barcodes="ngModel" name="barcodes" [(ngModel)]="formModel.barcodes" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                          </mat-chip-list>
+                          <mat-hint><mat-icon class="icon-done"></mat-icon> Please enter comma (,) to add multiple barcode</mat-hint>                        
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                      <mat-form-field  appearance="outline">
+                        <mat-label>Product EAN</mat-label>
+                        <input matInput placeholder="Product EAN" required #ean="ngModel" name="ean" [(ngModel)]="formModel.ean" disabled> 
+                      </mat-form-field>
+                    </div>
+                  </div>
+              </div>
+              <!-- ///////////////Buttons//// -->
+              <div class="btn-header hidden-xs">
+                  <button type="submit" mat-raised-button class="btn-main">Save</button>
+                  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+              </div>
+              <div class="clear"></div>
+              <!-- ///////////////Buttons//// -->
+          </div>
+          <div class="clear"></div>
+      </form>
+  </div>
+</section>

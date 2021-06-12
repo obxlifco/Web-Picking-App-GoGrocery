@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+           android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+
+                android:id="@+id/btn_billing_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/btnsBackgroung"
+                android:drawableRight="@mipmap/expand_less"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Billing Address"
+                android:textColor="@color/Title"
+                android:textSize="15dp" />
+
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/exp_billing_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_billing_address"
+                android:background="#FFF"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/LinerTansDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/Linerrans1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/text_r_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Name"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_name_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Charli"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Linerrans2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/text__Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Address"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_address_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Room no 1101 near Railway station Ambad"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Lineran1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/extr_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="City"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_city_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Indore"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Linerras1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/tex_r_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Country"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_country_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="India"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Linerran1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ext_r_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="State"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_state_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="MH"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Linean1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ext_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Zip"
+
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_zip_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="425001"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Lnerran1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/et_r_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Telephone"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_telephone_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="9595226054"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Linan1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ex_r_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Email Id"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_email_b"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="paras.gangwal@avenues.info"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+            <Button
+
+                android:id="@+id/btn_shipping_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/exp_billing_address"
+                android:layout_marginTop="4dp"
+                android:background="@color/btnsBackgroung"
+                android:drawableRight="@mipmap/expand_more"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Shipping Address"
+                android:textColor="@color/Title"
+                android:textSize="15dp" />
+
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/exp_shipping_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_shipping_address"
+                android:background="#FFF"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/LinerTansDetai3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/Linerrans3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/text_r_Dat3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Name"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_name_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Charli"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Line3rans3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/text__Dat3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Address"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_address_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Room no 1101 near Railway station Ambad"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Line3an1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/extr_3ate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="City"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_city_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="Indore"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Linerras3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/tex_r_Dat3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Country"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_country_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="India"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Linerran3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ext_r_3ate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="State"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_state_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="MH"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Line3n1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ext_3ate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Zip"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_zip_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="425001"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/Lne3ran1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/et_3_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Telephone"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_telephone_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="9595226054"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Lina31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ex_3_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:text="Email Id"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_email_s"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:enabled="true"
+                                android:gravity="left"
+                                android:padding="5dp"
+                                android:text="paras.gangwal@avenues.info"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+   </RelativeLayout>
+
+</ScrollView>
+
+
+
+        <Button
+            android:id="@+id/pay"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_background"
+            android:text="PROCEED TO PAY"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>

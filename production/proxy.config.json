@@ -1,0 +1,7 @@
+{
+	"/google-finance/":{
+		"target": "https://finance.google.com/finance/converter",
+		"secure": false,
+		 "changeOrigin": true
+	}
+}

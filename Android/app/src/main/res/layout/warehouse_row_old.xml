@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        app:cardElevation="8dp"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="4dp"
+       android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="3.5dp"
+        android:layout_marginBottom="3.5dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="@color/white"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="116dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivWarehouse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:padding="2dp"
+                app:riv_corner_radius="4dp"
+                android:src="@drawable/image_not_available" />
+
+
+            <TextView
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:text="@string/warehouse_warehouse"
+                android:textAlignment="center"
+                android:id="@+id/tvWarehouseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/hind_medium"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/app_red_clr"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

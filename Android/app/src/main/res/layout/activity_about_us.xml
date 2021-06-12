@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.AboutUs">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv1"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/back_btn_width"
+                    android:layout_height="@dimen/back_btn_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:padding="4dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+
+                    android:fontFamily="@font/montserrat"
+
+                    android:text="@string/toolbar_title_about_us"
+                    android:textColor="@color/grey_new"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:typeface="sans" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cv1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:layout_marginTop="@dimen/_26sdp"
+                    android:src="@drawable/privacy_policy">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginEnd="46dp"
+                    android:gravity="center"
+                    android:textColor="@color/green_dark_new"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/proxima_regular"
+
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/proxima_regular"
+
+                    android:textColor="@color/grey_new"
+                    android:gravity="center|start"
+                    android:layout_marginBottom="16dp">
+
+                </TextView>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_56sdp"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/path">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginEnd="46dp"
+                    android:gravity="center"
+                    android:textColor="#93C88D"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:text="VISION">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_text10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/proxima_regular"
+                    android:text="Just sit at wherever you are and order you
+favorite items by clicking straight from your
+mobile or desktop. Simply download the
+GoGrocery app or log in to GoGrocery.ae
+and make your grocery shopping easier."
+                    android:textColor="@color/grey_new"
+                    android:gravity="center|start"
+                    android:layout_marginBottom="16dp">
+
+                </TextView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_56sdp"
+                    android:padding="10dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/path">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginEnd="46dp"
+                    android:gravity="center"
+                    android:textColor="#93C88D"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:text="MISSION">
+
+                </TextView>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="26dp"
+                    android:lineSpacingExtra="5dp"
+                    android:visibility="gone"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:text="Just sit at wherever you are and order you
+favorite items by clicking straight from your
+mobile or desktop. Simply download the
+GoGrocery app or log in to GoGrocery.ae
+and make your grocery shopping easier."
+                    android:textColor="@color/grey_new"
+                    android:gravity="center|start"
+                    android:layout_marginBottom="16dp">
+
+                </TextView>
+            </LinearLayout>
+        </ScrollView>
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+        </ProgressBar>
+    </RelativeLayout>
+
+
+
+</layout>

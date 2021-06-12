@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_store_selection"
+        tools:context=".view.SelectStore">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="3dp"
+            app:cardElevation="2dp">
+
+            <RelativeLayout
+                android:id="@+id/rlHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="false"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/white"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivBack"
+                                android:layout_width="@dimen/back_btn_width"
+                                android:layout_height="@dimen/back_btn_height"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="16dp"
+                                android:padding="5dp"
+                                android:src="@drawable/ic_back" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/proxima_regular"
+                                android:gravity="center"
+                                android:ellipsize="end"
+                                android:textAlignment="center"
+                                android:text="@string/select_store"
+                                android:textColor="#575757"
+                                android:textSize="@dimen/_15sdp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/ivClose"
+                                android:layout_width="@dimen/back_btn_width"
+                                android:layout_height="@dimen/back_btn_height"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="16dp"
+                                android:padding="8dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_close" />
+
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl2Type"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/iv_top"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_marginTop="6dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/warehouse_sheet_header" />
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:textColor="@color/grey_new"
+                android:fontFamily="@font/proxima_regular"
+                android:text="@string/select_your_store_to_start_n_shopping"
+                android:textSize="22sp"
+                android:visibility="gone"
+                android:background="@color/transparent"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvWarehouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_below="@id/iv_top"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl2Type"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/cvHeader"
+            android:background="@drawable/round_corner_bg_light_green"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/ivPinType"
+                android:layout_width="18dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:tint="@color/white"
+                android:src="@drawable/ic_location_icon" />
+
+            <TextView
+                android:id="@+id/tv_deliveryTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_toStartOf="@+id/ivEditType"
+                android:layout_toEndOf="@+id/ivPinType"
+                android:ellipsize="end"
+                android:textDirection="ltr"
+                android:text="Show Store delivering to : \nAl mua tower al khalidis Street 23"
+                android:maxLines="2"
+
+                android:fontFamily="@font/proxima_bold"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/ivEditType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_border"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Change"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="16dp"
+
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</layout>

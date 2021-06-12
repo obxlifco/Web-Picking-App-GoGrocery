@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"
+            android:src="@drawable/empty_bag" />
+
+        <TextView
+            android:id="@+id/tvWishlistTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:fontFamily="@font/hind_semibold"
+            android:text="@string/empty_cart_ycie"
+            android:textColor="#202020" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:fontFamily="@font/hind"
+            android:text="@string/empty_cart_msg"
+            android:textColor=" #5D5D5D" />
+
+        <Button
+            android:id="@+id/btnShopNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:layout_alignParentBottom="true"
+
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_46sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:background="@drawable/green_round_side"
+            android:fontFamily="@font/proxima_regular"
+            android:text="Start Shopping"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</layout>

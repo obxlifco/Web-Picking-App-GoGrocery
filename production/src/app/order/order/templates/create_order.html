@@ -1,0 +1,369 @@
+<section class="right-part filter-pad">
+    <form #createOrderForm="ngForm" novalidate (ngSubmit)="createOrderForm.valid && createOrders(createOrderForm)">
+    	<input type="hidden" name="customer_id" [(ngModel)]="formModel.customer_id">
+      	<div class="topheading">
+        	<h1>Create Order
+          		<div class="btn-header">
+            		<button mat-raised-button class="btn-main" type="submit">Save</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+          		</div>
+          		<div class="clear"></div>
+        	</h1>
+      	</div>
+    	<div class="body-part">
+			<div class="clear"></div>   
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+					<div class="box">
+						<div class="row">
+							<div class="col-sm-4">
+								<mat-form-field>
+									<mat-select required placeholder="Store" #webshop_id="ngModel" name="webshop_id" [(ngModel)]="formModel.webshop_id"  (ngModelChange)="generateCustomOrderId(formModel.webshop_id)">
+										<div *ngFor="let channels of channel_list">
+											<mat-option [value]="channels.id" *ngIf="channels.id == 6">{{channels.name}}</mat-option>
+										</div>
+									</mat-select>
+									<mat-error *ngIf="webshop_id.errors && webshop_id.errors.required">Please select a channel</mat-error>  
+								</mat-form-field>
+							</div>
+							<div class="col-sm-4">
+								<mat-form-field>
+									<input matInput placeholder="Order Id" required #custom_order_id="ngModel" name="custom_order_id" [(ngModel)]="formModel.custom_order_id" pattern="^(?!\s*$|\s).*$" readonly="true">
+									<mat-error *ngIf="custom_order_id.errors && custom_order_id.errors.required">Please enter order id.</mat-error>                           
+									<mat-error *ngIf="custom_order_id.errors && custom_order_id.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-4">								
+								<mat-form-field class="md-block">
+							  			<!-- <input readonly="readonly" matInput placeholder="Date" required #created_date="ngModel"  name="created_date" [(ngModel)]="formModel.created_date" [value]="formModel.created_date | date: 'short'" [matDatepicker]="picker">
+								    	<mat-error *ngIf="created_date.errors && created_date.errors.required">
+									    	This is a <strong>required</strong> field
+									    </mat-error> -->
+									    <input matInput [matDatepicker]="picker" required placeholder="Order Date" (focus)="picker.open()"  name="created_date" #created_date="ngModel" [(ngModel)]="formModel.created_date">
+										   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+										<mat-datepicker #picker></mat-datepicker>
+										<mat-error *ngIf="created_date?.errors!=undefined && created_date?.errors.required">Order date is <strong>Requird</strong></mat-error>
+								</mat-form-field>
+							</div>
+						</div>						
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="box">
+								<div class="heading">Customer Info</div>
+								<mat-form-field>
+									<input matInput placeholder="Customer Name" required #billing_name="ngModel" name="billing_name" [(ngModel)]="formModel.billing_name" pattern="^(?!\s*$|\s).*$" [matAutocomplete]="CustomerIdSelect" (keyup)="filterCustomer(formModel.billing_name)">
+									<mat-error *ngIf="billing_name.errors && billing_name.errors.required">Please enter customer name</mat-error>                           
+									<mat-error *ngIf="billing_name.errors && billing_name.errors.pattern">White space is not allowed at beginning.</mat-error>
+
+									<mat-autocomplete #CustomerIdSelect="matAutocomplete" >
+									      <mat-option *ngFor="let customer of customer_list" [value]="customer.first_name+' '+customer.last_name" (click) ="setBillingAddress(customer.id)">
+									        {{customer.first_name}} {{customer.last_name}} &lt; {{customer.email}} &gt;
+									      </mat-option>
+								    </mat-autocomplete>
+
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Email Address" required #billing_email_address="ngModel" name="billing_email_address" [(ngModel)]="formModel.billing_email_address" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+									 <mat-error *ngIf="billing_email_address.errors && billing_email_address.errors.required">
+										      Please enter email address
+										    </mat-error>
+										    <mat-error *ngIf="billing_email_address.errors && billing_email_address.errors.pattern">
+								      		Enter a valid <strong>email</strong> address
+										</mat-error>
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Mobile Number" required #billing_phone="ngModel" name="billing_phone" [(ngModel)]="formModel.billing_phone" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="billing_phone.errors && billing_phone.errors.required">Please enter mobile number</mat-error>                           
+									<mat-error *ngIf="billing_phone.errors && billing_phone.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+							</div>	
+						</div>
+						<div class="col-sm-6">
+							<div class="box">
+								<div class="heading">Payment Type</div>
+								<mat-form-field>
+									<mat-select required placeholder="Payment Method" #payment_method_id="ngModel" name="payment_method_id" [(ngModel)]="formModel.payment_method_id">
+										<mat-option *ngFor="let website_payment_method of payment_method_list" [value]="website_payment_method.id">{{website_payment_method.name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="payment_method_id.errors && payment_method_id.errors.required">Please select payment method.</mat-error>  
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Transaction ID" #pay_txnTranID="ngModel" name="pay_txnTranID" [(ngModel)]="formModel.pay_txnTranID" pattern="^(?!\s*$|\s).*$">
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput [matDatepicker]="pickerPaymentDate" required placeholder="Payment Date" (focus)="pickerPaymentDate.open()"  name="payment_date" #payment_date="ngModel" [(ngModel)]="formModel.payment_date">
+									   <mat-datepicker-toggle matSuffix [for]="pickerPaymentDate"></mat-datepicker-toggle>
+									<mat-datepicker #pickerPaymentDate></mat-datepicker>
+									<mat-error *ngIf="payment_date?.errors!=undefined && payment_date?.errors.required">Payment date is <strong>Requird</strong></mat-error>
+
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="box">
+								<div class="heading">Billing Address</div>
+								<mat-form-field>
+									<input matInput placeholder="Address line 1" required #billing_street_address="ngModel" name="billing_street_address" [(ngModel)]="formModel.billing_street_address" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="billing_street_address.errors && billing_street_address.errors.required">Please enter first name</mat-error>                           
+									<mat-error *ngIf="billing_street_address.errors && billing_street_address.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Address line 2" #billing_street_address1="ngModel" name="billing_street_address1" [(ngModel)]="formModel.billing_street_address1">
+								</mat-form-field>
+								<mat-form-field>
+									<mat-select required placeholder="Country" #billing_country="ngModel" name="billing_country" [(ngModel)]="formModel.billing_country" (selectionChange)="get_billing_state(billing_country.value)">
+										<mat-option *ngFor="let country of billing_country_list" [value]="country.id">{{country.country_name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="billing_country.errors && billing_country.errors.required">Please select country</mat-error>  
+								</mat-form-field>
+								<mat-form-field>
+									<mat-select required placeholder="State" #billing_state="ngModel" name="billing_state" [(ngModel)]="formModel.billing_state">
+										<mat-option *ngFor="let state of billing_state_list" [value]="state.id">{{state.state_name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="billing_state.errors && billing_state.errors.required">Please select state</mat-error>  
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="City" required #billing_city="ngModel" name="billing_city" [(ngModel)]="formModel.billing_city" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="billing_city.errors && billing_city.errors.required">Please enter billing city</mat-error>                           
+									<mat-error *ngIf="billing_city.errors && billing_city.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Zipcode" required #billing_postcode="ngModel" name="billing_postcode" [(ngModel)]="formModel.billing_postcode" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="billing_postcode.errors && billing_postcode.errors.required">Please enter billing zipcode.</mat-error>                           
+									<mat-error *ngIf="billing_postcode.errors && billing_postcode.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+							</div>	
+						</div>
+						<div class="col-sm-6">
+							<div class="box">
+								<div class="heading">
+									<span>Shipping Address</span>
+									<mat-slide-toggle aria-labelledby labelPosition="before" (change)="copyAddress($event)" style="margin-left: 20px;">Same as Billing Address</mat-slide-toggle>
+								</div>
+								<mat-form-field>
+									<input matInput placeholder="Address line 1" required #delivery_street_address="ngModel" name="delivery_street_address" [(ngModel)]="formModel.delivery_street_address" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="delivery_street_address.errors && delivery_street_address.errors.required">Please enter delivery address</mat-error>                           
+									<mat-error *ngIf="delivery_street_address.errors && delivery_street_address.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Address line 2" #delivery_street_address1="ngModel" name="delivery_street_address1" [(ngModel)]="formModel.delivery_street_address1">
+								</mat-form-field>
+									<mat-form-field>
+									<mat-select required placeholder="Country" #delivery_country="ngModel" name="delivery_country" [(ngModel)]="formModel.delivery_country" (selectionChange)="get_shipping_state(delivery_country.value)">
+										<mat-option *ngFor="let country of shipping_country_list" [value]="country.id">{{country.country_name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="delivery_country.errors && delivery_country.errors.required">Please select country</mat-error>  
+								</mat-form-field>
+
+								<mat-form-field>
+									<mat-select required placeholder="State" #delivery_state="ngModel" name="delivery_state" [(ngModel)]="formModel.delivery_state">
+										<mat-option *ngFor="let state of shipping_state_list" [value]="state.id">{{state.state_name}}</mat-option>
+									</mat-select>
+									<mat-error *ngIf="delivery_state.errors && delivery_state.errors.required">Please select state</mat-error>  
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="City" required #delivery_city="ngModel" name="delivery_city" [(ngModel)]="formModel.delivery_city" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="delivery_city.errors && delivery_city.errors.required">Please enter delivery city</mat-error>                           
+									<mat-error *ngIf="delivery_city.errors && delivery_city.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+								<mat-form-field>
+									<input matInput placeholder="Zipcode" required #delivery_postcode="ngModel" name="delivery_postcode" [(ngModel)]="formModel.delivery_postcode" pattern="^(?!\s*$|\s).*$">
+									<mat-error *ngIf="delivery_postcode.errors && delivery_postcode.errors.required">Please enter delivery zipcode</mat-error>                           
+									<mat-error *ngIf="delivery_postcode.errors && delivery_postcode.errors.pattern">White space is not allowed at beginning.</mat-error>
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="box">
+								<div class="heading">
+									<span>Select Products</span>
+									<!-- <mat-slide-toggle aria-labelledby labelPosition="before" (change)="generateGrid(0,1,'',filter,search.value,show_item_wise_order)" [(ngModel)]="show_item_wise_order" style="margin-left: 20px;">Same as Billing Address</mat-slide-toggle> -->
+								</div>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th></th>						
+											<th>SKU</th>
+											<th>Title</th>
+											<th>Price</th>
+											<th>Qty</th>
+											<th>Discount</th>
+											<th>Net Amount</th>
+											<th>Gross Total</th>
+										</tr>
+									</thead>
+									<tbody class="text-center" *ngIf="cart_list.length > 0" >
+										<tr *ngFor="let product_list of cart_list; let i = index">
+											<td>
+												<button type="button" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="cart_list.length == (i+1)" (click) = "addTocart()"><i class="icon-add"></i></button>
+												<button type="button" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="cart_list.length != (i+1)" (click) = "deleteFromCart(product_list.id)"><i class="icon-delete"></i></button>
+											</td>
+											<td>
+												<mat-form-field>
+													<input matInput placeholder="SKU" required  name="{{product_list.sku}}" [(ngModel)]="product_list.sku"  (click) = "addTocart()">
+												</mat-form-field>
+											</td>
+											<td>
+												<mat-form-field>
+													<input matInput placeholder="Name" required  name="{{product_list.name}}" [(ngModel)]="product_list.name" pattern="^(?!\s*$|\s).*$">
+												</mat-form-field>
+											</td>
+											<td class="align-middle">{{formModel.currencyCode}} {{product_list.new_default_price_unit}}</td>
+											<td>
+												<mat-form-field class="inputSM">
+													<input matInput placeholder="Quantity" required name="Quantity" [(ngModel)]="product_list.qty" type="number" min="1" oninput="this.value = Math.abs(this.value)" style="text-align: center;" name="quantity_{{product_list.id}}" (blur)="updateQuantity(product_list.id , $event.target.value)">
+													<!-- <mat-error *ngIf="Quantity.errors && Quantity.errors.required">Please enter Quantity</mat-error> -->
+												</mat-form-field>
+											</td>
+											<td class="align-middle">{{formModel.currencyCode}} {{product_list.discount_amount | number: '1.2-2'}}</td>
+											<td class="align-middle">{{formModel.currencyCode}} {{product_list.new_default_price_unit | number: '1.2-2'}}</td>
+											<td class="align-middle">{{formModel.currencyCode}} {{product_list.new_default_price | number: '1.2-2'}}</td>
+										</tr>										
+									</tbody>
+									<tbody class="text-center" *ngIf="cart_list.length <= 0">
+										<tr>
+											<td>
+												<button type="button" class="margin-auto20 btn-pink" mat-mini-fab (click) = "addTocart()"><i class="icon-add"></i></button>
+											</td>
+											<td>
+												<mat-form-field>
+													<input matInput placeholder="SKU" required #sku="ngModel" name="sku" [(ngModel)]="formModel.sku" pattern="^(?!\s*$|\s).*$" (click) = "addTocart()">
+												</mat-form-field>
+											</td>
+											<td>
+												<mat-form-field>
+													<input matInput placeholder="Name" required #title="ngModel" name="title" [(ngModel)]="formModel.title" pattern="^(?!\s*$|\s).*$">
+												</mat-form-field>
+											</td>
+											<td class="align-middle">{{formModel.currencyCode}} 0</td>
+											<td>
+												<mat-form-field class="inputSM">
+													<input matInput placeholder="Quantity" required #Quantity="ngModel" name="Quantity" [(ngModel)]="formModel.Quantity" type="number" min="1" oninput="this.value = Math.abs(this.value)" style="text-align: center;">
+													<mat-error *ngIf="Quantity.errors && Quantity.errors.required">Please enter Quantity</mat-error>
+												</mat-form-field>
+											</td>
+											<td class="align-middle">{{formModel.currencyCode}} 0</td>
+											<td class="align-middle">{{formModel.currencyCode}} 0</td>
+											<td class="align-middle">{{formModel.currencyCode}} 0</td>
+										</tr>										
+									</tbody>
+
+								</table>
+							</div>		
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="box">
+								<div class="heading">
+									<span>Special Instruction</span>
+								</div>
+								<mat-form-field class="md-block">
+									<textarea matInput placeholder="Special Instruction" #custom_msg="ngModel"  name="custom_msg" [(ngModel)]="formModel.custom_msg" rows="5"></textarea>
+								</mat-form-field>
+								<mat-slide-toggle aria-labelledby labelPosition="before" style="margin-left: 20px;"  (change)="sendOrderEmailSetings($event)">Send email to customer?</mat-slide-toggle>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box">
+								<div class="heading">
+									<span>Add Coupon Code</span>
+								</div>
+								<mat-form-field class="md-block">
+								  <mat-chip-list #chipList>
+								    <mat-chip *ngFor="let coupon_code of applied_code" [selectable]="selectable"
+								             [removable]="removable" (removed)="remove(coupon_code)">
+								      {{coupon_code.name}}
+								      <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+								    </mat-chip>
+								    <input
+								           [matChipInputFor]="chipList"
+								           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+								           [matChipInputAddOnBlur]="addOnBlur"
+								           (matChipInputTokenEnd)="add($event)" [(ngModel)]="formModel.applied_coupon" name="applied_coupon">
+								  </mat-chip-list>
+								</mat-form-field>
+								<button mat-raised-button class="btn-main" type="button" (click) ="applyCouponCode()" >Apply</button>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="box">
+								<div class="heading">
+									<span>Order Details</span>									
+								</div>
+								<ul class="box-list">
+									<li *ngIf="orderDetails.sub_total > 0">
+										<div class="text">Net Amount: </div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.sub_total | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li *ngIf="orderDetails.tax_amount > 0">
+										<div class="text">Tax Amount:</div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.tax_amount | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li *ngIf="orderDetails.shipping_charge > 0">
+										<div class="text">Shipping Cost:</div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.shipping_charge | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li *ngIf="orderDetails.handling_charge > 0">
+										<div class="text">Shipping Cost:</div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.handling_charge | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li *ngIf="orderDetails.cod_charge > 0">
+										<div class="text">COD Cost:</div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.cod_charge | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li>
+										<div class="text">Grand Total:</div>
+										<div class="num">{{formModel.currencyCode}} {{orderDetails.grand_total | number: '1.2-2'}}</div>
+										<div class="clear"></div>
+									</li>
+									<li>
+										<div class="text">Amount Paid:</div>
+										<div class="num">
+											<mat-form-field>
+												<input matInput placeholder="Amount" #paid_amount="ngModel" name="paid_amount" [(ngModel)]="formModel.first_name" type="number" min="0">
+											</mat-form-field>
+										</div>
+										<div class="clear"></div>
+									</li>		
+									<!-- <li>
+										<div class="text">Balance Due:</div>
+										<div class="num">$ 400</div>
+										<div class="clear"></div>
+									</li> -->							
+								</ul>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="box">
+						<div class="heading">Wishlist</div>
+					</div>
+				</div>
+			</div>     
+        	
+			<div class="clear"></div> 
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs">
+				<button mat-raised-button class="btn-main" type="submit">Save</button>
+				<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div> 
+
+        	<!-- ///////////////Buttons//// --> 
+      		<div class="clear"></div> 
+    	</div>  
+    </form>
+</section>

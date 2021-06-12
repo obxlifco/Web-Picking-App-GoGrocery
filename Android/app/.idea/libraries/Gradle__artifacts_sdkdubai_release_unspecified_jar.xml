@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:sdkdubai-release:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../sdkdubai-release/build/.transforms/36d9da75d56005c247d2daa141cb50d3/jetified-sdkdubai-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../sdkdubai-release/build/.transforms/36d9da75d56005c247d2daa141cb50d3/jetified-sdkdubai-release/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

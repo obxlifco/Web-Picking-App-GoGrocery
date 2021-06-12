@@ -1,0 +1,27 @@
+<div class="review_box">
+    <div class="review_row" *ngFor="let reviewData of review_data | paginate: { itemsPerPage: count, currentPage: p }">
+        <div class="reviewhead">
+            <div class="heading">
+                <div class="starrate_box" *ngIf="reviewData.rating >= 3">
+                    <span class="icon-star"></span>{{reviewData.rating}}
+                </div>
+                <div class="starrate_box avarage" *ngIf="reviewData.rating ==2">
+                    <span class="icon-star"></span>{{reviewData.rating}}
+                </div>
+                <div class="starrate_box worst" *ngIf="reviewData.rating == 1">
+                    <span class="icon-star"></span>{{reviewData.rating}}
+                </div>
+                <h3>{{reviewData.title}}</h3>
+            </div>
+            <div class="comment_date"><span style="margin:0;">{{reviewData.user_name | titlecase}}</span><span *ngIf="reviewData.created">, {{reviewData.created | date :'dd MMM yyyy'}}</span></div>
+        </div>
+        <p>
+           {{reviewData.review}}
+        </p>
+    </div>
+
+</div>
+<div class="text-right" *ngIf="review_data.length > 5">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+<!-- <div class="all_review"><a href="#">All 687 Reviews</a></div> -->

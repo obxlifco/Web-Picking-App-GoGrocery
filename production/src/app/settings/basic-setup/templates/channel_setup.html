@@ -1,0 +1,104 @@
+<form  #ChannelSetup="ngForm" novalidate (ngSubmit)="loadBasicSetup(ChannelSetup)">
+	<section class="right-part filter-pad">
+	    <div class="topheading">
+	    	<div class="heading-left">
+		        <h1> Basic Setup
+					<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Continue</button>
+						  	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+					</div>
+					<div class="clear"></div>
+				</h1>
+		    </div>            
+	    </div>
+
+	    <div class="filter filter-stp">
+			<div class="stap">
+				<ul>
+					<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId]">Basic Setup</a></li>
+					<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/template']">Select Template</a></li>
+					<li class="done" ><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/payment_gateway']">Payment Gateway</a></li>
+					<li class="done" ><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/shipping']">Shipping</a></li>
+					<li  class="active"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/channel_setup']">Channel Setup</a></li>
+				</ul>
+			</div>	
+	    </div>	
+		<div class="body-part">
+			<div class="fixed-width">
+				<div *ngFor="let marketplace_list of channel_list">
+				<mat-card>				   	
+				   	<mat-card-title>{{marketplace_list.name}}</mat-card-title>
+				   	<div class="box-body">
+				      	<div class="row">
+				         	<div class="col-md-3 col-sm-4">
+								<img src="assets/images/channels/{{marketplace_list.parent_logo}}" class="img-responsive" alt="" style="margin-bottom: 20px;"/>
+								<mat-slide-toggle *ngIf="marketplace_list.status; else elseBlock" checked  (change)="activate_channels(marketplace_list.parent_id,$event,marketplace_list.channel_id)">Turn on</mat-slide-toggle>								
+								<ng-template #elseBlock>
+									<mat-slide-toggle (change)="activate_channels(marketplace_list.parent_id,$event,marketplace_list.channel_id)">Turn Off</mat-slide-toggle>
+								</ng-template>
+							</div>
+					        <div class="col-md-9 col-sm-8">
+					            <div class="mat-block">
+					               <p>{{marketplace_list.description}}</p>
+					               <div class="marketplaces-box"  *ngIf="marketplace_list.status;">
+					                  <ul>
+					                     <li>
+					                        If you are existing  {{marketplace_list.name}} store owner.
+											<div class="clear10"></div>
+											<button mat-raised-button class="btn-main"  (click)="authenticateMarketplaces(marketplace_list.parent_id,marketplace_list.channel_id)" type="button">I Know my {{marketplace_list.name}} authentication </button>
+					                     </li>
+					                     <li *ngIf="marketplace_list.parent_id !=30">
+					                        If you are new to  {{marketplace_list.name}}, please create your store from here
+					                        <div class="clear10"></div>
+					                        <button mat-raised-button class="mat-button btn-blue" type="button">Create a new store on  {{marketplace_list.name}} </button>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </div>
+					         </div>
+				      	</div>
+				   	</div>
+				</mat-card>
+				<div class="clear30"></div>
+				</div>
+				<!-- <mat-card>
+				   	<mat-card-title>FlipKart</mat-card-title>
+				   	<div class="box-body">
+				      	<div class="row">
+				         	<div class="col-md-3 col-sm-4"><img src="images/card.png" class="img-responsive" alt=""/></div>
+					         	<div class="col-md-9 col-sm-8">
+					            <div class="mat-block">
+					               <p>Flipkart India's leading online marketplace featuring best offers on products &amp; services offered by vendors across India. Shop online for mobiles, apparels etc.</p>
+					               <div class="marketplaces-box">
+					                  <ul>
+					                     <li>
+					                        If you are existing FlipKart store owner.
+					                        <div class="clear10"></div>
+					                        <button mat-raised-button class="mat-button btn-green">I Know my FlipKart authentication </button>
+					                     </li>
+					                     <li>
+					                        If you are new to FlipKart, please create your store from here
+					                        <div class="clear10"></div>
+					                        <button mat-raised-button class="mat-button btn-blue">Create a new store on FlipKart </button>
+					                     </li>
+					                  </ul>
+					               </div>
+					            </div>
+					         </div>
+				      	</div>
+				   	</div>
+				</mat-card> -->
+			</div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs">
+				<button type="submit" mat-raised-button class="btn-main">Continue</button>
+				<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div> 
+			<div class="clear"></div> 
+			<!-- ///////////////Buttons//// --> 
+    	</div>
+    	<div class="clear"></div>
+  	</section>
+</form>
+

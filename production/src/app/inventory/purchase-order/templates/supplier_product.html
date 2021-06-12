@@ -1,0 +1,53 @@
+<h2 md-dialog-title>Select Products
+	<div class="filter dialogFilter">
+	      
+        <!-- <button mat-icon-button mdTooltip="Reload" class="btn-main" (click)="reload('','id')"><mat-icon  class="icon-refresh"></mat-icon></button> -->
+
+        <mat-radio-group #productSpec="ngModel" name="productSpec" [(ngModel)]="product_spec" (change)="changeProductSpec()">
+			<mat-radio-button class="example-margin my-1" value="exclusive">Exclusive Products</mat-radio-button>
+		  	<mat-radio-button class="example-margin my-1" value="all">All Products</mat-radio-button>
+		</mat-radio-group>
+
+      	<div class="search">
+          <mat-icon  class="icon-search"></mat-icon>
+          <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="reload(search.value,sortBy)">
+      	</div>
+      	<div class="clear"></div>
+	</div>
+</h2>
+<hr>
+<mat-dialog-content style="min-width: 500px;">
+
+	<div class="table-list">
+  		<table>
+			<tr>
+				<th class="check-select">&nbsp;</th>
+				<th class="short" (click)="reload(search.value,'id')">ID<span [class]="(sortBy=='id')?sortClass:''"></span></th>
+				<th class="short" (click)="reload(search.value,'name')">Name<span [class]="(sortBy=='name')?sortClass:''"></span></th>
+				<th class="short" (click)="reload(search.value,'sku')">SKU<span [class]="(sortBy=='sku')?sortClass:''"></span></th>
+				<th class="short" (click)="reload(search.value,'default_price')">Default Price<span [class]="(sortBy=='default_price')?sortClass:''"></span></th>
+			</tr>
+			<tr [class.chec]="row.selected" *ngFor="let row of products_list">
+				<td>
+					<mat-checkbox name="row.selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+				</td>
+				<td>{{row.id}}</td>
+				<td>{{row.name}}</td>
+				<td>{{row.sku}}</td>
+				<td>{{row.default_price}}</td>  
+			</tr>
+			<tr *ngIf="products_list.length==0">
+			  	<td colspan="4" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+	    	
+
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="selectProduct()">Save</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

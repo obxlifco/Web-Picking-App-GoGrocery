@@ -1,0 +1,36 @@
+<div class="loginbox">
+  <div class="crossbtn"><a href="#"><span class="icon-cross_sml"></span></a></div>
+  <div class="image_panel" style="background-image:url(assets/images/loging_bg.jpg)"></div>
+  <div class="text_panel">
+      <div class="head">Login to Go grocery</div>
+      <div class="row">
+          <button type="button" class="facebookbtn" (click)="socialLogin('facebook')"><span><img src="assets/images/facebook.png"></span>Facebook</button>
+          <button type="button" class="google" (click)="socialLogin('google')"><span><img src="assets/images/google.png"></span>Google</button>
+      </div>
+      <div class="ortext">Or login with</div>
+      <div class="row">
+        <mat-form-field appearances="outline">
+            <mat-label>Simple placeholder</mat-label>
+            <input matInput placeholder="Simple placeholder">
+          </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Enter your password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+     </div>
+     <div class="row">
+         <div class="staysign"><mat-checkbox>Check me!</mat-checkbox></div>
+         <div class="forget_pass"><a href="javascript:void(0)">Forgot Password</a></div>
+     </div>
+     <div class="row">
+         <button class="signin_btn">SIGN IN</button>
+     </div>
+     <div class="row">
+        <div class="signuptext">Don’t have an account? <a href="#">Sign Up</a></div>
+    </div>
+  </div>
+</div>

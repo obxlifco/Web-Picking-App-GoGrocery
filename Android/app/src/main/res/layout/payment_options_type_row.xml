@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <RelativeLayout
+        android:id="@+id/rlPaymentType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:visibility="visible">
+
+        <RadioButton
+            android:id="@+id/rbPaymentType"
+            style="@style/MyRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/hind_medium"
+            android:paddingStart="8dp"
+            android:drawableStart="@drawable/custom_btn_radio"
+            android:button="@null"
+            android:text="@string/pay_option_credit_debit_card"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/hind_medium"
+            android:text="@string/pay_option_select"
+            android:textColor="#ED1C24"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="46dp"
+        android:text="* For verification, an amount of AED 1 will be charged. \n  The amount will be reversed automatically."
+        android:textColor="#ED1C24"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:visibility="gone" />
+</LinearLayout>

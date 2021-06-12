@@ -1,0 +1,142 @@
+<div class="cart_outer">
+    <div class="cartbox deleverybox address-form" #deliveryAddressForm id="scrollitem">
+        <div class="head" *ngIf='formmode!="edit"'>Add New Address</div>
+        <div class="head" *ngIf='formmode=="edit"'>Edit Address</div>
+         <form [formGroup]="addNewAddress" (ngSubmit) ="onAddNewAddressSubmit()"> 
+            <div class="add_addresswrap mob_add_address">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Name" formControlName="name">
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-12 col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput placeholder="Last Name" formControlName="last_name">
+                        </mat-form-field>
+                    </div> -->
+                    <div class="col-12 col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apartment Name, House No and Street Name</mat-label>
+                            <input matInput placeholder="Apartment Name, House No and Street Name" formControlName="apartment_name">
+                        </mat-form-field>
+                    </div>
+                 </div>
+                 <div class="row">
+                    <!-- <div class="col-12 col-md-6">
+                        <ng-select class="custom" [items]="countryList"
+                            formControlName="country"
+                            name="country"
+                            bindLabel="country_name" bindValue="id"
+                            placeholder="Select country"
+                            required>
+                        </ng-select>
+                    </div> -->
+                    <div class="col-12 col-md-6">
+                        <ng-select class="custom" [items]="stateList"
+                            formControlName="state"
+                            name="state"
+                            bindLabel="state_name" bindValue="id"
+                            placeholder="Emirates" [(ngModel)]="state" required
+                            >
+                        </ng-select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Area</mat-label>
+                            <input matInput placeholder="Area" formControlName="area">
+                        </mat-form-field>
+                    </div>
+                 </div>
+                 <!-- <div class="row">
+                        <div class="col-12 col-md-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nearest Landmark</mat-label>
+                                <textarea matInput placeholder="Nearest Landmark" formControlName="nearest_landmark"></textarea>
+                            </mat-form-field>
+                        </div>
+                 </div> -->
+                 <!-- <div class="row">
+                    <div class="col-12 col-md-6">
+                        <ng-select class="custom" [items]="countryList"
+                            formControlName="country"
+                            name="country"
+                            bindLabel="country_name" bindValue="id"
+                            placeholder="Select country"
+                            required>
+                        </ng-select>
+                    </div>
+                        <div class="col-12 col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Emirates" formControlName="state">
+                                <mat-option *ngFor="let singleState of stateList" [value]="singleState['id']">{{singleState['state_name']}}</mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                    </div>
+                 </div> -->
+                 <!-- <div class="row">
+                        <div class="col-12 col-md-6">
+                            <mat-form-field appearance="outline">
+                                <input matInput placeholder="City" formControlName="city">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Pincode</mat-label>
+                                <input matInput placeholder="Pincode" formControlName="pincode">
+                            </mat-form-field>
+                        </div>
+                 </div> -->
+                 <!-- <div class="row">
+                        
+                        <div class="col-12 col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mobile No</mat-label>
+                                <input matInput placeholder="Mobile No" formControlName="mobile_no">
+                            </mat-form-field>
+                        </div>
+                 </div> -->
+                 <div class="row align-items-center mobmat_gap">
+
+                      <div class="col-1 text-center">
+                        
+                          <mat-label><span style="color: #8a8585;">{{countryCode}}</span></mat-label>
+                         
+                      </div>
+                      <div class="col-4 col-md-5">
+                        <mat-form-field appearance="outline">
+                           <mat-label>Carrier Code:</mat-label>
+                        <mat-select name="carrier_code" formControlName = "carrier_code">
+                          <mat-option *ngFor="let code of carrierCode" [value]="code">{{code}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </div>
+                      <div class="col-6 col-md-6">
+                          <mat-form-field appearance="outline">
+                          <mat-label>Mobile No</mat-label>
+                          <input matInput placeholder="Mobile No" name="phone" formControlName="mobile_no" pattern="^[0-9]{7,7}$" required>
+                        </mat-form-field>
+                      </div>
+                 </div>
+
+                 <div class="row">
+                     <div class="col-12">
+                         <div class="checkrow">
+                                <mat-checkbox formControlName="is_default">Set this as my default delivery address</mat-checkbox>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-12">
+                         <div class="btnrow">
+                             <button class="basketbtn" (click)="cancelAddNewAddress()">CANCEL</button>
+                             <button type="submit" class="checkoutbtn styleCursor">SAVE ADDRESS</button>
+                        </div>
+                     </div>
+                 </div>
+           </div>
+        </form>
+    </div>
+</div>

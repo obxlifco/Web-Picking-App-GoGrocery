@@ -1,0 +1,49 @@
+<div class="pop_wrap">
+	<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+	<h4 mat-dialog-title>
+		Edit GRN
+    </h4>
+	<mat-dialog-content style="min-width: 500px;">
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body">
+			<div class="box productbox">
+				<div class="md-block">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>SKU ID </mat-label>
+						<input matInput placeholder="SKU ID" #sku="ngModel" name="sku" [(ngModel)]="formModel.sku" disabled>
+					</mat-form-field>
+		  		</div>
+
+		  		<div class="md-block">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Product Name </mat-label>
+						<input matInput placeholder="Product Name" #name="ngModel" name="name" [(ngModel)]="formModel.name" disabled>
+					</mat-form-field>
+		  		</div>
+
+		  		<div class="md-block">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Quantity </mat-label>
+						<input matInput placeholder="Quantity" #quantity="ngModel" name="quantity" [(ngModel)]="formModel.quantity" disabled>
+					</mat-form-field>
+		  		</div>
+
+				<div class="md-block">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Item Scan </mat-label>
+						<input matInput type="number" placeholder="Item Scan" #grn_quantity="ngModel" name="grn_quantity" [(ngModel)]="formModel.grn_quantity" (blur)="validateQuantity('GRN')">
+					</mat-form-field>
+		  		</div>
+
+		  		<div class="md-block">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Shortage </mat-label>
+						<input matInput type="number" placeholder="Shortage" #shortage="ngModel" name="shortage" [(ngModel)]="formModel.shortage" (blur)="validateQuantity('Shortage')">
+					</mat-form-field>
+		  		</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<hr>
+	<mat-dialog-actions layout="row" class="div-pop-bottom">
+		<button mat-raised-button class="btn-main" type="button" (click)="saveEditGRN()">Save</button>
+		<button mat-raised-button [mat-dialog-close]="true" class="btn-line" type="button">Cancel</button>
+	</mat-dialog-actions>
+</div>

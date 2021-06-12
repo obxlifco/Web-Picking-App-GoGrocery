@@ -1,0 +1,38 @@
+<h2 md-dialog-title>Received Products</h2>
+<hr>
+<mat-dialog-content style="min-width: 500px;">
+
+	<div class="table-list">
+  		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>SKU</th>
+				<th>PO Qty</th>
+				<th>Received Qty</th>
+				<th>Damaged Qty</th>
+				<th>Shortage Qty</th>
+			</tr>
+			<tr *ngFor="let row of products_list">
+				<td>{{row.product.id}}</td>
+				<td>{{row.product.name}}</td>
+				<td>{{row.product.sku}}</td>
+				<td>{{row.total_qty}}</td>  
+				<td>{{row.quantity}}</td>  
+				<td>{{row.damage}}</td>  
+				<td>{{row.shortage}}</td>  
+			</tr>
+			<tr *ngIf="products_list.length==0">
+			  	<td colspan="7" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+	    	
+
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

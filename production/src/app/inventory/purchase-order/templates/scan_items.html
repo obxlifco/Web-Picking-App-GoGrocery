@@ -1,0 +1,132 @@
+<h2 md-dialog-title>{{activityType}} Item Details
+	<div class="filter dialogFilter">
+	    <div class="search">
+          <mat-icon  class="icon-search"></mat-icon>
+          <input type="text"  placeholder="Scan Item" #search="ngModel" [(ngModel)]="search_text">
+      	</div>
+      	<div class="clear"></div>
+	</div>
+</h2>
+<hr>
+<mat-dialog-content style="min-width: 500px;">
+	<div class="table-list" *ngIf="activityType == 'Received'">
+  		<table>
+			<tr>
+				<th>Action</th>
+				<th class="short">Name</th>
+				<th class="short">SKU</th>
+				<th class="short">Quantity</th>
+				<th class="short">Expiry Date</th>
+				<th class="short">Batch No</th>
+				<th class="short">Rack Number</th>
+				<th class="short">Goods Condition</th>
+			</tr>
+			<tr [class.chec]="row.selected" *ngFor="let row of scanItemDetailsArr;let i = index">
+				<td>
+					<button type="button" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="scanItemDetailsArr.length == (i+1)" (click) = "addMoreBatch()" title="Add more Expiry Date or Batch No"><i class="icon-add"></i></button>
+					<button type="button" title="Delete" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="scanItemDetailsArr.length != (i+1)" (click) = "deleteBatchNo(row.product.id,i)"><i class="icon-delete"></i></button>
+				</td>
+				<td>{{row.product.name}}</td>
+				<td>{{row.product.sku}}</td>
+				<td><input type="number" #receivedQuantity="ngModel" name="receivedQuantity{{i}}" [(ngModel)]="row['quantity_'+i]" style="text-align: center;" min="0" validateMin="0"></td>
+				<td>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker" (focus)="picker.open()"  name="expiry_date_{{i}}" #expiry_date_  [(ngModel)]="row['expiry_date_'+i]" id="expiry_date_{{i}}">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+				</td>
+				<td><input type="text" #batchNo="ngModel" name="batchNo_{{i}}" [(ngModel)]="row['batchNo_'+i]" id="batchNo_{{i}}"></td>
+				<td><input type="text" #rackNo="ngModel" name="lotNo_{{i}}" [(ngModel)]="row['lotNo_'+i]" id ="lotNo_{{i}}"></td>  
+				<td>OK</td>		
+			</tr>
+			<tr *ngIf="scanItemDetailsArr.length==0">
+			  	<td colspan="7" align="center">No records found.</td>
+			</tr>
+			
+		</table>
+	</div>
+	    	
+	<div class="table-list" *ngIf="activityType == 'Damaged'">
+  		<table>
+			<tr>
+				<th>Action</th>
+				<th class="short">Name</th>
+				<th class="short">SKU</th>
+				<th class="short">Quantity</th>
+				<th class="short">Expiry Date</th>
+				<th class="short">Batch No</th>
+				<th class="short">Rack Number</th>
+				<th class="short">Goods Condition</th>
+			</tr>
+			<tr [class.chec]="row.selected" *ngFor="let row of scanItemDetailsArr;let i = index">
+				<td>
+					<button type="button" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="scanItemDetailsArr.length == (i+1)" (click) = "addMoreBatch()" title="Add more Expiry Date or Batch No"><i class="icon-add"></i></button>
+					<button type="button" title="Delete" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="scanItemDetailsArr.length != (i+1)" (click) = "deleteBatchNo(row.product.id,i)"><i class="icon-delete"></i></button>
+				</td>
+				<td>{{row.product.name}}</td>
+				<td>{{row.product.sku}}</td>
+				<td><input type="number" #receivedQuantity="ngModel" name="receivedQuantity{{row.id}}" [(ngModel)]="row.quantity" style="text-align: center;" min="0" validateMin="0"></td>
+				<td>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker" (focus)="picker.open()"  name="created_date" #created_date  [(ngModel)]="row.created_date" id="created_date{{i}}">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+				</td>
+				<td><input type="text" #batchNo="ngModel" name="batchNo_{{i}}" [(ngModel)]="row.batchNo" id="batchNo_{{i}}"></td>
+				<td><input type="text" #rackNo="ngModel" name="rackNo_{{i}}" [(ngModel)]="row.rackNo" id ="rackNo_{{i}}"></td>  
+				<td>OK</td>		
+			</tr>
+			<tr *ngIf="scanItemDetailsArr.length==0">
+			  	<td colspan="7" align="center">No records found.</td>
+			</tr>
+			
+		</table>
+	</div>
+
+	<div class="table-list" *ngIf="activityType == 'Shortage'">
+  		<table>
+			<tr>
+				
+				<th class="short">Name</th>
+				<th class="short">SKU</th>
+				<th class="short">Quantity</th>
+				<th class="short">Expiry Date</th>
+				<th class="short">Lot Number</th>
+				<th class="short">Rack Number</th>
+				<th class="short">Goods Condition</th>
+			</tr>
+			<tr [class.chec]="row.selected" *ngFor="let row of products_list;let i = index">
+				<td>
+					<button type="button" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="products_list.length == (i+1)" (click) = "addMoreBatch()" title="Add more Expiry Date or Batch No"><i class="icon-add"></i></button>
+					<button type="button" title="Delete" class="margin-auto20 btn-pink" mat-mini-fab *ngIf="products_list.length != (i+1)" (click) = "deleteBatchNo(row.product.id,i)"><i class="icon-delete"></i></button>
+				</td>
+				<td>{{row.product.name}}</td>
+				<td>{{row.product.sku}}</td>
+				<td><input type="number" #receivedQuantity="ngModel" name="receivedQuantity{{row.id}}" [(ngModel)]="row.quantity" style="text-align: center;" min="0" validateMin="0"></td>
+				<td>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker" (focus)="picker.open()"  name="created_date" #created_date  [(ngModel)]="row.created_date" id="created_date{{i}}">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+					</mat-form-field>
+				</td>
+				<td><input type="text" #batchNo="ngModel" name="batchNo_{{i}}" [(ngModel)]="row.batchNo" id="batchNo_{{i}}"></td>
+				<td><input type="text" #rackNo="ngModel" name="rackNo_{{i}}" [(ngModel)]="row.rackNo" id ="rackNo_{{i}}"></td>  
+				<td>OK</td>		
+			</tr>
+			<tr *ngIf="products_list.length==0">
+			  	<td colspan="7" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="applyChanges()">Apply</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+<form #PriceChange="ngForm" novalidate (ngSubmit)="PriceChange.valid && saveEditPrice(stock_price)">
+    <div class="pop_wrap">
+        <!-- <div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div> -->
+		<h4> Price Change </h4>
+        <mat-dialog-content style="min-width: 300px;">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" name="price" pattern="[0-9]*[.]?[0-9]+" #price="ngModel" [(ngModel)]="stock_price">
+                    <!-- <mat-error *ngIf="price.errors && price.required">
+                        This is a <strong>required</strong> field
+                    </mat-error> -->
+                    <mat-error *ngIf="price.errors && price.errors.pattern">
+                      Enter numeric values only
+                    </mat-error>
+              </mat-form-field>
+        </mat-dialog-content>
+		<mat-dialog-actions layout="row" class="div-pop-bottom">
+			<button mat-raised-button class="btn-main" type="submit">Save</button>
+            <button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+		</mat-dialog-actions>
+    </div>
+</form>

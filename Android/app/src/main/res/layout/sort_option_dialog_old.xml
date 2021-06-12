@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/sort_option"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tv1"
+            android:layout_marginTop="16dp"
+            android:background="@color/view_divider_clr" />
+
+        <RadioGroup
+            android:id="@+id/rgSortOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view1"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/rbPopularity"
+                style="@style/MyRadioButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/popularity"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <RadioButton
+                android:id="@+id/rbNewestFirst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/newest_first"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rbPriceHTL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/phtl"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rbPriceLTH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/plth"
+                android:textSize="16sp" />
+
+
+            <RadioButton
+                android:id="@+id/rbDiscountHTL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/dhtl"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <RadioButton
+                android:id="@+id/rbDiscountLTH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:text="@string/dlth"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/rgSortOption"
+            android:background="@color/view_divider_clr" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialogBtnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:fontFamily="@font/hind_semibold"
+                android:text="@string/cancel"
+                android:textColor="#ED1C24" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/view_divider_clr" />
+
+            <Button
+                android:id="@+id/dialogBtnApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:fontFamily="@font/hind_semibold"
+                android:text="@string/apply"
+                android:textColor="#ED1C24" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

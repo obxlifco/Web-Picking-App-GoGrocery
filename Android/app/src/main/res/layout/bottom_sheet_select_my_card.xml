@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/transparent"
+        android:paddingBottom="@dimen/_8sdp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingTop="6dp"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bottom_sheet_white_round_corner"
+            android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/nsView"
+                        android:layout_width="match_parent"
+
+
+                        android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_selectDeliveryAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                    </androidx.core.widget.NestedScrollView>
+                    <LinearLayout
+                        android:id="@+id/layout_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:padding="4dp"
+
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:src="@drawable/ic_plus">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/proxima_regular"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center|start"
+                            android:textStyle="bold"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:text="Add New Credit/Debit Card"
+                            android:textColor="#4C4C4C"
+
+                            android:textSize="16sp">
+
+                        </TextView>
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</layout>

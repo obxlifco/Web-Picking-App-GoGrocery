@@ -1,0 +1,117 @@
+<section class="right-part filter-pad addall_page">
+      <form #formId="ngForm" novalidate (ngSubmit)="formId.valid && addEdit(formId)">
+       <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+         <div class="topheading">
+            <h1>Credit Points Burn Setup
+               <div class="btn-header hidden-xs">
+                <button type="submit" mat-raised-button class="btn-main">Continue</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+               </div>
+               <div class="clear"></div>
+            </h1>
+         </div>
+         <div class="filter">
+            <div class="stap">
+               <ul *ngIf="add_edit=='add'">
+                  <li class="active"><div class="nom"></div>Discount Information</li>
+                  <li ><div class="nom"></div>Condition</li>
+               </ul>
+               <ul *ngIf="formModel.formId>0 && add_edit=='edit'">
+                  <li class="active"><a (click)="_globalService.setTab(tabIndex,'/credit_points_burn/edit/'+formModel.formId)" [routerLink]="['/credit_points_burn/edit/'+formModel.formId]"><div class="nom"></div>Discount Information</a></li>
+                  <li ><a (click)="_globalService.setTab(tabIndex,'/credit_points_burn/conditions/edit/'+formModel.formId)" [routerLink]="['/credit_points_burn/conditions/edit/'+formModel.formId]"><div class="nom"></div>Condition</a></li>
+               </ul>
+             <div class="clear"></div>
+            </div>
+         </div>	
+         <div class="clear"></div>
+         <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+                 
+          <div class="box">
+               <div class="fixed-width">
+                  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                  <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                 
+                     <div class="row">
+                        <div class="col-sm-4">
+                            <mat-form-field appearance="outline"  class="md-block">
+                              <mat-label>Name</mat-label>
+                              <input matInput placeholder="Name" required #name="ngModel"  name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+                              <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="name.errors && name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                               <mat-form-field appearance="outline"   class="md-block">
+                                 <mat-label>Description</mat-label>                                 
+                                 <input matInput placeholder="Description" required #loyalty_desc="ngModel"  name="loyalty_desc" [(ngModel)]="formModel.loyalty_desc" pattern="^(?!\s*$|\s).*$">
+                                 <mat-error *ngIf="loyalty_desc.errors && loyalty_desc.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                 <mat-error *ngIf="loyalty_desc.errors && loyalty_desc.errors.pattern"> White space is not allowed at beginning.</mat-error>                                                            
+                              </mat-form-field>
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline"  >
+                              <mat-label>Burn Type</mat-label>
+                              <mat-select required placeholder="Burn Type" #redeem_amount_type="ngModel" name="redeem_amount_type" [(ngModel)]="formModel.redeem_amount_type">
+                                 <mat-option  value="percentage">Percentage</mat-option>
+                                 <mat-option value="fixed">Fixed</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="redeem_amount_type?.errors && redeem_amount_type?.errors"> This is a <strong>required</strong> field </mat-error>
+                              </mat-form-field>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        
+                        <div class="col-sm-4">
+                           <div class="mandatory-select">
+                              <mat-form-field appearance="outline"  >
+                              <mat-label>Burn type Of</mat-label>
+                              <mat-select required placeholder="Burn type Of" #redeem_type="ngModel" name="redeem_type" [(ngModel)]="formModel.redeem_type">
+                                 <mat-option  value="order">Order Amount</mat-option>
+                                 <mat-option value="loyalty">Loyalty Point</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="redeem_type?.errors && redeem_type?.errors"> This is a <strong>required</strong> field </mat-error>
+                              </mat-form-field>
+                           </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field appearance="outline"   class="md-block">
+                              <mat-label>Amount Burn</mat-label>
+                              <input matInput placeholder="Amount Burn"  required #points="ngModel"  name="points" [(ngModel)]="formModel.points" pattern="^\d*\.?\d*$">
+                              <mat-error *ngIf="points.errors && points.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="points.errors && points.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>                                                                                      
+                           </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                           <div class="custom-checkbox" style="padding-top:20px">
+                              <mat-checkbox name="is_redeem_limited"  [(ngModel)]="formModel.is_redeem_limited" id="is_redeem_limited">Set max burn point</mat-checkbox>
+                           </div>
+                        </div>
+                        <div class="col-sm-4" *ngIf="formModel.is_redeem_limited">
+                            <mat-form-field appearance="outline"   class="md-block">
+                              <mat-label>Redeem Upto</mat-label>
+                              <input matInput placeholder="Redeem Upto"  required #redeem_limit="ngModel"  name="redeem_limit" [(ngModel)]="formModel.redeem_limit" pattern="^\d*\.?\d*$">
+                              <mat-error *ngIf="redeem_limit.errors && redeem_limit.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="redeem_limit.errors && redeem_limit.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>                                                                                      
+                           </mat-form-field>
+                        </div>  
+                     </div>
+               </div>
+             <!-- ///////////////Buttons//// -->
+             <div class="btn-header hidden-xs">
+                <button type="submit" mat-raised-button class="btn-main">Continue</button>
+                <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+             </div> 
+             <div class="clear"></div> 
+             <!-- ///////////////Buttons//// --> 
+          </div>
+            <div class="clear"></div>	
+       </div>
+    </form>	
+ </section>
+ 
+ 

@@ -1,0 +1,43 @@
+<section *ngIf="showConformationBox==0">
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+          <div class="selectstore">
+              
+              <div class="backbtn"><a href="javascript:void(0)" (click)="close_dialog()"><span><mat-icon class="back_icon">arrow_back</mat-icon></span></a></div>
+  
+              <div class="top_image">
+                  <img src=".\assets\images\Group16145.png" width="100%" alt="">
+              </div>
+              <div class="head">Select your store to start shopping</div>
+              <div class="selectpopbody" *ngIf = "warehouseList && warehouseList.length > 0">
+                  <div class="storeblog" *ngFor="let warehouse of warehouseList">
+                      <!-- <div class="storepic" style="background-image:url(warehouse_logo+warehouse.warehouse_logo)" (click)="onWareHouseSelect(warehouse['id'],warehouse['name'])"></div> -->
+                      <div (click)="onWareHouseSelect(warehouse['id'],warehouse['name'])">
+                          <img class="storepic" [src]="warehouse_logo_url+warehouse.warehouse_logo" alt="" >
+                          <div class="storename">{{warehouse['name']}}</div>
+                          <div class="timings">
+                              8AM - 10PM
+                          </div>
+                          <div class="store_status">
+                              <mat-icon class="status_icon">fiber_manual_record
+                              </mat-icon>Open
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="showConformationBox==1">
+      <div class="pop_upbg">
+          <div class="popup_wrap">
+              <div class="selectstore" style="height: 200px;padding: 10px;">
+                  <div class="head">If you change store , your cart will be empty.</div>
+                  <div class="head" style="color: red">Do you really want to change store ?</div>
+                  <button class="add_tocard" style="width: 22%; float: right;" (click)="isWarehouseChange(1)">Yes</button>
+                  <button class="add_tocard" style="width: 22%; background-color: red" (click)="isWarehouseChange(0)">No</button>
+              </div>
+          </div>
+      </div>
+  </section>

@@ -1,0 +1,25 @@
+<section class="topfix">
+	<!-- <nav mat-tab-nav-bar >
+		<a mat-tab-link
+		   *ngFor="let link of navLinks; let i = index"
+		   [routerLink]="link.url"
+		   [active]="globalService.activeTabIndex == i"
+		   (click)="globalService.activeTabIndex = i">
+		  {{link.label}}
+		  <div class="close-icon" [hidden]="i==0">
+		  	<a href="javascript:void(0)" (click)="globalService.deleteTab(i,link.parent)" class="icon-close"></a>
+		  </div>
+		</a>
+	</nav>
+ -->
+	<mat-tab-group [(selectedIndex)]="globalService.activeTabIndex" (selectedTabChange) = "setTabData($event)" >
+		<mat-tab *ngFor="let link of navLinks; let i = index">
+			<ng-template mat-tab-label>
+				<a href="javascript:void(0)" class='page_tab_link'>
+					{{link.label}}
+				</a>
+				<mat-icon class="icon-close" *ngIf="i>0" (click)="globalService.deleteTab(i,link.parent)"></mat-icon>
+			</ng-template>
+		</mat-tab>
+	</mat-tab-group>
+</section>

@@ -1,0 +1,56 @@
+.topserchbox .serch_dropbox{
+    display:none;
+}
+.main_nav .navsec {
+    flex-grow: 1;
+}
+.topserchbox {
+    width: 320px;
+}
+.main_nav .wishlist {
+    width: 160px;
+}
+.serch_dropbox {
+    width: 425px;
+}
+.wish-bagcount .wish-count_rount {
+    width: 21px;
+    height: 20px;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 50%;                                                                             
+    -moz-border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    right: -1px;
+    background-color: #DB4D65;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* css written by brij start */
+
+.inerblog_row .countingbox .item_name.cur_pointer{
+    cursor: pointer;
+}
+
+/* css written by brij  end */
+.right_nav ul li a:hover {
+    opacity: 0.7;
+}
+.no_hover:hover{opacity: 1 !important;}
+span.styleCursor.change_store:hover {
+    opacity: 0.7 !important;
+}
+.storename.styleCursor:hover {
+    opacity: 0.7;
+}
+.main_nav .navsec ul li a .megamenu_wrap .cus_col ul li:first-child:hover {
+    opacity: 0.8;
+}
+.main_nav .navsec ul li a .megamenu_wrap .cus_col ul li a:hover {
+    opacity: 0.7;
+}
+.hovereffect:hover{opacity: 0.7;}

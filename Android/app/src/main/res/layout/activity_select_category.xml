@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_preferences"
+        tools:context=".view.SelectCategory">
+    <!--    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">-->
+            <RelativeLayout
+                android:id="@+id/rlHeader"
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="false"
+android:background="@color/transparent"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/transparent"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:background="@color/transparent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivBack"
+                                android:layout_width="@dimen/back_btn_width"
+                                android:layout_height="@dimen/back_btn_height"
+
+                                android:layout_centerVertical="true"
+                                android:visibility="visible"
+                                android:padding="4dp"
+                                android:tint="@color/grey_new"
+                                android:src="@drawable/ic_back"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#202020"
+                                android:textSize="@dimen/_15sdp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/proxima_regular"
+                                android:layout_centerVertical="true"
+                                android:text="Gogrocery"
+                                android:visibility="gone"
+                                android:gravity="center"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:padding="6dp"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/toolbar_logo_icon">
+
+                            </ImageView>
+
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+            </RelativeLayout>
+     <!--   </com.google.android.material.card.MaterialCardView>-->
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl2Type"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/rlHeader"
+android:background="@drawable/round_corner_bg_light_green"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/ivPinType"
+                android:layout_width="18dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+              android:tint="@color/white"
+                android:src="@drawable/ic_location_icon" />
+
+            <TextView
+android:id="@+id/tv_deliveryTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_toStartOf="@+id/ivEditType"
+                android:layout_toEndOf="@+id/ivPinType"
+                android:ellipsize="end"
+                android:textDirection="ltr"
+                android:text="Show Store delivering to : \nAl mua tower al khalidis Street 23"
+                android:maxLines="2"
+
+                android:fontFamily="@font/proxima_bold"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/ivEditType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_border"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Change"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="16dp"
+
+              />
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl2Type"
+            android:src="@drawable/ic_leaf"
+            android:id="@+id/img"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+          />
+
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="12dp"
+            android:textColor="#748a9d"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:visibility="visible"
+            android:textAlignment="center"
+            android:fontFamily="@font/proxima_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img"
+
+
+            android:text="@string/select_your_category_to_start_n_shopping" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/txt1"
+            android:id="@+id/rvStoreType"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llStart"/>
+        <LinearLayout
+            android:id="@+id/llStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
+            android:padding="16dp"
+            android:visibility="gone"
+            android:background="@drawable/green_round_side"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_right_arrow_white"/>
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/proxima_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:ellipsize="end"
+
+                android:textAlignment="center"
+                android:text="@string/start_shopping"
+                android:layout_marginStart="@dimen/_5sdp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

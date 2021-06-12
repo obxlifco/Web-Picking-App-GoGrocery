@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+
+        <include
+            android:id="@+id/app_bar_include"
+            layout="@layout/app_bar_main_new"
+       />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/nav_header_height"
+                    android:background="@color/green_new"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                    <RelativeLayout
+                        android:id="@+id/navHeaderProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginEnd="8dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/dummy_circle_profile" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@+id/ivProfile"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:layout_centerVertical="true">
+
+                            <TextView
+                                android:id="@+id/tvUsername"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:textAlignment="viewStart"
+                                android:fontFamily="@font/proxima_regular"
+                                android:maxLines="1"
+                                android:text="@string/welcome"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:layout_marginStart="@dimen/_10sdp"/>
+
+                            <TextView
+                                android:visibility="visible"
+                                android:id="@+id/tvNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:ellipsize="end"
+                                android:textAlignment="viewStart"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/hind"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+
+                        <ImageView
+                            android:id="@+id/ivRight"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+
+                            android:layout_marginEnd="8dp"
+                            android:padding="8dp"
+                            android:tint="@color/brown_new"
+                            android:visibility="gone"
+                            tools:ignore="ContentDescription" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <ScrollView
+                    android:id="@+id/nsvSideMenu"
+                    android:layout_width="match_parent"
+                    android:scrollbarSize="0dp"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/_10sdp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvSideMenus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            tools:listitem="@layout/side_menus_row" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlShopCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_pin_category"
+                                android:tint="#515151"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/hind"
+                                android:text="@string/side_menu_sbc"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rlChangeStore"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv006"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_store"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv006"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_change_store"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlHome"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv06"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_location_icon"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv06"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_home"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlMyOrders"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv1"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_my_orders"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv1"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_mo"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rlProductSubstitute"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv10"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+
+                                android:src="@drawable/ic_substitute"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv10"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/product_substitutions"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:id="@+id/rlMyCart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv2"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_cart"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv2"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_mc"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlMyWishlist"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv3"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/menu_fav"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv3"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_mf"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rlMyAccount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv4"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_my_account"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv4"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_ma"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlAboutUS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv01"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_about"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv01"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_au"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlContactUs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv0"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_phone"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv0"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_cs"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlSettings"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv001"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/menu_settings"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv001"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_set"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv002"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_menu_logout"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv002"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/logout"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rlLogin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/iv7"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_menu_logout"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv7"
+                                android:fontFamily="@font/hind"
+                                android:text="@string/login"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/gray_light" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/proxima_regular"
+                            android:text="@string/app_name"
+                            android:textAllCaps="true"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/green_dark_new"
+                            android:textSize="16sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlLanguage"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv02l"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/language"
+                                android:tint="@color/green_dark_new"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv02l"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_language"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlOurVisionPurpose"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv02"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_target"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv02"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_ovp"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlPrivacyPolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv03"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_privacy_policy"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv03"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_pp"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlTermAndCondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv04"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_term_and_condition"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv04"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_tc"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlQulaityStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv05"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/ic_standard"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_toEndOf="@+id/iv05"
+                                android:fontFamily="@font/proxima_regular"
+                                android:text="@string/side_menu_qs"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rlNotificationPreferences"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/iv5"
+                                android:layout_width="16dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/notification_pref"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/iv5"
+                                android:fontFamily="@font/hind"
+                                android:text="@string/side_menu_noti"
+                                android:textColor="@color/side_menu_rv_clr"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+                <FrameLayout
+                    android:id="@+id/flSubmenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

@@ -1,0 +1,18 @@
+<div class="box">
+    <div class="heading">Order Activity</div>
+    <div class="activity_feedbox">
+        <div class="cusrow add" *ngFor="let activity of order_activity">
+            <div class="conround"><span class="icon-reports"></span></div>
+            <div class="textsec">
+                <p>
+                    {{activity.activity_comments}}
+                </p>
+                <span>{{_globalService.convertDate(activity.activity_date, 'dd-MM-yyyy h:mm a')}}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!-- <div class="cusrow add">
+        <button class="showmorebtn">Show more... </button>
+    </div> -->
+</div>

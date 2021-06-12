@@ -1,0 +1,194 @@
+<section class="right-part filter-pad grn_page">
+	<form #grnForm="ngForm" novalidate autocomplete="off">
+		<input type="hidden" name="shipment_id" [(ngModel)]="formModel.shipment_id">
+		<input type="hidden" name="picklist_id" [(ngModel)]="formModel.picklist_id">
+		<div class="topheading">
+			<h1>Picking
+				<div class="btn-header shipment-top-btn">
+					<button mat-raised-button [disabled]="isPickingDone" class="btn-main" type="button" (click)="grnContinue(grnForm)">Continue</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<button mat-raised-button class="btn-pink printbtn" type="button" (click)="printPicklist()"><mat-icon class="icon-printer"></mat-icon></button>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul>
+					<li class="active">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/grn/'+formModel.shipment_id)" [routerLink]="['/shipment/grn/'+formModel.shipment_id]"><div class="nom"></div>Picking</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/invoice/'+formModel.shipment_id)" [routerLink]="['/shipment/invoice/'+formModel.shipment_id]"><div class="nom"></div>Invoice</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/delivery_planner/'+formModel.shipment_id)" [routerLink]="['/shipment/delivery_planner/'+formModel.shipment_id]"><div class="nom"></div>Delivery Planner</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/manifest/'+formModel.shipment_id)" [routerLink]="['/shipment/manifest/'+formModel.shipment_id]"><div class="nom"></div>Delivery Note</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="body-part goodsreceived">
+			<!-- table repid group each order and slot wise block-->
+			<ng-container *ngFor="let orderData of formModel.orderData; let slot_count=index;">
+				<div class="tablegroup">
+					<div class="tabletopsec">
+						<div class="datesec">
+							<div class="dateblock">
+								<div class="icn">
+									<span class="icon-calendar"></span>
+								</div>
+								<p>Dlvry Dt:<span>{{orderData.selected_order.order_data.display_time_slot_date}}</span></p>
+							</div>
+
+							<div class="dateblock bkgrnd-trans" style="width: 230px;">
+							
+								<p>Mob: <span>{{orderData.selected_order.order_data.billing_phone}}</span>
+								</p>
+								<p  style="background-color: yellow; padding: 2px; width: 100%;text-align: left;" *ngIf="orderData.selected_order.order_data.custom_msg">{{orderData.selected_order.order_data.custom_msg}}
+								</p>
+							</div>
+
+							
+
+							<!-- <div class="dateblock">
+								<div class="icn">
+									<span class="icon-clock1"></span>
+								</div>
+								<p>Slot:<span>{{ orderData.time_slot_id }}</span></p>
+							</div>-->
+						</div>
+						<div class="shipment_msg_grn">
+							<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+							<div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+						</div>
+						<div class="tabledrop">
+							<mat-form-field appearance="outline">
+								<mat-select #custom_order_id="ngModel" name="order_list_{{slot_count}}"  [(ngModel)]="orderData.selected_order.order">
+									<mat-option *ngFor="let orderList of orderData.selected_order_list" (click)="getGrnOrderDetails(orderList.order_id, orderData.time_slot_id)" [value]="orderList.order_id">
+										<span [class]="(orderList.shipment_status=='Created' || orderList.shipment_status=='Picking')?'ordGraytick':'ordGraytick ordGrntick'">
+											{{orderList.custom_order_id}}
+										</span>
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="supplier_detailsacco_wrap picking">
+						<mat-accordion>
+						  <mat-expansion-panel [expanded]="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title (click)="$event.stopPropagation();">
+									<ul class="expension">
+										<li>
+											<span [class]="(orderData.selected_order.grn_finish=='n')?'graytick':'graytick grntick'"></span>
+										</li>
+									  <li>Order No:<span>{{orderData.selected_order.order_data.custom_order_id}}</span>,<span>{{orderData.selected_order.order_data.display_time_slot_date}}</span></li>
+									  <li (click) = "openPopCrates(orderData.selected_order.order)">No. of. Crates:<span>{{orderData.selected_order.no_of_crates}}</span></li>
+									</ul>
+								</mat-panel-title>
+								<div class="serch_and_filtersec" (click)="$event.stopPropagation();">
+									<div class="serch_sec" (click)="$event.stopPropagation();" (keydown)="handleSpacebar($event)">
+										<a href="javascript:"><span class="icon-search1" (click) ="searchPickedProducts(orderData.selected_order.order,orderData.time_slot_id)"></span></a>
+										<input placeholder="Scan Barcode" type="text" #scan_item="ngModel" name="scan_item_{{slot_count}}" [(ngModel)]="orderData.scan_item" (keyup.enter)="get_order_products_info(orderData.selected_order.order,orderData.scan_item,orderData.selected_order.shipment_status)">
+									</div>
+									<div class="serch_sec" (click)="$event.stopPropagation();" (keydown)="handleSpacebar($event)">
+										<a href="javascript:"><span class="icon-search1"></span></a>
+										<input placeholder="Scan Crate" type="text" #scan_crate="ngModel" name="scan_crate_{{slot_count}}" [(ngModel)]="orderData.scan_crate" (keyup.enter)="add_crates(orderData.selected_order.order, orderData.scan_crate, orderData.selected_order.shipment_status);">
+									</div>
+								</div>
+								<div class="cus_matopen"><span class="icon-addsvg"></span></div>
+								<div class="cus_matoclose"><span class="icon-minus"></span></div>
+							</mat-expansion-panel-header>
+							<div class="table-list product_price">
+								<table class="product_warehouse">
+									<tr>
+										<th width="10%">Item Description</th>
+										<th align="left" width="4%">Item Scan</th>
+										<th align="left" width="4%">Shortage</th>
+										<th align="left" width="4%">Selling Price</th>
+										<th align="left" width="4%">MRP</th>
+										<th align="left" width="4%">Net Price</th>
+									</tr>
+									<tr *ngFor="let orderProduct of orderData.selected_order.order_data.shipment_order_product; let index=index;" [ngClass]="orderProduct.picked_item_class">
+										<td align="left" valign="middle">
+											<div class='grn-image'>
+												<img *ngIf="orderProduct.order_product_details.product_image" [src]="img_base + orderProduct.order_product_details.product_image">
+											</div>
+											<div class='grn-product'>
+												<p class="proid">
+													{{orderProduct.order_product_details.product_sku}}
+													<!-- <a title="Substitute Product" *ngIf="orderProduct.order_product_details.is_sub_prod_exist=='Y' && orderProduct.order_product_details.substitute_product_id==0 && orderProduct.shortage>0 && !orderProduct.grn_quantity" href="javascript:void(0);" title='Substitute Product' class="editpencil toolTip" (click)="add_grn_substitude_product(orderData.selected_order.order,orderProduct.order_product_details.product_id, orderData.time_slot_id, orderProduct.shortage);">
+														<span class="icon-edit"></span>
+													</a> -->
+													<a title="Add Substitute Product" *ngIf="orderProduct.order_product_details.substitute_product_id==0 && orderProduct.shortage>0 && !orderProduct.grn_quantity" href="javascript:void(0);" title='Substitute Product' class="editpencil toolTip" (click)="add_grn_substitude_product(orderData.selected_order.order,orderProduct.order_product_details.product_id, orderData.time_slot_id, orderProduct.shortage);">
+														<span class="icon-edit"></span>
+													</a>
+												</p>
+												<p><span>Barcode :</span> {{orderProduct.order_product_details.product_ean}}</p>
+												<p><span>{{orderProduct.order_product_details.product_name}}</span></p>
+												<p *ngIf='orderProduct.order_product_details.sub_prod_sku'><span>Substitute SKU :</span> {{orderProduct.order_product_details.sub_prod_sku}}</p>
+												<p>{{orderProduct.order_product_details.uom_name}}</p>
+												<p class="proid"><span>Ordered Qty :</span> {{orderProduct.quantity}}</p>
+												<p class="proid" *ngIf="orderProduct.order_product_details.custom_field_value != ''"><span> {{orderProduct.order_product_details.custom_field_name}}:</span> {{orderProduct.order_product_details.custom_field_value}}</p>
+											</div>
+										</td>
+										<td align="left" data-th="Item Scan">
+											<mat-form-field appearance="outline">
+											  <input matInput type="number" name="grn_quantityc_{{slot_count}}_{{index}}" pattern="[0-9]+" #grn_quantity="ngModel" [(ngModel)]="orderProduct.grn_quantity" (blur)="changeQuantity(orderData.selected_order.order,orderProduct.order_product, orderProduct.grn_quantity,orderData.time_slot_id,'GRN')">
+												<mat-error *ngIf="grn_quantity.errors && grn_quantity.errors.pattern">
+													Enter numeric values only
+												</mat-error>
+											</mat-form-field>
+											<!-- <a href="javascript:void(0);" title='Edit GRN' class="editpencil toolTip" (click)="edit_grn_pop(orderData.selected_order.order,orderProduct.order_product_details.product_id, orderData.time_slot_id);">
+												<span class="icon-edit"></span>
+											</a> -->
+										</td>
+										<td align="left" data-th="Shortage">
+											<mat-form-field appearance="outline">
+											  <input class='short-red' matInput type="number" name="shortage_{{slot_count}}_{{index}}" pattern="[0-9]+" #shortage="ngModel" [(ngModel)]="orderProduct.shortage" (blur)="changeQuantity(orderData.selected_order.order,orderProduct.order_product, orderProduct.shortage, orderData.time_slot_id,'Shortage')">
+												<mat-error *ngIf="shortage.errors && shortage.errors.pattern">
+													Enter numeric values only
+												</mat-error>
+											</mat-form-field>
+										</td>
+										<td align="left"  data-th="Selling Price">
+											{{orderProduct.order_product_details.selling_price|number : '.2-2'}}
+											<a *ngIf="orderData.selected_order.shipment_status=='Picking'" href="javascript:void(0);" title='Change Price' class="editpencil toolTip" (click)="edit_price_pop(orderData.selected_order.order,orderProduct.order_product_details.product_id, orderData.time_slot_id);">
+												<span class="icon-edit"></span>
+											</a>
+										</td>
+										<td align="left"  data-th="MRP">
+											{{orderProduct.order_product_details.mrp|number : '.2-2'}}
+										</td>
+										<td align="left"  data-th="Net Price">
+											{{orderProduct.grn_quantity ?(orderProduct.grn_quantity*orderProduct.order_product_details.selling_price|number : '.2-2') :''}}
+										</td>
+									</tr>
+								</table>
+							</div>
+						  </mat-expansion-panel>
+						</mat-accordion>
+					</div>
+					<div class="save_draftbtnsec">
+						<button type="button" class="btn-line-pink mat-raised-button" (click)="grn_save_as_draft(orderData.selected_order.order)">Save As Draft</button>
+						<button type="button" class="btn-pink mat-raised-button" [disabled]="(orderData.selected_order.grn_finish=='n')?'disabled':''" (click)="grn_complete(orderData.selected_order.order)">Picking Complete</button>
+					</div>
+				</div>
+			</ng-container>
+			<!-- table repid group end each order and slot wise block-->
+			<div class="clear"></div>
+			<div id="printsection" style="display: none" [innerHTML]="formModel.printsection | safeHtml"></div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs btn-footer">
+				<button mat-raised-button [disabled]="isPickingDone" class="btn-main" type="button" (click)="grnContinue(grnForm)">Continue</button>
+				<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+			<!-- ///////////////Buttons//// -->
+			<div class="clear"></div>
+		</div>
+	</form>
+</section>

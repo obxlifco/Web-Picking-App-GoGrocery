@@ -1,0 +1,311 @@
+ <section class="right-part filter-pad inner_listing">
+    <div class="topheading">
+      <h1>Manage Purchase Orders
+        <!-- <div class="btn-header hidden-xs">
+
+        <button mat-raised-button class="btn-main" (click)="globalService.addTab('addpurchaseorder','/purchase_order/add','Add Purchase Order',parentId);globalService.navigateToUrl('/purchase_order/add');"  *ngIf="permission.add=='Y' && show_btn.add">+ Generate Purchase Order</button> -->
+        <button class="addpinkbtn" (click)="globalService.addTab('addpurchaseorder','/purchase_order/add','Add Purchase Order',parentId);globalService.navigateToUrl('/purchase_order/add');"  *ngIf="permission.add=='Y' && show_btn.add"><span
+            class="icon-add"></span></button>
+        <div class="clear"></div>
+      </h1>
+    </div>
+    <div class="innertab_sec">
+      <div class="tabhedouter">
+      </div>
+      <div class="serch_and_filtersec">
+        <div class="serch_sec">
+          <a href="javascript:void(0)"><span class="icon-search1"></span></a>
+          <input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(1,1,'',filter,search.value)">
+        </div>
+        <div class="filter_section">
+          <button class="button" (click)="FiltertoggleCheck($event)"><span class="icon-filter"></span></button>
+          <button class="button"><span class="icon-columns" (click)="loadColumnLayout()"></span></button>
+          <button class="button" [matMenuTriggerFor]="tools"><span class="icon-menu"></span></button>
+          <mat-menu #tools="matMenu" xPosition="before" [overlapTrigger]="false">
+            <!-- <button mat-menu-item (click)="openImportBox(childData.tablink)" *ngIf="permission.import_field=='Y' && childData.is_import=='Y'">
+              <mat-icon class="icon-import"></mat-icon> Import
+            </button>
+            <button mat-menu-item *ngIf="permission.export=='Y' && childData.is_export=='Y'" (click)="OpenExportPopUp()">
+              <mat-icon class="icon-import"></mat-icon> Export
+            </button> -->
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter ls"  style="display:none">
+          <button mat-icon-button [matMenuTriggerFor]="columns" mdTooltip="Show Columns"  class="btn-pink-active"><mat-icon  class="icon-columns"></mat-icon></button>
+              <mat-menu #columns="matMenu" multiple [overlapTrigger]="false" prevent-close>
+                 <mat-list-item (click)="$event.stopPropagation()" *ngFor="let col of cols"><mat-checkbox id="{{col.field+col.child}}" aria-label="Checkbox 1" [(ngModel)]="col.show" (change)="updateGrid(0)">{{col.title}}</mat-checkbox></mat-list-item>
+                <button mat-raised-button class="btn-pink" (click)="updateGrid(1)">Set Default</button>
+              </mat-menu>
+
+          <button mat-icon-button [matMenuTriggerFor]="filterMenu" class="btn-pink-active" mdTooltip="Filter"><mat-icon  class="icon-filter-button"></mat-icon></button>
+            <mat-menu #filterMenu="matMenu" xPosition="before" >
+              <button mat-menu-item class="pink-ripple"  (click)="generateGrid(0,1,'','',search.value)">All</button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','Received Full',search.value)">Received Full</button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','Received Partial',search.value)">Received Partial </button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','GRN Pending',search.value)">GRN Pending </button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','Cancel',search.value)">Cancel </button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','Shipped',search.value)">Shipped </button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','PO Sent',search.value)">PO Sent </button>
+              <button mat-menu-item (click)="generateGrid(0,1,'','Draft',search.value)">Draft </button>
+            </mat-menu>
+                
+            <button mat-icon-button mdTooltip="Reload" class="btn-pink-active" (click)="generateGrid(1,'','','','')"><mat-icon  class="icon-refresh"></mat-icon></button>
+
+            <button mat-icon-button mdTooltip="Add" class="btn-main btn-add-resp visible-xs pull-left" (click)="globalService.addTab('addpurchaseorder','/purchase_order/add','Add Purchase Order',parentId);globalService.navigateToUrl('/purchase_order/add');"  *ngIf="permission.add=='Y' && show_btn.add" ><mat-icon  class="icon-add"></mat-icon></button>
+
+           <!--  <button mat-icon-button mdTooltip="Add" class="btn-main btn-add-resp visible-xs pull-left" *ngIf="permission.add=='N' && show_btn.add" (click)="dialogsService.alert('Permission Error', 'You have no permission to add!')"><mat-icon  class="icon-add"></mat-icon></button> -->
+
+          <div class="search">
+              <mat-icon  class="icon-search"></mat-icon>
+              <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(1,1,'',filter,search.value)">
+              <!-- <div class="search-add"><button mat-icon-button mdTooltip="Advance Search"  class="pink-ripple"><mat-icon  class="icon-down-arrow"></mat-icon></button></div> -->
+          </div>
+          <!-- <mat-slide-toggle  aria-labelledby labelPosition="before">Show Variant Products</mat-slide-toggle> -->
+          <div class="clear"></div>
+    </div>
+  <div class="action-box">
+    <label> {{bulk_ids.length}} Selected  (out of all {{config.currentPageCount}}) </label>
+    <button mat-button *ngIf="bulk_ids.length==1 && permission.view=='Y'" (click)="globalService.addTab('viewpurchaseorder','/purchase_order/view/'+individualRow.id+'','View Purchase Order',parentId);globalService.navigateToUrl('/purchase_order/view/'+individualRow.id+'');"><mat-icon  class="icon-search"></mat-icon>View</button>
+    <!-- ///////////Edit////////////// -->
+    <button mat-button *ngIf="bulk_ids.length==1 && permission.edit=='Y' && show_btn.edit && (individualRow.status=='GRN Pending' || individualRow.status=='Received Partial')" (click)="globalService.addTab('purchaseordergrn','/purchase_order/grn/'+individualRow.id+'','Purchase Order GRN',parentId);globalService.navigateToUrl('/purchase_order/grn/'+individualRow.id+'');"><mat-icon  class="icon-edit"></mat-icon>{{individualRow.status=='Received Partial' ? 'Edit GRN' : 'Start GRN'}}</button>
+
+   <!--  <button mat-button *ngIf="bulk_ids.length==1 && permission.edit=='N' && show_btn.edit" (click)="dialogsService.alert('Permission Error', 'You have no permission to edit!')"><mat-icon  class="icon-edit"></mat-icon>Edit GRN</button> -->
+
+    <button *ngIf="bulk_ids.length==1 && permission.block=='Y' && (individualRow.status=='Draft' || individualRow.status=='Shipped') && isManager!='Suppliers'" mat-button [matMenuTriggerFor]="changeStatus"><mat-icon  class="icon-fast-delivery"></mat-icon>Change Status</button>
+
+    <button *ngIf="bulk_ids.length==1 && permission.block=='Y' && individualRow.status=='PO Sent' && (isManager=='Suppliers' || isSuperAdmin == 'Y')" mat-button [matMenuTriggerFor]="changeStatus"><mat-icon  class="icon-fast-delivery"></mat-icon>Change Status</button>
+
+    <mat-menu #changeStatus="matMenu">
+      <button mat-menu-item *ngIf="individualRow.status=='Draft'" (click)="changePoStatus(individualRow.id,'PO Sent')">PO Sent</button>
+      <button mat-menu-item *ngIf="individualRow.status=='PO Sent'" (click)="changePoStatus(individualRow.id,'Shipped')">Shipped</button>
+      <button mat-menu-item *ngIf="individualRow.status=='Shipped' && (isSuperAdmin == 'Y' || individualRow.createdby == userId)" (click)="changePoStatus(individualRow.id,'GRN Pending')">Received - GRN Pending</button>
+      <button mat-menu-item *ngIf="individualRow.status=='Draft'" (click)="changePoStatus(individualRow.id,'Cancel')">Cancel</button>
+    </mat-menu>
+
+    <button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(0,'','','','')"><mat-icon  class="icon-close"></mat-icon></button>
+  </div>
+  <div class="action-box orderfilter">
+		<div class="datepic_sec">
+				<div class="filtericon"><a href="javascript:void(0)"><span class="icon-filter"></span></a></div>
+				<div class="serchtagbox" *ngFor="let item of advanced_search; let i=index">
+					<p (click)="edit_filter(i, item)">{{item.show_name}}
+						<span *ngIf="!item.comparer" class="icon-equal"></span>
+						<span *ngIf="item.comparer==1" class="icon-equal"></span>
+						<span *ngIf="item.comparer==2" class="icon-mathematical_symbol"></span>
+						<span *ngIf="item.comparer==3" class="icon-start-contains"></span>
+						<span *ngIf="item.comparer==4" class="icon-end-contains"></span>
+						<span *ngIf="item.comparer==5" class="icon-contains"></span>
+						<span *ngIf="item.comparer==6" class="icon-not-contains"></span>
+						<span *ngIf="item.comparer==7" class="icon-right"></span>
+						<span *ngIf="item.comparer==8" class="icon-left"></span>
+						<span class="icon-equals"></span> 
+						<i *ngIf="item.key2=='n' || item.key2=='y'; else notShow">
+							<p *ngIf="item.key2=='n'">
+								Active
+							</p>
+							<p *ngIf="item.key2=='y'">
+									Inctive
+								</p>
+						</i>
+							
+							<ng-template #notShow>
+								
+								<p *ngIf="item.key2; else showKey">
+										{{item.key2}}
+								</p>
+								<ng-template #showKey>
+									<p>
+											{{item.key}}
+									</p>
+								</ng-template>
+							</ng-template>
+						<a href="javascript:void(0)" (click)="remove_filter(i)"><span class="icon-close"></span></a>
+						
+					</p>
+				</div>
+				<div class="filterdrop_wrap">
+						<mat-form-field appearance="outline">
+							<input  matInput placeholder="Select a column"  [matAutocomplete]="tdAuto" name="field_name" #field_name="ngModel" [(ngModel)]="formModel.field_name" (ngModelChange)="load_fiter_column()" >
+						</mat-form-field>
+						<mat-autocomplete  #tdAuto="matAutocomplete" >
+							<mat-option  *ngFor="let item of field_arr; let i=index;" [value]="item.field" (click)="get_data(item,i)">
+								<span >{{item.columns}}</span>
+							</mat-option>
+						</mat-autocomplete>
+						<!-- search tag -->		
+				<div class="meta_keywordbox" id="meta_keywordbox" >
+						<div class="headsec">{{formModel.field_name_show}}</div>
+						<form #formdata="ngForm"  (ngSubmit)="formdata.valid && sendSearchData()">
+								<div class="innerbox">
+										<div class="innrow">
+											<div class="dropbtn">
+												<div class="dop_icnbox">
+													<span class="icon-equal" *ngIf="!formModel.search_type"></span>
+													<span class="icon-equal" *ngIf="formModel.search_type=='1'"></span>
+													<span class="icon-mathematical_symbol" *ngIf="formModel.search_type=='2'"></span>
+													<span class="icon-start-contains" *ngIf="formModel.search_type=='3'"></span>
+													<span class="icon-end-contains" *ngIf="formModel.search_type=='4'"></span>
+													<span class="icon-contains" *ngIf="formModel.search_type=='5'"></span>
+													<span class="icon-not-contains" *ngIf="formModel.search_type=='6'"></span>
+													<span class="icon-right" *ngIf="formModel.search_type=='7'"></span>
+													<span class="icon-left" *ngIf="formModel.search_type=='8'"></span>
+												</div>
+												<mat-select  class="myFilter" #search_type="ngModel" name="search_type" [(ngModel)]="formModel.search_type" >
+														<mat-option *ngFor="let item of ConditionArr" [value]="item.type" >{{item.name}}</mat-option>
+												</mat-select>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='text'">
+												<mat-form-field appearance="outline">
+													<input matInput  placeholder="Type here" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='float'">
+												<mat-form-field appearance="outline">
+													<input matInput  type="number" placeholder="Enter value" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='select'" >
+													<mat-form-field appearance="outline">
+														<mat-select #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data" placeholder="Search here" #singleSelect [multiple]="false" >
+															<ngx-mat-select-search [formControl]="bankMultiFilterCtrl" placeholderLabel="Search" noEntriesFoundLabel="Nothing Found" ></ngx-mat-select-search>
+															<mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+																{{bank.name}}
+															</mat-option>
+														</mat-select>
+													</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='multi_select'">
+												<mat-form-field appearance="outline">
+													<mat-select #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data" placeholder="Search here" #singleSelect [multiple]="true" >
+														<ngx-mat-select-search [formControl]="bankMultiFilterCtrl" name="auto_search" placeholderLabel="Search" noEntriesFoundLabel="Nothing Found"></ngx-mat-select-search>
+														<mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank" >
+															{{bank.name}}
+														</mat-option>
+													</mat-select>
+												</mat-form-field>
+                      </div>
+                      
+											<div class="inputsec" *ngIf="formModel.input_type=='fix_select'">
+												<mat-form-field appearance="outline">
+													<mat-select class="myFilter"  #search_data="ngModel" name="search_data" placeholder="Select" [(ngModel)]="formModel.search_data"  (ngModelChange)="get_select_data()" >
+															<mat-option *ngFor="let select_item of selectArr" [value]="select_item.id" >{{select_item.name}}</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="inputsec" *ngIf="formModel.input_type=='date'">
+												<mat-form-field appearance="outline">
+													<input matInput  placeholder="Select date" [owlDateTime]="picker1" [owlDateTimeTrigger]="picker1" (focus)="picker1.open()" #search_data="ngModel" name="search_data" [(ngModel)]="formModel.search_data">
+													<owl-date-time #picker1 [pickerType]="'calendar'"></owl-date-time>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="footer">
+											<a href="javascript:void(0)" class="cnc" (click)="cancel_filter()">Cancel</a>
+											<a href="javascript:void(0)" class="apl" (click)="sendSearchData()">Apply</a>
+										</div>
+								</div>
+							</form>
+					</div>
+				</div>
+				<!-- search tag -->
+		</div>
+
+			<!--  <button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(0,'','','','',show_item_wise_order)"><mat-icon  class="icon-close"></mat-icon></button> -->
+			<button mat-icon-button  class="white-ripple pull-right" (click)="CloseFilter($event)"><mat-icon  class="icon-close"></mat-icon></button>
+	</div>
+  <div class="body-part">
+      <div class="table-list" *ngIf="showSkeletonLoaded">
+        <table>
+            <tr>
+            <th class="check-select">
+            <mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+            </th>
+            <ng-container >
+            <th  class="short" *ngFor="let item of temp_col"><span ></span></th>
+            </ng-container> 
+            </tr>
+            <tr *ngFor="let item of temp_result">
+              <td>
+              <div ></div>
+              <ng-template >
+              <mat-checkbox name="Selected" id="list" ></mat-checkbox>
+              </ng-template>
+              </td>
+              <ng-container >
+                <td *ngFor="let item of temp_col"><ng-container><div  class="skeleto-loader"></div></ng-container></td>
+              </ng-container>
+            </tr>
+        </table>
+      </div>
+      <div class="table-list" *ngIf="!showSkeletonLoaded">
+          <table>
+            <tr>
+              <th class="check-select">
+                <mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+              </th>
+              <ng-container *ngFor="let col of cols">
+                <th *ngIf="col.show == 1" class="short" (click)="generateGrid(0,1,col.field,filter,search.value)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span>
+                <span class="icon-up up" *ngIf="sortBy!=col.field"></span>
+                <span class="icon-down down" *ngIf="sortBy!=col.field"></span>
+                </th>
+
+              </ng-container>
+              
+            </tr>
+            <tr [class.chec]="row.selected"  *ngFor="let row of result_list">
+                <td>
+                  <mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+                </td>
+                <ng-container *ngFor="let col of cols">
+                  <td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+                    <span [ngClass]="(col.field=='status')?'status-box':''" [class.pendings]="row.status=='Draft'" [class.processing]="row.status == 'PO Sent'" [class.shipped]= "row.status == 'Shipped'" [class.approval]="row.status == 'GRN Pending'" [class.delivered]="row.status == 'Received Full'" [class.partial-refund]="row.status == 'Received Partial'">
+<!-- 
+                       [class.pendings]="row.status=='PO Sent'" [class.shipped]="row.status=='Shipped' || row.status=='GRN Pending' || row.status=='Received Full' || row.status=='Received Partial'" [class.pendings]="row.status=='Cancel'" -->
+                      <ng-container *ngIf="col.field_type=='p' && col.field!='purchase_order_id'">
+                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}   
+                      </ng-container>
+                      <ng-container *ngIf="col.field_type!='p' && col.field!='purchase_order_id'">
+                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}   
+                      </ng-container>
+                      <ng-container *ngIf="col.field=='purchase_order_id'">
+                        <a href="javascript:void(0)" (click)="globalService.addTab('viewpurchaseorder','/purchase_order/view/'+row.id+'','View Purchase Order',parentId);globalService.navigateToUrl('/purchase_order/view/'+row.id+'');">{{row.purchase_order_id}}</a>
+                      </ng-container>
+                    </span>
+                  </td>
+                </ng-container>
+                
+              </tr>
+              <tr *ngIf="pagination.total_page==0">
+                <td  [attr.colspan]="colSpanCount" align="center">No records found</td>
+              </tr>
+        </table>
+      </div>
+    </div>
+    <div class="clear"></div>
+      
+  </section>
+    <div class="pagination-box" *ngIf="pagination.total_page>1">
+          <span *ngFor="let list of total_list | paginate: config"></span>
+                  <pagination-template #p="paginationApi" [id]="config.id"  (pageChange)="generateGrid(0,$event,'',filter,search.value)" [maxSize]="maxSize">
+              <ul class="pagination">
+                  <li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+                      <a  (click)="p.previous()"><span class="icon-left"></span></a>
+                  </li>
+                  <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                      <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                          <span>{{ page.label }}</span>
+                      </a>
+                      <a *ngIf="p.getCurrent() === page.value">
+                          <span>{{ page.label }}</span>
+                      </a>
+                  </li>
+                  <li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+                      <a  (click)="p.next()"><span class="icon-right"></span></a>
+                  </li>
+              </ul>
+          </pagination-template>
+      </div>
+    <div class="clear"></div>

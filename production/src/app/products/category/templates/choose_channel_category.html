@@ -1,0 +1,50 @@
+ <form #customForm="ngForm" novalidate>
+	<input type="hidden" name="customId" [(ngModel)]="formModel.customId">
+	<input type="hidden" name="categoryId" [(ngModel)]="formModel.categoryId">
+	<input type="hidden" name="default_values" [(ngModel)]="formModel.default_values">
+	<div class="md-toolbar-tools">
+		<h2>Choose Category for amazon.com </h2>
+<!--         <button mat-raised-button class="btn-main hidden-xs hidden-sm" type="submit">Choose This Category</button>
+        <button mat-raised-button class="btn-line hidden-xs hidden-sm" type="button" (click)="closeDialog()">Cancel</button> -->
+	</div>
+	<div class="clear10"></div>
+	<div class="body-part modal-body-lg">
+		<div class="row same-height">
+			<div class="col col-md-4 no-pad">
+				<div class="box" style="overflow-y: auto; overflow-x: hidden;  max-height:250px;">
+					<ul class="box-list box-popup">
+					<!-- selected -->
+						<li *ngFor="let item_parent of formModel.categories;">
+							<span (click)="get_marketplace_categories(item_parent.id,item_parent,item_parent.channel_id,2)">{{item_parent.category_name}}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col col-md-4 no-pad" id="child">
+				<div class="box" style="overflow-y: auto; overflow-x: hidden; max-height:250px;">
+					<ul class="box-list box-popup">
+						<li *ngFor="let item_child of formModel.sub_categories;" >
+							<span (click)="get_marketplace_categories(item_child.id,item_child,item_child.channel_id,3)">{{item_child.category_name}}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col col-md-4 no-pad" id="child">
+				<div class="box" style="overflow-y: auto; overflow-x: hidden;  max-height:250px;">
+					<ul class="box-list box-popup">
+						<li *ngFor="let item_subchild of formModel._subsub_categories;">
+							<span (click)="get_marketplace_categories(item_subchild.id,item_subchild,item_subchild.channel_id,0)">{{item_subchild.category_name}}</span>
+						</li>
+					</ul>
+				</div>
+			</div>				
+		</div>		
+	</div>
+	<div class="clear40"></div>
+	<mat-dialog-actions layout="row">
+	  	<!-- <button mat-raised-button class="btn-main" [disabled]="!category.length>0" (click)="chooseCategory()" type="submit">Choose This 
+	  	Category</button> -->
+	  	<button mat-raised-button class="btn-main" (click)="chooseCategory()" type="submit">Choose This Category</button>
+	  	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

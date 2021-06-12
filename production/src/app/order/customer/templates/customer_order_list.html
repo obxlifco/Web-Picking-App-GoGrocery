@@ -1,0 +1,99 @@
+<section class="right-part filter-pad" ng-init="add_edit_load4(0)">
+	  <div class="body-part" style="padding-top: 24px !important;">
+		  <div class="topheading">
+			  <h1> Customer {{customer_steps == 1 ?  'Order' : 'Invoice'}} Details
+				  <div class="btn-header">
+			  		<button mat-raised-button class="btn-main" type="submit" (click)="customerOrderContinue()">Continue</button>
+					<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  </div>
+				  <div class="clear"></div>
+			  </h1>
+		  </div>
+		  <div class="clear"></div>
+		  <div class="filter">
+		  	<div class="stap">
+				    <ul *ngIf="formModel.customer_id>0 && add_edit=='edit'">
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id)" [routerLink]="['/customers/edit/'+formModel.customer_id]"><div class="nom"></div>General Information</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step2')" [routerLink]="['/customers/edit/'+formModel.customer_id+'/step2']"><div class="nom"></div>Address Information</a></li>
+					  <li class="active" *ngIf="customer_steps == 1"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step3')" [routerLink]="['/customers/edit/'+formModel.customer_id+'/step3']"><div class="nom"></div>Order Details</a></li>
+					  <li class="done" *ngIf="customer_steps == 2"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step3')" [routerLink]="['/customers/edit/'+formModel.customer_id+'/step3']"><div class="nom"></div>Order Details</a></li>
+					  <!-- <li *ngIf="customer_steps == 1"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step4')"  [routerLink]="['/customers/edit/'+formModel.customer_id+'/step4']"><div class="nom"></div>Invoice Details</a></li> -->
+					  <!-- <li class="active" *ngIf="customer_steps == 2"><a (click)="_globalService.setTab(tabIndex,'/customers/edit/'+formModel.customer_id+'/step4')"><div class="nom"></div>Invoice Details</a></li> -->
+				    </ul>
+				    <ul *ngIf="add_edit=='add'">
+					  <li class="done"><div class="nom"></div>General Information</li>
+					  <li class="done"><div class="nom"></div>Address Information</li>
+					  <li class="active" *ngIf="customer_steps == 1"><div class="nom"></div>Order Details</li>
+					  <li class="done" *ngIf="customer_steps == 2"><div class="nom"></div>Order Details</li>
+					  <li *ngIf="customer_steps == 1"><div class="nom"></div>Invoice Details</li>
+					  <!-- <li *ngIf="customer_steps == 2" class="active"><div class="nom"></div>Invoice Details</li> -->
+				    </ul>
+				  <div class="clear"></div>
+			  </div>
+			 <div class="clear"></div>
+			 <div class="filter_bottomsec" >
+				<div class="inner_subhead">Order Details</div>
+				<div class="selectand_btnsec">
+						<button mat-icon-button mdTooltip="Reload" class="btn-pink-active" (click)="generateCustomerGrid(1,'','','','',customer_module_name)"><mat-icon  class="icon-refresh"></mat-icon></button>
+						<div class="search">
+								<mat-icon  class="icon-search"></mat-icon>
+								<input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateCustomerGrid(1,1,'',filter,search.value,customer_module_name)">
+								<!-- <div class="search-add"><button mat-icon-button mdTooltip="Advance Search"  class="pink-ripple"><mat-icon  class="icon-down-arrow"></mat-icon></button></div> -->
+						</div>
+				</div>
+			</div>
+    </div>
+		<!-- <div class="clear40"></div>  -->
+		<!-- {{result_list | json}} -->
+    	<div class="table-list">
+      		<table>
+				<tr>
+					<ng-container *ngFor="let col of cols">
+						<th *ngIf="col.show == 1" class="short" (click)="generateCustomerGrid(0,1,col.field,filter,search.value,customer_module_name)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span></th>
+					</ng-container>	
+				</tr>
+				<tr [class.chec]="row.selected" *ngFor="let row of result_list">
+					   <ng-container *ngFor="let col of cols">
+                  <td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+                    <span [ngClass]="col.field=='order_status' ? (row.class_name) : ''">
+                      <ng-container *ngIf="col.field_type=='p'">
+                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}   
+                      </ng-container>
+                      <ng-container *ngIf="col.field_type!='p'">
+                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}   
+                      </ng-container>
+                    </span>
+                  </td>
+                </ng-container>
+				  </tr>
+				  <tr *ngIf="pagination.total_page==0">
+				  	<td colspan="4" align="center">No records found</td>
+				  </tr>
+			  </table>
+    	</div>
+    	<div class="clear"></div>
+		  <div class="pull-right" *ngIf="pagination.total_page>1">
+			    <span *ngFor="let list of total_list | paginate: config"></span>
+                 	<pagination-template #p="paginationApi" [id]="config.id"  (pageChange)="generateCustomerGrid(0,$event,'',filter,search.value,customer_module_name)" [maxSize]="maxSize">
+					    <ul class="pagination">
+					        <li class="pagination-previous" [class.disabled]="p.isFirstPage()">
+					            <a *ngIf="!p.isFirstPage()" (click)="p.previous()"><span class="icon-left"></span></a>
+					        </li>
+					        <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+					            <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+					                <span>{{ page.label }}</span>
+					            </a>
+					            <a *ngIf="p.getCurrent() === page.value">
+					                <span>{{ page.label }}</span>
+					            </a>
+					        </li>
+					        <li class="pagination-next" [class.disabled]="p.isLastPage()">
+					            <a *ngIf="!p.isLastPage()" (click)="p.next()"><span class="icon-right"></span></a>
+					        </li>
+					    </ul>
+					</pagination-template>
+		  </div>
+		  <div class="clear"></div>	
+	  </div>
+  </section>

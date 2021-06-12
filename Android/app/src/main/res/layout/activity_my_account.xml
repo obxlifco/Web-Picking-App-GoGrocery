@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MyAccount">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv1"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/back_btn_width"
+                    android:layout_height="@dimen/back_btn_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:padding="4dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+
+                    android:fontFamily="@font/montserrat"
+
+                    android:text="@string/toolbar_title_my_account"
+                    android:textColor="@color/grey_new"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:typeface="sans" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cv1"
+            android:scrollbarSize="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/rl_headerTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/nav_header_height"
+                    android:background="@color/green_new"
+                    android:gravity="center"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                    <RelativeLayout
+                        android:id="@+id/navHeaderProfile"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"
+
+                        tools:ignore="UselessParent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/dummy_circle_profile" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@+id/ivRight"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="14dp"
+                            android:layout_toEndOf="@+id/ivProfile"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvUsername"
+                                android:layout_width="match_parent"
+                                android:gravity="center|start"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:textAlignment="viewStart"
+                                android:fontFamily="@font/hind_medium"
+                                android:textSize="18sp"
+                                android:maxLines="1"
+                                android:text="@string/welcome"
+                                android:textColor="@color/white"
+                                />
+
+                            <TextView
+                                android:visibility="visible"
+                                android:id="@+id/tvNumber"
+                                android:ellipsize="end"
+                                android:textAlignment="viewStart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/hind"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+
+
+                        <ImageView
+                            android:id="@+id/ivRight"
+                            android:layout_width="16dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/edit_white"
+                            android:tint="@color/white"
+                            tools:ignore="ContentDescription" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_my_account"
+                    android:layout_alignParentStart="true"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                </ImageView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:layout_below="@+id/rl_headerTop"
+
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_language"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/green_round_side"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tv_lng"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/hind_medium"
+                            android:text="@string/language"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:textSize="20sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/tv_language"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_toEndOf="@+id/tv_lng"
+                            android:fontFamily="@font/hind_medium"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:visibility="visible">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_myOrder"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/my_orders">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_myDetails"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/my_details">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_myAddress"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/my_address">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_myPaymentMethod"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:visibility="gone"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/my_payment_methods">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_changesPassword"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/change_password_title">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/rl_logout"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:paddingTop="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:background="@drawable/gray_round_side"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hind_medium"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/logout">
+
+                        </TextView>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/icon_right">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressSpinKitView"
+
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                 />
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+
+
+
+    </RelativeLayout>
+</layout>

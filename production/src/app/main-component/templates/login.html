@@ -1,0 +1,56 @@
+<div class="login-box">
+	<mat-progress-bar *ngIf="showLoader" mode="indeterminate"></mat-progress-bar>
+	<form #loginForm="ngForm" novalidate (ngSubmit)="loginForm.valid && check_login(loginForm.value)">
+		<h2>Log In</h2>
+		<p>You can log in to your BoostMySale account at the domain you chose when you first signed up, or were invited to BoostMySale. </p>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<mat-form-field>
+			<input matInput placeholder="Username / Email / Mobile" required maxlength="40" #username="ngModel" name="username" ngModel (keyup)="detectMobile(username.value)">
+			<mat-error *ngIf="username.errors && username.errors.required">
+			  This is a required field
+			</mat-error>
+		</mat-form-field>
+		<div class="pw-filled" [class.show]="passwordType=='text'">
+		<mat-form-field class="password" *ngIf="!otpBtn && !otpField">
+			<input matInput placeholder="Password" required #password="ngModel" [attr.type]="passwordType" name="password" ngModel minlength="8" maxlength="20">
+			<mat-error *ngIf="password.errors && password.errors.required">
+			  This is a requiredfield
+			</mat-error>
+			<mat-error *ngIf="password.errors && password.errors.minlength">
+			  Password should be between 8 to 20 characters
+			</mat-error>
+			<mat-error *ngIf="password.errors && password.errors.maxlength">
+			  Password should be between 8 to 20 characters
+			</mat-error>
+			 <!-- <div class="input-help" *ngIf="password.errors && password.errors.validatePassword">
+				<h4>Password must meet the following requirements:</h4>
+				<ul>
+					<li [class.valid]="password.errors.validatePassword.cap">At least <strong>one upper case letter</strong></li>
+					<li [class.valid]="password.errors.validatePassword.low">At least <strong>one lower case letter</strong></li>
+					<li [class.valid]="password.errors.validatePassword.num">At least <strong>one number</strong></li>
+					<li [class.valid]="password.errors.validatePassword.spl">At least <strong>one special character</strong></li>
+					<li [class.valid]="password.errors.validatePassword.len">At least <strong>8 characters long</strong></li>
+				</ul>
+			</div>  -->
+			
+		</mat-form-field>
+		<button type="button" mat-icon-button class="show-pw" (click)="showPassword()"></button>
+		</div>
+		<mat-form-field class="" *ngIf="otpField && !otpBtn">
+			<input matInput placeholder="OTP" required #otp="ngModel" name="otp" ngModel>
+			<mat-error *ngIf="otp.errors && otp.errors.required">
+			  This is a required field
+			</mat-error>
+		</mat-form-field>
+		<div class="row">
+			<div class="col-sm-6">
+					<mat-checkbox name="RadioGroup1" id="remember-me" value="1" ng-model="user.keep_login" ng-checked="user.keep_login==1">Keep me logged in</mat-checkbox>
+			</div>
+			<div class="col-sm-6"><a class="pull-right" [routerLink] = "['/forgot_password']" >Forgotten Password?</a></div>
+		</div>
+		<button *ngIf="!otpBtn && !otpField" mat-raised-button  class="btn-black">LOG IN</button>
+		<button type="button" *ngIf="!otpBtn && otpField" mat-raised-button  class="btn-black" (click)="checkLogin(loginForm.value)">LOG IN</button>
+		<button type="button" *ngIf="otpBtn && !otpField" mat-raised-button  class="btn-black" (click)="sendOtp(username.value)" data-text="Send OTP">Send OTP</button>
+	</form>
+</div>

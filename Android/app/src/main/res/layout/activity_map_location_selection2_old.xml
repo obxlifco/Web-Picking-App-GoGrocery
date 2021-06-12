@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/mp_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="mapFragmentTag_old"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            tools:context=".view.MapLocationSelection"
+            tools:ignore="FragmentTagUsage" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/tvbtn_search"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/seach_backround">
+        <fragment android:id="@+id/autocomplete_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            />
+   <!--     <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:layout_width="match_parent"
+            android:layout_gravity="center|start"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            tools:ignore="FragmentTagUsage" />-->
+    </RelativeLayout>
+
+<ImageView
+    android:id="@+id/ivBtn_currentLocation"
+    android:layout_width="28dp"
+    android:layout_alignParentEnd="true"
+    android:layout_above="@+id/btnConfirmLocation"
+  android:tint="@color/app_red_clr"
+    tools:ignore="ContentDescription"
+    android:layout_marginBottom="12dp"
+    android:layout_marginEnd="10dp"
+    android:src="@drawable/current_location"
+    android:layout_height="28dp">
+
+</ImageView>
+
+
+
+    <Button
+        android:id="@+id/btnConfirmLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_green_clr"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/confirm_location"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progressSpinKitView"
+        style="@style/SpinKitView.Small.ThreeBounce"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/curve_corner_translucent_bg"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/green_new" />
+</RelativeLayout>

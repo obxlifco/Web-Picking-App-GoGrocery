@@ -1,0 +1,278 @@
+<section class="right-part filter-pad addall_page">
+  	 <form #priceForm="ngForm" novalidate (ngSubmit)="priceForm.valid && addEditPrice(priceForm)">
+	  <input type="hidden" name="productId" [(ngModel)]="formModel.productId">
+		  <div class="topheading">
+			  <h1>Product Setup
+				  <div class="btn-header">
+					  	<button mat-raised-button class="btn-main" type="submit">Continue</button>
+						<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  </div>
+				  <div class="clear"></div>
+			  </h1>
+		  </div>
+		  <div class="filter">
+			  <div class="stap">
+				  <ul *ngIf="formModel.productId>0 && add_edit=='edit'">
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId)" [routerLink]="['/products/edit/'+formModel.productId]"><div class="nom"></div>Basic Info</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step2')" [routerLink]="['/products/edit/'+formModel.productId+'/step2']"><div class="nom"></div>Advanced Info</a></li>
+					  <li class="active"><div class="nom"></div>Pricing &amp; Variant</li>
+					  <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step4')" [routerLink]="['/products/edit/'+formModel.productId+'/step4']"><div class="nom"></div>Related Products</a></li>
+					  <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step5')" [routerLink]="['/products/edit/'+formModel.productId+'/step5']"><div class="nom"></div>Up-sells</a></li>
+					  <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step6')" [routerLink]="['/products/edit/'+formModel.productId+'/step6']"><div class="nom"></div>Cross-sells</a></li>
+					  <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Associated Products</a></li>
+					  <li><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Substitute Products</a></li>
+				  </ul>
+				  <ul *ngIf="add_edit=='add'">
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add')" [routerLink]="['/products/add']"><div class="nom"></div>Basic Info</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add/step2')" [routerLink]="['/products/add/step2']"><div class="nom"></div>Advanced Info</a></li>
+					  <li class="active"><div class="nom"></div>Pricing &amp; Variant</li>
+					  <li><div class="nom"></div>Related Products</li>
+					  <li><div class="nom"></div>Up-sells</li>
+					  <li><div class="nom"></div>Cross-sells</li>
+					  <li><div class="nom"></div>Associated Products</li>
+					  <li><div class="nom"></div>Substitute Products</li>
+				  </ul>
+				  <div class="clear"></div>
+			  </div>
+			</div>  
+		<div class="clear"></div> 
+		<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="clear"></div>
+			<div class="box">
+			 <div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+			  	<div class="fixed-width">
+			  
+			  	  	<div class="row">
+					  	<div class="col-sm-8">
+
+							<div class="boxs active">
+							  	<div class="box-header">Please setup product price</div>
+								<div class="box-body">
+									<div class="row">
+											 <div class="col-sm-6">
+											 	<mat-form-field  class="md-block">
+										  			 <input type="number" matInput placeholder="Default Price" [(ngModel)]="formModel.default_price" required #default_price="ngModel" name="default_price">
+											    <mat-error *ngIf="default_price.errors && default_price.errors.required">
+											      Please enter product mrp
+											    </mat-error>
+												</mat-form-field> 
+											 </div>
+									</div>
+								  	<div class="row">
+								  		<div class="col-sm-6 col-md-3"  *ngFor="let item_channel of channel_list">
+											<mat-form-field class="md-block">
+											    <input type="tel" matInput placeholder="{{item_channel.channel_name}}" [(ngModel)]="item_channel.price"  #default_price_item="ngModel" name="{{item_channel.channel_name}}" [ngModelOptions]="{standalone: true}">
+											    <!-- <button *ngIf="item_channel.channel_id==6" mat-raised-button mdSuffix class="btn-gradient sm-icon-btn" type="button" (click)="show_pop(formModel.product.id,'P',item_channel.channel_id)"><i class="icon-timeline"></i></button> -->
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="clear20"></div>
+						</div>
+					</div>
+					<!-- //////////////////////varient product start//////////// -->
+					<ng-container *ngFor="let item of formModel.varients; let index=index; let last=last;">
+						<div class="row">
+						  	<div class="col-sm-8">
+								<div class="boxs active">
+								  	<div class="box-header"> Variant price settings
+								  	<span class="acc_icon icon-minus" *ngIf="index>0 && !item.variation_id" (click)="removeRow(index)" mdTooltip="Remove Variant"></span>
+								  	<span class="acc_icon icon-close" *ngIf="index>0 && item.variation_id" (click)="deleteVarient(item.variation_id)" mdTooltip="Delete Variant"></span>
+
+								  	</div>
+									<div class="box-body">
+									  	<div class="row">
+											<div class="col-sm-6 col-md-3"  *ngFor="let channel of item.channel_list">
+												<!-- <mat-form-field class="md-block">
+												    <input type="tel" matInput placeholder="{{channel.channel_name}}" [(ngModel)]="channel.price" [ngModelOptions]="{standalone: true}">
+												    <button *ngIf="channel.channel_id==6" mat-raised-button mdSuffix class="btn-gradient sm-icon-btn" type="button" (click)="show_pop(index,'O',channel.channel_id)"><i class="icon-timeline"></i></button>
+												</mat-form-field> -->
+												<mat-form-field class="md-block">
+													<!-- <input type="tel" matInput placeholder="{{channel.channel_name}}" [(ngModel)]="item.variation_price" [ngModelOptions]="{standalone: true}" readonly="true"> -->
+													<input type="number" matInput placeholder="{{channel.channel_name}}" [(ngModel)]="item.variation_price" [ngModelOptions]="{standalone: true}">
+												    <!-- <button mat-raised-button mdSuffix class="btn-gradient sm-icon-btn" type="button" (click)="show_pop(index,'O',channel.channel_id)"><i class="icon-timeline"></i></button> -->
+												</mat-form-field>
+											</div>  
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-md-6">
+								  				<input type="hidden" #variation_id="ngModel" [(ngModel)]="item.variation_id" [ngModelOptions]="{standalone: true}">
+
+											 	<mat-form-field class="md-block">
+										  			<input matInput required #sku="ngModel" placeholder="SKU" [(ngModel)]="item.variation_sku" [ngModelOptions]="{standalone: true}">
+										  			<mat-error *ngIf="sku.errors && sku.errors.required">
+												      Please Enter SKU
+												    </mat-error>
+												</mat-form-field> 
+											 </div>
+											 <div class="col-sm-6">
+											 	<mat-form-field  class="md-block">
+										  			<input matInput required #price="ngModel" name="" placeholder="Default Price" [(ngModel)]="item.variation_price" [ngModelOptions]="{standalone: true}" type="number">
+													<mat-error *ngIf="price.errors && price.errors.required">
+												      Please Enter Price
+												    </mat-error>
+												</mat-form-field> 
+											 </div>
+										</div>
+										<div class="row">
+											<!-- /////////variants//////////// -->
+												 <ng-container *ngIf="item.variation_id>0">
+													 <div class="col-sm-6"  *ngFor="let custom of item.var_custom">
+													 	<mat-form-field class="md-block" *ngIf="custom.input_type=='Textbox'">
+												  			<input matInput required placeholder="{{custom.field_label}}" [(ngModel)]="custom.value" [ngModelOptions]="{standalone: true}">
+														</mat-form-field> 
+														<mat-select placeholder="{{custom.field_label}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="custom.value" *ngIf="custom.input_type=='Dropdown'" required="true">
+															<mat-option value="{{item_custom}}" *ngFor="let item_custom of custom.custom_values">{{item_custom}}</mat-option>
+														 </mat-select>
+
+														 <!-- <section class="example-section" *ngIf="custom.input_type=='Radio'">
+														  <label class="example-margin">{{custom.field_label}}:</label>
+														  <mat-radio-group [(ngModel)]="custom.value" name="{{custom.field_label}}">
+															<mat-radio-button class="example-margin"  value="{{item_custom}}" *ngFor="let item_custom of custom.custom_values">{{item_custom}}</mat-radio-button>
+														  </mat-radio-group>
+													    </section>  -->
+
+														<!-- <section class="example-section" *ngIf="custom.input_type=='Checkbox'">
+													  	  <label class="example-margin">{{custom.field_label}}:</label>
+														  <mat-checkbox class="example-margin" name="{{item_custom}}" [(ngModel)]="custom[item_custom]" value="{{item_custom}}" *ngFor="let item_custom of custom.custom_values">{{item_custom}}</mat-checkbox>
+													    </section> --> 
+												    	<section class="my-2"  *ngIf="custom.input_type=='Radio'">
+															<div class="row">
+															 	<div class="col-xs-12">
+															  	  <label class="">{{custom.field_label}}:</label><br>
+															  	</div> 
+
+																<mat-radio-group [(ngModel)]="custom.value" [ngModelOptions]="{standalone: true}">
+																	<div class="col-sm-6" *ngFor="let item_custom of custom.custom_values">
+																		<mat-radio-button class="my-1" value="{{item_custom}}" >{{item_custom}}</mat-radio-button>
+																	</div>
+																 
+																</mat-radio-group>
+															</div>  
+													    </section>
+
+
+														<section class="example-section" *ngIf="custom.input_type=='Checkbox'">
+													    	<div class="row">
+																<div class="col-xs-12">
+													  	  			<label class="example-margin">{{custom.field_label}}:</label>
+													  	  		</div>	
+													  	  		{{custom[item_custom]}}
+													  	  		<div class="col-sm-6" *ngFor="let item_custom of custom.custom_values">
+													  	  			<mat-checkbox class="example-margin" name="{{item_custom}}" [(ngModel)]="custom[item_custom]" value="{{item_custom}}">{{item_custom}}</mat-checkbox>	
+													  	  		</div>
+														  	</div>	
+													    </section> 
+
+													    
+													    <mat-form-field *ngIf="custom.input_type=='Textarea'">
+														  <textarea matInput placeholder="{{custom.field_label}}" [(ngModel)]="custom.value"></textarea>
+														</mat-form-field> 
+
+													<!-- 	<mat-form-field class="md-block" *ngIf="custom.input_type=='Date'">
+													  			<input matInput placeholder="{{custom.field_label}}" [(ngModel)]="custom.value" [ngModelOptions]="{standalone: true}" [value]="custom.value| date: 'shortDate'" dateTimePicker [maxMoment]="maxDate" [pickerType]="'date'" readonly="readonly">
+														</mat-form-field> -->
+
+													 </div>
+												  </ng-container>
+												   <!-- /////////variants//////////// -->
+												  <!-- /////////new variants//////////// --> 
+												   <ng-container *ngIf="item.variation_id==0">
+													 <div class="col-sm-6"  *ngFor="let custom_new of custom_list">
+													 	<mat-form-field class="md-block"  *ngIf="custom_new.input_type=='Textbox'">
+												  			<input matInput required placeholder="{{custom_new.field_label}}" [(ngModel)]="item[custom_new.field_id]" [ngModelOptions]="{standalone: true}">
+														</mat-form-field> 
+														
+														
+														<mat-select required placeholder="{{custom_new.field_label}}"  [ngModelOptions]="{standalone: true}" [(ngModel)]="item[custom_new.field_id]" *ngIf="custom_new.input_type=='Dropdown'">
+															<mat-option value="{{item_custom_new}}" *ngFor="let item_custom_new of custom_new.custom_values">{{item_custom_new}}</mat-option>
+														 </mat-select>
+												    	<section class="my-2"  *ngIf="custom_new.input_type=='Radio'">
+															<div class="row">
+															 	<div class="col-xs-12">
+															  	  <label class="">{{custom_new.field_label}}:</label><br>
+															  	</div> 
+
+																<mat-radio-group [(ngModel)]="item[custom_new.field_id]" [ngModelOptions]="{standalone: true}">
+																	<div class="col-sm-6" *ngFor="let item_custom of custom_new.custom_values">
+																		<mat-radio-button class="my-1" value="{{item_custom}}" >{{item_custom}}</mat-radio-button>
+																	</div>
+																 
+																</mat-radio-group>
+															</div>  
+													    </section>
+
+														<section class="example-section" *ngIf="custom_new.input_type=='Checkbox'">
+													    	<div class="row">
+																<div class="col-xs-12">
+													  	  			<label class="example-margin">{{custom_new.field_label}}:</label>
+													  	  		</div>	
+													  	  		<div class="col-sm-6" *ngFor="let item_custom of custom_new.custom_values">
+													  	  			<mat-checkbox class="example-margin" [(ngModel)]="item[item_custom]" value="{{item_custom}}" [ngModelOptions]="{standalone: true}">{{item_custom}}</mat-checkbox>	
+													  	  		</div>
+														  	</div>	
+													    </section>
+
+													    <mat-form-field *ngIf="custom_new.input_type=='Textarea'">
+														  <textarea matInput placeholder="{{custom_new.field_label}}" [(ngModel)]="item[custom_new.field_id]" [ngModelOptions]="{standalone: true}"></textarea>
+														</mat-form-field> 
+
+													<!-- 	<mat-form-field class="md-block" *ngIf="custom_new.input_type=='Date'">
+													  			<input matInput placeholder="{{custom_new.field_label}}" [(ngModel)]="item[custom_new.field_id]" [ngModelOptions]="{standalone: true}"  [value]="item[custom_new.field_id] | date: 'shortDate'" dateTimePicker [maxMoment]="maxDate" [pickerType]="'date'" readonly="readonly">
+														</mat-form-field>  -->
+
+													 </div>
+												  </ng-container>
+												  <!-- /////////new variants//////////// --> 
+										</div>
+									</div>    
+								</div>	
+							</div>
+
+							<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
+								<div class="photo-up-box">
+
+								  <div class="before" [hidden]="formModelImage[index]">
+								    <button type="button" mat-raised-button class="btn-main" (click)="openImagePop(index)"><mat-icon  class="icon-img"></mat-icon> Upload Cover Image</button>
+									<br><br>
+									<p>(The image must be less than 2MB and have
+									a height and width greater than 150 px.)</p>
+								  </div>
+								  
+								  <div class="after" *ngIf="formModelImage[index]">
+								  	<mat-spinner [hidden]="formModelImage[index].url"></mat-spinner>
+								  	<img *ngIf="formModelImage[index].url" [src]="formModelImage[index].url">
+								  	<div *ngIf="formModelImage[index].url" class="photo-del">
+								  		<button type="button" mat-icon-button [matMenuTriggerFor]="tools" mdTooltip="Setings"  class="btn-pink"><mat-icon  class="icon-menu"></mat-icon></button>
+							            <mat-menu #tools="matMenu" xPosition="before" [overlapTrigger]="false">
+								            <button type="button" mat-menu-item (click)="delImg(item.variation_id,'formModelImage',index,0,index)"><mat-icon  class="icon-delete"></mat-icon> Delete</button>
+								            <button type="button" mat-menu-item (click)="addImageMeta(index,formModelImage[index].type,1)"><mat-icon  class="icon-edit"></mat-icon> META Data</button>
+								        </mat-menu>
+								  	</div>
+								  	<div class="im-name"> Cover Image</div>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</ng-container>
+							<div  (click)="addRow()">
+								<button type="button" class="margin-auto20 btn-pink" mat-mini-fab><i class="icon-add"></i></button>
+								<label class="ml-1 text-pink text-bold" >Add Varient Product</label>
+							</div>
+				   <!-- /////////////////////varient product end/////////////// -->
+				  </div>
+		  <div class="clear"></div>	
+		  <!-- ///////////////Buttons//// -->
+			 <div class="btn-header hidden-xs">
+			 		<button mat-raised-button class="btn-main" type="submit">Continue</button>
+					<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			 </div>
+			 <div class="clear"></div> 
+		  <!-- ///////////////Buttons//// -->
+		  </div>
+		  </div>
+		  </form>
+  </section>

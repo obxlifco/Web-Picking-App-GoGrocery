@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+       <!-- <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_20sdp"
+            android:layout_marginBottom="-10dp">-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+
+                android:background="@drawable/bottom_sheet_white_round_corner">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:gravity="center"
+                    android:text="@string/sort_by"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:textColor="@color/green_dark_new"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15sdp"/>
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv1"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/view_divider_clr"
+                    android:visibility="invisible"/>
+
+                <RadioGroup
+                    android:id="@+id/rgSortOption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+              android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginTop="16dp">
+
+                    <RadioButton
+                        android:id="@+id/rbPopularity"
+                        style="@style/MyRadioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/proxima_regular"
+                        android:text="@string/popularity"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <RadioButton
+                        android:id="@+id/rbNewestFirst"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:ellipsize="end"
+android:button="@null"
+                        android:fontFamily="@font/proxima_regular"
+                      android:drawableEnd="@drawable/custom_btn_radio"
+                        android:text="@string/newest_first"
+
+                        android:textSize="16sp"
+
+                        android:visibility="visible" />
+
+                    <RadioButton
+                        android:id="@+id/rbAlphabetically"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/proxima_regular"
+                        android:text="@string/alphabetically_sort"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:visibility="gone"
+                        android:drawableEnd="@drawable/custom_btn_radio"/>
+
+                    <RadioButton
+                        android:id="@+id/rbPriceLTH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/proxima_regular"
+
+                        android:text="@string/plth"
+                        android:drawableEnd="@drawable/custom_btn_radio"
+                        android:textSize="16sp"
+                        android:ellipsize="end"
+                        android:button="@null"
+                        android:layout_marginTop="@dimen/_8sdp"
+                       />
+
+                    <RadioButton
+                        android:id="@+id/rbPriceHTL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/proxima_regular"
+                        android:text="@string/phtl"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:ellipsize="end"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:drawableEnd="@drawable/custom_btn_radio"/>
+
+
+                    <RadioButton
+                        android:id="@+id/rbDiscountHTL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/hind"
+                        android:text="@string/dhtl"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <RadioButton
+                        android:id="@+id/rbDiscountLTH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/hind"
+                        android:text="@string/dlth"
+                        android:textSize="16sp"
+                        android:visibility="invisible" />
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/rgSortOption"
+                    android:background="@color/view_divider_clr" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view2"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/dialogBtnCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/hind_semibold"
+                        android:text="@string/cancel"
+                        android:textColor="#ED1C24" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view_divider_clr" />
+
+                    <Button
+                        android:id="@+id/dialogBtnApply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/hind_semibold"
+                        android:text="@string/apply"
+                        android:textColor="#ED1C24" />
+                </LinearLayout>
+
+            </RelativeLayout>
+     <!--   </androidx.cardview.widget.CardView>-->
+    </LinearLayout>
+
+</layout>

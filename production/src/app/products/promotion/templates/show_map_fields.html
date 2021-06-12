@@ -1,0 +1,102 @@
+<form #FieldMapping="ngForm" novalidate (ngSubmit)="FieldMapping.valid && save_file_data(FieldMapping)" enctype="multipart/form-data">
+<mat-dialog-actions layout="row">
+            <button mat-raised-button class="btn-main" type="submit">Save</button>
+            <button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions> 
+
+<div class="pop-head">
+Field Mapping
+</div>
+
+<mat-dialog-content class="file-up">
+    <ng-container>
+        <h6>1. Please select the below primary category:</h6>
+        <div class="form-row">
+            <div class="col col-3">
+                <mat-form-field appearance="outline"><mat-label>Select Category</mat-label>
+                    <mat-select placeholder="Select Category" #parent_category_selected="ngModel" name="first_label_category" [(ngModel)]="formModel.parent_category_selected" required (selectionChange)="get_child_category(parent_category_selected.value , 'second')">
+                      <mat-option *ngFor="let category_details of parent_category;" [value]="category_details.id">{{category_details.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col col-3">
+                <mat-form-field appearance="outline"><mat-label>Select Category</mat-label>
+                    <mat-select placeholder="Select Category" #second_label_categorys="ngModel" name="second_label_categorys" [(ngModel)]="formModel.second_label_categorys" (selectionChange)="get_child_category(second_label_categorys.value , 'third')">
+                      <mat-option *ngFor="let category_details of second_label_category;" [value]="category_details.id">{{category_details.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col col-3">
+                 <mat-form-field appearance="outline"><mat-label>Select Category</mat-label>
+                    <mat-select placeholder="Select Category" #third_label_categorys="ngModel" name="third_label_categorys" [(ngModel)]="formModel.third_label_categorys" (selectionChange)="get_child_category(third_label_categorys.value , 'forth')">
+                      <mat-option *ngFor="let category_details of third_label_category;" [value]="category_details.id">{{category_details.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col col-3">
+                <mat-form-field appearance="outline"><mat-label>Select Category</mat-label>
+                    <mat-select placeholder="Select Category" #forth_label_categorys="ngModel" name="forth_label_categorys" [(ngModel)]="formModel.forth_label_categorys" (selectionChange)="get_child_category(forth_label_categorys.value , 'no')">
+                      <mat-option *ngFor="let category_details of forth_label_category;" [value]="category_details.id">{{category_details.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="clear20"></div>
+        <h6 class="">2. Map excel column with product fields:</h6>
+        <div class="clear20"></div>
+        <div class="row">
+            <div class="col-sm-7">
+                <!--loop start-->
+                <div class="row">
+                    <div class="col-md-6"><strong>Excel Columns</strong></div>
+                    <div class="col-md-6"><strong>Database Fields</strong></div>
+                </div>
+                <div class="clear20"></div>
+                <div *ngFor="let header_name of xls_header; let i = index" [ngClass]=" i%2 === 0 ? 'row' : 'row row-odd'">
+                    <div class="col-md-6"><p class="full-height-text">{{header_name}}</p></div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline" >
+                        <!-- <mat-select placeholder="{{header_name}}" name="{{header_name}}" [(ngModel)]="formModel[header_name]" required> -->
+                            <mat-select  name="{{header_name}}" [(ngModel)]="formModel[header_name]" required>
+                              <mat-option *ngFor="let db_field_name of db_fields;" [value]="db_field_name.model_field_value">{{db_field_name.field_label}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>  
+                        
+                        <span class="tick-icon" *ngIf="formModel[header_name]!=''"></span>
+                    </div>
+                </div>
+              
+            </div>        
+            <div class="col-sm-5">
+                <p> <strong>What is Field Mapping</strong>?</p>
+                <p>When you import a product in your database, this tool helps you to interpret the database scheme as per the requirement. It establishes table relationship between the given values, helps to match database information with excel columns, add new corresponding value and eliminate what is not necessary.</p>
+
+                <p><strong>How it works?</strong></p>
+                <p>When you import product information in the database, field mapping checks whether the excel columns are matched with the database fields or not.</p>
+                <p>
+                When the value of database and excel columns are same, the field shows mapped. If the product has a different value in the excel sheet, you can choose the matching value from database drop down menu. If the value in excel column doesn't have any match in the database, you can select 'add a new field' to provide a new database value. In case you don't required a particular field to define your product, select 'I do not need it' from the database drop down menu.
+                </p>
+            </div>
+        </div>
+
+
+        <mat-dialog-actions layout="row">
+	  	    <button mat-raised-button class="btn-main" type="submit">Save</button>
+	  	    <button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+        </mat-dialog-actions> 
+    </ng-container>
+    <div class="clear40"></div>
+</mat-dialog-content>
+</form>
+<style type="text/css">
+    .filebrowse {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+</style>

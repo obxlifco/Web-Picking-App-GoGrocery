@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight=".3"
+
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+
+                android:id="@+id/circle"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/half_circle_grey"
+                android:gravity="center"
+
+                android:padding="10dp"
+                android:text="2" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="30dp"
+
+                android:background="@color/gray_light"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/rect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/app_name"
+
+                    android:src="@drawable/ic_saved_card" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight=".7"
+
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="30dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="Credit Card"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+
+                android:layout_gravity="end"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/half_circle_white"
+                android:paddingRight="10dp">
+
+
+                <ImageView
+                    android:id="@+id/rect1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_menu_arrow_side" />
+
+                <ImageView
+
+                    android:id="@+id/circle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    android:gravity="center"
+                    android:padding="10dp" />
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
+
+

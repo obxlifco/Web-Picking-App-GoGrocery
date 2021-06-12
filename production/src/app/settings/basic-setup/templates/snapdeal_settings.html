@@ -1,0 +1,51 @@
+<form #snapdealSetting="ngForm" novalidate (ngSubmit)="snapdealSetting.valid && saveSnapdealSettings(snapdealSetting)">
+	<input type="hidden" name="channel_id" [(ngModel)]="formModel.channel_id">
+	<div class="md-toolbar-tools">
+		<h2 mat-dialog-title>Snapdeal Settings</h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body price_setup_dio " layout="column">
+			<mat-form-field class="md-block">
+				<input matInput placeholder=" Client Id" required #name="ngModel" name="name" [(ngModel)]="formModel.name">
+				<mat-error *ngIf="name.errors && name.errors.required">
+					This is a
+					<strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Email" required #username="ngModel" name="username" [(ngModel)]="formModel.username">
+				<mat-error *ngIf="username.errors && username.errors.required">
+					This is a
+					<strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Access Token" required #refreshtoken="ngModel" name="refreshtoken" [(ngModel)]="formModel.refreshtoken">
+				<mat-error *ngIf="refreshtoken.errors && refreshtoken.errors.required">
+					This is a
+					<strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with
+			<span class="error">*</span> are compulsory.</label>
+		<span flex></span>
+		<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+	<div class="clear20"></div>
+	<p>1.In order to sell your products on Snapdeal, you will need to Authenticate your account.</p>
+	<p>2.Fill in the necessary details and provide the required credentials.e.g- Userid,Password</p>
+	<p>3.Now click on Generate Token button to complete the Authentication.</p>
+
+</form>

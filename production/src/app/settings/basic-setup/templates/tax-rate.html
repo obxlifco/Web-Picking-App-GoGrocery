@@ -1,0 +1,80 @@
+<form #setupForm="ngForm" novalidate (ngSubmit)="setupForm.valid && saveTax(setupForm)">
+<input type="hidden" name="settingsId" [(ngModel)]="formModel.settingsId">
+<section class="right-part filter-pad">
+    <div class="topheading">
+    	<div class="heading-left">
+	        <h6> Dashboard / Admin</h6>
+	        <h1> Basic Setup</h1>
+	    </div>
+        <div class="btn-header">
+			<button type="submit" mat-raised-button class="btn-main">Continue</button>
+          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+	  	</div>
+        <div class="clear"></div>
+      
+    </div>
+    <div class="filter filter-stp">
+		<div class="stap">
+			<ul>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId]">Basic Setup</a></li>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/template']">Select Template</a></li>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/payment_gateway']">Payment Gateway</a></li>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/shipping']">Shipping</a></li>
+				<li class="active"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/tax']">Tax Rate</a></li>
+			</ul>
+		</div>	
+    </div>	
+	<div class="body-part">
+		<div class="box">
+			<div class="fixed-width">
+				<div class="heading">Basic Info</div>
+				<div class="row">
+					<div class="col-md-8">
+						
+						<div class="row">
+							<div class="col-sm-6 ">
+								<mat-form-field>
+									<input matInput type="number" placeholder="Domestic Tax" required name="domestic_tax" #domestic_tax="ngModel" [(ngModel)]="formModel.domestic_tax" pattern="\d+(\.\d{1,2})?">
+									<span matSuffix type="number" class="text-bold">&nbsp; % &nbsp;</span>
+
+									<mat-error *ngIf="domestic_tax.errors && domestic_tax.errors.required">
+								    	This is <strong>required</strong> field
+								    </mat-error>
+								    <mat-error *ngIf="domestic_tax.errors && domestic_tax.errors.pattern">
+								    	Only valid <strong>decimal</strong> numbers are allowed
+								    </mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-sm-6 ">
+								<mat-form-field>
+									<input matInput type="number" placeholder="International Tax" required name="international_tax" #international_tax="ngModel" [(ngModel)]="formModel.international_tax" pattern="\d+(\.\d{1,2})?">
+									<span matSuffix class="text-bold">&nbsp; % &nbsp;</span>
+
+									<mat-error *ngIf="international_tax.errors && international_tax.errors.required">
+								    	This is <strong>required</strong> field
+								    </mat-error>
+								    <mat-error *ngIf="international_tax.errors && international_tax.errors.pattern">
+								    	Only valid <strong>decimal</strong> numbers are allowed
+								    </mat-error>
+								</mat-form-field>
+							</div>
+						</div>		
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="pull-right hidden-xs">
+			<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			<button type="submit" mat-raised-button class="btn-main">Continue</button>
+		</div> 
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+</form>
+

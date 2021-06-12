@@ -1,0 +1,52 @@
+<md-dialog>
+<form name="userForm" ng-submit="userForm.$valid && ctrl.parent.addEditUser()" novalidate focus-input>  
+	<input type="hidden" ng-model="ctrl.parent.formModel.userId">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>User Details</h2>
+			<span flex></span>
+			<mat-button class=" mat-button  md-line" close-popup-box>Cancel</mat-button>
+			<mat-button class="mat-button   btn-main" type="ng-submit">Save</mat-button>
+		</div>
+	</md-toolbar> 
+	<mat-dialog-content style="max-width:800px;max-height:810px;">
+		<div class="pop-body" layout="column"> 
+		 <mat-form-field class="md-block" appearance="outline"><mat-label>Employee Name</mat-label>
+			<input type="text" required name="empName"  ng-model="ctrl.parent.formModel.empName">
+			<div ng-messages="userForm.empName.$error">
+			  <div ng-message="required">Please enter employee name</div>
+			</div>
+		  </mat-form-field>
+		  <mat-form-field class="md-block" appearance="outline"><mat-label>Designation</mat-label>
+			<input type="text" required name="empDesignation"  ng-model="ctrl.parent.formModel.empDesignation">
+			<div ng-messages="userForm.empDesignation.$error">
+			  <div ng-message="required">Please enter employee designation</div>
+			</div>
+		  </mat-form-field>
+		  <mat-form-field class="md-block" appearance="outline"><mat-label>Email ID</mat-label>
+			<input type="email" required name="empEmail"  ng-model="ctrl.parent.formModel.empEmail" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
+			<div ng-messages="userForm.empEmail.$error">
+			  <div ng-message="required">Please enter email</div>
+			  <div ng-message="email">Please enter a valid email</div>
+			  <div ng-message="pattern">Please enter a valid email</div>
+			</div>
+			</mat-form-field>
+			<mat-form-field class="md-block" appearance="outline"><mat-label>Role Assign</mat-label>
+			  <mat-select name="role" ng-model="ctrl.parent.formModel.role" required ng-disabled="true">
+				<mat-option ng-repeat="roles in ctrl.parent.rolelist" ng-value="roles">{{roles.name}}</mat-option>
+			  </mat-select>
+			  <div ng-messages="userForm.role.$error">
+				  <div ng-message="required">Please choose Role Assign</div>
+				</div>
+			</mat-form-field>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		  <label>Fields marked with <span class="error">*</span> are compulsory.</label>
+		  <span flex></span>
+		  <mat-button class=" mat-button  md-line" close-popup-box>Cancel</mat-button>
+		  <mat-button class="mat-button   btn-main" type="ng-submit">Save</mat-button>
+	</mat-dialog-actions>
+</form>
+</md-dialog>	

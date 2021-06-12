@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" group="gogroceryandroid.git/app" />
+      <module fileurl="file://$PROJECT_DIR$/../gogroceryandroid.git.iml" filepath="$PROJECT_DIR$/../gogroceryandroid.git.iml" group="gogroceryandroid.git" />
+      <module fileurl="file://$PROJECT_DIR$/../sdkdubai-release/sdkdubai-release.iml" filepath="$PROJECT_DIR$/../sdkdubai-release/sdkdubai-release.iml" group="gogroceryandroid.git/sdkdubai-release" />
+    </modules>
+  </component>
+</project>

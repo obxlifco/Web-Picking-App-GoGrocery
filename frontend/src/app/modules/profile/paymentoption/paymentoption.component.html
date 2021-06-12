@@ -1,0 +1,168 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid odetails">
+  <div class="row">
+    <div class="col-12">
+      <div class="listing_container">
+
+        <div class="list_right_section details">
+
+          <div class="cart_outer">
+            <div class="row">
+              <div class="col-12 col-md-9">
+                <!-- <form #creditCardForm="ngForm" [formGroup]="paymenyForm" (ngSubmit)="onPaymentFormSubmit(creditCardForm)" novalidate> -->
+                <div class="cartbox orderdetails">
+                  <div class="head">
+                    Payment Option
+                  </div>
+                  
+                  <div class="paymentbox">
+                    <div class="headin">
+                      <div class="radiobx">
+                        <mat-radio-button [checked]="true" (change)="onCashOptionChange(1)"></mat-radio-button>
+                      </div>
+                      <div class="heading">Credit / Debit Card (Online Payment)</div>
+                    </div>
+                      <!-- <div class="inercont_box">
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Card Number</mat-label>
+                              <input matInput  id="card-number" type="tel" autocomplete="cc-number" formControlName="card_number" ccNumber>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Name on Card</mat-label>
+                              <input matInput placeholder="Name on Card" id="name_on_card" formControlName="name_on_card">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-3">
+                            <mat-form-field appearance="outline">
+                              <input matInput placeholder="Expiry Date" type="tel" id="expiy_date" autocomplete="cc-exp" formControlName="expiry_date" ccExp>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12 col-md-2">
+                            <mat-form-field appearance="outline">
+                              <mat-label>CVV</mat-label>
+                              <input matInput id="cvv"  type="tel" autocomplete="off" formControlName="sec_code" ccCVC>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <div class="cvv">
+                              <span><img src="assets/images/cvv.png"></span>
+                              Last 3 digits printed on the back of the card
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                  </div>
+                  <!-- <div class="paymentbox">
+                    <div class="headin">
+                      <div class="radiobx">
+                        <mat-radio-button></mat-radio-button>
+                      </div>
+                      <div class="heading">Net Banking</div>
+                    </div>
+                  </div> -->
+
+                  <div class="paymentbox">
+                    <div class="headin">
+                      <div class="radiobx">
+                        <mat-radio-button (change)="onCashOptionChange(2)"></mat-radio-button>
+                      </div>
+                      <div class="heading">Cash on Delivery</div>
+                    </div>
+                  </div>
+                  <div class="paymentbox">
+                    <div class="headin">
+                      <div class="radiobx">
+                        <mat-radio-button (change)="onCashOptionChange(3)"></mat-radio-button>
+                      </div>
+                      <div class="heading">Card on Delivery</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div><button class="checkoutbtn_grn placenow" type="button" (click)="palce_order()">CONFIRM ORDER</button></div>
+                  </div>
+                </div>
+             <!--  </form> -->
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="promocodebox">
+
+                  <div class="subhead"  *ngIf="orders.applied_coupon!=null">
+                    Promo Code  
+                    <div class="promo_amount">You have save-$20</div>
+                    <button class="removepromo_btn">Remove</button>
+                    <!-- <button class="applybtn">apply</button> -->
+                    <button class="applybtn">{{orders.applied_coupon}}</button>
+
+                  </div>
+                  <div class="ordersum">
+                    <h3>Order Summary</h3>
+                    <div class="row">
+                      <span>Subtotal</span>
+                      <span>{{orders.net_amount | money}}</span>
+                    </div>
+                    <div class="row">
+                      <span>Discount </span>
+                      <span class="red">{{orders.cart_discount | money}}</span>
+                    </div>
+                    
+                     <div class="row" *ngIf="orders && orders['pay_wallet_amount']">
+                      <span>Loyalty Discount</span>
+                      <span class="red">{{orders['pay_wallet_amount'] | money}}</span>
+                      
+                    </div>
+                    <div class="row">
+                      <span>Delivery Charges </span>
+                      <span>{{orders.shipping_cost | money}}</span>
+                    </div>
+                    <!-- <div class="row">
+                      <span>Estimated Tax</span>
+                      <span> {{orders.tax_amount | money}}</span>
+                    </div> -->
+                  </div>
+                  <div class="footed">
+                    <span>Total Amount</span>
+                    <span>{{orders.gross_amount | money}}</span>
+                  </div>
+                </div>
+                <div class="promocodebox change_delevery">
+                 
+                  <div class="ordersum">
+                    <h3 class="deleveryname">Order Summary
+
+                      <div class="applybtn">Default</div>
+                    </h3>
+                    <div class="row">
+                      <P>
+                        {{orders.delivery_street_address}}
+                        <span *ngIf="orders.delivery_street_address1!=''"><br/>{{orders.delivery_street_address1}}</span><br/>
+                        {{orders.delivery_city}} - {{orders.delivery_postcode}}<br/>
+                        {{orders.delivery_state_name}}<br/>
+                        {{orders.delivery_phone}}
+                      </P>
+                    </div>
+
+
+                  </div>
+                  
+                </div>
+                <!-- <div><button class="checkoutbtn_grn " type="submit">PLACE ORDER</button></div> -->
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- --- listing middle --- -->
+<!--  Payment option after getting 3d response  -->
+<div [innerHtml]="paymentFormSampleHtml" #paymentForm3D></div>

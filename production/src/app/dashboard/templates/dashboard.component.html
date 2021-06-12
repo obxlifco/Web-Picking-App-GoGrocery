@@ -1,0 +1,261 @@
+<section class="right-part" style="padding-top: 100px;">
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="row">
+			<div class="col-sm-6" >
+				<div class="dashboard_heading">
+					<h1>Dashboard</h1>
+				</div>
+			</div>
+			<div [ngClass]="userData.user_type=='SuperAdmin'?'col-sm-4':'col-sm-6'">
+				<div class="dashboard-decor">
+					<div class="dash-outer">
+						<!-- <span class="" >  -->
+							<!-- <mat-icon class="icon-calendar mat-icon material-icons dateSelectorIcon" role="img" aria-hidden="true" ></mat-icon> -->
+							<input type="button" class="dateSelectorInput" style="font-size: 16px;"
+							ngxDaterangepickerMd
+							[(ngModel)]="selected"
+							[locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}"
+							[showCustomRangeLabel]="true"
+							[alwaysShowCalendars]="alwaysShowCalendars"
+							[ranges]="ranges"
+							[linkedCalendars]="true"
+							(datesUpdated) = "datesUpdatedApply($event)"
+							[keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
+							placeholder="Order Date"/>
+							<i class="icon-table"></i>
+						<!-- </span> -->
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2" *ngIf="userData.user_type=='SuperAdmin'">
+				<!-- <mat-form-field appearance="outline">
+					<mat-select  floatPlaceholder="never"  placeholder="Select Store" #warehouse="ngModel" name="warehouse" [(ngModel)]="default_warehouse" (selectionChange)="callbackLoaddashboard(default_warehouse)">
+						<mat-option [value]="0" >All Store</mat-option>
+						<mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+					</mat-select>
+				</mat-form-field> -->
+				<ng-select [items]="warehouse_list"
+					floatPlaceholder="never"
+					placeholder="Select Store"
+					bindLabel="name" bindValue="id"
+					#warehouse="ngModel" name="warehouse" [(ngModel)]="default_warehouse"
+					(change)="callbackLoaddashboard(default_warehouse)"
+					style="width: 300px !important; margin-left: -140px !important;"
+				></ng-select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="box">
+					<div class="heading">Orders Info</div>
+					<ul class="box-list">
+						<li>
+							<a href="javascript:void(0)" (click)="loadStoreWiseOrder(77,'Pending'); _globalService.addTab(77,'orders','Orders',0)" class="dashbord_link">
+								<div class="text">Pending Orders</div>
+								<div class="num">{{storeReport.pending_order?.total_order_count}}</div>
+								
+								<div class="clear"></div>
+							</a>	
+						</li>
+						<li>
+							<a href="javascript:void(0)" (click)="loadStoreWiseOrder(193,'orders_in_picking'); _globalService.addTab(193,'shipment/shipment','Shipment',0)" class="dashbord_link">
+								<div class="text">Order in Picking</div>
+								<div class="num">{{storeReport.orders_in_picking?.total_order_count}}</div>
+								<div class="clear"></div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" (click)="loadStoreWiseOrder(193,'payment_pending'); _globalService.addTab(193,'shipment/shipment','Shipment',0)" class="dashbord_link">
+
+								<div class="text">Awaiting Payment</div>
+								<div class="num">{{storeReport.waiting_for_payment?.total_order_count}}</div>
+								<div class="clear"></div>
+							</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0)"  (click)="loadStoreWiseOrder(193,'payment_complete'); _globalService.addTab(193,'shipment/shipment','Shipment',0)" class="dashbord_link">
+								<div class="text">Payment Complete</div>
+								<div class="num">{{storeReport.payment_complete?.total_order_count}}</div>
+								<div class="clear"></div>
+							</a>
+						</li>
+						
+						<li>
+							<a href="javascript:void(0)" (click)="loadStoreWiseOrder(77,'delivered'); _globalService.addTab(77,'orders','Orders',0)"  class="dashbord_link">
+								<div class="text">Delivered</div>
+								<div class="num">{{storeReport.delivered_order?.total_order_count}}</div>
+								<div class="clear"></div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-sm-6 col-md-3">
+				<div class="chart-box green">
+					<div class="chart-top">
+						<div class="top-text"><span class="icon-clint"></span>New Clients</div>
+						<div class="mid-text">{{new_customer}}</div>
+						<div class="bot-text"><span class="icon-up"></span>{{diff_in_percent}}% from yesterday</div>
+					</div>
+					<div class="chart-bottom"><img src="assets/images/chart-img.png" alt=""></div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-3">
+				<div class="chart-box pink">
+					<div class="chart-top">
+						<div class="top-text"><span class="icon-sales"></span>New Sales</div>
+						<div class="mid-text"><span class="icon-font">AED</span> {{total_sales}}</div>
+						<div class="bot-text"><span class="icon-up"></span>{{sales_percent}}% last month</div>
+					</div>
+					<div class="chart-bottom"><img src="assets/images/sales-chart-img.png" alt=""></div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-3">
+				<div class="chart-box vilot">
+					<div class="chart-top">
+						<div class="top-text"><span class="icon-invoice"></span>New Invoice</div>
+						<div class="mid-text">{{invoice_nos}}</div>
+						<div class="bot-text"><span class="icon-down"></span> {{invoice_percent}}% from last month</div>
+					</div>
+					<div class="chart-bottom"><img src="assets/images/invoice-chart-img.png" alt=""></div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-3">
+				<div class="chart-box blue">
+					<div class="chart-top">
+						<div class="top-text"><span class="icon-visitors"></span>No. of Visitors</div>
+						<div class="mid-text">{{site_visit}}</div>
+						<div class="bot-text"><span class="icon-up"></span> {{percent_of_new_visit}}% from last month</div>
+					</div>
+					<div class="chart-bottom"><img src="assets/images/chart-img.png" alt=""></div>
+				</div>
+			</div>
+			
+		</div> -->
+		<!-- <div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<ul class="sale-tab">
+						<li style="cursor: hand;cursor: pointer;" [ngClass]="'day' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('day')">Day</li>
+						<li style="cursor: hand;cursor: pointer;" [ngClass]="'week' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('week')">Week</li>
+						<li style="cursor: hand;cursor: pointer;" [ngClass]="'month' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('month')">Month</li>
+						<li style="cursor: hand;cursor: pointer;" [ngClass]="'year' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('year')">Year</li>
+					</ul>
+					<div class="clear"></div>
+					<div class="graph">
+						<div style="display: block;" *ngIf="lineChartData.length>0">
+							<canvas baseChart width="400" height="100"
+								[datasets]="lineChartData"
+								[labels]="lineChartLabels"
+								[options]="lineChartOptions"
+								[colors]="lineChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="lineChartType"								  
+								(chartHover)="chartHovered($event)"
+								(chartClick)="chartClicked($event)"></canvas>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- 	<div class="row ">
+			<div class="col-sm-6 col-md-4">
+				<div class="box">
+					<div class="heading">Top Customer</div>
+					<ul class="box-list">
+						<li *ngFor="let customer of top_customers">
+							<div class="text">{{customer.customer__first_name}} {{customer.customer__last_name}}</div>
+							<div class="num"><span class="icon-font">AED</span> {{customer.total_amount.toFixed(2)}}</div>
+							<div class="clear"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+				<div class="col-sm-6 col-md-4">
+				<div class="box">
+					<div class="heading">Most Viewed Pages</div>
+					<ul class="box-list">
+						<li *ngFor="let pages of most_viewed_pages">
+							<div class="text">{{pages.pagepath}}</div>
+							<div class="num">{{pages.total_page_view}}</div>
+							<div class="clear"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="clear visible-sm"></div>
+
+				<div class="col-sm-6 col-md-4">
+				<div class="box">
+					<div class="heading">Top Sold Products</div>
+					<ul class="box-list">
+						<li *ngFor="let products of top_sold_products">
+							<div class="text">{{products.product__name}}</div>
+							<div class="num"><span class="icon-font">AED</span> {{products.total_quantity}}</div>
+							<div class="clear"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clear visible-md"></div>
+				<div class="col-sm-6 col-md-4">
+				<div class="box">
+					<div class="heading">Traffic Report</div>
+					<ul class="box-list">						
+						<li>
+							<div class="text">Site Visit</div>
+							<div class="num"> {{site_visit}}</div>
+							<div class="clear"></div>
+						</li>
+						<li>
+							<div class="text">Unique Visitor</div>
+							<div class="num"> {{unique_visitor}}</div>
+							<div class="clear"></div>
+						</li>	
+						<li>
+								<div class="text">Pageviews</div>
+								<div class="num"> {{page_view}}</div>
+								<div class="clear"></div>
+							</li>
+						<li>
+							<div class="text">% New Visit</div>
+							<div class="num"> {{percent_of_new_visit}}</div>
+							<div class="clear"></div>
+						</li>	
+						<li>
+							<div class="text">Average Time On Site</div>
+							<div class="num"> {{avg_time_on_site}}</div>
+							<div class="clear"></div>
+						</li>							
+					</ul>
+				</div>
+			</div>
+
+			<div class="clear visible-sm"></div>
+			
+			<div class="col-sm-6 col-md-4">
+				<div class="box">
+					<div class="heading">Marketplace</div>
+					<div class="graphContainer">
+						<canvas baseChart
+						[data]="doughnutChartDataVisitor"						
+						[chartType]="doughnutChartTypeVisitor"
+						[labels]="doughnutChartLabelsVisitor"
+						[colors] = "colors"
+						(chartHover)="chartHovered($event)"
+						(chartClick)="chartClicked($event)">
+						</canvas>
+					</div>
+				</div>	
+			</div>
+			</div> -->
+		
+	</div>
+</section>
+<div class="clear"></div>
+
+<div class="clear"></div>

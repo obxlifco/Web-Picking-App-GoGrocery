@@ -1,0 +1,289 @@
+<form #orderReturnForm="ngForm" novalidate (ngSubmit)="orderReturnForm.valid && saveReturn(orderReturnForm)">
+	<section class="right-part">
+	    <div class="topheading">
+	    	<div class="heading-left">
+		        <h6> Dashboard / Order </h6>
+		        <h1> Return Order View</h1>
+		    </div>
+			<div class="btn-header">
+				<button type="button" mat-raised-button class="btn-main" *ngIf="is_disable_save">Save</button>
+	          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+		  	</div>
+	        <div class="clear"></div>
+	    </div>
+		<div class="body-part" *ngIf="is_loaded">
+				<div class="row same-height">
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Order Info</div>
+							<ul class="box-list">
+								<li>
+									<div class="text-heading">Order Number</div>
+									<div class="num-heading">{{formModel.custom_order_id}}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Order Date</div>
+									<div class="num-heading">{{ formModel.created_date | date: 'shortDate' }}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Order Status</div>
+									<div class="num-heading">{{ formModel.order_status_text }}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Placed from IP</div>
+									<div class="num-heading">{{ formModel.ip_address }}</div>
+									<div class="clear"></div>
+								</li>
+								<li *ngIf="formModel.note!='' && formModel.note!=null">
+									<div class="text-heading">Note</div>
+									<div class="num-heading">{{ formModel.note }}</div>
+									<div class="clear"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Payment Info</div>
+							<ul class="box-list">
+								
+								<li>
+									<div class="text-heading">Payment method</div>
+									<div class="num-heading">{{ formModel.payment_method_name }}</div>
+									<div class="clear"></div>
+								</li>
+								<li *ngIf="formModel.pay_txntranid!='' && formModel.pay_txntranid!=null">
+									<div class="text-heading">Trasaction ID</div>
+									<div class="num-heading">{{ formModel.pay_txntranid }}</div>
+									<div class="clear"></div>
+								</li>
+								<li *ngIf="formModel.applied_coupon!='' && formModel.applied_coupon!=null">
+									<div class="text-heading">Applied Coupon</div>
+									<div class="num-heading">{{ formModel.applied_coupon }}</div>
+									<div class="clear"></div>
+								</li>
+								
+							</ul>
+						</div>
+						<div class="box">
+							<div class="heading">Return Info</div>
+							<ul class="box-list">
+								
+								<li>
+									<div class="text-heading">Return Request Date</div>
+									<div class="num-heading">{{ formModel.return_details.created }}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Return Status</div>
+									<div class="num-heading">{{ formModel.return_details.return_status }}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Return Reason</div>
+									<div class="num-heading">{{ formModel.return_details.reason }}</div>
+									<div class="clear"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Billing Address</div>
+							<ul class="box-list">
+								<li>
+									<div class="text-heading">Billing Name</div>
+									<div class="num-heading">
+										{{ formModel.billing_name }}
+									</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Billing Phone</div>
+									<div class="num-heading">
+										{{ formModel.billing_phone }}
+									</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Address</div>
+									<div class="num-heading">
+										{{ formModel.billing_company }} <br/>{{formModel.billing_street_address}} <br/>{{formModel.billing_street_address1}} <br/>
+										{{ formModel.billing_country_name }}<br/>
+										{{ formModel.billing_city }} {{ formModel.billing_postcode }}
+									</div>
+									<div class="clear"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Shipping Address</div>
+							<ul class="box-list">
+								<li>
+									<div class="text-heading">Contact Name</div>
+									<div class="num-heading">
+										{{ formModel.delivery_name }}
+									</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Contact Phone</div>
+									<div class="num-heading">
+										{{ formModel.delivery_phone }}
+									</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Address</div>
+									<div class="num-heading">
+										{{ formModel.delivery_company }} <br/>{{formModel.delivery_street_address}} <br/>{{formModel.delivery_street_address1}} <br/>
+										{{ formModel.delivery_country_name }}<br/>
+										{{ formModel.delivery_city }} {{ formModel.delivery_postcode }}
+									</div>
+									<div class="clear"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Account Info</div>
+							<ul class="box-list">
+								<li>
+									<div class="text-heading">Customer Name</div>
+									<div class="num-heading">{{ formModel.billing_name }}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Phone Number</div>
+									<div class="num-heading"> {{formModel.billing_phone}}</div>
+									<div class="clear"></div>
+								</li>
+								<li>
+									<div class="text-heading">Customer Email</div>
+									<div class="num-heading">{{formModel.billing_email_address}}</div>
+									<div class="clear"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="box">
+							<div class="heading">Timeline</div>
+							<mat-form-field>
+								<input matInput placeholder="comments" name="comments" #promocode=ngModel [(ngModel)]="activity_comments">
+								<button mat-button  matSuffix mat-icon-button matTooltip="Post comments" (click)="postComments(activity_comments)">
+		    					    <mat-icon class="icon-underline-button"></mat-icon>
+		    					</button>
+							</mat-form-field>	
+							<div class="timelines">
+								<ng-container *ngFor="let activity of activities_list">
+									<div class="dates-tags">{{activity.date}}</div>
+									<ul class="box-list">
+										<li *ngFor="let note of activity.notes">
+											<div class="time-tags">{{note.activity_time}}</div>
+											<div class="tags-desc">{{note.activity_comments}}</div>
+											<div class="clear"></div>
+										</li>
+									</ul>	
+								</ng-container>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+				<div class="">
+					<div class="heading">Review Order</div>
+					
+					<div class="vieworder_item">
+			      		<table cellpadding="0" cellspacing="0">
+							<tr>
+							  <th>SKU</th>
+							  <th>Product Name</th>
+							  <th align="right">Qty</th>
+							  <th align="right">Return</th> 
+							  <th align="right">Unit Price</th>
+							  <th align="right">Discount</th>
+							  <th align="right">In Stock</th>
+							  <th align="right">Damaged</th>
+							  <th align="right">Total Amount</th>
+							</tr>
+							<ng-container *ngFor="let item of formModel.products; let index = index; ">
+								<tr>
+								  	<td data-th="SKU">{{item.sku}}</td>
+								  	<td data-th="Product Name">{{item.product_name}}</td>
+									<td align="right" data-th="Qty">{{item.quantity}}</td>
+								  	<td align="right" data-th="Return">{{item.returns}}</td>
+								  	<td align="right" data-th="Unit Price">{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(item.product_price,formModel.website_id) | number: '1.2-2'}}</td>
+								  	<td align="right" data-th="Discount">{{ _globalService.getCurrencySymbol() }} {{  _globalService.merchantExchangeRate(item.product_discount_price,formModel.website_id) | number: '1.2-2'}}</td>
+								  	<td align="right" data-th="In Stock">
+									  	<mat-form-field>
+									      <input [disabled]="formModel.return_details.return_status!='Processing'" class="price_field" type="number" min="0" matInput name="stock{{index}}" pattern="[0-9]+" #stock="ngModel" [(ngModel)]="item.stock" (ngModelChange)="checkReturnQty(item.quantity,item.stock,item.damaged)">
+									      	<mat-error *ngIf="stock.errors && stock.errors.pattern">
+							      				Enter numeric values only
+							    			</mat-error>
+							    		</mat-form-field>
+								  	</td>
+								  	<td align="right" data-th="Damaged">
+									  	<mat-form-field>
+									      <input [disabled]="formModel.return_details.return_status!='Processing'" class="price_field" type="number" min="0" matInput name="damaged{{index}}" pattern="[0-9]+" #damaged="ngModel" [(ngModel)]="item.damaged" (ngModelChange)="checkReturnQty(item.quantity,item.stock,item.damaged)">
+									      	<mat-error *ngIf="damaged.errors && damaged.errors.pattern">
+							      				Enter numeric values only
+							    			</mat-error>
+							    		</mat-form-field>
+								  	</td>
+								  	<td align="right" data-th="Net Amount">{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(item.net_amt,formModel.website_id) | number: '1.2-2'}}</td>
+								</tr>
+							</ng-container>
+					    </table>
+						<table class="price">
+							<tr>
+								<td>Subtotal: </td>
+								<td>{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(formModel.order_calc.gross_amount,formModel.website_id) | number: '1.2-2'}}</td>
+							</tr>
+							<tr>
+								<td>Shipping Cost: </td>
+								<td>{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(formModel.order_calc.shipping_cost,formModel.website_id) | number: '1.2-2' }}</td>
+							</tr>
+							<tr>
+								<td>Tax: </td>
+								<td>
+									{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate((formModel.order_calc.tax_amount)?formModel.order_calc.tax_amount:0,formModel.website_id) | number: '1.2-2' }}
+								</td>
+							</tr>
+							
+							<tr>
+								<td>Grand Total: </td>
+								<td>{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(formModel.order_calc.net_amount,formModel.website_id) | number:'1.2-2'}}</td>
+							</tr>
+							<tr>
+								<td>Paid Amount: </td>
+								<td> {{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate(formModel.paid_amount,formModel.website_id) | number: '1.2-2'}}</td>
+							</tr>
+							
+							
+							<tr class="total">
+								<td>Due Amount: </td>
+								<td>{{ _globalService.getCurrencySymbol() }} {{ _globalService.merchantExchangeRate((formModel.order_calc.net_amount - formModel.paid_amount),formModel.website_id) | number: '1.2-2' }}</td>
+							</tr>
+						</table>
+		    		</div>
+				</div>
+				
+	    </div>
+	    <div class="clear"></div>
+
+	</section>
+</form>
+

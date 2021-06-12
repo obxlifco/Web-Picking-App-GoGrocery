@@ -1,0 +1,97 @@
+<div class="loada" *ngIf="popupLoder">
+	<mat-spinner></mat-spinner>
+</div>
+<form #brandForm="ngForm" novalidate (ngSubmit)="brandForm.valid && addEditBrand(brandForm)">
+	<input type="hidden" name="brandId" [(ngModel)]="formModel.brandId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.brandId)?'Edit':'Add'}} Brand </h2>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-form-field class="md-block" appearance="outline">
+				<mat-label>Brand Name</mat-label>
+				<input matInput placeholder="Brand Name" required #brandName="ngModel" name="brandName" [(ngModel)]="formModel.brandName" (change)="createSlug(formModel.brandName)" pattern="^(?!\s*$|\s).*$" maxlength="120">
+			    <mat-error *ngIf="brandName.errors && brandName.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			    <mat-error *ngIf="brandName.errors && brandName.errors.pattern">
+						White space is not allowed at beginning.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="md-block" appearance="outline"  *ngFor="let lang of all_languages">
+				<mat-label>Brand Name ({{ lang.name}})</mat-label>
+				<input matInput placeholder="Brand Name ({{ lang.name}})" #name_{{lang.lang_code}}="ngModel" name="name_{{lang.lang_code}}" [(ngModel)]="formModel['name_'+lang.lang_code]" >
+			</mat-form-field>
+
+			<mat-form-field class="example-full-width" appearance="outline">
+				<mat-label>Slug Url</mat-label>
+				<input  matInput placeholder="Slug Url" type="" #slug_url="ngModel"  name="slug_url" [(ngModel)]="formModel.slug_url" readonly>
+				<mat-error *ngIf="slug_url.errors && slug_url.errors.pattern">
+					Only <strong>alphanumeric,underscore and hyphen</strong> are allowed
+				</mat-error>
+			</mat-form-field>
+			
+			<mat-form-field class="example-chip-list" appearance="outline" *ngIf="warehouse_id==''">
+				<mat-label>Choose locations</mat-label>
+					<mat-chip-list #chipList aria-label="Fruit selection">
+						<mat-chip *ngFor="let wareHouse of selectedWareHouseList" [selectable]="selectable"
+										[removable]="removable" (removed)="remove(wareHouse.id)">
+							{{wareHouse.name}}
+							<mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+						</mat-chip>
+						<input placeholder="New Warehouse"
+									#fruitInput
+									[formControl]="wareHouseCtrl"
+									[matChipInputFor]="chipList"
+									[matAutocomplete]="auto"
+									[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+									[matChipInputAddOnBlur]="addOnBlur"
+									(matChipInputTokenEnd)="add($event)">
+					</mat-chip-list>
+						<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+							<mat-option *ngFor="let wareHouse of allWareHouseList" [value]="wareHouse['id']">
+								{{wareHouse['name']}}
+							</mat-option>
+						</mat-autocomplete>
+			</mat-form-field>
+
+			<!-- <div class="mandatory-select">
+				<mat-form-field class="md-block" appearance="outline">
+					<mat-label>Status</mat-label>
+					<mat-select required placeholder="Status" #status="ngModel" name="status" [(ngModel)]="formModel.status">
+						<mat-option value="n">Active</mat-option>
+						<mat-option value="y">Inactive</mat-option>
+					</mat-select>
+					<mat-error *ngIf="status.errors && status.errors.required && (status.dirty || status.touched || brandForm.submitted)">
+						This is a <strong>required</strong> field
+					</mat-error>
+				</mat-form-field>
+			</div> -->
+
+			<div class="file_upload">
+				<button mat-raised-button class="btn-main" type="button">
+					<mat-icon class="icon-upload-cloud"></mat-icon>Browse Logo
+					<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+					 (change)="selectBrandLogo($event)" />
+				</button>
+				<span class="ml-1">{{file_selection_tool}}</span>
+			</div>
+			<br>
+			<div class="photobox" *ngIf="formModel.fileUrl != '' && formModel.fileUrl != undefined">
+				<div class=" propic">
+					<img src="{{formModel.fileUrl}}" height="200" width="200" class="product_image" style="margin-top:10px;">
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

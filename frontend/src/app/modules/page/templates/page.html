@@ -1,0 +1,4 @@
+
+<ng-template widget-host></ng-template> 
+
+<div *ngIf="page_details.page_type && page_details.page_data" [innerHTML]="page_details.page_data | safeHtml"></div>

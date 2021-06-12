@@ -1,0 +1,55 @@
+<section class="container-fluid" *ngIf="isCMS">
+          <div class="row">
+              <div class="col-12">
+                  <div class="container_cuswrap">
+                      <div class="discount_product">
+                          <div class="row">
+                              <div class="col-12 col-md-4">
+                                  <div class="discount_productbox" style="background-image: url(assets/images/vegtable.png);">
+                                      <a href="javascript:void(0);">
+                                          <p>Wholesale Price Store!<span> 121 PRODUCTS</span></p>
+                                          
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                  <div class="discount_productbox" style="background-image: url(assets/images/veg2.png);">
+                                      <a href="javascript:void(0);"> 
+                                          <p>Upto 60% Off in Vegetables<span>210 PRODUCTS</span></p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                  <div class="discount_productbox" style="background-image: url(assets/images/mango.png);">
+                                      <a href="javascript:void(0);">  
+                                          <p>The Mango Mandi<span>412 PRODUCTS</span></p>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <section class="container-fluid" *ngIf="!isCMS">
+         <div class="row">
+              <div class="col-12">
+                  <div class="container_cuswrap">
+                      <div class="discount_product home">
+                          <div class="row">
+                              <div class="col-12 col-md-4" *ngFor="let bannerData of widget_data_for_non_cms">
+                                  <div class="discount_productbox" [ngStyle]="{background: 'url(' +S3_URL_BANNER+'/'+bannerData['banner_image']['primary_image_name']+')'}">
+                                      <a href="javascript:void(0);">
+                                          <p>{{bannerData['banner_name']}}<span>{{bannerData['product_count']}} PRODUCTS</span></p>
+                                          
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        
+      </section>

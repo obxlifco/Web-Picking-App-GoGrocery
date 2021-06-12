@@ -1,0 +1,806 @@
+<!-- mobile serch Start-->
+<div [ngClass]="showSearchBox?'mobileserch show':'mobileserch'" #topSearchMobileBox>
+  <div class="topserchsec">
+    <div class="backarrow"><a href="javascript:void(0)" (click)="open_serchbox()"><span class="icon-left-arrow"></span></a></div>
+    <div class="serchbox">
+      <input placeholder="Search for product" type="search" #elasticsearchMob="ngModel" name="elasticsearchMob" ngModel class="search" (input)="onSearchChange($event.target.value,true)" (keyup.enter)="onSearchPageReq($event)">
+    </div>
+  </div>
+  <div class="recentserchbox">
+    <div class="resentbox">
+      <div class="add_cart">
+        <div class="serch_dropbox serch_dropbox_new" *ngIf="showSearchBox">
+            <div class="serchinnerbox" style="max-height: 531px;">
+              <div class="serchrow" *ngFor="let search_result of global_search">
+                <div class="leftpdc_sec">
+                  <div class="productbox" *ngIf="search_result.product_images">
+                    <img [src]="search_result.product_images" (error)="updateUrlImg($event)" alt="">
+                  </div>
+                  <div class="productbox" *ngIf="!search_result.product_images">
+                    <img src="assets/images/noimg.png" alt="">
+                  </div>
+                  <div class="item_name">
+                    <span>{{search_result.brand}}</span>
+                    {{search_result.name}} <!-- <span class="cmnword">Peas</span> Fresh -->
+                  </div>
+                </div>
+                <div class="rightamt_sec">
+                <!--   <div class="pricebox">{{search_result.variation}}</div> -->
+                  <div class="pricebox" *ngIf="search_result.channel_currency_product_price">
+                    {{search_result.channel_currency_product_price | money}}</div>
+                      <div class="count_box" *ngIf="cartService.cartDetails['cart_list'] && cartService.cartDetails['cart_list'][search_result['id']]">
+                          <button class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],cartService.cartDetails['cart_list'][search_result['id']]['quantity']-1)">
+                              <span class="icon-minus"></span>
+                          </button>
+                          <div class="count_no">{{cartService.cartDetails['cart_list'][search_result['id']]['quantity']}}</div>
+                          <button  class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],cartService.cartDetails['cart_list'][search_result['id']]['quantity']+1)">
+                              <span class="icon-plus"></span>
+                          </button>
+                      </div>
+                      <div class="count_box" *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][search_result['id']]">
+                        <button class="adto_cart styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],1)"><span class="icon-shopping-cart"></span>Add to cart</button>
+                      </div>
+                </div>
+              </div>
+
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- mobile serch End -->
+
+<!-- Mobile Left Menu Start -->
+<div [ngClass]="showUserMenuMob?'leftmenu openmenu':'leftmenu'">
+  <div class="headsec">
+      <div class="profilepic">
+          <img src="assets/images/Layer 45.png" style="border-radius: 50%;">
+      </div>
+      <div class="namesec">
+          <p *ngIf="this.authenticationService.userFirstName">
+              Hi! {{this.authenticationService.userFirstName}}
+              <!-- <span>+ 91 - 9876543210</span> -->
+          </p>
+          <p *ngIf="!this.authenticationService.userFirstName">
+            <a href="javascript:void(0)" *ngIf="!this.authenticationService.userFirstName" (click)="openLoginDialog()">Login / Sign Up</a>
+          </p>
+          <a href="javascript:void(0)"><span class="icon-right-arrow_new" (click)="toggle_menu_mob()"></span></a> 
+      </div>
+  </div>
+  <div class="innermenu_sec">
+    <ul class="topmenu" >
+      <li>
+        <a href="javascript:void(0)" (click)="navigateTolistMob('home')">
+          <div class="text">
+            <!-- <span class="icon-paper"></span> -->
+            Home
+          </div>
+        </a>
+      </li>
+      <div *ngIf="header_list && header_list.length > 0">
+        <li *ngFor="let headerMenu of header_list">
+          <a href="javascript:void(0)" (click)="open_submenu(headerMenu)">
+            <div class="text">
+              <!-- <span class="icon-paper"></span> -->
+              {{headerMenu['name']}}
+            </div>
+          </a>
+        </li>
+      </div>
+      <li *ngIf="this.authenticationService.userFirstName">
+        <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/order-history')" >
+          <div class="text">
+            Product Substitutions
+          </div>
+        </a>
+      </li>
+      <li *ngIf="this.authenticationService.userFirstName">
+        <a href="javascript:void(0)" (click)="open_submenu('profile')">
+          <div class="text">
+            Profile
+          </div>
+        </a>
+      </li>
+      <!--<li *ngIf="this.authenticationService.userFirstName">
+        <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/order-history')">
+          <div class="text">
+            Order History
+          </div>
+        </a>
+      </li>
+      <li *ngIf="this.authenticationService.userFirstName">
+        <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/wishlist')">
+          <div class="text">
+            Wishlist
+          </div>
+        </a>
+      </li> -->
+      <li *ngIf="this.authenticationService.userFirstName">
+        <a href="javascript:void(0)" (click)="this.authenticationService.logout()">
+          <div class="text">
+            Logout
+          </div>
+        </a>
+      </li>
+
+    </ul>
+    <ul class="bottommenu"></ul>
+  </div>
+  <div [ngClass]="subMenu?'submenuwrap submenu_open':'submenuwrap'">
+      <div class="head">
+          <a href="javascript:void(0)" (click)="open_submenu()">
+              <span class="icon-left-arrow"></span><p>{{headerMenu_child_name}}</p>
+          </a>
+      </div>
+      <div class="sub_innermenu_wrap">
+          <ul *ngIf="headerMenu_child && headerMenu_child.length > 0">
+              <li *ngFor="let childMenu of headerMenu_child">
+                  <a href="javascript:void(0)" (click)="navigateTolist(childMenu.slug)" ><p>{{childMenu['name']}}</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  
+  <div [ngClass]="subMenuProfile?'submenuwrap submenu_open':'submenuwrap'">
+      <div class="head">
+          <a href="javascript:void(0)" (click)="open_submenu('profile')">
+              <span class="icon-left-arrow"></span><p>Profile</p>
+          </a>
+      </div>
+      <div class="sub_innermenu_wrap">
+          <ul>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/profiledetails')" ><p>My profile</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/delivery-address')" ><p>Delivery Address</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/change-password')" ><p>Change Password</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/order-history')" ><p>Order History</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/wishlist')" ><p>Wishlist</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/my-wallet')" ><p>My Wallet</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/save-list')" ><p>Save List</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" (click)="navigateTolistMob('profile\/profiledetails')" ><p>Logout</p><span class="icon-right-arrow_new"></span></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+<div class="leftmenu_blackbg" (click)="toggle_menu_mob()"></div>
+<!-- Mobile Left Menu End -->
+
+<!-- Desktop Header start -->
+<ng-container *ngIf="globalData.website_id==1 && (!pageType || pageType <2 )">
+<header>
+  <div class="headtop">
+    <div class="topnav">
+      <div class="cuswrap">
+        <div class="citylocation">
+            You are shopping at
+            <div class="locotion_icn"><span class="icon-location_delivery-address"></span></div>
+            <div class="storename styleCursor" (click)="onChangeLocation()" ><strong>{{selectedWareHouseDatails && selectedWareHouseDatails['selected_warehouse_name'] ? selectedWareHouseDatails['selected_warehouse_name'] : defaultWareHouse['selected_warehouse_name'] }}</strong>
+              <span class="fa fa-map" style="padding-left: 10px;" ></span>
+            </div>
+            <span class="styleCursor change_store" style="padding-left: 20px;" (click)="onChangeStoreType()">Change Store Type</span>
+            <span class="styleCursor change_store" style="padding-left: 20px;" (click)="onChangeWareHouse()">Change Store</span>
+          </div>
+        <div class="right_nav">
+          <ul>
+            <!-- <li><a href="#">Store Locator</a></li> -->
+            <li><a [routerLink]="['/page/about-us']">About Us</a></li>
+            <li><a [routerLink]="['/contact-us']">Contact Us</a></li>
+            <li><a href="javascript:void(0)" *ngIf="!this.authenticationService.userFirstName" (click)="openLoginDialog()">Login / Sign Up
+              
+            </a></li>
+            <li #toggleProfileMenu>
+              <a class="no_hover" [ngClass]="showUserMenu?'active':''" href="javascript:void(0)" (click)="toggle_menu()" *ngIf="this.authenticationService.userFirstName!=undefined" ><span class="hovereffect">Hi, {{this.authenticationService.userFirstName}}</span>
+                <div class="profiledrop">
+                    <ul>
+                        <li (click)="navigate(1)"><a href="javascript:void(0)"><span class="icon-profile1"></span>Profile</a></li>
+                        <li (click)="navigate(2)"><a href="javascript:void(0)"><span class="icon-shopping-cart" ></span>Order History</a></li>
+                        <li (click)="navigate(3)"><a href="javascript:void(0)"><span class="icon-wishlist"></span>Wishlist</a></li>
+                        <li (click)="this.authenticationService.logout()"><a href="javascript:void(0)"><span class="icon-logout" ></span>Logout</a></li>
+                    </ul>
+                </div>
+            </a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="main_nav ">
+      <div class="cuswrap">
+        <!-- add for mobile -->
+        <a href="javascript:void(0)" class="togglemenu" (click)="toggle_menu_mob()">
+            <div class="line"></div>
+        </a>
+          <!-- add for mobile -->  
+        <div class="logo" (click)="us.navigateToUrl('/')"><img src="assets/images/logo.png"></div>
+        <div class="navsec" #navSec>
+          <!--  <ul *ngIf="header_list && header_list.length > 0">
+                        <li *ngFor="let headerMenu of header_list"><a href="javascript:void(0)">{{headerMenu['name']}}</a></li>
+                      </ul> -->
+          <ul *ngIf="header_list && header_list.length > 0">
+            <li class="header_menu_li" #headerDiv (mouseover)="onMouseEnterOnMenu($event)"  (mouseout)="onMouseOutFromMenu($event,headerDiv)">
+              <a href="javascript:void(0)" class="header_menu">ALL CATEGORIES
+                <div class="megamenu_wrap">
+                  <div class="cus_col" *ngFor="let headerMenuGroup of header_menu_group_list">
+                    <ng-container *ngFor="let headerMenu of headerMenuGroup">
+                    <ul >
+
+                      <li [routerLink]="['/listing/',headerMenu.slug]">{{headerMenu['name']}}</li>
+                      <li *ngFor="let childMenu of headerMenu['child']"><a href="javascript:void(0)" [routerLink]="['/listing/',childMenu.slug]">{{childMenu['name']}}</a></li>
+                    </ul>
+                  </ng-container>
+                  </div>
+                </div>
+              </a>
+              
+            </li>
+            <ng-container *ngFor="let headerMenu of header_list">
+            <li *ngIf="showFrontEndMenuItem.includes(headerMenu['name'])" class="header_menu_li" #headerDiv  (mouseover)="onMouseEnterOnMenu($event)"  (mouseout)="onMouseOutFromMenu($event,headerDiv)">
+
+              <a href="javascript:void(0)" class="header_menu">
+                <span [routerLink]="['/listing/',headerMenu.slug]"> {{headerMenu['name']}}</span>
+                <div class="megamenu_wrap">
+                  <div class="cus_col">
+                    <ul *ngIf="headerMenu['child'] && headerMenu['child'].length > 0">
+                      <li [routerLink]="['/listing/',headerMenu.slug]">{{headerMenu['name']}}</li>
+                      <li *ngFor="let childMenu of headerMenu['child']"><a href="javascript:void(0)"
+                          [routerLink]="['/listing/',childMenu.slug]" >
+                          {{childMenu['name']}}
+                        </a></li>
+                    </ul>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ng-container>
+          </ul>
+        </div>
+
+        <!-- search box started -->
+        <div class="topserchbox" #topSearchBox>
+          <a class="serchicn"><span class="icon-search"></span></a>
+          <input placeholder="Search for product" type="search" #elasticsearch="ngModel" name="elasticsearch" ngModel
+            class="search" (input)="onSearchChange($event.target.value,false)" (keyup.enter)="onSearchPageReq($event)">
+          <!-- <div class="serch_dropbox" *ngIf="global_search && global_search.length>0"> -->
+            <div class="serch_dropbox">
+            <div class="serchinnerbox">
+              <div class="serchrow" *ngFor="let search_result of global_search">
+                <div class="leftpdc_sec">
+                  <div class="productbox" *ngIf="search_result.product_images">
+                    <img [src]="search_result.product_images" (error)="updateUrlImg($event)" alt="">
+                  </div>
+                  <div class="productbox" *ngIf="!search_result.product_images">
+                    <img src="assets/images/noimg.png" alt="">
+                  </div>
+                  <div class="item_name">
+                    <span>{{search_result.brand}}</span>
+                    {{search_result.name}} <!-- <span class="cmnword">Peas</span> Fresh -->
+                  </div>
+                </div>
+                <div class="rightamt_sec">
+                <!--   <div class="pricebox">{{search_result.variation}}</div> -->
+                  <div class="pricebox" *ngIf="search_result.channel_currency_product_price">
+                    {{search_result.channel_currency_product_price | money}}</div>
+                      <div class="count_box" *ngIf="cartService.cartDetails['cart_list'] && cartService.cartDetails['cart_list'][search_result['id']]">
+                          <button class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],cartService.cartDetails['cart_list'][search_result['id']]['quantity']-1)">
+                              <span class="icon-minus"></span>
+                          </button>
+                          <div class="count_no">{{cartService.cartDetails['cart_list'][search_result['id']]['quantity']}}</div>
+                          <button  class="count_btn styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],cartService.cartDetails['cart_list'][search_result['id']]['quantity']+1)">
+                              <span class="icon-plus"></span>
+                          </button>
+                      </div>
+                      <div class="count_box" *ngIf="!cartService.cartDetails['cart_list'] || !cartService.cartDetails['cart_list'][search_result['id']]">
+                        <button class="adto_cart styleCursor" (click)="cartService.addOrRemoveItem(search_result['id'],1)"><span class="icon-shopping-cart"></span>Add to cart</button>
+                      </div>
+                <!--    <div class="count_box">
+                    <button class="adto_cart" (click)="addtoCart()"><span class="icon-shopping-cart"></span>Add to
+                      cart</button>
+                    <button class="count_btn">
+                      <span class="icon-substract"></span>
+                    </button>
+                    <div class="count_no">5</div>
+                    <button class="count_btn">
+                      <span class="icon-add"></span>
+                    </button>
+                  </div> -->
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="wishlist" #wishList>
+          <ul>
+            <li (click)="navigate(3)">
+              <a class="wish-bagcount" href="javascript:void(0)"><span class="icon-heart_like"></span>Wishlist
+                <div class="wish-count_rount" >{{cartService.wishlistCount}}</div>
+              </a>
+            </li>
+            <li>
+              <a class="bagcount" href="javascript:void(0)"  (click)="toggleBagPopup()"><span class="icon-paper-bag"></span>Cart
+                <div class="count_rount"  *ngIf="objectKeys(cartService.cartDetails).length > 0 && objectKeys(cartService.cartDetails['cart_list']).length > 0 ">{{objectKeys(cartService.cartDetails['cart_list']).length}}</div>
+              </a>
+              <div class="add_cart" *ngIf="showBagPopup && (!cartService.cartDetails || !cartService.cartDetails['cart_list'] || objectKeys(cartService.cartDetails['cart_list']).length==0 )">
+                <div class="head">
+                  <span >Your Cart is Empty</span>
+              </div>             
+              </div>
+              <div class="add_cart" *ngIf="showBagPopup && cartService.cartDetails && cartService.cartDetails['cart_list'] && objectKeys(cartService.cartDetails['cart_list']).length > 0">
+                <div class="head">
+                    <span >Your Cart ({{objectKeys(cartService.cartDetails['cart_list']).length}} Items)</span>
+                </div>
+                  <div class="cartlistbox" *ngIf="objectKeys(cartService.cartDetails['cart_list']).length > 0">
+                      <div class="inerblog_row" *ngFor="let key of objectKeys(cartService.cartDetails['cart_list'])">
+                          <ng-container *ngIf="key != 'total_amount'">
+                          <div class="productbox">
+                              <img [src]="cartService.cartDetails['cart_list'][key]['product_image']|imagetransform:['product','200','cover']">
+                          </div>
+                          <div class="countingbox">
+                              <div class="item_name cur_pointer" (click)="navigateToDetailPage(cartService.cartDetails['cart_list'][key]['product_slug'])">
+                                  {{cartService.cartDetails['cart_list'][key]['product_name']}}
+                              </div>
+                              <div class="count_box">
+                                  <button class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']-1)">
+                                      <span class="icon-minus"></span>
+                                  </button>
+                                  <div class="count_no">{{cartService.cartDetails['cart_list'][key]['quantity']}}</div>
+                                  <button  class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']+1)">
+                                      <span class="icon-plus"></span>
+                                  </button>
+                              </div>
+                          </div>
+                          <div class="pricebox"> {{cartService.cartDetails['cart_list'][key]['price'] | money}}</div>
+                          <a class="removebtn" (click)="cartService.removeCartItem(key)"><span class="icon-cross_sml"></span></a>
+                        </ng-container>
+                      </div>
+                  </div>
+                  <div class="cartfoot" *ngIf="objectKeys(cartService.cartDetails['cart_list']).length > 0">
+                      <!-- <button class="basketbtn styleCursor"></button> -->
+                      <button class="checkoutbtn styleCursor" (click)="navigateToUrl('/cart')">CHECKOUT</button>
+                  </div>
+              </div>
+          </li>
+          </ul>
+        </div>
+
+        <!-- add for mobile -->
+        <div class="wishlist mobile" #mobBag>
+            <ul>
+              <li>
+                  <a href="javascript:void(0)">
+                  <span class="icon-search" (click)="open_serchbox()"></span>
+                </a>
+                <div class="add_cart mobile_addcart" *ngIf="showBagPopupMob && cartService.cartDetails">
+                    <div class="head" *ngIf="objectKeys(cartService.cartDetails).length > 0 ">Your Bag has ({{objectKeys(cartService.cartDetails['cart_list']).length}} Items)</div>
+                    <div class="head" *ngIf="objectKeys(cartService.cartDetails).length == 0 ">Your Bag is empty</div>
+                    <div class="cartlistbox">
+                        <div class="inerblog_row" *ngFor="let key of objectKeys(cartService.cartDetails['cart_list'])">
+                            <div class="productbox">
+                                <img [src]="cartService.cartDetails['cart_list'][key]['product_image']|imagetransform:['product','200','cover']">
+                            </div>
+                            <div class="countingbox">
+                                <div class="item_name" (click)="navigateToDetailPage(cartService.cartDetails['cart_list'][key]['product_slug'])">
+                                    {{cartService.cartDetails['cart_list'][key]['product_name']}}
+                                </div>
+                                <div class="count_box">
+                                    <button class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']-1)">
+                                        <span class="icon-minus"></span>
+                                    </button>
+                                    <div class="count_no">{{cartService.cartDetails['cart_list'][key]['quantity']}}</div>
+                                    <button  class="count_btn" (click)="cartService.addOrRemoveItem(key,cartService.cartDetails['cart_list'][key]['quantity']+1)">
+                                        <span class="icon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pricebox"> {{cartService.cartDetails['cart_list'][key]['price'] | money}}</div>
+                            <a class="removebtn" (click)="cartService.removeCartItem(key)"><span class="icon-cross_sml"></span></a>
+                        </div>
+                    </div>
+                    <div class="cartfoot" *ngIf="objectKeys(cartService.cartDetails['cart_list']).length > 0">
+                        <!-- <button class="basketbtn">VIEW BASKET</button> -->
+                        <button class="checkoutbtn" (click)="navigateToUrl('/cart')">CHECKOUT</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="onChangeSelectOption()"><span class="icon-location_delivery-address"></span></a>
+            </li>
+            <!-- <li>
+                <a href="javascript:void(0)" (click)="onChangeStoreType()"><span class="icon-location_delivery-address"></span></a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="onChangeWareHouse()"><span class="icon-location_delivery-address"></span></a>
+            </li> -->
+            <li>
+                <a href="javascript:void(0)" class="bagcount" (click)="toggleBagPopupMob()">
+                <span class="icon-paper-bag"></span>
+                <div class="count_rount" *ngIf="objectKeys(cartService.cartDetails).length > 0 ">{{objectKeys(cartService.cartDetails['cart_list']).length}}</div>
+              </a>
+            </li>
+            </ul>
+        </div>
+          <!-- add for mobile -->
+        <!-- search box end -->
+      </div>
+    </div>
+    <!-- Listing page menu start -->
+    <!-- <div class="main_nav listing">
+      <div class="cuswrap">
+          <div class="listing_name_box">
+              <a href="#"><span class="icon-left-arrow"></span>Fruits & Vegetables</a>
+          </div>
+          <a href="#" class="togglemenu">
+              <div class="line"></div>
+          </a>
+        <div class="logo"><img src="assets/images/logo.png"></div>
+        <div class="navsec">
+            <ul>
+              <li><a href="#">GROCERY</a></li>
+              <li><a href="#">HOUSEHOLD</a></li>
+              <li><a href="#">FRUITS & VEGETABLES</a></li>
+              <li><a href="#">BEVERAGES</a></li>  
+            </ul>
+        </div>
+        <div class="topserchbox">
+            <a class="serchicn"><span class="icon-search"></span></a> 
+          <input placeholder="Search for product" type="search">
+                <div class="serch_dropbox" (click)="close_search_div('desk')">
+                    <div class="headsec">
+                        <div class="intext">Showing result for <span>{{show_result}}</span></div>
+                        <div class="intext">
+                            <a href="#">View all products</a>
+                        </div>
+                    </div>
+                    <div class="serchinnerbox">
+                        <div class="serchrow">
+                            <div class="leftpdc_sec">
+                                <div class="productbox">
+                                    <img src="assets/images/noimg.png"  alt="">
+                                </div>
+                              
+                                <div class="item_name">
+                                    <span>Fresh</span>
+                                    Green<span class="cmnword">Peas</span> Fresh
+                                </div>
+                            </div>
+                            <div class="rightamt_sec">
+                                <div class="pricebox">1kg</div>
+                                <div class="pricebox">
+                                    $100.00
+                                </div>
+                                <div class="count_box">
+                                    <button class="adto_cart"><span
+                                            class="icon-shopping-cart"></span>Add to cart</button>
+                                    <button class="count_btn">
+                                        <span class="icon-substract"></span>
+                                    </button>
+                                    <div class="count_no">5</div>
+                                    <button class="count_btn">
+                                        <span class="icon-add"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+        </div>
+        <div class="wishlist">
+            <ul>
+              <li><a href="#"><span class="icon-wishlist"></span>Wishlist</a>
+                <div class="add_cart">
+                    <div class="head">Your Bag (5 Items)</div>
+                    <div class="cartlistbox">
+                        <div class="inerblog_row">
+                            <div class="productbox">
+                                <img src="assets/images/Layer_16.png">
+                            </div>
+                            <div class="countingbox">
+                                <div class="item_name">
+                                    Green Peas Fresh 
+                                </div>
+                                <div class="count_box">
+                                    <button class="count_btn">
+                                        <span class="icon-minus"></span>
+                                    </button>
+                                    <div class="count_no">5</div>
+                                    <button  class="count_btn">
+                                        <span class="icon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pricebox"> $12.00</div>
+                            <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </li>
+              <li><a href="#"><span class="icon-paper-bag"></span>Bag</a></li>
+            </ul>
+        </div>
+        <div class="wishlist mobile">
+            <ul>
+              <li>
+                  <a href="#">
+                  <span class="icon-search"></span>
+                </a>
+                
+                <div class="add_cart">
+                    <div class="head">Your Bag (5 Items)</div>
+                    <div class="cartlistbox">
+                        <div class="inerblog_row">
+                            <div class="productbox">
+                                <img src="assets/images/Layer_16.png">
+                            </div>
+                            <div class="countingbox">
+                                <div class="item_name">
+                                    Green Peas Fresh 
+                                </div>
+                                <div class="count_box">
+                                    <button class="count_btn">
+                                        <span class="icon-minus"></span>
+                                    </button>
+                                    <div class="count_no">5</div>
+                                    <button  class="count_btn">
+                                        <span class="icon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pricebox"> $12.00</div>
+                            <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                        <div class="inerblog_row">
+                                <div class="productbox">
+                                    <img src="assets/images/Layer_16.png">
+                                </div>
+                                <div class="countingbox">
+                                    <div class="item_name">
+                                        Green Peas Fresh 
+                                    </div>
+                                    <div class="count_box">
+                                        <button class="count_btn">
+                                            <span class="icon-minus"></span>
+                                        </button>
+                                        <div class="count_no">5</div>
+                                        <button  class="count_btn">
+                                            <span class="icon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pricebox"> $12.00</div>
+                                <a class="removebtn"><span class="icon-cross_sml"></span></a>
+                        </div>
+                    </div>
+                    <div class="cartfoot">
+                        <button class="basketbtn">VIEW BASKET</button>
+                        <button class="checkoutbtn">CHECKOUT</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#"><span class="icon-location_delivery-address"></span></a>
+            </li>
+              <li><a href="#"><span class="icon-paper-bag"></span></a></li>
+            </ul>
+        </div>
+      </div>
+    </div> -->
+    <!-- Listing page menu end -->
+  </div>
+</header>
+</ng-container>
+<!-- Desktop Header End -->

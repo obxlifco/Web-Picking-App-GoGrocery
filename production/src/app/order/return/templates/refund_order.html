@@ -1,0 +1,310 @@
+<section class="right-part filter-pad" style="padding-top: 160px;">
+    <form #refundOrderForm="ngForm" novalidate (ngSubmit)="refundOrderForm.valid && saveRefundOrder(refundOrderForm)">
+        <div class="topheading">
+            <h1>Order No {{orderData.custom_order_id}}
+                <div class="btn-header">
+                    <button mat-raised-button class="btn-main" type="submit" *ngIf="is_disable_save">Save</button>
+                    <button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+            </h1>
+        </div>
+        <div class="body-part">
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-sm-12" *ngIf="successMsg">
+                    <div class="alert alert-success" ><strong>Success!</strong>{{successMsg}}</div>
+                </div>
+                <div class="col-sm-12" *ngIf="errorMsg">
+                    <div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="box">
+                        
+                        <div class="row">
+                            <div class="col-sm-4">
+                                Store : {{orderData.warehouse_name}}
+                            </div>
+                            <div class="col-sm-4">
+                                Order Id : {{orderData.custom_order_id}}
+                            </div>
+                            <div class="col-sm-4">
+                                Date : {{orderData.created | date:'short'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">Customer Info</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td>Customer Name :</td>
+                                            <td><span>{{orderData.customer?.first_name}} {{orderData.customer?.last_name}} </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email Address :</td>
+                                            <td><span>{{orderData.customer?.email}} </span> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mobile Number :</td>
+                                            <td><span>{{orderData.customer?.phone}}  </span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">
+                                    <span>Delivery Information</span>
+                                </div>
+                                <div class="vieworder_innertable" >
+                                    <table cellpadding="0" cellspacing="0"  class="view_order_responsive">
+                                        <!--<tr>
+                                            <td>Zone :</td>
+                                            <td><span> {{orderData.zone_name}}</span> </td>
+                                        </tr>-->
+                                        <tr>
+                                            <td>Delivery Date :</td>
+                                            <td><span> {{orderData.time_slot_date}}</span> </td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td>Delivery Time :</td>
+                                            <td><span>{{orderData.time_slot_id}}</span></td>
+                                        </tr>-->
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">Delivery Address</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td>Address :</td>
+                                            <td><span>{{orderData.delivery_street_address}} </span> </td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td>Area :</td>
+                                            <td><span>{{orderData.delivery_street_address1}}</span> </td>
+                                        </tr>-->
+                                        <tr *ngIf="orderData.delivery_country_name">
+                                            <td>Country :</td>
+                                            <td><span> {{orderData.delivery_country_name}}</span></td>
+                                        </tr>
+                                        <tr *ngIf="orderData.delivery_state_name">
+                                            <td>State :</td>
+                                            <td><span>{{orderData.delivery_state_name}}</span></td>
+                                        </tr>
+                                        <tr *ngIf="orderData.delivery_city">
+                                            <td>City :</td>
+                                            <td><span>{{orderData.delivery_city}}</span></td>
+                                        </tr>
+                                        <tr *ngIf="orderData.delivery_postcode">
+                                            <td>Zipcode :</td>
+                                            <td><span>{{orderData.delivery_postcode}} </span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">Payment Type</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td>Payment Method :</td>
+                                            <td><span>{{orderData.payment_method_name}}</span> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Currency :</td>
+                                            <td><span>{{orderData.currency_code}}</span> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Transaction ID :</td>
+                                            <td><span>{{orderData.pay_txntranid}}</span></td>
+                                        </tr>
+                                        <tr *ngIf="orderData.received_status">
+                                            <td width="25%"><span>Payment Status :</span></td>
+                                            <td>{{orderData.received_status}}</td>
+                                        </tr>
+                                        <tr *ngIf="orderData.pay_txndate">
+                                            <td width="25%"><span>Payment Date :</span></td>
+                                            <td>{{orderData.pay_txndate}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6" *ngIf="formModel.return_order_type==1">
+                            <div class="box">
+                                <div class="heading">Reason For Cancellation</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td>
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Select Reason For Cancellation</mat-label>
+                                                    <mat-select required placeholder="Select Reason For Cancellation" #return_note="ngModel" name="return_note" [(ngModel)]="formModel.return_note">
+                                                        <mat-option *ngFor="let return_txt of return_note_arr_full" [value]="return_txt.text">{{return_txt.text}}</mat-option>
+                                                    </mat-select>
+                                                    <mat-error *ngIf="return_note.errors && return_note.errors.required">Please select a return type</mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td *ngIf="formModel.return_note == 'Others'">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Enter the reason for return</mat-label>
+                                                    <input matInput placeholder="Enter the reason for return" #return_others_reason="ngModel" name="return_others_reason" [(ngModel)]="formModel.return_others_reason">
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="heading">
+                                    <span>Item Information</span>
+                                </div>
+                                <div class="vieworder_item">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>SKU </th>
+                                                <th>Qty</th>
+                                                <th>Invoiced</th>
+                                                <th>Shortage</th>
+                                                <th>Return Qty</th>
+                                                <th>Returned</th>
+                                                <th>Price</th>
+                                                <th>Discount</th>
+                                                <th>Total</th>
+                                                <th *ngIf="formModel.return_order_type==2">Reason</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr *ngFor="let product_list of orderData.order_products; let i = index">
+                                                <td data-th="Product Name"><label>{{product_list["product"]["name"]}}</label></td>
+                                                <td data-th="SKU"><label>{{product_list["product"]["sku"]}}</label></td>
+                                                <td data-th="Qty">{{product_list.quantity}}</td>
+                                                <td data-th="Invoiced"> {{product_list.invoice_product}} </td>
+                                                <td data-th="Shortage"> {{product_list.shortage}} </td>
+                                                <td data-th="Return Qty">
+                                                    <mat-form-field appearance="outline">
+                                                      <input matInput [disabled]="formModel.return_order_type==1" type="number" name="quantityrefund_{{index}}" pattern="[0-9]+" #quantityrefund="ngModel" [(ngModel)]="product_list.quantityrefund">
+                                                        <mat-error *ngIf="quantityrefund.errors && quantityrefund.errors.pattern">
+                                                            Enter numeric values only
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </td>
+                                                <td data-th="Returned"> {{product_list.returns}} </td>
+                                                <td data-th="Price" class="align-middle">{{formModel.currencyCode}} {{(product_list.product_price+product_list.product_discount_price+product_list.product_tax_price) | number: '1.2-2'}}</td>
+                                                <td data-th="Discount" class="align-middle">{{formModel.currencyCode}} {{(product_list.product_discount_price*product_list.quantity) | number: '1.2-2'}}</td>
+                                                <td data-th="Total" class="align-middle" *ngIf="taxSettings.display_prices == 'Excluding Tax' ">{{formModel.currencyCode}} {{((product_list.product_price*product_list.quantity)) | number: '1.2-2'}}</td>
+    
+                                                <td *ngIf="formModel.return_order_type==2" data-th="Reason">
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select required placeholder="Select Reason For Cancellation" #return_request_message="ngModel" name="return_request_message_{{index}}" [(ngModel)]="product_list.return_request_message">
+                                                            <mat-option *ngFor="let return_txt of return_note_arr_partial" [value]="return_txt.text">{{return_txt.text}}</mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="return_request_message.errors && return_request_message.errors.required">Please select a return type</mat-error>
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="align-middle" data-th="Reason" *ngIf="taxSettings.display_prices == 'Including Tax' || taxSettings.display_prices =='Including and Excluding Tax' ">{{formModel.currencyCode}} {{((product_list.product_price*product_list.quantity)+(product_list.product_tax_price*product_list.quantity)) | number: '1.2-2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">
+                                    <span>Special Instruction</span>
+                                </div>
+                                <div class="clear"></div>
+                                <label>{{orderData.custom_msg!="" ?  orderData.custom_msg : 'No Instructions found.'}}</label>
+                            </div>
+                        </div>
+                       
+                        <div class="col-sm-6">
+                                <div class="box">
+                                    <div class="heading">
+                                        <span>Order Summary</span>
+                                    </div>
+                                    <ul class="box-list">
+                                        <li *ngIf="orderData.net_amount > 0">
+                                            <div class="text">Net Amount: </div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.net_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.pay_wallet_amount > 0">
+                                            <div class="text">Pay by wallet :</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.pay_wallet_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.tax_amount > 0">
+                                            <div class="text">Tax Amount:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.tax_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.shipping_cost > 0">
+                                            <div class="text">Shipping Cost:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.shipping_cost | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        
+                                        <li *ngIf="orderData.cod_charge > 0">
+                                            <div class="text">COD Cost:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.cod_charge | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.cart_discount > 0">
+                                            <div class="text">Coupon Discount:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.cart_discount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li>
+                                            <div class="text">Grand Total:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.gross_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li class="amountpaid">
+                                            <div class="text">Amount Paid:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.paid_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Start order activities -->
+                    <order-activity [orderInfo]="orderInfo"></order-activity>
+                </div>
+            </div>
+            <div class="clear"></div> 
+            <!-- ///////////////Buttons//// -->
+            <div class="btn-header hidden-xs">
+                <button mat-raised-button class="btn-main" type="submit" *ngIf="is_disable_save">Save</button>
+                <button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+            </div>
+            <!-- ///////////////Buttons//// -->
+            <div class="clear"></div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,74 @@
+<form #paymentForm="ngForm" novalidate (ngSubmit)="paymentForm.valid && savePayment(paymentForm)">
+<section class="right-part filter-pad addall_page">
+    <div class="topheading">
+    	<div class="heading-left">
+	        <h1> Basic Setup
+				<div class="btn-header">
+					<button type="submit" mat-raised-button class="btn-main">Continue</button>
+					  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					  <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  </div>
+				<div class="clear"></div>
+			</h1>
+	    </div>            
+    </div>
+
+    <div class="filter filter-stp">
+		<div class="stap">
+			<ul>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId]">Basic Setup</a></li>
+				<!-- <li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId+'/template']">Select Template</a></li> -->
+				<li class="active">Payment Gateway</li>
+				<li>Shipping</li>
+				<!-- <li>Channel Setup</li> -->
+			</ul>
+		</div>	
+    </div>	
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="fixed-width">
+			<div class="box" *ngFor="let payment of payment_list">
+				<div class="heading">{{payment.name}}</div>
+				<div class="row mt-2">
+					<div class="col-md-3 col-sm-4"><img src="assets/images/payments/{{payment.image}}"  class="img-responsive" alt=""/></div>
+					<ng-container *ngFor="let method of payment.payment_method">
+						<div class="col-md-9 col-sm-8">
+							<mat-checkbox name="payment_methods{{method.id}}"  [(ngModel)]="method.is_checked" id="payment_method{{method.id}}" value="{{method.id}}"><strong>{{method.name}}</strong></mat-checkbox>
+							
+							<div class="ml-1" [innerHTML]="method.description"></div>
+
+							<div class="row ml-1" *ngIf="method.payment_field.length>0">
+								
+								<div class="col-md-6" *ngFor="let field of method.payment_field">
+									<mat-form-field appearance="outline" class="md-block" *ngIf="field.setting_default_val=='textbox'">
+										<mat-label>{{field.setting_label}}</mat-label>
+										<input matInput placeholder="{{field.setting_label}}" name="{{field.setting_key}}" [required]="method.is_checked==1" [(ngModel)]="field.values">
+									</mat-form-field>
+
+									<div *ngIf="field.setting_default_val=='checkbox'">
+										<mat-checkbox name="{{field.setting_key}}" [(ngModel)]="field.values"><strong>{{field.setting_label}}</strong></mat-checkbox>
+									</div>
+								</div>
+								
+							</div>
+
+						</div>
+						<div class="col-md-3 col-sm-4">
+						</div>						
+					</ng-container>	
+				</div>
+			</div>
+					
+		</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="btn-header hidden-xs">
+			<button type="submit" mat-raised-button class="btn-main">Continue</button>
+			<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		</div> 
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    
+    </div>
+    <div class="clear"></div>
+  </section>
+</form>
+

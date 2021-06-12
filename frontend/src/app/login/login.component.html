@@ -1,0 +1,74 @@
+
+
+    <section  class="pmc_order_con ">
+        <form #loginForm="ngForm" novalidate (ngSubmit)="loginForm.valid && check_login()">
+            <div class="pop_upbg">
+                <!-- <div style="background-image:url(assets/images/LoginSample_2_Copy.png); background-size: cover;  background-repeat: no-repeat;  border-radius: 6px;"> -->
+                <div class="loginbox mobile login_background">
+                    <div class="logo_section">
+                        <img src=".\assets\img\gogrocery-logo-big.png" height="130px" width="170px" alt="">
+                    </div>
+                    <div class="crossbtn"><a href="javascript:void(0)" (click)="closeDialog()"><span class="icon-cross_sml"></span></a></div>
+
+                    <!-- <div class="image_panel" style="background-image:url(assets/images/loging_bg.jpg)"></div> -->
+                    
+
+                    <div class="text_panel">
+                        <!-- <div class="head">Login to GoGrocery</div>
+                        <div class="row">
+                            <button type="button" class="facebookbtn" (click)="socialLogin('facebook')"><span><img src="assets/images/facebook.png"></span>Facebook</button>
+                            <button type="button" class="google" (click)="socialLogin('google')"><span><img src="assets/images/google.png"></span>Google</button>
+                        </div>
+                        <div class="ortext">Or login with</div> -->
+                        <div class="row">
+                        <mat-form-field appearances="outline">
+                            <mat-label>Email</mat-label>
+                            <span matPrefix class="input_prefix"><img src=".\assets\images\icon-mail.png" alt=""></span>
+                            <input matInput placeholder="Email" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': loginForm.submitted && email.invalid }" required email>
+                            </mat-form-field>
+                        </div>
+                        <div class="row" >
+                        <mat-form-field>
+                            <span matPrefix class="input_prefix"><img src=".\assets\images\icon-padlock.png" alt=""></span>
+                            <input matInput placeholder="Password" [attr.type]="hide"   name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': loginForm.submitted && password.invalid }" required >
+                            <button type="button" mat-icon-button matSuffix (click)="showPassword()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="staysign"><mat-checkbox [(ngModel)]="isChecked" [ngModelOptions]="{standalone: true}">Remember Me </mat-checkbox></div>
+                            <div class="forget_pass"><a href="javascript:void(0)" (click)="forgetpassword()">Forgot Password?</a></div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" [ngClass]="loginForm.valid? 'signin_btn': 'signin_btn_disable'" [disabled]="!loginForm.valid">SIGN IN</button>
+                        </div> -->
+                        <div class="buttons_section">
+                            <button type="submit" [ngClass]="loginForm.valid? 'new_signin_btn': 'new_signin_btn_disable'" [disabled]="!loginForm.valid">SIGN IN</button>
+                            <!-- <button type="button" class="guest_btn" (click)="closeDialog()"  >I'M A GUEST</button> -->
+                            <div class="forgot_password_text">
+                                <a href="javascript:void(0)" (click)="forgetpassword()">Forgot Password ?</a>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="login_social_media_btns">
+                                <button  (click)="socialLogin('facebook')" type="button" class="login_facebookbtn"><i class="fa fa-facebook-square socialmedia_icon"></i>FACEBOOK</button>
+                                <button  (click)="socialLogin('google')" type="button" class="login_googlebtn"><i class="fa fa-google socialmedia_icon"></i>GOOGLE</button>
+                            </div>
+                          </div>
+                        <div class="row" *ngIf="isError"><span style="color:red;text-align: center;margin: 0px auto;">{{error}}</span></div>
+                        <div class="row">
+                        <!-- <div class="signuptext">Don’t have an account? <a href="javascript:void(0)" (click)="onSignUpRequest()">Sign Up</a></div> -->
+                        <div class="create_account_text">
+                            <p>Don’t have an account? <a href="javascript:void(0)" (click)="onSignUpRequest()">Sign Up</a></p>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+            <!-- </div> -->
+        </form>
+    </section>
+        

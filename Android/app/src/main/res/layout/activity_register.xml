@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_registration"
+                tools:context=".view.LoginActivity">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/header_registration" />
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ivLogo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:text="@string/create_account"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_15sdp"
+                   />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/tilname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt1"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:hint="@string/first_name"
+                    app:boxStrokeColor="#10893C"
+                    app:hintTextAppearance="@style/customHintApperance">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvNameRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:fontFamily="@font/proxima_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tiladdress"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilname"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/hind"
+                    android:hint="@string/address"
+                    android:visibility="gone"
+                    app:boxStrokeColor="#10893C"
+                    app:hintTextAppearance="@style/customHintApperance">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvAddressRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/hind" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilname"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:hint="@string/txtLastName"
+                    app:boxStrokeColor="#10893C"
+                    app:hintTextAppearance="@style/customHintApperance">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvLastNameRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:fontFamily="@font/proxima_regular" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/llcontact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilLastName"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilExtension"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tilFirstname"
+                        app:boxStrokeColor="#10893C"
+                        app:hintTextAppearance="@style/customHintApperance">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtExtension"
+                            android:enabled="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:fontFamily="@font/hind"
+                            android:text="+971"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCarrierNo"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tilMobileNo"
+                        android:hint="CC  "
+                        android:tooltipText="Carrier code"
+                        app:boxStrokeColor="#10893C"
+                        app:hintTextAppearance="@style/customHintApperance">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCarrierNo"
+                            android:tooltipText="Carrier code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/drop_down_arrow"
+                            android:editable="false"
+                            android:fontFamily="@font/hind"
+                            android:hint="CC  "
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/transparent" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilmobileno"
+                        android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/hind"
+                        android:hint="@string/mobileno"
+                        app:boxStrokeColor="#10893C"
+                        app:hintTextAppearance="@style/customHintApperance">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tvMobileRegister"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/hind"
+                            android:maxLines="1"
+                            android:maxLength="7"
+                            android:inputType="phone" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilemailaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llcontact"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/proxima_regular"
+                   android:hint="@string/txtEmail"
+                    app:boxStrokeColor="#10893C"
+                    app:hintTextAppearance="@style/customHintApperance">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvEmailRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:inputType="textEmailAddress"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:fontFamily="@font/proxima_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilemailaddress"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/proxima_regular"
+                    android:hint="@string/password"
+                    app:boxStrokeColor="#10893C"
+                    app:boxStrokeWidth="0dp"
+                    app:hintTextAppearance="@style/customHintApperance"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvPasswordRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:inputType="textPassword"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:fontFamily="@font/proxima_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tilPassword"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:background="@drawable/green_round_side"
+                    android:fontFamily="@font/proxima_regular"
+                    android:text="@string/next"
+                    android:ellipsize="end"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"/>
+
+
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnSignup"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_weight="1"
+                        android:background="@color/translucent"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/proxima_regular"
+                        android:gravity="center"
+                        android:ellipsize="end"
+                        android:textAlignment="center"
+                        android:text="@string/privacy_policy" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_weight="1"
+                        android:background="@color/translucent"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:layout_below="@id/ll1"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/llFacebook"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/facebook"/>
+                        <ImageView
+                            android:id="@+id/llGoogle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/google"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="7.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/facebook"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="9dp"
+                            android:src="@drawable/ic_fb"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:fontFamily="@font/proxima_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/facebook"
+                            android:textColor="@color/white"
+                            android:textAllCaps="true"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="7.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/google"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="9dp"
+                            android:src="@drawable/ic_google"
+                            android:visibility="gone"/>
+
+                        <TextView
+                            android:fontFamily="@font/proxima_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/google"
+                            android:textColor="@color/white"
+                            android:textAllCaps="true"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll2"
+android:layout_marginBottom="@dimen/_16sdp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/proxima_regular"
+                        android:text="@string/already_acc" />
+
+                    <TextView
+                        android:id="@+id/tvSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:fontFamily="@font/proxima_bold"
+                        android:text="@string/signin_"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/green_new" />
+    </RelativeLayout>
+</layout>

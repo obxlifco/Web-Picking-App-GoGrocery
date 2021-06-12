@@ -1,0 +1,40 @@
+<!-- <div class="promocodebox"> -->
+    <!-- <div class="subhead" [ngClass]="appliedPromoCode ? 'promoapplyed' : 'applyPromoCode'">
+      Promo Code
+      <ng-container  *ngIf="appliedPromoCode && appliedPromoCode['status'] == 1;else requestForApplyPromo">
+      <div class="promo_amount">You have save-$20</div>
+      <button class="removepromo_btn">Remove</button>
+     </ng-container>
+     <ng-template #requestForApplyPromo>
+      <button class="applybtn" (click)="requestForApplyPromoCode()">apply</button>
+    </ng-template>
+      <div class="applypromo" *ngIf="onApplyPromo">
+          <div class="promo_inpouter">
+              <input type="text" [(ngModel)]="promoCode" (keyup)="resetPromoCode()">
+              <p *ngIf="appliedPromoCode && appliedPromoCode['status'] == 0">Invalid Promocode</p>
+              <button class="applytext" (click)="applyPromoCode()">apply</button>
+          </div>
+      </div>
+    </div> -->
+    
+<div class="subhead" *ngIf="promocodeApplyBoxStatus == 0">
+    Promo Code
+    <button class="applybtn" (click)="requestForApplyPromoCode();">apply</button>
+</div>
+
+<div class="subhead promoapply" *ngIf="promocodeApplyBoxStatus == 1">
+  <div class="applypromo">
+      <div class="promo_inpouter">
+          <input type="text" [(ngModel)]="promoCode" (keyup)="resetPromoCode()">
+          <button class="applytext" (click)="applyPromoCode()">apply</button>
+      </div>
+  </div>
+  <br>
+</div>
+
+<div class="subhead promoapplyed" *ngIf="promocodeApplyBoxStatus == 2">
+  Promo Code
+  <div class="promo_amount">You have save-{{appliedPromoCode['amount'] | money}}</div>
+  <button class="removepromo_btn" (click)="removePromocode()">Remove</button>
+  <button class="applybtn">apply</button>
+</div>

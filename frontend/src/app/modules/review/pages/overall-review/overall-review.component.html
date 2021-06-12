@@ -1,0 +1,37 @@
+<div class="overall_rating_top">
+    <div class="customer_rating">
+        <h3>Customer Overall Reviews</h3>
+        <div class="counting_row">
+            <div class="bigrating_text">
+                <div class="bigpoint">{{rating | number:'1.1-1'}}</div>
+                <div class="rating_stargrp">
+                    <span class="icon-star" [ngClass]="{'select': rating >= 1}"></span>
+                    <span class="icon-star" [ngClass]="{'select': rating >= 2}"></span>
+                    <span class="icon-star" [ngClass]="{'select': rating >= 3}"></span>
+                    <span class="icon-star" [ngClass]="{'select': rating >= 4}"></span>
+                    <span class="icon-star" [ngClass]="{'select': rating >= 5}"></span>
+                </div>
+                <p>Average Rating</p>
+            </div>
+            <div class="rating_graph_row">
+                <div class="ratingrow" *ngFor="let ratData of rating_data">
+                    <div class="val">{{ratData.rating}} Star</div>
+                    <div class="line">
+                        <div class="good" [style.width.%]="[ratData.percent]" *ngIf="ratData.rating >= 3"></div>
+                        <div class="avarage" [style.width.%]="[ratData.percent]"  *ngIf="ratData.rating == 2"></div>
+                        <div class="worst" [style.width.%]="[ratData.percent]"  *ngIf="ratData.rating == 1"></div>
+                    </div>
+                    <div class="val">{{ratData.percent | number:'2.0-0'}}%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rate_product">
+        <h3>Review This Product</h3>
+        <p>Share your thoughts with other customers</p>
+        <div class="btnrow">
+            <button class="red_line_medum_btn" *ngIf="this.authenticationService.userFirstName!=undefined;" (click)="showrateForm()" >RATE PRODUCT</button>
+            <button class="red_line_medum_btn" *ngIf="this.authenticationService.userFirstName==undefined;" (click)="showrateForm()" >RATE PRODUCT</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بقالة الذهاب</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="need_permissions">Need Permissions</string>
+    <string name="this_app_needs_permission_to_use_this_feature">السماح لـ Gogrocery بالوصول إلى موقع هذا الجهاز.</string>
+    <string name="go_to_settings">اذهب للاعدادات.</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="discount">خصم</string>
+    <string name="delivery_charge">رسوم التوصيل</string>
+    <string name="estimated_tax">الضريبة المقدرة</string>
+    <string name="total_amount">المبلغ الإجمالي</string>
+    <string name="total">مجموع</string>
+    <string name="error_something_went_wrong">حدث خطأ ما. أعد المحاولة من فضلك.</string>
+    <!--    <string name="error_no_delivery_msg">We don\'t deliver to your location yet</string>-->
+    <string name="error_no_store_msg">لا توجد مثل هذه المتاجر المتاحة في هذا المجال حتى الآن.</string>
+    <string name="error_no_delivery_msg">نحن لا نسلم إلى موقعك</string>
+    <string name="error_try_again_later">حاول مرة أخرى في وقت لاحق.</string>
+    <string name="error_no_product_fount">لم يتم العثور على أي منتج!</string>
+    <string name="current_curremcy">AED</string>
+    <string name="current_curremcy_zero">AED 0.00</string>
+    <string name="something_went_wrong">هناك خطأ ما! حاول مرة أخرى في وقت لاحق</string>
+    <string name="default_notification_channel_id">com.gogrocery</string>
+
+
+    <!-- Sign In Page String -->
+    <string name="ltgg">تسجيل الدخول إلى GoGrocery</string>
+    <string name="username">اسم المستخدم او رقم الجوال</string>
+    <string name="password">كلمة المرور</string>
+    <string name="signin">كلمة المرور</string>
+    <string name="forgetpass">هل نسيت كلمة السر؟</string>
+    <string name="logiin_opt">أو تسجيل الدخول باستخدام</string>
+    <string name="facebook">موقع التواصل الاجتماعي الفيسبوك</string>
+    <string name="google">غوغل</string>
+    <string name="no_acc_signup">ليس لديك حساب؟</string>
+    <string name="sign_up">اشتراك</string>
+    <string name="filed_empty_error">هذا المجال لا يمكن أن يكون فارغا</string>
+    <string name="login_field_error">الرجاء إدخال معرف بريد إلكتروني صالح</string>
+    <string name="login_password_error">الرجاء إدخال كلمة المرور</string>
+    <string name="tvText_not_wishlist_item_Found"> قائمة رغباتك فارغة!</string>
+    <!-- Sign In Page String -->
+
+
+    <!-- Signup Page -->
+    <string name="wlcm_grocry">مرحبًا بك في GoGrocery</string>
+    <string name="name">اسم</string>
+    <string name="address">تبوك</string>
+    <string name="mobileno">رقم المحمول</string>
+    <string name="emailaddress">عنوان بريد الكتروني</string>
+    <string name="register_opt">أو سجل مع</string>
+    <string name="already_acc">هل لديك حساب؟</string>
+    <string name="signin_">تسجيل الدخول</string>
+    <string name="ok">تمام</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="add">يضيف</string>
+    <string name="_50">50   </string>
+    <string name="_52">52 </string>
+    <string name="_53">53 </string>
+    <string name="_54">54 </string>
+    <string name="_55">55 </string>
+    <string name="_56">56 </string>
+    <string name="_58">58 </string>
+    <!-- Signup Page -->
+
+
+    <string name="forgetpass_page">هل نسيت كلمة السر</string>
+    <!--<string name="forgetpass_txt1">We will send you a link to reset your password. Enter registered email address...</string>-->
+    <string name="forgetpass_txt1">قم بتأكيد عنوان بريدك الإلكتروني \ n وسنرسل لك التعليمات</string>
+    <string name="srl">إرسال رابط إعادة التعيين</string>
+    <string name="vw_cart">عرض عربة التسوق</string>
+
+
+    <!-- ########################### HOME PAGE ###############################################-->
+    <string name="sbc">تسوق حسب الاقسام</string>
+    <string name="dotd">Deals Of The Day</string>
+    <string name="bsp">Best Selling Products</string>
+    <string name="show_all">Show All</string>
+    <string name="home_sbb">Shop By Brand</string>
+    <string name="atc">أضف إلى السلة</string>
+
+    <!-- ########################### HOME PAGE ###############################################-->
+
+    <!-- Side Menu -->
+    <string name="side_menu_mo">طلباتي</string>
+    <string name="side_menu_home">تغيير الموقع</string>
+    <string name="side_menu_change_store">تغيير المتجر</string>
+    <string name="side_menu_sbc">تسوق حسب الاقسام</string>
+    <string name="side_menu_mc">عربة التسوق الخاصة بي</string>
+    <string name="side_menu_mw">قائمة امنياتي</string>
+    <string name="side_menu_mf">مفضلتي</string>
+    <string name="side_menu_ma">حسابي</string>
+    <string name="side_menu_cs">اتصل بنا</string>
+    <string name="side_menu_set">Settings</string>
+    <string name="side_menu_ovp">الرؤية والغرض</string>
+    <string name="side_menu_au">معلومات عنا</string>
+    <string name="side_menu_pp">سياسة خاصة</string>
+    <string name="side_menu_tc">البنود و الظروف</string>
+    <string name="side_menu_qs">معايير الجودة</string>
+    <string name="side_menu_noti">إشعارات</string>
+
+
+    <!-- Side Menu -->
+
+    <!-- ########################### MyAccount PAGE ###########################################-->
+    <string name="myaccount">حسابي</string>
+    <string name="myorders">طلباتي</string>
+    <string name="product_substitutions">بدائل المنتج</string>
+    <string name="myaddresses">عناويني</string>
+    <string name="mywallet">My Wallet &amp; cards</string>
+    <string name="accsetting">إعدادات الحساب</string>
+    <string name="notipref">Notification Preferences</string>
+    <string name="msl"> My Save List</string>
+    <string name="logout">تسجيل خروج</string>
+    <!-- ########################### MyAccount PAGE ###########################################-->
+
+    <!-- Sort Option -->
+    <string name="sort_option">فرز الخيارات</string>
+    <string name="popularity">شعبية</string>
+    <string name="phtl">السعر الاعلى الى الادنى</string>
+    <string name="plth">السعر من الارخص للاعلى</string>
+    <string name="newest_first">القادمون الجدد</string>
+    <string name="dhtl">Discount - High to Low</string>
+    <string name="dlth">Discount - Low to High</string>
+    <string name="cancel">يلغي</string>
+    <string name="apply">يتقدم</string>
+    <string name="alphabetically_sort">List Alphabetically A-Z</string>
+    <!-- Sort Option -->
+    <string name="dialogPositiveButtonText_cancel">@string/cancel</string>
+    <!-- AccountSetting -->
+    <string name="acc_setting_title">إعدادت الحساب</string>
+    <string name="acc_setting_fn">الاسم الاول</string>
+    <string name="acc_setting_ln">الكنية</string>
+    <string name="acc_setting_ea">عنوان بريد الكتروني</string>
+    <string name="acc_setting_mn">رقم المحمول.</string>
+    <string name="acc_setting_gender">جنس تذكير أو تأنيث</string>
+    <string name="acc_setting_cp">تغيير كلمة المرور</string>
+    <string name="acc_setting_da">تعطيل الحساب</string>
+    <string name="acc_setting_sc">حفظ التغييرات</string>
+    <!-- AccountSetting -->
+    <string name="dialogPositiveButtonText_delete">حذف</string>
+    <string name="dialogTitle_deleteFromMyAddress">تأكيد الحذف؟</string>
+    <string name="dialogMessage_deleteFromMyAddress">هل تريد حذف هذا العنوان؟</string>
+    <!-- Change Password  -->
+    <string name="change_password_title">تغيير كلمة المرور</string>
+    <string name="change_password_cp">كلمة المرور الحالي</string>
+    <string name="change_password_np">كلمة السر الجديدة</string>
+    <string name="change_password_cnp">تأكيد كلمة المرور الجديدة</string>
+    <string name="change_password_update">تحديث</string>
+    <!-- Change Password  -->
+    <string name="contact_us_title">اتصل بنا</string>
+    <!--    Detail page -->
+
+    <string name="ioat">(Inclusive of all taxes.)</string>
+    <string name="note_price_change">يرجى ملاحظة أن السعر النهائي للمنتج قد يختلف بسبب اختلاف الوزن</string>
+    <string name="dummy_detail_page_offer1">Instant 10% Cashback on ICICI Bank Debit Cards. (T&amp;C)</string>
+    <string name="dummy_detail_page_offer2">Bank Offer Extra 5% off* with Axis Bank Buzz Credit Card. (T&amp;C)</string>
+    <string name="available_in">Available In:</string>
+    <string name="detail_pd">PRODUCT DESCRIPTION</string>
+    <string name="detail_ingrdients">INGREDIENTS</string>
+    <string name="details_opi">OTHER PRODUCT INFO</string>
+    <string name="similar_product">Similar Products</string>
+    <string name="related_product">منتجات ذات صله</string>
+    <string name="rate_product">RATE PRODUCT</string>
+    <!--   Detail Page  -->
+
+    <!-- My Cart -->
+    <string name="my_cart_title">عربتي</string>
+    <string name="my_cart_options">والخيارات</string>
+    <string name="my_cart_apc">تطبيق الرمز الترويجي</string>
+    <string name="my_cart_os">ملخص الطلب</string>
+    <string name="my_cart_subtotal">المجموع الفرعي</string>
+    <string name="my_cart_discount">خصم</string>
+    <string name="my_cart_dc">رسوم التوصيل</string>
+    <string name="my_cart_sc">تكلفة الشحن</string>
+    <string name="my_cart_et">الضريبة المقدرة</string>
+    <string name="my_cart_ta">المبلغ الإجمالي</string>
+    <string name="my_cart_checkout">الدفع</string>
+    <string name="my_cart_po">مكان الامر</string>
+    <string name="my_cart_vpd">عرض تفاصيل السعر</string>
+    <string name="my_cart_atc">أضف إلى السلة</string>
+    <string name="my_cart_gtc">اذهب إلى عربة التسوق</string>
+    <string name="my_cart_wishlist">WISHLIST</string>
+    <string name="my_cart_rc">استرداد الكوبون</string>
+    <string name="enter_valid_code">أدخل رمزًا صالحًا</string>
+    <string name="please_select_any_reason">الرجاء تحديد أي سبب</string>
+    <!-- My Cart -->
+
+    <!--Listing Page-->
+    <string name="listing_sort">فرز</string>
+    <string name="listing_filtert">المرشحات</string>
+    <!--Listing Page-->
+
+
+    <!-- Delivery Details -->
+    <string name="delivery_details_title">تفاصيل التسليم</string>
+    <string name="delivery_details_da">عنوان التسليم</string>
+    <string name="delivery_details_coaa">تغيير أو إضافة العنوان</string>
+    <string name="delivery_details_do">خيارات التسليم</string>
+
+    <!-- Delivery Details -->
+
+    <!--Add new Address-->
+    <string name="add_new_address_title">أضف عنوانا جديدا</string>
+    <string name="add_new_address_name">اسم</string>
+    <string name="add_new_address_fname">الاسم الاول</string>
+    <string name="add_new_address_lname">الكنية</string>
+    <!--<string name="add_new_address_anhnsn">Apartment Name, House No and Street Name</string>-->
+    <string name="add_new_address_anhnsn">اسم المبنى أو رقمه</string>
+    <!--  <string name="add_new_address_hnosn">House No and Street Name</string>-->
+    <string name="add_new_address_hnosn">رقم الشقة أو المنزل</string>
+    <string name="add_new_address_nl">أقرب معلم</string>
+    <string name="add_new_address_country">دولة</string>
+    <string name="add_new_address_city">City</string>
+    <string name="add_new_address_state">State</string>
+    <string name="add_new_address_pincode">الرمز السري</string>
+    <string name="add_new_address_mn">رقم المحمول.</string>
+    <string name="add_new_address_da">تعيين هذا كعنوان التسليم الافتراضي الخاص بي</string>
+    <string name="add_new_address_cancel">إلغاء</string>
+    <string name="add_new_alternative">رقم الهاتف المتحرك البديل</string>
+    <string name="add_new_address_save">حفظ</string>
+    <string name="add_new_address_error_n">يجب ألا يكون الاسم فارغًا</string>
+    <string name="add_new_address_error_field_empty">Should not be empty</string>
+    <string name="add_new_address_error_area">Area should not be empty</string>
+    <string name="add_new_address_error_fn">First Name should not be empty</string>
+    <string name="add_new_address_error_ln">Last Name should not be empty</string>
+    <string name="add_new_address_error_an">Apartment Name should not be empty</string>
+    <string name="add_new_address_error_sn">House No and Street Name should not be empty</string>
+    <string name="add_new_address_error_nl">Landmark should not be empty</string>
+    <string name="add_new_address_error_country">Country should not be empty</string>
+    <string name="add_new_address_error_city">City should not be empty</string>
+    <string name="add_new_address_error_mobile">يجب ألا يكون رقم الجوال فارغًا</string>
+
+    <!--Add new Address-->
+
+    <!--Payment Option-->
+    <string name="pay_option_title">خيارات الدفع</string>
+    <string name="pay_option_do">خيارات التسليم</string>
+    <string name="pay_option_credit_debit_card">بطاقة الائتمان / الخصم</string>
+    <string name="pay_option_nb">صافي المصرفية</string>
+    <string name="pay_option_cod">الدفع عند الاستلام</string>
+    <string name="pay_option_pgpay">Phone Pe/Google Pay</string>
+    <string name="pay_option_os">ملخص الطلب</string>
+    <string name="pay_option_dt">DELIVER TO</string>
+    <string name="pay_option_select">Select</string>
+    <string name="pay_option_default">Recently Used</string>
+    <string name="pay_option_dummy_address">Manojit Das Navigators Software Pvt Ltd #205 Haute Street Bldg, 86A Topsia Road, Near Mahindra Showroom, West Bengal Kolkata - 700046</string>
+    <string name="pay_option_ca">Change Address</string>
+    <string name="pay_option_vpd">view price details</string>
+    <string name="pay_option_pn">PAY NOW</string>
+    <!--Payment Option-->
+
+    <!--Credit Card-->
+    <string name="credit_card_title">Credit/Debit Card</string>
+    <string name="credit_card_cn">Card Number*</string>
+    <string name="credit_card_noc">Name on Card*</string>
+    <string name="credit_card_em">Expiry Month*</string>
+    <string name="credit_card_ey">Expiry Year*</string>
+    <string name="credit_card_cvv">CVV</string>
+    <string name="credit_card_cvv_info">Last 3 digits printed on the back of the card</string>
+    <string name="credit_card_save">Save this card for future payments</string>
+    <string name="credit_card_os">ORDER SUMMARY</string>
+
+    <!--Credit Card-->
+
+    <!--Success -->
+    <string name="success_msg">نجح الطلب. \ n نحن نعالج طلبك.</string>
+    <!--    <string name="success_msg_detail">You will receive an SMS with a link to proceed with the Payment OR Cash on Delivery.</string>-->
+    <string name="success_msg_detail">سيتم إرسال بريد لتأكيد الطلب إليك قريبًا.</string>
+    <string name="success_order_id_dummy"> Your order ID : 14254869-21547896</string>
+    <string name="success_btn">CONTINUE SHOPPING</string>
+    <string name="success_da">DELIVERY ADDRESS</string>
+    <!---->
+
+    <!--Search Page-->
+    <string name="search_hint">ابحث عن أكثر من 1000 منتج</string>
+    <string name="search_rs">Recent Search</string>
+    <string name="search_ymbii">You May Be Interested In</string>
+    <string name="speech_prompt">Search Product&#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+    <!--Search Page-->
+
+
+    <!--Search Page-->
+    <string name="empty_cart_ycie">Your cart is empty!</string>
+    <string name="empty_cart_msg">Looks like you haven’t made your choice yet.</string>
+    <string name="empty_cart_sn">SHOP NOW</string>
+    <!--Search Page-->
+
+
+    <!--My Addresses-->
+    <string name="my_addresses_title">عناويني</string>
+    <string name="my_addresses_aana">أضف عنوانا جديدا</string>
+
+    <!--My Addresses-->
+
+
+    <!--My Orders row-->
+    <string name="my_orders_row_orderTitle">طلباتي</string>
+    <string name="product_substitutions_row_orderTitle">بدائل المنتج</string>
+    <string name="my_orders_row_orderno">رقم الطلب:</string>
+    <string name="my_orders_row_time">موعد التسليم:</string>
+    <string name="my_orders_row_order_pm">طريقة الدفع: </string>
+    <string name="my_orders_row_order_ps">حالة السداد:  </string>
+
+    <!--My Orders row-->
+
+
+    <!--My Orders DETAIL -->
+    <string name="my_orders_detail_Title">تفاصيل الطلب</string>
+    <string name="my_orders_detail_oi">معلومات الطلب</string>
+    <string name="my_orders_detail_dd">تفاصيل التسليم</string>
+    <string name="my_orders_detail_snba">SHIPPING &amp; BILLING ADDRESS</string>
+    <string name="my_orders_detail_os">ORDER SUMMARY</string>
+    <string name="my_orders_detail_iito"> ITEMS IN THIS ORDER</string>
+
+    <string name="my_orders_detail_ri">RETURN ITEM</string>
+    <string name="my_orders_detail_ro">REPEAT ORDER</string>
+    <string name="my_orders_detail_rinvoice">REQUEST INVOICE</string>
+    <string name="my_orders_detail_rnr">Review &amp; Ratings</string>
+    <string name="my_orders_detail_rp">RATE PRODUCT</string>
+    <string name="my_orders_detail_ar">Average Rating</string>
+    <string name="wrong_product_selected">تم تحديد منتج خاطئ</string>
+    <string name="wrong_price">سعر خاطئ</string>
+    <string name="ordered_by_mistake">مرتبة بالخطأ</string>
+    <string name="other">Other</string>
+    <string name="your_order_has_been_failed">لقد فشل طلبك</string>
+    <string name="retry_payment">محاولة دفع</string>
+    <string name="your_order_id">معرف الطلب الخاص بك: </string>
+
+
+    <!--My Orders DETAIL-->
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">موقع التسليم</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">يستخدم GoGrocery خدمات الموقع من أجل تحديد القرب من الأعمال المدرجة وفقط أثناء استخدام التطبيق</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="title_activity_map_location_selection">Map</string>
+    <string name="date">تاريخ:</string>
+    <string name="store">محل:</string>
+    <string name="order_list_total_amount">المبلغ الإجمالي:</string>
+    <string name="_address">تبوك:</string>
+    <string name="_status">حالة:</string>
+    <string name="special_instructions">تعليمات خاصة:</string>
+
+    <!--My Wallet-->
+    <string name="my_wallet_title">My Wallet</string>
+    <string name="my_wallet_detail">WALLET DETAILS</string>
+
+    <!--My Wallet-->
+
+    <!-- Review Product-->
+    <string name="review_product_title">Review Product</string>
+    <string name="review_product_ert">Enter Review Title</string>
+    <string name="review_product_erd">Enter Review Description</string>
+    <!--Review Product-->
+
+    <!-- Save List-->
+    <string name="save_list_title">Save To List</string>
+    <string name="save_list_cnl">CREATE NEW LIST</string>
+    <string name="save_list_enl">Enter List Name</string>
+    <string name="save_list_cna">CREATE &amp; ADD</string>
+    <string name="save_list_msl">MY SAVE LIST</string>
+
+    <!-- Save List-->
+
+
+    <string name="instructions">
+Place your fingertip on the Home button to verify your identity
+</string>
+
+
+    <!-- From Clients Credential-->
+    <!--AIzaSyDdnHSfwdG3jfIIL7pPw1S36RM0tcXvwgo    from onboard.lifco@gmail.com-->
+    <!--AIzaSyC0WHcWkovQFGhtjPfgQu4pNrtE5ikwtmY    from gogrocery.live@gmail.com -->
+    <!--    <string name="google_login_api_key">AIzaSyC0WHcWkovQFGhtjPfgQu4pNrtE5ikwtmY</string>-->
+    <string name="google_login_api_key">AIzaSyBus_gcbVKcO5MFinVIX3yNpuYHO6fHJao</string>
+    <!--  //  <string name="google_login_api_key">AIzaSyDwJfFz9Hyur4RkbEa_Hlt6Fkibr6rYhJo</string>-->
+    <!-- From Clients Credential-->
+
+
+    <!--<string name="facebook_app_id">857529464665765</string>
+    <string name="fb_login_protocol_scheme">fb857529464665765</string>-->
+    <!--   <string name="facebook_app_id">269932210679127</string>
+    <string name="fb_login_protocol_scheme">fb269932210679127</string>-->
+
+
+    <string name="facebook_app_id">238251867451299</string>
+    <string name="fb_login_protocol_scheme">fb238251867451299</string>
+
+    <string name="support_gogrocery_ae">support@gogrocery.ae</string>
+    <string name="phone_number">+971 600 551685</string>
+    <string name="confirm_location">قم بتأكيد الموقع</string>
+    <string name="welcome">مرحبا بك ضيف</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="_500gm_aed_50_00">500gm - AED 50.00</string>
+    <string name="_20_off">(20% OFF)</string>
+    <string name="_1">1</string>
+    <string name="welcome_gogrocery">مرحبًا بـ GoGrocery</string>
+    <string name="enable_location_service">تمكين خدمة الموقع</string>
+    <string name="warehouse_warehouse">Warehouse warehouse</string>
+    <string name="unavailable_here">Unavailable Here</string>
+    <string name="not_available_here">غير متوفر هنا</string>
+    <string name="search">بحث</string>
+    <string name="select_state">Select State</string>
+    <string name="ooops">Ooops!!</string>
+    <string name="email_id">عنوان الايميل</string>
+    <string name="_contac">رقم التليفون*</string>
+    <string name="query">Query*</string>
+    <string name="error">Error</string>
+    <string name="okey">تمام</string>
+    <string name="how_can_i_help_you">كيف يمكنني مساعدك؟</string>
+    <string name="area">منطقة</string>
+    <string name="place_order">مكان الامر</string>
+    <string name="enter_new_password">أدخل كلمة مرور جديدة</string>
+    <string name="deliver_here">التسليم هنا</string>
+    <string name="submit">إرسال</string>
+
+    <!-- ########################### ERROR MESSAGE ###############################################-->
+    <string name="error_msg_enter_first_name">First Name should not be empty</string>
+    <string name="error_msg_enter_name">First Name should not be empty"</string>
+    <string name="error_msg_enter_carrier_code">Carrier Code(CC) should not be empty"</string>
+    <string name="error_msg_enter_last_name">Last Name should not be empty</string>
+    <string name="error_msg_enter_email">Email Address should not be empty</string>
+    <string name="error_msg_enter_valid_email">Enter valid email Address</string>
+    <string name="error_msg_enter_7_digit_mobile_no">Mobile number should be 7 digit</string>
+    <string name="error_msg_enter_mobile_no">Mobile Number should not be empty</string>
+    <string name="error_msg_enter_otp">OTP should not be empty</string>
+    <string name="error_msg_enter_password">Password should not be empty</string>
+    <string name="error_msg_enter_password_lenght">Password at least 6 Character</string>
+    <string name="error_msg_enter_password_policy">Password must contain at least one upper and lower case letter, number and special character</string>
+    <string name="error_msg_enter_confirm_password">Please enter confirm password</string>
+    <string name="error_msg_enter_confirm_password_match">Confirm Password doesn\'t match</string>
+    <string name="error_msg_enter_registered_email">Please enter registered email</string>
+    <string name="error_msg_enter_registered_email_forgot">Registered Email address should not be empty</string>
+    <string name="error_msg_enter_old_password">Please enter old password</string>
+    <string name="error_msg_enter_new_password">Please enter new password</string>
+    <string name="error_msg_enter_mobile">Enter Mobile Number</string>
+    <string name="error_msg_select_gender">Select Gender</string>
+    <string name="error_msg_enter_address">Enter Address</string>
+    <string name="error_msg_enter_city">Enter City</string>
+    <string name="error_msg_enter_region">Enter Region</string>
+    <string name="error_msg_enter_review_title_is_empty">Review title is empty</string>
+    <string name="error_msg_enter_review_description_is_empty">Review description is empty</string>
+    <string name="error_msg_enter_rating_can_not_be_zero">Rating cannot be zero!!</string>
+    <string name="error_msg_login_cancelled">تم إلغاء تسجيل الدخول!</string>
+    <string name="error_msg_please_select_any_one_address">الرجاء تحديد أي عنوان واحد!</string>
+    <string name="error_msg_please_choose_delivery_slot">الرجاء اختيار خانة التسليم</string>
+    <string name="error_msg_please_add_delivery_address">الرجاء إضافة عنوان التسليم</string>
+    <string name="error_msg_please_location">يجب ألا يكون الموقع فارغًا</string>
+    <string name="error_msg_no_delivery_slot_available">لا توجد خانات توصيل متاحة</string>
+    <string name="error_msg_enter_your_query">أدخل الاستعلام الخاص بك</string>
+    <string name="error_msg_cvv_less_than_three_digit">يجب أن يكون رقم CVV أقل من ثلاثة أرقام</string>
+    <string name="error_msg_space_not_allowed">المساحة غير مسموح بها</string>
+    <string name="error_msg_your_savelist_is_empty">قائمة التوفير الخاصة بك فارغة!</string>
+    <string name="error_msg_your_email_is_empty">يجب ألا يكون البريد الإلكتروني فارغًا</string>
+    <string name="error_msg_select_any_one_option">حدد خيار أي شخص!</string>
+    <string name="txtSubmitReplacement">إرسال الاستبدال</string>
+    <string name="txtDenyReplacement">لا أريد الاستبدال</string>
+    <string name="txtTimeRemaining">الوقت المتبقي</string>
+
+    <string name="dialogTitle_logout">تسجيل خروج</string>
+    <string name="dialogTitleRemoveCart">إزالة بند</string>
+    <string name="dialogMessage_logout">هل ترغب بالخروج؟</string>
+    <string name="dialogMessageRemoveCart">هل أنت متأكد أنك تريد إزالة هذا العنصر؟</string>
+    <string name="dialogPositiveButtonText_logout">تسجيل خروج</string>
+    <string name="GetStarted">البدء</string>
+    <string name="msg_please_click_back_again_to_exit">الرجاء النقر فوق "رجوع" مرة أخرى للخروج.</string>
+    <string name="txtStartedOneHeader">بقالة الخاص بك دون ضغوط</string>
+    <string name="txtStartedTwoHeader">خصومات مذهلة وأمبير. عروض</string>
+    <string name="txtStartedThreeHeader">تسليم سريع إلى باب المنزل</string>
+    <string name="txtStartedOneDesc">تسوق من مجموعة واسعة من أصناف البقالة من المتاجر المحلية التي تضم أكثر من 80،000 عنصر</string>
+    <string name="txtStartedTwoDesc">أسعار أرخص من السوبر ماركت المحلي ، \ n خصومات وعروض ترويجية رائعة \ n للأعضاء المسجلين.</string>
+    <string name="txtStartedThreeDesc">ضمان توصيل \ n البقالة في نفس اليوم في الإمارات العربية المتحدة. \ n يمكنك أيضًا الدفع نقدًا عند التسليم!</string>
+    <string name="imguest">أنا ضيف</string>
+    <string name="create_account">أنشئ حسابك على \ n GoGrocery</string>
+    <string name="txtEmail">بريد الالكتروني</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="txtLastName">الكنية</string>
+    <string name="privacy_policy">من خلال إنشاء حساب فإنك توافق على سياسة الخصوصية وشروط الاستخدام</string>
+    <string name="ResetPassword">إعادة تعيين كلمة المرور</string>
+    <string name="sort_by">ترتيب حسب</string>
+    <string name="vision_text">نحن نسعى جاهدين لنصبح التطبيق الأول لتوصيل البقالة الذي يقدم أفضل المنتجات عالية الجودة والخدمات المتفوقة التي تضيف قيمة لعملائنا.</string>
+    <string name="mission_text">لإرضاء عملائنا بتجربة تسوق أسرع وأسهل دون المساومة على الجودة ووقت التسليم.</string>
+    <string name="search_for_a_specific_brand_or_product">ابحث عن علامة تجارية أو منتج معين</string>
+    <string name="aed_0_00">AED 0.00</string>
+    <string name="change_store">تغيير المتجر</string>
+    <string name="no_connection">لا يوجد اتصال بالإنترنت</string>
+    <!-- ########################### TOOLBAR_TITLE ###############################################-->
+    <string name="toolbar_title_delivery_details">تفاصيل التسليم</string>
+    <string name="toolbar_title_about_us">معلومات عنا</string>
+    <string name="toolbar_title_change_personal_information">تغيير المعلومات الشخصية</string>
+    <string name="toolbar_title_contact_us">اتصل بنا</string>
+    <string name="toolbar_title_order_summary">ملخص الطلب</string>
+    <string name="toolbar_title_preparation_view">عرض التحضير</string>
+    <string name="toolbar_title_search">بحث</string>
+    <string name="toolbar_title_my_account">حسابي</string>
+    <string name="toolbar_title_privacy_policy">سياسة خاصة</string>
+    <string name="toolbar_title_quality_standards">معايير الجودة</string>
+    <string name="toolbar_title_my_favorites">مفضلتي</string>
+    <string name="toolbar_title_my_addresses">عناويني</string>
+
+    <string name="call_us">اتصل بنا</string>
+    <string name="of">من</string>
+    <string name="success">نجاح!</string>
+    <string name="send_feedback">ارسل رأيك</string>
+    <string name="my_address">عنواني</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="enter_valid_credentials">أدخل أوراق اعتماد صالحة</string>
+    <string name="please_choose_delivery_slot">الرجاء اختيار خانة التسليم</string>
+    <string name="please_select_one_address">الرجاء تحديد عنوان واحد</string>
+
+    <string name="shop_again">تسوق مرة أخرى!</string>
+    <string name="toolbar_title_our_vision_amp_purpose"><![CDATA[Our Vision & Purpose]]></string>
+    <string name="vision">رؤية</string>
+    <string name="mission">مهمة</string>
+    <string name="missing_items">عناصر مفقودة </string>
+    <string name="select_address">حدد العنوان</string>
+    <string name="cash_on_delivery">الدفع الالكتروني</string>
+    <string name="online_payment">الدفع الالكتروني</string>
+    <string name="card_on_delivery">البطاقة عند التسليم</string>
+    <string name="no_delivery_slot_available">لا يوجد فتحة توصيل متاحة</string>
+    <string name="choose_a_saved_address">اختر عنوانًا محفوظًا</string>
+    <string name="add_new_address">أضف عنوان جديد</string>
+    <string name="choose_one_address">اختر عنوان واحد</string>
+    <string name="minimum_order_should_be_above">يجب أن يكون الحد الأدنى للطلب أعلاه </string>
+    <string name="add_coupon">أضف عرض</string>
+    <string name="side_menu_language">English/العربية</string>
+    <string name="select_your_category_to_start_n_shopping">حدد فئتك لبدء التسوق</string>
+    <string name="start_shopping">ابدأ التسوق</string>
+    <string name="tool_bar_title_send_feedback">ارسل رأيك</string>
+    <string name="choose_location_from_map">اختر الموقع من الخريطة</string>
+    <string name="show_store_delivering_to">عرض المتجر الذي يتم تسليمه إلى:</string>
+    <string name="note">ملاحظة </string>
+    <string name="please_select_category_to_start_shopping">الرجاء تحديد فئة لبدء التسوق</string>
+    <string name="do_you_confirm_this_address">هل تؤكد هذا العنوان؟</string>
+    <string name="all">الجميع</string>
+    <string name="choose_your_language">اختر لغتك</string>
+    <string name="toolbar_title_language">Language</string>
+    <string name="feel_free_to_send_us_your_comments_or_suggestions">لا تتردد في إرسال تعليقاتك أو اقتراحاتك إلينا</string>
+    <string name="subject">موضوعات</string>
+    <string name="settings">Settings</string>
+    <string name="age_verification">تاكيد السن</string>
+    <string name="i_m_18_years_or_above">أبلغ من العمر 18 عامًا أو أكثر</string>
+    <string name="i_m_below_18_years_old">أنا أقل من 18 سنة</string>
+    <string name="confirmation">تأكيد!</string>
+    <string name="user_blocked">المستخدم المحظور!</string>
+    <string name="no_address_found">لم يتم العثور على عنوان!</string>
+    <string name="there_are_items_added_in_the_list_please_submit_replacement">هناك عناصر مضافة إلى القائمة ، يرجى تقديم بديل.</string>
+    <string name="are_you_sure_that_you_want_to_reject_the_substitutions">هل أنت متأكد أنك تريد رفض التبديلات؟</string>
+    <string name="are_you_sure_that_you_want_to_accept_the_substitutions">هل أنت متأكد أنك تريد قبول هذه الاستبدالات؟</string>
+    <string name="your_session_for_substitute_product_has_been_expired">لقد انتهت صلاحية جلستك الخاصة بالمنتج البديل</string>
+    <string name="you_have_already_submitted_your_choice_for_this_product">لقد قدمت بالفعل اختيارك لهذا المنتج</string>
+    <string name="you_have_successfully_added_substitute_products">لقد نجحت في إضافة منتجات بديلة</string>
+    <string name="please_select_any_one_payment_option">الرجاء تحديد أي خيار دفع واحد</string>
+    <string name="you_can_not_purchase_only_prepaid_card">لا يمكنك شراء بطاقة مسبقة الدفع فقط. يجب عليك شراء بعض العناصر الأخرى مع هذا.</string>
+    <string name="you_have_more_than_one_saved_address">لديك أكثر من عنوان محفوظ يطابق موقعك الحالي. من فضلك ، اختر واحدة لمتابعة الطلب.</string>
+    <string name="no_related_address_found_for_this_area_from_your_address">لم يتم العثور على عنوان ذي صلة لهذه المنطقة من عنوانك</string>
+    <string name="please_add_new_address_so_that_we_can_deliver_product_at_your_door_step">نظرًا لأنه ليس لديك عنوان محفوظ ، يرجى إضافة عنوان جديد حتى نتمكن من توصيل المنتج إلى عتبة داركم</string>
+    <string name="you_can_either_choose_any_address_from_the_list_or_you_can_add_new_address">يمكنك إما اختيار أي عنوان من القائمة أو يمكنك إضافة عنوان جديد </string>
+    <string name="sorry">آسف!</string>
+    <string name="mobile">متحرك :</string>
+    <string name="no_substitutions_are_pending">لا توجد بدائل معلقة</string>
+
+    <string name="you_don_t_want_any_replacement">لا تريد أي بديل؟</string>
+
+
+    <string name="if_you_change_store_your_cart_will_be_empty">إذا قمت بتغيير المتجر ، ستكون سلة التسوق الخاصة بك فارغة.</string>
+    <string name="do_you_really_want_to_change_store">هل تريد حقًا تغيير المتجر؟</string>
+    <string name="carrier_code">رمز الناقل</string>
+    <string name="select_your_store_to_start_n_shopping">حدد متجرك لبدء التسوق</string>
+    <string name="promo_code">رمز ترويجي</string>
+    <string name="enter_promo_code_below">أدخل الرمز الترويجي أدناه</string>
+    <string name="upgrade">تطوير</string>
+    <string name="you_are_using_the_older_version_of_the_gogrocery_we_recommend_you_to_upgrade_to_new_version">أنت تستخدم الإصدار الأقدم من GoGrocery. نوصيك بالترقية إلى الإصدار الجديد</string>
+    <string name="new_update_is_available">التحديث الجديد متاح</string>
+    <string name="select_store">اختر المتجر</string>
+    <string name="personally_identifiable_information">معلومات التعرف الشخصية</string>
+    <string name="order_summary">ملخص الطلب</string>
+
+    <string name="anything_else_we_need_to_know">أي شيء آخر نحن بحاجة إلى معرفته؟</string>
+    <string name="_continue">يكمل</string>
+    <string name="edit_address">تعديل العنوان</string>
+    <string name="shipping_cost">تكلفة الشحن</string>
+    <string name="grand_amount">المبلغ الكبير</string>
+    <string name="confirm">يتأكد</string>
+    <string name="save">يحفظ</string>
+    <string name="language">لغة</string>
+    <string name="eng">عربى</string>
+    <string name="choose_delivery_slot">اختر خانة التسليم</string>
+    <string name="unit_price">سعر الوحده :</string>
+    <string name="price">السعر :</string>
+    <string name="_pen_off">٪ عن </string>
+    <string name="_off">  عن </string>
+    <string name="product_description">  وصف المنتج </string>
+    <string name="email_us">Email Us</string>
+    <string name="query_submitted_successfully">  تم إرسال الاستعلام بنجاح </string>
+    <string name="confirm_order">  Confirm order</string>
+    <string name="my_payment_methods">My Payment Methods</string>
+    <string name="my_details">My Details</string>
+    <string name="please_select_any_card_from_the_list">Please select any card from the list below or Add a new card to proceed</string>
+    <string name="toolbar_title_my_card">My Payment Card</string>
+</resources>

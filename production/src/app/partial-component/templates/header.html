@@ -1,0 +1,56 @@
+<section class="top-bar">
+    <div class="brand">
+      <div class="nav-icon" (click)="changeClass()"></div>
+      <div class="logo">
+        <a [routerLink] = "['/dashboard']" ng-click="setSelectedTab(0)">
+           <img src="assets/images/boostmysale-main-logo.png" alt="" class="svg">
+        </a>
+       </div>
+    </div>
+    <div class="search-box">
+      <div class="search-icon"><span class="icon-search"></span></div>
+      <input matInput placeholder="Search..." #elasticsearch="ngModel" name="elasticsearch" ngModel (keyup)="globalSearch(elasticsearch.value)" id='search'>
+      <div class="dropdownsearch search-result" (click)="close_search_div()">
+          <ul class="searchresult">
+              <li class="boxeach" *ngFor="let search_result of global_search">
+              <!-- {{((search_result._source.parent_name!='') && (search_result._type=="menu"))?search_result._source.parent_name+' > ':(search_result._type=='product')?'Product > ':'Category > '}}
+              <a [routerLink]="(search_result._source.link!='')?'/'+search_result._source.link:'javascript:void(0)'" (click)="globalService.addTab((search_result._type=='menu')?search_result._id:search_result._source.tab_id,search_result._source.link,(search_result._type=='menu')?search_result._source.name:search_result._source.tab_name,0)">{{(search_result._type=='menu')?search_result._source.name:(search_result._type=='product')?search_result._source.name+' - '+search_result._source.sku:search_result._source.name+' - '+search_result._source.slug}}</a> -->
+              {{search_result._source.tab_name}} >>
+              <a href="javascript:void(0);" (click)="globalService.addTab(search_result._source.tab_id,search_result._source.link,search_result._source.tab_name,tab_parent_id);globalService.navigateToUrl('/'+search_result._source.link);">{{(search_result._source.tab_name=='Order')?search_result._source.custom_order_id : search_result._source.name}}</a>
+              </li>
+          </ul>
+      </div>
+    </div>
+    <ul class="top-nav">
+      <li class="hidden-xs">
+        <button mat-button class="btn-line white-ripple"  matTooltip="View Store">View Store</button>
+      </li>
+      <li class="full-class hidden-xs" fullscreen-toggle>
+        <button (click)="toggleFullScreen()" mat-icon-button matTooltip="Full Screen">
+          <mat-icon  class="icon-full-screen"></mat-icon>
+        </button>
+      </li>
+      <li>
+        <button mat-icon-button matTooltip="View Notifications">
+          <mat-icon  class="icon-noti"></mat-icon>
+        </button>
+      </li>
+      <li>
+        <button mat-icon-button matTooltip="Switch Store" [matMenuTriggerFor]="website" *ngIf="is_superadmin == 'Y'">
+         <mat-icon  class="icon-more"></mat-icon>
+        </button>
+        <mat-menu #website="matMenu" yPosition="below" [overlapTrigger]="false">         
+          <button mat-menu-item *ngFor="let weblist of website_list" [ngClass]="weblist.id == selectedItem ? 'active' : 'none'" (click)="get_websitedetails(weblist.id)">{{weblist.websitename}}</button>
+        </mat-menu>            
+      </li> 
+
+      <li>
+        <button mat-button [matMenuTriggerFor]="menu" matTooltip="User Actions">Hi {{user_first_name}}</button>
+        <mat-menu #menu="matMenu" yPosition="below" [overlapTrigger]="false">
+          <button mat-menu-item (click)="openDetailsPop()">User Details</button>
+          <button mat-menu-item (click)="openPasswordPop()">Reset Password</button>
+          <button mat-menu-item (click)="logout()">Log out</button>
+        </mat-menu>
+      </li>
+    </ul>
+  </section>

@@ -1,0 +1,131 @@
+<section class="right-part">
+        <div class="body-part">
+            <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEditReview(formData)">
+                <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+                <input type="hidden" name="customer_id" [(ngModel)]="formModel.customer_id">
+                <input type="hidden" name="product_id" [(ngModel)]="formModel.product_id">
+                <div class="topheading">
+                    <h1>{{(formModel.formId>0)?'Edit':'Add'}} Review & Rating
+                <div class="btn-header">
+                <div class="btn-header">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                  </div>
+              </div>
+              <div class="clear"></div>
+              </h1> </div>
+                <div class="clear"></div>
+                <div class="box">
+                    <div class="fixed-width">
+                        <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Product Name</mat-label>
+                                    <input matInput placeholder="Name" required #product_name="ngModel" name="product_name" [(ngModel)]="formModel.product_name" pattern="^(?!\s*$|\s).*$" [matAutocomplete]="productAuto" (keyup)="getProductDetails(formModel.product_name,$event)" (focus)="getProductDetails(' ',$event)" disable>
+                                    <mat-error *ngIf="product_name.errors && product_name.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="product_name.errors && product_name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                    <mat-autocomplete #productAuto="matAutocomplete" (optionSelected)='setSku($event.option.value)'>
+                                        <mat-option *ngFor="let item of productsList" [value]="item">
+                                            <span>{{ item.sku +' | '+ item.name }} </span>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Product Sku</mat-label>
+                                    <input matInput placeholder="Sku" required #sku="ngModel" name="sku" [(ngModel)]="formModel.sku" pattern="^(?!\s*$|\s).*$" disabled="true">
+                                    <mat-error *ngIf="sku.errors && sku.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="sku.errors && sku.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Review Title</mat-label>
+                                    <input matInput placeholder="Title" required #title="ngModel" name="title" [(ngModel)]="formModel.title" pattern="^(?!\s*$|\s).*$">
+                                    <mat-error *ngIf="title.errors && title.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="title.errors && title.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                </mat-form-field>                                 
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Review Description</mat-label>
+                                    <textarea matInput placeholder="Description" required #description="ngModel" name="description" [(ngModel)]="formModel.description" pattern="^(?!\s*$|\s).*$"></textarea>
+                                    <mat-error *ngIf="description.errors && description.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="description.errors && description.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Customer Name</mat-label>
+                                    <input matInput placeholder="Customer Name" required #customer_name="ngModel" name="customer_name" [(ngModel)]="formModel.customer_name" pattern="^(?!\s*$|\s).*$" [matAutocomplete]="CustomerIdSelect" (keyup)="filterCustomer(formModel.customer_name,$event)" (focus)="filterCustomer(' ',$event)" disabled="{{cus_field_mode}}">
+                                    <mat-error *ngIf="customer_name.errors && customer_name.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="customer_name.errors && customer_name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                    <mat-autocomplete #CustomerIdSelect="matAutocomplete" [displayWith]="displayFnCustomer(this)" (optionSelected)= "setDetails($event.option.value)">
+                                        <mat-option *ngFor="let customer of customer_list" [value]="customer">
+                                            {{customer.first_name}} {{customer.last_name}} &lt; {{customer.email}} &gt;
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <!-- <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput placeholder="Country" required #name="ngModel" name="country" [(ngModel)]="formModel.country">
+                                </mat-form-field> -->
+                                <!-- <mat-form-field appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <mat-select required placeholder="Country" #country="ngModel" name="country" [(ngModel)]="formModel.country"
+                                        (selectionChange)="get_state(country.value)">
+                                        <mat-option *ngFor="let countrys of country_list" [value]="countrys.id">{{countrys.country_name}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="country.errors && country.errors.required">Please select country</mat-error>
+                                </mat-form-field> -->
+                                <ng-select [ngClass]="{ 'custom_error_red': country.errors && country.errors.required && (country.dirty || country.touched || formData.submitted) }"
+                                    [items]="country_list"
+                                    required
+                                    placeholder="Country"
+                                    bindLabel="country_name" bindValue="id"
+                                    #country="ngModel" name="country" [(ngModel)]="formModel.country"
+                                    (change)="getState(formModel.country)"
+                                    style="margin-top: 8px !important;"
+                                >
+                                </ng-select>
+                                <p class="custom_error" *ngIf="country.errors && country.errors.required && (country.dirty || country.touched || formData.submitted)">Please select country</p>
+                                <!-- <mat-form-field appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <mat-select required placeholder="State" #state="ngModel" name="state" [(ngModel)]="formModel.state">
+                                        <mat-option *ngFor="let states of state_list" [value]="states.id">{{states.state_name}}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="state.errors && state.errors.required">Please select state</mat-error>
+                                </mat-form-field> -->
+                                <ng-select [ngClass]="{ 'custom_error_red': country.errors && country.errors.required && (country.dirty || country.touched || formData.submitted) }"
+                                    [items]="state_list"
+                                    required
+                                    placeholder="State"
+                                    bindLabel="state_name" bindValue="id"
+                                    #state="ngModel" name="state" [(ngModel)]="formModel.state"
+                                    style="margin-top: 14px !important;"
+                                >
+                                </ng-select>
+                                <p class="custom_error" *ngIf="country.errors && country.errors.required && (country.dirty || country.touched || formData.submitted)">Please select state</p>
+                                <mat-form-field appearance="outline" class="md-block">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="City" required #city="ngModel" name="city" [(ngModel)]="formModel.city" pattern="^(?!\s*$|\s).*$">
+                                    <mat-error *ngIf="city.errors && city.errors.required">This is a <strong>required</strong> field</mat-error>
+                                    <mat-error *ngIf="city.errors && city.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                </mat-form-field>
+                                <div>
+                                    <mat-label>Review Rating<span style="color:red; font-size: 13px;">*</span></mat-label> 
+                                    <star-rating value="{{currentRate}}" checkedcolor="rgb(219,49,86)" uncheckedcolor="gray" size="24px"    readonly="false" (rate)="onRate($event)" required></star-rating>
+                                    <mat-error *ngIf="!currentRateValidate">This is a <strong>required</strong> field</mat-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ///////////////Buttons//// -->
+                    <div class="btn-header hidden-xs">
+                        <button type="submit" mat-raised-button class="btn-main">Save</button>
+                        <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                    </div>
+                    <div class="clear"></div>
+                    <!-- ///////////////Buttons//// -->
+                </div>
+                <div class="clear"></div>
+            </form>
+        </div>
+    </section>

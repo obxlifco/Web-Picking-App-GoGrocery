@@ -1,0 +1,87 @@
+<div class="loada" *ngIf="popupLoder">
+    <mat-spinner></mat-spinner>
+</div>
+
+<form #formData="ngForm" novalidate (ngSubmit)="formData.valid && senBannerLinkData(formData)"
+    enctype="multipart/form-data">
+    <div class="pop-head">
+        Banner Settings
+    </div>
+
+    <mat-dialog-content class="file-up">
+        <ng-container>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div  class="md-block">
+                        <mat-form-field appearance="outline">
+                        <mat-label>Banner link to</mat-label>
+                        <mat-select placeholder="Banner link to" #banner_linkto="ngModel" name="banner_linkto" [(ngModel)]="formModel.banner_linkto" (selectionChange)="loadBannerSettingsData(formModel.banner_linkto)" >
+                            <mat-option value="external link">External link</mat-option>
+                            <mat-option value="category">Category</mat-option>
+                            <mat-option value="promotion">Promotion</mat-option>
+                            <!-- <mat-option value="product">Product</mat-option> -->
+                        </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-12" *ngIf="formModel.banner_linkto=='external link'">
+                    <mat-form-field appearance="outline" class="md-block">
+                        <mat-label>External Link </mat-label>
+                        <input matInput placeholder="External Link" #external_link="ngModel" name="external_link"
+                            [(ngModel)]="formModel.external_link">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12" *ngIf="formModel.banner_linkto=='category'">
+                    <ng-select [items]="category_list" bindLabel="name" bindValue="id" placeholder="Category Name" #category_id="ngModel" name="item_ids"
+                        [(ngModel)]="formModel.item_ids" id="item_ids" required appendTo="body">
+                    </ng-select>
+                    <p class="custom_error" *ngIf="category_id.errors && category_id.errors.required && (category_id.dirty || category_id.touched || formData.submitted)">
+                        This is a <strong>required</strong> field</p>
+                        <div class="clear20"></div>
+
+                    <!-- <mat-form-field appearance="outline"  class="md-block" (click)="openPopup(1)"><mat-label>Category List</mat-label>
+                        <input matInput placeholder="All Items" readonly required #item_ids="ngModel" name="item_ids" [(ngModel)]="formModel.item_ids" >
+                        <mat-error *ngIf="item_ids.errors && item_ids.errors.required"> This is a <strong>required</strong> field </mat-error>
+                    </mat-form-field> -->
+                </div>
+                <div class="col-sm-12" *ngIf="formModel.banner_linkto=='promotion'">
+                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Promotion List</mat-label>
+                        <!-- <input matInput placeholder="All Items" readonly required #item_ids="ngModel" name="item_ids" [(ngModel)]="formModel.item_ids" > -->
+                        <mat-select required placeholder="All Items" #item_ids="ngModel" name="item_ids"
+                        [(ngModel)]="formModel.item_ids">
+                            <mat-option *ngFor="let item of promotion_arr" [value]="item.id">{{item.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="item_ids.errors && item_ids.errors.required"> This is a <strong>required</strong> field </mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-sm-12" *ngIf="formModel.banner_linkto=='product'">
+                    <mat-form-field appearance="outline"  class="md-block" (click)="openPopup(3)"><mat-label>Product List</mat-label>
+                        <input matInput placeholder="All Items" readonly required #item_ids="ngModel" name="item_ids" [(ngModel)]="formModel.item_ids" >
+                        <mat-error *ngIf="item_ids.errors && item_ids.errors.required"> This is a <strong>required</strong> field </mat-error>
+                    </mat-form-field>
+                </div> -->
+                <div class="col-sm-12">
+                    <mat-form-field appearance="outline" class="md-block">
+                        <mat-label>Caption 1 </mat-label>
+                        <input matInput placeholder="Caption 1" #caption1="ngModel" name="caption1"
+                            [(ngModel)]="formModel.banner_caption1">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12">
+                    <mat-form-field appearance="outline" class="md-block">
+                        <mat-label>Caption 2</mat-label>
+                        <input matInput placeholder="Caption 2" #caption2="ngModel" name="caption2"
+                            [(ngModel)]="formModel.banner_caption2">
+
+                    </mat-form-field>
+                </div>
+               <br><br>
+            </div>
+            <mat-dialog-actions layout="row">
+                <button mat-raised-button class="btn-main" type="submit">Save</button>
+                <button mat-raised-button class="btn-line" type="button" (click)="closeDialog('')">Cancel</button>
+            </mat-dialog-actions>
+        </ng-container>
+    </mat-dialog-content>
+</form>

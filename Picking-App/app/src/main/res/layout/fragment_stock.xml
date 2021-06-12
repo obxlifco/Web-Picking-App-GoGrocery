@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtManageStock"
+        android:textColor="@color/appColorBlack"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:background="@drawable/bg_rect_round_corner"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:id="@+id/spCategoryStock"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="end"
+                android:layout_marginStart="@dimen/_3sdp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rect_round_corner"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="end"
+                android:id="@+id/spSubCategoryStock"
+                android:layout_marginStart="@dimen/_3sdp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:background="@drawable/bg_rect_round_corner"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:gravity="end"
+                android:id="@+id/spInStock"
+                android:layout_marginStart="@dimen/_3sdp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:background="@drawable/bg_rect_round_corner">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/spHasPriceStock"
+                android:gravity="end"
+                android:layout_marginStart="@dimen/_3sdp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_rect_round_corner"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <EditText
+                android:id="@+id/etSearchStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/txtSearchForProduct"
+                android:imeOptions="flagNoExtractUi|actionSearch"
+                android:inputType="text"
+                android:textColor="@color/appColorBlack"
+                android:textSize="@dimen/_7sdp" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:id="@+id/tvScanStock"
+            android:background="@drawable/bg_rect_round_corner_black_border"
+            android:text="@string/txtScan"
+            android:gravity="center"
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/appColorBlack"
+            android:layout_margin="@dimen/_1sdp"
+            android:visibility="visible"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:id="@+id/tvSearchStock"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/bg_rect_round_corner_black_border"
+            android:text="@string/txtSearch"
+            android:gravity="center"
+            android:textSize="@dimen/_7sdp"
+            android:textColor="@color/appColorBlack"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_rect_round_corner"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/bg_grey_round_corner">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/txtProductInfo"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="center"
+                    android:text="@string/txtPricee"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="center"
+                    android:text="@string/txtStock"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_7sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tvNoValueStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/txtNoData"
+                    android:textColor="@color/appColorDarkGrey"
+                    android:textSize="@dimen/_7sdp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

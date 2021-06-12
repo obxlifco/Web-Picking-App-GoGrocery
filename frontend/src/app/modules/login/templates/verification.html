@@ -1,0 +1,21 @@
+<section class="pmc_order_con login-bg">
+  <form #forgotForm="ngForm" novalidate (ngSubmit)="forgotForm.valid && submitVerify(forgotForm.value)">
+    <div class="login-box">
+      <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+      <div class="clearfix"></div>
+      <div class="login-heading">{{ 'LOGIN.verification_code_heading' | translate }}</div>
+      <p>Please check your email for your verification code. </p>
+      <div class="clearfix"></div>
+      <mat-form-field>
+        <input matInput placeholder="{{ 'FIELD_PLACEHOLDER.verification_code_placeholer_msg' | translate }}" required maxlength="40" #code="ngModel" name="code" ngModel>
+        <mat-error *ngIf="code.errors && code.errors.required">
+          {{ 'ERRORMSG.required_field_msg' | translate }}
+        </mat-error>       
+      </mat-form-field>      
+      <div class="clear40"></div>
+      <button mat-raised-button class="btn-main btn-lg btn-block">{{ 'LOGIN.verify' | translate }}</button>
+      <div class="clear20"></div>
+      <button mat-button class="btn-main-ripple btn-block" type="button" [routerLink]="['/login']">{{ 'LOGIN.back_to_login' | translate }}</button>
+    </div>
+  </form>
+</section>

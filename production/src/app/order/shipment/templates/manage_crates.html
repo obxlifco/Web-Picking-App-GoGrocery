@@ -1,0 +1,46 @@
+<div class="pop_wrap">
+	<div class="pop_cross" (click)="dialogRef.close();"><span class="icon-cancel"></span></div>
+	<h4 mat-dialog-title>
+		Manage Crates
+    </h4>
+	<div class="action-box manage-crates in-popup">
+		<button mat-button (click)="delete_crates(data.trent_picklist_id,data.order_id,0)"><mat-icon  class="icon-delete"></mat-icon>Delete</button>
+  	</div>
+  	<div class="clear"></div>
+	<mat-dialog-content style="min-width: 500px;">
+		<div class="pop-body">
+			<div class="filter dialogFilter">
+		        <button mat-icon-button mdTooltip="Reload" class="btn-main" (click)="getallCrates(data.trent_picklist_id,data.order_id, '')"><mat-icon  class="icon-refresh"></mat-icon></button> 
+		        &nbsp;
+		        <div class="search">
+		          <mat-icon  class="icon-search"></mat-icon>
+		          <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="getallCrates(data.trent_picklist_id,data.order_id,search.value)">
+		      	</div>
+		    </div>
+			<div class="clear"></div>
+			<div class="table-list">
+		  		<table>
+					<tr>
+						<th class="check-select">
+							<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="selectedAll" (change)="toggleCheckAll($event)"></mat-checkbox>
+						</th>
+						<th class="short">Crate Name<span [class]=""></span></th>
+						<th class="short">Action</th>
+					</tr>
+					<tr [class.chec]="row.selected" *ngFor="let row of result_list_crates">
+						<td>
+							<mat-checkbox name="row.selected" id="tag_list{{row.id}}" [checked]="row.selected" (change)="toggleCheckCrates(row.id,$event)"></mat-checkbox>
+						</td>
+						<td>{{row.crate_barcode}}</td>
+						<td class="align-middle text-center">
+							<button mat-icon-button class="btn-pink" type="button" (click)="delete_crates(data.trent_picklist_id, data.order_id, row.id)"><mat-icon  class="icon-delete"></mat-icon></button>
+						</td>
+					</tr>
+					<tr *ngIf="result_list_crates.length==0">
+					  	<td colspan="3" align="center">No records found</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</mat-dialog-content>
+</div>

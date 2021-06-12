@@ -1,0 +1,135 @@
+<section class="right-part addall_page">
+  <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+      <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEdit(formData)">
+          <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+          <div class="topheading">
+              <h1>{{(formModel.formId>0)?'Edit':'Add'}} Tax rates
+          <div class="btn-header">
+          <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+              <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+            </div>
+        </div>
+        <div class="clear"></div>
+        </h1> </div>
+          <div class="clear"></div>
+          <div class="box">
+              <div class="fixed-width">
+                  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                  <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                           <mat-form-field appearance="outline"  class="md-block">
+                             <mat-label>Tax name</mat-label>
+                                <input matInput placeholder="Tax name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+                                <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                <mat-error *ngIf="name.errors && name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                         <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Tax percentage</mat-label>
+                              <input matInput placeholder="Tax percentage" required #percentage="ngModel" name="percentage" [(ngModel)]="formModel.percentage" pattern="^\d*\.?\d*$">
+                              <mat-error *ngIf="percentage.errors && percentage.errors.required"> This is a <strong>required</strong> field </mat-error>
+                              <mat-error *ngIf="percentage.errors && percentage.errors.pattern"> This is not a valid input.</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-4">
+                         <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Tax apply</mat-label>
+                            <mat-select placeholder="Tax apply" required #apply="ngModel"  name="apply" [(ngModel)]="formModel.apply">
+                              <mat-option value="b">Billing Address</mat-option>
+                              <mat-option value="s">Shipping Address</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                          </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                       <mat-form-field appearance="outline"  class="md-block">
+                          <mat-label>Excise Duty</mat-label>
+                          <mat-select placeholder="Tax type" required #tax_type="ngModel" name="tax_type" [(ngModel)]="formModel.tax_type">
+                            <mat-option value="VAT">VAT</mat-option>
+                            <mat-option value="CST">CST</mat-option>
+                            <mat-option value="Excise Duty">Excise Duty</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-4">
+                         <!-- <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Country</mat-label>
+                            <mat-select placeholder="Country" required #country_id="ngModel" name="country_id" [(ngModel)]="formModel.country_id" (selectionChange)="getState(formModel.country_id)">
+                              <mat-option *ngFor="let country of country_list" [value]="country.id">{{country.country_name}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="name.errors && name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                          </mat-form-field> -->
+                          <ng-select [ngClass]="{ 'custom_error_red': country_id.errors && country_id.errors.required && (country_id.dirty || country_id.touched || formData.submitted) }"
+                            [items]="country_list"
+                            required
+                            placeholder="Country"
+                            bindLabel="country_name" bindValue="id"
+                            #country_id="ngModel" name="country_id" [(ngModel)]="formModel.country_id" 
+                            (change)="getState(formModel.country_id)"
+                          >
+                          </ng-select>
+                          <p class="custom_error" *ngIf="country_id.errors && country_id.errors.required && (country_id.dirty || country_id.touched || formData.submitted)">This is a <strong>required</strong> field</p>
+                      </div>
+                      <div class="col-sm-4">
+                         <!-- <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>State</mat-label>
+                            <mat-select placeholder="State" #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id" multiple>
+                              <mat-option *ngFor="let state of state_list" [value]="state.id">{{state.state_name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field> -->
+                          <ng-select
+                            [items]="state_list"
+                            placeholder="State"
+                            [multiple]="true"
+                            bindLabel="state_name" bindValue="id"
+                            #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id"
+                            style="margin-top: 8px !important;"
+                          >
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                    <span class="ng-value-label">{{item.state_name}}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                            </div>
+                          </ng-template>
+                          </ng-select>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="formModel.tax_type=='VAT'">
+                      <div class="col-sm-6">
+                         <mat-form-field appearance="outline"  class="md-block">
+                            <mat-label>Zipcode</mat-label>
+                            <input matInput placeholder="Zipcode" #zipcode="ngModel" name="zipcode"  [(ngModel)]="formModel.zipcode">
+                          </mat-form-field>
+                      </div>
+                      <div  class="col-sm-6 file_upload">
+                        <button mat-raised-button class="btn-main" type="button">
+                          <mat-icon class="icon-upload-cloud"></mat-icon>Upload File
+                          <input type="file" accept=".csv,.xls" (change)="readfile($event)"
+                          />
+                        </button>
+                        <span class="ml-1">{{file_selection_tool}}</span>
+                        <a href="{{sample_xls}}">Download sample Excel file</a>
+                      </div>
+                    </div>
+              </div>
+              <!-- ///////////////Buttons//// -->
+              <div class="btn-header hidden-xs">
+                  <button type="submit" mat-raised-button class="btn-main">Save</button>
+                  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+              </div>
+              <div class="clear"></div>
+              <!-- ///////////////Buttons//// -->
+          </div>
+          <div class="clear"></div>
+      </form>
+  </div>
+</section>

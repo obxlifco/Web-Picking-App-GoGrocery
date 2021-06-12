@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <Button
+            android:id="@+id/btn_merchant_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/btnsBackgroung"
+            android:drawableRight="@mipmap/expand_more"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Merchant Details"
+            android:textColor="@color/Title"
+            android:textSize="15dp" />
+
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/exp_merchant_details"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@id/btn_merchant_details"
+            android:background="#FFF"
+            app:ael_duration="400"
+            app:ael_expanded="false"
+            app:ael_orientation="vertical">
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="250dp" >
+
+                <LinearLayout
+                    android:id="@+id/LinerTransDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Access Code"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_access_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="AVUP03GL28CI81PUIC"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_Id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Id"
+
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_merchant_id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:gravity="left"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:text="45990"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linertans3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_CC"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Currency"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_currency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:text="AED"
+                            android:padding="5dp"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertans11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Order Id"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_order_id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:text="111111"
+                            android:padding="5dp"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_BRef"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:text="Amount"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="1.00"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_M_Id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:text="Redirect Url"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_redirect_url"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="https://www.gogrocery.ae/api/front/v1/payment-res/"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_SubAcc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Cancel Url"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_cancel_url"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="https://www.google.com"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_Type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="RSA Key Url"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_rsa_url"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="https://www.gogrocery.ae/api/front/v1/get-rsa/"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_Typ"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Customer Id"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_customer_id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_Tr_Typ1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Promo Code"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_promo_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text=""
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/add1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Param1"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_add1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test1"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/add2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Param2"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_add2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test2"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/add3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Param3"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_add3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test3"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/add4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Param4"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_add4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test4"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linertrans15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/add5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Merchant Param5"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_add5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:padding="5dp"
+                            android:background="@drawable/border"
+                            android:text="test5"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+        <!--  <net.cachapa.expandablelayout.ExpandableLayout
+              android:id="@+id/exp_merchant_details"
+              android:layout_width="match_parent"
+              android:layout_height="250dp"
+              android:layout_below="@id/btn_merchant_details"
+              android:background="#FFF"
+              app:ael_duration="400"
+              app:ael_expanded="false"
+              app:ael_orientation="vertical">
+
+              <ScrollView
+                  android:layout_width="fill_parent"
+                  android:layout_height="250dp" >
+
+                  <LinearLayout
+                      android:id="@+id/LinerTransDetail"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+
+                      android:orientation="vertical">
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans1"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_Date"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Access Code"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_access_code"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:background="@drawable/border"
+                              android:padding="5dp"
+                              android:gravity="left"
+                              android:text="AVNB02CH25BB26BNBB"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans2"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_Id"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Merchant Id"
+
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_merchant_id"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:gravity="left"
+                              android:background="@drawable/border"
+                              android:padding="5dp"
+                              android:text="43205"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/Linertans3"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_CC"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Currency"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_currency"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:background="@drawable/border"
+                              android:text="AED"
+                              android:padding="5dp"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+
+
+                      <LinearLayout
+                          android:id="@+id/Linertans11"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Order Id"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_order_id"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:background="@drawable/border"
+                              android:text="111111"
+                              android:padding="5dp"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans4"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_BRef"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:text="Amount"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_amount"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text="100.00"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans5"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_M_Id"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:text="Redirect Url"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_redirect_url"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text="https://securetest.ccavenue.ae/transaction/jsp/ccavResponseHandler_43205.jsp"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans6"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_SubAcc"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Cancel Url"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_cancel_url"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text="https://securetest.ccavenue.ae/transaction/jsp/ccavResponseHandler_64814.jsp"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans7"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_Type"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="RSA Key Url"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_rsa_url"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text="https://securetest.ccavenue.ae/transaction/jsp/GetRSA.jsp"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans8"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_Typ"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Customer Id"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_customer_id"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text="saurabh"
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+
+                      <LinearLayout
+                          android:id="@+id/Linertrans9"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="5dp"
+                          android:orientation="horizontal"
+                          android:weightSum="1">
+
+                          <TextView
+                              android:id="@+id/text_Tr_Typ1"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.35"
+                              android:gravity="center"
+                              android:layout_gravity="center"
+                              android:text="Promo Code"
+                              android:textSize="14dp" />
+
+                          <EditText
+                              android:id="@+id/ed_promo_code"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="0.65"
+                              android:padding="5dp"
+                              android:background="@drawable/border"
+                              android:text=""
+                              android:textSize="14dp" />
+                      </LinearLayout>
+
+                  </LinearLayout>
+
+              </ScrollView>
+          </net.cachapa.expandablelayout.ExpandableLayout>-->
+
+
+        <Button
+
+            android:id="@+id/btn_billing_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/btnsBackgroung"
+            android:layout_below="@id/exp_merchant_details"
+            android:drawableRight="@mipmap/expand_more"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Billing Address"
+            android:textColor="@color/Title"
+            android:textSize="15dp" />
+
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/exp_billing_address"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@id/btn_billing_address"
+            android:background="#FFF"
+            app:ael_duration="400"
+            app:ael_expanded="false"
+            app:ael_orientation="vertical">
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="250dp" >
+
+                <LinearLayout
+                    android:id="@+id/LinerTansDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/Linerrans1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_r_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Name"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_name_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Charli"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linerrans2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text__Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Address"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_address_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Room no 1101 near Railway station Ambad"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Lineran1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/extr_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="City"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_city_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Indore"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linerras1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tex_r_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Country"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_country_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="India"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linerran1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ext_r_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="State"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_state_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="MH"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/Lnerran1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/et_r_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Telephone"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_telephone_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="9595226054"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linan1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ex_r_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Email Id"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_email_b"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="paras.gangwal@avenues.info"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
+
+
+        <Button
+
+            android:id="@+id/btn_shipping_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/btnsBackgroung"
+            android:layout_below="@id/exp_billing_address"
+            android:drawableRight="@mipmap/expand_more"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Shipping Address"
+            android:textColor="@color/Title"
+            android:textSize="15dp" />
+
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/exp_shipping_address"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@id/btn_shipping_address"
+            android:background="#FFF"
+            app:ael_duration="400"
+            app:ael_expanded="false"
+            app:ael_orientation="vertical">
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="250dp" >
+
+                <LinearLayout
+                    android:id="@+id/LinerTansDetai3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/Linerrans3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_r_Dat3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Name"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_name_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Charli"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Line3rans3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text__Dat3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Address"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_address_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Room no 1101 near Railway station Ambad"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/Line3an1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/extr_3ate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="City"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_city_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Indore"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Linerras3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tex_r_Dat3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Country"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_country_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="India"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/Linerran3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ext_r_3ate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="State"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_state_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="MH"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/Lne3ran1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/et_3_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Telephone"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_telephone_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="9595226054"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Lina31"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/ex_3_Date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Email Id"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/ed_email_s"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="paras.gangwal@avenues.info"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_standard_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/btnsBackgroung"
+            android:layout_below="@id/exp_shipping_address"
+            android:drawableRight="@mipmap/expand_more"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Standard Instructions"
+            android:textColor="@color/Title"
+            android:textSize="15dp" />
+
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:visibility="gone"
+            android:id="@+id/exp_standard_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_standard_instructions"
+            android:background="#FFF"
+            app:ael_duration="400"
+            app:ael_expanded="false"
+            app:ael_orientation="vertical">
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:id="@+id/layout_si_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/layout_si_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/text_r_Dat4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="SI Type"
+                            android:textSize="14dp" />
+
+                        <RadioGroup
+                            android:id="@+id/radio_grp_si_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="0.65"
+                            android:padding="5dp">
+
+                            <RadioButton
+                                android:layout_weight="1"
+                                android:id="@+id/radio_fixed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fixed"
+                                android:textSize="12dp"/>
+
+                            <RadioButton
+                                android:layout_weight="1"
+                                android:id="@+id/radio_on_demand"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="On Demand"
+                                android:textSize="12dp"/>
+                            <RadioButton
+                                android:layout_weight="1"
+                                android:id="@+id/radio_none"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="None"
+                                android:textSize="12dp"/>
+
+                        </RadioGroup>
+                        <!--<EditText
+                            android:id="@+id/ed_name_ss"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:background="@drawable/border"
+                            android:padding="5dp"
+                            android:gravity="left"
+                            android:text="Charli"
+                            android:textSize="14dp" />-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/layout_si_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/layout_si_ref_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/text__Dat4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="Ref No. (Optional)"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_ref_no"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:inputType="text"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/layout_setup_amt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/extr_4ate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="Setup Amt. (Y/N)"
+                                android:textSize="14dp" />
+
+                            <RadioGroup
+                                android:id="@+id/radio_grp_setup_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.65"
+                                android:padding="5dp">
+
+                                <RadioButton
+                                    android:id="@+id/radio_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"/>
+
+                                <RadioButton
+                                    android:id="@+id/radio_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="No"/>
+
+                            </RadioGroup>
+                            <!--<EditText
+                                android:id="@+id/ed_setup_amt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:textSize="14dp" />-->
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_amt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/tex_r_Dat4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="Amount"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_si_amount"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:inputType="numberDecimal"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_start_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ext_r_4ate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="Start Date"
+                                android:textSize="14dp" />
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_select_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:background="@drawable/border"
+                                    android:padding="5dp">
+                                    <TextView
+                                        android:id="@+id/txt_start_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint="DD-MM-YYYY"/>
+                                    <ImageView
+                                        android:paddingLeft="8dp"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_calendar"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            <!--<EditText
+                                android:id="@+id/ed_start_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:hint="DD/MM/YYYY"
+                                android:textSize="14dp" />-->
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_freq_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/et_4_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="Freq. Type"
+                                android:textSize="14dp" />
+
+                            <RadioGroup
+                                android:id="@+id/radio_grp_freq_type"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="0.65"
+                                android:padding="5dp">
+
+                                <RadioButton
+                                    android:layout_weight="1"
+                                    android:id="@+id/radio_days"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Days"/>
+
+                                <RadioButton
+                                    android:layout_weight="1"
+                                    android:id="@+id/radio_month"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Month"/>
+
+                                <RadioButton
+                                    android:layout_weight="1"
+                                    android:id="@+id/radio_year"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Year"/>
+
+                            </RadioGroup>
+                            <!--<EditText
+                                android:id="@+id/ed_telephone_ss"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:text="9595226054"
+                                android:textSize="14dp" />-->
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_si_frequency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/ex_4_Date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="SI Freq."
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_si_freq"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:inputType="number"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_si_bill_cycle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/txt_bill_cycle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.35"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="SI bill cycle"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/ed_bill_cycle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.65"
+                                android:background="@drawable/border"
+                                android:padding="5dp"
+                                android:gravity="left"
+                                android:inputType="number"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+        <LinearLayout
+            android:layout_below="@id/exp_standard_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:id="@+id/chk"
+            android:weightSum="1">
+
+            <CheckBox
+                android:id="@+id/chk_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+
+                android:text="Show Address" />
+
+            <CheckBox
+                android:id="@+id/chk_ccPromo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="CCAvenue Promo"/>
+
+
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sdk"
+            android:layout_below="@id/chk"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"
+            android:layout_centerInParent="true"
+            android:paddingRight="20dp"
+            android:text="Go to SDK"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>

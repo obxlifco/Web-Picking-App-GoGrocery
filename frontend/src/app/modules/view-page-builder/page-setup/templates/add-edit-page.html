@@ -1,0 +1,68 @@
+
+<form #pageForm="ngForm" novalidate (ngSubmit)="pageForm.valid && addEditPage(pageForm)">
+	<input type="hidden" name="userId" [(ngModel)]="formModel.id">
+	
+	<div class="mat-toolbar-tools">
+		<h2 mat-dialog-title>{{ (formModel.id>0)?'Edit':'Add' }} Page</h2>
+		<button mat-raised-button class="editor-btn-main" type="submit">Save</button>
+		<button mat-raised-button class="editor-btn-main-line" type="button" (click)="closeDialog()">Cancel</button>
+		<div class="clear"></div>
+	</div>
+	
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column"> 
+		 	<mat-form-field class="md-block">
+		    	<input matInput placeholder="Page Name (EN)" required #page_name="ngModel"  name="page_name" [(ngModel)]="formModel.page_name" (blur)="createUrl(page_name.value)">
+		    	<mat-error *ngIf="page_name.errors && page_name.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<!-- <mat-form-field class="md-block">
+		    	<input matInput placeholder="Page Name (TH)" #page_name_th="ngModel"  name="page_name_th" [(ngModel)]="formModel.page_name_th">
+		    </mat-form-field> -->
+		  	<mat-form-field>
+	  			<input matInput placeholder="Page URL" required #url="ngModel" name="url" [(ngModel)]="formModel.url" (blur)="createUrl(url.value)">
+		    	<mat-error *ngIf="url.errors && url.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+	  		</mat-form-field>
+	  		<mat-form-field class="md-block">
+		    	<input matInput placeholder="Page Title (EN)" required #page_title="ngModel"  name="page_title" [(ngModel)]="formModel.page_title">
+		    	<mat-error *ngIf="page_title.errors && page_title.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<!-- <mat-form-field class="md-block">
+		    	<input matInput placeholder="Page Title (TH)" #page_title_th="ngModel"  name="page_title_th" [(ngModel)]="formModel.page_title_th">
+		    </mat-form-field> -->
+			<mat-form-field>
+	  			<input matInput placeholder="Page Keyword" required #meta_key="ngModel"  name="meta_key" [(ngModel)]="formModel.meta_key">
+		    	<mat-error *ngIf="meta_key.errors && meta_key.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+	  		</mat-form-field>
+	  		<mat-form-field class="md-block">
+		    	<input matInput placeholder="Page Meta Data" required #meta_data="ngModel"  name="meta_data" [(ngModel)]="formModel.meta_data">
+		    	<mat-error *ngIf="meta_data.errors && meta_data.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+			<mat-form-field>
+	  			<input matInput placeholder="Page Description" required #meta_desc="ngModel"  name="meta_desc" [(ngModel)]="formModel.meta_desc">
+		    	<mat-error *ngIf="meta_desc.errors && meta_desc.errors.required">
+			    	This is a <strong>required</strong> field
+			    </mat-error>
+	  		</mat-form-field>
+
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		  	<button mat-raised-button class="editor-btn-main" type="submit">Save</button>
+		  	<button mat-raised-button class="editor-btn-main-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>
+	
+

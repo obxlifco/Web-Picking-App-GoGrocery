@@ -1,0 +1,123 @@
+
+        <section  class="pmc_order_con ">
+          <form #signupForm="ngForm" (ngSubmit)="signupForm.valid && signup()" novalidate>
+              <div class="pop_upbg">
+                <div class="loginbox mobile" style="background-color: #fff;">
+                  <div class="top_image_panel">
+                       <img  class="top_image" src="./assets/images/Group16279-Copy.png" alt="">
+                  </div>
+                  <div class="crossbtn"><a href="javascript:void(0)" (click)="closeDialog()"><span class="icon-cross_sml"></span></a></div>
+                  <!-- <div class="image_panel" style="background-image:url(assets/images/loging_bg.jpg)"></div> -->
+                  <div class="signup_background_image">
+                  <div class="text_panel">
+                    
+            
+                    
+                      <!-- <div class="head">Welcome to Go grocery</div> -->
+                      <!-- <div class="row" style="color:red" *ngIf="isError">{{error}}</div> -->
+                      <!-- <div class="row">
+                          <button type="button" class="facebookbtn" (click)="socialLogin('facebook')"><span><img src="assets/images/facebook.png"></span>Facebook</button>
+                          <button type="button" class="google" (click)="socialLogin('google')"><span><img src="assets/images/google.png"></span>Google</button>
+                      </div>
+                      <div class="ortext">Or register with</div> -->
+                      <div class="account_text">Create your account on GoGrocery
+                      </div>
+                      <div class="row">
+                        <mat-form-field appearances="outline">
+                            <mat-label>First name</mat-label>
+                            <input matInput placeholder="Name" name="name" [(ngModel)]="model.first_name" #name="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && name.invalid }" required>
+                          </mat-form-field>
+                      </div>
+                      <!-- <div class="row">
+                        <mat-form-field appearances="outline">
+                            <mat-label>Address</mat-label>
+                            <input matInput placeholder="Address" name="address" [(ngModel)]="model.address" #address="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && address.invalid }">
+                          </mat-form-field>
+                      </div> -->
+                      <div class="row">
+                        <mat-form-field appearances="outline">
+                            <mat-label>Last name</mat-label>
+                            <input matInput placeholder="Name" name="lname" [(ngModel)]="model.last_name" #lname="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && lname.invalid }" >
+                          </mat-form-field>
+                      </div>
+                      <!-- mob number -->
+                      <!-- <div class="row align-items-center">
+                        <div class="col-2">
+                            <span style="color: #8a8585;">{{countryCode}}</span>
+                        </div>
+                        <div class="col-5">
+                          <div class="r_number">
+                            <mat-form-field>
+                             <mat-label>Carrier Code:</mat-label>
+                              <mat-select name="carrier_code" #carrier_code = "ngModel" [(ngModel)]="model.carrier_code" required>
+                                <mat-option *ngFor="let code of carrierCode" [value]="code">{{code}}</mat-option>
+                              </mat-select>
+                              </mat-form-field>
+                          </div>
+                          
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearances="outline">
+                            <mat-label>Mobile No</mat-label>
+                            <input matInput placeholder="Mobile No" name="phone" [(ngModel)]="model.phone" #phone="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && phone.invalid }" pattern="^[0-9]{7,7}$" required>
+                          </mat-form-field>
+                        </div>
+                      </div> -->
+                      <!-- <div class="row">
+
+                        <mat-form-field appearances="outline">
+                            <mat-label>Mobile No</mat-label>
+                            <input matInput placeholder="Mobile No" name="phone" [(ngModel)]="model.phone" #phone="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && phone.invalid }" pattern="^(?:\+971|00971|054|055|056|050|052|058|0)?[0-9]{7,}$" required>
+                          </mat-form-field>
+                      </div> -->
+                      <!-- mob number -->
+
+                      <div class="row">
+                        <mat-form-field appearances="outline">
+                            <mat-label>Email Address</mat-label>
+                            <input matInput placeholder="Email" name="user_email" [(ngModel)]="model.user_email" #user_email="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && user_email.invalid }" required email>
+                          </mat-form-field>
+                      </div>
+                      <div class="row" >
+                        <mat-form-field appearances="outline">
+                            <input matInput placeholder="Password" [attr.type]="hide"   name="user_password" [(ngModel)]="model.user_password" #user_password="ngModel" [ngClass]="{ 'is-invalid': signupForm.submitted && user_password.invalid }" required >
+                            <button type="button" mat-icon-button matSuffix (click)="showPassword()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                          </mat-form-field>
+                     </div>
+                       <div class="row">
+                         <!-- <button type="submit" [ngClass]="signupForm.valid? 'signin_btn': 'signin_btn_disable'" [disabled]="!signupForm.valid">SIGN UP</button> -->
+                         <button type="submit" [ngClass]="signupForm.valid? 'new_signup_btn': 'new_signup_btn_disable'" [disabled]="!signupForm.valid">Next</button>
+
+                     </div>
+                     <div class="row" *ngIf="error">
+                      <span class="error_message">{{error}}</span>
+                       
+                     </div>
+                    <div class="row">
+                      <div class="privacy_policy_text">
+                        <p>By creating an account you agree to the privacy policy and to the terms of use
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="social_media_btns">
+                      
+                          <button (click)="socialLogin('facebook')" type="button" class="new_facebookbtn"><i class="fa fa-facebook-square socialmedia_icon"></i>FACEBOOK</button>
+                          <button  (click)="socialLogin('google')" type="button" class="new_googlebtn"><i class="fa fa-google socialmedia_icon"></i>GOOGLE</button>
+                      
+                      </div>
+                    </div>
+                     <!-- <div class="row">
+                        <div class="signuptext">Already have an account? <a href="javascript:void(0)" (click)="openSignInPopup()">Sign In</a></div>
+                    </div> -->
+                    <div class="create_account_text mt1">
+                      <p>Already have an account?  <a href="javascript:void(0)" (click)="openSignInPopup()">Sign In</a></p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+          </form>
+      </section>

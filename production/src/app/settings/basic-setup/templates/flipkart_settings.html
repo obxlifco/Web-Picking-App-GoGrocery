@@ -1,0 +1,50 @@
+<form #flipkartSetting="ngForm" novalidate (ngSubmit)="flipkartSetting.valid && saveFlipkartCredential(flipkartSetting)">
+	<input type="hidden" name="channel_id" [(ngModel)]="formModel.channel_id">
+	<div class="md-toolbar-tools">
+		<h2 mat-dialog-title>Flipkart Settings</h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body price_setup_dio " layout="column">
+			<mat-form-field class="md-block">
+				<input matInput placeholder="Application ID" required #username="ngModel" name="username" [(ngModel)]="formModel.username">
+			    <mat-error *ngIf="username.errors && username.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+				</mat-form-field>
+				
+				<mat-form-field class="md-block">
+				<input matInput placeholder="Application Secret" required #password="ngModel" name="password" [(ngModel)]="formModel.password">
+			    <mat-error *ngIf="password.errors && password.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+				</mat-form-field>
+				
+				<section class="">
+					<label class="example-margin">Fullfilment Type
+						<span class="error">*</span>:</label>
+					<div class="clear"></div>
+					<mat-radio-group #fullfilment_by="ngModel" name="fullfilment_by" [(ngModel)]="formModel.fullfilment_by" required>
+						<mat-radio-button value="standard">Standard</mat-radio-button>
+						<mat-radio-button value="self_ship">Self Ship</mat-radio-button>
+					</mat-radio-group>
+				</section>
+			</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	
+
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+	<div class="clear20"></div>
+	<p>1.In order to sell your products on Flipkart, you will need to Authenticate your account.</p>
+	<p>2.Fill in the necessary details and provide the required credentials.e.g- Userid,Password</p>
+	<p>3.Now click on Save button to complete the Authentication.</p>
+</form>

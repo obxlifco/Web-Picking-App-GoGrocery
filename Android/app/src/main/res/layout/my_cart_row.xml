@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivItemImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:src="@drawable/dummy_item_img" />
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_toEndOf="@+id/ivItemImage">
+
+            <TextView
+                android:id="@+id/tvItemBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind_medium"
+                android:text="Healthy"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rlPricingDiscount"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="0.58">
+
+                        <TextView
+                            android:id="@+id/tvItemName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/hind_medium"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="Organic Moong Dal Yellow Split"
+                            android:textColor="@color/grey_new"
+                            android:textSize="@dimen/_10sdp" />
+
+                        <TextView
+                            android:id="@+id/tvItemWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvItemName"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_2sdp"
+
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/grey_new"
+                            android:textSize="@dimen/_8sdp"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/proxima_regular" />
+
+                        <TextView
+                            android:id="@+id/tvOriginalPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
+                            android:textColor="@color/black"
+                            android:visibility="gone"
+                            app:fontFamily="@font/hind" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.42">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvAddToCart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="@dimen/_5sdp">
+
+                            <LinearLayout
+                                android:id="@+id/llAddToCart"
+                                style="@style/Base.Widget.AppCompat.Button"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_21sdp"
+                                android:background="@drawable/white_border">
+
+                                <RelativeLayout
+                                    android:id="@+id/rlMinus"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/my_cart_minus_bg">
+
+                                    <ImageView
+                                        android:layout_width="10dp"
+                                        android:layout_height="12dp"
+                                        android:layout_centerInParent="true"
+                                        android:tint="@color/green_dark_new"
+                                        android:src="@drawable/minus" />
+                                </RelativeLayout>
+
+
+                                <EditText
+                                    android:id="@+id/etQuantity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/hind_semibold"
+                                    android:inputType="number"
+                                    android:text="1"
+                                    android:editable="false"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                                <RelativeLayout
+                                    android:id="@+id/rlPlus"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/my_cart_plus_bg">
+
+                                    <ImageView
+                                        android:layout_width="10dp"
+                                        android:layout_height="12dp"
+                                        android:layout_centerInParent="true"
+                                        android:tint="@color/green_dark_new"
+                                        android:src="@drawable/plus" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/tvDiscountedPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_6sdp"
+                            android:layout_toEndOf="@+id/cvAddToCart"
+                            android:text="AED 50.00"
+                            android:ellipsize="end"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/green_dark_new"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/proxima_regular" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_preparationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvCustomFieldName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/proxima_regular"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:text="Preparation Type"
+                        android:textColor="@color/green_dark_new"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvCustomFieldValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="500 gm"
+                        android:ellipsize="end"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/grey_new"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/proxima_regular" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

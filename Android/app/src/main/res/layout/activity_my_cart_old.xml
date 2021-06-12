@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MyCart">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="false"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/white"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivBack"
+                                android:layout_width="@dimen/back_btn_width"
+                                android:layout_height="@dimen/back_btn_height"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="16dp"
+                                android:src="@drawable/back_arrow_black" />
+
+                            <TextView
+                                style="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/montserrat"
+                                android:text="@string/my_cart_title"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <RelativeLayout
+                                android:id="@+id/cartRl"
+                                android:layout_width="32dp"
+                                android:layout_height="26dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="16dp">
+
+                                <ImageView
+                                    android:id="@+id/ivCart"
+                                    android:layout_width="20dp"
+                                    android:layout_height="22dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:src="@drawable/ic_cart"
+                                    android:visibility="gone" />
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rlBadge"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:visibility="gone">
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:background="@drawable/card_bubble"
+                                        app:civ_border_color="@color/white"
+                                        app:civ_border_width="2dp" />
+
+                                    <TextView
+                                        android:id="@+id/badge_notification"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:gravity="center"
+                                        android:text="0"
+                                        android:textColor="@color/white"
+                                        android:textSize="8sp" />
+
+                                </RelativeLayout>
+
+
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:id="@+id/ivWishList"
+                                android:layout_width="18dp"
+                                android:layout_height="22dp"
+                                android:layout_alignRight="@+id/cartRl"
+                                android:layout_alignBottom="@+id/cartRl"
+                                android:layout_marginRight="40dp"
+                                android:layout_marginBottom="-4dp"
+                                android:src="@drawable/location_pin"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/ivSearch"
+                                android:layout_width="18dp"
+                                android:layout_height="20dp"
+                                android:layout_alignRight="@+id/ivWishList"
+                                android:layout_alignBottom="@+id/ivWishList"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="40dp"
+                                android:src="@drawable/search"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_view_height"
+                    android:layout_below="@+id/app_bar"
+                    android:background="@drawable/test_divider"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/sfl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cvHeader"
+            android:visibility="visible"
+            app:shimmer_duration="1000">
+
+            <include
+                android:id="@+id/includeShimmerLayout"
+                layout="@layout/view_cart_placeholder" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsvMyCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cvFooter"
+            android:layout_below="@+id/cvHeader"
+            android:fillViewport="true"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvViewCart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/my_cart_row" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/txtOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/my_cart_options"
+                    android:textColor="#4C4C4C"
+                    android:visibility="gone" />
+
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/txtOption"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/view_divider_clr"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/rlOffertag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/ivOffertag"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/offer_tag" />
+
+                    <TextView
+                        android:id="@+id/txtApplyPromoCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/ivOffertag"
+                        android:fontFamily="@font/hind_semibold"
+                        android:text="@string/my_cart_apc"
+                        android:textColor="@color/app_red_clr" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/rlOffertag"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/view_divider_clr"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/txtOrderSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view3"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/my_cart_os"
+                    android:textColor="#4C4C4C" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_orderSummery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtOrderSummary"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/view_divider_clr"
+                            android:visibility="visible" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/llSubTotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+
+                                    android:id="@+id/txtSubtotal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:text="@string/my_cart_subtotal"
+                                    android:textColor="#5C5C5C" />
+
+                                <TextView
+                                    android:id="@+id/tvSubtotal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:gravity="end"
+                                    android:text="@string/current_curremcy_zero"
+                                    android:textColor="#5C5C5C" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llDiscount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/llSubTotal"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <TextView
+
+                                    android:id="@+id/txtDiscount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:text="@string/my_cart_discount"
+                                    android:textColor="#5C5C5C" />
+
+                                <TextView
+                                    android:id="@+id/tvDiscount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:gravity="end"
+                                    android:text="@string/current_curremcy_zero"
+                                    android:textColor="#5C5C5C" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llDeliveryCharges"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/llDiscount"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:id="@+id/txtDeliveryCharges"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:text="@string/my_cart_dc"
+                                    android:textColor="#5C5C5C" />
+
+                                <TextView
+                                    android:id="@+id/tvDeliveryCharges"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:gravity="end"
+                                    android:text="@string/current_curremcy_zero"
+                                    android:textColor="#5C5C5C" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llEstimatedTax"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/llDeliveryCharges"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <TextView
+
+                                    android:id="@+id/txtEstimatedTax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:text="@string/my_cart_et"
+                                    android:textColor="#5C5C5C" />
+
+                                <TextView
+                                    android:id="@+id/tvEstimatedTax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:gravity="end"
+                                    android:text="@string/current_curremcy_zero"
+                                    android:textColor="#5C5C5C" />
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/view4"
+                                android:layout_width="match_parent"
+                                android:layout_height="0.55dp"
+                                android:layout_below="@id/llEstimatedTax"
+                                android:layout_marginTop="16dp"
+                                android:background="@color/view_divider_clr" />
+
+                            <LinearLayout
+                                android:id="@+id/llTotalAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/view4"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/hind"
+                                    android:text="@string/my_cart_ta"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalSumPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/hind"
+                                    android:gravity="end"
+                                    android:text="@string/current_curremcy_zero"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/view_divider_clr"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/add_note_background"
+                    android:orientation="vertical"
+
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <EditText
+                        android:id="@+id/et_addNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/hind"
+                        android:hint="Add a note to your order"
+                        android:inputType="textMultiLine"
+                        android:maxLength="200"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="4dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray_dark"
+                        android:textSize="13sp">
+
+                    </EditText>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvPlaceOrderPrice"
+                            style="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/hind_medium"
+                            android:text="@string/current_curremcy_zero"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/my_cart_vpd"
+                            android:textColor="@color/sor_radio_selected_color"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnPlaceOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_ng"
+                        android:fontFamily="@font/hind_semibold"
+                        android:text="@string/my_cart_checkout"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressSpinKitView"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/curve_corner_translucent_bg"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/green_new" />
+
+        <RelativeLayout
+            android:id="@+id/noResponse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/includeEmptyCart"
+                layout="@layout/empty_cart_layout" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

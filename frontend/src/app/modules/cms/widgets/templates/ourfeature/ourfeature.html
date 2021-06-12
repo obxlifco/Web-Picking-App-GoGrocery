@@ -1,0 +1,14 @@
+<div class="clear"></div>
+<section class="container-fluid" *ngIf="widget_properties_data.length > 0">
+  <div class="container_cuswrap">
+    <div class="footertop">
+        <div class="f_topblog" *ngFor="let ourfeature of widget_properties_data">
+            <div class="iconblog"><i class="fa {{ourfeature['value']}}" aria-hidden="true"></i></div>
+            <div class="textblog">
+                <h4>{{ourfeature['associative_fields'][0]['value']}}</h4>
+                <p>{{ourfeature['associative_fields'][1]['value']}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

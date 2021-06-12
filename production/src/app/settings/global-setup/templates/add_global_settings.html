@@ -1,0 +1,1018 @@
+<section class="right-part addall_page">
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<form #globalSettingsForm="ngForm" novalidate
+			(ngSubmit)="globalSettingsForm.valid && addEditGlobalSettings(globalSettingsForm)">
+			<input type="hidden" name="settingsId" [(ngModel)]="formModel.settingsId">
+			<div class="topheading">
+				<h1>Edit Global Settings
+					<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Save</button>
+						<button type="button" mat-raised-button class="btn-line"
+							(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+					</div>
+					<div class="clear"></div>
+				</h1>
+			</div>
+			<div class="box">
+				<div class="fixed-width">
+					<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="boxs active" accordianBox>
+								<div class="box-header"> Basic Settings <span class="acc_icon icon-minus"></span> </div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Settings Name</mat-label>
+												<input matInput placeholder="Settings Name" required
+													#settingName="ngModel" name="settingName"
+													[(ngModel)]="formModel.name">
+												<mat-error *ngIf="settingName.errors && settingName.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Date Format</mat-label>
+													<mat-select required placeholder="Date Format" #dateFormat="ngModel"
+														name="dateFormat" [(ngModel)]="formModel.date_format">
+														<mat-option value="%d-%m-%Y">d-m-Y</mat-option>
+														<mat-option value="%m-%d-%y">m-d-Y</mat-option>
+														<mat-option value="%Y-%m-%d">Y-m-d</mat-option>
+														<mat-option value="%Y-%d-%m">Y-d-m</mat-option>
+														<mat-option value="%d/%m/%Y">d/m/Y</mat-option>
+														<mat-option value="%m/%d/%Y">m/d/Y</mat-option>
+														<mat-option value="%Y/%m/%d">Y/m/d</mat-option>
+														<mat-option value="%Y/%d/%m">Y/d/m</mat-option>
+														<mat-option value="%d-%m-%Y">d-m-Y</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="dateFormat.errors && dateFormat.errors.required && (dateFormat.dirty || dateFormat.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Resize Image Based On</mat-label>
+													<mat-select required placeholder="Resize Image Based On"
+														#imageResize="ngModel" name="imageResize"
+														[(ngModel)]="formModel.image_resize">
+														<mat-option value="Height">Height</mat-option>
+														<mat-option value="Width">Width</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="imageResize.errors && imageResize.errors.required && (imageResize.dirty || imageResize.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										
+										
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Review Moderation</mat-label>
+													<mat-select required placeholder="Review Moderation"
+														#reviewMod="ngModel" name="reviewMod"
+														[(ngModel)]="formModel.review_moderation">
+														<mat-option value="y">Yes</mat-option>
+														<mat-option value="n">Publish Directly</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="reviewMod.errors && reviewMod.errors.required && (reviewMod.dirty || reviewMod.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<!-- <mat-form-field appearance="outline">
+													<mat-label>Timezone</mat-label>
+													<mat-select required placeholder="Timezone" #timezone="ngModel"
+														name="timezone" [(ngModel)]="formModel.timezone_id">
+														<mat-option *ngFor="let timezone of settingList.timezone"
+															[value]="timezone.id">{{timezone.timezone_location}}
+														</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="timezone.errors && timezone.errors.required && (timezone.dirty || timezone.touched || globalSettingsForm.submitted)">
+														This is a
+														<strong>required</strong> field
+													</mat-error>
+												</mat-form-field> -->
+												<ng-select [ngClass]="{ 'custom_error_red': timezone.errors && timezone.errors.required && (timezone.dirty || timezone.touched || globalSettingsForm.submitted) }"
+													[items]="settingList.timezone"
+													required
+													placeholder="Timezone"
+													bindLabel="timezone_location" bindValue="id"
+													#timezone="ngModel"	name="timezone" [(ngModel)]="formModel.timezone_id"
+												>
+												</ng-select>
+												<p class="custom_error" *ngIf="timezone.errors && timezone.errors.required && (timezone.dirty || timezone.touched || globalSettingsForm.submitted)">This is a <strong>required</strong> field</p>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<!-- <mat-form-field appearance="outline">
+													<mat-label>Language</mat-label>
+													<mat-select required placeholder="Language" #language="ngModel"
+														name="language" [(ngModel)]="formModel.language_id" multiple>
+														<mat-option *ngFor="let language of settingList.language_list"
+															[value]="language.id">{{language.name}}</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="language.errors && language.errors.required && (language.dirty || language.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field> -->
+												<ng-select [ngClass]="{ 'custom_error_red': language.errors && language.errors.required && (language.dirty || language.touched || globalSettingsForm.submitted) }"
+													[items]="settingList.language_list"
+													required
+													[multiple]="true"
+													placeholder="Language"
+													bindLabel="name" bindValue="id"
+													#language="ngModel" name="language" [(ngModel)]="formModel.language_id"
+													style="margin-top: 8px !important;"
+												>
+												<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+													<div class="ng-value" *ngFor="let item of items | slice:0:1">
+															<span class="ng-value-label">{{item.name}}</span>
+															<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+													</div>
+													<div class="ng-value" *ngIf="items.length > 1">
+															<span class="ng-value-label">{{items.length - 1}} more...</span>
+													</div>
+												</ng-template>
+												</ng-select>
+												<p class="custom_error" *ngIf="language.errors && language.errors.required && (language.dirty || language.touched || globalSettingsForm.submitted)">This is a <strong>required</strong> field</p>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="md-block">
+												<!-- <mat-form-field appearance="outline">
+													<mat-label>Currency</mat-label>
+													<mat-select required placeholder="Currency" #currency="ngModel"
+														name="currency" [(ngModel)]="formModel.currency_id" multiple>
+														<mat-option *ngFor="let currency of settingList.currency_list"
+															[value]="currency.id">{{currency.currencyname}}</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="currency.errors && currency.errors.required && (currency.dirty || currency.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field> -->
+												<ng-select [ngClass]="{ 'custom_error_red': currency.errors && currency.errors.required && (currency.dirty || currency.touched || globalSettingsForm.submitted) }"
+													[items]="settingList.currency_list"
+													required
+													[multiple]="true"
+													placeholder="Currency"
+													bindLabel="currencyname" bindValue="id"
+													#currency="ngModel" name="currency" [(ngModel)]="formModel.currency_id"
+													style="margin-top: 8px !important;"
+												>
+												<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+													<div class="ng-value" *ngFor="let item of items | slice:0:1">
+															<span class="ng-value-label">{{item.currencyname}}</span>
+															<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+													</div>
+													<div class="ng-value" *ngIf="items.length > 1">
+															<span class="ng-value-label">{{items.length - 1}} more...</span>
+													</div>
+												</ng-template>
+												</ng-select>
+												<p class="custom_error" *ngIf="currency.errors && currency.errors.required && (currency.dirty || currency.touched || globalSettingsForm.submitted)">This is a <strong>required</strong> field</p>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<!-- <mat-form-field appearance="outline">
+													<mat-label>Country</mat-label>
+													<mat-select required placeholder="Country" #country="ngModel"
+														name="country" [(ngModel)]="formModel.country_id" multiple>
+														<mat-option *ngFor="let country of settingList.country_list"
+															[value]="country.id">{{country.country_name}}</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="country.errors && country.errors.required && (country.dirty || country.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field> -->
+												<ng-select [ngClass]="{ 'custom_error_red': country.errors && country.errors.required && (country.dirty || country.touched || globalSettingsForm.submitted) }"
+													[items]="settingList.country_list"
+													required
+													[multiple]="true"
+													placeholder="Country"
+													bindLabel="country_name" bindValue="id"
+													#country="ngModel" name="country" [(ngModel)]="formModel.country_id"
+													style="margin-top: 8px !important;"
+												>
+												<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+													<div class="ng-value" *ngFor="let item of items | slice:0:1">
+															<span class="ng-value-label">{{item.country_name}}</span>
+															<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+													</div>
+													<div class="ng-value" *ngIf="items.length > 1">
+															<span class="ng-value-label">{{items.length - 1}} more...</span>
+													</div>
+												</ng-template>
+												</ng-select>
+												<p class="custom_error" *ngIf="country.errors && country.errors.required && (country.dirty || country.touched || globalSettingsForm.submitted)">This is a <strong>required</strong> field</p>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Items listing in frontend</mat-label>
+												<input matInput placeholder="Items listing in frontend"
+													#listCountFrontend="ngModel" name="listCountFrontend"
+													[(ngModel)]="formModel.itemlisting_front">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Items listing in backend</mat-label>
+												<input matInput placeholder="Items listing in backend"
+													#listCountBackend="ngModel" name="listCountBackend"
+													[(ngModel)]="formModel.itemlisting_backend">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>New Arrival Days</mat-label>
+												<input matInput placeholder="New Arrival Days" #newArrival="ngModel"
+													name="newArrival" [(ngModel)]="formModel.new_arrival_days">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Minimum Order Amount</mat-label>
+												<input matInput placeholder="Minimum Order Amount"
+													#minOrderAmt="ngModel" name="minOrderAmt"
+													[(ngModel)]="formModel.min_order_amount">
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Page Title</mat-label>
+												<input matInput placeholder="Page Title" #pageTitle="ngModel"
+													name="pageTitle" [(ngModel)]="formModel.page_title">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4"><br>
+											<!-- [ng-true-value]="'y'" [ng-false-value]="'n'" -->
+											<mat-checkbox id="isPrePayment" name="isPrePayment"
+												[(ngModel)]="formModel.is_prepaid_payment">
+												Is PrePayment Applicable
+											</mat-checkbox>
+										</div>
+										<div class="col-sm-4"><br>
+											<mat-checkbox id="isSmsGateway" name="isSmsGateway"
+												[(ngModel)]="formModel.sms_check" (change)="toggleSmsGateway()">
+												Is SMS Gateway Applicable
+											</mat-checkbox>
+										</div>
+									</div>
+
+									<div class="row">
+										
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Service Applicable</mat-label>
+													<mat-select required placeholder="Service Applicable"
+														#serviceApplicable="ngModel" name="serviceApplicable"
+														[(ngModel)]="formModel.service_applicable">
+														<mat-option value="no">No</mat-option>
+														<mat-option value="yes">Yes</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="serviceApplicable.errors && serviceApplicable.errors.required && (serviceApplicable.dirty || serviceApplicable.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Applicable IMEI</mat-label>
+													<mat-select required placeholder="Applicable IMEI"
+														#imeiApplicable="ngModel" name="imeiApplicable"
+														[(ngModel)]="formModel.applicable_imei">
+														<mat-option value="N">No</mat-option>
+														<mat-option value="Y">Yes</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="imeiApplicable.errors && imeiApplicable.errors.required && (imeiApplicable.dirty || imeiApplicable.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Applicable Tax</mat-label>
+													<mat-select required placeholder="Applicable Tax"
+														#applicable_tax="ngModel" name="applicable_tax"
+														[(ngModel)]="formModel.applicable_tax">
+														<mat-option value="GST">GST</mat-option>
+														<mat-option value="VAT">VAT</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="applicable_tax.errors && applicable_tax.errors.required && (applicable_tax.dirty || applicable_tax.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Meta Keyword</mat-label>
+												<textarea matInput placeholder="Meta Keyword" #metaKeyword="ngModel"
+													name="metaKeyword" [(ngModel)]="formModel.meta_keyword"></textarea>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Meta Description</mat-label>
+												<textarea matInput placeholder="Meta Description"
+													#metaDescription="ngModel" name="metaDescription"
+													[(ngModel)]="formModel.meta_description"></textarea>
+											</mat-form-field>
+										</div>
+										<!-- <div class="col-sm-6">
+											<mat-checkbox id="isAlgolia" name="isAlgolia" [(ngModel)]="formModel.algolia_search_status" (change)="toggleAlgoliaSetting()">
+												Is Algolia Applicable
+											</mat-checkbox>
+										</div> -->
+									</div>
+								</div>
+							</div>
+							<!--Algolia Settings start here...-->
+							<!-- <div class="boxs" *ngIf="showAlgolia" accordianBox>
+								<div class="box-header"> Algolia Settings <span class="acc_icon icon-addsvg"></span> </div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block"><mat-label>Algolia App Key</mat-label>
+										    	<input matInput placeholder="Algolia App Key" required #algoliaAppKey="ngModel"  name="algoliaAppKey" [(ngModel)]="formModel.algolia_app_key">
+										    	<mat-error *ngIf="algoliaAppKey.errors && algoliaAppKey.errors.required">
+											    	This is a <strong>required</strong> field
+											    </mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block"><mat-label>Algolia App Token</mat-label>
+										    	<input matInput placeholder="Algolia App Token" required #algoliaAppToken="ngModel"  name="algoliaAppToken" [(ngModel)]="formModel.algolia_app_token">
+										    	<mat-error *ngIf="algoliaAppToken.errors && algoliaAppToken.errors.required">
+											    	This is a <strong>required</strong> field
+											    </mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block"><mat-label>Algolia Index Name</mat-label>
+										    	<input matInput placeholder="Algolia Index Name" required #algoliaIndex="ngModel"  name="algoliaIndex" [(ngModel)]="formModel.index_name">
+										    	<mat-error *ngIf="algoliaIndex.errors && algoliaIndex.errors.required">
+											    	This is a <strong>required</strong> field
+											    </mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6"></div>
+									</div>
+								</div>
+							</div> -->
+							<!--Algolia Settings end here...-->
+							<!--SMS Gateway Settings start here...-->
+							<div class="boxs" *ngIf="showSmsGateway" accordianBox>
+								<div class="box-header"> SMS Gateway Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Sender Id</mat-label>
+												<input matInput placeholder="Sender Id" required #smsSenderId="ngModel"
+													name="smsSenderId" [(ngModel)]="formModel.sms_sender_id">
+												<mat-error *ngIf="smsSenderId.errors && smsSenderId.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Auth Key</mat-label>
+												<input matInput placeholder="Auth Key" required #smsAuthKey="ngModel"
+													name="smsAuthKey" [(ngModel)]="formModel.sms_auth_key">
+												<mat-error *ngIf="smsAuthKey.errors && smsAuthKey.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Route Id</mat-label>
+												<input matInput placeholder="Route Id" required #smsRouteId="ngModel"
+													name="smsRouteId" [(ngModel)]="formModel.sms_route">
+												<mat-error *ngIf="smsRouteId.errors && smsRouteId.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--SMS Gateway Settings start here...-->
+							<!--Product Setting start here....-->
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Product Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Product Sku Prefix</mat-label>
+												<input matInput placeholder="Product Sku Prefix" #skuPrefix="ngModel"
+													name="skuPrefix" [(ngModel)]="formModel.sku_prefix">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Product Sku Suffix</mat-label>
+												<input matInput placeholder="Product Sku Suffix" #skuPrefix="ngModel"
+													name="skuSuffix" [(ngModel)]="formModel.sku_suffix">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Product Weight Unit</mat-label>
+													<mat-select required placeholder="Product Weight Unit"
+														#weightUnit="ngModel" name="weightUnit"
+														[(ngModel)]="formModel.weight_unit">
+														<mat-option value="LBS">LBS</mat-option>
+														<mat-option value="KGS">KGS</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="weightUnit.errors && weightUnit.errors.required && (weightUnit.dirty || weightUnit.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Product SLA</mat-label>
+												<input matInput placeholder="Product SLA" #productSLA="ngModel"
+													name="productSLA" [(ngModel)]="formModel.product_sla"
+													pattern="[0-9]+">
+												<mat-error *ngIf="productSLA.errors && productSLA.errors.pattern">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Product Backend Review applicable</mat-label>
+													<mat-select required placeholder="Product Backend Review applicable"
+														#backendReview="ngModel" name="backendReview"
+														[(ngModel)]="formModel.is_review_grant_exist">
+														<mat-option value="N">No</mat-option>
+														<mat-option value="Y">Yes</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="backendReview.errors && backendReview.errors.required && (backendReview.dirty || backendReview.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!--Product Setting end here....-->
+
+							<!--Order Settings start here....-->
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Order Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Order Prefix Type</mat-label>
+													<mat-select required placeholder="Order Prefix Type"
+														#orderPrefixType="ngModel" name="orderPrefixType"
+														[(ngModel)]="formModel.order_prefix_type">
+														<mat-option value="Unique">Unique</mat-option>
+														<mat-option value="Warehouse">Store</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="orderPrefixType.errors && orderPrefixType.errors.required && (orderPrefixType.dirty || orderPrefixType.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Invoice/Shipping Label Ordering</mat-label>
+													<mat-select placeholder="Invoice/Shipping Label Ordering"
+														#lblOrdering="ngModel" name="lblOrdering"
+														[(ngModel)]="formModel.label_invoice_order">
+														<mat-option value="Invoice">Invoice</mat-option>
+														<mat-option value="Shipping label">Shipping label</mat-option>
+													</mat-select>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Order id starts with</mat-label>
+												<input matInput placeholder="Order id starts with"
+													#orderPrefix="ngModel" name="orderPrefix"
+													[(ngModel)]="formModel.orderid_format">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Invoice id starts with</mat-label>
+												<input matInput placeholder="Invoice id starts with"
+													#invoicePrefix="ngModel" name="invoicePrefix"
+													[(ngModel)]="formModel.invoice_id_format">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Shipping id starts with</mat-label>
+												<input matInput placeholder="Shipping id starts with"
+													#shippingPrefix="ngModel" name="shippingPrefix"
+													[(ngModel)]="formModel.shipping_id_format">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Purchase Order id starts with</mat-label>
+												<input matInput placeholder="Purchase Order id starts with"
+													#purchaseOrderPrefix="ngModel" name="purchaseOrderPrefix"
+													[(ngModel)]="formModel.purchase_order_id_format">
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Receipt id starts with</mat-label>
+												<input matInput placeholder="Receipt id starts with"
+													#receiptPrefix="ngModel" name="receiptPrefix"
+													[(ngModel)]="formModel.receiptid_format">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Confirm order to</mat-label>
+												<input matInput placeholder="Confirm order to" maxlength="40"
+													#orderToEmail="ngModel" name="orderToEmail"
+													[(ngModel)]="formModel.orderconfirmemailid"
+													pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+												<mat-error *ngIf="orderToEmail.errors && orderToEmail.errors.pattern">
+													Enter a valid <strong>email</strong> address
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<!-- [ng-true-value]="1" [ng-false-value]="0" -->
+											<mat-checkbox id="isGlobalShip" name="isGlobalShip"
+												[(ngModel)]="formModel.is_global_shipping_app"
+												(click)="toggleShipCharge()">
+												Is global Shipping Charge Applicable
+											</mat-checkbox>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Global Shipping Charge</mat-label>
+												<input matInput placeholder="Global Shipping Charge" required
+													#globalShipCharge="ngModel" name="globalShipCharge"
+													[(ngModel)]="formModel.shipping_charge">
+												<mat-error
+													*ngIf="globalShipCharge.errors && globalShipCharge.errors.required">
+													This is a <strong>required</strong> field
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Goods Inward/outward Prefix</mat-label>
+												<input matInput placeholder="Goods Inward/outward Prefix"
+													#goodsInOutPrefix="ngModel" name="goodsInOutPrefix"
+													[(ngModel)]="formModel.goods_inward_ref_prefix">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>GRN Number Prefix</mat-label>
+												<input matInput placeholder="GRN Number Prefix" #grnPrefix="ngModel"
+													name="grnPrefix" [(ngModel)]="formModel.grn_number_prefix">
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Order Auto Approval</mat-label>
+													<mat-select required placeholder="Order Auto Approval"
+														#orderAutoApproval="ngModel" name="orderAutoApproval"
+														[(ngModel)]="formModel.order_auto_approval">
+														<mat-option value="no">No</mat-option>
+														<mat-option value="yes">Yes</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="orderAutoApproval.errors && orderAutoApproval.errors.required && (orderAutoApproval.dirty || orderAutoApproval.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-label>Drop Shippement Type</mat-label>
+													<mat-select required placeholder="Drop Shippement Type"
+														#dropShipType="ngModel" name="dropShipType"
+														[(ngModel)]="formModel.drop_shipment_type">
+														<mat-option value="Manual">Manual</mat-option>
+														<mat-option value="Automated">Automated</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="dropShipType.errors && dropShipType.errors.required && (dropShipType.dirty || dropShipType.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+										<div class="col-sm-2">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>With GRN</mat-label>
+												<input matInput placeholder="Order ship in(Days)" #shipDays="ngModel"
+													name="shipDays" [(ngModel)]="formModel.order_ship_in_days">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-2">
+											<div class="md-block">
+												<mat-form-field appearance="outline">
+													<mat-select required placeholder="With GRN" #withGrn="ngModel"
+														name="withGrn" [(ngModel)]="formModel.isgrn_exist">
+														<mat-option value="N">No</mat-option>
+														<mat-option value="Y">Yes</mat-option>
+													</mat-select>
+													<mat-error
+														*ngIf="withGrn.errors && withGrn.errors.required && (withGrn.dirty || withGrn.touched || globalSettingsForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</mat-form-field>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Maximum Substitute Limit</mat-label>
+												<input matInput placeholder="Maximum Substitute Limit" #maxLimit="ngModel"
+													name="maxLimit" [(ngModel)]="maximum_substitute_limit">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Minimum Substitute Limit</mat-label>
+												<input matInput placeholder="Minimum Substitute Limit" #minLimit="ngModel"
+													name="minLimit" [(ngModel)]="minimum_substitute_limit">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Substitute Approval Time</mat-label>
+												<input matInput placeholder="Substitute Approval Time" #substituteApprovalTime="ngModel"
+													name="substituteApprovalTime" [(ngModel)]="substitute_approval_time">
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--Order Settings end here....-->
+							<!--Refund Setting start here....-->
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Refund Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-label>Refund auto approve : </mat-label>
+											<mat-radio-group #refund_auto_approve="ngModel" name="refund_auto_approve" [(ngModel)]="formModel.refund_auto_approve" >
+												<mat-radio-button style="padding: 10px;" value="Yes">Yes </mat-radio-button>
+												<mat-radio-button  style="padding: 10px;" value="No">No </mat-radio-button>
+											</mat-radio-group>
+										</div>
+										<div class="col-sm-6">
+											<mat-label>Default refund mode : </mat-label>
+											<mat-radio-group #default_refund_mode="ngModel" name="default_refund_mode" [(ngModel)]="formModel.default_refund_mode">
+												<mat-radio-button style="padding: 10px;" value="Direct reference" checked>Direct reference </mat-radio-button>
+												<mat-radio-button style="padding: 10px;" value="Loyalty points">Loyalty points </mat-radio-button>
+												<mat-radio-button style="padding: 10px;" value="Cash">Cash </mat-radio-button>
+											</mat-radio-group>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--Refund Setting end here....-->
+							<!-- <div class="boxs" accordianBox>
+								<div class="box-header"> Facebook Settings <span class="acc_icon icon-addsvg"></span> </div>
+								<div class="box-body">
+									<div class="row">
+									  	<div class="col-sm-6">
+									  		<mat-form-field appearance="outline" class="md-block"><mat-label>Facebook Store App id</mat-label>
+										    	<textarea matInput placeholder="Facebook Store App id" #fbStoreAppId="ngModel" name="fbStoreAppId" [(ngModel)]="formModel.fb_store_app_id"></textarea>
+											</mat-form-field>
+									  	</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block"><mat-label>Facebook Store Secret</mat-label>
+										    	<textarea matInput placeholder="Facebook Store Secret" #fbStoreSecret="ngModel" name="fbStoreSecret" [(ngModel)]="formModel.fb_store_secret"></textarea>
+											</mat-form-field>
+										</div>
+								  	</div>
+
+								  	<div class="row">
+									  	<div class="col-sm-6">
+									  		<mat-form-field appearance="outline" class="md-block"><mat-label>Facebook Login App id</mat-label>
+										    	<textarea matInput placeholder="Facebook Login App id" #fbLoginAppId="ngModel" name="fbLoginAppId" [(ngModel)]="formModel.fb_login_id"></textarea>
+											</mat-form-field>
+									  	</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block"><mat-label>Facebook Login Secret</mat-label>
+										    	<textarea matInput placeholder="Facebook Login Secret" #fbLoginSecret="ngModel" name="fbLoginSecret" [(ngModel)]="formModel.fb_login_secret"></textarea>
+											</mat-form-field>
+										</div>
+								  	</div>
+								</div>
+						  	</div> -->
+
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Google Analytics Settings <span
+										class="acc_icon icon-addsvg"></span> </div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Analytics Reporting View Id</mat-label>
+												<input matInput placeholder="Google Analytics Reporting View Id"
+													#gaViewId="ngModel" name="gaViewId"
+													[(ngModel)]="formModel.google_analytics_profileid">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Ananytics Email</mat-label>
+												<input matInput placeholder="Google Ananytics Email" #gaEmail="ngModel"
+													name="gaEmail" [(ngModel)]="formModel.google_analytics_email"
+													pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+												<mat-error *ngIf="gaEmail.errors && gaEmail.errors.pattern">
+													Please enter a valid <strong>email</strong> address
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Analytics Password</mat-label>
+												<input type="password" matInput placeholder="Google Analytics Password"
+													#gaPassword="ngModel" name="gaPassword"
+													[(ngModel)]="formModel.google_analytics_password">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Analytics (Header)</mat-label>
+												<textarea matInput placeholder="Google Analytics (Header)"
+													#gaHeader="ngModel" name="gaHeader"
+													[(ngModel)]="formModel.google_analytics"></textarea>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Analytics (Footer)</mat-label>
+												<textarea matInput placeholder="Google Analytics (Footer)"
+													#gaFooter="ngModel" name="gaFooter"
+													[(ngModel)]="formModel.google_analytics2"></textarea>
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Google App Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Application Name</mat-label>
+												<input matInput placeholder="Google Application Name"
+													#ggAppName="ngModel" name="ggAppName"
+													[(ngModel)]="formModel.google_application_name">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label></mat-label>
+												<input matInput placeholder="Google Login Client Id"
+													#ggClientId="ngModel" name="ggClientId"
+													[(ngModel)]="formModel.google_login_client_id">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Client Secret</mat-label>
+												<input matInput placeholder="Google Client Secret"
+													#ggClientSec="ngModel" name="ggClientSec"
+													[(ngModel)]="formModel.google_login_client_secret">
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Login Devoloper Key</mat-label>
+												<input matInput placeholder="Google Login Devoloper Key"
+													#ggDevKey="ngModel" name="ggDevKey"
+													[(ngModel)]="formModel.google_login_devoloper_key">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Google Login Redirect Url</mat-label>
+												<input matInput placeholder="Google Login Redirect Url"
+													#ggRedirectUrl="ngModel" name="ggRedirectUrl"
+													[(ngModel)]="formModel.google_login_redirect_url">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6"></div>
+									</div>
+
+								</div>
+							</div>
+							<!--Email Setting-->
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Email Settings <span class="acc_icon icon-addsvg"></span>
+								</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMTP Server</mat-label>
+												<input matInput placeholder="SMTP Server" #smtpServer="ngModel"
+													name="smtpServer" [(ngModel)]="formModel.smtp_server">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMTP Port</mat-label>
+												<input matInput placeholder="SMTP Port" #smtpPort="ngModel"
+													name="smtpPort" [(ngModel)]="formModel.smtp_port" pattern="[0-9]+">
+												<mat-error *ngIf="smtpPort.errors && smtpPort.errors.pattern">
+													Please enter a <strong>valid</strong> port
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMTP Username</mat-label>
+												<input matInput placeholder="SMTP Username" #smtpUsername="ngModel"
+													name="smtpUsername" [(ngModel)]="formModel.smtp_username">
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMTP Passwor</mat-label>
+												<input matInput type="password" placeholder="SMTP Password"
+													#smtpPassword="ngModel" name="smtpPassword"
+													[(ngModel)]="formModel.smtp_password">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Email Sent From</mat-label>
+												<input matInput placeholder="Email Sent From" maxlength="40"
+													#smtpSentFrom="ngModel" name="smtpSentFrom"
+													[(ngModel)]="formModel.mail_sent_from"
+													pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+												<mat-error *ngIf="smtpSentFrom.errors && smtpSentFrom.errors.pattern">
+													Enter a valid <strong>email</strong> address
+												</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-sm-4">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Email Reply To</mat-label>
+												<input matInput placeholder="Email Reply To" maxlength="40"
+													#smtpReplyTo="ngModel" name="smtpReplyTo"
+													[(ngModel)]="formModel.mail_reply_to"
+													pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+												<mat-error *ngIf="smtpReplyTo.errors && smtpReplyTo.errors.pattern">
+													Enter a valid <strong>email</strong> address
+												</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--Elastic Search-->
+							<div class="boxs" accordianBox>
+								<div class="box-header"> Elastic Search Settings <span
+										class="acc_icon icon-addsvg"></span> </div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>Search Index</mat-label>
+												<input matInput placeholder="Search Index" #search_index="ngModel"
+													name="search_index" [(ngModel)]="formModel.search_index">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>URL</mat-label>
+												<input matInput placeholder="URL" #search_url="ngModel"
+													name="search_url" [(ngModel)]="formModel.search_url"
+													pattern="^[A-Za-z0-9_-]*$">
+												<mat-error *ngIf="search_url.errors && search_url.errors.pattern">
+													Please enter a <strong>valid</strong> port
+												</mat-error>
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--Elastic Search END-->
+						</div>
+					</div>
+				</div>
+				<!-- ///////////////Buttons//// -->
+				<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Save</button>
+					<button type="button" mat-raised-button class="btn-line"
+						(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div>
+				<div class="clear"></div>
+				<!-- ///////////////Buttons//// -->
+			</div>
+			<div class="clear"></div>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,265 @@
+<section class="right-part addall_page">
+  <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+    <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && categoryBannerAddEdit()">
+      <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+      <div class="topheading">
+        <h1>{{(bannerId > 0)?'Edit':'Add'}} banner
+          <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+              <button type="button" mat-raised-button class="btn-line"
+                (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </h1>
+      </div>
+      <div class="clear"></div>
+      <div class="box productbox">
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="innerhead main">BANNER DETAILS</div>
+          </div>
+        </div>
+        <div class="fixed-width">
+          <div class="row">
+            <div class="col-sm-4"><br>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>Banner Type</label>
+                </div>
+                <div class="col-sm-8" *ngIf="bannerId <= 0">
+                  <mat-radio-group required #banner_type="ngModel" name="banner_type" [(ngModel)]="formModel.banner_type">
+                    <mat-radio-button class="example-margin" value="category">
+                      Category Page
+                    </mat-radio-button>
+                    <mat-radio-button class="example-margin" value="home">
+                      Home Page
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="col-sm-8" *ngIf="bannerId > 0 && formModel.banner_type == 'category'">
+                  <mat-radio-group required #banner_type="ngModel" name="banner_type" [(ngModel)]="formModel.banner_type">
+                    <mat-radio-button class="example-margin" value="category">
+                      Category Page
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="col-sm-8" *ngIf="bannerId > 0 && formModel.banner_type == 'home'">
+                  <mat-radio-group required #banner_type="ngModel" name="banner_type" [(ngModel)]="formModel.banner_type">
+                    <mat-radio-button class="example-margin" value="home">
+                      Home Page
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+            <div class="row">
+            <div class="col-sm-4">
+              <mat-form-field appearance="outline" class="md-block">
+                <mat-label>Banner Name</mat-label>
+                <input matInput placeholder="Banner Name" required #banner_name="ngModel" name="banner_name"
+                  [(ngModel)]="formModel.banner_name" pattern="^(?!\s*$|\s).*$">
+                <mat-error *ngIf="banner_name.errors && banner_name.errors.required"> This is a
+                  <strong>required</strong> field </mat-error>
+                <mat-error *ngIf="banner_name.errors && banner_name.errors.pattern"> White space is not allowed at
+                  beginning.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4" *ngIf="formModel.banner_type=='category'">
+              <!-- <mat-form-field appearance="outline" class="md-block">
+                <mat-label>Category</mat-label>
+                <mat-select required placeholder="Category" #category_id="ngModel" name="category_id"
+                  [(ngModel)]="formModel.category_id">
+                  <mat-option *ngFor="let category of category_list" [value]="category.id">{{category.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="category_id.errors && category_id.errors.required"> This is a
+                  <strong>required</strong> field </mat-error>
+              </mat-form-field> -->
+              <ng-select [ngClass]="{ 'custom_error_red': category_id.errors && category_id.errors.required && (category_id.dirty || category_id.touched || formData.submitted) }"
+                [items]="category_list"
+                required
+                placeholder="Category"
+                bindLabel="name" bindValue="id"
+                #category_id="ngModel" name="category_id" [(ngModel)]="formModel.category_id"
+                style="margin-top: 8px !important;"
+              >
+              </ng-select>
+              <p class="custom_error" *ngIf="category_id.errors && category_id.errors.required && (category_id.dirty || category_id.touched || formData.submitted)">This is a <strong>required</strong> field</p>
+            </div>
+
+            <div class="col-sm-4" *ngIf="formModel.banner_type=='category'" >
+              <!-- <mat-form-field appearance="outline" class="md-block">
+                <mat-label>Location</mat-label>
+                <mat-select required placeholder="Category" #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="selected_warehouses" multiple>
+                  <mat-option *ngFor="let warehouse of warehouseList" [value]="warehouse.id">{{warehouse.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="warehouse_id.errors && warehouse_id.errors.required"> This is a
+                  <strong>required</strong> field </mat-error>
+              </mat-form-field> -->
+              <ng-select [ngClass]="{ 'custom_error_red': warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted) }"
+                [items]="warehouseList"
+                required
+                [multiple]="true"
+                placeholder="Location"
+                bindLabel="name" bindValue="id"
+                #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="selected_warehouses"
+                style="margin-top: 8px !important;"
+              >
+              <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                  <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                          <span class="ng-value-label">{{item.name}}</span>
+                          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  </div>
+                  <div class="ng-value" *ngIf="items.length > 1">
+                          <span class="ng-value-label">{{items.length - 1}} more...</span>
+                  </div>
+              </ng-template>
+              </ng-select>
+              <p class="custom_error" *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || formData.submitted)">This is a <strong>required</strong> field</p>
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="formModel.banner_type=='category'">
+        <div class="box productbox">
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="innerhead main">Banner Image</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="group_photobox">
+                <div class="photobox" *ngFor="let img of formModel.catgory_banner_image; let i=index">
+                  <div class="propic">
+                    <div class="editrow">
+                      <a href="javascript:void(0)"
+                        (click)="delImg(img.id,'formModel','catgory_banner_image',1,i)">
+                        <div class="editbtn"><span class="icon-delete"></span></div>
+                      </a>
+                      <a href="javascript:void(0)" (click)="linkBanner(i,'Category')">
+                        <div class="editbtn"><span class="icon-link"></span></div>
+                      </a>
+                    </div>
+                    <img *ngIf="img.url" [src]="img.url" class="product_image">
+                  </div>
+                  <p><span class="icon-add"></span></p>
+                </div>
+                <div class="photobox" (click)="openImagePop('catgory_banner_image',true,1)">
+                  <p><span class="icon-add"></span></p>
+                  <p>Category Image</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---- --- ---->
+      <div class="box productbox" *ngIf="formModel.banner_type=='home'">
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="innerhead main">Banner Images</div>
+          </div>
+          <div class="col-12 col-md-12">
+            <div class="addbanner_row" *ngFor="let item of formModel.catgory_home_desktop_image; let i=index">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="add_bannerwrap">
+                    <div class="photobox" (click)="openImagePop('catgory_home_desktop_image',false,i)" *ngIf="item.web.url == ''">
+                      <p class="ng-tns-c2-1">Banner for website</p>
+                      <p><span class="icon-add"></span></p>
+                    </div>
+                    <div class="photobox" *ngIf="item.web?.url != ''">
+                      <div class="propic">
+                        <div class="editrow">
+                          <a href="javascript:void(0)" (click)="del_image(i,'Web')">
+                            <div class="editbtn"><span class="icon-delete"></span></div>
+                          </a>
+                          <a href="javascript:void(0)" (click)="linkBanner(i,'Web')">
+                            <div class="editbtn"><span class="icon-link"></span></div>
+                          </a>
+                        </div>
+                        <img src="{{item.web?.url}}"
+                          class="product_image">
+                      </div>
+                    </div>
+                      
+                      
+                    <div class="photobox" (click)="openImagePop('catgory_home_mobile_image',false,i)" *ngIf="item.mobile.url == ''">
+                      <p class="ng-tns-c2-1">Banner for mobile App </p>
+                      <p><span class="icon-add"></span></p>
+                    </div>
+                   
+                    <div class="photobox" *ngIf="item.mobile?.url != ''">
+                      <div class=" propic">
+                        <div class="editrow">
+                          <a href="javascript:void(0)" (click)="del_image(i,'Mobile')">
+                            <div class="editbtn"><span class="icon-delete"></span></div>
+                          </a>
+                          <a href="javascript:void(0)" (click)="linkBanner(i,'Mobile')">
+                            <div class="editbtn"><span class="icon-link"></span></div>
+                          </a>
+                        </div>
+                        <img src="{{item.mobile?.url}}" class="product_image">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="add_banner_right">
+                    <div class="calender_fild">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput placeholder="Placeholder" [owlDateTime]="start_date" [owlDateTimeTrigger]="start_date" id="banner_start_date_{{i}}"
+                          name="banner_start_date_{{i}}" [(ngModel)]="item.web.start_date"  required>
+                        <owl-date-time #start_date ></owl-date-time>
+                        <mat-icon><span class="icon-calendar"></span></mat-icon>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>End date</mat-label>
+                        <input matInput placeholder="Placeholder" [owlDateTime]="end_date_0" [owlDateTimeTrigger]="end_date_0" id="banner_end_date_0"
+                          name="banner_end_date_0"  required [(ngModel)]="item.web.end_date">
+                        <owl-date-time #end_date_0></owl-date-time>
+                        <mat-icon><span class="icon-calendar"></span></mat-icon>
+                      </mat-form-field>
+                    </div>
+                    <div class="cross_icnsec" (click)="del_img_row(i)" title="Remove"><span class="icon-close"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="addmore_row">
+              <a class="addmore" (click)="add_more_image()" title="Add More">
+                <div class="icon"><span class="icon-add"></span></div> Add More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---- --- ---->
+      <!-- ///////////////Buttons//// -->
+      <div class="btn-header hidden-xs">
+        <button type="submit" mat-raised-button class="btn-main">Save</button>
+        <button type="button" mat-raised-button class="btn-line"
+          (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+      </div>
+      <div class="clear"></div>
+      <!-- ///////////////Buttons//// -->
+      <div class="clear"></div>
+    </form>
+  </div>
+</section>

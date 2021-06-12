@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "818548578279",
+    "firebase_url": "https://gogrocerypicking-699bd.firebaseio.com",
+    "project_id": "gogrocerypicking-699bd",
+    "storage_bucket": "gogrocerypicking-699bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818548578279:android:062975844b231a05458f42",
+        "android_client_info": {
+          "package_name": "com.gogrocery.picking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818548578279-k37lghishi229varojb96ga8l7ovpgrr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gogrocery.picking",
+            "certificate_hash": "b005f6c98b30a27da23108bcc8bdad0aa58e7b13"
+          }
+        },
+        {
+          "client_id": "818548578279-tuvji94nh1s1gbtopigenqagp9j163fr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmNJbPkrCrctVy7byq-9qTmjziI96RXlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818548578279-tuvji94nh1s1gbtopigenqagp9j163fr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

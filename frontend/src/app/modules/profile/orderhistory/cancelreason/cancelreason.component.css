@@ -1,0 +1,3 @@
+.add_tocard.cancel{background-color:#DB4D65;  padding-left: 12px; padding-right: 12px }
+.cancel-pop .add_tocard{ display: inline-block; width: auto; padding: 8px 30px;}
+.cancel-pop{display: flex; justify-content: space-between}

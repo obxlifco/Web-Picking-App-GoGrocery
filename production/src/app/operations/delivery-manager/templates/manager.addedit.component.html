@@ -1,0 +1,125 @@
+<section class="right-part">
+    <div class="body-part">
+        <form #managerForm="ngForm" novalidate (ngSubmit)="managerForm.valid && addEditManeger(managerForm)">
+            <input type="hidden" name="executiveId" [(ngModel)]="formModel.executiveId">
+            <div class="topheading">
+                <h1>{{(formModel.executiveId>0)?'Edit':'Add'}} LMD Executive
+            <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                
+              </div>
+          </div>
+          <div class="clear"></div>
+          </h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Executive Name</mat-label>
+                                        <input matInput placeholder="Executive Name" required #executive_name="ngModel" name="executive_name" [(ngModel)]="formModel.executive_name" pattern="^(?!\s*$|\s).*$">
+                                        <mat-error *ngIf="executive_name.errors && executive_name.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="executive_name.errors && executive_name.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Executive Email</mat-label>
+                                        <input matInput placeholder="Executive Email" required #executive_email="ngModel" name="executive_email" [(ngModel)]="formModel.executive_email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                        <mat-error *ngIf="executive_email.errors && executive_email.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="executive_email.errors && executive_email.errors.pattern"> This is not a <strong>valid</strong> email </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>LMD Executive Linked</mat-label>
+                                        <mat-select required placeholder="LMD Executive Linked" #delivery_manager="ngModel" name="delivery_manager" [(ngModel)]="formModel.delivery_manager">
+                                            <mat-option *ngFor="let manager of managerList" [value]="manager.id">{{manager.first_name}} {{manager.last_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="delivery_manager.errors && delivery_manager.errors.required">Please select Executive</mat-error> 
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': delivery_manager.errors && delivery_manager.errors.required && (delivery_manager.dirty || delivery_manager.touched || managerForm.submitted) }"
+                                        [items]="managerList"
+                                        required
+                                        placeholder="LMD Executive Linked"
+                                        bindLabel="employee_name" bindValue="id"
+                                        #delivery_manager="ngModel" name="delivery_manager" [(ngModel)]="formModel.delivery_manager"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="delivery_manager.errors && delivery_manager.errors.required && (delivery_manager.dirty || delivery_manager.touched || managerForm.submitted)">Please select Executive</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Warehouse</mat-label>
+                                        <mat-select required placeholder="Warehouse" #warehouse_ids="ngModel" name="warehouse_ids" [(ngModel)]="formModel.warehouse_ids" multiple>
+                                            <mat-option *ngFor="let warehouseMaster of warehouseList" [value]="warehouseMaster.id">{{warehouseMaster.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="warehouse_ids.errors && warehouse_ids.errors.required">Please select zone</mat-error> 
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': warehouse_ids.errors && warehouse_ids.errors.required && (warehouse_ids.dirty || warehouse_ids.touched || managerForm.submitted) }"
+                                        [items]="warehouseList"
+                                        required
+                                        [multiple]="true"
+                                        placeholder="Warehouse"
+                                        bindLabel="name" bindValue="id"
+                                        #warehouse_ids="ngModel" name="warehouse_ids" [(ngModel)]="formModel.warehouse_ids"
+                                        style="margin-top: 8px !important;"
+                                        >
+                                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                            <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                    <span class="ng-value-label">{{item.name}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                            </div>
+                                            <div class="ng-value" *ngIf="items.length > 1">
+                                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="warehouse_ids.errors && warehouse_ids.errors.required && (warehouse_ids.dirty || warehouse_ids.touched || managerForm.submitted)">Please select warehouse</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Mobile Number</mat-label>
+                                        <input matInput placeholder="Mobile Number" required #executive_mobile_number="ngModel" name="executive_mobile_number" [(ngModel)]="formModel.executive_mobile_number" pattern="^[+]?[0-9]*?[0-9]*" minlength="10" maxlength="16" >
+                                        <mat-error *ngIf="executive_mobile_number.errors && executive_mobile_number.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="executive_mobile_number.errors && executive_mobile_number.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                        <mat-error *ngIf="executive_mobile_number.hasError('minlength')"> Mobile should be minimum 10 digit </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Address1</mat-label>
+                                        <input matInput placeholder="Address1" required #executive_address1="ngModel" name="executive_address1" [(ngModel)]="formModel.executive_address1" pattern="^(?!\s*$|\s).*$">
+                                        <mat-error *ngIf="executive_address1.errors && executive_address1.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="executive_address1.errors && executive_address1.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Address2</mat-label>
+                                        <input matInput placeholder="Address2" #executive_address2="ngModel" name="executive_address2" [(ngModel)]="formModel.executive_address2" pattern="^(?!\s*$|\s).*$">
+                                        <mat-error *ngIf="executive_address2.errors && executive_address2.errors.pattern"> White space is not allowed at beginning.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>

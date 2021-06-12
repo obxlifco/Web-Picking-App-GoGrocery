@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center"
+
+            android:padding="3dp">
+
+            <RelativeLayout
+                android:id="@+id/ll_productImage"
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/oval_1"
+                    android:layout_centerInParent="true"
+
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/oval"
+                        android:layout_margin="6dp"
+                        android:layout_centerInParent="true"
+                        android:layout_height="wrap_content">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/_110sdp"
+                            android:src="@drawable/dummy_item_img"
+                            android:padding="8dp"
+
+                            android:id="@+id/ivPicSubsFrag"
+                            android:layout_centerInParent="true"
+                            android:layout_height="@dimen/_110sdp">
+
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_below="@+id/ll_productImage"
+                android:text="Nutella Chocolate"
+                android:textColor="@color/grey_new"
+                android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:id="@+id/tv_productWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_below="@+id/tv_productName"
+                android:text="500gm"
+
+                android:textSize="@dimen/_10sdp" />
+            <TextView
+                android:id="@+id/tv_productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_below="@+id/tv_productWeight"
+                android:text="AED 34.25"
+                android:textColor="@color/green_dark_new"
+                android:textSize="@dimen/_12sdp" />
+            <View
+                android:id="@+id/v2"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tv_productPrice"
+                android:background="@drawable/test_divider"
+                android:layout_height="1dp">
+
+            </View>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvReplacementHeader"
+                android:layout_below="@+id/v2"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:text="Choose Replacement : Max 1 Quantity"
+                android:textColor="@color/side_menu_rv_clr"
+                android:textSize="@dimen/_12sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:gravity="center_horizontal"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvReplacementHeader"
+                android:id="@+id/rvSubsFrag"
+                tools:itemCount="1"
+                tools:listitem="@layout/substitute_list_row"
+                android:background="@color/white"
+                android:layout_margin="@dimen/_2sdp"/>
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:id="@+id/ivPicSubsFrag"
+                android:src="@drawable/dummy_item_img" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:paddingStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Out of stock"
+                android:textColor="@color/side_menu_rv_clr"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNameSubsFrag"
+                android:text="Jergens Milk Soap Bar"
+                android:textColor="@color/side_menu_rv_clr"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"/>
+
+            <TextView
+                android:id="@+id/tvWeightSubsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="125 Gr"
+                android:textColor="@color/side_menu_rv_clr"
+                android:textSize="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AED 15.50"
+                android:id="@+id/tvPriceSubsFrag"
+                android:textColor="@color/side_menu_rv_clr"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+        </LinearLayout>
+
+
+
+</LinearLayout>-->
+</LinearLayout>

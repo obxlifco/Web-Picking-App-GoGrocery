@@ -1,0 +1,242 @@
+  <section class="container-fluid odetails">
+      <div class="row" *ngIf="!isAddnewAddress" >
+          <div class="col-12">
+            <!-- delevary address for mobile 23-10-2019 -->
+            <div class="mobile_delivery_wrap">
+                <div *ngIf="!isSelectedAddress">
+                    <div class="headinner">ADDRESSES
+                        <div class="mob_add_addressbtn" (click)="add_new()">+ Add New</div>
+                    </div>
+                    <owl-carousel [options]="carouselOptions"   [carouselClasses]="['owl-theme' ,'sliding']" [items]="deliveryAddress">
+                        <div *ngFor="let singleDeliveryAddress of deliveryAddress">
+                            <div class="innbox addr-owl" >
+                                <div class="subhead">
+                                    <h3>{{singleDeliveryAddress['delivery_name']}}</h3>
+                                    <div class="applybtn" *ngIf="singleDeliveryAddress['set_primary']==1">Recently Used</div>
+                                </div>
+                                <div class="innercontent" >
+                                    <span *ngIf="singleDeliveryAddress['delivery_company']">{{singleDeliveryAddress['delivery_company']}}</span>
+                                    <p *ngIf="singleDeliveryAddress['delivery_street_address']">{{singleDeliveryAddress['delivery_street_address']}}</p>
+                                    <span *ngIf="singleDeliveryAddress['delivery_street_address1']">{{singleDeliveryAddress['delivery_street_address1']}}</span>
+                                    <p *ngIf="singleDeliveryAddress['delivery_landmark']">{{singleDeliveryAddress['delivery_landmark']}}</p>
+                                    <p *ngIf="singleDeliveryAddress['delivery_state_name']">{{singleDeliveryAddress['delivery_state_name']}}</p>
+                                    <!-- <span *ngIf="singleDeliveryAddress['delivery_city']">{{singleDeliveryAddress['delivery_city']}} </span> -->
+                                    <!-- <span >-{{singleDeliveryAddress['delivery_postcode']}}</span> -->
+                                    <p *ngIf="singleDeliveryAddress['delivery_phone']"> Mobile : <span > {{singleDeliveryAddress['delivery_phone']}}</span></p>
+                                </div>
+                                <div class="change_address_blog">
+                                    <button class="red_midumbtn" (click)="select_address(singleDeliveryAddress)">DELIVER HERE</button>
+                                </div>
+                                <div class="editmenusec">
+                                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                       <mat-icon>more_vert</mat-icon>
+                                     </button>
+                                     <mat-menu #menu="matMenu">
+                                       <button mat-menu-item (click)="editDeliveryAddress(singleDeliveryAddress)">
+                                         <mat-icon>edit</mat-icon>
+                                         <span>Edit</span>
+                                       </button>
+                                       <button mat-menu-item (click)="deleteDeliveryAddress(singleDeliveryAddress['id'])">
+                                         <mat-icon>delete</mat-icon>
+                                         <span>Delete</span>
+                                       </button>
+                                     </mat-menu>
+                                 </div>
+                            </div>
+                        </div>
+                    </owl-carousel>
+                </div>
+                <!-- <div class="change_address_blog">
+                    <button class="red_midumbtn" (click)="navigateToUrl('profile/\delivery-address')">ADD NEW ADDRESS</button>
+                </div> -->
+                <div *ngIf="isSelectedAddress">
+                    <div class="headinner">DELIVERY ADDRESS</div>
+                    <div class="innbox" >
+                        <div class="subhead">
+                            <h3 *ngIf="SelectedAddress.delivery_name">{{SelectedAddress.delivery_name}}</h3>
+                            <div class="applybtn" (click)="chnange_address()">Change</div>
+                        </div>
+                        <div class="innercontent" >
+                            <p *ngIf="SelectedAddress.delivery_company">{{SelectedAddress.delivery_company}}</p>
+                            <p *ngIf="SelectedAddress.delivery_street_address">{{SelectedAddress.delivery_street_address}}</p>
+                            <p *ngIf="SelectedAddress.delivery_street_address1">{{SelectedAddress.delivery_street_address1}}</p>
+                            <p *ngIf="SelectedAddress.delivery_landmark">{{SelectedAddress.delivery_landmark}}</p>
+                            <p *ngIf="SelectedAddress.delivery_state_name">{{SelectedAddress.delivery_state_name}}</p>
+                            <!-- <span *ngIf="SelectedAddress.delivery_city">{{SelectedAddress.delivery_city}},</span> -->
+                            <!-- <span *ngIf="SelectedAddress.delivery_city">{{SelectedAddress.delivery_city}}</span><span>-{{SelectedAddress.delivery_postcode}}</span> -->
+                            <p *ngIf="SelectedAddress.delivery_phone"> Mobile : <span > {{SelectedAddress.delivery_phone}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="headinner">Delivery Options</div>
+                <div class="innbox">
+                    <div class="cusrow">
+                        Select Delivery Slot
+                    </div>
+                    <div class="cusrow">
+                        <div class="droptimesec">
+                            <mat-form-field>
+                                <mat-label>Select slot</mat-label>
+                                <mat-select [(ngModel)]="tomeSlot" (ngModelChange)="onChangeTimeSlot($event)">
+                                    <mat-option *ngFor="let tomeSlot of allDeliverySlot" [value]="tomeSlot">{{tomeSlot['slot_name']}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <ng-select [items]="slots"
+                                bindLabel="slot_name"
+                                placeholder="Select slot"
+                                [(ngModel)]="tomeSlot" 
+                                (ngModelChange)="onChangeTimeSlot($event)" required>
+                            </ng-select> -->
+                        </div>   
+                    </div> 
+                </div>
+
+                 <div class="innbox">
+                    <div class="cusrow">
+                        <div class="droptimesec">
+                             <mat-form-field appearance="outline">
+                              <mat-label>Add note to this order</mat-label>
+                              <input matInput placeholder="Add note to this order" maxlength="200" (keyup)="getMessage(delivery_note)"  [(ngModel)]="delivery_note">
+                          </mat-form-field>
+                        </div>   
+                    </div> 
+                </div>
+                <div class="innbox">
+                  <div class="headinner">
+                    PAYMENT OPTION
+                  </div>
+
+                  <mat-radio-group class="example-radio-group" [(ngModel)]="option" (change)="onCashOptionChange(option)">
+                    <ng-container *ngFor = "let options of paymentOption" >
+                      <div class="paymentbox">
+                        <div class="headin">
+                          <div class="radiobx">
+                            <mat-radio-button [value]="options.id"><div class="heading">{{options.name}}</div></mat-radio-button>
+                          </div>
+                        </div>
+                        <div *ngIf="options.id == 51 && option == 51" class="heading" style="color: red;">*For verification, an amount of AED 1 will be charged. The amount will be reversed automatically.</div>
+                      </div>
+                    </ng-container>
+                  </mat-radio-group>
+                  
+                  <div>
+                    <div><button class="checkoutbtn_green placenow" type="button" (click)="onPlaceOrder()">PLACE ORDER</button></div>
+                  </div>
+                </div>
+                <div [innerHtml]="paymentFormSampleHtml" #paymentForm3D></div>
+                <div class="headinner">ORDER SUMMARY</div>
+            </div>
+            
+            <!-- delevary address for mobile 23-10-2019 -->
+              <div class="listing_container mobile">
+                  <div class="list_right_section details mobile">
+                      <div class="cart_outer mobile">
+                          <div class="row">
+                            <div class="col-12 col-md-9">
+                              <app-deliveryaddress (chnageDeliveryAddress) = "onChangeDeliveryAddress($event)" ></app-deliveryaddress>
+                              <app-deliveryoptions (changeTimeSlot)="onChangeTimeSlot($event)" (messageToEmit)="getMessage($event)"></app-deliveryoptions>
+                              <div class="cartbox payment_box">
+                                <div class="head">
+                                  PAYMENT OPTION
+                                </div>
+
+                                <mat-radio-group class="example-radio-group" [(ngModel)]="option" (change)="onCashOptionChange(option)">
+                                  <ng-container *ngFor = "let options of paymentOption" >
+                                    <div class="paymentbox">
+                                      <div class="headin">
+                                        <div class="radiobx">
+                                          <mat-radio-button [value]="options.id"><div class="heading">{{options.name}}</div></mat-radio-button>
+                                        </div>
+                                      </div>
+                                      <div *ngIf="options.id == 51 && option == 51" class="heading" style="color: red;">*For verification, an amount of AED 1 will be charged. The amount will be reversed automatically.</div>
+                                    </div>
+                                  </ng-container>
+                                </mat-radio-group>
+                                
+                                <div>
+                                  <div><button class="checkoutbtn_green placenow" type="button" (click)="onPlaceOrder()">PLACE ORDER</button></div>
+                                </div>
+                              </div>
+                              <div [innerHtml]="paymentFormSampleHtml" #paymentForm3D></div>
+		                      </div>
+		                      <div class="col-12 col-md-3">
+                            <div class="promocodebox">
+                             <!--  <app-promocode [loyaltyData]="loyaltyDetails" (onSuccessPromoCode)="appliedPromocode($event)"></app-promocode> -->
+                             <div class="subhead" *ngIf="promocodeApplyBoxStatus == 0">
+                                  Promo Code
+                                  <button class="applybtn" (click)="requestForApplyPromoCode();">apply</button>
+                              </div>
+
+                              <div class="subhead promoapply" *ngIf="promocodeApplyBoxStatus == 1">
+                                <div class="applypromo">
+                                    <div class="promo_inpouter">
+                                        <input type="text" [(ngModel)]="promoCode" (keyup)="resetPromoCode()">
+                                        <button class="applytext" [ngClass]="{'disable': promoCode==''}" (click)="applyPromoCode()">apply</button>
+                                    </div>
+                                </div>
+                                <br>
+                              </div>
+
+                              <div class="subhead promoapplyed" *ngIf="promocodeApplyBoxStatus == 2">
+                                Promo Code
+                                <div class="promo_amount">You have save-{{appliedPromoCode['amount'] | money}}</div>
+                                <button class="removepromo_btn" (click)="removePromocode()">Remove</button>
+                                <button class="applybtn">apply</button>
+                              </div>
+                               <!-- <div class="wallet_balcheck_row" *ngIf="loyaltyDetails && loyaltyDetails['usable_loyalty'] && loyaltyDetails['usable_loyalty'] > 0">
+                                  <div class="text">
+                                      Wallet Balance - {{loyaltyDetails['remain_loyalty'] | money}}
+                                      <p>You can use upto {{loyaltyDetails['usable_loyalty'] | money}} for this order</p>
+                                    </div>
+                                  <div class="checkbox"><mat-checkbox (change)="onChangeLoyaltyPointOption($event)"></mat-checkbox></div>
+                               </div> -->
+                              <!-- <app-loyalty (onSuccessLoyaltyCode)="appliedLoyaltyPoint($event)"></app-loyalty> -->
+                              <div class="ordersum">
+                                      <h3>Order Summary</h3>
+                                      <div class="row">
+                                          <span>Subtotal</span>
+                                          <span>{{orderAmountDetails['sub_total'] | money}}</span>
+                                      </div>
+                                      <div class="row" *ngIf="orderAmountDetails && orderAmountDetails['applied_loyalty_amount']">
+                                        <span>Applied Wallet Amount</span>
+                                        <span class="red">{{orderAmountDetails['applied_loyalty_amount'] | money}}</span>
+                                        
+                                      </div>
+                                      <div class="row">
+                                        <span>Delivery Charges </span>
+                                        <span>{{orderAmountDetails['shipping_charge'] | money}}</span>
+                                      </div>
+                                      <div class="row">
+                                        <span>Discount </span>
+                                        <span class="red">{{orderAmountDetails['cart_discount'] | money}}</span>
+                                      </div>
+                                      <!-- <div class="row">
+                                        <span>Estimated Tax</span>
+                                        <span>{{orderAmountDetails['tax_amount'] | money}}</span>
+                                      </div> -->
+                                  </div>
+                                  <div class="footed">
+                                      <span>Total Amount</span>
+                                      <span>{{orderAmountDetails['grand_total'] | money}}</span>
+                                  </div>
+                              </div>
+                              <!-- <div class="checkoutbtn_grn" (click)="onPlaceOrder();">Place Order</div> -->
+	                           </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- place order btn for mobile -->
+                  <!-- <div class="placeorderbtnrow">
+                        <div class="amount">{{orderAmountDetails['sub_total'] | money}}
+                            <a href="#">view price details</a>
+                        </div>
+                        <button class="grn_midum_btn" (click)="onPlaceOrder()">CONTINUE</button>
+                  </div> -->
+                  <!-- place order btn for mobile end -->
+              </div>
+          </div>
+      </div>
+      <app-addnewdeliveryaddress *ngIf="isAddnewAddress" [displayIn]="'mobile'" (onAddressAdd)="onNewAddressAdded($event)" [deleveryeditaddress]='singleDeliveryAddress'></app-addnewdeliveryaddress>
+      <div >
+      </div>
+  </section>

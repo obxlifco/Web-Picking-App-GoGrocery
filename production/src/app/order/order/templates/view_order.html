@@ -1,0 +1,315 @@
+<section class="right-part filter-pad addorder">
+    <div class="topheading">
+        <h1>Order# : {{orderData.custom_order_id}}
+            <div class="btn-header">
+                <button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Close</button>
+                <button *ngIf="is_return" mat-raised-button class="btn-main" type="button" (click)="order_return_pop(orderData.id,orderData.custom_order_id)">Return</button>
+            </div>
+        </h1>
+    </div>
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <div class="clear"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="addorder_left">
+                    <div class="box productbox">
+                        
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <strong>Store</strong> : {{orderData.warehouse_name}}
+                            </div>
+                            <div class="col-sm-4">
+                                <strong>Order Id</strong> : {{orderData.custom_order_id}}
+                            </div>
+                            <div class="col-sm-4">
+                                <strong>Date</strong> : {{orderData.created}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row same-height">
+                        <div class="col-sm-6 col-lg-6 ">
+                            <div class="box">
+                                <div class="heading">Customer Info</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td width="25%"><span>Name :</span></td>
+                                            <td>{{orderData.customer?.first_name}} {{orderData.customer?.last_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"><span> Email :</span></td>
+                                            <td> {{orderData.customer?.email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"><span>Mob :</span></td>
+                                            <td>{{orderData.delivery_phone}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="col-sm-6 col-lg-6">
+                            <div class="box">
+                                <div class="heading">Delivery Address</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td width="25%"><span>Address : </span></td>
+                                            <td>{{orderData.delivery_street_address}} </td>
+                                        </tr>
+                                        <tr *ngIf="orderData.delivery_landmark">
+                                            <td width="25%"><span>Area :</span></td>
+                                            <td> {{orderData.delivery_landmark}}</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td width="25%"><span> Country :</span></td>
+                                            <td>{{orderData.delivery_country_name}}</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td width="25%"><span>State :</span></td>
+                                            <td>{{orderData.delivery_state_name}}</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td width="25%"><span>City :</span></td>
+                                            <td>{{orderData.delivery_city}}</td>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <td width="25%"><span>Zipcode : </span></td>
+                                            <td>{{orderData.delivery_postcode}}</td>
+                                        </tr> -->
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-6 ">
+                                <div class="box">
+                                    <div class="heading">
+                                        <span>Delivery & Other Information</span>
+                                    </div>
+                                    <div class="vieworder_innertable">
+                                        <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                            <!-- <tr>
+                                                <td width="25%"><span>Zone :</span></td>
+                                                <td>{{orderData.zone_name}}</td>
+                                            </tr> -->
+                                            <tr>
+                                                <td width="20%"><span>Delivery Date :</span></td>
+                                                <td>{{orderData.time_slot_date}}</td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td width="25%"><span>Delivery Time :</span></td>
+                                                <td>{{orderData.time_slot_id}}</td>
+                                            </tr> -->
+                                            <tr *ngIf="orderData.applied_coupon">
+                                                <td width="25%"><span>Applied Coupon :</span></td>
+                                                <td>{{orderData.applied_coupon}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-sm-6 col-lg-6 ">
+                            <div class="box">
+                                <div class="heading">Payment Information</div>
+                                <div class="vieworder_innertable">
+                                    <table cellpadding="0" cellspacing="0" class="view_order_responsive">
+                                        <tr>
+                                            <td width="25%"><span>Payment Method :</span></td>
+                                            <td>{{orderData.payment_method_name}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="25%"><span>Currency :</span></td>
+                                            <td>{{orderData.currency_code}} </td>
+                                        </tr>
+                                        <tr *ngIf="orderData.pay_txntranid">
+                                            <td width="25%"><span>Transaction ID :</span></td>
+                                            <td>{{orderData.pay_txntranid}}</td>
+                                        </tr>
+                                        <tr *ngIf="orderData.received_status">
+                                            <td width="25%"><span>Payment Status :</span></td>
+                                            <ng-container *ngIf="orderData.paid_amount>0">
+                                                <td>{{orderData.received_status}}</td>
+                                            </ng-container>
+                                            <ng-container *ngIf="orderData.paid_amount==0">
+                                                <td>Pending</td>
+                                            </ng-container>
+                                        </tr>
+                                        <tr *ngIf="orderData.status_message">
+                                            <td width="25%"><span>Status Message :</span></td>
+                                            <td>{{orderData.status_message}}</td>
+                                        </tr>
+                                        <tr *ngIf="orderData.pay_txndate">
+                                            <td width="25%"><span>Payment Date :</span></td>
+                                            <td>{{orderData.pay_txndate}}</td>
+                                        </tr>
+
+                                        <tr *ngIf="orderData.delivery_sap_ecustomer_state_no">
+                                            <td width="25%"><span>Payment Link :</span></td>
+                                            <td>{{orderData.delivery_sap_ecustomer_state_no}}</td>
+                                        </tr>
+
+                                        <!-- <tr *ngIf="orderData.pay_txndate">
+                                            <td width="25%">Payment Date :</td>
+                                            <td><span>{{orderData.pay_txndate}}</span></td>
+                                        </tr> -->
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row same-height">
+                        
+                    </div>
+                    <div class="row same-height">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="heading">
+                                    <span>Item Information</span>
+                                </div>
+                                <!-- new table -->
+                                <div class="vieworder_item">
+                                    <table cellpadding="0" cellspacing="0" >
+                                        <thead>
+                                            <tr>
+                                                <th >SKU </th>
+                                                <th >Title</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Tax Amount</th>
+                                                <th>Discount</th>
+                                                <th>Invoiced</th>
+                                                <th>Cancelled</th>
+                                                <th>Shortage</th>
+                                                <th>Returned</th>
+                                                <th>Net Amount</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr *ngFor="let product_list of orderData.order_products; let i = index">
+                                                <td  data-th="SKU">
+                                                    {{product_list["product"]["sku"]}}
+                                                    <br>
+                                                    <span *ngIf='product_list["custom_field_value"]!=""' style="font-size: 10px;">{{product_list["custom_field_name"]!="" ? product_list["custom_field_name"] : ':'}}  {{product_list["custom_field_value"]}}</span>
+                                                </td>
+                                                <td  data-th="Title">
+                                                    {{product_list["product"]["name"]}}
+                                                    
+                                                </td>
+                                                <td data-th="Qty">{{product_list.quantity}}</td>
+                                                <td class="align-middle" data-th="Price">{{formModel.currencyCode}} {{(product_list.product_price+product_list.product_discount_price+product_list.product_tax_price) | number: '1.2-2'}}</td>
+                                                <td class="align-middle" data-th="Tax Amount">{{formModel.currencyCode}} {{product_list.product_tax_price | number: '1.2-2'}}</td>
+                                                <td class="align-middle" data-th="Discount">{{formModel.currencyCode}} {{product_list.product_discount_price | number: '1.2-2'}}</td>
+                                                <td data-th="Invoiced"> {{product_list.invoice_product}} </td>
+                                                <td data-th="Cancelled"> {{product_list.deleted_quantity}} </td>
+                                                <td data-th="Shortage"> {{product_list.shortage}} </td>
+                                                <td data-th="Returned"> {{product_list.returns}} </td>
+                                                <td class="align-middle" data-th="Net Amount">{{formModel.currencyCode}} {{(product_list.product_price*product_list.total_quantity) | number: '1.2-2'}}</td>
+                                                <td class="align-middle" data-th="Total" *ngIf="taxSettings.display_prices == 'Excluding Tax' ">{{formModel.currencyCode}} {{((product_list.product_price*product_list.total_quantity)) | number: '1.2-2'}}</td>
+                                                <td class="align-middle" data-th="Total" *ngIf="taxSettings.display_prices == 'Including Tax' || taxSettings.display_prices =='Including and Excluding Tax' ">{{formModel.currencyCode}} {{((product_list.product_price*product_list.total_quantity)+(product_list.product_tax_price*product_list.total_quantity)) | number: '1.2-2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- new table -->
+
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row same-height">
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <div class="heading">
+                                    <span>Special Instruction</span>
+                                </div>
+                                <div class="clear"></div>
+                                <label>{{orderData.custom_msg!="" ?  orderData.custom_msg : 'No Instructions found.'}}</label>
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-6">
+                                <div class="box">
+                                    <div class="heading">
+                                        <span>Order Summary</span>
+                                    </div>
+                                    <ul class="box-list">
+                                        <li>
+                                            <div class="text">Sub Total:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.net_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.pay_wallet_amount > 0">
+                                            <div class="text">Pay by wallet :</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.pay_wallet_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.tax_amount > 0">
+                                            <div class="text">Tax Amount:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.tax_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.shipping_cost > 0">
+                                            <div class="text">Shipping Cost:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.shipping_cost | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.cod_charge > 0">
+                                            <div class="text">COD Cost:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.cod_charge | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.cart_discount > 0">
+                                            <div class="text">Coupon Discount:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.cart_discount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li *ngIf="orderData.net_amount > 0">
+                                            <div class="text">Grand Total: </div>
+                                            <div class="num">{{formModel.currencyCode}} {{(orderData.gross_amount) | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <!-- <li>
+                                            <div class="text">Balance Due:</div>
+                                            <div class="num">$ 400</div>
+                                            <div class="clear"></div>
+                                        </li> -->
+                                        <li class="amountpaid">
+                                            <div class="text">Amount Paid:</div>
+                                            <div class="num">{{formModel.currencyCode}} {{orderData.paid_amount | number: '1.2-2'}}</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <!-- right hide panel-->
+            <div [ngClass]="activitySettings == false ? 'order_hidepanel' : 'order_hidepanel show'">
+                <div class="show_round" (click)="showActivityPanel(activitySettings)">
+                    <a href="javascript:void(0)">
+                        <span class="icon-back_one"></span>
+                        <span class="icon-next"></span>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <order-activity [orderInfo]="orderInfo"></order-activity>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div> 
+        <!-- ///////////////Buttons//// -->
+        <div class="bottom_fixedpart">
+            <div class="btn-header hidden-xs">
+                <button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Close</button>
+                <button *ngIf="is_return" mat-raised-button class="btn-main" type="button" (click)="order_return_pop(orderData.id,orderData.custom_order_id)">Return</button>
+            </div>
+        </div>
+        <!-- ///////////////Buttons//// -->
+    </div>
+</section>

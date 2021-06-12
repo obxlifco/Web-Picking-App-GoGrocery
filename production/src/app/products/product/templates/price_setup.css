@@ -1,0 +1,29 @@
+
+.table-list.product_price table td {
+    padding: 0px 35px !important;
+}
+.cus_frm_box.topgap {
+    margin:56px 0 20px 0;
+}
+/* .table-list.product_price .mat-form-field {
+    width: 103px !important;
+    margin-top: 4px;
+    
+} */
+.date-decor{
+    width: 165px !important;
+
+    font-size: 6px;
+}
+.table-list table th {
+    text-align: center !important;
+}
+
+.cus_frm_box .table-list .mat-form-field-flex {
+    height: 30px !important;
+    padding: 2px 0px;
+}
+.input-decor {
+    width: 95px !important;
+    margin-top: 4px;
+}

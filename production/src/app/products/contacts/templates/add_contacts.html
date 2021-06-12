@@ -1,0 +1,198 @@
+<section class="right-part">
+  	<div class="body-part">
+  		<form #contactForm="ngForm" novalidate (ngSubmit)="contactForm.valid && addEditContacts(contactForm)">
+	  		<input type="hidden" name="contactId" [(ngModel)]="formModel.contactId">
+		  	<div class="topheading">
+			  	<h1>{{(formModel.contactId)?'Edit':'Add'}} Contact
+				  	<div class="btn-header">
+				  		<button type="submit" mat-raised-button class="btn-main">Continue</button>
+			          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					  	<label class="hidden-sm hidden-xs">Fields marked with <span>*</span> are compulsory</label>
+					</div>
+				  	<div class="clear"></div>
+			  	</h1>
+		  	</div>
+		  	
+		  	<div class="clear"></div>
+		  	<div class="box">
+			  	<div class="fixed-width">
+			  		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		  			<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+			  	  	<div class="row">
+					  	<div class="col-md-12">
+					  		<div class="row">
+						  		<div class="col-sm-6">
+						  			<mat-form-field class="md-block">
+								    	<input matInput placeholder="First Name" required #firstName="ngModel"  name="firstName" [(ngModel)]="formModel.firstName">
+								    	<mat-error *ngIf="firstName.errors && firstName.errors.required">
+									    	This is a <strong>required</strong> field
+									    </mat-error>
+									</mat-form-field>
+								</div>
+						  		<div class="col-sm-6">
+						  			<mat-form-field class="md-block">
+								        <input matInput placeholder="Last Name" required #lastName="ngModel"  name="lastName" [(ngModel)]="formModel.lastName">
+								    	<mat-error *ngIf="lastName.errors && lastName.errors.required">
+									    	This is a <strong>required</strong> field
+									    </mat-error>
+								    </mat-form-field>
+								</div>    
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+						  			<div class="md-block">
+							  			<mat-select placeholder="Title" #title="ngModel" name="title" [(ngModel)]="formModel.title">
+											<mat-option value="Ms">Ms</mat-option>
+								            <mat-option value="Mrs">Mrs</mat-option>
+								            <mat-option value="Mr">Mr</mat-option>
+								            <mat-option value="Dr">Dr</mat-option>
+								            <mat-option value="Prof">Prof</mat-option>
+										</mat-select>
+									</div>
+								</div>	
+								<div class="col-sm-6">
+							  		<mat-form-field class="md-block">
+								    	<input required matInput placeholder="Email" #email="ngModel"  name="email" [(ngModel)]="formModel.email" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+								    	<mat-error *ngIf="email.errors && email.errors.required">
+									      This is a <strong>required</strong> field
+									    </mat-error>
+									    <mat-error *ngIf="email.errors && email.errors.pattern">
+									      This is not a <strong>valid</strong>email
+									    </mat-error>
+								    </mat-form-field>
+							  	</div>	
+					  		</div>
+					  		<div class="row">
+								<div class="col-sm-6">
+						  			<div class="md-block">
+						  				<div class="mandatory-select">
+						  					<mat-select required placeholder="Email Format" #emailFormat="ngModel" name="emailFormat" [(ngModel)]="formModel.emailFormat">
+												<mat-option value="HTML">HTML</mat-option>
+									            <mat-option value="TEXT">TEXT</mat-option>
+									            <mat-option value="HTML&TEXT">HTML and TEXT</mat-option>
+											</mat-select>
+											<mat-error *ngIf="emailFormat.errors && emailFormat.errors.required && (emailFormat.dirty || emailFormat.touched || contactForm.submitted)">
+									      		This is a <strong>required</strong> field
+									    	</mat-error>		
+						  				</div>
+							  		</div>
+								</div>	
+								<div class="col-sm-6">
+							  		<div class="md-block">
+							  			<div class="mandatory-select">
+							  				<mat-select required placeholder="Activity Status" #activityStatus="ngModel" name="activityStatus" [(ngModel)]="formModel.activityStatus">
+												<mat-option value="subscribed">Subscribed</mat-option>
+							            		<mat-option value="unsubscribed">Unsubscribed</mat-option>
+											</mat-select>
+											<mat-error *ngIf="activityStatus.errors && activityStatus.errors.required && (activityStatus.dirty || activityStatus.touched || contactForm.submitted)">
+									      		This is a <strong>required</strong> field
+									    	</mat-error>		
+							  			</div>
+							  		</div>
+							  	</div>	
+					  		</div>
+							<div class="row">
+							  	<div class="col-sm-6">
+							  		<div class="md-block">
+							  			<div class="mandatory-select">
+							  				<mat-select required placeholder="Confirmation Status" #confirmStatus="ngModel" name="confirmStatus" [(ngModel)]="formModel.confirmStatus">
+												<mat-option value="confirm">Confirmed</mat-option>
+									            <mat-option value="unconfirm">Unconfirmed</mat-option>
+									            <mat-option value="sendmail" [hidden]="formModel.contactId>0">Send a Confirmation Mail</mat-option>
+											</mat-select>
+											<mat-error *ngIf="confirmStatus.errors && confirmStatus.errors.required && (confirmStatus.dirty || confirmStatus.touched || contactForm.submitted)">
+									      		This is a <strong>required</strong> field
+									    	</mat-error>		
+							  			</div>
+							  		</div>
+							  	</div>	
+								<div class="col-sm-6">
+									<mat-form-field class="md-block">
+								    	<input type="text" matInput placeholder="Zipcode" #zip="ngModel"  name="zip" [(ngModel)]="formModel.zip">
+								    </mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+							  	<div class="col-sm-6">
+							  		<div class="mandatory-select">
+							  			<mat-select placeholder="Country" #country="ngModel" name="country" [(ngModel)]="formModel.country" required>
+											<mat-option *ngFor="let country of country_list" [value]="country.id">{{country.country_name}}</mat-option>
+										</mat-select>
+										<mat-error *ngIf="country.errors && country.errors.required && (country.dirty || country.touched || contactForm.submitted)">
+								      		This is a <strong>required</strong> field
+								    	</mat-error>		
+							  		</div>
+								</div>
+								<div class="col-sm-6">
+							  		<mat-form-field class="md-block">
+								    	<input type="text" matInput placeholder="Phone" #phone="ngModel"  name="phone" [(ngModel)]="formModel.phone">
+								    </mat-form-field>
+							  	</div>	
+							</div>
+					  		
+					  		<div class="row">
+							  	<div class="col-sm-6">
+							  		<mat-form-field class="md-block">
+								    	<input type="text" matInput placeholder="Mobile" #mobile="ngModel"  name="mobile" [(ngModel)]="formModel.mobile" minlength="10" maxlength="12" pattern="[7-9][0-9]{9}">
+								    	<mat-error *ngIf="mobile.errors && mobile.errors.pattern">
+								      		Please enter a <strong>valid</strong> mobile number
+								    	</mat-error>
+								    	<mat-error *ngIf="mobile.errors && mobile.errors.minlength">
+								      		Mobile number should be between 10 to 12 characters
+								    	</mat-error>
+								    	<mat-error *ngIf="mobile.errors && mobile.errors.maxlength">
+							      			Mobile number should be between 10 to 12 characters
+							    		</mat-error>
+								    </mat-form-field>
+							  	</div>	
+								<div class="col-sm-6">
+									<mat-form-field class="md-block">
+								    	<input type="text" matInput placeholder="Fax" #fax="ngModel"  name="fax" [(ngModel)]="formModel.fax">
+								    </mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+							  	<div class="col-sm-6">
+							  		<!-- <mat-form-field class="md-block">
+							  			<input readonly="readonly" matInput placeholder="Birth Date" #dob="ngModel"  name="dob" [(ngModel)]="formModel.dob" [value]="formModel.dob | date: 'shortDate'" dateTimePicker [maxMoment]="maxDate" [pickerType]="'date'">
+								    </mat-form-field> -->
+							  	</div>	
+								<div class="col-sm-6">
+									<!-- <mat-form-field class="md-block">
+							  			<input readonly="readonly" matInput placeholder="Anniversary Date" #anniDate="ngModel"  name="anniDate" [(ngModel)]="formModel.anniDate" [value]="formModel.anniDate | date: 'shortDate'" dateTimePicker [maxMoment]="maxDate" [pickerType]="'date'">
+								    </mat-form-field> -->
+								</div>
+							</div>
+							<div class="row">
+							  	<div class="col-sm-6">
+							  		<div class="mandatory-select">
+							  			<mat-select placeholder="Contact Group" #contactGroup="ngModel" name="contactGroup" [(ngModel)]="formModel.contactGroup" required>
+											<mat-option *ngFor="let group of contact_list" [value]="group.id">{{group.name}}</mat-option>
+										</mat-select>
+										<mat-error *ngIf="contactGroup.errors && contactGroup.errors.required && (contactGroup.dirty || contactGroup.touched || contactForm.submitted)">
+								      		This is a <strong>required</strong> field
+								    	</mat-error>		
+							  		</div>
+								</div>
+								
+							</div>
+							
+					  	</div>
+					  	
+				  	</div>  
+			  	</div>
+			  
+		  	</div>
+		  	<div class="clear"></div>	
+		   	<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs">
+				<button type="submit" mat-raised-button class="btn-main">Continue</button>
+				<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">
+					Cancel
+				</button>
+			</div> 
+			<div class="clear"></div> 
+			<!-- ///////////////Buttons////   -->
+	  	</form>	  
+	</div>
+</section>

@@ -1,0 +1,42 @@
+version: '2.0'
+services:
+ db:
+   image: postgres
+ webservice:
+   build: .
+   command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8062"
+   container_name: webservices
+   volumes:
+     - .:/webservices
+   ports:
+     - "8062:8062"
+   depends_on:
+     - db
+ app_backend:
+  image: 'production'
+  build: ./production
+  ports:
+   - "81:81"
+  volumes:
+    - /www/static
+  links:
+    - webservice:webservice
+ app_frontend:
+  image: 'frontend'
+  build: ./frontend
+  ports:
+   - "82:82"
+  volumes:
+    - /www/static
+  links:
+    - webservice:webservice
+ web:
+  build: ./web
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+    - /www/static  
+  links:
+    - app_frontend:app_frontend
+    - webservice:webservice

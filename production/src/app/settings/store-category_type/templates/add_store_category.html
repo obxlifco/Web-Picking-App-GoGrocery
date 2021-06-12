@@ -1,0 +1,82 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <form #storeCategoryForm="ngForm" novalidate (ngSubmit)="storeCategoryForm.valid && addEditStoreCategory(storeCategoryForm)">
+            <input type="hidden" name="storeCategoryId" [(ngModel)]="formModel.storeCategoryId">
+            <div class="topheading">
+                <h1>{{(formModel.storeCategoryId)?'Edit':'Add'}} Store Category
+                <!-- <h1> Add Store -->
+                    <div class="btn-header">
+                      <button type="submit" mat-raised-button class="btn-main">Save</button>
+                        <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                        <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+                    </div>
+                    <div class="clear"></div>
+                </h1>
+            </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="row">
+                        <div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Store Type Name</mat-label>
+								<input matInput placeholder="Store Type Name" #store_name="ngModel" required  name="store_name" [(ngModel)]="formModel.store_name">
+							</mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+							<ng-select [ngClass]="{ 'custom_error_red': store_type_category.errors && store_type_category.errors.required && (store_type_category.dirty || store_type_category.touched || storeCategoryForm.submitted) }"
+								[items]="parent_category_list"
+								[multiple]="true"
+								placeholder="Applicable Categories"
+								bindLabel="name" bindValue="id"
+								#store_type_category="ngModel" name="store_type_category" [(ngModel)]="formModel.store_type_categories_selected"
+								style="margin-top: 8px !important;"
+							 required>
+							<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+									<div class="ng-value" *ngFor="let item of items | slice:0:2">
+											<span class="ng-value-label">{{item.name}}</span>
+											<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+									</div>
+									<div class="ng-value" *ngIf="items.length > 2">
+											<span class="ng-value-label">{{items.length - 2}} more...</span>
+									</div>
+							</ng-template>
+							</ng-select>
+                        </div>
+                        
+                        <div class="col-md-4">
+							<mat-form-field appearance="outline"  class="md-block">
+								<mat-label>Sequence Number</mat-label>
+								<input matInput placeholder="Sequence Number" #sequence_number="ngModel" required  name="sequence_number" [(ngModel)]="formModel.sequence_number">
+							</mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+							<br>
+							<div class="file_upload">
+								<button mat-raised-button class="btn-main" type="button">
+									<mat-icon class="icon-upload-cloud"></mat-icon>Browse Logo
+									<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+									 (change)="selectWarehouseLogo($event)" />
+								</button>
+								<span class="ml-1">{{file_selection_tool}}</span>
+							</div>
+						</div>						
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+							<div class="photobox" *ngIf="formModel.fileUrl != '' && formModel.fileUrl != undefined">
+								<div class=" propic">
+									<img src="{{formModel.fileUrl}}" height="200" width="200" class="product_image" style="margin-top:10px;">
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

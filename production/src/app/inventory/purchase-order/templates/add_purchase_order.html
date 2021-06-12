@@ -1,0 +1,338 @@
+<form #poForm="ngForm" novalidate (ngSubmit)="poForm.valid && poCheckout(poForm)">
+<section class="right-part">
+    <div class="topheading">
+      <h1>Purchase Order
+		 
+        <div class="btn-header">
+			<button type="submit" mat-raised-button class="btn-main">Save</button>
+          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+	  	</div>
+        <div class="clear"></div>
+      </h1>
+    </div>
+    
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<div class="">
+			<div class="box">
+				<div class="row">
+					<div class="col-sm-6 col-md-3">
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline">
+								<mat-label>Supplier Name</mat-label>
+								<mat-select required placeholder="Supplier Name" #supplier_id="ngModel" name="supplier_id" [(ngModel)]="formModel.supplier_id" (change)="getSupplierProducts(formModel.supplier_id)">
+									<mat-option *ngFor="let supplier of supplier_list" [value]="supplier.id">{{supplier.name}} | {{supplier.code}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="supplier_id.errors && supplier_id.errors.required && (supplier_id.dirty || supplier_id.touched || poForm.submitted)">
+								This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+					    </div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline">
+								<mat-label>Currency</mat-label>
+								<mat-select required placeholder="Currency" #currency_id="ngModel" name="currency_id" [(ngModel)]="formModel.currency_id" (change)="currencyDetails()">
+									<mat-option *ngFor="let currency of currency_list" [value]="currency.id">{{currency.currencyname}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="currency_id.errors && currency_id.errors.required && (currency_id.dirty || currency_id.touched || poForm.submitted)">
+								This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+					    </div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<mat-form-field appearance="outline">
+							<mat-label>PO Order No</mat-label>
+							<input required matInput placeholder="PO Order No" #purchase_order_id="ngModel" name="purchase_order_id" [(ngModel)]="formModel.purchase_order_id" disabled>
+							<mat-error *ngIf="purchase_order_id.errors && purchase_order_id.errors.required">
+						      This is a <strong>required</strong> field
+						    </mat-error>
+						</mat-form-field>
+					</div>
+					<div class="clear hidden-sm"></div>
+					<!-- <div class="col-sm-6 col-md-4">
+						<mat-form-field appearance="outline">
+						   <input readonly="readonly" matInput class="picker-input" #order_date="ngModel" name="order_date" [value]="formModel.order_date | date: 'shortDate'" [(ngModel)]="formModel.order_date" dateTimePicker [mode]="'dropdown'"  [hourTime]="'12'" readonly name="date" placeholder="Select Date" [pickerType]="'date'">
+						   <i class="icon-calendar" matSuffix></i>
+						</mat-form-field>  
+					</div> -->
+					<div class="col-sm-6 col-md-3">
+						<mat-form-field appearance="outline">
+							<mat-label>Special Instruction</mat-label>
+							<input matInput placeholder="Note" #notes="ngModel" name="notes" [(ngModel)]="formModel.notes">
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+			<div class="row same-height">
+				<div class="col-md-4">
+					<div class="box">
+						<div class="heading">Shipping/ Billing Address</div>
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline">
+								<mat-label>Store</mat-label>
+								<mat-select required placeholder="Store" #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id" (selectionChange)="getWarehouseDetails(formModel.warehouse_id)">
+									<mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="warehouse_id.errors && warehouse_id.errors.required && (warehouse_id.dirty || warehouse_id.touched || poForm.submitted)">
+								This is a <strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+					    </div>
+						
+						<ul class="box-list" *ngIf="formModel.warehouse_id">
+							<li>
+								<div class="text-heading_add">Address</div>
+								<div class="num-heading">{{selected_warehouse.address}}, {{selected_warehouse.city}} - {{selected_warehouse.zipcode}}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading_add">Phone</div>
+								<div class="num-heading">{{selected_warehouse.phone}}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading_add">Email</div>
+								<div class="num-heading">{{selected_warehouse.email}}</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box">
+						<div class="heading">Payment Method</div>
+						<div class="row">
+							<div class="col-sm-12 ">
+								<div class="mandatory-select">
+									<mat-form-field appearance="outline">
+										<mat-label>Payment Method</mat-label>
+										<mat-select placeholder="Payment Method" #purchase_order_payment_id="ngModel" name="purchase_order_payment_id" [(ngModel)]="formModel.purchase_order_payment_id">
+											<mat-option *ngFor="let payment of payment_list" [value]="payment.id">{{payment.name}}</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="col-sm-12">
+						<!-- 		<mat-form-field appearance="outline">
+								   <input readonly="readonly" matInput class="picker-input" #payment_due_date="ngModel" name="payment_due_date" [value]="formModel.payment_due_date | date: 'shortDate'" [(ngModel)]="formModel.payment_due_date" dateTimePicker [mode]="'dropdown'"  [hourTime]="'12'" readonly name="date" placeholder="Due Date Of Payment" [minMoment]="minDate" [pickerType]="'date'">
+								   <i class="icon-calendar" matSuffix></i>
+								</mat-form-field> -->
+								
+							</div>
+							<div class="col-sm-12">
+								<mat-form-field appearance="outline">
+									<mat-label>No of days credit</mat-label>
+									<input matInput placeholder="No of days credit" #payment_days_credit="ngModel" name="payment_days_credit" [(ngModel)]="formModel.payment_days_credit" type="number">
+									<!-- <span mdSuffix>days</span> -->
+								</mat-form-field>
+							</div>
+							
+							<div class="col-sm-12">
+								<mat-form-field appearance="outline">
+									<mat-label>Payment Note</mat-label>
+									<input matInput placeholder="Note" #payment_method_description="ngModel" name="payment_method_description" [(ngModel)]="formModel.payment_method_description">
+								</mat-form-field>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box">
+						<div class="heading">Shipping Option</div>
+						<div class="row">
+							<div class="col-sm-12 ">
+								<div class="mandatory-select">
+									<mat-form-field appearance="outline">
+										<mat-label>Shipping option</mat-label>
+									<mat-select placeholder="Shipping Option" #purchase_order_shipping_id="ngModel" name="purchase_order_shipping_id" [(ngModel)]="formModel.purchase_order_shipping_id">
+										<mat-option *ngFor="let shipping of shipping_list" [value]="shipping.id">{{shipping.name}}</mat-option>
+									</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<mat-form-field appearance="outline">
+									<mat-label>Shipping Cost</mat-label>
+									<input matInput placeholder="Shipping Cost" #shipping_cost="ngModel" name="shipping_cost" [(ngModel)]="formModel.shipping_cost" pattern="\d+(\.\d{1,2})?" (blur)="calcAmt(0)">
+									<mat-error *ngIf="shipping_cost.errors && shipping_cost.errors.pattern">
+								    	Only valid <strong>decimal</strong> numbers are allowed
+								    </mat-error>
+								</mat-form-field>
+							</div>
+							
+							<div class="col-sm-12">
+								<mat-radio-group #shipping_cost_stats="ngModel" name="shipping_cost_stats" [(ngModel)]="formModel.shipping_cost_stats" (change)="calcAmt(0)">
+									<mat-radio-button class="example-margin my-1" value="i">Included in Product Price <!-- {{formModel.shipping_cost_stats}} --></mat-radio-button>
+								  	<mat-radio-button class="example-margin my-1" value="e">Charge Separately</mat-radio-button>
+								</mat-radio-group>
+							</div>
+							<div class="col-sm-12">
+								<mat-form-field appearance="outline">
+									<mat-label>Shipping Note</mat-label>
+									<input matInput placeholder="Shipping Note" #shipping_method_description="ngModel" name="shipping_method_description" [(ngModel)]="formModel.shipping_method_description">
+								</mat-form-field>
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box productbox">
+				<div class="row same-height">
+					<div class="col-sm-8">
+						<div class="heading" style="margin-bottom: 0px;">My Bucket</div>
+					</div>
+					<!-- <div class="col-sm-4">
+						<mat-form-field appearance="outline" class="topminus">
+							<mat-label>Search/Scan Item</mat-label>
+							<input matInput placeholder="Search/Scan Item" [matAutocomplete]="tdAuto" name="sku" #sku="ngModel" [(ngModel)]="formModel.sku"
+							(keyup)="getProductDetails(formModel.sku,$event)">
+						</mat-form-field>
+						<mat-autocomplete #tdAuto="matAutocomplete" [displayWith]="displayFnSKU" (optionSelected)='UpdateItems($event.option.value)'>
+							<mat-option *ngFor="let item of productsList" [value]="item">
+								<span>{{ item.sku }}</span>
+							</mat-option>
+						</mat-autocomplete>
+					</div> -->
+				</div>
+				<div class="table-list">
+					<table>
+						<tr>
+						<th class="check-select"> </th>
+
+						<th class="short" colspan="2" style="width: 40%;">SKU & Product Name</th>
+						<th>Quantity</th>
+						<th align="right">Cost Per Unit {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+						<th align="right">Gross Amount {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+						<th align="right">Discount%</th>
+						<th align="right">Net Amount {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+						</tr>
+						<ng-container *ngFor="let item of formModel.products; let index=index;">
+							<tr>
+							<td><button *ngIf="formModel.products.length>0" mat-icon-button class="btn-gray sm-icon-btn" (click)="removeRow(index)"><i class="icon-close"></i></button></td>
+							<td data-th="SKU" colspan="2">
+								<mat-form-field appearance="outline">
+								<input matInput readonly placeholder="" name="sku{{index}}" #sku="ngModel" [(ngModel)]="item.sku" (click)="openProductPop(index)">
+								</mat-form-field>
+
+							</td>
+							<!-- <td data-th="Product Name">
+								<mat-form-field appearance="outline">
+								<input matInput readonly placeholder="" name="product{{index}}" #product="ngModel" [(ngModel)]="item.name" (click)="openProductPop(index)">
+								</mat-form-field>
+							</td> -->
+							<td data-th="Quantity">
+								<mat-form-field appearance="outline">
+								<input type="number" min="0" matInput placeholder="" name="quantity{{index}}" #quantity="ngModel" [(ngModel)]="item.quantity" (blur)="calcAmt(index)" class="add_edit_price">
+								</mat-form-field>
+							</td>
+							<td align="right" data-th="Cost Per Unit">
+								<mat-form-field appearance="outline">
+									<input matInput placeholder="" type="number" name="cpu{{index}}" #cpu="ngModel" [(ngModel)]="item.price" (blur)="calcAmt(index)" pattern="\d+(\.\d{1,2})?" class="add_edit_price">
+									<mat-error *ngIf="cpu.errors && cpu.errors.pattern">
+										Only valid <strong>decimal</strong> numbers are allowed
+									</mat-error>
+								</mat-form-field>
+							</td>
+							<td align="right" data-th="Gross Amount">{{item.gross_amt | number:'1.2-2' }}</td>
+							<td align="right" data-th="Discount%">
+								<mat-form-field appearance="outline">
+								<input matInput placeholder="" type="number" name="discount{{index}}" #discount="ngModel" [(ngModel)]="item.discount" pattern="\d+(\.\d{1,2})?" (blur)="calcAmt(index)" class="add_edit_price">
+									<mat-error *ngIf="discount.errors && discount.errors.pattern">
+										Only valid <strong>decimal</strong> numbers are allowed
+									</mat-error>
+								</mat-form-field>
+							</td>
+							<td align="right" data-th="Net Amount">{{item.net_amt | number:'1.2-2' }}</td>
+							</tr>
+						</ng-container>
+						
+						<ng-container>
+							<tr>
+								<td></td>
+								<td data-th="SKU" colspan="2">
+									<mat-form-field appearance="outline">
+										<input matInput placeholder="" name="sku" #sku="ngModel" [(ngModel)]="formModel.sku" [matAutocomplete]="tdAuto" (keyup)="getProductDetails(formModel.sku,$event)" (focus)="getProductDetails(' ',$event)">
+										</mat-form-field>
+										<mat-autocomplete #tdAuto="matAutocomplete" [displayWith]="displayFnSKU" (optionSelected)='UpdateItems($event.option.value)'>
+											<mat-option *ngFor="let item of productsList" [value]="item">
+												<span>{{ item.sku+' | ' +item.name}}</span>
+											</mat-option>
+										</mat-autocomplete>									
+								</td>
+								<td data-th="Quantity">
+									<mat-form-field appearance="outline">
+										<input type="number" min="0" matInput placeholder="" name="quantity" #quantity="ngModel" [(ngModel)]="formModel.quantity"
+											 class="add_edit_price">
+									</mat-form-field>
+								</td>
+								<td align="right" data-th="Cost Per Unit">
+									<mat-form-field appearance="outline">
+										<input matInput placeholder="" name="cpu" #cpu="ngModel" [(ngModel)]="formModel.price" 
+											pattern="\d+(\.\d{1,2})?" class="add_edit_price">
+										<mat-error *ngIf="cpu.errors && cpu.errors.pattern">
+											Only valid <strong>decimal</strong> numbers are allowed
+										</mat-error>
+									</mat-form-field>
+								</td>
+								<td align="right" data-th="Gross Amount">{{formModel.gross_amt | number:'1.2-2' }}</td>
+								<td align="right" data-th="Discount%">
+									<mat-form-field appearance="outline">
+										<input matInput placeholder="" name="discount" #discount="ngModel" [(ngModel)]="formModel.discount" pattern="\d+(\.\d{1,2})?"
+											class="add_edit_price">
+										<mat-error *ngIf="discount.errors && discount.errors.pattern">
+											Only valid <strong>decimal</strong> numbers are allowed
+										</mat-error>
+									</mat-form-field>
+								</td>
+								<td align="right" data-th="Net Amount">{{formModel.net_amt | number:'1.2-2' }}</td>
+							</tr>
+						</ng-container>
+						
+						<!-- <tr>
+							<td colspan="8"><button type="button" md-mini-fab class="btn-pink mat-mini-fab" (click)="addRow()"><i class="icon-add"></i></button><label class="ml-1 text-pink text-bold" (click)="addRow()">Add new</label></td>
+						</tr> -->
+					</table>
+					<table class="price">
+						<tr>
+							<td>Subtotal : </td>
+							<td>{{ (formModel.net_amount)?formModel.net_amount:'0.00' }}</td>
+						</tr>
+						<tr>
+							<td>Discount : </td>
+							<td>{{ (formModel.discount_amount)?formModel.discount_amount:'0.00' }}</td>
+						</tr>
+						<tr>
+							<td>Shipping Cost {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+							<td>{{(formModel.shipping_cost && formModel.shipping_cost_stats=='e')?formModel.shipping_cost:'0.00' }}</td>
+						</tr>
+						<tr class="total">
+							<td>Grand Total : </td>
+							<td>{{ (temp_total_amt)?temp_total_amt:'0.00' }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+		<!-- ///////////////Buttons//// --> 
+
+		<div class="bottom_fixedpart">
+			<div class="btn-header  hidden-xs">
+				<button type="submit" mat-raised-button class="btn-main">Save</button>
+				<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+		</div>
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+</form>
+

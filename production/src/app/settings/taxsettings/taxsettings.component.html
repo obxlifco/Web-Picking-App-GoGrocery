@@ -1,0 +1,179 @@
+<section class="right-part addall_page">
+  <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+     <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && updateTaxSettings()">
+     <input type="hidden" name="formId" [(ngModel)]="formModel.formId">
+     <div class="topheading">
+        <h1>
+           <span class="icon-settings"></span>
+           Tax Settings
+           <div class="btn-header">
+              <div class="btn-header">
+                 <button type="submit" mat-raised-button class="btn-main">Save</button>
+                 <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+              </div>
+           </div>
+           <div class="clear"></div>
+        </h1>
+     </div>
+     <div class="clear"></div>
+     <div class="box">
+        <!-- <div class="fixed-width"> -->
+               <h3 mat-subheader>Calculation Settings</h3>
+               <mat-divider></mat-divider><br>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Tax Calculation Based On</mat-label>
+                        <mat-select  placeholder="Tax Calculation Based On" #tax_calculation_based_on="ngModel" name="tax_calculation_based_on" [(ngModel)]="formModel.tax_calculation_based_on" >
+                        <mat-option value="Select Tax Calculation Based On">Select Tax Calculation Based On</mat-option>
+                        <mat-option value="Shipping Address">Shipping Address</mat-option>
+                        <mat-option value="Billing Address">Billing Address</mat-option>
+                        </mat-select>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Apply Customer Tax</mat-label>
+                     <mat-select required placeholder="Apply Customer Tax " #apply_customer_tax="ngModel" name="apply_customer_tax" [(ngModel)]="formModel.apply_customer_tax" >
+                     <mat-option value="Before Discount">Before Discount</mat-option>
+                     <mat-option value="After Discount">After Discount</mat-option>
+                     </mat-select>
+                     <mat-error *ngIf="apply_customer_tax.errors && apply_customer_tax.errors.required">Please select Apply Customer Tax</mat-error>
+                  </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Catalog Prices</mat-label>
+                     <mat-select required placeholder="Catalog Prices" #catalog_prices="ngModel" name="catalog_prices" [(ngModel)]="formModel.catalog_prices" >
+                     <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                     <mat-option value="Including Tax">Including Tax</mat-option>
+                     </mat-select>
+                     <mat-error *ngIf="catalog_prices.errors && catalog_prices.errors.required">Please select Catalog Prices</mat-error>
+                  </mat-form-field>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Apply Discount on Prices</mat-label>
+                        <mat-select required placeholder="Apply Discount on Prices" #apply_discount_on_prices="ngModel" name="apply_discount_on_prices" [(ngModel)]="formModel.apply_discount_on_prices" >
+                        <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                        <mat-option value="Including Tax">Including Tax</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="apply_discount_on_prices.errors && apply_discount_on_prices.errors.required">Please select Apply Discount on Prices</mat-error>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Select Shipping Prices</mat-label>
+                     <mat-select  placeholder="Select Shipping Prices" #display_shipping_prices="ngModel" name="display_shipping_prices" [(ngModel)]="formModel.display_shipping_prices" >
+                     <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                     <mat-option value="Including Tax">Including Tax</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>CST Applicable</mat-label>
+                     <mat-select placeholder="CST Applicable" #cst_applicable="ngModel" name="cst_applicable" [(ngModel)]="formModel.cst_applicable" >
+                     <mat-option value="Yes">Yes</mat-option>
+                     <mat-option value="No">No</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Excise Duty</mat-label>
+                        <input matInput placeholder="Excise Duty" #excise_duty="ngModel" name="excise_duty" [(ngModel)]="formModel.excise_duty" pattern="^\d*\.?\d*$">
+                        <mat-error *ngIf="excise_duty.errors && excise_duty.errors.pattern"> This is a number field</mat-error>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Shipping Tax Rate</mat-label>
+                        <input matInput placeholder="Excise Duty" #shipping_tax_rate="ngModel" name="shipping_tax_rate" [(ngModel)]="formModel.shipping_tax_rate" pattern="^\d*\.?\d*$">
+                        <mat-error *ngIf="shipping_tax_rate.errors && shipping_tax_rate.errors.pattern"> This is a number field</mat-error>
+                     </mat-form-field>
+                  </div>
+               </div>
+               <h3 mat-subheader>Orders, Invoices, Credit Memos Display Settings</h3>
+               <mat-divider></mat-divider><br>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Display Prices</mat-label>
+                        <mat-select  placeholder="Display Prices" #display_prices="ngModel" name="display_prices" [(ngModel)]="formModel.display_prices" >
+                           <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                           <mat-option value="Including Tax">Including Tax</mat-option>
+                           <mat-option value="Including and Excluding Tax">Including and Excluding Tax</mat-option>
+                        </mat-select>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Include Tax in Grand Total</mat-label>
+                     <mat-select  placeholder="Include Tax in Grand Total " #include_tax_in_grand_total="ngModel" name="include_tax_in_grand_total" [(ngModel)]="formModel.include_tax_in_grand_total" >
+                        <mat-option value="Yes">Yes</mat-option>
+                        <mat-option value="No">No</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Display Subtotal</mat-label>
+                        <mat-select  placeholder="Display Subtotal" #display_subtotal="ngModel" name="display_subtotal" [(ngModel)]="formModel.display_subtotal" >
+                           <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                           <mat-option value="Including Tax">Including Tax</mat-option>
+                           <mat-option value="Including and Excluding Tax">Including and Excluding Tax</mat-option>
+                        </mat-select>
+                     </mat-form-field>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Display Full Tax Summary</mat-label>
+                        <mat-select  placeholder="Display Full Tax Summary" #display_full_tax_summary="ngModel" name="display_full_tax_summary" [(ngModel)]="formModel.display_full_tax_summary" >
+                           <mat-option value="Yes">Yes</mat-option>
+                           <mat-option value="No">No</mat-option>
+                        </mat-select>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Display Shipping Amount</mat-label>
+                        <mat-select  placeholder="Display Shipping Amount " #display_shipping_amount="ngModel" name="display_shipping_amount" [(ngModel)]="formModel.display_shipping_amount" >
+                              <mat-option value="Excluding Tax">Excluding Tax</mat-option>
+                              <mat-option value="Including Tax">Including Tax</mat-option>
+                              <mat-option value="Including and Excluding Tax">Including and Excluding Tax</mat-option>
+                     </mat-select>
+                     </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                     <mat-form-field appearance="outline"><mat-label>Display Zero Tax Subtotal</mat-label>
+                     <mat-select  placeholder="Display Zero Tax Subtotal" #display_zero_tax_subtotal="ngModel" name="display_zero_tax_subtotal" [(ngModel)]="formModel.display_zero_tax_subtotal" >
+                        <mat-option value="Yes">Yes</mat-option>
+                        <mat-option value="No">No</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+                  </div>
+               </div>
+               <h3 mat-subheader>Shipping Tax Classes</h3>
+               <mat-divider></mat-divider><br>
+               <div class="row">
+                  <div class="col-sm-4">
+                     <!-- <mat-form-field appearance="outline"><mat-label>Tax Class for Shipping</mat-label>
+                        <mat-select placeholder="Tax Class for Shipping" #shipping_tax_class="ngModel" name="shipping_tax_class" [(ngModel)]="formModel.shipping_tax_class" >
+                           <mat-option *ngFor="let item of product_tax_list" [value]="item.id">{{item.name}}</mat-option>
+                        </mat-select>
+                     </mat-form-field> -->
+                     <ng-select
+                        [items]="product_tax_list"
+                        placeholder="Tax Class for Shipping"
+                        bindLabel="name" bindValue="id"
+                        #shipping_tax_class="ngModel" name="shipping_tax_class" [(ngModel)]="formModel.shipping_tax_class"
+                     >
+                     </ng-select>
+                  </div>
+               </div>
+        <!-- </div> -->
+        <!-- ///////////////Buttons//// -->
+        <div class="pull-right hidden-xs">
+           <button type="submit" mat-raised-button class="btn-main">Save</button>
+        </div>
+        <div class="clear"></div>
+        <!-- ///////////////Buttons//// -->
+     </div>
+     <div class="clear"></div>
+     </form>
+  </div>
+</section>

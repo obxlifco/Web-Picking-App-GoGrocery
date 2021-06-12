@@ -1,0 +1,107 @@
+<form #presetForm="ngForm" novalidate (ngSubmit)="presetForm.valid && addEditPreset(presetForm)">
+	<input type="hidden" name="presetId" [(ngModel)]="formModel.presetId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.presetId)?'Edit':'Add'}} Preset </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<div class="row">
+				<div class="col-sm-6">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Preset Name</mat-label>
+						<input matInput placeholder="Preset Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$">
+							<mat-error *ngIf="name.errors && name.errors.required">
+								Preset Name is Required
+							</mat-error>
+							<mat-error *ngIf="name.errors && name.errors.pattern">
+							White space is not allowed at beginning. 
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-6">
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline"  class="md-block"><mat-label>Courier</mat-label>
+								<mat-select required placeholder="Courier" #shipping_method_id="ngModel" name="shipping_method_id" [(ngModel)]="formModel.shipping_method_id" (change)="fillServicePackage(shipping_method_id.value)"> 
+									<mat-option *ngFor="let courier of courier_list"  [value]="courier.id" >{{courier.method_name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="shipping_method_id.errors && shipping_method_id.errors.required && (shipping_method_id.dirty || shipping_method_id.touched || presetForm.submitted)">
+										Courier is Required
+									</mat-error>
+							</mat-form-field>	
+						</div>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div  class="md-block">
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline"  class="md-block"><mat-label>Service</mat-label>
+								<mat-select placeholder="Service" #service_id="ngModel" name="service_id" [(ngModel)]="formModel.service_id">
+								<mat-option *ngFor="let service of service_list"  [value]="service.id" >{{service.service_name}}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="service_id.errors && service_id.errors.required && (service_id.dirty || service_id.touched || presetForm.submitted)">
+									Service is Required
+								</mat-error>	
+						</mat-form-field>	
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div  class="md-block">
+						<div class="mandatory-select">
+							<mat-form-field appearance="outline"  class="md-block"><mat-label>Package</mat-label>
+								<mat-select placeholder="Package" #package_id="ngModel" name="package_id" [(ngModel)]="formModel.package_id">
+								<mat-option *ngFor="let package of package_list"  [value]="package.id" >{{package.package_name}}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="package_id.errors && package_id.errors.required && (package_id.dirty || package_id.touched || presetForm.submitted)">
+									Package is Required
+								</mat-error>	
+						</mat-form-field>
+						</div>
+				</div>
+				</div>
+			</div>
+			<div class="boxs active">
+				<div class="box-header">
+					Dimension (in inches):
+				</div>
+				<div class="box-body">
+				<div class="row flex-item-center">
+					<mat-form-field appearance="outline"  class="md-block col-md-3"><mat-label>Length</mat-label>
+						<input matInput type="number" min="0" placeholder="Length" #sizel="ngModel" name="sizel" [(ngModel)]="formModel.sizel">
+						</mat-form-field>
+						<label class="col-sm-1 hidden-xs">X</label> 
+						<mat-form-field appearance="outline"  class="md-block col-md-3"><mat-label>Width</mat-label>
+						<input matInput type="number" min="0" placeholder="Width" #sizew="ngModel" name="sizew" [(ngModel)]="formModel.sizew">
+						</mat-form-field>
+						<label class="col-sm-1 hidden-xs">X</label>
+						<mat-form-field appearance="outline"  class="md-block col-md-3"><mat-label>Height</mat-label>
+						<input matInput type="number" min="0" placeholder="Height" #sizeh="ngModel" name="sizeh" [(ngModel)]="formModel.sizeh">
+						</mat-form-field>
+						<label class="col-sm-1 hidden-xs"></label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<mat-form-field appearance="outline"  class="md-block"><mat-label>Weight</mat-label>
+						<input matInput placeholder="Weight" required #weight="ngModel" name="weight" [(ngModel)]="formModel.weight">
+							<mat-error *ngIf="weight.errors && weight.errors.required">
+								Weight is Required
+							</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

@@ -1,0 +1,40 @@
+<form #paymentForm="ngForm" novalidate (ngSubmit)="paymentForm.valid && addEditShippingMethod(paymentForm)">
+	<input type="hidden" name="shippingId" [(ngModel)]="formModel.shippingId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.shippingId)?'Edit':'Add'}} Shipping Method </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-form-field appearance="outline"  class="md-block"><mat-label>Shipping Method Name</mat-label>
+				<input matInput placeholder="Shipping Method Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name">
+			    <mat-error *ngIf="name.errors && name.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+		  	</mat-form-field>
+			<div class="mandatory-select">
+				<mat-form-field appearance="outline"  class="md-block"><mat-label>Shipping Method Status</mat-label>
+					<mat-select required placeholder="Shipping Method Status" #status="ngModel" name="status" [(ngModel)]="formModel.status">
+						<mat-option value="n">Active</mat-option>
+						<mat-option value="y">Inactive</mat-option>
+					</mat-select>
+					<mat-error *ngIf="status.errors && status.errors.required && (status.dirty || status.touched || paymentForm.submitted)">
+						This is a
+						<strong>required</strong> field
+					</mat-error>
+				</mat-form-field>
+			</div>
+			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

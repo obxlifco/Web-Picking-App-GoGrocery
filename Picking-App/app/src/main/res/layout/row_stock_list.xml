@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_50sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:id="@+id/ivPicStockRow"
+                android:src="@drawable/ic_product_default"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNameStockRow"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Seeberger Pineapple pieces"
+                android:textColor="@color/appColorBlack"
+                android:textSize="@dimen/_7sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWeightStockRow"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="200gm"
+                android:textSize="@dimen/_7sdp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_weight=".2"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:id="@+id/tvPriceStockRow"
+                android:text="AED 10.00"
+                android:textColor="@color/appColorBlack"
+                android:textSize="@dimen/_7sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEditStockRow"
+                android:gravity="end"
+                android:text="@string/txtEditPrice"
+                android:textColor="@color/appRed"
+                android:textSize="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:gravity="center">
+
+            <com.suke.widget.SwitchButton
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:id="@+id/sbStockRow"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                app:sb_checked="true"
+                app:sb_show_indicator="false"
+                app:sb_enable_effect="false"
+                android:clickable="false"
+                app:sb_checked_color="@color/appGreen"
+                android:layout_centerInParent="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"/>
+        </RelativeLayout>
+
+        <!--<LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:gravity="center">
+
+            <com.suke.widget.SwitchButton
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:id="@+id/sbStockRow"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                app:sb_checked="true"
+                app:sb_show_indicator="false"
+                app:sb_checked_color="@color/appGreen" />
+        </LinearLayout>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDoneRowItemList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_green_tick"/>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,96 @@
+
+
+<div class="container">
+  <form #customForm="ngForm" novalidate (ngSubmit)="customForm.valid && doFormSubmit(customForm)">
+    <div class="row" [class.read-on]="isCMS">
+      <ng-container *ngFor="let field of widget_data.fields">
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Textbox'">
+          <mat-form-field>
+            <input matInput placeholder="{{field.field_label}}" [required]="field.value_required=='y'" #textbox="ngModel" name="{{field.field_label}}" [(ngModel)]="field.default_values">
+            <mat-error *ngIf="textbox.errors && textbox.errors.required">
+              This is a <strong>required</strong> field
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Email'">
+          <mat-form-field>
+            <input matInput placeholder="{{field.field_label}}" [required]="field.value_required=='y'" #email="ngModel" name="{{field.field_label}}" [(ngModel)]="field.default_values" pattern="([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})">
+            <mat-error *ngIf="email.errors && email.errors.required">
+              This is a <strong>required</strong> field
+            </mat-error>
+            <mat-error *ngIf="email.errors && email.errors.pattern">
+                  Enter a valid <strong>email</strong> address
+            </mat-error>    
+          </mat-form-field>
+        </div>
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Phone'">
+          <mat-form-field>
+            <input matInput placeholder="{{field.field_label}}" [required]="field.value_required=='y'" #phone="ngModel" name="{{field.field_label}}" [(ngModel)]="field.default_values" pattern="^\+?\d+$">
+            <mat-error *ngIf="phone.errors && phone.errors.required">
+              This is a <strong>required</strong> field
+            </mat-error>
+            <mat-error *ngIf="phone.errors && phone.errors.pattern">
+                  Enter a valid <strong>phone</strong> number
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Radio'">
+          <label class="">{{field.field_label}}<span *ngIf="field.value_required=='y'">*</span>:</label><br>
+          <mat-radio-group name="{{field.field_label}}" [(ngModel)]="field.default_values" [required]="field.value_required=='y'">
+            <div class="row">
+              <div class="col-sm-6" *ngFor="let value of field.custom_values">
+                <mat-radio-button class="my-1" value="{{value}}" >{{value}}</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>  
+
+        <div class="col-sm-6" *ngIf="field.input_type=='Dropdown'">
+          <mat-form-field>
+            <mat-select placeholder="{{field.field_label}}" [(ngModel)]="field.default_values" [required]="field.value_required=='y'" #dropdown="ngModel" name="{{field.field_label}}">
+              <mat-option *ngFor="let value of field.custom_values" value="{{value}}">{{value}}</mat-option>
+            </mat-select> 
+            <mat-error *ngIf="dropdown.errors && dropdown.errors.required">
+              This is a <strong>required</strong> field
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Checkbox'">
+          <div class="row">
+           <div class="col-sm-12">
+              <label class="">{{field.field_label}}<span *ngIf="field.value_required=='y'">*</span>:</label><br>
+            </div> 
+            <div class="col-sm-6" *ngFor="let value of field.custom_values">
+              <mat-checkbox class="my-1" name="{{value}}" value="{{value}}" [(ngModel)]="field.default_values" [required]="field.value_required=='y'">{{(value)}}</mat-checkbox>
+            </div>
+          </div>
+        </div>   
+        
+        <div class="col-sm-6" *ngIf="field.input_type=='Textarea'">
+          <mat-form-field>
+            <textarea matInput placeholder="{{field.field_label}}" [(ngModel)]="field.default_values" [required]="field.value_required=='y'" #textarea="ngModel" name="{{field.field_label}}"></textarea>
+            <mat-error *ngIf="textarea.errors && textarea.errors.required">
+              This is a <strong>required</strong> field
+            </mat-error>
+          </mat-form-field>
+        </div>  
+
+
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col-auto mx-auto">
+        
+        
+        <button type="button" mat-raised-button class="btn-main-line" (click)="doFormReset(customForm)">{{widget_data.reset_button_text}}</button>
+        <button type="submit" mat-raised-button class="btn-main">{{widget_data.submit_button_text}}</button>
+        <div class="clear10"></div>
+      </div>
+    </div>
+  </form>  
+</div>

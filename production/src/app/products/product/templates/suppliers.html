@@ -1,0 +1,112 @@
+<div class="loada" *ngIf="popupLoder">
+	<mat-spinner></mat-spinner>
+</div>
+<div class="filter dialogFilter pop-div-right">
+	<h2 mat-dialog-title>Select Suppliers</h2>
+	<div class="row">
+		<div class="col-sm-4">
+			<!-- <mat-form-field class="md-block" appearance="outline">
+				<mat-label>Select Warehouse</mat-label>
+					<mat-select placeholder="Select Warehouse" #warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id" multiple>
+						<mat-option *ngFor="let item of warehouse_list; let i=index" [value]="item.id">{{item.name}}</mat-option> 
+					</mat-select>                
+					<mat-error *ngIf="warehouse_id.errors && warehouse_id.errors.required">
+						This is a <strong>required</strong> field
+				</mat-error>
+			</mat-form-field> -->
+			<ng-select [items]="warehouse_list"
+				[multiple]="true"
+				placeholder="Select Warehouse"
+				bindLabel="name" bindValue="id"
+				#warehouse_id="ngModel" name="warehouse_id" [(ngModel)]="formModel.warehouse_id"
+				style="width: 300px;"
+			>
+			<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+				<div class="ng-value" *ngFor="let item of items | slice:0:1">
+						<span class="ng-value-label">{{item.name}}</span>
+						<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+				</div>
+				<div class="ng-value" *ngIf="items.length > 1">
+						<span class="ng-value-label">{{items.length - 1}} more...</span>
+				</div>
+			</ng-template>
+			<!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" name="item-{{index}}" [ngModel]="item$.selected"/> {{item.name}}
+            </ng-template> -->
+			</ng-select>
+		</div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-5">
+				<div class="search pop-up">
+				<mat-icon  class="icon-search" style="line-height: 20px !important;"></mat-icon>
+				<input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(0,1,'',filter,search.value)">
+			</div>
+		</div>
+		<div class="col-sm-1">
+			<button mat-icon-button matTooltipClass="mat-tooltip-white" matTooltip="Reload" (click)="generateGrid(0, 1, '',filter,'')">
+				<mat-icon class="icon-refresh"></mat-icon>
+			</button>
+		</div>
+	</div>
+</div>
+<mat-dialog-content style="min-width: 500px;">
+
+	<div class="table-list">
+  		<table>
+			<tr>
+				<th class="check-select">
+					<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+				</th>
+				<th class="short" (click)="generateGrid(0,1,'id',filter,search.value)">ID</th>
+				<th class="short" (click)="generateGrid(0,1,'name',filter,search.value)">Name</th>
+				<th class="short" (click)="generateGrid(0,1,'code',filter,search.value)">Company Code</th>
+				<th class="short" (click)="generateGrid(0,1,'companu_name',filter,search.value)">Company Name</th>
+				<th class="short" (click)="generateGrid(0,1,'email,',filter,search.value)">Email</th>
+				<th class="short" (click)="generateGrid(0,1,'contact_person',filter,search.value)">Contact Person</th>
+			</tr>
+			<tr [class.chec]="row.Selected" *ngFor="let row of result_list">
+				<td>
+					<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.Selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+				</td>
+				<td>{{row.id}}</td>
+				<td>{{row.name}}</td>
+				<td>{{row.code}}</td>
+				<td>{{row.company_name}}</td>
+				<td>{{row.email}}</td>
+				<td>{{row.contact_person}}</td>
+			</tr>
+			<tr *ngIf="result_list.length==0">
+			  	<td colspan="5" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+	    	
+
+</mat-dialog-content>
+<mat-dialog-actions layout="row" class="div-pop-bottom">
+	<div class="pagination-box" *ngIf="pagination.total_page>1" style='position:relative;'>
+			<span *ngFor="let list of total_list | paginate: config"></span>
+			<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGrid(0,$event,'',filter,search.value)" [maxSize]="maxSize">
+				<ul class="pagination">
+					<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+						<a (click)="p.previous()"><span class="icon-left"></span></a>
+	            </li>
+	            <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+	                <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+	                    <span>{{ page.label }}</span>
+	                </a>
+	                <a *ngIf="p.getCurrent() === page.value">
+	                    <span>{{ page.label }}</span>
+	                </a>
+	            </li>
+	            <li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+	                <a (click)="p.next()"><span class="icon-right"></span></a>
+	            </li>
+	        </ul>
+    	</pagination-template>
+	</div>
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="saveSuppliers()">Save</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

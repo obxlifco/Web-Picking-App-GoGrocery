@@ -1,0 +1,114 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="listing_container">
+               
+                <div class="list_right_section details details_one">
+                    
+                    <div class="details_topsml_menu">
+                        <ul>
+                            <li (click)="navigate(0)"><a href="javascript:void(0)">Home /</a></li>
+                            <li (click)="navigate(1)"><a href="javascript:void(0)">My Account /</a></li>
+                            <li><a href="javascript:void(0)">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart_outer">
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-3">
+                               <app-left-panel-profile [activatedMenu] = "'profiledetails'"></app-left-panel-profile>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <div class="cartbox orderdetails">
+                                  <div class="row">
+                                      <div class="col-12 col-md-12">
+                                        <div class="head"> My Profile
+                                        </div>
+                                      </div>
+                                     
+                                  </div>
+                                 
+                                  <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEdit(formData)">
+                                  <div class="frmbox">
+                                      <div class="row">
+                                          <div class="col-12 col-md-6">
+                                              <mat-form-field appearance="outline">
+                                                  <mat-label>First Name</mat-label>
+                                                  <input matInput required placeholder="First Name"  #first_name="ngModel"  name="first_name" [(ngModel)]="formModel.first_name">
+                                                  <mat-error *ngIf="first_name.errors && first_name.errors.required">
+                                                      Please enter first name
+                                                    </mat-error>
+                                              </mat-form-field>
+                                          </div>
+                                          <div class="col-12 col-md-6">
+                                              <mat-form-field appearance="outline">
+                                                  <mat-label>Last Name</mat-label>
+                                                  <input matInput required placeholder="Last Name" #last_name="ngModel"  name="last_name" [(ngModel)]="formModel.last_name">
+                                                  <mat-error *ngIf="last_name.errors && last_name.errors.required">Please enter last name</mat-error>
+                                              </mat-form-field>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-12 col-md-6">
+                                              <mat-form-field appearance="outline">
+                                                  <mat-label>Email Address</mat-label>
+                                                  <input matInput required placeholder="Email Address" #email="ngModel"  name="email" [(ngModel)]="formModel.email" pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$">
+                                                  <mat-error *ngIf="last_name.errors && last_name.errors.required">Please enter email</mat-error>
+                                                  <mat-error *ngIf="email.errors && email.errors.pattern">Enter a valid <strong>email</strong> address</mat-error>
+                                              </mat-form-field>
+                                          </div>
+                                          <div class="col-12 col-md-6">
+                                              <mat-form-field appearance="outline">
+                                                  <mat-label>Mobile No</mat-label>
+                                                  <input matInput required placeholder="Mobile No" #phone="ngModel"  name="phone" [(ngModel)]="formModel.phone" pattern="^(?:\+971|00971|054|055|056|050|052|058|0)?[0-9]{7,}$">
+                                                  <mat-error *ngIf="phone.errors && phone.errors.required">Please enter mobile numbre</mat-error>
+                                                  <mat-error *ngIf="phone.errors && phone.errors.pattern">Please enter valid mobile number</mat-error>
+                                              </mat-form-field>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-12 col-md-6">
+                                              <!-- <mat-form-field appearance="outline">
+                                                  <mat-select required placeholder="Gender" #gender="ngModel"  name="gender" [(ngModel)]="formModel.gender">
+                                                      <mat-option value="Male">Male</mat-option>
+                                                      <mat-option value="Female">Female</mat-option>
+                                                      <mat-option value="Others">Others</mat-option>
+                                                      </mat-select>
+                                                      <mat-error *ngIf="last_name.errors && last_name.errors.required">Please select gender</mat-error>
+                                              </mat-form-field> -->
+                                            <ng-select class="custom" [items]="gender_list"
+                                                name="gender"
+                                                placeholder="Select gender"
+                                                [(ngModel)]="formModel.gender" 
+                                                required>
+                                            </ng-select>
+                                          </div>
+                                          <div class="col-12 col-md-6">
+                                              <mat-form-field appearance="outline">
+                                                  <mat-label>Location</mat-label>
+                                                  <input matInput placeholder="Location" #location="ngModel"  name="location" [(ngModel)]="formModel.location">
+                                              </mat-form-field>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="btnsec">
+                                        <button type="submit" class="checkoutbtn ml-auto">SAVE</button>
+
+                                        <!-- <button  type="submit" style="cursor: pointer" class="basketbtn ml-auto">SAVE</button> -->
+                                    </div>
+                                  </form>
+                                </div>
+                           </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<!-- --- listing middle --- -->
+
+
+

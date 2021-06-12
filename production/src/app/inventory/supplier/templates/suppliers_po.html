@@ -1,0 +1,123 @@
+<section class="right-part filter-pad">
+  	
+  	<div class="topheading">
+	  	<h1>{{(formModel.supplierId)?'Edit':'Add'}} Supplier 
+		  	<div class="btn-header">
+				<button type="submit" mat-raised-button class="btn-main" (click)="supplierExit()">Continue</button>
+	          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			  	<label>Fields marked with <span>*</span> are compulsory</label>
+		  	</div>
+		  	<div class="clear"></div>
+	  	</h1>
+  	</div>
+  	<div class="filter ls">
+	  	<div class="stap">
+	  		<ul *ngIf="formModel.supplierId>0 && add_edit=='edit'">
+				<li class="done"><a (click)="_globalService.setTab(tabIndex,'/suppliers/edit/'+formModel.supplierId)" [routerLink]="['/suppliers/edit/'+formModel.supplierId]"><div class="nom"></div>Genaral Information</a></li>
+				<li class="active"><div class="nom"></div>Purchase Order Details</li>
+			</ul>
+			<ul *ngIf="add_edit=='add'">
+				<li class="done"><a (click)="_globalService.setTab(tabIndex,'/suppliers/add')" [routerLink]="['/suppliers/add']"><div class="nom"></div>Genaral Information</a></li>
+				<li class="active"><div class="nom"></div>Purchase Order Details</li>
+			</ul>
+			<div class="clear"></div>
+	  	</div>
+	  	<div class="clear"></div>		  
+		<button mat-icon-button [matMenuTriggerFor]="columns" mdTooltip="Show Columns"  class="btn-pink-active"><mat-icon  class="icon-columns"></mat-icon></button>
+      	<mat-menu #columns="matMenu" multiple [overlapTrigger]="false" prevent-close>
+	         <mat-list-item (click)="$event.stopPropagation()" *ngFor="let col of cols"><mat-checkbox id="{{col.field}}" aria-label="Checkbox 1" [(ngModel)]="col.show" (change)="updateGrid(0)">{{col.title}}</mat-checkbox></mat-list-item>
+	        <button mat-raised-button class="btn-pink" (click)="updateGrid(1)">Set Default</button>
+      	</mat-menu>
+            
+        <button mat-icon-button mdTooltip="Reload" class="btn-pink-active" (click)="generateGrid(1,'','','','')"><mat-icon  class="icon-refresh"></mat-icon></button>
+      	<div class="search">
+            <mat-icon  class="icon-search"></mat-icon>
+            <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(1,1,'',filter,search.value)">
+        </div>
+	  	<div class="clear"></div>
+	 </div>
+	 <div class="action-box">
+	    <label> {{bulk_ids.length}} Selected  (out of all {{config.currentPageCount}}) </label>
+	    <button mat-button [routerLink]="['/purchase_order/view/'+individualRow.id+'']" *ngIf="bulk_ids.length==1 && permission.view=='Y'" (click)="globalService.addTab('viewpurchaseorder','/purchase_order/view/'+individualRow.id+'','View Purchase Order',parentId)"><mat-icon  class="icon-search"></mat-icon>View</button>
+	    <!-- ///////////Edit////////////// -->
+	    <button mat-button [routerLink]="['/purchase_order/grn/'+individualRow.id+'']" *ngIf="bulk_ids.length==1 && permission.edit=='Y' && show_btn.edit && (individualRow.status=='GRN Pending' || individualRow.status=='Received Partial')" (click)="globalService.addTab('purchaseordergrn','/purchase_order/grn/'+individualRow.id+'','Purchase Order GRN',parentId)"><mat-icon  class="icon-edit"></mat-icon>{{individualRow.status=='Received Partial' ? 'Edit GRN' : 'Start GRN'}}</button>
+
+	   <!--  <button mat-button *ngIf="bulk_ids.length==1 && permission.edit=='N' && show_btn.edit" (click)="dialogsService.alert('Permission Error', 'You have no permission to edit!')"><mat-icon  class="icon-edit"></mat-icon>Edit GRN</button> -->
+
+	    <button *ngIf="bulk_ids.length==1 && permission.block=='Y' && (individualRow.status=='Draft' || individualRow.status=='Shipped') && isManager!='Suppliers'" mat-button [matMenuTriggerFor]="changeStatus"><mat-icon  class="icon-fast-delivery"></mat-icon>Change Status</button>
+
+	    <button *ngIf="bulk_ids.length==1 && permission.block=='Y' && individualRow.status=='PO Sent' && (isManager=='Suppliers' || isSuperAdmin == 'Y')" mat-button [matMenuTriggerFor]="changeStatus"><mat-icon  class="icon-fast-delivery"></mat-icon>Change Status</button>
+
+	    <mat-menu #changeStatus="matMenu">
+	      <button mat-menu-item *ngIf="individualRow.status=='Draft'" (click)="changePoStatus(individualRow.id,'PO Sent')">PO Sent</button>
+	      <button mat-menu-item *ngIf="individualRow.status=='PO Sent'" (click)="changePoStatus(individualRow.id,'Shipped')">Shipped</button>
+	      <button mat-menu-item *ngIf="individualRow.status=='Shipped' && (isSuperAdmin == 'Y' || individualRow.createdby == userId)" (click)="changePoStatus(individualRow.id,'GRN Pending')">Received - GRN Pending</button>
+	      <button mat-menu-item *ngIf="individualRow.status=='Draft'" (click)="changePoStatus(individualRow.id,'Cancel')">Cancel</button>
+	    </mat-menu>
+
+	    <button mat-icon-button  class="white-ripple pull-right"  (click)="generateGrid(0,'','','','')"><mat-icon  class="icon-close"></mat-icon></button>
+  	</div> 
+	<div class="clear40"></div>
+	<div class="body-part">	
+	  	<div class="table-list">
+          	<table>
+	            <tr>
+	              <th class="check-select">
+	                <mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+	              </th>
+	              <ng-container *ngFor="let col of cols">
+	                <th *ngIf="col.show == 1" class="short" (click)="generateGrid(0,1,col.field,filter,search.value)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span></th>
+	              </ng-container>
+	              
+	            </tr>
+	            <tr [class.chec]="row.selected"  *ngFor="let row of result_list">
+	                <td>
+	                  <mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+	                </td>
+	               <ng-container *ngFor="let col of cols">
+	                  <td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+	                    <span [ngClass]="(col.field=='status')?'status-box':''" [class.pendings]="row.status=='Draft'" [class.processing]="row.status == 'PO Sent'" [class.shipped]= "row.status == 'Shipped'" [class.approval]="row.status == 'GRN Pending'" [class.delivered]="row.status == 'Received Full'" [class.partial-refund]="row.status == 'Received Partial'">
+	<!-- 
+	                       [class.pendings]="row.status=='PO Sent'" [class.shipped]="row.status=='Shipped' || row.status=='GRN Pending' || row.status=='Received Full' || row.status=='Received Partial'" [class.pendings]="row.status=='Cancel'" -->
+	                      <ng-container *ngIf="col.field_type=='p'">
+	                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}   
+	                      </ng-container>
+	                      <ng-container *ngIf="col.field_type!='p'">
+	                        {{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}   
+	                      </ng-container>
+	                    </span>
+	                  </td>
+                </ng-container>
+	                
+	            </tr>
+              	<tr *ngIf="pagination.total_page==0">
+                	<td [attr.colspan]="colSpanCount" align="center">No records found</td>
+              	</tr>
+        	</table>
+      	</div>	
+
+      	<div class="pagination-box" *ngIf="pagination.total_page>1">
+          	<span *ngFor="let list of total_list | paginate: config"></span>
+            <pagination-template #p="paginationApi" [id]="config.id"  (pageChange)="generateGrid(0,$event,'',filter,search.value)" [maxSize]="maxSize">
+              	<ul class="pagination">
+                  <li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+                      <a  (click)="p.previous()"><span class="icon-left"></span></a>
+                  </li>
+                  <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                      <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                          <span>{{ page.label }}</span>
+                      </a>
+                      <a *ngIf="p.getCurrent() === page.value">
+                          <span>{{ page.label }}</span>
+                      </a>
+                  </li>
+                  <li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+                      <a  (click)="p.next()"><span class="icon-right"></span></a>
+                  </li>
+              </ul>
+      		</pagination-template>
+      	</div>
+    	<div class="clear"></div>
+	  	
+	</div>
+</section>

@@ -1,0 +1,69 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="listing_container">
+               
+                <div class="list_right_section details details_one">
+                    
+                    <div class="details_topsml_menu">
+                        <ul>
+                            <li (click)="navigate(0)"><a href="javascript:void(0)">Home /</a></li>
+                            <li (click)="navigate(1)"><a href="javascript:void(0)">My Account /</a></li>
+                            <li><a href="javascript:void(0)">Save List</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart_outer">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                              <app-left-panel-profile [activatedMenu] = "'save-list'"></app-left-panel-profile>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <div class="cartbox">
+                                  <div class="row">
+                                      <div class="col-12 col-md-12">
+                                        <div class="head">Save List</div>
+                                      </div>
+                                      <div class="orderhistory_table_wrap wishlist">
+                                        <table cellpadding="" cellspacing="">
+                                          <tr>
+                                            <th>Name</th>
+                                            <th>ITEMS</th>
+                                            <th>CREATED</th>
+                                            <th>ACTION</th>
+                                          </tr>
+                                          <ng-container *ngIf="saveListData && saveListData.length > 0">
+                                          <tr *ngFor="let item of saveListData; let i=index">
+                                            <td deta-th="NAME" style="cursor:pointer;">{{item['savelist_name']}}</td>
+                                            <td deta-th="AMOUNT">{{item['count']}}</td>
+                                            <td deta-th="ORDER DATE & TIME">{{item['created']| date : 'shortDate'}}</td>
+                                            <td deta-th="ACTION">
+                                              <div class="activiti_icn">
+                                              <a (click)="delete_item(item['id'])"><span class="icon-trash"></span></a>
+                                              <a><span class="icon-edit"></span></a>
+                                             </div>
+                                            </td>
+                                          </tr>
+                                          </ng-container>
+                                        </table>
+                                        <div style="text-align:center;" *ngIf="saveListData && saveListData.length == 0 && !isProcessing">
+                                          <p >No record found</p>
+                                        </div>
+                                      </div> 
+                                  </div> 
+                                </div>
+                           </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<!-- --- listing middle --- -->
+
+
+
+

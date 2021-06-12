@@ -1,0 +1,436 @@
+<section class="right-part filter-pad addall_page">
+  	<form #basicinfoForm="ngForm" novalidate (ngSubmit)="basicinfoForm.valid && addEditBasicInfo(basicinfoForm)" enctype="multipart/form-data">
+	  	<input type="hidden" name="categoryId" [(ngModel)]="formModel.categoryId">
+	  	<div class="topheading">
+		  	<h1>Category Setup
+			  	<div class="btn-header hidden-xs">
+			  		<button type="submit" mat-raised-button class="btn-main">Continue</button>
+		          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+			  	</div>
+			  	<div class="clear"></div>
+		  	</h1>
+	  	</div>
+	  	<div class="filter">
+		  	<div class="stap">
+		  		<ul *ngIf="formModel.categoryId>0 && add_edit=='edit'">
+					<li class="active"><div class="nom"></div>Basic Info</li>
+					<li><a (click)="_globalService.setTab(tabIndex,'/category/edit/'+formModel.categoryId+'/step2')" [routerLink]="['/category/edit/'+formModel.categoryId+'/step2']"><div class="nom"></div>Additional Information</a></li>
+		  		</ul>
+			  	<ul *ngIf="add_edit=='add'">
+					<li class="active"><div class="nom"></div>Basic Info</li>
+					<li><div class="nom"></div>Additional Information</li>
+			  	</ul>
+			  	<div class="clear"></div>
+		  	</div>
+		</div>
+		<div class="clear"></div>
+		<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+			<div class="box">
+				<div class="fixed-width">
+					<div class="">
+						<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+						<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-4">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Category Name</mat-label>
+											<input matInput placeholder="Category Name" required #categoryName="ngModel"  name="categoryName" [(ngModel)]="formModel.name" pattern="^(?!\s*$|\s).*$" (change)="createSlug(categoryName.value)">
+											<mat-error *ngIf="categoryName.errors && categoryName.errors.required">
+												This is a <strong>required</strong> field
+											</mat-error>
+											<mat-error *ngIf="categoryName.errors && categoryName.errors.pattern">
+												White space is not allowed at beginning.
+											</mat-error>
+										</mat-form-field>
+									</div>
+									<div class="col-md-4">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Description</mat-label>
+											<input matInput placeholder="Description" #categoryDesc="ngModel"  name="categoryDesc" [(ngModel)]="formModel.description" pattern="^(?!\s*$|\s).*$">
+										</mat-form-field>
+									</div>
+									<div class="col-md-4">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Display Order</mat-label>
+											<input matInput placeholder="Display Order"  #categoryOrder="ngModel"  name="categoryOrder" [(ngModel)]="formModel.display_order" pattern="[0-9]+">
+											<mat-error *ngIf="categoryOrder.errors && categoryOrder.errors.pattern">
+												This is not a <strong>valid</strong> display Order, only numeric values are allowed.
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>
+								<div class="row" *ngFor="let lang of all_languages">
+									<div class="col-md-6">
+										<mat-form-field class="md-block" appearance="outline">
+										<mat-label>Category Name ({{ lang.name}})</mat-label>
+											<input matInput placeholder="Category Name ({{ lang.name}})" #categoryName{{lang.lang_code}}="ngModel"  name="categoryName{{lang.lang_code}}" [(ngModel)]="formModel['name_'+lang.lang_code]" >
+											
+										</mat-form-field>
+									</div>
+									<div class="col-md-6">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Description ({{ lang.name}})</mat-label>
+											<textarea matInput placeholder="Description" #categoryDesc{{lang.lang_code}}="ngModel"  name="categoryDesc{{lang.lang_code}}" [(ngModel)]="formModel['description_'+lang.lang_code]"></textarea>
+										</mat-form-field>
+									</div>
+								</div>
+							<div class="row">							
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-sm-6">
+											<section class="smllable">
+												<label class="example-margin">Parent Category <span class="error">*</span>:</label>
+											</section>
+										</div>
+										<div class="col-sm-6">
+											<mat-radio-group #categoryIsParent="ngModel" name="categoryIsParent" [(ngModel)]="formModel.is_parent" required>
+												<mat-radio-button class="example-margin my-1" value="Y">Yes</mat-radio-button>
+												<mat-radio-button class="example-margin my-1" value="N">No</mat-radio-button>
+											</mat-radio-group>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-sm-6">
+											<section class="smllable">
+												<label class="example-margin">Display in mobile <span class="error">*</span>:</label>
+											</section>
+										</div>
+										<div class="col-sm-6">
+											<mat-radio-group #categoryMobDisplay="ngModel" name="categoryMobDisplay" [(ngModel)]="formModel.display_mobile_app" required>
+												<mat-radio-button class="example-margin my-1" value="Y">Yes</mat-radio-button>
+												<mat-radio-button class="example-margin my-1" value="N">No</mat-radio-button>
+											</mat-radio-group>
+										</div>
+									</div>
+								</div>
+									<!-- <div class="col-md-6" *ngIf="warehouse_id==''"> -->
+										<!-- <mat-form-field class="example-chip-list" appearance="outline">
+											<mat-label>Choose locations</mat-label>
+											<mat-chip-list #chipList aria-label="Fruit selection">
+												<mat-chip *ngFor="let wareHouse of selectedWareHouseList" [selectable]="selectable" [removable]="removable"
+												 (removed)="remove(wareHouse.id)">
+													{{wareHouse.name}}
+													<mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+												</mat-chip>
+												<input placeholder="New Warehouse" #fruitInput [formControl]="wareHouseCtrl" [matChipInputFor]="chipList"
+												 [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+												 (matChipInputTokenEnd)="add($event)">
+											</mat-chip-list>
+											<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+												<mat-option *ngFor="let wareHouse of allWareHouseList" [value]="wareHouse['id']">
+													{{wareHouse['name']}}
+												</mat-option>
+											</mat-autocomplete>
+										</mat-form-field> -->
+										<!-- <ng-select [items]="all_WareHouse_List"
+											[multiple]="true"
+											placeholder="Choose locations"
+											bindLabel="name" bindValue="id"
+											#warehouseID="ngModel" name="warehouseID" [(ngModel)]="default_warehouse"
+										>
+										<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+												<div class="ng-value" *ngFor="let item of items | slice:0:1">
+														<span class="ng-value-label">{{item.name}}</span>
+														<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+												</div>
+												<div class="ng-value" *ngIf="items.length > 1">
+														<span class="ng-value-label">{{items.length - 1}} more...</span>
+												</div>
+										</ng-template>
+										</ng-select> -->
+									<!-- </div> -->
+								<!-- <div class="col-md-6">
+									<div class="mandatory-select">
+										<mat-form-field appearance="outline">
+										<mat-label>Applicable IMEI</mat-label>
+											<mat-select required placeholder="Applicable IMEI" #categoryImei="ngModel" name="categoryImei" [(ngModel)]="formModel.applicable_imei">
+											<mat-option  value="N">No</mat-option>
+												<mat-option  value="Y">Yes</mat-option>
+										</mat-select>
+										<mat-error *ngIf="categoryImei.errors && categoryImei.errors.required && (categoryImei.dirty || categoryImei.touched || basicinfoForm.submitted)">
+												This is a <strong>required</strong> field
+										</mat-error>
+										</mat-form-field>
+										</div>
+								</div> -->
+							</div>
+
+								<!-- <div class="row">
+									<div class="col-md-6">
+										<div  class="md-block">
+										<mat-form-field appearance="outline">
+										<mat-label>Customer Group</mat-label>
+											<mat-select placeholder="Customer Group" #categoryCustomergrp="ngModel" name="categoryCustomergrp" [(ngModel)]="formModel.customer_group_id" multiple>
+											<mat-option *ngFor="let customergrp of customergrp_list" [value]="customergrp.id">{{customergrp.name}}</mat-option>
+										</mat-select>
+										</mat-form-field>
+									</div>
+								</div>
+								</div> -->
+								<div class="clear20"></div>
+							<!-- 	<div class="boxs" accordianBox>
+									<div class="box-header"> Marketplace Mapping <span class="acc_icon icon-minus"></span> </div>
+									<div class="box-body">
+										<ng-container>
+											<div class="row" *ngFor="let item of marketplace_categories; let index=index; let last=last;">
+											<div class="col-xs-10 col-sm-5">
+												<div class="mandatory-select">
+													<mat-form-field>
+													<mat-select placeholder="Mapping Channel" #marketplace="ngModel" name="marketplace{{index}}" [(ngModel)]="item.channel">
+														<mat-option *ngFor="let channel of channel_list" [value]="channel.id" (change)="update($event.target.value, i, $event.target.options.selectedIndex)">{{channel.name}}</mat-option>
+													</mat-select>
+												</mat-form-field>
+												</div>
+											</div>
+											<div class="col-xs-2 col-sm-1  col-sm-push-6">
+												<button type="button" class="margin-auto20" mat-icon-button (click)="removeRow(index)" *ngIf="marketplace_categories.length>1 && index!=0"><mat-icon class="icon-close"></mat-icon></button>
+											</div>
+											<div class="col-xs-10 col-sm-5 col-sm-pull-1">
+												<mat-form-field (click)="ChooseMarketplaceCat(item.channel,item,index)">
+												<mat-select placeholder="With Category" #categorymarketplace="ngModel" class="abc" name="categorymarketplace{{index}}" [(ngModel)]="item.category_channel" disabled>
+													<mat-option *ngFor="let category of marketplace_category_list[index] ;let i = index" [value]="category.id" selected="true" >{{category.category_name}}</mat-option>
+												</mat-select>
+											</mat-form-field>
+												<i class="icon-calendar" matSuffix (click)="ChooseMarketplaceCat(item.channel,item,index)"></i>
+											</div>
+											
+											<hr class="visible-xs clear">
+											<div class="col-sm-12" *ngIf="last">
+												<button type="button" class="margin-auto20 btn-pink" mat-mini-fab (click)="addRow()"><i class="icon-add"></i></button>
+												<label class="ml-1 text-pink text-bold" (click)="addRow()">Add More</label>
+											</div>
+										</div>
+									</ng-container>
+								</div>
+								</div>   --> 
+								
+								<div class="boxs active" accordianBox *ngIf="formModel.is_parent=='N'">
+									<div class="box-header" style="cursor: pointer;"> Select Category <span class="acc_icon icon-minus"></span> </div>
+									<div class="box-body">
+									<div class="row pb">
+										<div class="col-md-6">
+											<!-- <div class="row">
+												<div class="col-12 col-md-6">
+													<section class="smllable">
+														<label class="example-margin">Is this a Parent Category <span class="error">*</span>:</label>
+													</section>
+												</div>
+												<div class="col-12 col-md-6">
+													<mat-radio-group #categoryIsParent="ngModel" name="categoryIsParent" [(ngModel)]="formModel.is_parent" required>
+														<mat-radio-button class="example-margin my-1" value="Y">Yes</mat-radio-button>
+														<mat-radio-button class="example-margin my-1" value="N">No</mat-radio-button>
+													</mat-radio-group>
+												</div>
+											</div> -->
+											<div class="row">
+												<div class="col-12 col-md-12">
+													<mat-error *ngIf="categoryIsParent.errors && categoryIsParent.errors.required && (categoryIsParent.dirty || categoryIsParent.touched || basicinfoForm.submitted)">
+														This is a <strong>required</strong> field
+													</mat-error>
+												</div>
+											</div>
+										</div>
+										
+									</div>	
+									<ng-container *ngIf="formModel.is_parent=='N'">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="mandatory-select">
+													<mat-form-field appearance="outline">
+													<mat-label>Parent Category</mat-label>
+													<mat-select required placeholder="Parent Category" #categoryparent="ngModel" name="categoryparent" [(ngModel)]="formModel.category_1" (selectionChange)="get_child_categories(formModel.category_1,1,1)">
+														<mat-option *ngFor="let category of category_list" [value]="category.id">{{category.name}}</mat-option>
+													</mat-select>
+													<mat-error *ngIf="categoryparent.errors && categoryparent.errors.required && (categoryparent.dirty || categoryparent.touched || basicinfoForm.submitted)">
+															This is a <strong>required</strong> field
+													</mat-error>
+													</mat-form-field>
+													</div>
+											</div>
+											<div class="col-md-4">
+												<mat-form-field appearance="outline">
+												<mat-label>Child Category</mat-label>
+												<mat-select placeholder="Child Category" #categorychild="ngModel" name="categorychild" [(ngModel)]="formModel.category_2" (selectionChange)="get_child_categories(formModel.category_2,2,1)">
+													<mat-option *ngFor="let category of child_category_list" [value]="category.id">{{category.name}}</mat-option>
+												
+												</mat-select>
+												</mat-form-field>
+											</div>
+											<div class="col-md-4">
+												<mat-form-field appearance="outline">
+												<mat-label>Child Category</mat-label>
+												<mat-select placeholder="Child Category" #categorychild2="ngModel" name="categorychild2" [(ngModel)]="formModel.category_3">
+													<mat-option *ngFor="let category of child_child_category_list" [value]="category.id">{{category.name}}</mat-option>
+												</mat-select>
+												</mat-form-field>
+											</div>
+										</div>
+									</ng-container>	
+								</div>
+								</div>
+								<!-- Start of show in navigation -->
+								<!-- <div class="boxs" accordianBox>
+									<div class="box-header" style="cursor: pointer;">Show in Navigation<span class="acc_icon icon-addsvg"></span> </div>
+									<div class="box-body">
+									<div class="row pb">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-12 col-md-6">
+													<section class="smllable">
+														<label class="example-margin">Do you want to show this category in Navigation?<span class="error">*</span>:</label>
+													</section>
+												</div>
+												<div class="col-12 col-md-6">
+													<mat-radio-group #show_navigation="ngModel" name="show_navigation" [(ngModel)]="formModel.show_navigation" required>
+														<mat-radio-button class="example-margin my-1" value="Y">Yes</mat-radio-button>
+														<mat-radio-button class="example-margin my-1" value="N">No</mat-radio-button>
+													</mat-radio-group>
+												</div>
+											</div>
+										</div>
+									</div>	
+									<ng-container *ngIf="formModel.show_navigation=='Y'">
+										<div class="row">
+											<div class="warehouse-list-container">
+												<mat-form-field class="example-chip-list" appearance="outline">
+													<mat-label>Applied for</mat-label>
+														<mat-chip-list #chipList aria-label="Fruit selection">
+															<mat-chip *ngFor="let wareHouse of selectedWareHouseList" [selectable]="selectable"
+																			[removable]="removable" (removed)="remove(wareHouse.id)">
+																{{wareHouse.name}}
+																<mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+															</mat-chip>
+															<input placeholder="New Warehouse"
+																		#fruitInput
+																		[formControl]="wareHouseCtrl"
+																		[matChipInputFor]="chipList"
+																		[matAutocomplete]="auto"
+																		[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+																		[matChipInputAddOnBlur]="addOnBlur"
+																		(matChipInputTokenEnd)="add($event)">
+														</mat-chip-list>
+															<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+																<mat-option *ngFor="let wareHouse of filteredWareHouse | async" [value]="wareHouse['id']">
+																	{{wareHouse['name']}}
+																</mat-option>
+															</mat-autocomplete>
+													</mat-form-field>
+											</div>
+										</div>
+									</ng-container>
+								</div>
+								</div> -->
+
+								<!-- End of show in navigation  -->
+							</div>
+						</div>
+						
+						<div class="boxs" accordianBox>
+							<div class="box-header" style="cursor: pointer;"> Search Engine Optimization (SEO) <span class="acc_icon icon-addsvg"></span> </div>
+							<div class="box-body">
+							<div class="row">
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width" appearance="outline">
+										<mat-label>Page Url</mat-label>
+										<!-- <span matPrefix>{{category_base}}</span> -->
+										<input  matInput placeholder="Page Url" type="" #categoryPageurl="ngModel"  name="categoryPageurl" [(ngModel)]="formModel.category_url" (change)="chopSlug(formModel.category_url_temp)" readonly>
+									</mat-form-field>
+								</div>
+								<div class="col-md-6">
+									<mat-form-field class="md-block" appearance="outline">
+										<mat-label>Page Title</mat-label>
+											<input matInput placeholder="Page Title" #categoryPagetitle="ngModel"  name="categoryPagetitle" [(ngModel)]="formModel.page_title">
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+									<div class="col-md-6">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Meta Keyword</mat-label>
+											<!-- <textarea matInput placeholder="Meta Keyword" #categoryMetakey="ngModel"  name="categoryMetakey" [(ngModel)]="formModel.meta_keywords"></textarea> -->
+											<input matInput placeholder="Meta Keyword" #categoryMetakey="ngModel"  name="categoryMetakey" [(ngModel)]="formModel.meta_keywords">
+											
+											<mat-hint>Please insert comma (,) for separate meta key word</mat-hint>
+										</mat-form-field>
+									</div>
+									<div class="col-md-6">
+										<mat-form-field class="md-block" appearance="outline">
+											<mat-label>Meta Description</mat-label>
+											<!-- <textarea matInput placeholder="Meta Description" #categoryMetadesc="ngModel"  name="categoryMetadesc" [(ngModel)]="formModel.meta_description"></textarea> -->
+											<input matInput placeholder="Meta Description" #categoryMetadesc="ngModel"  name="categoryMetadesc" [(ngModel)]="formModel.meta_description">										
+										</mat-form-field>
+								</div>
+							</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="photo-up-box" style="">
+									<div class="before" [hidden]="formModel.banner_image">
+										<button type="button" mat-raised-button class="btn-main" (click)="openImagePop('banner_image')"><i class="icon-img mr-1"></i>Upload Banner Image</button>
+									<br><br>
+									<p>Image must be less than 2MB and height and width greater than 150 px</p>
+									</div>
+									<div class="after" *ngIf="formModel.banner_image">
+										<img [src]="formModel.banner_image.url" style="max-height: 200px;">
+										<div *ngIf="formModel.banner_image" (click)="delImg(formModel.categoryId,'formModel','banner_image',0)" class="photo-del">
+											<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="photo-up-box" style="">
+									<div class="before" [hidden]="formModel.image">
+										<button type="button" mat-raised-button class="btn-main" (click)="openImagePop('image')"><i class="icon-img mr-1"></i>Upload Category Image</button>
+									<br><br>
+									<p>Image must be less than 2MB and height and width greater than 150px</p>
+									</div>
+									<div class="after" *ngIf="formModel.image">
+										<img [src]="formModel.image.url" style="max-height: 200px;">
+										<div *ngIf="formModel.image" (click)="delImg(formModel.categoryId,'formModel','image',0)" class="photo-del">
+											<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="photo-up-box" style="">
+									<div class="before" [hidden]="formModel.thumb_image">
+										<button type="button" mat-raised-button class="btn-main" (click)="openImagePop('thumb_image')"><i class="icon-img mr-1"></i>Upload Icon Image</button>
+									<br><br>
+									<p>Image must be less than 2MB and height and width greater than 150px</p>
+									</div>
+									<div class="after" *ngIf="formModel.thumb_image">
+										<img [src]="formModel.thumb_image.url" style="max-height: 200px;">
+										<div *ngIf="formModel.thumb_image" (click)="delImg(formModel.categoryId,'formModel','thumb_image',0)" class="photo-del">
+											<button type="button" mat-icon-button class="btn-pink"><mat-icon class="icon-delete"></mat-icon></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				  	</div>
+			  	</div>
+		  	</div>
+			<div class="clear"></div>
+			 <!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs">
+				<button type="submit" mat-raised-button class="btn-main">Continue</button>
+				<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">
+					Cancel
+				</button>
+			</div> 
+			<div class="clear"></div> 
+			<!-- ///////////////Buttons//// -->
+		</div>
+	</form>
+</section>
+
+

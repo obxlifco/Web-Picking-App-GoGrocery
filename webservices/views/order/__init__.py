@@ -1,0 +1,13 @@
+#-------------------Orders
+from webservices.views.order.Customer import CustomerAddressSetPrimary,CustomerAddressDelete,CustomerList,CustomerEdit,CustomerAdd,CustomerAddressSetup,CustomerAddressFetch,CustomerOrderList,CustomerInvoiceList
+from webservices.views.order.Preset import PresetSetup,PresetListView,Presetdata,ServicesList,PackegeList
+from webservices.views.order.ShippingMaster import ShippingMaster,ShippingMasterList
+from webservices.views.order.Order import OrderDelivery,InvoiceList,OrdersLoadView,OrderInfoViewSet,Paymentmethodtype,Promotionscoupon,FindCustomer,GetCustomerInfo,OrdersLoadView,OrderList,AssignToWarehouse,UpdateOrderStatus,GetTags,ManageTags,AssignTag,GenerateOrderId,PaymentGatewayList,WarehouseWiseProduct,ProductDiscountCalculation,SaveOrder, get_delivery_slot, GetAvailablePromo, ViewOrder, EditOrder, DeleteOrder, GetOrderDeliverySlot, OrderExport, test, testorder,OrderActivity,OrdersLoadViewProduct,TimeLine, ManageOrderDetails, LoyaltyPointsDetails
+from webservices.views.order.AutoResponder import Emailnotification,EmailnotificationList,AutoresponderViewSet
+from webservices.views.order.Courier import CourierAdd,GetCourierInfo,ViewAwbDetails,AddAwbNumber
+from webservices.views.order.CustomerGroups import Customers,CustomerGroup,CustomerGroupList
+from webservices.views.order.Shipment import Shipment,ShipmentList,PickList,Invoice,CreatePicklist,InvoicePrint,ShipingManifest,CreateShipingManifest,PrintManifest,print_barcode, OrderlistByPicklist, search_picked_products, add_crates, delete_crates, get_all_crates, get_grn_order_details, get_order_products_info, OrderDetailsByPicklistid, grn_save_as_draft, get_grn_order_details_by_order_id, grn_complete,DeliveryPlanner,AssignVehicle,CreateAssignVehicle,RemoveOrderShipment,DeleteShipment,DeletePicklist,make_planner,saveSortBydistance,PicklistPrint,getGrnProductsInfo,saveEditGRN,saveEditPrice,saveSubstituteProduct,AssignVehicleReturn,CreateAssignVehicleReturn, Invoice_new,Invoice_si
+# OrderDetailsByPicklistid, OrderDetailsByShipmentOrder
+from webservices.views.order.OrderReturn import OrderReturnRequest,OrderReturnApprove,ViewOrderReturn,CancelOrderRefund,RefundOrders
+from webservices.views.order.Loyalty import LoyaltySet,LoyaltyConditions,LoyaltyList
+from webservices.views.order.Report import testreport

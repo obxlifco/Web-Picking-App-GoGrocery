@@ -1,0 +1,18 @@
+<section class="subcribe_row">
+      <div class="container_cuswrap">
+          <div class="subcribe_inner">
+              <p>{{widget_data.heading_text}}</p>
+              <div class="subscribebox">
+                  <div class="inputbox">
+                      <input type="email" [(ngModel)]="subscribeEmail" name="subscribeEmail" #subscribeEmailRef="ngModel" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                      <div class="error" [hidden]="subscribeEmailRef.valid || subscribeEmailRef.untouched" style="padding-top: 10px;">
+                        <!-- <span style="color: red;" *ngIf="subscribeEmailRef.errors && subscribeEmailRef.errors.required">Plese provide your email address</span> -->
+                        <span style="color: red;" *ngIf="subscribeEmailRef.errors && subscribeEmailRef.errors.pattern">Plese provide a valid email</span>
+        
+                      </div>
+                  </div>
+                  <button class="bubcribebtn" (click)="subscribeNewsLetter()">subscribe</button>
+              </div>
+          </div>
+      </div>    
+</section>

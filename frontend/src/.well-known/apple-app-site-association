@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [
+      
+    ],
+    "details": [
+      {
+        "appID": "LG2FQUKLHD.com.go-grocery.GoGrocery",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
+}

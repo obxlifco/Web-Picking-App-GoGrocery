@@ -1,0 +1,207 @@
+<section class="right-part">
+    <div class="topheading">
+      <h1>Purchase Order
+		<div class="btn-header">
+			<button type="button" mat-raised-button class="btn-main" (click)="_globalService.deleteTab(tabIndex,parentId)">Continue</button>
+          	<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		  	<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+	  	</div>
+        <div class="clear"></div>
+      </h1>
+    </div>
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+			<div class="row same-height">
+				<div class="col-md-6">
+					<div class="box">
+						<div class="heading">Purchase Order info</div>
+						<ul class="box-list">
+							<li>
+								<div class="text-heading">Order Number</div>
+								<div class="num-heading">{{purchase_order.purchase_order_id}}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Order Date</div>
+								<div class="num-heading">{{ purchase_order.order_date | date: 'shortDate' }}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Order Status</div>
+								<div class="num-heading">{{ (purchase_order.status)?purchase_order.status:'Draft' }}</div>
+								<div class="clear"></div>
+							</li>
+							<li *ngIf="purchase_order.received_id && purchase_order.received_id!=''">
+								<div class="text-heading">Receipt Number</div>
+								<div class="num-heading">{{ purchase_order.received_id }}</div>
+								<div class="clear"></div>
+							</li>
+							<li *ngIf="purchase_order.received_date && purchase_order.received_date!=''">
+								<div class="text-heading">Received Date</div>
+								<div class="num-heading">{{ purchase_order.received_date }}</div>
+								<div class="clear"></div>
+							</li>
+							<li *ngIf="purchase_order.ip_address">
+								<div class="text-heading">Placed from IP</div>
+								<div class="num-heading">{{ purchase_order.ip_address }}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Store Name</div>
+								<div class="num-heading">{{ selected_warehouse.name }}</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box">
+						<div class="heading">Vendor info</div>
+						<ul class="box-list">
+							<li>
+								<div class="text-heading">Name</div>
+								<div class="num-heading">{{ selected_supplier.name }}</div>
+								<div class="clear"></div>
+							</li>
+							<li *ngIf="selected_supplier.phone">
+								<div class="text-heading">Phone Number</div>
+								<div class="num-heading"> {{(selected_supplier.phone)?selected_supplier.phone:' - '}}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Email</div>
+								<div class="num-heading">{{selected_supplier.email}}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Address</div>
+								<div class="num-heading">
+									{{selected_supplier.company_name }} <br/>
+									{{selected_supplier.address_one}} <br/> 
+									{{selected_supplier.address_two}} <br/>
+									{{selected_supplier.city }} {{ selected_supplier.zip }}
+								</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="box">
+						<div class="heading">Ship to address</div>
+						<ul class="box-list">
+							<li>
+								<div class="text-heading">Account Information</div>
+								<div class="num-heading">
+									{{selected_warehouse.contact_person}}<br/>
+									{{ selected_warehouse.email }}
+								</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Shipping Information</div>
+								<div class="num-heading">
+									{{ selected_warehouse.address }} <br/>
+									{{ selected_warehouse.city }} {{ selected_warehouse.zipcode }}
+								</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box">
+						<div class="heading">Shipping method</div>
+						<ul class="box-list">
+							
+							<li>
+								<div class="text-heading">Shipping Option</div>
+								<div class="num-heading">{{ (selected_ship.name)?selected_ship.name:' - ' }}</div>
+								<div class="clear"></div>
+							</li>
+							<li>
+								<div class="text-heading">Shipping Charge</div>
+								<div class="num-heading">{{ purchase_order.shipping_cost }}</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="box">
+						<div class="heading">Payment method</div>
+						<ul class="box-list">
+							
+							<li>
+								<div class="text-heading">Payment method</div>
+								<div class="num-heading">{{ (selected_payment.name)?selected_payment.name:' - ' }}</div>
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="heading">Review Your Order</div>
+			<div class="table-list">
+	      		<table>
+					<tr>
+					  
+					  <th>SKU</th>
+					  <th>Product Name</th>
+					  <th>PO Quantity</th>
+					  <th *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'">Received Qty</th>
+					  <th *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'">Damaged Qty</th>
+					  <th *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'">Shortage Qty</th>
+					  <th align="right">Cost Per Unit {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+					  <th align="right">Gross Amount {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+					  <th align="right">Discount%</th>
+					  <th align="right">Net Amount {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}</th>
+					</tr>
+					<ng-container *ngFor="let item of purchase_order.products">
+						<tr>
+						  <td data-th="SKU">{{item.sku}}</td>
+						  <td data-th="Product Name">{{item.name}}</td>
+						  <td align="right" data-th="PO Quantity">{{item.quantity}}</td>
+						  <td align="right" *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'" data-th="Received Qty">{{item.received_quantity}}</td>
+						  <td align="right" *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'" data-th="Damaged Qty">{{item.damaged_quantity}}</td>
+						  <td align="right" *ngIf="purchase_order.status=='Grn Pending' || purchase_order.status=='Received Full' || purchase_order.status=='Received Partial'" data-th="Shortage Qty">{{item.shortage_quantity}}</td>
+						  <td align="right" data-th="Cost Per Unit">{{item.price | number: '1.2-2'}}</td>
+						  <td align="right" data-th="Gross Amount">{{item.gross_amt | number: '1.2-2'}}</td>
+						  <td align="right" data-th="Discount%">{{item.discount | number: '1.2-2'}}%</td>
+						  <td align="right" data-th="Net Amount">{{item.net_amt | number: '1.2-2'}}</td>
+						</tr>
+					</ng-container>
+			    </table>
+				<table class="price">
+					<tr>
+						<td>Subtotal {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+						<td>{{purchase_order.gross_amount | number: '1.2-2'}}</td>
+					</tr>
+					<tr>
+						<td>Shipping Cost {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+						<td>{{ purchase_order.shipping_cost | number: '1.2-2'  }}</td>
+					</tr>
+					<tr>
+						<td>Tax {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+						<td>
+							{{ purchase_order.purchase_order_tax | number: '1.2-2' }}
+						</td>
+					</tr>
+					<tr>
+						<td>Discount {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+						<td>
+							{{ purchase_order.discount_amount | number: '1.2-2' }}
+						</td>
+					</tr>
+					<tr class="total">
+						<td>Grand Total {{(supplier_currency.currency)?'('+supplier_currency.currency+')':''}}: </td>
+						<td>{{ purchase_order.net_amount | number: '1.2-2' }}</td>
+					</tr>
+				</table>
+    		</div>
+    </div>
+    <div class="clear"></div>
+</section>
+

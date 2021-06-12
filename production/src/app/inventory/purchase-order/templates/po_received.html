@@ -1,0 +1,75 @@
+<form #receiveForm="ngForm" novalidate (ngSubmit)="receiveForm.valid && poReceived(receiveForm)">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>PO Received</h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<div class="row">
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="PO Number" #po_number="ngModel" name="po_number" [(ngModel)]="formModel.purchase_order_id" disabled>
+					</mat-form-field>
+				</div>
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+					   <input readonly="readonly" matInput class="picker-input" #po_date="ngModel" name="po_date" [ngModel]="formModel.order_date | date: 'shortDate'" disabled placeholder="PO Date">
+					   <i class="icon-calendar" matSuffix></i>
+					</mat-form-field>  
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="PO Quantity" #po_qty="ngModel" name="po_qty" [(ngModel)]="formModel.total_qty" disabled>
+					</mat-form-field>
+				</div>
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="PO Amount" #po_amt="ngModel" name="po_amt" [(ngModel)]="formModel.net_amount" disabled>
+					</mat-form-field> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="Supplier Name" #po_supplier="ngModel" name="po_supplier" [(ngModel)]="formModel.supplier_name" disabled>
+					</mat-form-field>
+				</div>
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="Store Name" #po_warehouse="ngModel" name="po_warehouse" [(ngModel)]="formModel.warehouse_name" disabled>
+					</mat-form-field> 
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-md-6">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="Receipt Number" #po_receipt="ngModel" name="po_receipt" [(ngModel)]="formModel.receipt_no" required pattern="^(?!\s*$|\s).*$">
+						<mat-error *ngIf="po_receipt.errors && po_receipt.errors.required">
+					      This is a <strong>required</strong> field
+					    </mat-error>
+					    <mat-error *ngIf="po_receipt.errors && po_receipt.errors.pattern">White space is not allowed at beginning.</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-md-6">
+					<!-- <mat-form-field>
+					   <input readonly="readonly" matInput class="picker-input" #received_date="ngModel" name="received_date" [value]="formModel.received_date | date: 'shortDate'" [(ngModel)]="formModel.received_date" dateTimePicker [mode]="'popup'"  [hourTime]="'12'" name="date" placeholder="Received Date" [minMoment]="minDate" [pickerType]="'date'" disabled>
+					   <i class="icon-calendar" matSuffix></i>
+					</mat-form-field> --> 
+				</div>
+			</div>		
+			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

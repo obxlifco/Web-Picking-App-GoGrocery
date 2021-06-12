@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <!--<color name="colorAccent">#D81B60</color>-->
+    <color name="colorAccent">#98D81D</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="white">#ffff</color>
+    <color name="black">#000</color>
+    <color name="translucent">#A0000000</color>
+    <color name="nav_header_bg">#EE282F</color>
+    <color name="view_divider_clr">#E1E1E1</color>
+
+    <color name="filter_unselected">#F9F9F9</color>
+    <color name="out_of_stock">#CC5051</color>
+
+    <!-- Login page -->
+
+    <color name="signin_btn_clr">#EA1722</color>
+    <color name="app_green_clr">#509F45 </color>
+    <color name="app_red_clr">#EE282F</color>
+    <color name="sor_radio_selected_color">#ED1C24</color>
+
+    <color name="rating_green">#0B9444</color>
+
+    <color name="side_menu_rv_clr">#303030</color>
+
+    <array name="shop_by_category">
+        <item>#F96C26</item>
+        <item>#F35355</item>
+        <item>#C3386E</item>
+        <item>#2F6CA8</item>
+        <item>#3CB9E2</item>
+        <item>#3AC47B</item>
+        <item>#90B85C</item>
+        <item>#E7B13D</item>
+    </array>
+
+    <color name="earned_color">#0B9444</color>
+    <color name="redeem_color">#ED1B24</color>
+
+
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen1_green">#509F45 </color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+
+    <!--MY_ORDERS_ROW_COLOR-->
+    <color name="my_orders_row_color_failed">#ED1B24</color>
+    <color name="my_orders_row_color_unpaid">#0B9444</color>
+    <color name="my_orders_row_color_successfull">#183FAC</color>
+    <color name="my_orders_row_color_green">#0B9444</color>
+    <color name="my_orders_row_color_red">#ED1B24</color>
+    <!--MY_ORDERS_ROW_COLOR-->
+
+
+    <!--RATING Colors-->
+    <color name="worst">#EE282F</color>
+    <color name="average">#E7B13D</color>
+    <color name="good">#10893C</color>
+
+    <!--NEW UI Colors-->
+    <color name="green_new">#98D81D</color>
+    <color name="green_dark_new">#2E6B0B</color>
+    <color name="green_ass_new">#93C88D</color>
+    <color name="map_radius_new">#90DFECC5</color>
+    <color name="grey_new">#575757</color>
+    <color name="brown_new">#C32D4A</color>
+
+
+
+</resources>

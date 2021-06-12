@@ -1,0 +1,166 @@
+<section class="right-part filter-pad" ng-init="add_edit_load4(0)">
+	<div class="body-part">
+		<div class="topheading">
+			  <h1>Product Setup 
+				  <div class="btn-header">
+			  		<button mat-raised-button class="btn-main" type="submit" (click)="addEditRelatedProduct()">Continue</button>
+					<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+					<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+				  </div>
+				  <div class="clear"></div>
+			  </h1>
+		</div>
+		<div class="clear"></div>
+		<div class="filter grid">
+			<div class="stap">
+				<ul *ngIf="formModel.productId>0 && add_edit=='edit'">
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId)" [routerLink]="['/products/edit/'+formModel.productId]">
+							<div class="nom"></div>Basic Info
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step2')" [routerLink]="['/products/edit/'+formModel.productId+'/step2']">
+							<div class="nom"></div>Advanced Info
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step3')" [routerLink]="['/products/edit/'+formModel.productId+'/step3']">
+							<div class="nom"></div>Pricing
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step4')" [routerLink]="['/products/edit/'+formModel.productId+'/step4']">
+							<div class="nom"></div>Supplier
+						</a>
+					</li>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step5')" [routerLink]="['/products/edit/'+formModel.productId+'/step5']">
+							<div class="nom"></div>Collections
+						</a>
+					</li>
+					<li class="active" *ngIf="step_type==1"><div class="nom"></div>Related Products</li>
+					<li class="done" *ngIf="step_type!=1 && (step_type==2||step_type==3||step_type==4||step_type==5)"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step6')" [routerLink]="['/products/edit/'+formModel.productId+'/step6']"><div class="nom"></div>Related Products</a></li>
+					<!-- 
+					<li *ngIf="step_type==1"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Up-sells</a></li>
+					<li class="active" *ngIf="step_type==2"><a [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Up-sells</a></li>
+					<li class="done" *ngIf="step_type!=2 && (step_type==3||step_type==4||step_type==5)"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Up-sells</a></li>
+
+					<li *ngIf="step_type==2||step_type==1"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Cross-sells</a></li>
+					<li  class="active" *ngIf="step_type==3"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Cross-sells</a></li>
+					<li class="done" *ngIf="step_type!=3 && (step_type==4||step_type==5)"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Cross-sells</a></li> -->
+
+					<li *ngIf="step_type==1"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Substitute Products</a></li>
+					<li  class="active" *ngIf="step_type==2"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Substitute Products</a></li>
+					<li class="done" *ngIf="step_type!=4 && (step_type==5)"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step7')" [routerLink]="['/products/edit/'+formModel.productId+'/step7']"><div class="nom"></div>Substitute Products</a></li>
+					<!-- <li *ngIf="step_type==4||step_type==3||step_type==2||step_type==1"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Substitute Products</a></li>
+					<li class="active" *ngIf="step_type==5"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step8')" [routerLink]="['/products/edit/'+formModel.productId+'/step8']"><div class="nom"></div>Substitute Products</a></li>
+					<li class="active" *ngIf="step_type==5"><a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step9')" [routerLink]="['/products/edit/'+formModel.productId+'/step9']"><div class="nom"></div>Substitute Products</a></li> -->
+				</ul>
+				<ul *ngIf="add_edit=='add'">
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add')" [routerLink]="['/products/add']"><div class="nom"></div>Basic Info</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add/step2')" [routerLink]="['/products/add/step2']"><div class="nom"></div>Advanced Info</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add/step3')" [routerLink]="['/products/add/step3']"><div class="nom"></div>Pricing</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add/step4')" [routerLink]="['/products/add/step4']"><div class="nom"></div>Supplier</a></li>
+					  <li class="done"><a (click)="_globalService.setTab(tabIndex,'/products/add/step5')" [routerLink]="['/products/add/step5']"><div class="nom"></div>Collections</a></li>
+
+					  <li class="active" *ngIf="step_type==1"><div class="nom"></div>Related Products</li>
+					  <li class="done" *ngIf="step_type!=1 && (step_type==2 || step_type==3 || step_type==4)"><a (click)="_globalService.setTab(tabIndex,'/products/add/step6')" [routerLink]="['/products/add/step6']"><div class="nom"></div>Related Products</a></li>
+					  <li *ngIf="step_type !=2 "><div class="nom"></div>Substitute Products</li>
+					  <!-- <li *ngIf="step_type==1"><div class="nom"></div>Up-sells</li>
+					  <li class="active" *ngIf="step_type==2"><div class="nom"></div>Up-sells</li>
+					  <li class="done" *ngIf="step_type!=2 && (step_type==3||step_type==4) && formModel.productId==0"><div class="nom"></div>Up-sells</li>
+					  <li class="done" *ngIf="step_type!=2 && (step_type==3||step_type==4) && formModel.productId>0"><a (click)="_globalService.setTab(tabIndex,'/products/add/step7')" [routerLink]="['/products/add/step7']"><div class="nom"></div>Up-sells</a></li>
+
+					  <li *ngIf="step_type==2||step_type==1"><div class="nom"></div>Cross-sells</li>
+					  <li class="active" *ngIf="step_type==3"><div class="nom"></div>Cross-sells</li>
+					  <li class="done" *ngIf="step_type!=3 && (step_type==4) && formModel.productId==0"><div class="nom"></div>Cross-sells</li>
+					  <li class="done" *ngIf="step_type!=3 && (step_type==4) && formModel.productId>0"><a (click)="_globalService.setTab(tabIndex,'/products/add/step8')" [routerLink]="['/products/add/step8']"><div class="nom"></div>Cross-sells</a></li> -->
+
+					  <li class="active" *ngIf="step_type==2"><div class="nom"></div>Substitute Products</li>
+					  <li class="done" *ngIf="step_type!=4 && (step_type==5) && formModel.productId==0"><div class="nom"></div>Substitute Products</li>
+					  <li class="done" *ngIf="step_type!=3 && (step_type==5) && formModel.productId>0"><a (click)="_globalService.setTab(tabIndex,'/products/add/step7')" [routerLink]="['/products/add/step7']"><div class="nom"></div>Substitute Products</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+	        <button mat-icon-button [matMenuTriggerFor]="columns" mdTooltip="Show Columns"  class="btn-pink-active"><mat-icon  class="icon-columns"></mat-icon></button>
+              	<mat-menu #columns="matMenu" multiple [overlapTrigger]="false" prevent-close>
+                 	<mat-list-item (click)="$event.stopPropagation()" *ngFor="let col of cols"><mat-checkbox id="{{col.field}}" aria-label="Checkbox 1" [(ngModel)]="col.show" (change)="updateGrid(0)">{{col.title}}</mat-checkbox></mat-list-item>
+                	<button mat-raised-button class="btn-pink" (click)="updateGrid(1)">Set Default</button>
+              	</mat-menu>
+		        <button mat-icon-button mdTooltip="Reload" class="btn-pink-active" (click)="generateGrid(1,'','','','')"><mat-icon  class="icon-refresh"></mat-icon></button>
+		        <div class="search">
+		              <mat-icon  class="icon-search"></mat-icon>
+					  <input type="text"  placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGrid(1,1,'',filter,search.value)">
+					  <!-- <div class="search-add"><button mat-icon-button mdTooltip="Advance Search"  class="pink-ripple"><mat-icon  class="icon-down-arrow"></mat-icon></button></div> -->
+		        </div>
+            <div class="clear"></div>
+    	</div>
+		<!-- <div class="clear40"></div> -->
+    	<div class="table-list">
+      		<table>
+				<tr>
+					<th class="check-select">
+						<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+					</th>
+					<ng-container *ngFor="let col of cols">
+						<th *ngIf="col.show == 1" class="short" (click)="generateGrid(0,1,col.field,filter,search.value)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span></th>
+					</ng-container>
+				</tr>
+				<tr [class.chec]="row.selected" *ngFor="let row of result_list">
+					<td>
+						<mat-checkbox name="row.selected" id="list{{row.id}}" [checked]="row.selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+					</td>
+					<ng-container *ngFor="let col of cols">
+					    <td *ngIf="col.show == 1">
+							<span [ngClass]="col.field=='isblocked' ? (row[col.field]=='Active'?'status-box shipped':'status-box cancelled') : ''">
+								{{(col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field]}}
+							</span>
+						</td>
+					</ng-container>
+				</tr>
+				<tr *ngIf="pagination.total_page==0">
+				  	<td colspan="4" align="center">No records found</td>
+				</tr>
+			</table>
+    	</div>
+    	<div class="clear"></div>
+		<div class="pull-right" *ngIf="pagination.total_page>1">
+		    <span *ngFor="let list of total_list | paginate: config"></span>
+         	<pagination-template #p="paginationApi" [id]="config.id"  (pageChange)="generateGrid(0,$event,'',filter,search.value)" [maxSize]="maxSize">
+			    <ul class="pagination">
+			        <li class="pagination-previous" [class.disabled]="p.isFirstPage()">
+			            <a *ngIf="!p.isFirstPage()" (click)="p.previous()"><span class="icon-left"></span></a>
+			        </li>
+			        <li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+			            <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+			                <span>{{ page.label }}</span>
+			            </a>
+			            <a *ngIf="p.getCurrent() === page.value">
+			                <span>{{ page.label }}</span>
+			            </a>
+			        </li>
+			        <li class="pagination-next" [class.disabled]="p.isLastPage()">
+			            <a *ngIf="!p.isLastPage()" (click)="p.next()"><span class="icon-right"></span></a>
+			        </li>
+			    </ul>
+			</pagination-template>
+		  </div>
+		<div class="bottom_fixedpart">
+			<div class="btn-header  hidden-xs">
+				<button mat-raised-button class="btn-main" (click)="addEditRelatedProduct()">Continue</button>
+				<button mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+			<div class="btn-header left">
+				<a (click)="_globalService.setTab(tabIndex,'/products/edit/'+formModel.productId+'/step5')" [routerLink]="['/products/edit/'+formModel.productId+'/step5']" *ngIf="step_type==1">
+					Back
+				</a>
+				<a (click)="_globalService.setTab(tabIndex,'/products/add/step6')" [routerLink]="['/products/add/step6']" *ngIf="step_type==2">
+					Back
+				</a>
+			</div>
+		</div>
+		  <div class="clear"></div>
+	  </div>
+  </section>

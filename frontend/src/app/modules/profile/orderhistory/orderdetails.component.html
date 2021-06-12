@@ -1,0 +1,172 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid odetails">
+  <div class="row">
+    <div class="col-12">
+      <div class="listing_container">
+        <div class="list_right_section details">
+          <div class="cart_outer">
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-9">
+                <div class="cartbox orderdetails">
+                  <div class="head headnew">
+                    Order Details
+                  </div>
+                  <div class="top_details_wrap">
+                    <div class="row same-height">
+                      <div class="col-12 col-md-4">
+                        <div class="orderdetailsbox">
+                          <div class="innergrup">
+                            <div class="head">ORDER ID & DATE</div>
+                            <p class="inhead">{{orders.custom_order_id}} <br/>{{orders.created | date: 'MMM d, y, HH:mm'}}</p>
+
+                          </div>
+                          <div class="innergrup">
+                            <div class="head">DELIVERY DATE</div>
+                            <p class="inhead">Date : {{orders.time_slot_date | date: 'mediumDate'}}, {{orders.slot_start_time}}<br/>
+                              <!-- Time Slot : {{orders.time_slot_id}} -->
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="orderdetailsbox">
+                          <div class="innergrup">
+                            <div class="head">Billing Information.</div>
+                            <p class="inhead">{{orders.custom_order_id}} <br> 
+                              <!-- {{orders.created | date: 'medium'}} -->
+                            </p>
+                            <p>
+                              {{orders.billing_street_address}} <br>
+                              <!-- <span *ngIf="orders.billing_street_address1!=''"><br/>{{orders.billing_street_address1}}<br/></span> -->
+                              {{orders.billing_city}} - {{orders.billing_postcode}}<br/>
+                              {{orders.billing_state_name}}<br/>
+                              {{orders.billing_phone}}
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="orderdetailsbox">
+                          <div class="innergrup">
+                            <div class="head">Shipping Information</div>
+                            <p class="inhead">{{orders.custom_order_id}} <br/> 
+                              <!-- {{orders.created | date: 'medium'}} -->
+                            </p>
+                            <p>
+                              {{orders.delivery_street_address}} <br>
+                              <!-- <span *ngIf="orders.delivery_street_address1!=''"><br/>{{orders.delivery_street_address1}}<br/></span> -->
+                              {{orders.delivery_city}} - {{orders.delivery_postcode}}<br/>
+                              {{orders.delivery_state_name}}<br/>
+                              {{orders.delivery_phone}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- order history table -->
+                  <div class="orderhistory_table_wrap">
+                    <table cellpadding="" cellspacing="">
+                      <tr>
+                        <th>ITEM DESCRIPTION</th>
+                        <th class="text-center">QUANTITY</th>
+                        <th class="text-center">PRODUCT UNIT</th>
+                        <th class="text-center">UNIT PRICE</th>
+                        <th class="sub">PRICE</th>
+
+                      </tr>
+                      <tr *ngFor="let item of orders.order_products; let i=index">
+                        <td deta-th="ITEM DESCRIPTION" class="descrip">
+                          <div class="productbox">
+                            <!-- <img src="assets/images/Layer_16.png"> -->
+                            <img style="cursor: pointer;" (click)="navigateToDetailPage(item.product.slug)" [src]="S3_URL_PRODUCT+item.product.product_image.img">
+                            <!-- <img  [src]="S3_URL_PRODUCT+item.product.product_image.img |imagetransform:['product','80','cover']"> -->
+                            <span class="stock_batch" *ngIf="item.grn_quantity == 0 && orders.shipment_status=='Invoicing'">
+                              Out of stock
+                            </span>
+                          </div>
+                          <div class="product_details">
+                            <p style="cursor: pointer;" (click)="navigateToDetailPage(item.product.slug)">{{item.product.name}}</p>
+                            <div class="custom_fields_data">
+                              <p>{{item.custom_field_name}} </p>
+                              <p>{{item.custom_field_value}}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td deta-th="QUANTITY" class="text-center">{{item.quantity}}</td>
+                        <td deta-th="PRODUCT UNIT" class="unit_price text-center"> {{ (item.weight > 0 && item.product.weight != item.weight) ? item.weight : item.product.weight}} {{item.product.uom?.uom_name}} x {{item.quantity}}
+                          <span style="text-decoration: line-through;" *ngIf="item.weight > 0 && item.product.weight != item.weight">
+                            {{item.product.weight}} {{item.product.uom?.uom_name}} x {{item.quantity}}
+                          </span>
+                        </td>
+
+                        <td class="unit_price" deta-th="UNIT PRICE" class="unit_price text-center">{{item.new_default_price_unit | money}}
+											    <span style="text-decoration: line-through;" *ngIf="item.new_default_price_unit != item.mrp">{{item.mrp | money}}</span>
+                        </td>
+                        <td deta-th="PRICE" class="sub">{{item.new_default_price | money}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- order history table -->
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-lg-3">
+                <div class="promocodebox">
+
+                  <div class="subhead" *ngIf="orders.applied_coupon!=null">
+                    Promo Code
+                    <div class="promo_amount">You have save-$20</div>
+                    <button class="removepromo_btn">Remove</button>
+                    <!-- <button class="applybtn">apply</button> -->
+                    <button class="applybtn" *ngIf="orders.applied_coupon">{{orders.applied_coupon}}</button>
+                  </div>
+                
+                  <div class="ordersum">
+                    <h3>Order Summary</h3>
+                    <div class="row">
+                      <span>Subtotal</span>
+                      <span>{{orders.net_amount | money}}</span>
+                    </div>
+                     <div class="row" *ngIf="orders && orders['pay_wallet_amount'] && orders['pay_wallet_amount'] > 0 ">
+                      <span>Loyalty Discount</span>
+                      <span class="red">{{orders['pay_wallet_amount'] | money}}</span>
+                      
+                    </div>
+                   
+                    <div class="row">
+                      <span>Delivery Charges </span>
+                      <span>{{orders.shipping_cost | money}}</span>
+                    </div>
+                    <!-- <div class="row" *ngIf="orders['tax_amount']">
+                      <span>Tax </span>
+                      <span>{{orders['tax_amount'] | money}}</span>
+                    </div> -->
+                    <div class="row">
+                      <span>Discount </span>
+                      <span class="red">{{orders.cart_discount | money}}</span>
+                    </div>
+                    <!-- <div class="row">
+                      <span>Estimated Tax</span>
+                      <span>{{orders.tax_amount | money}}</span>
+                    </div> -->
+                  </div>
+                  <div class="footed">
+                    <span>Total Amount</span>
+                    <span>{{orders.gross_amount | money}}</span>
+                  </div>
+                </div>
+                  <div *ngIf="view_order==0 && page_name=='profile' && orders.shipment_status=='Invoicing'" class="checkoutbtn_grn placenow"  (click)="navigate_payment_option()">CONFIRM ORDER</div>
+                  <div *ngIf="view_order==0 && page_name=='approved-order' && orders.shipment_status=='Invoicing'" class="checkoutbtn_grn placenow"  (click)="navigate_payment_option('approved-order')">CONFIRM ORDER NOW</div>
+                <!-- <div *ngIf="view_order==0 && shipment_status=='Invoicing'" page_name class="checkoutbtn_grn"  (click)="navigate_payment_option()">Place Order</div> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- --- listing middle --- -->

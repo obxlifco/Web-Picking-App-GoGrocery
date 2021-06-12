@@ -1,0 +1,48 @@
+<mat-dialog-content>
+
+	<div class="clear10"> </div>
+	<mat-accordion *ngIf="menu_list.length>0">
+	  <mat-expansion-panel *ngFor="let parent of menu_list" [disabled]="parent.child.length==0" [hideToggle]="parent.child.length==0">
+	    <mat-expansion-panel-header>
+	      <mat-panel-title>
+	        {{parent.name}}
+	      </mat-panel-title>
+	      <mat-panel-description>
+	        <button mat-icon-button (click)="addEditNavigation(parent.id)"><mat-icon class="fa fa-pencil-square-o"></mat-icon></button>
+			<button mat-icon-button (click)="deleteNavigation(parent.id)"><mat-icon class="fa fa-trash-o"></mat-icon></button>
+	      </mat-panel-description>
+	    </mat-expansion-panel-header>
+ 			<ul class="page-list" *ngIf="parent.child.length>0">
+				<li *ngFor="let child of parent.child">
+					{{child.name}}
+					<button mat-icon-button (click)="addEditNavigation(child.id)"><mat-icon class="fa fa-pencil-square-o"></mat-icon></button>
+					<button mat-icon-button (click)="deleteNavigation(child.id)"><mat-icon class="fa fa-trash-o"></mat-icon></button>
+				</li>
+			</ul>
+	  </mat-expansion-panel>
+
+	</mat-accordion>
+	<div class="clear10"> </div>
+<!-- 	<ul class="page-list" *ngIf="menu_list.length>0">
+		<li *ngFor="let parent of menu_list">
+			{{parent.name}}
+			<button mat-icon-button (click)="addEditNavigation(parent.id)"><mat-icon class="fa fa-pencil-square-o"></mat-icon></button>
+			<button mat-icon-button (click)="deleteNavigation(parent.id)"><mat-icon class="fa fa-trash-o"></mat-icon></button>
+			<ul class="" *ngIf="parent.child.length>0">
+				<li *ngFor="let child of parent.child">
+					{{child.name}}
+					<button mat-icon-button (click)="addEditNavigation(child.id)"><mat-icon class="fa fa-pencil-square-o"></mat-icon></button>
+					<button mat-icon-button (click)="deleteNavigation(child.id)"><mat-icon class="fa fa-trash-o"></mat-icon></button>
+				</li>
+			</ul>
+		</li>
+	</ul> -->
+	<h5 *ngIf="menu_list==0">
+		No menu navigation found
+	</h5>
+</mat-dialog-content>
+
+<mat-dialog-actions layout="row">
+	  	<button mat-raised-button class="editor-btn-main" type="button" (click)="addEditNavigation()">Add</button>
+	  	<button mat-raised-button class="editor-btn-main-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

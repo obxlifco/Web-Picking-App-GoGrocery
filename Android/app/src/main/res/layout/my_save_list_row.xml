@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvSavelitsTitle"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hind_medium"
+        android:text="Monday Big Bazar Shopping"
+        android:textColor="@color/black" />
+    <ImageView
+        android:id="@+id/ivMore"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/vertical_more"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvSavelitsTitle"
+        android:layout_alignBaseline="@+id/tvSavelitsTitle"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDateNCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll1"
+        android:fontFamily="@font/hind_medium"
+        android:text="10/12/2019 | 10 Items" />
+
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

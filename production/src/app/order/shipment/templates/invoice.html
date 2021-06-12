@@ -1,0 +1,116 @@
+<section class="right-part filter-pad picklist_invoice">
+	<form #invoiceOrders="ngForm">
+		<input type="hidden" name="shipment_id" [(ngModel)]="formModel.shipment_id">
+		<input type="hidden" name="picklist_id" [(ngModel)]="formModel.picklist_id">
+		<div class="topheading">
+			<h1>Invoice
+				<div class="btn-header shipment-top-btn shipment-two-btn">
+					<button mat-raised-button class="btn-main" type="button" (click)="invoiceContinue(invoiceOrders)">Continue</button>
+					<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div>
+				<div class="clear"></div>
+			</h1>
+		</div>
+		<div class="filter">
+			<div class="stap">
+				<ul>
+					<li class="done">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/grn/'+formModel.shipment_id)" [routerLink]="['/shipment/grn/'+formModel.shipment_id]">
+							<div class="nom"></div>Picking
+						</a>
+					</li>
+					<li class="active">
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/invoice/'+formModel.shipment_id)" [routerLink]="['/shipment/invoice/'+formModel.shipment_id]">
+							<div class="nom"></div>Invoice
+						</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/delivery_planner/'+formModel.shipment_id)" [routerLink]="['/shipment/delivery_planner/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Planner
+						</a>
+					</li>
+					<li>
+						<a (click)="_globalService.setTab(tabIndex,'/shipment/manifest/'+formModel.shipment_id)" [routerLink]="['/shipment/manifest/'+formModel.shipment_id]">
+							<div class="nom"></div>Delivery Note
+						</a>
+					</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="body-part" *ngIf="_globalService.isFormLoaded == 'Yes'">
+			<div class="box">
+				<button mat-raised-button class="btn-main" type="button" (click)="createInvoice()">
+					<mat-icon class="icon-add"></mat-icon> Create Invoice
+				</button>
+				<button mat-raised-button class="btn-pink ml-1" type="button" (click)="printInvoice()">
+					<mat-icon class="icon-printer"></mat-icon> Print
+				</button>
+				<mat-slide-toggle aria-labelledby labelPosition="before" style="margin-left: 20px;" (change)="sendInvoiceEmail($event)">Send
+					email to customer?</mat-slide-toggle>
+				<div class="clear10"></div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="table-list table-wrap">
+							<table>
+								<tr>
+									<th>
+										<mat-checkbox name="selectedAll" [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+									</th>
+									<th>Invoice ID</th>
+									<th>Invoice Date</th>
+									<th>Order ID</th>
+									<th>Order Date</th>
+									<th>Delivery Date</th>
+
+									<!-- <th>Vehicle No</th> -->
+									<!-- <th>Delivery Boy Name</th> -->
+
+									<th>Customer Name</th>
+									<th>Phone</th>
+									<th>Customer Address</th>
+									<!-- <th>Pin</th> -->
+									<th>No. of Crates</th>
+									<th>Payment Method</th>
+									<th>Total Amount</th>
+								</tr>
+								<tr [class.chec]="InvoiceOrder.selected" *ngFor="let InvoiceOrder of formModel.InvoiceDetails">
+									<td data-th="">
+										<mat-checkbox name="InvoiceOrder.Selected" id="shipment_order_id{{InvoiceOrder.order.id}}" [checked]="InvoiceOrder.selected"
+										 (change)="toggleCheck(InvoiceOrder.order.id,$event)"></mat-checkbox>
+										<!-- <span class="dropdownArrow"></span> -->
+									</td>
+									<td data-th="Invoice ID">{{InvoiceOrder.custom_invoice_id}}</td>
+									<td data-th="Invoice Date">{{InvoiceOrder.created_date}}</td>
+									<td data-th="Order ID">{{InvoiceOrder.custom_order_id}}</td>
+									<td data-th="Order Date">{{InvoiceOrder.order_details.created}}</td>
+									<td data-th="Delivery Date">{{InvoiceOrder.order.time_slot_date}}</td>
+
+									<!-- <td>{{InvoiceOrder.order_details.vehicle_no}}</td> -->
+									<!-- <td>{{InvoiceOrder.order_details.DriverName}}</td> -->
+
+									<td data-th="Customer Name">{{InvoiceOrder.order_details.billing_name}}</td>
+									<td data-th="Phone">{{InvoiceOrder.order_details.delivery_phone}}</td>
+									<td data-th="Customer Address">{{InvoiceOrder.order_details.billing_street_address}}&nbsp;{{InvoiceOrder.order_details.billing_street_address1}},&nbsp;{{InvoiceOrder.order_details.delivery_state_name}},&nbsp;{{InvoiceOrder.order_details.delivery_country_name}}</td>
+									<!-- <td>{{InvoiceOrder.order_details.billing_postcode}}</td> -->
+									<td data-th="No. of Crates">{{InvoiceOrder.no_of_crates}}</td>
+									<td data-th="Payment Method" style="font-weight: 600; color: red;">{{InvoiceOrder.order_details.payment_method_name}}</td>
+									<td data-th="Total Amount">{{InvoiceOrder.order_details.gross_amount|number : '.2-2'}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div id="printsection" style="display: none" [innerHTML]="formModel.printsection | safeHtml"></div>
+			<!-- ///////////////Buttons//// -->
+			<div class="btn-header hidden-xs btn-footer">
+				<button mat-raised-button class="btn-main" type="button" (click)="invoiceContinue(invoiceOrders)">Continue</button>
+				<button mat-raised-button class="btn-line" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+			</div>
+			<!-- ///////////////Buttons//// -->
+			<div class="clear"></div>
+		</div>
+	</form>
+</section>

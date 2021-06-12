@@ -1,0 +1,81 @@
+<form #hsncodeForm="ngForm" novalidate (ngSubmit)="hsncodeForm.valid && addHsnCode(hsncodeForm)">
+    <input type="hidden" name="hsn_id" [(ngModel)]="formModel.id">
+    <div class="md-toolbar-tools">
+        <h2 md-dialog-title>{{(formModel.id)?'Edit':'Add'}} HSN code </h2>
+        <button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+        <button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+    </div>
+    <mat-dialog-content>
+        <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+        <div class="pop-body" >
+            <div class="row">
+                <div class="col-sm-4">
+                    <mat-form-field appearance="outline"  class="md-block">
+                        <mat-label>HSN Code</mat-label>
+                        <input matInput placeholder="HSN Code" required #hsn_code="ngModel" name="hsn_code" [(ngModel)]="formModel.hsn_code"  pattern="^(?!\s*$|\s).*$">
+                        <mat-error *ngIf="hsn_code.errors && hsn_code.errors.required">
+                            This is a
+                            <strong>required</strong> field
+                        </mat-error>
+                        <mat-error *ngIf="hsn_code.errors && hsn_code.errors.pattern">
+                            White space is not allowed at beginning.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field appearance="outline"  class="md-block">
+                        <mat-label>SGST</mat-label>
+                        <input matInput placeholder="SGST" required #sgst="ngModel" name="sgst" [(ngModel)]="formModel.sgst" type="number" min = "0">
+                        <mat-error *ngIf="sgst.errors && sgst.errors.required">
+                            This is a
+                            <strong>required</strong> field
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field appearance="outline"  class="md-block">
+                        <mat-label>CGST</mat-label>
+                        <input matInput placeholder="CGST" required #cgst="ngModel" name="cgst" [(ngModel)]="formModel.cgst" type="number" min = "0">
+                        <mat-error *ngIf="cgst.errors && cgst.errors.required">
+                            This is a
+                            <strong>required</strong> field
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline"  class="md-block">
+                         <mat-label>CESS</mat-label>
+                         <input matInput placeholder="CESS" required #cess="ngModel" name="cess" [(ngModel)]="formModel.cess" type="number" min = "0">
+                         <mat-error *ngIf="cess.errors && cess.errors.required">
+                             This is a
+                             <strong>required</strong> field
+                         </mat-error>
+                     </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline"  class="md-block">
+                         <mat-label>IGST</mat-label>
+                         <input matInput placeholder="IGST" required #igst="ngModel" name="igst" [(ngModel)]="formModel.igst" type="number" min = "0">
+                         <mat-error *ngIf="igst.errors && igst.errors.required">
+                             This is a
+                             <strong>required</strong> field
+                         </mat-error>
+                     </mat-form-field>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="clear"></div>
+    </mat-dialog-content>
+    <mat-dialog-actions layout="row">
+        <label class="hidden-sm hidden-xs">Fields marked with
+            <span class="error">*</span> are compulsory.</label>
+        <span flex></span>
+        <button type="submit" mat-raised-button class="btn-main">Save</button>
+        <button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Image Crop</h2>
+<mat-dialog-content>
+	<div class="pop-body" layout="column" style="width: 500px;">
+		<!-- <img-cropper #cropper [image]="crop_data" [settings]="cropperSettings" (onCrop)="cropped($event)" (imageCropped)="onImageCropped($event)"></img-cropper>
+		<span class="image_cropper_image" *ngIf="">
+			<img [src]="data_content['img']" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+			
+		</span> -->
+		<!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+		<image-cropper #cropper
+		    [imageChangedEvent]="imageChangedEvent"
+		    [maintainAspectRatio]="false"
+		    [aspectRatio]="data_content['aspect_ratio']"
+		    [resizeToWidth]="data_content['converted_img_width']"
+		    [resizeToHeight] = "data_content['converted_img_height']"
+		    format="png"
+		    (imageCropped)="imageCropped($event)"
+		    (imageLoaded)="imageLoaded()"
+		    (cropperReady)="cropperReady()"
+		    (loadImageFailed)="loadImageFailed()"></image-cropper>
+		   <!--  <img [src]="data_content['img']" width="data_content['img_width']" height="data_content['img_height']">
+ -->
+<!-- <img [src]="croppedImage" /> -->
+	</div>		  	
+</mat-dialog-content>
+
+
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="saveCrop()">Crop</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

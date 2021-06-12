@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".view.DialogPrepareView">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@android:color/transparent">
+
+
+
+
+
+
+
+                        <TextView
+                            android:id="@+id/tvItemName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:ellipsize="end"
+                            android:lineSpacingMultiplier="0.7"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:text="@string/toolbar_title_preparation_view"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:fontFamily="@font/proxima_regular" />
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nsView"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvItemName"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rgPreparation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                  >
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.core.widget.NestedScrollView>
+
+
+
+                        <Button
+                            android:id="@+id/btnApplyContinue"
+                            android:textColor="@color/white"
+                            android:background="@drawable/green_round_side"
+                            android:paddingStart="36dp"
+                            android:paddingEnd="36dp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/_continue"
+                            android:layout_below="@+id/nsView"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+
+
+                <ImageView
+                    android:id="@+id/ivClose"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                  android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:tint="#C32D4A"
+                    android:padding="8dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_close" />
+
+
+
+
+        </RelativeLayout>
+
+
+
+</layout>
+

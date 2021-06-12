@@ -1,0 +1,39 @@
+<form #priceMapForm="ngForm" novalidate (ngSubmit)="priceMapForm.valid && setMappedPrice(priceMapForm)">
+	<div class="md-toolbar-tools">
+		<mat-radio-group #toggleImport="ngModel" name="toggleImport" [(ngModel)]="mapOpt">
+			<mat-radio-button class="example-margin my-1" value="Manual">Manual</mat-radio-button>
+		  	<mat-radio-button class="example-margin my-1" value="Automatic" (change)="sync()">Automatic</mat-radio-button>
+		</mat-radio-group>
+	</div>
+	<div class="pop-head my-2">
+		Please set the price manually here
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<div class="row">
+				<div class="col-sm-12" *ngIf="mapOpt=='Automatic'">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="Source Url" required readonly="true" value="http://google.com/">
+				  	</mat-form-field>
+				</div>
+				<div class="col-sm-6" *ngFor="let currency of currency_list">
+					<mat-form-field class="md-block">
+			  			<input matInput placeholder="{{currency.currency_name}}" *ngIf="mapOpt=='Manual'" [ngModelOptions]="{standalone: true}" [(ngModel)]="formModel[currency.currency_id]">
+			  			<input matInput placeholder="{{currency.currency_name}}" *ngIf="mapOpt=='Automatic'" [ngModelOptions]="{standalone: true}" readonly="true" [(ngModel)]="formModel[currency.currency_id]">
+					</mat-form-field> 
+				</div>
+			</div>
+			
+			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

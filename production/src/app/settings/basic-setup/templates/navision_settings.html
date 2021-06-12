@@ -1,0 +1,205 @@
+<form #NavisionSettingsForm="ngForm" novalidate
+	(ngSubmit)="NavisionSettingsForm.valid && saveNavissionSettings(NavisionSettingsForm)">
+	<input type="hidden" name="channel_id" [(ngModel)]="formModel.channel_id">
+	<div class="md-toolbar-tools">
+		<h2 mat-dialog-title>Navision Settings</h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs"
+			(click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<div class="row">
+				<div class="col-12 col-lg-12">
+					<mat-form-field  appearance="outline">
+							<mat-label>Username</mat-label>
+						<input matInput placeholder="Username" required #username="ngModel" name="username"
+							[(ngModel)]="formModel.username">
+						<mat-error *ngIf="username.errors && username.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-lg-12">
+
+					<mat-form-field  appearance="outline">
+							<mat-label>Password</mat-label>
+						<input matInput placeholder="Password" type="password" required #password="ngModel" name="password"
+							[(ngModel)]="formModel.password">
+						<mat-error *ngIf="password.errors && password.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+
+
+			<!-- <mat-slide-toggle *ngIf="is_active ==1; else elseBlock" checked  (change)="activate_channels(formModel.parent_id,$event)">Turn on</mat-slide-toggle>								
+								<ng-template #elseBlock>
+									<mat-slide-toggle (change)="activate_channels(formModel.parent_id,$event)">Turn Off</mat-slide-toggle>
+								</ng-template>
+								 -->
+								
+			<div class="row" id="contentInside" *ngFor="let container of containers;let index=index;">
+					
+
+				<div class="col-12 col-lg-3">
+
+					<mat-form-field appearance="outline">
+						<mat-label>Select Value</mat-label>
+						<mat-select [(ngModel)]="container.value" (ngModelChange)="changeModule($event,container)"
+							[ngModelOptions]="{standalone: true}">
+	
+							<mat-option [value]="module.id"  *ngFor="let module of container.module_imported">
+								
+										{{module.name}}
+								
+								</mat-option>
+							<!-- <mat-option value="catno">No</mat-option> -->
+						</mat-select>
+					</mat-form-field>
+					
+				</div>
+				<div class="col-12 col-lg-3" >
+						<mat-form-field appearance="outline">
+						<mat-select [(ngModel)]="container.dropdown_value" (ngModelChange)="urlShowHide($event,container)"
+						[ngModelOptions]="{standalone: true}">
+						<mat-option [value]="module.id" *ngFor="let module of container.dropdown">{{module.name}}</mat-option>
+						<!-- <mat-option value="catno">No</mat-option> -->
+					</mat-select>
+					</mat-form-field>
+				</div>
+					<div class="col-12 col-lg-5" *ngIf="container.is_show == true" >
+					<mat-form-field appearance="outline" >
+						<mat-label> URL</mat-label>
+						<input matInput placeholder="Url" required #navisionurl="ngModel" name="navisionurl{{index}}"
+							[(ngModel)]="container.navisionurl">
+						<mat-error *ngIf="navisionurl.errors && navisionurl.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-12 col-lg-1">
+						<a href="javascript:void(0)" class="smlicon gray"  (click)="removeRow(index)" *ngIf="containers.length>1 && index!=0"><span class="icon-multiply_new"></span></a>
+						<button type="button" class="margin-auto20 btn-pink"  style="margin-top: 10px;" mat-mini-fab (click)="addRow()" *ngIf="index==0" [disabled]="disabled"><i class="icon-add"></i></button>
+
+					</div>
+					
+			</div>
+			<!-- <div class="row">
+				<div class="col-12 col-lg-6">
+					<mat-form-field appearance="outline">
+						<mat-label>Select Value to Enter Product Url</mat-label>
+						<mat-select [(ngModel)]="prourlselected" (ngModelChange)="urlShowHide($event)"
+							[ngModelOptions]="{standalone: true}">
+							<mat-option value="proyes">Yes</mat-option>
+							<mat-option value="prono">No</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-12 col-lg-6" *ngIf="isprourlselected">
+					<mat-form-field appearance="outline">
+						<input matInput placeholder="Product Url" required #prourl="ngModel" name="prourl"
+							[(ngModel)]="formModel.prourl">
+						<mat-error *ngIf="prourl.errors && prourl.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div> -->
+
+			<!-- <div class="row">
+				<div class="col-12 col-lg-6">
+					<mat-form-field appearance="outline">
+						<mat-label>Select Value to Enter Inventory Url</mat-label>
+						<mat-select [(ngModel)]="inventoryurlselected" (ngModelChange)="urlShowHide($event)"
+							[ngModelOptions]="{standalone: true}">
+							<mat-option value="inventoryyes">Yes</mat-option>
+							<mat-option value="inventoryno">No</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-12 col-lg-6" *ngIf="isinventoryurlselected">
+					<mat-form-field appearance="outline">
+						<input matInput placeholder="Inventory Url" required #inventoryurl="ngModel" name="inventoryurl"
+							[(ngModel)]="formModel.inventoryurl">
+						<mat-error *ngIf="inventoryurl.errors && inventoryurl.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<mat-form-field appearance="outline">
+						<mat-label>Select Value to Enter Inventory Url</mat-label>
+						<mat-select [(ngModel)]="orderurlselected" (ngModelChange)="urlShowHide($event)"
+							[ngModelOptions]="{standalone: true}">
+							<mat-option value="orderyes">Yes</mat-option>
+							<mat-option value="orderno">No</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-12 col-lg-6" *ngIf="isorderurlselected">
+					<mat-form-field appearance="outline">
+						<input matInput placeholder="Order Url" required #orderurl="ngModel" name="orderurl"
+							[(ngModel)]="formModel.orderurl">
+						<mat-error *ngIf="orderurl.errors && orderurl.errors.required">
+							This is a <strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div> -->
+
+
+			<!-- <mat-form-field class="md-block" *ngIf="is_active ==1">
+				<input matInput placeholder="Product Url" required #prourl="ngModel" name="prourl"
+					[(ngModel)]="formModel.prourl">
+				<mat-error *ngIf="prourl.errors && prourl.errors.required">
+					This is a <strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" *ngIf="is_active ==1">
+				<input matInput placeholder="Inventory Url" required #inventoryurl="ngModel" name="inventoryurl"
+					[(ngModel)]="formModel.inventoryurl">
+				<mat-error *ngIf="inventoryurl.errors && inventoryurl.errors.required">
+					This is a <strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" *ngIf="is_active ==1">
+				<input matInput placeholder="Order Url" required #orderurl="ngModel" name="orderurl"
+					[(ngModel)]="formModel.orderurl">
+				<mat-error *ngIf="orderurl.errors && orderurl.errors.required">
+					This is a <strong>required</strong> field
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field class="md-block" *ngIf="is_active ==1">
+				<input matInput placeholder="Discount Url" required #discounturl="ngModel" name="discounturl"
+					[(ngModel)]="formModel.discounturl">
+				<mat-error *ngIf="discounturl.errors && discounturl.errors.required">
+					This is a <strong>required</strong> field
+				</mat-error>
+			</mat-form-field> -->
+
+			<!-- <mat-form-field class="md-block">
+					<input matInput placeholder="Base Url" required #base_url="ngModel" name="base_url" [(ngModel)]="formModel.base_url">
+					<mat-error *ngIf="base_url.errors && base_url.errors.required">
+						This is a
+						<strong>required</strong> field
+					</mat-error>
+				</mat-form-field> -->
+
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+		<span flex></span>
+		<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

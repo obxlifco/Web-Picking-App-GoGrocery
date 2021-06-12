@@ -1,0 +1,99 @@
+<!-- --- listing middle --- -->
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="listing_container">
+               
+                <div class="list_right_section details details_one">
+                    
+                    <div class="details_topsml_menu">
+                        <ul>
+                            <li (click)="navigate(0)"><a href="javascript:void(0)">Home /</a></li>
+                            <li (click)="navigate(1)"><a href="javascript:void(0)">My Account /</a></li>
+                            <li><a href="javascript:void(0)">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart_outer">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                              <app-left-panel-profile [activatedMenu] = "'my-wallet'"></app-left-panel-profile>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-9">
+                                <div class="cartbox deleverybox orderhistory">
+                                    <div class="head">
+                                        My Wallet
+                                   </div>
+                                    <!-- order history table -->
+                                    <div class="orderhistory_table_wrap wallet_table">
+                                      <table cellpadding="" cellspacing="" >
+                                          <tr>
+                                              <th>Date</th>
+                                              <th>Earn Points</th>
+                                              <th>Used Points</th>
+                                              <th>Remaining Points</th>
+                                          </tr>
+                                          <ng-container *ngIf="walletDataSource && walletDataSource.length > 0">
+                                          <tr *ngFor="let mywallet of walletDataSource">
+                                              <td deta-th="DATE" >{{mywallet['created'] | date:'shortDate'}}</td>
+                                              <td deta-th="EARN POINTS">
+                                                   <span class="grntext" *ngIf="mywallet['status'] == 'earn';else no_earn">{{mywallet['received_points']}}</span>
+                                                   <ng-template #no_earn>---</ng-template>
+                                              </td>
+                                              <td deta-th="USED POINTS">
+                                                <span class="grntext" *ngIf="mywallet['status'] == 'burn';else no_burn">{{mywallet['burnt_points']}}</span>
+                                                   <ng-template #no_burn>---</ng-template>
+                                              </td>
+                                              <td deta-th="REMAINING POINTS" >{{mywallet['remaining_balance']}}</td>
+                                          </tr>
+                                        </ng-container>
+                                      </table>
+                                    </div>
+                                    <!-- order history table -->
+                                </div>
+                            </div>
+                            <!-- <div class="col-12 col-md-9">
+                                <div class="cartbox orderdetails">
+                                  <div class="row">
+                                      <div class="col-12 col-md-12">
+                                        <div class="head"> My Wallet
+                                        </div>
+                                      </div>
+                                      <div class="mat-elevation-z8 col-12 col-md-12" *ngIf="walletDataSource">
+                  										  <table mat-table [dataSource]="walletDataSource" style="width: 100%;">
+                  										    <ng-container matColumnDef="created">
+                  										      <th mat-header-cell *matHeaderCellDef> Date. </th>
+                  										      <td mat-cell *matCellDef="let element"> {{element.created | date:'short'}} </td>
+                  										    </ng-container>
+                  										    <ng-container matColumnDef="custom_order_id">
+                  										      <th mat-header-cell *matHeaderCellDef>Order Id</th>
+                  										      <td mat-cell *matCellDef="let element"> {{element.custom_order_id}} </td>
+                  										    </ng-container>
+                  										    <ng-container matColumnDef="burnt_points">
+                  										      <th mat-header-cell *matHeaderCellDef> Debit </th>
+                  										      <td mat-cell *matCellDef="let element">{{element.burnt_points}}</td>
+                  										    </ng-container>
+                  										    <ng-container matColumnDef="received_points">
+                  										      <th mat-header-cell *matHeaderCellDef> Credit </th>
+                  										      <td mat-cell *matCellDef="let element"> {{element.received_points}} </td>
+                  										    </ng-container>
+                  										    <tr mat-header-row *matHeaderRowDef="displayedWalletColumns"></tr>
+                  										    <tr mat-row *matRowDef="let row; columns: displayedWalletColumns;"></tr>
+                  										  </table>
+                  										</div>
+                                      </div>
+                                </div>
+                           </div> -->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<!-- --- listing middle --- -->
+
+
+
+

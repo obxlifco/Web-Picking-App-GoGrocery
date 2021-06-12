@@ -1,0 +1,42 @@
+<form #tagsForm="ngForm" novalidate (ngSubmit)="tagsForm.valid && addEditTags(tagsForm)">
+	<input type="hidden" name="tag_id" [(ngModel)]="formModel.tag_id">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.tag_id)?'Edit':'Add'}} Tags </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-form-field class="md-block" appearance="outline">
+							<mat-label>Tag Name</mat-label>
+				<input matInput placeholder="Tag Name" required #tag_name="ngModel" name="tag_name" [(ngModel)]="formModel.tag_name" pattern="^(?!\s*$|\s).*$">
+			    <mat-error *ngIf="tag_name.errors && tag_name.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			     <mat-error *ngIf="tag_name.errors && tag_name.errors.pattern">
+						White space is not allowed at beginning. 
+				</mat-error>
+		  	</mat-form-field>
+			<div class="mandatory-select">
+			<mat-form-field class="md-block" appearance="outline">
+				<mat-label>Color Code</mat-label>
+				<input matInput placeholder="Color Code" required #color_code="ngModel" name="color_code" [(ngModel)]="formModel.color_code" [(colorPicker)]="formModel.color_code" value="color">
+			    <mat-error *ngIf="color_code.errors && color_code.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+			</mat-form-field>
+
+ 				
+		    </div>			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

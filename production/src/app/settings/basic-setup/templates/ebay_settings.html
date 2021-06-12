@@ -1,0 +1,33 @@
+<form #EbaySetting="ngForm" novalidate (ngSubmit)="saveEbayCredentials(EbaySetting)">
+	<mat-tab-group>
+		<div *ngFor="let channels_settings of formModel.channel_lists">
+			<mat-tab label="{{channels_settings.name}}">
+				<!-- <form #{{channels_settings.name}}="ngForm" novalidate (ngSubmit)="'{channels_settings.name}'.valid && saveAmazonCredential(channels_settings.name)"> -->
+				<input type="hidden" name="channel_id" [(ngModel)]="channels_settings.id">
+				<div class="md-toolbar-tools">
+					<h2 mat-dialog-title>{{channels_settings.name}} Settings</h2>
+					<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Generate Token</button>
+					<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+				</div>
+				<mat-dialog-content>
+					<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+					<div class="pop-body price_setup_dio " layout="column">
+						<p>Boost's System will communicate with eBay on your behalf. Register your eBay credentials with Boost.</p>
+						<p>Token : You have not registered your eBay authentication token with engageboost. Please generate a token to register</p>
+						<mat-form-field class="md-block">
+							<input matInput placeholder="{{channels_settings.name}} UserName" name="username{{channels_settings.id}}" [(ngModel)]="channels_settings.username">
+						</mat-form-field>
+						<p *ngIf="channels_settings.token_expired">Token Expiration Date : {{channels_settings.token_expired | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+					</div>
+					<div class="clear"></div>
+				</mat-dialog-content>
+				<mat-dialog-actions layout="row">
+					<span flex></span>
+					<button type="submit" mat-raised-button class="btn-main">Generate Token</button>
+					<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+				</mat-dialog-actions>
+			</mat-tab>
+		</div>
+	</mat-tab-group>
+</form>

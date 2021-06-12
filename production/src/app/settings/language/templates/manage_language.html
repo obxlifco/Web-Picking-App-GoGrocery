@@ -1,0 +1,42 @@
+<form #languageForm="ngForm" novalidate (ngSubmit)="languageForm.valid && manageLanguage(languageForm)">
+		<div class="md-toolbar-tools">
+			<h2>Manage Rate</h2>
+			<!-- <button type="submit" mat-raised-button class="btn-main hidden-xs">Save</button>
+			<button type="button" mat-raised-button class="btn-line hidden-xs" (click)="closeDialog()">Cancel</button> -->
+			<button type="button" mat-raised-button class="btn-gradient sm-icon-btn" (click)="sync()"><i class="icon-bank-transfer"></i></button>
+		</div>
+		<mat-dialog-content style="max-width:800px;max-height:810px;">
+			<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   			<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+			<div class="pop-body" layout="column">
+				<div class="form-field">
+					<label>Base Language:</label>
+					<label>{{base_language.language_code}}</label>	
+					<div class="clear"></div>
+				</div>
+				<div class="clear20"></div>
+				<div class="row" *ngFor="let language of language_list; let i=index">
+					<ng-container *ngIf="language.id!=base_language.id">
+						<div class="col-sm-12">
+						  	<mat-form-field appearance="outline" class="md-block">
+						  	   <label mdPrefix>1 {{base_language.language_code}} = </label>
+							   <input matInput required name="language{{i}}" #rate[language.id]="ngModel"  [(ngModel)]="rate[language.id]">
+							  <label mdSuffix>{{language.language_code}}</label>
+								<mat-error *ngIf="rate[language.id].errors && rate[language.id].errors.required">
+							      Rates can't be blank
+							    </mat-error>
+							</mat-form-field>
+						</div>
+					</ng-container>		
+					
+				</div>
+			</div>
+			<div class="clear"></div>
+		</mat-dialog-content>
+		<mat-dialog-actions layout="row">
+			<label class="hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+			<span flex></span>
+			<button type="submit" mat-raised-button class="btn-main">Save</button>
+			<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+		</mat-dialog-actions>
+</form>

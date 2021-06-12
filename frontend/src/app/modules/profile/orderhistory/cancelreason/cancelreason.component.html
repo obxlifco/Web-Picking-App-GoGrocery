@@ -1,0 +1,34 @@
+<section>
+    <div class="pop_upbg">
+        <div class="popup_wrap">
+          <div class="selectstore">
+            <form #formData="ngForm" novalidate (ngSubmit)="formData.valid && addEdit(formData)">
+              <div class="box">
+                  <div class="heading"><h2>Reason For Cancellation</h2></div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Select Reason For Cancellation</mat-label>
+                          <mat-select required placeholder="Select Reason For Cancellation" #return_note="ngModel" name="return_note" [(ngModel)]="formModel.return_note">
+                              <mat-option *ngFor="let return_txt of return_note_arr_full" [value]="return_txt.text">{{return_txt.text}}</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="return_note.errors && return_note.errors.required">Please select a reason</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12" *ngIf="formModel.return_note == 'Others'">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Reason for Cancellation</mat-label>
+                          <input matInput placeholder="Reason for Cancellation" #return_others_reason="ngModel" name="return_others_reason" [(ngModel)]="formModel.return_others_reason">
+                      </mat-form-field>
+                    </div>
+                  </div>
+              </div>
+              <div class="cancel-pop">
+                <a class="add_tocard cancel" style="color:#fff" (click)="cancel_btn()">Cancel</a>
+                <button class="add_tocard"  >Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</section>

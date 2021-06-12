@@ -1,0 +1,41 @@
+ <section class="container-fluid" *ngIf="isCMS">
+          <div class="row">
+              <div class="col-12">
+                  <div class="container_cuswrap">
+                      <div class="middle_productblog">
+                          <div class="row">
+                              <div class="col-12 col-md-4">
+                                  <a href="javascript:void(0);"><div class="mdl_productbox" style="background-image: url(assets/images/ins.png)"></div></a>
+                              </div>
+                               <div class="col-12 col-md-4">
+                                  <a href="javascript:void(0);"><div class="mdl_productbox" style="background-image: url(assets/images/ins.png)"></div></a>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                  <a href="javascript:void(0);"><div class="mdl_productbox" style="background-image: url(assets/images/ins.png)"></div></a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+ </section>
+ <section class="container-fluid home-category-banner" *ngIf="!isCMS">
+  <div class="row">
+              <div class="col-12">
+                  <div class="container_cuswrap">
+                      <div class="middle_productblog">
+                          <div class="row">
+                              <!-- <div class="col-12 col-md-4" *ngFor="let bannerData of widget_data_for_non_cms | slice:0:3"> -->
+                                <div class="col-12 col-md-4" style="padding-right: 8px;padding-left:8px;" *ngFor="let bannerData of widget_data_for_non_cms">
+                                 <ng-container>
+                                  <a href="javascript:void(0);" (click)="navigateToUrl(bannerData['link'])">
+                                    <div class="mdl_productbox no-repeat" [ngStyle]="{background: 'url(' +S3_URL_BANNER+'/'+bannerData.primary_image_name+')'}"></div>
+                                  </a>
+                                </ng-container>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+ </section>

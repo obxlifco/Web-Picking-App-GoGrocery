@@ -1,0 +1,46 @@
+
+<form #unitsettingsForm="ngForm" novalidate (ngSubmit)="unitsettingsForm.valid && addEditUnit(unitsettingsForm)">
+	<input type="hidden" name="brandId" [(ngModel)]="formModel.brandId">
+	<div class="md-toolbar-tools">
+		<h2 md-dialog-title>{{(formModel.unitId)?'Edit':'Add'}} Unit </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+   		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body" layout="column">
+			<mat-form-field appearance="outline" class="md-block"><mat-label>Unit Name</mat-label>
+				<input matInput placeholder="Unit Name" required #unitName="ngModel" name="unitName" [(ngModel)]="formModel.unitName">
+			    <mat-error *ngIf="unitName.errors && unitName.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+		  	</mat-form-field>
+		  	<mat-form-field appearance="outline" class="md-block"><mat-label>Unit Full Name</mat-label>
+				<input matInput placeholder="Unit Full Name" required #unitFullName="ngModel" name="unitFullName" [(ngModel)]="formModel.unitFullName">
+			    <mat-error *ngIf="unitFullName.errors && unitFullName.errors.required">
+			      This is a <strong>required</strong> field
+			    </mat-error>
+		  	</mat-form-field>
+			<div  class="md-block">
+					<mat-form-field appearance="outline"><mat-label>Status</mat-label>
+				<mat-select required placeholder="Status" #status="ngModel" name="status" [(ngModel)]="formModel.status">
+					<mat-option value="n">Active</mat-option>
+					<mat-option value="y">Inactive</mat-option>
+				</mat-select>
+				<mat-error *ngIf="status.errors && status.errors.required && (status.dirty || status.touched || unitsettingsForm.submitted)">
+			      This is a <strong>required</strong> field
+					</mat-error>
+					</mat-form-field>
+		    </div>
+			
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>			
+	<mat-dialog-actions layout="row">
+		<label class="hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<span flex></span>
+	  	<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

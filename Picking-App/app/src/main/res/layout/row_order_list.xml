@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/llStatusRowOrdList"
+        android:background="@drawable/bg_rect_dark_round_corner"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/tvOrdIdStatusRowOrdList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_red_round_corner"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="4811-Pending"
+            android:textColor="@color/appColorWhite"
+            android:textSize="@dimen/_8sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTimeRowOrdList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="10:55"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_7sdp"
+            android:visibility="gone"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="@string/txtOrderedOn"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvOrderTimeRowOrdList"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="10 May, 2020 \n 10:51 AM"
+            android:textColor="@color/appColorDarkGrey"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/tvElapseTimeRowOrdList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="center"
+            android:text="Two Hours Ago"
+            android:textSize="@dimen/_7sdp" />
+
+        <LinearLayout
+            android:id="@+id/llScheduleRowOrdList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/bg_rect"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/_7sdp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/txtScheduled"
+                android:textColor="@color/appColorWhite"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvScheduleTimeRowOrdList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:text="From 12:00 to 13:00"
+                android:textColor="@color/appColorWhite"
+                android:textSize="@dimen/_7sdp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tvScheduleDateRowOrdList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:text="From 12:00 to 13:00"
+                android:textColor="@color/appColorWhite"
+                android:textSize="@dimen/_7sdp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="- Delivery Address -"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:id="@+id/tvAddressRowOrdList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="7/48, Vankar Das, \n Kolkata- 700001"
+            android:textColor="@color/appColorDarkGrey"
+            android:textSize="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/llAssignRowOrdList"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/txtThisOrderAssignTo"
+                android:textColor="@color/appColorBlack"
+                android:textSize="@dimen/_8sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvAssigneeNameRowOrdList"
+                    android:gravity="center"
+                    android:text="John Doe"
+                    android:textColor="@color/appColorBlack"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPriceRowOrdList"
+            android:gravity="center"
+            android:text="$ 50"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_9sdp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPayMethodRowOrdList"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="Paid Online"
+            android:textColor="@color/appColorBlack"
+            android:textSize="@dimen/_8sdp"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

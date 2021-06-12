@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Select Days
+</h2>
+<mat-dialog-content style="min-width: 500px;">    
+	<div class="table-list">
+  		<table>
+			<tr>
+				<th class="check-select">
+					<mat-checkbox name="selectedAll" [ngModel]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+				</th>
+				<th class="short">ID</th> 
+				<th class="short">Name</th>
+			</tr>
+			<tr [class.chec]="row.Selected" *ngFor="let row of week_list">
+				<td>
+					<mat-checkbox name="row.Selected" id="list{{row.id}}" [checked]="row.Selected" (change)="toggleCheck(row.id,$event)"></mat-checkbox>
+				</td>
+				<td>{{row.id}}</td>
+				<td>{{row.name}}</td>
+			</tr>
+			<tr *ngIf="week_list.length==0">
+			  	<td colspan="3" align="center">No records found</td>
+			</tr>
+			
+		</table>
+	</div>
+</mat-dialog-content>
+<mat-dialog-actions layout="row">
+	<span flex></span>
+	<button mat-raised-button class="btn-main" type="button" (click)="saveWeek()">Save</button>
+	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

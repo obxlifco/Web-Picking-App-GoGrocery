@@ -1,0 +1,343 @@
+<section class="right-part addall_page">
+	<div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+		<form #emailForm="ngForm" novalidate (ngSubmit)="emailForm.valid && addEditEmailNotification(emailForm)">
+			<input type="hidden" name="emailId" [(ngModel)]="formModel.emailId">
+			<div class="topheading">
+				<h1>{{(formModel.emailId>0)?'Edit':'Add'}} Email Notification
+					<div class="btn-header">
+						<button type="submit" mat-raised-button class="btn-main">Save</button>
+						<button type="button" mat-raised-button class="btn-line"
+							(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+						<label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+					</div>
+					<div class="clear"></div>
+				</h1>
+			</div>
+			<div class="clear"></div>
+			<div class="box">
+				<div class="fixed-width">
+					<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+					<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Name</mat-label>
+										<input matInput placeholder="Name" required #emailName="ngModel" name="emailName"
+											[(ngModel)]="formModel.name" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+										<mat-error *ngIf="emailName.errors && emailName.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="emailName.errors && emailName.errors.pattern">
+											This is not a <strong>valid</strong> input
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>From Name</mat-label>
+										<input matInput placeholder="From Name" required #emailFromName="ngModel" name="emailFromName"
+											[(ngModel)]="formModel.email_from" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+										<mat-error *ngIf="emailFromName.errors && emailFromName.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="emailFromName.errors && emailFromName.errors.pattern">
+											This is not a <strong>valid</strong> input
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Subject</mat-label>
+										<input matInput placeholder="Subject" required #emailSubject="ngModel" name="emailSubject"
+											[(ngModel)]="formModel.subject" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-{}]*$">
+										<mat-error *ngIf="emailSubject.errors && emailSubject.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="emailSubject.errors && emailSubject.errors.pattern">
+											This is not a <strong>valid</strong> input
+										</mat-error>
+	
+										<button matSuffix type="button" mat-icon-button class="" [matMenuTriggerFor]="rootMenu"
+											matTooltip="Use Database field">
+											<mat-icon class="icon-menu"></mat-icon>
+										</button>
+										<mat-menu #rootMenu="matMenu">
+											<button mat-menu-item [matMenuTriggerFor]="productFields">Product Fields</button>
+											<button mat-menu-item [matMenuTriggerFor]="orderFields">Order Fields</button>
+											<button mat-menu-item [matMenuTriggerFor]="customerFields">Customer Fields</button>
+										</mat-menu>
+	
+										<mat-menu #productFields="matMenu">
+											<button (click)="set_subject(field.value)" mat-menu-item
+												*ngFor="let field of product_fields">{{field.label}}</button>
+										</mat-menu>
+										<mat-menu #orderFields="matMenu">
+											<button (click)="set_subject(field.value)" mat-menu-item
+												*ngFor="let field of order_fields">{{field.label}}</button>
+										</mat-menu>
+										<mat-menu #customerFields="matMenu">
+											<button (click)="set_subject(field.value)" mat-menu-item
+												*ngFor="let field of customer_fields">{{field.label}}</button>
+										</mat-menu>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="row flex-item-center">
+								<!-- <div class="col-xs-2 col-sm-1">
+									<button type="button" mat-icon-button class="btn-gray btn-sm" [matMenuTriggerFor]="rootMenu"><mat-icon class="icon-table2"></mat-icon></button>
+									<mat-menu #rootMenu="matMenu">
+										<button mat-menu-item [matMenuTriggerFor]="productFields">Product Fields</button>
+										<button mat-menu-item [matMenuTriggerFor]="orderFields">Order Fields</button>
+										<button mat-menu-item [matMenuTriggerFor]="customerFields">Customer Fields</button>
+									</mat-menu>
+
+									<mat-menu #productFields="matMenu">
+										<button (click)="set_subject(field.value)" mat-menu-item *ngFor="let field of product_fields">{{field.label}}</button>
+									</mat-menu>
+									<mat-menu #orderFields="matMenu">
+										<button (click)="set_subject(field.value)" mat-menu-item *ngFor="let field of order_fields">{{field.label}}</button>
+									</mat-menu>
+									<mat-menu #customerFields="matMenu">
+										<button (click)="set_subject(field.value)" mat-menu-item *ngFor="let field of customer_fields">{{field.label}}</button>
+									</mat-menu>
+								</div> -->
+								
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Reply To Email</mat-label>
+										<input matInput placeholder="Reply To Email" required maxlength="40" #emailReply="ngModel"
+											name="emailReply" [(ngModel)]="formModel.reply_to_email"
+											pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+										<mat-error *ngIf="emailReply.errors && emailReply.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="emailReply.errors && emailReply.errors.pattern">
+											Enter a valid <strong>email</strong> address
+										</mat-error>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<div class="mandatory-select">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Email Type</mat-label>
+											<mat-select required placeholder="Email Type" #emailType="ngModel" name="emailType"
+												[(ngModel)]="formModel.email_type">
+												<mat-option value="T">Text</mat-option>
+												<mat-option value="H">HTML</mat-option>
+												<mat-option value="HT">Text & HTML</mat-option>
+											</mat-select>
+											<mat-error
+												*ngIf="emailType.errors && emailType.errors.required && (emailType.dirty || emailType.touched || emailForm.submitted)">
+												This is a <strong>required</strong> field
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>BCC</mat-label>
+										<input matInput placeholder="Bcc" required maxlength="40" #emailBcc="ngModel" name="emailBcc"
+											[(ngModel)]="formModel.bcc" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}">
+										<mat-error *ngIf="emailBcc.errors && emailBcc.errors.required">
+											This is a <strong>required</strong> field
+										</mat-error>
+										<mat-error *ngIf="emailBcc.errors && emailBcc.errors.pattern">
+											Enter a valid <strong>email</strong> address
+										</mat-error>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row" *ngIf="(emailType.value=='T') || (emailType.value=='HT')">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Product Fields</mat-label>
+										<mat-select placeholder="Product Fields" #textProductFields="ngModel" name="textProductFields"
+											ngModel (change)="set_template(emailType.value,textProductFields.value,1)">
+											<mat-option *ngFor="let field of product_fields" [value]="field.value">{{field.label}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Order Fields</mat-label>
+										<mat-select placeholder="Order Fields" #textOrderFields="ngModel" name="textOrderFields" ngModel
+											(change)="set_template(emailType.value,textOrderFields.value,1)">
+											<mat-option *ngFor="let field of order_fields" [value]="field.value">{{field.label}}</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Customer Fields</mat-label>
+										<mat-select placeholder="Customer Fields" #textCustomerFields="ngModel" name="textCustomerFields"
+											ngModel (change)="set_template(emailType.value,textCustomerFields.value,1)">
+											<mat-option *ngFor="let field of customer_fields" [value]="field.value">{{field.label}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="mandatory-select">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Applicable For</mat-label>
+											<mat-select required placeholder="Applicable For" #emailFor="ngModel" name="emailFor"
+												[(ngModel)]="formModel.auto_responder_applied_for">
+												<mat-option value="Others">Others</mat-option>
+												<mat-option value="Order">Orders</mat-option>
+											</mat-select>
+											<mat-error
+												*ngIf="emailFor.errors && emailFor.errors.required && (emailFor.dirty || emailFor.touched || emailForm.submitted)">
+												This is a <strong>required</strong> field
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>
+								<div class="col-sm-4" *ngIf="emailFor.value=='Order'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Applicable Store</mat-label>
+										<mat-select multiple placeholder="Applicable Store" #emailWarehouse="ngModel"
+											name="emailWarehouse" [(ngModel)]="formModel.applicable_email_warehouse">
+											<mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4" *ngIf="emailFor.value=='Order'">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Applicable Channels</mat-label>
+										<mat-select multiple placeholder="Applicable Channels" #emailChannel="ngModel" name="emailChannel"
+											[(ngModel)]="formModel.applicable_email_channel">
+											<mat-option *ngFor="let channel of channel_list" [value]="channel.id">{{channel.name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row" *ngIf="(emailType.value=='H') || (emailType.value=='HT')">
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Product Fields</mat-label>
+										<mat-select placeholder="Product Fields" #editorProductFields="ngModel" name="editorProductFields"
+											ngModel (change)="set_template(emailType.value,editorProductFields.value,2)">
+											<mat-option *ngFor="let field of product_fields" [value]="field.value">{{field.label}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Order Fields</mat-label>
+										<mat-select placeholder="Order Fields" #editorOrderFields="ngModel" name="editorOrderFields" ngModel
+											(change)="set_template(emailType.value,editorOrderFields.value,2)">
+											<mat-option *ngFor="let field of order_fields" [value]="field.value">{{field.label}}</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Customer Fields</mat-label>
+										<mat-select placeholder="Customer Fields" #editorCustomerFields="ngModel"
+											name="editorCustomerFields" ngModel
+											(change)="set_template(emailType.value,editorCustomerFields.value,2)">
+											<mat-option *ngFor="let field of customer_fields" [value]="field.value">{{field.label}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row" *ngIf="emailFor.value=='Order'">
+								
+								<div class="col-sm-4">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Applicable Shipping Provider</mat-label>
+										<mat-select multiple placeholder="Applicable Shipping Provider" #emailShip="ngModel"
+											name="emailShip" [(ngModel)]="formModel.applicable_email_shipping_providers">
+											<mat-option *ngFor="let shipping of shipping_list" [value]="shipping.id">{{shipping.method_name}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-sm-4">
+									<div class="mandatory-select">
+										<mat-form-field appearance="outline" class="md-block">
+											<mat-label>Shipment Status</mat-label>
+											<mat-select required placeholder="Shipment Status" #emailShipStatus="ngModel"
+												name="emailShipStatus" [(ngModel)]="formModel.shipment_status">
+												<mat-option value="Picking">Picking</mat-option>
+												<mat-option value="Shipment Processing">Shipment Processing</mat-option>
+												<mat-option value="Shipped">Shipped</mat-option>
+												<mat-option value="Completed">Completed</mat-option>
+											</mat-select>
+											<mat-error
+												*ngIf="emailShipStatus.errors && emailShipStatus.errors.required && (emailShipStatus.dirty || emailShipStatus.touched || emailForm.submitted)">
+												This is a <strong>required</strong> field
+											</mat-error>
+										</mat-form-field>
+									</div>
+								</div>
+							</div>
+							<div class="row" *ngIf="(emailType.value=='T') || (emailType.value=='HT')">
+								<div class="col-sm-12">
+									<mat-form-field appearance="outline" class="md-block">
+										<mat-label>Template</mat-label>
+										<textarea matInput placeholder="Template" #emailTemplate="ngModel" name="emailTemplate"
+											[(ngModel)]="formModel.email_content_text"></textarea>
+									</mat-form-field>
+								</div>
+							</div>
+
+							<div class="row" *ngIf="(emailType.value=='H') || (emailType.value=='HT')">
+								<div class="col-sm-12">
+									<ckeditor [config]="config" #editor name="editor" [(ngModel)]="formModel.email_content"
+										debounce="500"></ckeditor>
+								</div>
+							</div>
+							<div class="clear20"></div>
+							<div class="boxs active">
+								<div class="box-header"> Send SMS Content</div>
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMS Subject</mat-label>
+												<input matInput placeholder="SMS Subject" #smsSubject="ngModel" name="smsSubject"
+													[(ngModel)]="formModel.sms_subject">
+											</mat-form-field>
+										</div>
+										<div class="col-sm-6">
+											<mat-form-field appearance="outline" class="md-block">
+												<mat-label>SMS Content</mat-label>
+												<textarea matInput placeholder="SMS Content" #smsContent="ngModel" name="smsContent"
+													[(ngModel)]="formModel.sms_content_text"></textarea>
+											</mat-form-field>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- ///////////////Buttons//// -->
+				<div class="btn-header hidden-xs">
+					<button type="submit" mat-raised-button class="btn-main">Save</button>
+					<button type="button" mat-raised-button class="btn-line"
+						(click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				</div>
+				<div class="clear"></div>
+				<!-- ///////////////Buttons//// -->
+			</div>
+			<div class="clear"></div>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,96 @@
+ <form #customForm="ngForm" novalidate (ngSubmit)="customForm.valid && addEditCustomfield(customForm)">
+	<input type="hidden" name="customId" [(ngModel)]="formModel.customId">
+	<input type="hidden" name="categoryId" [(ngModel)]="formModel.categoryId">
+	<input type="hidden" name="default_values" [(ngModel)]="formModel.default_values">
+	<div class="md-toolbar-tools">
+		<h2>{{(formModel.customId)?'Edit':'Add'}} Custom Fields </h2>
+        <button mat-raised-button class="btn-main hidden-xs hidden-sm" type="submit">Save</button>
+        <button mat-raised-button class="btn-line hidden-xs hidden-sm" type="button" (click)="closeDialog()">Cancel</button>
+	</div>
+	<div class="pop-body" layout="column">
+		<div class="alert alert-danger hide-it" *ngIf="errorMsg">{{errorMsg}}</div>
+		<mat-form-field appearance="outline" class="md-block" >
+			<mat-label>Label Name</mat-label>
+			<input matInput placeholder="Label Name" required #name="ngModel" name="name" [(ngModel)]="formModel.name" pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9])*$">
+				<mat-error *ngIf="name.errors && name.errors.required">
+					This is a <strong>required</strong> field
+				</mat-error>
+				<mat-error *ngIf="name.errors && name.errors.pattern">
+					Special character is not allowed.
+				</mat-error>
+		  </mat-form-field>
+		  <mat-form-field appearance="outline" class="md-block" *ngFor="let lang of all_languages">
+			<mat-label>Label Name ({{ lang.name }})</mat-label>
+			<input matInput placeholder="Label Name ({{ lang.name }})" #name{{lang.lang_code}}="ngModel" name="name{{lang.lang_code}}" [(ngModel)]="formModel[formModel.field_name+'_'+lang.lang_code]">
+		  </mat-form-field>
+		  
+	  	<div class="mandatory-select">
+				<mat-form-field appearance="outline">
+					<mat-label>Field Type</mat-label>
+					<mat-select required placeholder="Field Type" #input_type="ngModel" name="input_type" [(ngModel)]="formModel.input_type" (change)="OnchangeField($event.value)">
+						<mat-option value="Textbox">Textbox <i class="icon-input pull-right"></i></mat-option>
+						<mat-option value="Textarea">Textarea <i class="icon-textarea pull-right"></i></mat-option>
+						<mat-option value="Checkbox">Checkbox <i class="icon-check-box pull-right"></i></mat-option>
+						<mat-option value="Radio">Radio <i class="icon-radio-button pull-right"></i></mat-option>
+						<mat-option value="Dropdown">Dropdown <i class="icon-select pull-right"></i></mat-option>
+						<mat-option value="Date">Date <i class="icon-calendar pull-right"></i></mat-option>
+					</mat-select>
+					<mat-error *ngIf="input_type.errors && input_type.errors.required && (input_type.dirty || input_type.touched || customForm.submitted)">
+							Please choose an option
+					</mat-error>
+				</mat-form-field>
+	    </div>
+		<div  class="md-block">
+			<mat-checkbox #is_optional="ngModel" name="is_optional" [(ngModel)]="formModel.is_optional">It’s a mandatory field</mat-checkbox>
+	  	</div>
+	  	<div  class="clear10"></div>
+	  	<div class="mandatory-select">
+				<mat-form-field appearance="outline">
+					<mat-label>Is this a variation field</mat-label>
+					<mat-select required placeholder="Is this a variation field" #is_variant="ngModel" name="is_variant" [(ngModel)]="formModel.is_variant">
+						<mat-option value="Yes">Yes</mat-option>
+						<mat-option value="No">No</mat-option>
+					</mat-select>
+					<mat-error *ngIf="is_variant.errors && is_variant.errors.required && (is_variant.dirty || is_variant.touched || customForm.submitted)">
+							Please choose an option
+					</mat-error>
+				</mat-form-field>
+	    </div>
+	    <mat-form-field appearance="outline" appearance="outline" class="md-block" *ngIf="formModel.input_type=='Checkbox' || formModel.input_type=='Radio' || formModel.input_type=='Dropdown'">
+							
+			<textarea matInput required placeholder="Value" #custom_values="ngModel"  name="custom_values" [(ngModel)]="formModel.custom_values" rows="5"></textarea>
+			<mat-error *ngIf="custom_values.errors && custom_values.errors.required && (custom_values.dirty || custom_values.touched || customForm.submitted)">
+				Please mention {{formModel.input_type}} value
+			</mat-error>
+			<mat-error *ngIf="custom_values.errors && custom_values.errors.pattern">
+				White space is not allowed at beginning.
+			</mat-error>
+				<!-- <small><i class="icon-info"></i> Please press enter for adding multiple {{formModel.input_type}} <i *ngIf="formModel.input_type=='Radio'">Button</i> value</small> -->
+			<mat-hint>Please press enter for adding multiple {{formModel.input_type}} <i *ngIf="formModel.input_type=='Radio'">Button</i> value</mat-hint>
+		</mat-form-field>
+		<span *ngFor="let lang of all_languages">
+		<mat-form-field appearance="outline" appearance="outline" class="md-block" *ngIf="formModel.input_type=='Checkbox' || formModel.input_type=='Radio' || formModel.input_type=='Dropdown'" >
+			<mat-label>Value ({{ lang.name }})</mat-label>					
+				<textarea matInput required placeholder="Value ({{ lang.name }})" #custom_values_{{lang.lang_code}}="ngModel"  name="custom_values_{{lang.lang_code}}" [(ngModel)]="formModel['custom_values_'+lang.lang_code]" rows="5"></textarea>
+			</mat-form-field>
+		</span>
+
+
+		<div class="mandatory-select ">
+			<mat-form-field appearance="outline" class="cus_multiselect">
+				<mat-label>Applicable on</mat-label>
+				<mat-select required placeholder="Applicable on" #channel_id="ngModel" name="channel_id" multiple="true" [(ngModel)]="formModel.channel_id">
+					<mat-option *ngFor="let channel of channel_list" [value]="channel.id">{{channel.name}}</mat-option>
+				</mat-select>
+				<mat-error *ngIf="channel_id.errors && channel_id.errors.required && (channel_id.dirty || channel_id.touched || customForm.submitted)">
+						Please choose an option
+				</mat-error>
+			</mat-form-field>
+	    </div>		
+	</div>
+	<mat-dialog-actions layout="row">
+		<label class="hidden-xs">Fields marked with <span class="error">*</span> are compulsory.</label>
+	  	<button mat-raised-button class="btn-main" type="submit">Save</button>
+	  	<button mat-raised-button class="btn-line" type="button" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

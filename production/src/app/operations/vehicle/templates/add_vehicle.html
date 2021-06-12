@@ -1,0 +1,166 @@
+<section class="right-part addall_page">
+    <div class="body-part addorderbody addorderbodypart" *ngIf="_globalService.isFormLoaded == 'Yes'">
+        <form #vehicleForm="ngForm" novalidate (ngSubmit)="vehicleForm.valid && addEditVehicle(vehicleForm)">
+            <input type="hidden" name="vehicleId" [(ngModel)]="formModel.vehicleId">
+            <div class="topheading">
+                <h1>{{(formModel.vehicleId>0)?'Edit':'Add'}} Vehicle
+            <div class="btn-header">
+            <div class="btn-header">
+              <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                <label class="hidden-xs hidden-sm">Fields marked with <span>*</span> are compulsory</label>
+              </div>
+          </div>
+          <div class="clear"></div>
+          </h1> </div>
+            <div class="clear"></div>
+            <div class="box">
+                <div class="fixed-width">
+                    <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Vehicle Number</mat-label>
+                                        <input matInput placeholder="Vehicle Number" required #vehicle_number="ngModel" name="vehicle_number" [(ngModel)]="formModel.vehicle_number" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="vehicle_number.errors && vehicle_number.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="vehicle_number.errors && vehicle_number.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Model No</mat-label>
+                                        <input matInput placeholder="Model No" required #model_no="ngModel" name="model_no" [(ngModel)]="formModel.model_no" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="model_no.errors && model_no.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="model_no.errors && model_no.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Vehicle Description</mat-label>
+                                        <input matInput placeholder="Vehicle Description" #vehicle_description="ngModel" name="vehicle_description" [(ngModel)]="formModel.vehicle_description" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="vehicle_description.errors && vehicle_description.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>City</mat-label>
+                                        <input matInput placeholder="City" required #vehicle_city="ngModel" name="vehicle_city" [(ngModel)]="formModel.vehicle_city" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="vehicle_city.errors && vehicle_city.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="vehicle_city.errors && vehicle_city.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Country</mat-label>
+                                        <mat-select required placeholder="Country" #vehicle_country_id="ngModel" name="vehicle_country_id" [(ngModel)]="formModel.vehicle_country_id" (selectionChange)="getState(vehicle_country_id.value)">
+                                            <mat-option *ngFor="let country of country_list" [value]="country.id">{{country.country_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="vehicle_country_id.errors && vehicle_country_id.errors.required">Please select country</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': vehicle_country_id.errors && vehicle_country_id.errors.required && (vehicle_country_id.dirty || vehicle_country_id.touched || vehicleForm.submitted) }"
+                                        [items]="country_list"
+                                        required
+                                        placeholder="Country"
+                                        bindLabel="country_name" bindValue="id"
+                                        #vehicle_country_id="ngModel" name="vehicle_country_id" [(ngModel)]="formModel.vehicle_country_id"
+                                        (change)="getState(formModel.vehicle_country_id)"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="vehicle_country_id.errors && vehicle_country_id.errors.required && (vehicle_country_id.dirty || vehicle_country_id.touched || vehicleForm.submitted)">Please select country</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>State</mat-label>
+                                        <mat-select placeholder="State" #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id">
+                                            <mat-option *ngFor="let state of state_list" [value]="state.id">{{state.state_name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="state_id.errors && state_id.errors.required">Please select state</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select
+                                        [items]="state_list"
+                                        placeholder="State"
+                                        bindLabel="state_name" bindValue="id"
+                                        #state_id="ngModel" name="state_id" [(ngModel)]="formModel.state_id"
+                                        >
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Zip Code</mat-label>
+                                        <input matInput placeholder="Zip Code" required #vehicle_zipcode="ngModel" name="vehicle_zipcode" [(ngModel)]="formModel.vehicle_zipcode" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="vehicle_zipcode.errors && vehicle_zipcode.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="vehicle_zipcode.errors && vehicle_zipcode.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field appearance="outline"  class="md-block"><mat-label>Mobile Number</mat-label>
+                                        <input matInput placeholder="Mobile Number" required #vehicle_mobile_number="ngModel" name="vehicle_mobile_number" [(ngModel)]="formModel.vehicle_mobile_number" pattern="^[ A-Za-z0-9_\x27\x22@./#&+-]*$">
+                                        <mat-error *ngIf="vehicle_mobile_number.errors && vehicle_mobile_number.errors.required"> This is a <strong>required</strong> field </mat-error>
+                                        <mat-error *ngIf="vehicle_mobile_number.errors && vehicle_mobile_number.errors.pattern"> This is not a <strong>valid</strong> input </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Driver</mat-label>
+                                        <mat-select required placeholder="Driver" #delivery_manager="ngModel" name="delivery_manager" [(ngModel)]="formModel.delivery_manager">
+                                            <mat-option *ngFor="let manager of managerList" [value]="manager.id">{{manager.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="delivery_manager.errors && delivery_manager.errors.required">Please select country</mat-error>  
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': delivery_manager.errors && delivery_manager.errors.required && (delivery_manager.dirty || delivery_manager.touched || vehicleForm.submitted) }"
+                                        [items]="managerList"
+                                        required
+                                        placeholder="Driver"
+                                        bindLabel="name" bindValue="id"
+                                        #delivery_manager="ngModel" name="delivery_manager" [(ngModel)]="formModel.delivery_manager"
+                                        >
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="delivery_manager.errors && delivery_manager.errors.required && (delivery_manager.dirty || delivery_manager.touched || vehicleForm.submitted)">Please select driver</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <!-- <mat-form-field appearance="outline" ><mat-label>Warehouse</mat-label>
+                                        <mat-select required placeholder="Warehouse" #vehicle_warehouse="ngModel" name="vehicle_warehouse" [(ngModel)]="formModel.vehicle_warehouse" multiple>
+                                            <mat-option *ngFor="let warehouseMaster of warehouseList" [value]="warehouseMaster.id">{{warehouseMaster.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="vehicle_warehouse.errors && vehicle_warehouse.errors.required">Please select warehouse</mat-error>
+                                    </mat-form-field> -->
+                                    <ng-select [ngClass]="{ 'custom_error_red': vehicle_warehouse.errors && vehicle_warehouse.errors.required && (vehicle_warehouse.dirty || vehicle_warehouse.touched || vehicleForm.submitted) }"
+                                        [items]="warehouseList"
+                                        required
+                                        [multiple]="true"
+                                        placeholder="Warehouse"
+                                        bindLabel="name" bindValue="id"
+                                        #vehicle_warehouse="ngModel" name="vehicle_warehouse" [(ngModel)]="formModel.vehicle_warehouse"
+                                        >
+                                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                            <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                                                    <span class="ng-value-label">{{item.name}}</span>
+                                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                            </div>
+                                            <div class="ng-value" *ngIf="items.length > 1">
+                                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <p class="custom_error" *ngIf="vehicle_warehouse.errors && vehicle_warehouse.errors.required && (vehicle_warehouse.dirty || vehicle_warehouse.touched || vehicleForm.submitted)">Please select warehouse</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ///////////////Buttons//// -->
+                <div class="btn-header hidden-xs">
+                    <button type="submit" mat-raised-button class="btn-main">Save</button>
+                    <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+                </div>
+                <div class="clear"></div>
+                <!-- ///////////////Buttons//// -->
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</section>

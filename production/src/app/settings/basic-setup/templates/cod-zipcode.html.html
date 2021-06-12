@@ -1,0 +1,85 @@
+<form #TableRate="ngForm" novalidate (ngSubmit)="TableRate.valid && saveTableRate(TableRate)" enctype="multipart/form-data">
+	<input type="hidden" name="shipping_method_id" [(ngModel)]="formModel.shipping_method_id">
+	<div class="md-toolbar-tools">
+		<h2 mat-dialog-title>Table Rate Shipping Method </h2>
+		<button type="submit" mat-raised-button class="btn-main hidden-sm hidden-xs">Save</button>
+		<button type="button" mat-raised-button class="btn-line hidden-sm hidden-xs" (click)="closeDialog()">Cancel</button>
+	</div>
+	<mat-dialog-content>
+		<div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+		<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+		<div class="pop-body price_setup_dio " layout="column">
+			<div class="row">
+				<div class="col-md-12">
+					<mat-form-field class="md-block">
+						<input matInput placeholder="Title" required #title="ngModel" name="title" [(ngModel)]="formModel.title">
+						<mat-error *ngIf="title.errors && title.errors.required">
+							This is a
+							<strong>required</strong> field
+						</mat-error>
+					</mat-form-field>
+					<div class="row">
+						<div class="col-sm-12">
+							<mat-form-field>
+								<mat-select placeholder="Shipping Type" #matrix_type="ngModel" name="matrix_type" [(ngModel)]="formModel.matrix_type">
+									<mat-option value="0">Shipping Type Based on Shipping Weight</mat-option>
+									<mat-option value="1">Shipping Type Based on Order Total</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<mat-form-field class="md-block">
+								<input matInput placeholder="Handling Charges" required #handling_price="ngModel" name="handling_price" [(ngModel)]="formModel.handling_price"
+								 type="number" min="0">
+								<mat-error *ngIf="handling_price.errors && handling_price.errors.required">
+									This is a
+									<strong>required</strong> field
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-sm-4">
+							<mat-form-field>
+								<mat-select placeholder="Type" #handling_fees_type="ngModel" name="handling_fees_type" [(ngModel)]="formModel.handling_fees_type">
+									<mat-option value="0">Fixed</mat-option>
+									<mat-option value="1">Percent</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<mat-form-field class="md-block">
+								<textarea matInput placeholder="Description" #description="ngModel" name="description" [(ngModel)]="formModel.description"></textarea>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						 <div class="col-md-12">
+							<div class="file_upload">
+								<button mat-raised-button class="btn-main" type="button">
+									<mat-icon class="icon-upload-cloud"></mat-icon>Upload File
+									<input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="browseFileXLSTableRate($event)"/>
+								</button>
+								<span class="ml-1">No file choosen</span>
+							</div>
+							<div class="clear20"></div>
+							<a href="{{sample_xls}}">Download sample Excel file</a>
+						 </div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div class="clear"></div>
+	</mat-dialog-content>
+	<mat-dialog-actions layout="row">
+		<label class="hidden-sm hidden-xs">Fields marked with
+			<span class="error">*</span> are compulsory.</label>
+		<span flex></span>
+		<button type="submit" mat-raised-button class="btn-main">Save</button>
+		<button type="button" mat-raised-button class="btn-line" (click)="closeDialog()">Cancel</button>
+	</mat-dialog-actions>
+</form>

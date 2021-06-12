@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "273351983794",
+    "firebase_url": "https://gogrocerymapapi.firebaseio.com",
+    "project_id": "gogrocerymapapi",
+    "storage_bucket": "gogrocerymapapi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273351983794:android:219beb62d6b63010687fab",
+        "android_client_info": {
+          "package_name": "com.gogrocery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273351983794-tceb720fi9omdut105gupke42o9tju3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gogrocery",
+            "certificate_hash": "49c1534afd29dc510f67d86de8e0b4af35ec7d4b"
+          }
+        },
+        {
+          "client_id": "273351983794-q6g7vbuqfav9ldhj89jkbfu9fvupt2kp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gogrocery",
+            "certificate_hash": "66742f769ba386f5bbd2792c750202469e76d205"
+          }
+        },
+        {
+          "client_id": "273351983794-6bvp71odmjk5umf3a9ou503uhu6gjhnt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gogrocery",
+            "certificate_hash": "b2126b0724b922aa849bf18f0e4d0de9221eba35"
+          }
+        },
+        {
+          "client_id": "273351983794-nent11b57mab4sut9mcgscb87dfg7fi1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQqZPoTni9YivNTNcqMExCLlszwVNS9Ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273351983794-nent11b57mab4sut9mcgscb87dfg7fi1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

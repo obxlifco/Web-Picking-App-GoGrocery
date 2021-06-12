@@ -1,0 +1,7 @@
+.custom_fields_data{
+   display: flex;
+}
+.custom_fields_data p{
+    font-size: 10px !important;
+    margin-right: 6px;
+}

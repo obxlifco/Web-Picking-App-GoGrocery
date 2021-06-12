@@ -1,0 +1,679 @@
+<section class="right-part filter-pad productdetails product_view" id="product-details">
+	<div class="topheading">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="productDetailsAllBox">
+					<div class="prodDetailsImg">
+						<img src="{{formModel.cover_img}}" alt="">
+					</div>
+					<div class="prodDetailsDesc">
+						<p class="prodName">{{formModel.sku || formModel.name}}</p>
+						<p class="prodDesc">{{formModel.name}} | Active</p>
+					</div>
+					<div class="prodBarcode">
+						<ngx-barcode [bc-value]="formModel.barcode" [bc-display-value]="true" [bc-height]="50" [bc-width]="3"  [bc-background]="false"></ngx-barcode>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="rightdropsec">
+					<div class="dropbox" *ngIf="warehouse_id == ''">
+						<!-- <mat-form-field appearance = "outline">
+							<mat-select class="m-0" floatPlaceholder="never" placeholder="Select Store" #warehouse="ngModel" name="warehouse"
+							[(ngModel)]="formModel.default_warehouse" (selectionChange)="callbackLoadStock(formModel.default_warehouse)">
+								<mat-option *ngIf="user_type=='SuperAdmin'" value="">All</mat-option>
+								<mat-option *ngFor="let warehouse of warehouse_list" [value]="warehouse.id">{{warehouse.name}}</mat-option>
+							</mat-select>
+						</mat-form-field> -->
+						<ng-select
+							[items]="warehouse_list"
+							floatPlaceholder="never"
+							placeholder="Select Store"
+							bindLabel="name" bindValue="id"
+							#warehouse="ngModel" name="warehouse" [(ngModel)]="formModel.default_warehouse"
+							(change)="callbackLoadStock(formModel.default_warehouse)"
+							style="width: 300px;"
+						>
+						</ng-select>
+					</div>
+					<div class="productdatepic">
+						<div class="outer">
+								<!-- <mat-form-field appearance="outline"> -->
+								<input type="button" class="calndercus" style="font-size: 16px;" ngxDaterangepickerMd [(ngModel)]="selected"
+									[locale]="{applyLabel: 'Apply', format: 'DD-MM-YYYY'}" [showCustomRangeLabel]="true" [alwaysShowCalendars]="alwaysShowCalendars"
+									[ranges]="ranges" [linkedCalendars]="true" (datesUpdated)="datesUpdatedApply($event)"
+									[keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange" placeholder="Choose date" />
+								<!-- </mat-form-field> -->
+								<i class="icon-table"></i>
+						</div>
+						<div class="btn-groups edt top-action-buttons product">
+							<button class="btn-main " mat-raised-button  [routerLink]="['/'+childData.tablink+'/edit/'+formModel.productId+'']" (click)="_globalService.addTab('edit'+childData.tablink,childData.tablink+'/edit/'+formModel.productId+'','Edit
+							'+childData.heading,childData.tabparrentid)"><span class="icon-edit"></span></button>
+						</div>
+						<button mat-raised-button class="btn-line clsbtn" type="button" (click)="_globalService.deleteTab(tabIndex,parentId)"
+						 (click)="_globalService.deleteTab(tabIndex,parentId)">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="innertab_sec view_product">
+		<div class="tabhedouter">
+			<mat-tab-group (selectedTabChange)="loadProductDetailsTab($event)">
+				<mat-tab tabindex="0">
+					<ng-template mat-tab-label>
+					<a href="javascript:void(0)" class='page_tab_link'>
+						Summary
+					</a>
+					</ng-template>
+				</mat-tab>
+	
+				<mat-tab tabindex="1">
+					<ng-template mat-tab-label>
+						<a href="javascript:void(0)" class='page_tab_link'>
+							Inventory
+						</a>
+					</ng-template>
+				</mat-tab>
+				
+				<mat-tab tabindex="2">
+					<ng-template mat-tab-label>
+					<a href="javascript:void(0)" class='page_tab_link'>
+						Orders
+					</a>
+					</ng-template>
+				</mat-tab>
+				<mat-tab tabindex="3">
+					<ng-template mat-tab-label>
+					<a href="javascript:void(0)" class='page_tab_link'>
+						Invoice
+					</a>
+					</ng-template>
+				</mat-tab> 
+				<mat-tab tabindex="4">
+					<ng-template mat-tab-label>
+					<a href="javascript:void(0)" class='page_tab_link'>
+						Purchase Orders
+					</a>
+					</ng-template>
+				</mat-tab>
+			</mat-tab-group>
+		</div>
+		<div class="serch_and_filtersec">
+			<div class="serch_sec" *ngIf="tab_number==2">
+				<a href="javascript:void(0)"><span class="icon-search1"></span></a>
+				<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGridOrder(1,1,'',filter,search.value)">
+			</div>
+			<div class="serch_sec" *ngIf="tab_number==3">
+				<a href="javascript:void(0)"><span class="icon-search1"></span></a>
+				<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGridInvoice(1,1,'',filter,search.value)">
+			</div>
+			<div class="serch_sec" *ngIf="tab_number==4">
+				<a href="javascript:void(0)"><span class="icon-search1"></span></a>
+				<input type="text" placeholder="Search..." #search="ngModel" [(ngModel)]="search_text" (keyup)="generateGridPurchase(1,1,'',filter,search.value)">
+			</div>
+		</div>
+	</div>
+
+	<div *ngIf='tab_number==0'>
+		<div class="body-part bothspace">
+			<!-- hide panel -->
+			<div [ngClass]="activitySettings == false ? 'order_hidepanel' : 'order_hidepanel show'">
+					<div class="show_round" (click)="showActivityPanel(activitySettings)">
+						<a href="javascript:void(0)">
+							<span class="icon-back_one" *ngIf="activitySettings==false"></span>
+							<span class="icon-next" *ngIf="activitySettings== true"></span>
+						</a>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="box productbox order_activity">
+								<div class="heading">Activity Feed</div>
+								<mat-list *ngFor="let item of feeds">	
+									<mat-list-item>
+										<mat-icon mat-list-icon class="icon-sales-orders mat-list-item-icon"></mat-icon>
+										<h4 mat-line class="mat-list-item-header">{{item.activity_comments}}</h4>
+										<p mat-line class="mat-list-item-text">{{item.activity_date | date:'medium'}}</p>
+									</mat-list-item>
+									<mat-divider></mat-divider>
+								</mat-list>
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- hide panel -->
+			
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="row">
+								<div class="col-md-6">
+								<div class="box box-low-shadow">
+										<div class="displaytexts">
+											<p class="topline">{{formModel.currency_code}} {{formModel.total_sale | number: '1.2-2'}}</p>
+											<p class="bottomline">Total Sales</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="box box-low-shadow">
+										<div class="displaytexts">
+											<p class="topline">{{formModel.total_customer > 0 ? formModel.total_customer:0}}</p>
+											<p class="bottomline">Customers</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="box box-low-shadow">
+										<div class="displaytexts">
+											<p class="topline">{{formModel.tot_virtual_stock > 0 ?  formModel.tot_virtual_stock : 0}}</p>
+											<p class="bottomline">Virtual Stock</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="box box-low-shadow">
+										<div class="displaytexts">
+											<p class="topline">{{formModel.tot_real_stock > 0 ? formModel.tot_real_stock : 0}}</p>
+											<p class="bottomline">Real Stock</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="box box-low-shadow">
+										<div class="displaytexts">
+											<p class="topline">{{formModel.tot_visitors > 0 ? formModel.tot_visitors : 0}}</p>
+											<p class="bottomline">Visitors</p>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row ">
+				<div class="col-md-12">
+					<div class="row same-height">
+						<div class="col-md-6">
+							<div class="box box-low-shadow">
+								<div class="heading">Sales Report</div>
+									<div class="graphContainer">
+									<!-- <ul class="sale-tab">
+										<li style="cursor: hand;cursor: pointer;" [ngClass]="'day' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('day')">Day</li>
+										<li style="cursor: hand;cursor: pointer;" [ngClass]="'week' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('week')">Week</li>
+										<li style="cursor: hand;cursor: pointer;" [ngClass]="'month' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('month')">Month</li>
+										<li style="cursor: hand;cursor: pointer;" [ngClass]="'year' == selectedItem ? 'active' : 'none'"  (click)="getgraphdata('year')">Year</li>
+									</ul> -->
+									<div class="clear"></div>
+									<!-- <div class="graph"><img src="assets/images/sale-graph.png" alt=""></div> -->
+									<div class="graph">
+										<div style="display: block;" *ngIf="lineChartData_sales.length>0">
+											<canvas baseChart width="400" height="180"
+												[datasets]="lineChartData_sales"
+												[labels]="lineChartLabels_sales"
+												[options]="lineChartOptions"
+												[colors]="lineChartColors"
+												[legend]="lineChartLegend"
+												[chartType]="lineChartType"
+												(chartHover)="chartHovered($event)"
+												(chartClick)="chartClicked($event)">
+											</canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="box box-low-shadow">
+								<div class="heading">Stock Report</div>
+									<div class="graphContainer">
+									<div class="clear"></div>
+									<div class="graph">
+										<div style="display: block;" *ngIf="lineChartData_stock.length>0">
+											<canvas baseChart width="400" height="180"
+												[datasets]="lineChartData_stock"
+												[labels]="lineChartLabels_stock"
+												[options]="lineChartOptions"
+												[colors]="lineChartColors"
+												[legend]="lineChartLegend"
+												[chartType]="lineChartType"
+												(chartHover)="chartHovered($event)"
+												(chartClick)="chartClicked($event)">
+											</canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="row same-height">
+						<div class="col-md-6">
+							<div class="box box-low-shadow" style="min-height:336px">
+								<div class="heading">Top Customers</div>
+								<ul class="box-list">
+									<li *ngFor="let item of top_customes">
+										<div class="text">{{item.customer__first_name}} {{item.customer__last_name}}</div>
+										<!-- <div class="num"><span class="icon-font">~</span> 50,000</div> -->
+										<div class="clear"></div>
+									</li>
+								</ul>
+								<ul class="box-list" *ngIf="top_customes.length==0">
+									<li>
+										<div class="text">No record found</div>
+										<div class="num"></div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="box box-low-shadow">
+								<div class="heading">Marketplace & Social Commerce</div>
+								<div class="graphContainer">
+									<!-- <div style="display: block;">
+									<canvas baseChart
+										[datasets]="barChartData"
+										[labels]="barChbodyartLabels"
+										[options]="barCbodyhartOptions"
+										[legend]="barChbodyartLegend"
+										[colors]="barChartColors"
+										[chartType]="barChartType">
+									</canvas>
+									</div> -->
+									<canvas baseChart
+										[data]="doughnutChartDataVisitor"
+										[labels]="doughnutChartLabelsVisitor"
+										[chartType]="doughnutChartTypeVisitor"
+										[colors] = "colors">
+									</canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row same-height">
+						<div class="col-md-6">
+							<div class="box box-low-shadow" style="min-height:336px">
+								<div class="heading">Suppliers</div>
+								<ul class="box-list extra_scroller">
+									<li *ngFor="let item of suppliers">
+										<div class="text">{{item.name}}</div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+								<ul class="box-list" *ngIf="suppliers.length==0">
+									<li>
+										<div class="text">No record found</div>
+										<div class="num"></div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="box box-low-shadow">
+								<div class="heading">Visitors Report</div>
+								<div class="graphContainer">
+									<!-- <div style="display: block">
+										<canvas baseChart
+											[data]="doughnutChartDataVisitor"
+											[labels]="doughnutChartLabelsVisitor"
+											[chartType]="doughnutChartTypeVisitor"
+											[colors] = "colors">
+											</canvas>
+									</div> -->
+									<div class="graph">
+										<div style="display: block;" *ngIf="lineChartData_visitor.length>0">
+											<canvas baseChart width="400" height="180"
+												[datasets]="lineChartData_visitor"
+												[labels]="lineChartLabels_visitor"
+												[options]="lineChartOptions"
+												[colors]="lineChartColors"
+												[legend]="lineChartLegend"
+												[chartType]="lineChartType"
+												(chartHover)="chartHovered($event)"
+												(chartClick)="chartClicked($event)">
+											</canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row same-height">
+						<div class="col-md-6">
+							<div class="box box-low-shadow" style="min-height:336px">
+								<div class="heading">Product Promotion</div>
+								<ul class="box-list">
+									<li *ngFor="let item of promition_list">
+										<div class="text">{{item.name}}</div>
+										<div class="num"><span class="icon-font">~</span> {{item.amount}}</div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+								<ul class="box-list" *ngIf="promition_list.length==0" >
+									<li>
+										<div class="text">No record found</div>
+										<div class="num"></div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class='body-part' *ngIf="tab_number==1">
+		<!--- INVENTORY GOES HERE -->
+		<div class="grid">
+			<div class="table-list" *ngIf="showSkeletonLoaded">
+				<table>
+					<tr>
+					<th class="check-select">
+					<mat-checkbox name="selectedAll"  [(ngModel)]="selectedAll" id="list-all" (change)="toggleCheckAll($event)"></mat-checkbox>
+					</th>
+					<ng-container >
+					<th  class="short" *ngFor="let item of temp_col"><span ></span></th>
+					</ng-container> 
+					</tr>
+					<tr *ngFor="let item of temp_result">
+						<td>
+						<div ></div>
+						<ng-template >
+						<mat-checkbox name="Selected" id="list" ></mat-checkbox>
+						</ng-template>
+						</td>
+						<ng-container >
+						<td *ngFor="let item of temp_col"><ng-container><div  class="skeleto-loader"></div></ng-container></td>
+						</ng-container>
+					</tr>
+				</table>
+			</div>
+			<div class="table-list" *ngIf="!showSkeletonLoaded">
+				<table>
+					<!-- <tr>
+						<th class="check-select">&nbsp;</th>
+						<th  class="short" (click)="reload(0,1,'id',filter,search.value)">ID<span [class]="(sortBy=='id')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'last_modified',filter,search.value)">Last Modified<span [class]="(sortBy=='last_modified')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'name',filter,search.value)">Item Name<span [class]="(sortBy=='product_name')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'sku',filter,search.value)">SKU<span [class]="(sortBy=='sku')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'qty',filter,search.value)">Qty.<span [class]="(sortBy=='qty')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'safety_stock',filter,search.value)">Safety Stock<span [class]="(sortBy=='safety_stock')?sortClass:''"></span></th>
+						<th  class="short" (click)="reload(0,1,'real_stock',filter,search.value)">Real Stock<span [class]="(sortBy=='real_stock')?sortClass:''"></span></th>
+					</tr> -->
+					<tr>
+						<th  class="short" >Item Name<span [class]="(sortBy=='product_name')?sortClass:''"></span></th>
+						<th  class="short" >Store Name<span [class]="(sortBy=='warehouse_name')?sortClass:''"></span></th>
+						<th  class="short" >SKU<span [class]="(sortBy=='sku')?sortClass:''"></span></th>
+						<th  class="short" >Qty.<span [class]="(sortBy=='qty')?sortClass:''"></span></th>
+						<th  class="short" >Safety Stock<span [class]="(sortBy=='safety_stock')?sortClass:''"></span></th>
+						<th  class="short" >Real Stock<span [class]="(sortBy=='real_stock')?sortClass:''"></span></th>
+						<th  class="short" >Last Modified<span [class]="(sortBy=='last_modified')?sortClass:''"></span></th>
+					</tr>
+					<tr [class.chec]="row.selected"  *ngFor="let row of inventory_list">
+						<td attr.data-th="Item Name">{{row.product_name}}</td>
+						<td attr.data-th="Store Name">{{row.warehouse_name}}</td>
+						<td attr.data-th="SKU">{{row.sku}}</td>
+						<td attr.data-th="Qty">{{row.qty}}</td>
+						<td attr.data-th="Safety Stock">{{row.safety_stock}}</td>
+						<td attr.data-th="Real Stock">{{row.real_stock}}</td>
+						<td attr.data-th="Last Modified">{{row.last_modified}}</td>
+						</tr>
+						<tr *ngIf="inventory_list.length==0">
+							<td colspan="8" align="center">No records found</td>
+						</tr>
+			</table>
+			</div>
+			<div class="clear"></div>
+			<div class="pagination-box" *ngIf="pagination.total_page>1">
+				<span *ngFor="let list of total_list | paginate: config"></span>
+				<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGridInventory(0,$event,'',filter,search.value,4,0)"
+					[maxSize]="maxSize">
+					<ul class="pagination">
+						<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+							<a (click)="p.previous()">
+								<span class="icon-left"></span>
+							</a>
+						</li>
+						<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+							<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+								<span>{{ page.label }}</span>
+							</a>
+							<a *ngIf="p.getCurrent() === page.value">
+								<span>{{ page.label }}</span>
+							</a>
+						</li>
+						<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+							<a (click)="p.next()">
+								<span class="icon-right"></span>
+							</a>
+						</li>
+					</ul>
+				</pagination-template>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<div class="body-part" *ngIf='tab_number==2'>
+		<div class="grid">
+			<div class="table-list" *ngIf="showSkeletonLoaded">
+				<table>
+					<tr>
+						<ng-container>
+							<th class="short" *ngFor="let item of temp_col"><span></span>
+							</th>
+						</ng-container>
+					</tr>
+					<tr *ngFor="let item of temp_result">
+						<ng-container>
+							<td *ngFor="let item of temp_col">
+								<ng-container>
+									<div class="skeleto-loader"></div>
+								</ng-container>
+							</td>
+						</ng-container>
+					</tr>
+				</table>
+			</div>
+			<div *ngIf="!showSkeletonLoaded" [ngClass]="tag_list_name.length > 0 || status_list_name.length > 0 || destination_list_name.length > 0 || channel_list_name.length > 0 || assigned_manager_name.length > 0 || timeSlotIds.length > 0 ? 'table-list order manageorder_tablelist' : 'table-list order'">
+				<table>
+					<thead>
+						<tr>
+							<ng-container *ngFor="let col of cols">
+								<th *ngIf="col.show == 1" class="short" (click)="generateGridOrder(0,1,col.field,filter,search_text,show_item_wise_order)">{{col.title}}
+									<span [class]="(sortBy==col.field)?sortClass:''"></span>
+								</th>
+							</ng-container>
+						</tr>
+					</thead>
+					<tbody>
+						<tr [class.chec]="row.selected" *ngFor="let row of result_list">
+							<ng-container *ngFor="let col of cols">
+								<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':''}}">
+									<span [ngClass]="col.field=='order_status' ? (row.class_name) : '' || col.field=='shipping_status'?(row.shipping_class_name):''">
+										<ng-container *ngIf="col.field_type=='p' && col.field!='tag_names' && col.field!='custom_order_id' && col.field!='delivery_name'">
+											{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}
+										</ng-container>
+										<ng-container *ngIf="col.field_type!='p' && col.field!='tag_names'  && col.field!='custom_order_id' && col.field!='delivery_name'">
+											{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}
+										</ng-container>
+										<ng-container *ngIf="col.field =='tag_names'">
+											<div *ngFor="let tagsData of row.tag_names;">
+												<div class="tagsClass" [ngStyle]="{'background-color':tagsData.color_code}" title="{{tagsData.tag_name}}" *ngIf="tagsData.tag_name != '' || tagsData.tag_name != null"></div>
+											</div>
+										</ng-container>
+										<ng-container *ngIf="col.field == 'custom_order_id' || col.field == 'delivery_name'">
+											<a href="javascript:void(0)" (click)="_globalService.addTab('View Order'+'orders/details/','orders/details/'+row.id+'','View Order',childData.tabparrentid);_globalService.navigateToUrl('/'+childData.tablink+'/details/'+row.id+'');" *ngIf="col.field == 'custom_order_id'">{{row.custom_order_id}}</a> 
+											<a href="javascript:void(0)" (click)="_globalService.addTab('editcustomers','customers/edit/'+row.customer.id+'','Edit Customers',childData.tabparrentid);_globalService.navigateToUrl('/customers/edit/'+row.customer.id+'')" *ngIf="col.field == 'delivery_name'">{{row.delivery_name}}</a>
+										</ng-container>
+									</span>
+								</td>
+							</ng-container>
+						</tr>
+						<tr *ngIf="pagination.total_page==0">
+							<td [attr.colspan]="colSpanCount" align="center">No records found</td>
+						</tr>
+					</tbody>
+					<div class="pagination-box" *ngIf="pagination.total_page>1">
+						<span *ngFor="let list of total_list | paginate: config"></span>
+						<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGridOrder(0,$event,'',filter,'',show_item_wise_order)"
+						[maxSize]="maxSize">
+							<ul class="pagination">
+								<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+									<a (click)="p.previous()"><span class="icon-left"></span></a>
+								</li>
+								<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+									<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"><span>{{ page.label }}</span></a>
+									<a *ngIf="p.getCurrent() === page.value"><span>{{ page.label }}</span></a>
+								</li>
+								<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+									<a (click)="p.next()"><span class="icon-right"></span></a>
+								</li>
+							</ul>
+						</pagination-template>
+					</div>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="body-part" *ngIf="tab_number==3">
+		<!--- INVOICE LIST GOES HERE -->
+		<div class="grid">
+			<div class="table-list" *ngIf="showSkeletonLoaded">
+				<table>
+					<tr>
+					<ng-container >
+					<th  class="short" *ngFor="let item of temp_col"><span ></span></th>
+					</ng-container> 
+					</tr>
+					<tr *ngFor="let item of temp_result">
+						<ng-container >
+						<td *ngFor="let item of temp_col"><ng-container><div  class="skeleto-loader"></div></ng-container></td>
+						</ng-container>
+					</tr>
+				</table>
+			</div>
+			<div class="table-list" *ngIf="!showSkeletonLoaded">
+				<table>
+					<tr>
+						<th  class="short" (click)="generateGridInvoice(0,1,'invoice_id',filter,search_text)" >Invoice Id<span [class]="(sortBy=='invoice_id')?sortClass:''" ></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'order_id',filter,search_text)">Order Id<span [class]="(sortBy=='order_id')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'customer_name',filter,search_text)">Customer Name<span [class]="(sortBy=='customer_name')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'webshop_name',filter,search_text)">Webshop Name.<span [class]="(sortBy=='webshop_name')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'quantity',filter,search_text)">Quantity<span [class]="(sortBy=='quantity')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'gross_amount',filter,search_text)">Gross Amoun<span [class]="(sortBy=='gross_amount')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'net_amount',filter,search_text)">Net Amount<span [class]="(sortBy=='net_amount')?sortClass:''"></span></th>
+						<th  class="short" (click)="generateGridInvoice(0,1,'shipping_amount',filter,search_text)">Shipping Amount<span [class]="(sortBy=='shipping_amount')?sortClass:''"></span></th>
+					</tr>
+					<tr [class.chec]="row.selected"  *ngFor="let row of result_list">
+							<td attr.data-th="Invoice Id">{{row.invoice_id}}</td>
+							<td attr.data-th="Order Id">{{row.order_id}}</td>
+							<td attr.data-th="Customer Name">{{row.customer_name}}</td>
+							<td attr.data-th="Webshop Name">{{row.webshop_name}}</td>
+							<td attr.data-th="Quantity">{{row.quantity}}</td>
+							<td attr.data-th="Gross Amoun">{{row.gross_amount}}</td>
+							<td attr.data-th="Net Amount">{{row.net_amount}}</td>
+							<td attr.data-th="Shipping Amount">{{row.shipping_amount}}</td>
+						</tr>
+						<tr *ngIf="result_list.length==0">
+							<td colspan="8" align="center">No records found</td>
+					</tr>
+				</table>
+			</div>
+			<div class="clear"></div>
+			<div class="pagination-box" *ngIf="pagination.total_page>1">
+				<span *ngFor="let list of total_list | paginate: config"></span>
+				<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="generateGridInvoice(0,$event,'',filter,search_text,4,0)"
+					[maxSize]="maxSize">
+					<ul class="pagination">
+						<li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+							<a (click)="p.previous()">
+								<span class="icon-left"></span>
+							</a>
+						</li>
+						<li *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+							<a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+								<span>{{ page.label }}</span>
+							</a>
+							<a *ngIf="p.getCurrent() === page.value">
+								<span>{{ page.label }}</span>
+							</a>
+						</li>
+						<li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+							<a (click)="p.next()">
+								<span class="icon-right"></span>
+							</a>
+						</li>
+					</ul>
+				</pagination-template>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<div class="body-part" *ngIf="tab_number==4">
+		<!--- PURCHASE ORDER -->
+		<div class="grid">
+			<div class="table-list" *ngIf="showSkeletonLoaded">
+				<table>
+					<tr>
+						<ng-container>
+							<th class="short" *ngFor="let item of temp_col"><span></span>
+							</th>
+						</ng-container>
+					</tr>
+					<tr *ngFor="let item of temp_result">
+						
+						<ng-container>
+							<td *ngFor="let item of temp_col">
+								<ng-container>
+									<div class="skeleto-loader"></div>
+								</ng-container>
+							</td>
+						</ng-container>
+					</tr>
+				</table>
+			</div>
+			<div class="table-list" *ngIf="!showSkeletonLoaded">
+				<table>
+					<tr>
+					<ng-container *ngFor="let col of cols">
+						<th *ngIf="col.show == 1" class="short" (click)="generateGridPurchase(0,1,col.field,filter,search_text)">{{col.title}}<span [class]="(sortBy==col.field)?sortClass:''"></span></th>
+					</ng-container>
+					</tr>
+					<tr [class.chec]="row.selected"  *ngFor="let row of result_list">
+						<ng-container *ngFor="let col of cols">
+						<td *ngIf="col.show == 1" attr.data-th="{{col.title}}" align="{{ (col.field_type=='p' || col.field_type=='n')?'right':'' }}">
+							<span [ngClass]="(col.field=='status')?'status-box':''" [class.pendings]="row.status=='Draft'" [class.processing]="row.status == 'PO Sent'" [class.shipped]= "row.status == 'Shipped'" [class.approval]="row.status == 'GRN Pending'" [class.delivered]="row.status == 'Received Full'" [class.partial-refund]="row.status == 'Received Partial'">
+							<ng-container *ngIf="col.field_type=='p'">
+								{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])| number: '1.2-2' }}   
+							</ng-container>
+							<ng-container *ngIf="col.field_type!='p'">
+								{{((col.child!='')?((row[col.child])?row[col.child][col.field]:''):row[col.field])|limitTo:50 }}   
+							</ng-container>
+							</span>
+						</td>
+						</ng-container>
+					</tr>
+					<tr *ngIf="pagination.total_page==0">
+						<td  [attr.colspan]="colSpanCount" align="center">No records found</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>

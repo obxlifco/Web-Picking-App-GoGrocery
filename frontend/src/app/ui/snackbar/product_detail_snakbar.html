@@ -1,0 +1,8 @@
+
+<ng-container *ngIf="data.action=='add'">
+	<img [src]="data.cover_img" width="40" /> {{data.name}} has been added in your wishlist
+</ng-container>
+
+<ng-container *ngIf="data.action=='remove'">
+	<img [src]="data.cover_img" width="40" /> {{data.name}} has been removed from your wishlist
+</ng-container>

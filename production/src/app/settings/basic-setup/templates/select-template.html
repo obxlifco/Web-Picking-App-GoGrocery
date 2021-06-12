@@ -1,0 +1,59 @@
+<form #setupForm="ngForm" novalidate (ngSubmit)="setupForm.valid && saveTemplate(setupForm)">
+<input type="hidden" name="settingsId" [(ngModel)]="formModel.settingsId">
+<section class="right-part filter-pad">
+    <div class="topheading">
+    	<div class="heading-left">
+	        <h1> Basic Setup
+				<div class="btn-header">
+					<button type="submit" mat-raised-button class="btn-main">Continue</button>
+					  <button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+				  </div>
+				<div class="clear"></div>
+			</h1>
+	    </div>     
+    </div>
+    <div class="filter filter-stp">
+		<div class="stap">
+			<ul>
+				<li class="done"><a [routerLink]="['/basicsetup/edit/'+formModel.settingsId]">Basic Setup</a></li>
+				<!-- <li class="active">Select Template</li> -->
+				<li>Payment Gateway</li>
+				<li>Shipping</li>
+				<!-- <li>Channel Setup</li> -->
+			</ul>
+		</div>	
+    </div>	
+	<div class="body-part">
+		<div class="">
+			<div class="fixed-width">
+				<div class="heading">Select Template</div>
+				<div class="row">
+					<div class="col-md-4" *ngFor="let template of template_list">
+						<div class="template-box" [class.active]="formModel.engageboost_template_master_id==template.id" style="cursor: pointer;" (click)="setTemplate(template.id)">
+							<div class="template-img" [style.backgroundImage]="'url(assets/images/'+ template.image +')'"></div>
+							<div class="template-text">
+								<div class="template-name"> {{ template.name }}
+									<span>{{ template.description }}</span>
+								</div>
+								<div class="select-icon"><mat-icon  class="icon-checked"></mat-icon></div>
+
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ///////////////Buttons//// -->
+		<div class="btn-header hidden-xs">
+			<button type="submit" mat-raised-button class="btn-main">Continue</button>
+			<button type="button" mat-raised-button class="btn-line" (click)="_globalService.deleteTab(tabIndex,parentId)">Cancel</button>
+		</div> 
+		<div class="clear"></div> 
+		<!-- ///////////////Buttons//// --> 
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+</form>
+

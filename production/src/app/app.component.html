@@ -1,0 +1,24 @@
+<div class="maincontainer" [class.full]="innerWidth<1000">
+	<div class="loada" *ngIf="showSpinnerLoaded">
+		<mat-spinner></mat-spinner>
+	</div>
+	<header-menu *ngIf="isSidebarVisible"></header-menu>
+	<left-menu *ngIf="isSidebarVisible"></left-menu>
+	<tabs *ngIf="isSidebarVisible"></tabs>
+	<div class="login-bg" *ngIf="!isSidebarVisible">
+		<div class="login-header">
+			<div class="logo">
+				<a [routerLink] = "['/login']">
+					<img src="assets/images/boostmysale-main-logo.png" class="svg" alt="BoostMySale">
+				</a>
+			</div>
+		</div>
+		<footer>&copy; <!-- 2018 BoostMySale, --> All Rights Reserved. Privacy and Terms</footer>
+		<div class="clear"></div>
+	</div>
+	<main [@routerTransition]="getState(o)">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
+	<div class="clear"></div>
+	<footer-view *ngIf="isSidebarVisible"></footer-view>
+</div>

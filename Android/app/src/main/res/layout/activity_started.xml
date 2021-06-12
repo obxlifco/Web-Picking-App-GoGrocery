@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_30sdp"
+        android:orientation="vertical">
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/imageSliderGetStarted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="44dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#737171"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="20"
+            app:sliderStartAutoCycle="false"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_40sdp"/>
+
+        <Button
+            android:id="@+id/btnGetStarted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+         android:layout_gravity="bottom"
+            android:ellipsize="end"
+            android:background="@drawable/green_round_side"
+
+            android:text="@string/GetStarted"
+            android:textColor="@color/white"
+
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"/>
+
+    </FrameLayout>
+</layout>
